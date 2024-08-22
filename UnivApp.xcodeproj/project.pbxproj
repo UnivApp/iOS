@@ -14,6 +14,8 @@
 		E4B3FCD92C7751DD00CB98F3 /* UnivAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FCD82C7751DD00CB98F3 /* UnivAppTests.swift */; };
 		E4B3FCE32C7751DD00CB98F3 /* UnivAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FCE22C7751DD00CB98F3 /* UnivAppUITests.swift */; };
 		E4B3FCE52C7751DD00CB98F3 /* UnivAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FCE42C7751DD00CB98F3 /* UnivAppUITestsLaunchTests.swift */; };
+		E4B3FCF42C7754E400CB98F3 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4B3FCF32C7754E400CB98F3 /* Color.xcassets */; };
+		E4B3FCF72C7754F500CB98F3 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FCF62C7754F500CB98F3 /* Color+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		E4B3FCDE2C7751DD00CB98F3 /* UnivAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnivAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B3FCE22C7751DD00CB98F3 /* UnivAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivAppUITests.swift; sourceTree = "<group>"; };
 		E4B3FCE42C7751DD00CB98F3 /* UnivAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E4B3FCF32C7754E400CB98F3 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
+		E4B3FCF62C7754F500CB98F3 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +100,9 @@
 			children = (
 				E4B3FCC72C7751DB00CB98F3 /* UnivAppApp.swift */,
 				E4B3FCC92C7751DB00CB98F3 /* ContentView.swift */,
-				E4B3FCCB2C7751DD00CB98F3 /* Assets.xcassets */,
+				E4B3FCF12C7754C800CB98F3 /* View */,
+				E4B3FCF22C7754CF00CB98F3 /* Reference */,
+				E4B3FCF52C7754E800CB98F3 /* Extension */,
 				E4B3FCCD2C7751DD00CB98F3 /* Preview Content */,
 			);
 			path = UnivApp;
@@ -125,6 +131,30 @@
 				E4B3FCE42C7751DD00CB98F3 /* UnivAppUITestsLaunchTests.swift */,
 			);
 			path = UnivAppUITests;
+			sourceTree = "<group>";
+		};
+		E4B3FCF12C7754C800CB98F3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E4B3FCF22C7754CF00CB98F3 /* Reference */ = {
+			isa = PBXGroup;
+			children = (
+				E4B3FCCB2C7751DD00CB98F3 /* Assets.xcassets */,
+				E4B3FCF32C7754E400CB98F3 /* Color.xcassets */,
+			);
+			path = Reference;
+			sourceTree = "<group>";
+		};
+		E4B3FCF52C7754E800CB98F3 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				E4B3FCF62C7754F500CB98F3 /* Color+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,6 +263,7 @@
 			files = (
 				E4B3FCCF2C7751DD00CB98F3 /* Preview Assets.xcassets in Resources */,
 				E4B3FCCC2C7751DD00CB98F3 /* Assets.xcassets in Resources */,
+				E4B3FCF42C7754E400CB98F3 /* Color.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +289,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4B3FCCA2C7751DB00CB98F3 /* ContentView.swift in Sources */,
+				E4B3FCF72C7754F500CB98F3 /* Color+Extension.swift in Sources */,
 				E4B3FCC82C7751DB00CB98F3 /* UnivAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
