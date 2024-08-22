@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct UnivAppApp: App {
+    @StateObject var container: DIContainer = .init(services: Services())
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AuthView(authViewModel: .init(container: container))
+                .environmentObject(container)
         }
     }
 }

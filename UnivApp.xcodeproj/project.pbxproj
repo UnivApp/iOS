@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E4B3FCC82C7751DB00CB98F3 /* UnivAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FCC72C7751DB00CB98F3 /* UnivAppApp.swift */; };
-		E4B3FCCA2C7751DB00CB98F3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FCC92C7751DB00CB98F3 /* ContentView.swift */; };
+		E4B3FCCA2C7751DB00CB98F3 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FCC92C7751DB00CB98F3 /* AuthView.swift */; };
 		E4B3FCCC2C7751DD00CB98F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4B3FCCB2C7751DD00CB98F3 /* Assets.xcassets */; };
 		E4B3FCCF2C7751DD00CB98F3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4B3FCCE2C7751DD00CB98F3 /* Preview Assets.xcassets */; };
 		E4B3FCD92C7751DD00CB98F3 /* UnivAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FCD82C7751DD00CB98F3 /* UnivAppTests.swift */; };
@@ -16,6 +16,13 @@
 		E4B3FCE52C7751DD00CB98F3 /* UnivAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FCE42C7751DD00CB98F3 /* UnivAppUITestsLaunchTests.swift */; };
 		E4B3FCF42C7754E400CB98F3 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4B3FCF32C7754E400CB98F3 /* Color.xcassets */; };
 		E4B3FCF72C7754F500CB98F3 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FCF62C7754F500CB98F3 /* Color+Extension.swift */; };
+		E4B3FD002C77560200CB98F3 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FCFF2C77560200CB98F3 /* AuthViewModel.swift */; };
+		E4B3FD022C77563600CB98F3 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD012C77563600CB98F3 /* DIContainer.swift */; };
+		E4B3FD042C77577100CB98F3 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD032C77577100CB98F3 /* Services.swift */; };
+		E4B3FD082C775B5300CB98F3 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD072C775B5300CB98F3 /* LoginView.swift */; };
+		E4B3FD0A2C775C0E00CB98F3 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD092C775C0E00CB98F3 /* LoginViewModel.swift */; };
+		E4B3FD0C2C775D7000CB98F3 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD0B2C775D7000CB98F3 /* MainTabView.swift */; };
+		E4B3FD0E2C775D7C00CB98F3 /* MainTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD0D2C775D7C00CB98F3 /* MainTabViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +45,7 @@
 /* Begin PBXFileReference section */
 		E4B3FCC42C7751DB00CB98F3 /* UnivApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnivApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B3FCC72C7751DB00CB98F3 /* UnivAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivAppApp.swift; sourceTree = "<group>"; };
-		E4B3FCC92C7751DB00CB98F3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E4B3FCC92C7751DB00CB98F3 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		E4B3FCCB2C7751DD00CB98F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E4B3FCCE2C7751DD00CB98F3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E4B3FCD42C7751DD00CB98F3 /* UnivAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnivAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,6 +55,13 @@
 		E4B3FCE42C7751DD00CB98F3 /* UnivAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E4B3FCF32C7754E400CB98F3 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		E4B3FCF62C7754F500CB98F3 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		E4B3FCFF2C77560200CB98F3 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		E4B3FD012C77563600CB98F3 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
+		E4B3FD032C77577100CB98F3 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
+		E4B3FD072C775B5300CB98F3 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		E4B3FD092C775C0E00CB98F3 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		E4B3FD0B2C775D7000CB98F3 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		E4B3FD0D2C775D7C00CB98F3 /* MainTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +113,12 @@
 			isa = PBXGroup;
 			children = (
 				E4B3FCC72C7751DB00CB98F3 /* UnivAppApp.swift */,
-				E4B3FCC92C7751DB00CB98F3 /* ContentView.swift */,
+				E4B3FCFD2C7755BC00CB98F3 /* General */,
+				E4B3FCFC2C7755B500CB98F3 /* Service */,
+				E4B3FCFB2C7755AF00CB98F3 /* Model */,
+				E4B3FCFA2C7755AB00CB98F3 /* Util */,
+				E4B3FCF92C7755A200CB98F3 /* Provider */,
+				E4B3FCF82C77559C00CB98F3 /* Repository */,
 				E4B3FCF12C7754C800CB98F3 /* View */,
 				E4B3FCF22C7754CF00CB98F3 /* Reference */,
 				E4B3FCF52C7754E800CB98F3 /* Extension */,
@@ -136,6 +155,9 @@
 		E4B3FCF12C7754C800CB98F3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E4B3FD062C77589A00CB98F3 /* MainTab */,
+				E4B3FD052C77589500CB98F3 /* Login */,
+				E4B3FCFE2C7755DD00CB98F3 /* Auth */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -155,6 +177,77 @@
 				E4B3FCF62C7754F500CB98F3 /* Color+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		E4B3FCF82C77559C00CB98F3 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		E4B3FCF92C7755A200CB98F3 /* Provider */ = {
+			isa = PBXGroup;
+			children = (
+				E4B3FD012C77563600CB98F3 /* DIContainer.swift */,
+			);
+			path = Provider;
+			sourceTree = "<group>";
+		};
+		E4B3FCFA2C7755AB00CB98F3 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		E4B3FCFB2C7755AF00CB98F3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E4B3FCFC2C7755B500CB98F3 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				E4B3FD032C77577100CB98F3 /* Services.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		E4B3FCFD2C7755BC00CB98F3 /* General */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
+		E4B3FCFE2C7755DD00CB98F3 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				E4B3FCC92C7751DB00CB98F3 /* AuthView.swift */,
+				E4B3FCFF2C77560200CB98F3 /* AuthViewModel.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		E4B3FD052C77589500CB98F3 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				E4B3FD072C775B5300CB98F3 /* LoginView.swift */,
+				E4B3FD092C775C0E00CB98F3 /* LoginViewModel.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		E4B3FD062C77589A00CB98F3 /* MainTab */ = {
+			isa = PBXGroup;
+			children = (
+				E4B3FD0B2C775D7000CB98F3 /* MainTabView.swift */,
+				E4B3FD0D2C775D7C00CB98F3 /* MainTabViewModel.swift */,
+			);
+			path = MainTab;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,7 +381,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4B3FCCA2C7751DB00CB98F3 /* ContentView.swift in Sources */,
+				E4B3FD002C77560200CB98F3 /* AuthViewModel.swift in Sources */,
+				E4B3FD0E2C775D7C00CB98F3 /* MainTabViewModel.swift in Sources */,
+				E4B3FD082C775B5300CB98F3 /* LoginView.swift in Sources */,
+				E4B3FD0C2C775D7000CB98F3 /* MainTabView.swift in Sources */,
+				E4B3FD042C77577100CB98F3 /* Services.swift in Sources */,
+				E4B3FCCA2C7751DB00CB98F3 /* AuthView.swift in Sources */,
+				E4B3FD0A2C775C0E00CB98F3 /* LoginViewModel.swift in Sources */,
+				E4B3FD022C77563600CB98F3 /* DIContainer.swift in Sources */,
 				E4B3FCF72C7754F500CB98F3 /* Color+Extension.swift in Sources */,
 				E4B3FCC82C7751DB00CB98F3 /* UnivAppApp.swift in Sources */,
 			);
