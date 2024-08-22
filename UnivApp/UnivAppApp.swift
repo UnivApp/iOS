@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct UnivAppApp: App {
-    @StateObject var container: DIContainer = .init(services: Services())
+    @StateObject var container: DIContainer = .init(services: Services(authService: AuthService()))
     var body: some Scene {
         WindowGroup {
             AuthView(authViewModel: .init(container: container))

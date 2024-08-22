@@ -16,10 +16,10 @@ struct AuthView: View {
         VStack {
             switch authViewModel.authState {
             case .unAuth:
-                LoginView(loginViewModel: LoginViewModel())
+                LoginView(loginViewModel: LoginViewModel(container: container))
                     .environmentObject(authViewModel)
             case .auth:
-                MainTabView()
+                MainTabView(mainTabViewModel: MainTabViewModel())
                     .environmentObject(authViewModel)
             }
         }
@@ -31,5 +31,5 @@ struct AuthView: View {
 }
 
 #Preview {
-    AuthView(authViewModel: AuthViewModel(container: .init(services: Services())))
+    AuthView(authViewModel: .init(container: .init(services: StubServices(authService: StubAuthService()))))
 }

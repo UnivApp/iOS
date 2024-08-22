@@ -23,6 +23,13 @@
 		E4B3FD0A2C775C0E00CB98F3 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD092C775C0E00CB98F3 /* LoginViewModel.swift */; };
 		E4B3FD0C2C775D7000CB98F3 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD0B2C775D7000CB98F3 /* MainTabView.swift */; };
 		E4B3FD0E2C775D7C00CB98F3 /* MainTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD0D2C775D7C00CB98F3 /* MainTabViewModel.swift */; };
+		E4B3FD102C778D6C00CB98F3 /* MainTabType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD0F2C778D6C00CB98F3 /* MainTabType.swift */; };
+		E4B3FD162C77902800CB98F3 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD152C77902800CB98F3 /* HomeView.swift */; };
+		E4B3FD182C77903700CB98F3 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD172C77903700CB98F3 /* ListView.swift */; };
+		E4B3FD1C2C77904A00CB98F3 /* HeartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD1B2C77904A00CB98F3 /* HeartView.swift */; };
+		E4B3FD1E2C77905500CB98F3 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD1D2C77905500CB98F3 /* SettingView.swift */; };
+		E4B3FD262C77A26D00CB98F3 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD252C77A26D00CB98F3 /* AuthService.swift */; };
+		E4B3FD282C77A42900CB98F3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD272C77A42900CB98F3 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +69,13 @@
 		E4B3FD092C775C0E00CB98F3 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		E4B3FD0B2C775D7000CB98F3 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		E4B3FD0D2C775D7C00CB98F3 /* MainTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewModel.swift; sourceTree = "<group>"; };
+		E4B3FD0F2C778D6C00CB98F3 /* MainTabType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabType.swift; sourceTree = "<group>"; };
+		E4B3FD152C77902800CB98F3 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		E4B3FD172C77903700CB98F3 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		E4B3FD1B2C77904A00CB98F3 /* HeartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartView.swift; sourceTree = "<group>"; };
+		E4B3FD1D2C77905500CB98F3 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		E4B3FD252C77A26D00CB98F3 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		E4B3FD272C77A42900CB98F3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +169,10 @@
 		E4B3FCF12C7754C800CB98F3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E4B3FD142C77902100CB98F3 /* Setting */,
+				E4B3FD132C77901C00CB98F3 /* Heart */,
+				E4B3FD122C77901900CB98F3 /* List */,
+				E4B3FD112C77901400CB98F3 /* Home */,
 				E4B3FD062C77589A00CB98F3 /* MainTab */,
 				E4B3FD052C77589500CB98F3 /* Login */,
 				E4B3FCFE2C7755DD00CB98F3 /* Auth */,
@@ -204,6 +222,7 @@
 		E4B3FCFB2C7755AF00CB98F3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E4B3FD272C77A42900CB98F3 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -212,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				E4B3FD032C77577100CB98F3 /* Services.swift */,
+				E4B3FD252C77A26D00CB98F3 /* AuthService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -246,8 +266,41 @@
 			children = (
 				E4B3FD0B2C775D7000CB98F3 /* MainTabView.swift */,
 				E4B3FD0D2C775D7C00CB98F3 /* MainTabViewModel.swift */,
+				E4B3FD0F2C778D6C00CB98F3 /* MainTabType.swift */,
 			);
 			path = MainTab;
+			sourceTree = "<group>";
+		};
+		E4B3FD112C77901400CB98F3 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				E4B3FD152C77902800CB98F3 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		E4B3FD122C77901900CB98F3 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				E4B3FD172C77903700CB98F3 /* ListView.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		E4B3FD132C77901C00CB98F3 /* Heart */ = {
+			isa = PBXGroup;
+			children = (
+				E4B3FD1B2C77904A00CB98F3 /* HeartView.swift */,
+			);
+			path = Heart;
+			sourceTree = "<group>";
+		};
+		E4B3FD142C77902100CB98F3 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				E4B3FD1D2C77905500CB98F3 /* SettingView.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -382,15 +435,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4B3FD002C77560200CB98F3 /* AuthViewModel.swift in Sources */,
+				E4B3FD182C77903700CB98F3 /* ListView.swift in Sources */,
 				E4B3FD0E2C775D7C00CB98F3 /* MainTabViewModel.swift in Sources */,
 				E4B3FD082C775B5300CB98F3 /* LoginView.swift in Sources */,
 				E4B3FD0C2C775D7000CB98F3 /* MainTabView.swift in Sources */,
 				E4B3FD042C77577100CB98F3 /* Services.swift in Sources */,
+				E4B3FD1E2C77905500CB98F3 /* SettingView.swift in Sources */,
+				E4B3FD282C77A42900CB98F3 /* User.swift in Sources */,
 				E4B3FCCA2C7751DB00CB98F3 /* AuthView.swift in Sources */,
+				E4B3FD102C778D6C00CB98F3 /* MainTabType.swift in Sources */,
 				E4B3FD0A2C775C0E00CB98F3 /* LoginViewModel.swift in Sources */,
+				E4B3FD1C2C77904A00CB98F3 /* HeartView.swift in Sources */,
 				E4B3FD022C77563600CB98F3 /* DIContainer.swift in Sources */,
+				E4B3FD162C77902800CB98F3 /* HomeView.swift in Sources */,
 				E4B3FCF72C7754F500CB98F3 /* Color+Extension.swift in Sources */,
 				E4B3FCC82C7751DB00CB98F3 /* UnivAppApp.swift in Sources */,
+				E4B3FD262C77A26D00CB98F3 /* AuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -562,6 +622,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -591,6 +652,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

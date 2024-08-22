@@ -10,6 +10,7 @@ import Combine
 import AuthenticationServices
 
 struct LoginView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var container: DIContainer
     @StateObject var loginViewModel: LoginViewModel
     
@@ -35,11 +36,11 @@ struct LoginView: View {
             Spacer()
             
             SignInWithAppleButton { request in
-                
+                authViewModel.send(action: .appleLogin(request))
             } onCompletion: { completion in
 
             }
-            .frame(height: 60)
+            .frame(height: 50)
             .padding(.horizontal, 30)
             .padding(.bottom, 30)
 
@@ -48,5 +49,5 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView(loginViewModel: LoginViewModel())
+    LoginView(loginViewModel: LoginViewModel(container: .init(services: Services(authService: StubAuthService()))))
 }

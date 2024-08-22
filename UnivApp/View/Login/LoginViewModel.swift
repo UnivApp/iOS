@@ -11,6 +11,12 @@ import Combine
 
 class LoginViewModel: ObservableObject {
     
+    var container: DIContainer
+    
+    init(container: DIContainer) {
+        self.container = container
+    }
+    
     
     
 }
