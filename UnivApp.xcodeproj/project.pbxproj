@@ -34,6 +34,7 @@
 		E4B3FD2C2C786B0C00CB98F3 /* sha256.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD2B2C786B0C00CB98F3 /* sha256.swift */; };
 		E4B3FD2F2C7870F500CB98F3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4B3FD2E2C7870F500CB98F3 /* Launch Screen.storyboard */; };
 		E4B3FD312C7877C000CB98F3 /* flower.gif in Resources */ = {isa = PBXBuildFile; fileRef = E4B3FD302C7877C000CB98F3 /* flower.gif */; };
+		E4B3FD372C7882C200CB98F3 /* CategoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD362C7882C200CB98F3 /* CategoryType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		E4B3FD2D2C786F0000CB98F3 /* UnivApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = UnivApp.entitlements; sourceTree = "<group>"; };
 		E4B3FD2E2C7870F500CB98F3 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		E4B3FD302C7877C000CB98F3 /* flower.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = flower.gif; sourceTree = "<group>"; };
+		E4B3FD362C7882C200CB98F3 /* CategoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -289,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				E4B3FD152C77902800CB98F3 /* HomeView.swift */,
+				E4B3FD362C7882C200CB98F3 /* CategoryType.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -465,6 +468,7 @@
 				E4B3FCCA2C7751DB00CB98F3 /* AuthView.swift in Sources */,
 				E4B3FD102C778D6C00CB98F3 /* MainTabType.swift in Sources */,
 				E4B3FD0A2C775C0E00CB98F3 /* LoginViewModel.swift in Sources */,
+				E4B3FD372C7882C200CB98F3 /* CategoryType.swift in Sources */,
 				E4B3FD1C2C77904A00CB98F3 /* HeartView.swift in Sources */,
 				E4B3FD022C77563600CB98F3 /* DIContainer.swift in Sources */,
 				E4B3FD162C77902800CB98F3 /* HomeView.swift in Sources */,
@@ -638,6 +642,7 @@
 				DEVELOPMENT_TEAM = Q653PU93R6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "위들";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -670,6 +675,7 @@
 				DEVELOPMENT_TEAM = Q653PU93R6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "위들";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
