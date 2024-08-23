@@ -15,6 +15,13 @@ struct HomeView: View {
         
         UIPageControl.appearance().currentPageIndicatorTintColor = .black
         UIPageControl.appearance().pageIndicatorTintColor = .gray
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor.white
+        appearance.shadowColor = nil
+        
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
     }
     
     var body: some View {
@@ -40,6 +47,9 @@ struct HomeView: View {
                     }, label: {
                         Image("bell")
                     })
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Image("logo")
                 }
             }
         }
