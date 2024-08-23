@@ -37,8 +37,8 @@ struct LoginView: View {
             
             SignInWithAppleButton { request in
                 authViewModel.send(action: .appleLogin(request))
-            } onCompletion: { completion in
-
+            } onCompletion: { result in
+                authViewModel.send(action: .appleLoginCompletion(result))
             }
             .frame(height: 50)
             .padding(.horizontal, 30)

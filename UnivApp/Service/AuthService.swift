@@ -25,15 +25,29 @@ protocol AuthServiceType {
 class AuthService: AuthServiceType {
     
     func checkAuthState() -> String? {
+        //TODO: 사용자 로그인 체크
         return nil
     }
     
     func signInAppleRequest(_ request: ASAuthorizationAppleIDRequest) -> String {
-        return ""
+        request.requestedScopes = [.fullName, .email]
+        let nonce = randomNonceString()
+        request.nonce = sha256(nonce)
+        return nonce
     }
     
     func signInAppleCompletion(_ auth: ASAuthorization, none: String) -> AnyPublisher<User, ServicesError> {
-        Empty().eraseToAnyPublisher()
+        Future { [weak self] promise in
+            self?.handleSignInAppleCompletion(auth, none: none) { result in
+                switch result {
+                case let .success(user):
+                    promise(.success(user))
+                case let .failure(error):
+                    promise(.failure(.error(error)))
+                }
+            }
+        }
+        .eraseToAnyPublisher()
     }
     
     func logout() -> AnyPublisher<Void, ServicesError> {
@@ -60,4 +74,16 @@ class StubAuthService: AuthServiceType {
         Empty().eraseToAnyPublisher()
     }
     
+}
+
+extension AuthService {
+    private func handleSignInAppleCompletion(_ auth: ASAuthorization, none: String, completion: @escaping (Result<User, Error>) -> Void) {
+        guard let appleIDCredential = auth.credential as? ASAuthorizationAppleIDCredential,
+              let appleIDToken = appleIDCredential.identityToken else {
+            completion(.failure(AuthError.tokenError))
+            return
+        }
+        
+        //TODO: - JWT 서버 연결
+    }
 }
