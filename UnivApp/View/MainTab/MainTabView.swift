@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AdFitSDK
 
 struct MainTabView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
@@ -44,6 +45,13 @@ struct MainTabView: View {
     
 }
 
-#Preview {
-    MainTabView(mainTabViewModel: MainTabViewModel())
+struct MainTabView_Preview: PreviewProvider {
+    static let container: DIContainer = .init(services: StubServices(authService: StubAuthService()))
+    static let authViewModel: AuthViewModel = AuthViewModel(container: .init(services: StubServices(authService: StubAuthService())))
+    
+    static var previews: some View {
+        MainTabView(mainTabViewModel: MainTabViewModel())
+            .environmentObject(container)
+            .environmentObject(authViewModel)
+    }
 }

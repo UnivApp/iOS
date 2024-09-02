@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E47B2ECF2C79AF4C0039E2E0 /* SettingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47B2ECE2C79AF4C0039E2E0 /* SettingType.swift */; };
-		E4B3FCC82C7751DB00CB98F3 /* UnivAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FCC72C7751DB00CB98F3 /* UnivAppApp.swift */; };
+		E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */; };
 		E4B3FCCA2C7751DB00CB98F3 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FCC92C7751DB00CB98F3 /* AuthView.swift */; };
 		E4B3FCCC2C7751DD00CB98F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4B3FCCB2C7751DD00CB98F3 /* Assets.xcassets */; };
 		E4B3FCCF2C7751DD00CB98F3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4B3FCCE2C7751DD00CB98F3 /* Preview Assets.xcassets */; };
@@ -57,8 +57,8 @@
 
 /* Begin PBXFileReference section */
 		E47B2ECE2C79AF4C0039E2E0 /* SettingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingType.swift; sourceTree = "<group>"; };
+		E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnivAppApp.swift; sourceTree = "<group>"; };
 		E4B3FCC42C7751DB00CB98F3 /* UnivApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnivApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E4B3FCC72C7751DB00CB98F3 /* UnivAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivAppApp.swift; sourceTree = "<group>"; };
 		E4B3FCC92C7751DB00CB98F3 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		E4B3FCCB2C7751DD00CB98F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E4B3FCCE2C7751DD00CB98F3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -89,6 +89,7 @@
 		E4B3FD2E2C7870F500CB98F3 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		E4B3FD302C7877C000CB98F3 /* flower.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = flower.gif; sourceTree = "<group>"; };
 		E4B3FD362C7882C200CB98F3 /* CategoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryType.swift; sourceTree = "<group>"; };
+		E4EA25602C85CEF000DC5D55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +124,7 @@
 				E4B3FCD72C7751DD00CB98F3 /* UnivAppTests */,
 				E4B3FCE12C7751DD00CB98F3 /* UnivAppUITests */,
 				E4B3FCC52C7751DB00CB98F3 /* Products */,
+				E4EA25622C85D54800DC5D55 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -139,10 +141,11 @@
 		E4B3FCC62C7751DB00CB98F3 /* UnivApp */ = {
 			isa = PBXGroup;
 			children = (
+				E4EA25602C85CEF000DC5D55 /* Info.plist */,
 				E4B3FD2D2C786F0000CB98F3 /* UnivApp.entitlements */,
-				E4B3FCC72C7751DB00CB98F3 /* UnivAppApp.swift */,
 				E4B3FD2E2C7870F500CB98F3 /* Launch Screen.storyboard */,
-				E4B3FCFD2C7755BC00CB98F3 /* General */,
+				E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */,
+				E4EA25652C85D6DC00DC5D55 /* General */,
 				E4B3FCFC2C7755B500CB98F3 /* Service */,
 				E4B3FCFB2C7755AF00CB98F3 /* Model */,
 				E4B3FCFA2C7755AB00CB98F3 /* Util */,
@@ -254,13 +257,6 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
-		E4B3FCFD2C7755BC00CB98F3 /* General */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = General;
-			sourceTree = "<group>";
-		};
 		E4B3FCFE2C7755DD00CB98F3 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -323,6 +319,28 @@
 			path = Setting;
 			sourceTree = "<group>";
 		};
+		E4EA25622C85D54800DC5D55 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E4EA25652C85D6DC00DC5D55 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				E4EA25662C85D6E500DC5D55 /* View */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
+		E4EA25662C85D6E500DC5D55 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -339,6 +357,8 @@
 			dependencies = (
 			);
 			name = UnivApp;
+			packageProductDependencies = (
+			);
 			productName = UnivApp;
 			productReference = E4B3FCC42C7751DB00CB98F3 /* UnivApp.app */;
 			productType = "com.apple.product-type.application";
@@ -475,9 +495,9 @@
 				E4B3FD372C7882C200CB98F3 /* CategoryType.swift in Sources */,
 				E4B3FD1C2C77904A00CB98F3 /* HeartView.swift in Sources */,
 				E4B3FD022C77563600CB98F3 /* DIContainer.swift in Sources */,
+				E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */,
 				E4B3FD162C77902800CB98F3 /* HomeView.swift in Sources */,
 				E4B3FCF72C7754F500CB98F3 /* Color+Extension.swift in Sources */,
-				E4B3FCC82C7751DB00CB98F3 /* UnivAppApp.swift in Sources */,
 				E4B3FD262C77A26D00CB98F3 /* AuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -646,7 +666,9 @@
 				DEVELOPMENT_TEAM = Q653PU93R6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = UnivApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "위들";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "맞춤형 광고 제공을 위해 사용자의 데이터가 사용됩니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -679,7 +701,9 @@
 				DEVELOPMENT_TEAM = Q653PU93R6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = UnivApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "위들";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "맞춤형 광고 제공을 위해 사용자의 데이터가 사용됩니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
