@@ -49,32 +49,30 @@ struct SettingView: View {
     
     var setting: some View {
         VStack(alignment: .leading) {
-            Group {
-                Text("계정 설정")
-                    .foregroundColor(.gray)
-                    .font(.system(size: 10, weight: .bold))
-                    .padding(.leading, 20)
-                    .padding(.bottom, 20)
-                    
-                
-                ForEach(SettingType.allCases, id: \.self) { cases in
-                    NavigationLink(destination: ListView()) {
-                        HStack {
-                            Text("\(cases.title)")
-                                .foregroundColor(.black)
-                                .font(.system(size: 14, weight: .bold))
-                                .padding(.leading, 30)
-                            
-                            Spacer()
-                            
-                            Image("arrow_fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 5, height: 10)
-                                .padding(.trailing, 30)
-                        }
-                        .padding(.bottom, 10)
+            Text("계정 설정")
+                .foregroundColor(.gray)
+                .font(.system(size: 10, weight: .bold))
+                .padding(.leading, 20)
+                .padding(.bottom, 20)
+            
+            
+            ForEach(SettingType.allCases, id: \.self) { cases in
+                NavigationLink(destination: EmptyView()) {
+                    HStack {
+                        Text("\(cases.title)")
+                            .foregroundColor(.black)
+                            .font(.system(size: 14, weight: .bold))
+                            .padding(.leading, 30)
+                        
+                        Spacer()
+                        
+                        Image("arrow_fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 5, height: 10)
+                            .padding(.trailing, 30)
                     }
+                    .padding(.bottom, 10)
                 }
             }
         }
@@ -82,32 +80,30 @@ struct SettingView: View {
     
     var support: some View {
         VStack(alignment: .leading) {
-            Group {
-                Text("지원")
-                    .foregroundColor(.gray)
-                    .font(.system(size: 10, weight: .bold))
-                    .padding(.leading, 20)
-                    .padding(.bottom, 20)
-                    
-                
-                ForEach(SupportType.allCases, id: \.self) { cases in
-                    NavigationLink(destination: ListView()) {
-                        HStack {
-                            Text("\(cases.title)")
-                                .foregroundColor(.black)
-                                .font(.system(size: 14, weight: .bold))
-                                .padding(.leading, 30)
-                            
-                            Spacer()
-                            
-                            Image("arrow_fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 5, height: 10)
-                                .padding(.trailing, 30)
-                        }
-                        .padding(.bottom, 10)
+            Text("지원")
+                .foregroundColor(.gray)
+                .font(.system(size: 10, weight: .bold))
+                .padding(.leading, 20)
+                .padding(.bottom, 20)
+            
+            
+            ForEach(SupportType.allCases, id: \.self) { cases in
+                NavigationLink(destination: EmptyView()) {
+                    HStack {
+                        Text("\(cases.title)")
+                            .foregroundColor(.black)
+                            .font(.system(size: 14, weight: .bold))
+                            .padding(.leading, 30)
+                        
+                        Spacer()
+                        
+                        Image("arrow_fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 5, height: 10)
+                            .padding(.trailing, 30)
                     }
+                    .padding(.bottom, 10)
                 }
             }
         }

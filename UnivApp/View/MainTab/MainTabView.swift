@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import AdFitSDK
 
 struct MainTabView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
@@ -14,21 +13,19 @@ struct MainTabView: View {
     @StateObject var mainTabViewModel : MainTabViewModel
     @State private var selectedTab: MainTabType = .home
     
-//    init(selectedTab: MainTabType) {
-//        self.selectedTab = selectedTab
-//        UITabBar.appearance().unselectedItemTintColor = UIColor(Color.black)
-//    }
-    
-    
     var body: some View {
         TabView(selection: $selectedTab) {
             ForEach(MainTabType.allCases, id: \.self) { tab in
                 Group {
                     switch tab {
                     case .home:
-                        HomeView(searchText: "")
+                        HomeView(searchText: .init(), viewModel: HomeViewModel(container: self.container))
+                            .environmentObject(authViewModel)
+                            .environmentObject(container)
                     case .list:
-                        ListView()
+                        ListView(searchText: .init(), viewModel: ListViewModel(container: self.container))
+                            .environmentObject(authViewModel)
+                            .environmentObject(container)
                     case .heart:
                         HeartView()
                     case .setting:

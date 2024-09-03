@@ -9,20 +9,9 @@ import SwiftUI
 
 struct HomeView: View {
     @State var searchText: String
-    
-    init(searchText: String) {
-        self.searchText = searchText
-        
-        UIPageControl.appearance().currentPageIndicatorTintColor = .black
-        UIPageControl.appearance().pageIndicatorTintColor = .gray
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor.white
-        appearance.shadowColor = nil
-        
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
-    }
+    @StateObject var viewModel: HomeViewModel
+    @EnvironmentObject var continer: DIContainer
+    @EnvironmentObject var authViewModel: AuthViewModel
     
     var body: some View {
         NavigationStack {
@@ -52,6 +41,17 @@ struct HomeView: View {
                     Image("logo")
                 }
             }
+        }
+        .onAppear {
+            UIPageControl.appearance().currentPageIndicatorTintColor = .black
+            UIPageControl.appearance().pageIndicatorTintColor = .gray
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = UIColor.white
+            appearance.shadowColor = nil
+            
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
         }
     }
     
@@ -128,7 +128,7 @@ struct HomeView: View {
                     
                 Spacer()
                 
-                NavigationLink(destination: ListView()) {
+                NavigationLink(destination: EmptyView()) {
                     Image("arrow")
                         .resizable()
                         .scaledToFit()
@@ -148,6 +148,12 @@ struct HomeView: View {
     
 }
 
-#Preview {
-    HomeView(searchText: "")
+struct HomeView_Previews: PreviewProvider {
+    static let container = DIContainer(services: StubServices(authService: StubAuthService()))
+    static let authViewModel = AuthViewModel(container: .init(services: StubServices(authService: StubAuthService())))
+    static var previews: some View {
+        HomeView(searchText: .init(), viewModel: HomeViewModel(container: Self.container))
+            .environmentObject(Self.authViewModel)
+            .environmentObject(Self.container)
+    }
 }

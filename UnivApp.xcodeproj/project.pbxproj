@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		E47B2ECF2C79AF4C0039E2E0 /* SettingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47B2ECE2C79AF4C0039E2E0 /* SettingType.swift */; };
 		E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */; };
+		E49C9F9F2C86CF70001F43A3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */; };
+		E49C9FA52C86D202001F43A3 /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FA42C86D202001F43A3 /* ListModel.swift */; };
+		E49C9FA72C86D3BC001F43A3 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */; };
+		E49C9FA92C86D539001F43A3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FA82C86D539001F43A3 /* HomeViewModel.swift */; };
+		E49C9FAD2C86D756001F43A3 /* ListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FAC2C86D756001F43A3 /* ListCellView.swift */; };
 		E4B3FCCA2C7751DB00CB98F3 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FCC92C7751DB00CB98F3 /* AuthView.swift */; };
 		E4B3FCCC2C7751DD00CB98F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4B3FCCB2C7751DD00CB98F3 /* Assets.xcassets */; };
 		E4B3FCCF2C7751DD00CB98F3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4B3FCCE2C7751DD00CB98F3 /* Preview Assets.xcassets */; };
@@ -30,7 +35,7 @@
 		E4B3FD1C2C77904A00CB98F3 /* HeartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD1B2C77904A00CB98F3 /* HeartView.swift */; };
 		E4B3FD1E2C77905500CB98F3 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD1D2C77905500CB98F3 /* SettingView.swift */; };
 		E4B3FD262C77A26D00CB98F3 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD252C77A26D00CB98F3 /* AuthService.swift */; };
-		E4B3FD282C77A42900CB98F3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD272C77A42900CB98F3 /* User.swift */; };
+		E4B3FD282C77A42900CB98F3 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD272C77A42900CB98F3 /* UserModel.swift */; };
 		E4B3FD2A2C786B0400CB98F3 /* randomNonceString.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD292C786B0400CB98F3 /* randomNonceString.swift */; };
 		E4B3FD2C2C786B0C00CB98F3 /* sha256.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD2B2C786B0C00CB98F3 /* sha256.swift */; };
 		E4B3FD2F2C7870F500CB98F3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4B3FD2E2C7870F500CB98F3 /* Launch Screen.storyboard */; };
@@ -58,6 +63,11 @@
 /* Begin PBXFileReference section */
 		E47B2ECE2C79AF4C0039E2E0 /* SettingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingType.swift; sourceTree = "<group>"; };
 		E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnivAppApp.swift; sourceTree = "<group>"; };
+		E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
+		E49C9FA42C86D202001F43A3 /* ListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
+		E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
+		E49C9FA82C86D539001F43A3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		E49C9FAC2C86D756001F43A3 /* ListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellView.swift; sourceTree = "<group>"; };
 		E4B3FCC42C7751DB00CB98F3 /* UnivApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnivApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B3FCC92C7751DB00CB98F3 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		E4B3FCCB2C7751DD00CB98F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -82,7 +92,7 @@
 		E4B3FD1B2C77904A00CB98F3 /* HeartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartView.swift; sourceTree = "<group>"; };
 		E4B3FD1D2C77905500CB98F3 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		E4B3FD252C77A26D00CB98F3 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
-		E4B3FD272C77A42900CB98F3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E4B3FD272C77A42900CB98F3 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		E4B3FD292C786B0400CB98F3 /* randomNonceString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = randomNonceString.swift; sourceTree = "<group>"; };
 		E4B3FD2B2C786B0C00CB98F3 /* sha256.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sha256.swift; sourceTree = "<group>"; };
 		E4B3FD2D2C786F0000CB98F3 /* UnivApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = UnivApp.entitlements; sourceTree = "<group>"; };
@@ -117,6 +127,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E49C9FA22C86D1EB001F43A3 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				E4B3FD272C77A42900CB98F3 /* UserModel.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		E49C9FA32C86D1F2001F43A3 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				E49C9FA42C86D202001F43A3 /* ListModel.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
 		E4B3FCBB2C7751DB00CB98F3 = {
 			isa = PBXGroup;
 			children = (
@@ -243,7 +269,8 @@
 		E4B3FCFB2C7755AF00CB98F3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E4B3FD272C77A42900CB98F3 /* User.swift */,
+				E49C9FA32C86D1F2001F43A3 /* List */,
+				E49C9FA22C86D1EB001F43A3 /* User */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -290,6 +317,7 @@
 			children = (
 				E4B3FD152C77902800CB98F3 /* HomeView.swift */,
 				E4B3FD362C7882C200CB98F3 /* CategoryType.swift */,
+				E49C9FA82C86D539001F43A3 /* HomeViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -298,6 +326,7 @@
 			isa = PBXGroup;
 			children = (
 				E4B3FD172C77903700CB98F3 /* ListView.swift */,
+				E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -337,6 +366,8 @@
 		E4EA25662C85D6E500DC5D55 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */,
+				E49C9FAC2C86D756001F43A3 /* ListCellView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -480,6 +511,8 @@
 			files = (
 				E4B3FD002C77560200CB98F3 /* AuthViewModel.swift in Sources */,
 				E4B3FD2C2C786B0C00CB98F3 /* sha256.swift in Sources */,
+				E49C9F9F2C86CF70001F43A3 /* EmptyView.swift in Sources */,
+				E49C9FA92C86D539001F43A3 /* HomeViewModel.swift in Sources */,
 				E4B3FD182C77903700CB98F3 /* ListView.swift in Sources */,
 				E4B3FD0E2C775D7C00CB98F3 /* MainTabViewModel.swift in Sources */,
 				E4B3FD082C775B5300CB98F3 /* LoginView.swift in Sources */,
@@ -488,8 +521,11 @@
 				E47B2ECF2C79AF4C0039E2E0 /* SettingType.swift in Sources */,
 				E4B3FD1E2C77905500CB98F3 /* SettingView.swift in Sources */,
 				E4B3FD2A2C786B0400CB98F3 /* randomNonceString.swift in Sources */,
-				E4B3FD282C77A42900CB98F3 /* User.swift in Sources */,
+				E4B3FD282C77A42900CB98F3 /* UserModel.swift in Sources */,
 				E4B3FCCA2C7751DB00CB98F3 /* AuthView.swift in Sources */,
+				E49C9FA52C86D202001F43A3 /* ListModel.swift in Sources */,
+				E49C9FA72C86D3BC001F43A3 /* ListViewModel.swift in Sources */,
+				E49C9FAD2C86D756001F43A3 /* ListCellView.swift in Sources */,
 				E4B3FD102C778D6C00CB98F3 /* MainTabType.swift in Sources */,
 				E4B3FD0A2C775C0E00CB98F3 /* LoginViewModel.swift in Sources */,
 				E4B3FD372C7882C200CB98F3 /* CategoryType.swift in Sources */,

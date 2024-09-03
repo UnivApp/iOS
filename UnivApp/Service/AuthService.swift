@@ -18,7 +18,7 @@ enum AuthError: Error {
 protocol AuthServiceType {
     func checkAuthState() -> String?
     func signInAppleRequest(_ request: ASAuthorizationAppleIDRequest) -> String
-    func signInAppleCompletion(_ auth: ASAuthorization, none: String) -> AnyPublisher<User, ServicesError>
+    func signInAppleCompletion(_ auth: ASAuthorization, none: String) -> AnyPublisher<UserModel, ServicesError>
     func logout() -> AnyPublisher<Void, ServicesError>
 }
 
@@ -36,7 +36,7 @@ class AuthService: AuthServiceType {
         return nonce
     }
     
-    func signInAppleCompletion(_ auth: ASAuthorization, none: String) -> AnyPublisher<User, ServicesError> {
+    func signInAppleCompletion(_ auth: ASAuthorization, none: String) -> AnyPublisher<UserModel, ServicesError> {
         Future { [weak self] promise in
             self?.handleSignInAppleCompletion(auth, none: none) { result in
                 switch result {
@@ -66,7 +66,7 @@ class StubAuthService: AuthServiceType {
         return ""
     }
     
-    func signInAppleCompletion(_ auth: ASAuthorization, none: String) -> AnyPublisher<User, ServicesError> {
+    func signInAppleCompletion(_ auth: ASAuthorization, none: String) -> AnyPublisher<UserModel, ServicesError> {
         Empty().eraseToAnyPublisher()
     }
     
@@ -77,7 +77,7 @@ class StubAuthService: AuthServiceType {
 }
 
 extension AuthService {
-    private func handleSignInAppleCompletion(_ auth: ASAuthorization, none: String, completion: @escaping (Result<User, Error>) -> Void) {
+    private func handleSignInAppleCompletion(_ auth: ASAuthorization, none: String, completion: @escaping (Result<UserModel, Error>) -> Void) {
         guard let appleIDCredential = auth.credential as? ASAuthorizationAppleIDCredential,
               let appleIDToken = appleIDCredential.identityToken else {
             completion(.failure(AuthError.tokenError))

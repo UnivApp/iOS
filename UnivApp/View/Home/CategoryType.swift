@@ -42,21 +42,21 @@ enum CategoryType: String, CaseIterable {
     var view: AnyView {
         switch self {
         case .event:
-            return AnyView(ListView())
+            return AnyView(EmptyView())
         case .food:
-            return AnyView(ListView())
+            return AnyView(EmptyView())
         case .graduate:
-            return AnyView(ListView())
+            return AnyView(EmptyView())
         case .info:
-            return AnyView(ListView())
+            return AnyView(EmptyView())
         case .initiative:
-            return AnyView(ListView())
+            return AnyView(EmptyView())
         case .money:
-            return AnyView(ListView())
+            return AnyView(EmptyView())
         case .mou:
-            return AnyView(ListView())
+            return AnyView(EmptyView())
         case .play:
-            return AnyView(ListView())
+            return AnyView(EmptyView())
         }
     }
     
