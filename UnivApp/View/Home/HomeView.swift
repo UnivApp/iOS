@@ -65,7 +65,7 @@ struct HomeView: View {
                 }
                 .padding()
                 
-                TextField("대학명/소재지", text: $searchText)
+                TextField("대학명을 입력하세요", text: $searchText)
                     .padding()
             }
             .padding(.horizontal, 10)
@@ -112,6 +112,8 @@ struct HomeView: View {
                                 .font(.system(size: 8, weight: .regular))
                         }
                     }
+                    .environmentObject(continer)
+                    .environmentObject(authViewModel)
                 }
             }
             .padding(.horizontal, 5)

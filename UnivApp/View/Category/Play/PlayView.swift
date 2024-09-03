@@ -1,17 +1,19 @@
 //
-//  ListView.swift
+//  PlayView.swift
 //  UnivApp
 //
-//  Created by 정성윤 on 8/23/24.
+//  Created by 정성윤 on 9/3/24.
 //
 
 import SwiftUI
 
-struct ListView: View {
-    @State var searchText: String
-    @StateObject var viewModel: ListViewModel
-    @EnvironmentObject var continer: DIContainer
+struct PlayView: View {
+    @EnvironmentObject var container: DIContainer
     @EnvironmentObject var authViewModel: AuthViewModel
+    @StateObject var viewModel: PlayViewModel
+    @State var searchText: String
+    @Environment(\.dismiss) var dismiss
+    
     
     var body: some View {
         NavigationStack {
@@ -20,17 +22,39 @@ struct ListView: View {
                 
                 search
                     .padding(.bottom, 20)
+                    .padding(.top, 10)
                 
                 Spacer()
                 
                 list
             }
             .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    HStack {
+                        Text("놀거리")
+                            .font(.system(size: 15, weight: .heavy))
+                            .foregroundColor(.white)
+                            .padding(.leading, 20)
+                        Image("play")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 35, height: 35)
+                            .padding(.trailing, 10)
+                    }
+                    .background(.pink)
+                    .cornerRadius(15)
+                    .padding(.trailing, 20)
+                }
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Image("logo")
+                    Button(action: {
+                        dismiss()
+                    }, label: {
+                        Image("back")
+                    })
                 }
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
     
     var search: some View {
@@ -74,12 +98,13 @@ struct ListView: View {
     }
 }
 
-struct ListView_Previews: PreviewProvider {
+struct PlayView_Previews: PreviewProvider {
     static let container = DIContainer(services: StubServices(authService: StubAuthService()))
     static let authViewModel = AuthViewModel(container: .init(services: StubServices(authService: StubAuthService())))
     static var previews: some View {
-        ListView(searchText: .init(), viewModel: ListViewModel(container: Self.container))
+        PlayView(viewModel: PlayViewModel(container: Self.container), searchText: .init())
             .environmentObject(Self.authViewModel)
             .environmentObject(Self.container)
     }
 }
+
