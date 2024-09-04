@@ -10,12 +10,21 @@ import Combine
 
 class HomeViewModel: ObservableObject {
     
-    private var container: DIContainer
-    
-    init(container: DIContainer) {
-        self.container = container
+    enum Action {
+        
     }
     
+    @Published var searchText: String
     
+    private var container: DIContainer
+    
+    init(container: DIContainer, searchText: String) {
+        self.container = container
+        self.searchText = searchText
+    }
+    
+    func send(action: Action) {
+        
+    }
     
 }

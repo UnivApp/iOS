@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State var searchText: String
     @StateObject var viewModel: HomeViewModel
     @EnvironmentObject var continer: DIContainer
     @EnvironmentObject var authViewModel: AuthViewModel
@@ -62,10 +61,14 @@ struct HomeView: View {
                     //TODO: 검색
                 } label: {
                     Image("search")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20)
                 }
                 .padding()
                 
-                TextField("대학명을 입력하세요", text: $searchText)
+                TextField("대학명을 입력하세요", text: $viewModel.searchText)
+                    .font(.system(size: 17, weight: .bold))
                     .padding()
             }
             .padding(.horizontal, 10)
@@ -154,7 +157,7 @@ struct HomeView_Previews: PreviewProvider {
     static let container = DIContainer(services: StubServices(authService: StubAuthService()))
     static let authViewModel = AuthViewModel(container: .init(services: StubServices(authService: StubAuthService())))
     static var previews: some View {
-        HomeView(searchText: .init(), viewModel: HomeViewModel(container: Self.container))
+        HomeView(viewModel: HomeViewModel(container: Self.container, searchText: ""))
             .environmentObject(Self.authViewModel)
             .environmentObject(Self.container)
     }

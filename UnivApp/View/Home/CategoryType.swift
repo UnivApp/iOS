@@ -42,21 +42,21 @@ enum CategoryType: String, CaseIterable {
     var view: AnyView {
         switch self {
         case .event:
-            return AnyView(EventView())
+            return AnyView(EventView(viewModel: EventViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
         case .food:
-            return AnyView(FoodView())
+            return AnyView(FoodView(viewModel: FoodViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
         case .graduate:
-            return AnyView(GraduateView())
+            return AnyView(GraduateView(viewModel: GraduateViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
         case .info:
-            return AnyView(InfoView())
+            return AnyView(InfoView(viewModel: InfoViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
         case .initiative:
-            return AnyView(InitiativeView())
+            return AnyView(InitiativeView(viewModel: InitiativeViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
         case .money:
-            return AnyView(MoneyView())
+            return AnyView(MoneyView(viewModel: MoneyViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
         case .mou:
-            return AnyView(MouView())
+            return AnyView(MouView(viewModel: MouViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
         case .play:
-            return AnyView(PlayView(viewModel: PlayViewModel(container: .init(services: Services(authService: AuthService()))), searchText: .init()))
+            return AnyView(PlayView(viewModel: PlayViewModel(container: .init(services: Services(authService: AuthService())), searchText: .init())))
         }
     }
     

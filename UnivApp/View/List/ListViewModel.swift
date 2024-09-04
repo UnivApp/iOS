@@ -14,10 +14,13 @@ class ListViewModel: ObservableObject {
         
     }
     
+    @Published var searchText: String
+    
     private var container: DIContainer
     
-    init(container: DIContainer) {
+    init(container: DIContainer, searchText: String) {
         self.container = container
+        self.searchText = searchText
     }
     
     var stub: [ListModel] = [

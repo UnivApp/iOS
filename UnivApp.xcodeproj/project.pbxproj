@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E47B2ECF2C79AF4C0039E2E0 /* SettingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47B2ECE2C79AF4C0039E2E0 /* SettingType.swift */; };
+		E4953D222C888A64008CBDE5 /* HeartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D212C888A64008CBDE5 /* HeartViewModel.swift */; };
 		E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */; };
 		E49C9F9F2C86CF70001F43A3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */; };
 		E49C9FA52C86D202001F43A3 /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FA42C86D202001F43A3 /* ListModel.swift */; };
@@ -23,38 +24,20 @@
 		E49C9FBC2C86ED7C001F43A3 /* MouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FBB2C86ED7C001F43A3 /* MouView.swift */; };
 		E49C9FBE2C86ED82001F43A3 /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FBD2C86ED82001F43A3 /* PlayView.swift */; };
 		E49C9FC82C86EFEA001F43A3 /* PlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FC72C86EFEA001F43A3 /* PlayViewModel.swift */; };
-		E49C9FD62C86FC49001F43A3 /* HeartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FD52C86FC49001F43A3 /* HeartViewModel.swift */; };
-		E49C9FD72C86FC49001F43A3 /* HeartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FD52C86FC49001F43A3 /* HeartViewModel.swift */; };
-		E49C9FD82C86FC49001F43A3 /* HeartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FD52C86FC49001F43A3 /* HeartViewModel.swift */; };
 		E49C9FDA2C870557001F43A3 /* MouViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FD92C870557001F43A3 /* MouViewModel.swift */; };
-		E49C9FDB2C870557001F43A3 /* MouViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FD92C870557001F43A3 /* MouViewModel.swift */; };
-		E49C9FDC2C870557001F43A3 /* MouViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FD92C870557001F43A3 /* MouViewModel.swift */; };
 		E49C9FDE2C87055D001F43A3 /* MoneyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FDD2C87055D001F43A3 /* MoneyViewModel.swift */; };
-		E49C9FDF2C87055D001F43A3 /* MoneyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FDD2C87055D001F43A3 /* MoneyViewModel.swift */; };
-		E49C9FE02C87055D001F43A3 /* MoneyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FDD2C87055D001F43A3 /* MoneyViewModel.swift */; };
 		E49C9FE22C87056B001F43A3 /* InitiativeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FE12C87056B001F43A3 /* InitiativeViewModel.swift */; };
-		E49C9FE32C87056B001F43A3 /* InitiativeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FE12C87056B001F43A3 /* InitiativeViewModel.swift */; };
-		E49C9FE42C87056B001F43A3 /* InitiativeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FE12C87056B001F43A3 /* InitiativeViewModel.swift */; };
 		E49C9FE62C870572001F43A3 /* InfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FE52C870572001F43A3 /* InfoViewModel.swift */; };
-		E49C9FE72C870572001F43A3 /* InfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FE52C870572001F43A3 /* InfoViewModel.swift */; };
-		E49C9FE82C870572001F43A3 /* InfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FE52C870572001F43A3 /* InfoViewModel.swift */; };
 		E49C9FEA2C87057A001F43A3 /* GraduateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FE92C87057A001F43A3 /* GraduateViewModel.swift */; };
-		E49C9FEB2C87057A001F43A3 /* GraduateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FE92C87057A001F43A3 /* GraduateViewModel.swift */; };
-		E49C9FEC2C87057A001F43A3 /* GraduateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FE92C87057A001F43A3 /* GraduateViewModel.swift */; };
 		E49C9FEE2C870582001F43A3 /* FoodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FED2C870582001F43A3 /* FoodViewModel.swift */; };
-		E49C9FEF2C870582001F43A3 /* FoodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FED2C870582001F43A3 /* FoodViewModel.swift */; };
-		E49C9FF02C870582001F43A3 /* FoodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FED2C870582001F43A3 /* FoodViewModel.swift */; };
 		E49C9FF22C870589001F43A3 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FF12C870589001F43A3 /* EventViewModel.swift */; };
-		E49C9FF32C870589001F43A3 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FF12C870589001F43A3 /* EventViewModel.swift */; };
-		E49C9FF42C870589001F43A3 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FF12C870589001F43A3 /* EventViewModel.swift */; };
 		E49C9FF62C870BF8001F43A3 /* PlayViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FF52C870BF8001F43A3 /* PlayViewCell.swift */; };
 		E49C9FF92C870C36001F43A3 /* PlayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FF82C870C36001F43A3 /* PlayModel.swift */; };
+		E49CA0112C88695F001F43A3 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49CA0102C88695F001F43A3 /* PageView.swift */; };
+		E49CA0132C886DC9001F43A3 /* HeartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49CA0122C886DC9001F43A3 /* HeartView.swift */; };
 		E4B3FCCA2C7751DB00CB98F3 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FCC92C7751DB00CB98F3 /* AuthView.swift */; };
 		E4B3FCCC2C7751DD00CB98F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4B3FCCB2C7751DD00CB98F3 /* Assets.xcassets */; };
 		E4B3FCCF2C7751DD00CB98F3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4B3FCCE2C7751DD00CB98F3 /* Preview Assets.xcassets */; };
-		E4B3FCD92C7751DD00CB98F3 /* UnivAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FCD82C7751DD00CB98F3 /* UnivAppTests.swift */; };
-		E4B3FCE32C7751DD00CB98F3 /* UnivAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FCE22C7751DD00CB98F3 /* UnivAppUITests.swift */; };
-		E4B3FCE52C7751DD00CB98F3 /* UnivAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FCE42C7751DD00CB98F3 /* UnivAppUITestsLaunchTests.swift */; };
 		E4B3FCF42C7754E400CB98F3 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4B3FCF32C7754E400CB98F3 /* Color.xcassets */; };
 		E4B3FCF72C7754F500CB98F3 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FCF62C7754F500CB98F3 /* Color+Extension.swift */; };
 		E4B3FD002C77560200CB98F3 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FCFF2C77560200CB98F3 /* AuthViewModel.swift */; };
@@ -67,7 +50,6 @@
 		E4B3FD102C778D6C00CB98F3 /* MainTabType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD0F2C778D6C00CB98F3 /* MainTabType.swift */; };
 		E4B3FD162C77902800CB98F3 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD152C77902800CB98F3 /* HomeView.swift */; };
 		E4B3FD182C77903700CB98F3 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD172C77903700CB98F3 /* ListView.swift */; };
-		E4B3FD1C2C77904A00CB98F3 /* HeartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD1B2C77904A00CB98F3 /* HeartView.swift */; };
 		E4B3FD1E2C77905500CB98F3 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD1D2C77905500CB98F3 /* SettingView.swift */; };
 		E4B3FD262C77A26D00CB98F3 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD252C77A26D00CB98F3 /* AuthService.swift */; };
 		E4B3FD282C77A42900CB98F3 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD272C77A42900CB98F3 /* UserModel.swift */; };
@@ -78,25 +60,9 @@
 		E4B3FD372C7882C200CB98F3 /* CategoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FD362C7882C200CB98F3 /* CategoryType.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		E4B3FCD52C7751DD00CB98F3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E4B3FCBC2C7751DB00CB98F3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E4B3FCC32C7751DB00CB98F3;
-			remoteInfo = UnivApp;
-		};
-		E4B3FCDF2C7751DD00CB98F3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E4B3FCBC2C7751DB00CB98F3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E4B3FCC32C7751DB00CB98F3;
-			remoteInfo = UnivApp;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		E47B2ECE2C79AF4C0039E2E0 /* SettingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingType.swift; sourceTree = "<group>"; };
+		E4953D212C888A64008CBDE5 /* HeartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartViewModel.swift; sourceTree = "<group>"; };
 		E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnivAppApp.swift; sourceTree = "<group>"; };
 		E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		E49C9FA42C86D202001F43A3 /* ListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
@@ -112,7 +78,6 @@
 		E49C9FBB2C86ED7C001F43A3 /* MouView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MouView.swift; sourceTree = "<group>"; };
 		E49C9FBD2C86ED82001F43A3 /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
 		E49C9FC72C86EFEA001F43A3 /* PlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewModel.swift; sourceTree = "<group>"; };
-		E49C9FD52C86FC49001F43A3 /* HeartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartViewModel.swift; sourceTree = "<group>"; };
 		E49C9FD92C870557001F43A3 /* MouViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MouViewModel.swift; sourceTree = "<group>"; };
 		E49C9FDD2C87055D001F43A3 /* MoneyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyViewModel.swift; sourceTree = "<group>"; };
 		E49C9FE12C87056B001F43A3 /* InitiativeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiativeViewModel.swift; sourceTree = "<group>"; };
@@ -122,15 +87,12 @@
 		E49C9FF12C870589001F43A3 /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 		E49C9FF52C870BF8001F43A3 /* PlayViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewCell.swift; sourceTree = "<group>"; };
 		E49C9FF82C870C36001F43A3 /* PlayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayModel.swift; sourceTree = "<group>"; };
+		E49CA0102C88695F001F43A3 /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
+		E49CA0122C886DC9001F43A3 /* HeartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartView.swift; sourceTree = "<group>"; };
 		E4B3FCC42C7751DB00CB98F3 /* UnivApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnivApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B3FCC92C7751DB00CB98F3 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		E4B3FCCB2C7751DD00CB98F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E4B3FCCE2C7751DD00CB98F3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		E4B3FCD42C7751DD00CB98F3 /* UnivAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnivAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E4B3FCD82C7751DD00CB98F3 /* UnivAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivAppTests.swift; sourceTree = "<group>"; };
-		E4B3FCDE2C7751DD00CB98F3 /* UnivAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnivAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E4B3FCE22C7751DD00CB98F3 /* UnivAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivAppUITests.swift; sourceTree = "<group>"; };
-		E4B3FCE42C7751DD00CB98F3 /* UnivAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E4B3FCF32C7754E400CB98F3 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		E4B3FCF62C7754F500CB98F3 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		E4B3FCFF2C77560200CB98F3 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
@@ -143,7 +105,6 @@
 		E4B3FD0F2C778D6C00CB98F3 /* MainTabType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabType.swift; sourceTree = "<group>"; };
 		E4B3FD152C77902800CB98F3 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		E4B3FD172C77903700CB98F3 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
-		E4B3FD1B2C77904A00CB98F3 /* HeartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartView.swift; sourceTree = "<group>"; };
 		E4B3FD1D2C77905500CB98F3 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		E4B3FD252C77A26D00CB98F3 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		E4B3FD272C77A42900CB98F3 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -158,20 +119,6 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		E4B3FCC12C7751DB00CB98F3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E4B3FCD12C7751DD00CB98F3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E4B3FCDB2C7751DD00CB98F3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -296,8 +243,6 @@
 			isa = PBXGroup;
 			children = (
 				E4B3FCC62C7751DB00CB98F3 /* UnivApp */,
-				E4B3FCD72C7751DD00CB98F3 /* UnivAppTests */,
-				E4B3FCE12C7751DD00CB98F3 /* UnivAppUITests */,
 				E4B3FCC52C7751DB00CB98F3 /* Products */,
 				E4EA25622C85D54800DC5D55 /* Frameworks */,
 			);
@@ -307,8 +252,6 @@
 			isa = PBXGroup;
 			children = (
 				E4B3FCC42C7751DB00CB98F3 /* UnivApp.app */,
-				E4B3FCD42C7751DD00CB98F3 /* UnivAppTests.xctest */,
-				E4B3FCDE2C7751DD00CB98F3 /* UnivAppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -340,23 +283,6 @@
 				E4B3FCCE2C7751DD00CB98F3 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		E4B3FCD72C7751DD00CB98F3 /* UnivAppTests */ = {
-			isa = PBXGroup;
-			children = (
-				E4B3FCD82C7751DD00CB98F3 /* UnivAppTests.swift */,
-			);
-			path = UnivAppTests;
-			sourceTree = "<group>";
-		};
-		E4B3FCE12C7751DD00CB98F3 /* UnivAppUITests */ = {
-			isa = PBXGroup;
-			children = (
-				E4B3FCE22C7751DD00CB98F3 /* UnivAppUITests.swift */,
-				E4B3FCE42C7751DD00CB98F3 /* UnivAppUITestsLaunchTests.swift */,
-			);
-			path = UnivAppUITests;
 			sourceTree = "<group>";
 		};
 		E4B3FCF12C7754C800CB98F3 /* View */ = {
@@ -485,8 +411,8 @@
 		E4B3FD132C77901C00CB98F3 /* Heart */ = {
 			isa = PBXGroup;
 			children = (
-				E4B3FD1B2C77904A00CB98F3 /* HeartView.swift */,
-				E49C9FD52C86FC49001F43A3 /* HeartViewModel.swift */,
+				E49CA0122C886DC9001F43A3 /* HeartView.swift */,
+				E4953D212C888A64008CBDE5 /* HeartViewModel.swift */,
 			);
 			path = Heart;
 			sourceTree = "<group>";
@@ -521,6 +447,7 @@
 				E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */,
 				E49C9FAC2C86D756001F43A3 /* ListViewCell.swift */,
 				E49C9FF52C870BF8001F43A3 /* PlayViewCell.swift */,
+				E49CA0102C88695F001F43A3 /* PageView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -547,42 +474,6 @@
 			productReference = E4B3FCC42C7751DB00CB98F3 /* UnivApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E4B3FCD32C7751DD00CB98F3 /* UnivAppTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E4B3FCEB2C7751DD00CB98F3 /* Build configuration list for PBXNativeTarget "UnivAppTests" */;
-			buildPhases = (
-				E4B3FCD02C7751DD00CB98F3 /* Sources */,
-				E4B3FCD12C7751DD00CB98F3 /* Frameworks */,
-				E4B3FCD22C7751DD00CB98F3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E4B3FCD62C7751DD00CB98F3 /* PBXTargetDependency */,
-			);
-			name = UnivAppTests;
-			productName = UnivAppTests;
-			productReference = E4B3FCD42C7751DD00CB98F3 /* UnivAppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		E4B3FCDD2C7751DD00CB98F3 /* UnivAppUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E4B3FCEE2C7751DD00CB98F3 /* Build configuration list for PBXNativeTarget "UnivAppUITests" */;
-			buildPhases = (
-				E4B3FCDA2C7751DD00CB98F3 /* Sources */,
-				E4B3FCDB2C7751DD00CB98F3 /* Frameworks */,
-				E4B3FCDC2C7751DD00CB98F3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E4B3FCE02C7751DD00CB98F3 /* PBXTargetDependency */,
-			);
-			name = UnivAppUITests;
-			productName = UnivAppUITests;
-			productReference = E4B3FCDE2C7751DD00CB98F3 /* UnivAppUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -595,14 +486,6 @@
 				TargetAttributes = {
 					E4B3FCC32C7751DB00CB98F3 = {
 						CreatedOnToolsVersion = 15.4;
-					};
-					E4B3FCD32C7751DD00CB98F3 = {
-						CreatedOnToolsVersion = 15.4;
-						TestTargetID = E4B3FCC32C7751DB00CB98F3;
-					};
-					E4B3FCDD2C7751DD00CB98F3 = {
-						CreatedOnToolsVersion = 15.4;
-						TestTargetID = E4B3FCC32C7751DB00CB98F3;
 					};
 				};
 			};
@@ -622,8 +505,6 @@
 			projectRoot = "";
 			targets = (
 				E4B3FCC32C7751DB00CB98F3 /* UnivApp */,
-				E4B3FCD32C7751DD00CB98F3 /* UnivAppTests */,
-				E4B3FCDD2C7751DD00CB98F3 /* UnivAppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -638,20 +519,6 @@
 				E4B3FD2F2C7870F500CB98F3 /* Launch Screen.storyboard in Resources */,
 				E4B3FD312C7877C000CB98F3 /* flower.gif in Resources */,
 				E4B3FCF42C7754E400CB98F3 /* Color.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E4B3FCD22C7751DD00CB98F3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E4B3FCDC2C7751DD00CB98F3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -670,12 +537,12 @@
 				E49C9FA92C86D539001F43A3 /* HomeViewModel.swift in Sources */,
 				E49C9FE22C87056B001F43A3 /* InitiativeViewModel.swift in Sources */,
 				E4B3FD182C77903700CB98F3 /* ListView.swift in Sources */,
-				E49C9FD62C86FC49001F43A3 /* HeartViewModel.swift in Sources */,
 				E49C9FC82C86EFEA001F43A3 /* PlayViewModel.swift in Sources */,
 				E49C9FBC2C86ED7C001F43A3 /* MouView.swift in Sources */,
 				E4B3FD0E2C775D7C00CB98F3 /* MainTabViewModel.swift in Sources */,
 				E49C9FDA2C870557001F43A3 /* MouViewModel.swift in Sources */,
 				E4B3FD082C775B5300CB98F3 /* LoginView.swift in Sources */,
+				E4953D222C888A64008CBDE5 /* HeartViewModel.swift in Sources */,
 				E4B3FD0C2C775D7000CB98F3 /* MainTabView.swift in Sources */,
 				E4B3FD042C77577100CB98F3 /* Services.swift in Sources */,
 				E47B2ECF2C79AF4C0039E2E0 /* SettingType.swift in Sources */,
@@ -687,6 +554,7 @@
 				E49C9FB82C86ED62001F43A3 /* InitiativeView.swift in Sources */,
 				E4B3FD282C77A42900CB98F3 /* UserModel.swift in Sources */,
 				E4B3FCCA2C7751DB00CB98F3 /* AuthView.swift in Sources */,
+				E49CA0112C88695F001F43A3 /* PageView.swift in Sources */,
 				E49C9FA52C86D202001F43A3 /* ListModel.swift in Sources */,
 				E49C9FA72C86D3BC001F43A3 /* ListViewModel.swift in Sources */,
 				E49C9FB22C86ED38001F43A3 /* FoodView.swift in Sources */,
@@ -697,7 +565,6 @@
 				E49C9FE62C870572001F43A3 /* InfoViewModel.swift in Sources */,
 				E49C9FF22C870589001F43A3 /* EventViewModel.swift in Sources */,
 				E4B3FD372C7882C200CB98F3 /* CategoryType.swift in Sources */,
-				E4B3FD1C2C77904A00CB98F3 /* HeartView.swift in Sources */,
 				E49C9FF92C870C36001F43A3 /* PlayModel.swift in Sources */,
 				E49C9FB02C86ED28001F43A3 /* EventView.swift in Sources */,
 				E4B3FD022C77563600CB98F3 /* DIContainer.swift in Sources */,
@@ -706,57 +573,12 @@
 				E4B3FCF72C7754F500CB98F3 /* Color+Extension.swift in Sources */,
 				E49C9FB62C86ED54001F43A3 /* InfoView.swift in Sources */,
 				E49C9FF62C870BF8001F43A3 /* PlayViewCell.swift in Sources */,
+				E49CA0132C886DC9001F43A3 /* HeartView.swift in Sources */,
 				E4B3FD262C77A26D00CB98F3 /* AuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E4B3FCD02C7751DD00CB98F3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E49C9FDB2C870557001F43A3 /* MouViewModel.swift in Sources */,
-				E49C9FF32C870589001F43A3 /* EventViewModel.swift in Sources */,
-				E4B3FCD92C7751DD00CB98F3 /* UnivAppTests.swift in Sources */,
-				E49C9FEF2C870582001F43A3 /* FoodViewModel.swift in Sources */,
-				E49C9FE72C870572001F43A3 /* InfoViewModel.swift in Sources */,
-				E49C9FEB2C87057A001F43A3 /* GraduateViewModel.swift in Sources */,
-				E49C9FD72C86FC49001F43A3 /* HeartViewModel.swift in Sources */,
-				E49C9FDF2C87055D001F43A3 /* MoneyViewModel.swift in Sources */,
-				E49C9FE32C87056B001F43A3 /* InitiativeViewModel.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E4B3FCDA2C7751DD00CB98F3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E49C9FE42C87056B001F43A3 /* InitiativeViewModel.swift in Sources */,
-				E49C9FE02C87055D001F43A3 /* MoneyViewModel.swift in Sources */,
-				E4B3FCE52C7751DD00CB98F3 /* UnivAppUITestsLaunchTests.swift in Sources */,
-				E49C9FF42C870589001F43A3 /* EventViewModel.swift in Sources */,
-				E49C9FEC2C87057A001F43A3 /* GraduateViewModel.swift in Sources */,
-				E49C9FD82C86FC49001F43A3 /* HeartViewModel.swift in Sources */,
-				E49C9FF02C870582001F43A3 /* FoodViewModel.swift in Sources */,
-				E49C9FE82C870572001F43A3 /* InfoViewModel.swift in Sources */,
-				E49C9FDC2C870557001F43A3 /* MouViewModel.swift in Sources */,
-				E4B3FCE32C7751DD00CB98F3 /* UnivAppUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		E4B3FCD62C7751DD00CB98F3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E4B3FCC32C7751DB00CB98F3 /* UnivApp */;
-			targetProxy = E4B3FCD52C7751DD00CB98F3 /* PBXContainerItemProxy */;
-		};
-		E4B3FCE02C7751DD00CB98F3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E4B3FCC32C7751DB00CB98F3 /* UnivApp */;
-			targetProxy = E4B3FCDF2C7751DD00CB98F3 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		E4B3FCE62C7751DD00CB98F3 /* Debug */ = {
@@ -948,82 +770,6 @@
 			};
 			name = Release;
 		};
-		E4B3FCEC2C7751DD00CB98F3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Q653PU93R6;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = WEDLE.UnivAppTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UnivApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/UnivApp";
-			};
-			name = Debug;
-		};
-		E4B3FCED2C7751DD00CB98F3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Q653PU93R6;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = WEDLE.UnivAppTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UnivApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/UnivApp";
-			};
-			name = Release;
-		};
-		E4B3FCEF2C7751DD00CB98F3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Q653PU93R6;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = WEDLE.UnivAppUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = UnivApp;
-			};
-			name = Debug;
-		};
-		E4B3FCF02C7751DD00CB98F3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Q653PU93R6;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = WEDLE.UnivAppUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = UnivApp;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1041,24 +787,6 @@
 			buildConfigurations = (
 				E4B3FCE92C7751DD00CB98F3 /* Debug */,
 				E4B3FCEA2C7751DD00CB98F3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E4B3FCEB2C7751DD00CB98F3 /* Build configuration list for PBXNativeTarget "UnivAppTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E4B3FCEC2C7751DD00CB98F3 /* Debug */,
-				E4B3FCED2C7751DD00CB98F3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E4B3FCEE2C7751DD00CB98F3 /* Build configuration list for PBXNativeTarget "UnivAppUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E4B3FCEF2C7751DD00CB98F3 /* Debug */,
-				E4B3FCF02C7751DD00CB98F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

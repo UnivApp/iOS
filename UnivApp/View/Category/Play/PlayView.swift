@@ -11,23 +11,19 @@ struct PlayView: View {
     @EnvironmentObject var container: DIContainer
     @EnvironmentObject var authViewModel: AuthViewModel
     @StateObject var viewModel: PlayViewModel
-    @State var searchText: String
     @Environment(\.dismiss) var dismiss
     
     
     var body: some View {
         NavigationStack {
             VStack {
-                Spacer()
-                
                 search
                     .padding(.bottom, 20)
-                    .padding(.top, 10)
+                    .padding(.top, 20)
                 
                 Spacer()
                 
                 ScrollView(.vertical) {
-                    page
                     list
                 }
                 .padding(.horizontal, 0)
@@ -37,32 +33,26 @@ struct PlayView: View {
                 }
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    HStack {
-                        Text("놀거리")
-                            .font(.system(size: 15, weight: .heavy))
-                            .foregroundColor(.white)
-                            .padding(.leading, 20)
-                        Image("play")
+                ToolbarItem(placement: .navigationBarLeading) {
+                    HStack(spacing: 0) {
+                        Button(action: {
+                            dismiss()
+                        }, label: {
+                            Image("back")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 30, height: 30)
+                        })
+                        Image("play_navi")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 35, height: 35)
-                            .padding(.trailing, 10)
+                            .frame(width: 90, height: 60)
                     }
-                    .background(.pink)
-                    .cornerRadius(15)
-                    .padding(.trailing, 20)
-                }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        dismiss()
-                    }, label: {
-                        Image("back")
-                    })
                 }
             }
         }
         .navigationBarBackButtonHidden(true)
+        .toolbar(.hidden, for: .tabBar)
         .onAppear {
             UIPageControl.appearance().currentPageIndicatorTintColor = .black
             UIPageControl.appearance().pageIndicatorTintColor = .gray
@@ -78,36 +68,26 @@ struct PlayView: View {
     
     var search: some View {
         HStack {
-            Button {
-                //TODO: 검색
-            } label: {
-                Image("search")
-            }
-            .padding()
-            
-            TextField("대학명을 입력하세요", text: $searchText)
+            Group {
+                Button {
+                    //TODO: 검색
+                } label: {
+                    Image("search")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20)
+                }
                 .padding()
+                
+                TextField("대학명을 입력하세요", text: $viewModel.searchText)
+                    .font(.system(size: 17, weight: .bold))
+                    .padding()
+            }
+            .padding(.leading, 10)
         }
-        .padding(.horizontal, 10)
         .background(Color(.backGray))
         .cornerRadius(15)
         .padding(.horizontal, 30)
-    }
-    
-    var page: some View {
-        TabView {
-            ForEach(viewModel.playStub, id: \.self) { cell in
-                if let image = cell.image, let title = cell.title, let address = cell.address, let description = cell.description {
-                    HStack(spacing: 20) {
-                        PlayViewCell(title: title, address: address, description: description, image: image)
-                            .tag(cell.id)
-                    }
-                }
-            }
-        }
-        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-        .frame(height: 250)
-        .padding(.horizontal, 0)
     }
     
     var list: some View {
@@ -130,7 +110,7 @@ struct PlayView_Previews: PreviewProvider {
     static let container = DIContainer(services: StubServices(authService: StubAuthService()))
     static let authViewModel = AuthViewModel(container: .init(services: StubServices(authService: StubAuthService())))
     static var previews: some View {
-        PlayView(viewModel: PlayViewModel(container: Self.container), searchText: .init())
+        PlayView(viewModel: PlayViewModel(container: Self.container, searchText: ""))
             .environmentObject(Self.authViewModel)
             .environmentObject(Self.container)
     }

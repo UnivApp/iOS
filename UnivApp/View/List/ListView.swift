@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ListView: View {
-    @State var searchText: String
     @StateObject var viewModel: ListViewModel
     @EnvironmentObject var continer: DIContainer
     @EnvironmentObject var authViewModel: AuthViewModel
@@ -42,7 +41,7 @@ struct ListView: View {
             }
             .padding()
             
-            TextField("대학명을 입력하세요", text: $searchText)
+            TextField("대학명을 입력하세요", text: $viewModel.searchText)
                 .padding()
         }
         .padding(.horizontal, 10)
@@ -78,7 +77,7 @@ struct ListView_Previews: PreviewProvider {
     static let container = DIContainer(services: StubServices(authService: StubAuthService()))
     static let authViewModel = AuthViewModel(container: .init(services: StubServices(authService: StubAuthService())))
     static var previews: some View {
-        ListView(searchText: .init(), viewModel: ListViewModel(container: Self.container))
+        ListView(viewModel: ListViewModel(container: self.container, searchText: ""))
             .environmentObject(Self.authViewModel)
             .environmentObject(Self.container)
     }

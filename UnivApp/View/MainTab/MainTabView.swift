@@ -19,15 +19,15 @@ struct MainTabView: View {
                 Group {
                     switch tab {
                     case .home:
-                        HomeView(searchText: .init(), viewModel: HomeViewModel(container: self.container))
+                        HomeView(viewModel: HomeViewModel(container: self.container, searchText: .init()))
                             .environmentObject(authViewModel)
                             .environmentObject(container)
                     case .list:
-                        ListView(searchText: .init(), viewModel: ListViewModel(container: self.container))
+                        ListView(viewModel: ListViewModel(container: self.container, searchText: .init()))
                             .environmentObject(authViewModel)
                             .environmentObject(container)
                     case .heart:
-                        HeartView(searchText: .init(), viewModel: HeartViewModel())
+                        HeartView(viewModel: HeartViewModel(container: self.container))
                             .environmentObject(authViewModel)
                             .environmentObject(container)
                     case .setting:
