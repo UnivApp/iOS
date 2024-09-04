@@ -13,7 +13,7 @@
 		E49C9FA52C86D202001F43A3 /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FA42C86D202001F43A3 /* ListModel.swift */; };
 		E49C9FA72C86D3BC001F43A3 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */; };
 		E49C9FA92C86D539001F43A3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FA82C86D539001F43A3 /* HomeViewModel.swift */; };
-		E49C9FAD2C86D756001F43A3 /* ListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FAC2C86D756001F43A3 /* ListCellView.swift */; };
+		E49C9FAD2C86D756001F43A3 /* ListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FAC2C86D756001F43A3 /* ListViewCell.swift */; };
 		E49C9FB02C86ED28001F43A3 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FAF2C86ED28001F43A3 /* EventView.swift */; };
 		E49C9FB22C86ED38001F43A3 /* FoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FB12C86ED38001F43A3 /* FoodView.swift */; };
 		E49C9FB42C86ED41001F43A3 /* GraduateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FB32C86ED41001F43A3 /* GraduateView.swift */; };
@@ -23,9 +23,6 @@
 		E49C9FBC2C86ED7C001F43A3 /* MouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FBB2C86ED7C001F43A3 /* MouView.swift */; };
 		E49C9FBE2C86ED82001F43A3 /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FBD2C86ED82001F43A3 /* PlayView.swift */; };
 		E49C9FC82C86EFEA001F43A3 /* PlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FC72C86EFEA001F43A3 /* PlayViewModel.swift */; };
-		E49C9FD22C86F6FB001F43A3 /* EF_jejudoldam.otf in Resources */ = {isa = PBXBuildFile; fileRef = E49C9FD12C86F6FB001F43A3 /* EF_jejudoldam.otf */; };
-		E49C9FD32C86F6FB001F43A3 /* EF_jejudoldam.otf in Resources */ = {isa = PBXBuildFile; fileRef = E49C9FD12C86F6FB001F43A3 /* EF_jejudoldam.otf */; };
-		E49C9FD42C86F6FB001F43A3 /* EF_jejudoldam.otf in Resources */ = {isa = PBXBuildFile; fileRef = E49C9FD12C86F6FB001F43A3 /* EF_jejudoldam.otf */; };
 		E49C9FD62C86FC49001F43A3 /* HeartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FD52C86FC49001F43A3 /* HeartViewModel.swift */; };
 		E49C9FD72C86FC49001F43A3 /* HeartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FD52C86FC49001F43A3 /* HeartViewModel.swift */; };
 		E49C9FD82C86FC49001F43A3 /* HeartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FD52C86FC49001F43A3 /* HeartViewModel.swift */; };
@@ -50,6 +47,8 @@
 		E49C9FF22C870589001F43A3 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FF12C870589001F43A3 /* EventViewModel.swift */; };
 		E49C9FF32C870589001F43A3 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FF12C870589001F43A3 /* EventViewModel.swift */; };
 		E49C9FF42C870589001F43A3 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FF12C870589001F43A3 /* EventViewModel.swift */; };
+		E49C9FF62C870BF8001F43A3 /* PlayViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FF52C870BF8001F43A3 /* PlayViewCell.swift */; };
+		E49C9FF92C870C36001F43A3 /* PlayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FF82C870C36001F43A3 /* PlayModel.swift */; };
 		E4B3FCCA2C7751DB00CB98F3 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FCC92C7751DB00CB98F3 /* AuthView.swift */; };
 		E4B3FCCC2C7751DD00CB98F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4B3FCCB2C7751DD00CB98F3 /* Assets.xcassets */; };
 		E4B3FCCF2C7751DD00CB98F3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4B3FCCE2C7751DD00CB98F3 /* Preview Assets.xcassets */; };
@@ -103,7 +102,7 @@
 		E49C9FA42C86D202001F43A3 /* ListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
 		E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		E49C9FA82C86D539001F43A3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		E49C9FAC2C86D756001F43A3 /* ListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellView.swift; sourceTree = "<group>"; };
+		E49C9FAC2C86D756001F43A3 /* ListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewCell.swift; sourceTree = "<group>"; };
 		E49C9FAF2C86ED28001F43A3 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		E49C9FB12C86ED38001F43A3 /* FoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodView.swift; sourceTree = "<group>"; };
 		E49C9FB32C86ED41001F43A3 /* GraduateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraduateView.swift; sourceTree = "<group>"; };
@@ -113,7 +112,6 @@
 		E49C9FBB2C86ED7C001F43A3 /* MouView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MouView.swift; sourceTree = "<group>"; };
 		E49C9FBD2C86ED82001F43A3 /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
 		E49C9FC72C86EFEA001F43A3 /* PlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewModel.swift; sourceTree = "<group>"; };
-		E49C9FD12C86F6FB001F43A3 /* EF_jejudoldam.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EF_jejudoldam.otf; sourceTree = "<group>"; };
 		E49C9FD52C86FC49001F43A3 /* HeartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartViewModel.swift; sourceTree = "<group>"; };
 		E49C9FD92C870557001F43A3 /* MouViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MouViewModel.swift; sourceTree = "<group>"; };
 		E49C9FDD2C87055D001F43A3 /* MoneyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyViewModel.swift; sourceTree = "<group>"; };
@@ -122,6 +120,8 @@
 		E49C9FE92C87057A001F43A3 /* GraduateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraduateViewModel.swift; sourceTree = "<group>"; };
 		E49C9FED2C870582001F43A3 /* FoodViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewModel.swift; sourceTree = "<group>"; };
 		E49C9FF12C870589001F43A3 /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
+		E49C9FF52C870BF8001F43A3 /* PlayViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewCell.swift; sourceTree = "<group>"; };
+		E49C9FF82C870C36001F43A3 /* PlayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayModel.swift; sourceTree = "<group>"; };
 		E4B3FCC42C7751DB00CB98F3 /* UnivApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnivApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B3FCC92C7751DB00CB98F3 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		E4B3FCCB2C7751DD00CB98F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -284,20 +284,12 @@
 			path = Play;
 			sourceTree = "<group>";
 		};
-		E49C9FCB2C86F559001F43A3 /* Fonts */ = {
+		E49C9FF72C870C2F001F43A3 /* Play */ = {
 			isa = PBXGroup;
 			children = (
-				E49C9FCE2C86F574001F43A3 /* EARLYFONT_JEJUDOLDAM */,
+				E49C9FF82C870C36001F43A3 /* PlayModel.swift */,
 			);
-			path = Fonts;
-			sourceTree = "<group>";
-		};
-		E49C9FCE2C86F574001F43A3 /* EARLYFONT_JEJUDOLDAM */ = {
-			isa = PBXGroup;
-			children = (
-				E49C9FD12C86F6FB001F43A3 /* EF_jejudoldam.otf */,
-			);
-			path = EARLYFONT_JEJUDOLDAM;
+			path = Play;
 			sourceTree = "<group>";
 		};
 		E4B3FCBB2C7751DB00CB98F3 = {
@@ -385,7 +377,6 @@
 		E4B3FCF22C7754CF00CB98F3 /* Reference */ = {
 			isa = PBXGroup;
 			children = (
-				E49C9FCB2C86F559001F43A3 /* Fonts */,
 				E4B3FD302C7877C000CB98F3 /* flower.gif */,
 				E4B3FCCB2C7751DD00CB98F3 /* Assets.xcassets */,
 				E4B3FCF32C7754E400CB98F3 /* Color.xcassets */,
@@ -428,6 +419,7 @@
 		E4B3FCFB2C7755AF00CB98F3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E49C9FF72C870C2F001F43A3 /* Play */,
 				E49C9FA32C86D1F2001F43A3 /* List */,
 				E49C9FA22C86D1EB001F43A3 /* User */,
 			);
@@ -527,7 +519,8 @@
 			isa = PBXGroup;
 			children = (
 				E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */,
-				E49C9FAC2C86D756001F43A3 /* ListCellView.swift */,
+				E49C9FAC2C86D756001F43A3 /* ListViewCell.swift */,
+				E49C9FF52C870BF8001F43A3 /* PlayViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -640,7 +633,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E49C9FD22C86F6FB001F43A3 /* EF_jejudoldam.otf in Resources */,
 				E4B3FCCF2C7751DD00CB98F3 /* Preview Assets.xcassets in Resources */,
 				E4B3FCCC2C7751DD00CB98F3 /* Assets.xcassets in Resources */,
 				E4B3FD2F2C7870F500CB98F3 /* Launch Screen.storyboard in Resources */,
@@ -653,7 +645,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E49C9FD32C86F6FB001F43A3 /* EF_jejudoldam.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,7 +652,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E49C9FD42C86F6FB001F43A3 /* EF_jejudoldam.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -701,19 +691,21 @@
 				E49C9FA72C86D3BC001F43A3 /* ListViewModel.swift in Sources */,
 				E49C9FB22C86ED38001F43A3 /* FoodView.swift in Sources */,
 				E49C9FDE2C87055D001F43A3 /* MoneyViewModel.swift in Sources */,
-				E49C9FAD2C86D756001F43A3 /* ListCellView.swift in Sources */,
+				E49C9FAD2C86D756001F43A3 /* ListViewCell.swift in Sources */,
 				E4B3FD102C778D6C00CB98F3 /* MainTabType.swift in Sources */,
 				E4B3FD0A2C775C0E00CB98F3 /* LoginViewModel.swift in Sources */,
 				E49C9FE62C870572001F43A3 /* InfoViewModel.swift in Sources */,
 				E49C9FF22C870589001F43A3 /* EventViewModel.swift in Sources */,
 				E4B3FD372C7882C200CB98F3 /* CategoryType.swift in Sources */,
 				E4B3FD1C2C77904A00CB98F3 /* HeartView.swift in Sources */,
+				E49C9FF92C870C36001F43A3 /* PlayModel.swift in Sources */,
 				E49C9FB02C86ED28001F43A3 /* EventView.swift in Sources */,
 				E4B3FD022C77563600CB98F3 /* DIContainer.swift in Sources */,
 				E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */,
 				E4B3FD162C77902800CB98F3 /* HomeView.swift in Sources */,
 				E4B3FCF72C7754F500CB98F3 /* Color+Extension.swift in Sources */,
 				E49C9FB62C86ED54001F43A3 /* InfoView.swift in Sources */,
+				E49C9FF62C870BF8001F43A3 /* PlayViewCell.swift in Sources */,
 				E4B3FD262C77A26D00CB98F3 /* AuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

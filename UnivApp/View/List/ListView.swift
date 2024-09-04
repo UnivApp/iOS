@@ -57,7 +57,7 @@ struct ListView: View {
                 ForEach(viewModel.stub, id: \.self) { cell in
                     if let image = cell.image, let title = cell.title, let heartNum = cell.heartNum {
                         HStack(spacing: 20) {
-                            ListCellView(image: image, title: title, heartNum: heartNum, heart: false)
+                            ListViewCell(image: image, title: title, heartNum: heartNum, heart: false)
                                 .tag(cell.id)
                         }
                     }

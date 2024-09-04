@@ -27,7 +27,7 @@ struct MainTabView: View {
                             .environmentObject(authViewModel)
                             .environmentObject(container)
                     case .heart:
-                        HeartView(searchText: .init(), viewModel: HeartViewModel(container: self.container))
+                        HeartView(searchText: .init(), viewModel: HeartViewModel())
                             .environmentObject(authViewModel)
                             .environmentObject(container)
                     case .setting:

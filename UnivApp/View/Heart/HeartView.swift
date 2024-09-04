@@ -53,14 +53,14 @@ struct HeartView: View {
     var list: some View {
         ScrollView(.vertical) {
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
-                ForEach(viewModel.stub, id: \.self) { cell in
-                    if let image = cell.image, let title = cell.title, let heartNum = cell.heartNum {
-                        HStack(spacing: 20) {
-                            ListCellView(image: image, title: title, heartNum: heartNum, heart: false)
-                                .tag(cell.id)
-                        }
-                    }
-                }
+//                ForEach(viewModel.stub, id: \.self) { cell in
+//                    if let image = cell.image, let title = cell.title, let heartNum = cell.heartNum {
+//                        HStack(spacing: 20) {
+//                            ListCellView(image: image, title: title, heartNum: heartNum, heart: false)
+//                                .tag(cell.id)
+//                        }
+//                    }
+//                }
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 10)
@@ -77,7 +77,7 @@ struct HeartView_Previews: PreviewProvider {
     static let container = DIContainer(services: StubServices(authService: StubAuthService()))
     static let authViewModel = AuthViewModel(container: .init(services: StubServices(authService: StubAuthService())))
     static var previews: some View {
-        HeartView(searchText: .init(), viewModel: HeartViewModel(container: Self.container))
+        HeartView(searchText: .init(), viewModel: HeartViewModel())
             .environmentObject(Self.authViewModel)
             .environmentObject(Self.container)
     }

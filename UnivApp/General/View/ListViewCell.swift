@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ListCellView: View {
+struct ListViewCell: View {
     var image: String
     var title: String
     var heartNum: String
@@ -98,5 +98,5 @@ struct ListCellView: View {
 }
 
 #Preview {
-    ListCellView(image: "", title: "", heartNum: "", heart: false)
+    ListViewCell(image: "", title: "", heartNum: "", heart: false)
 }

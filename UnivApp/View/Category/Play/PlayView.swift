@@ -26,7 +26,15 @@ struct PlayView: View {
                 
                 Spacer()
                 
-                list
+                ScrollView(.vertical) {
+                    page
+                    list
+                }
+                .padding(.horizontal, 0)
+                .padding(.bottom, 0)
+                .refreshable {
+                    
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -55,6 +63,17 @@ struct PlayView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            UIPageControl.appearance().currentPageIndicatorTintColor = .black
+            UIPageControl.appearance().pageIndicatorTintColor = .gray
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = UIColor.white
+            appearance.shadowColor = nil
+            
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        }
     }
     
     var search: some View {
@@ -75,26 +94,35 @@ struct PlayView: View {
         .padding(.horizontal, 30)
     }
     
-    var list: some View {
-        ScrollView(.vertical) {
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
-                ForEach(viewModel.stub, id: \.self) { cell in
-                    if let image = cell.image, let title = cell.title, let heartNum = cell.heartNum {
-                        HStack(spacing: 20) {
-                            ListCellView(image: image, title: title, heartNum: heartNum, heart: false)
-                                .tag(cell.id)
-                        }
+    var page: some View {
+        TabView {
+            ForEach(viewModel.playStub, id: \.self) { cell in
+                if let image = cell.image, let title = cell.title, let address = cell.address, let description = cell.description {
+                    HStack(spacing: 20) {
+                        PlayViewCell(title: title, address: address, description: description, image: image)
+                            .tag(cell.id)
                     }
                 }
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 10)
         }
+        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        .frame(height: 250)
         .padding(.horizontal, 0)
-        .padding(.bottom, 0)
-        .refreshable {
-            
+    }
+    
+    var list: some View {
+        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
+            ForEach(viewModel.stub, id: \.self) { cell in
+                if let image = cell.image, let title = cell.title, let heartNum = cell.heartNum {
+                    HStack(spacing: 20) {
+                        ListViewCell(image: image, title: title, heartNum: heartNum, heart: false)
+                            .tag(cell.id)
+                    }
+                }
+            }
         }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 10)
     }
 }
 

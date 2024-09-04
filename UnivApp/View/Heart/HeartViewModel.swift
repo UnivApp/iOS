@@ -14,25 +14,25 @@ class HeartViewModel: ObservableObject {
         
     }
     
-    private var container: DIContainer
-    
-    init(container: DIContainer) {
-        self.container = container
-    }
+//    private var container: DIContainer
+//    
+//    init(container: DIContainer) {
+//        self.container = container
+//    }
     
     func send(action: Action) {
         
     }
     
-    var stub: [ListModel] = [
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3")
-    ]
+//    var stub: [ListModel] = [
+//        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
+//        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
+//        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
+//        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
+//        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
+//        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
+//        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
+//        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
+//        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3")
+//    ]
 }
