@@ -21,6 +21,15 @@
 		E4953D382C89C924008CBDE5 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E4953D372C89C924008CBDE5 /* Kingfisher */; };
 		E4953D3C2C89CDD5008CBDE5 /* View + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D3B2C89CDD5008CBDE5 /* View + Extension.swift */; };
 		E4953D3F2C89CDF6008CBDE5 /* LoadingModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D3E2C89CDF6008CBDE5 /* LoadingModifier.swift */; };
+		E4953D422C89D516008CBDE5 /* ListCellDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D412C89D516008CBDE5 /* ListCellDestination.swift */; };
+		E4953D442C89D60D008CBDE5 /* PlayDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D432C89D60D008CBDE5 /* PlayDetailView.swift */; };
+		E4953D462C89D649008CBDE5 /* MouDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D452C89D649008CBDE5 /* MouDetailView.swift */; };
+		E4953D482C89D67C008CBDE5 /* MoneyDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D472C89D67C008CBDE5 /* MoneyDetailView.swift */; };
+		E4953D4A2C89D6A2008CBDE5 /* InitiativeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D492C89D6A2008CBDE5 /* InitiativeDetailView.swift */; };
+		E4953D4C2C89D6CC008CBDE5 /* InfoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D4B2C89D6CC008CBDE5 /* InfoDetailView.swift */; };
+		E4953D4E2C89D6E3008CBDE5 /* GraduateDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D4D2C89D6E3008CBDE5 /* GraduateDetailView.swift */; };
+		E4953D502C89D704008CBDE5 /* FoodDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D4F2C89D704008CBDE5 /* FoodDetailView.swift */; };
+		E4953D522C89D725008CBDE5 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D512C89D725008CBDE5 /* EventDetailView.swift */; };
 		E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */; };
 		E49C9F9F2C86CF70001F43A3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */; };
 		E49C9FA52C86D202001F43A3 /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FA42C86D202001F43A3 /* ListModel.swift */; };
@@ -86,6 +95,15 @@
 		E4953D342C89C8DF008CBDE5 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		E4953D3B2C89CDD5008CBDE5 /* View + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Extension.swift"; sourceTree = "<group>"; };
 		E4953D3E2C89CDF6008CBDE5 /* LoadingModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingModifier.swift; sourceTree = "<group>"; };
+		E4953D412C89D516008CBDE5 /* ListCellDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellDestination.swift; sourceTree = "<group>"; };
+		E4953D432C89D60D008CBDE5 /* PlayDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayDetailView.swift; sourceTree = "<group>"; };
+		E4953D452C89D649008CBDE5 /* MouDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MouDetailView.swift; sourceTree = "<group>"; };
+		E4953D472C89D67C008CBDE5 /* MoneyDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyDetailView.swift; sourceTree = "<group>"; };
+		E4953D492C89D6A2008CBDE5 /* InitiativeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiativeDetailView.swift; sourceTree = "<group>"; };
+		E4953D4B2C89D6CC008CBDE5 /* InfoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDetailView.swift; sourceTree = "<group>"; };
+		E4953D4D2C89D6E3008CBDE5 /* GraduateDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraduateDetailView.swift; sourceTree = "<group>"; };
+		E4953D4F2C89D704008CBDE5 /* FoodDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailView.swift; sourceTree = "<group>"; };
+		E4953D512C89D725008CBDE5 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
 		E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnivAppApp.swift; sourceTree = "<group>"; };
 		E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		E49C9FA42C86D202001F43A3 /* ListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
@@ -174,6 +192,15 @@
 			path = Loading;
 			sourceTree = "<group>";
 		};
+		E4953D402C89D4E5008CBDE5 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				E49C9FAC2C86D756001F43A3 /* ListViewCell.swift */,
+				E4953D412C89D516008CBDE5 /* ListCellDestination.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
 		E49C9FA22C86D1EB001F43A3 /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +237,7 @@
 			children = (
 				E49C9FAF2C86ED28001F43A3 /* EventView.swift */,
 				E49C9FF12C870589001F43A3 /* EventViewModel.swift */,
+				E4953D512C89D725008CBDE5 /* EventDetailView.swift */,
 			);
 			path = Event;
 			sourceTree = "<group>";
@@ -219,6 +247,7 @@
 			children = (
 				E49C9FB12C86ED38001F43A3 /* FoodView.swift */,
 				E49C9FED2C870582001F43A3 /* FoodViewModel.swift */,
+				E4953D4F2C89D704008CBDE5 /* FoodDetailView.swift */,
 			);
 			path = Food;
 			sourceTree = "<group>";
@@ -228,6 +257,7 @@
 			children = (
 				E49C9FB32C86ED41001F43A3 /* GraduateView.swift */,
 				E49C9FE92C87057A001F43A3 /* GraduateViewModel.swift */,
+				E4953D4D2C89D6E3008CBDE5 /* GraduateDetailView.swift */,
 			);
 			path = Graduate;
 			sourceTree = "<group>";
@@ -237,6 +267,7 @@
 			children = (
 				E49C9FB52C86ED54001F43A3 /* InfoView.swift */,
 				E49C9FE52C870572001F43A3 /* InfoViewModel.swift */,
+				E4953D4B2C89D6CC008CBDE5 /* InfoDetailView.swift */,
 			);
 			path = Info;
 			sourceTree = "<group>";
@@ -246,6 +277,7 @@
 			children = (
 				E49C9FB72C86ED62001F43A3 /* InitiativeView.swift */,
 				E49C9FE12C87056B001F43A3 /* InitiativeViewModel.swift */,
+				E4953D492C89D6A2008CBDE5 /* InitiativeDetailView.swift */,
 			);
 			path = Initiative;
 			sourceTree = "<group>";
@@ -255,6 +287,7 @@
 			children = (
 				E49C9FB92C86ED75001F43A3 /* MoneyView.swift */,
 				E49C9FDD2C87055D001F43A3 /* MoneyViewModel.swift */,
+				E4953D472C89D67C008CBDE5 /* MoneyDetailView.swift */,
 			);
 			path = Money;
 			sourceTree = "<group>";
@@ -264,6 +297,7 @@
 			children = (
 				E49C9FBB2C86ED7C001F43A3 /* MouView.swift */,
 				E49C9FD92C870557001F43A3 /* MouViewModel.swift */,
+				E4953D452C89D649008CBDE5 /* MouDetailView.swift */,
 			);
 			path = Mou;
 			sourceTree = "<group>";
@@ -273,6 +307,7 @@
 			children = (
 				E49C9FBD2C86ED82001F43A3 /* PlayView.swift */,
 				E49C9FC72C86EFEA001F43A3 /* PlayViewModel.swift */,
+				E4953D432C89D60D008CBDE5 /* PlayDetailView.swift */,
 			);
 			path = Play;
 			sourceTree = "<group>";
@@ -494,9 +529,9 @@
 		E4EA25662C85D6E500DC5D55 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E4953D402C89D4E5008CBDE5 /* List */,
 				E4953D3D2C89CDDF008CBDE5 /* Loading */,
 				E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */,
-				E49C9FAC2C86D756001F43A3 /* ListViewCell.swift */,
 				E49C9FF52C870BF8001F43A3 /* PlayViewCell.swift */,
 				E49CA0102C88695F001F43A3 /* PageView.swift */,
 			);
@@ -588,6 +623,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E49C9FB42C86ED41001F43A3 /* GraduateView.swift in Sources */,
+				E4953D4C2C89D6CC008CBDE5 /* InfoDetailView.swift in Sources */,
 				E4B3FD002C77560200CB98F3 /* AuthViewModel.swift in Sources */,
 				E4B3FD2C2C786B0C00CB98F3 /* sha256.swift in Sources */,
 				E49C9F9F2C86CF70001F43A3 /* EmptyView.swift in Sources */,
@@ -596,10 +632,12 @@
 				E49C9FE22C87056B001F43A3 /* InitiativeViewModel.swift in Sources */,
 				E4B3FD182C77903700CB98F3 /* ListView.swift in Sources */,
 				E49C9FC82C86EFEA001F43A3 /* PlayViewModel.swift in Sources */,
+				E4953D442C89D60D008CBDE5 /* PlayDetailView.swift in Sources */,
 				E49C9FBC2C86ED7C001F43A3 /* MouView.swift in Sources */,
 				E4B3FD0E2C775D7C00CB98F3 /* MainTabViewModel.swift in Sources */,
 				E4953D242C897CCE008CBDE5 /* ListDetailView.swift in Sources */,
 				E49C9FDA2C870557001F43A3 /* MouViewModel.swift in Sources */,
+				E4953D482C89D67C008CBDE5 /* MoneyDetailView.swift in Sources */,
 				E4B3FD082C775B5300CB98F3 /* LoginView.swift in Sources */,
 				E4953D222C888A64008CBDE5 /* HeartViewModel.swift in Sources */,
 				E4B3FD0C2C775D7000CB98F3 /* MainTabView.swift in Sources */,
@@ -611,7 +649,9 @@
 				E49C9FEE2C870582001F43A3 /* FoodViewModel.swift in Sources */,
 				E49C9FBA2C86ED75001F43A3 /* MoneyView.swift in Sources */,
 				E49C9FB82C86ED62001F43A3 /* InitiativeView.swift in Sources */,
+				E4953D462C89D649008CBDE5 /* MouDetailView.swift in Sources */,
 				E4B3FD282C77A42900CB98F3 /* UserModel.swift in Sources */,
+				E4953D502C89D704008CBDE5 /* FoodDetailView.swift in Sources */,
 				E4953D3F2C89CDF6008CBDE5 /* LoadingModifier.swift in Sources */,
 				E4B3FCCA2C7751DB00CB98F3 /* AuthView.swift in Sources */,
 				E49CA0112C88695F001F43A3 /* PageView.swift in Sources */,
@@ -625,16 +665,20 @@
 				E4B3FD0A2C775C0E00CB98F3 /* LoginViewModel.swift in Sources */,
 				E49C9FE62C870572001F43A3 /* InfoViewModel.swift in Sources */,
 				E49C9FF22C870589001F43A3 /* EventViewModel.swift in Sources */,
+				E4953D4A2C89D6A2008CBDE5 /* InitiativeDetailView.swift in Sources */,
+				E4953D4E2C89D6E3008CBDE5 /* GraduateDetailView.swift in Sources */,
 				E4B3FD372C7882C200CB98F3 /* CategoryType.swift in Sources */,
 				E49C9FF92C870C36001F43A3 /* PlayModel.swift in Sources */,
 				E49C9FB02C86ED28001F43A3 /* EventView.swift in Sources */,
 				E4B3FD022C77563600CB98F3 /* DIContainer.swift in Sources */,
 				E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */,
 				E4B3FD162C77902800CB98F3 /* HomeView.swift in Sources */,
+				E4953D422C89D516008CBDE5 /* ListCellDestination.swift in Sources */,
 				E4B3FCF72C7754F500CB98F3 /* Color+Extension.swift in Sources */,
 				E4953D352C89C8DF008CBDE5 /* LoadingView.swift in Sources */,
 				E49C9FB62C86ED54001F43A3 /* InfoView.swift in Sources */,
 				E49C9FF62C870BF8001F43A3 /* PlayViewCell.swift in Sources */,
+				E4953D522C89D725008CBDE5 /* EventDetailView.swift in Sources */,
 				E49CA0132C886DC9001F43A3 /* HeartView.swift in Sources */,
 				E4B3FD262C77A26D00CB98F3 /* AuthService.swift in Sources */,
 				E4953D282C899013008CBDE5 /* ListDetailType.swift in Sources */,

@@ -11,7 +11,7 @@ struct ListDetailView: View {
     @StateObject var viewModel: ListDetailViewModel
     @State private var selectedType: ListDetailType?
     @State private var isNavigate: Bool = false
-    @Environment(\.dismiss) var dismiss
+//    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         NavigationStack {
@@ -22,24 +22,29 @@ struct ListDetailView: View {
                 category
                     .padding(.vertical, 0)
                     .padding(.horizontal, 0)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image("back")
-                    }
-
+                
+                NavigationLink(destination: selectedType?.view, isActive: $isNavigate) {
+                    
                 }
+                
             }
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarLeading) {
+//                    Button {
+//                        dismiss()
+//                    } label: {
+//                        Image("back")
+//                    }
+//
+//                }
+//            }
             .toolbar(.hidden, for: .tabBar)
-            .navigationBarBackButtonHidden(true)
-            .navigationDestination(isPresented: $isNavigate) {
-                if let selectedType = selectedType {
-                    selectedType.view
-                }
-            }
+//            .navigationBarBackButtonHidden(true)
+//            .navigationDestination(isPresented: $isNavigate) {
+//                if let selectedType = selectedType {
+//                    selectedType.view
+//                }
+//            }
         }
     }
     
@@ -77,7 +82,7 @@ struct ListDetailView: View {
                 ForEach(ListDetailType.allCases, id: \.self) { type in
                     Button {
                         selectedType = type
-                        isNavigate = true
+                        self.isNavigate = true
                     } label: {
                         VStack {
                             Text(type.title)
@@ -110,7 +115,6 @@ struct ListDetailView: View {
             }
         }
     }
-    
 }
 
 struct ListDetailView_PreViews: PreviewProvider {

@@ -11,7 +11,8 @@ struct ListViewCell: View {
     var image: String
     var title: String
     var heartNum: String
-    @State var heart: Bool
+    var destination: ListCellDestination?
+    var heart: Bool
     
     var body: some View {
         cell
@@ -68,7 +69,7 @@ struct ListViewCell: View {
             
             Spacer()
             
-            NavigationLink(destination: ListDetailView(viewModel: ListDetailViewModel(container: DIContainer(services: Services(authService: AuthService()))))) {
+            NavigationLink(destination: destination?.view) {
                 Text("정보보기")
                     .font(.system(size: 12, weight: .bold))
                     .foregroundColor(.orange)

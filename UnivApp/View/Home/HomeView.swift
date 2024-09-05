@@ -57,7 +57,7 @@ struct HomeView: View {
             self.isLoading = true
             viewModel.send(action: .load)
         }
-        .startLoading(url: "congratulations", isLoading: $isLoading)
+//        .startLoading(url: "congratulations", isLoading: $isLoading)
     }
     
     var headerView: some View {
@@ -65,7 +65,7 @@ struct HomeView: View {
             HStack {
                 Button {
                     //TODO: 검색
-                    self.isLoading = false
+//                    self.isLoading = false
                 } label: {
                     Image("search")
                         .resizable()
