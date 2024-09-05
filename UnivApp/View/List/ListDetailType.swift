@@ -80,4 +80,25 @@ enum ListDetailType: String, CaseIterable {
             return "대학의 행사들을 확인해 보세요!"
         }
     }
+    
+    var view: AnyView {
+        switch self {
+        case .event:
+            return AnyView(EventView(viewModel: EventViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
+        case .food:
+            return AnyView(FoodView(viewModel: FoodViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
+        case .graduate:
+            return AnyView(GraduateView(viewModel: GraduateViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
+        case .info:
+            return AnyView(InfoView(viewModel: InfoViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
+        case .initiative:
+            return AnyView(InitiativeView(viewModel: InitiativeViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
+        case .money:
+            return AnyView(MoneyView(viewModel: MoneyViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
+        case .mou:
+            return AnyView(MouView(viewModel: MouViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
+        case .play:
+            return AnyView(PlayView(viewModel: PlayViewModel(container: .init(services: Services(authService: AuthService())), searchText: .init())))
+        }
+    }
 }

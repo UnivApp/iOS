@@ -10,6 +10,7 @@ import SwiftUI
 struct ListDetailView: View {
     @StateObject var viewModel: ListDetailViewModel
     @State private var selectedType: ListDetailType?
+    @State private var isNavigate: Bool = false
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -33,6 +34,11 @@ struct ListDetailView: View {
                 }
             }
             .navigationBarBackButtonHidden(true)
+            .navigationDestination(isPresented: $isNavigate) {
+                if let selectedType = selectedType {
+                    selectedType.view
+                }
+            }
         }
     }
     
@@ -69,8 +75,8 @@ struct ListDetailView: View {
             VStack(spacing: 0) {
                 ForEach(ListDetailType.allCases, id: \.self) { type in
                     Button {
-                        //TODO: 해당 섹션으로 이동
                         selectedType = type
+                        isNavigate = true
                     } label: {
                         VStack {
                             Text(type.title)
