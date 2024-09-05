@@ -25,7 +25,7 @@ enum CategoryType: String, CaseIterable {
         case .food:
             return "맛집"
         case .graduate:
-            return "졸업"
+            return "졸업자"
         case .info:
             return "정보"
         case .initiative:
@@ -35,7 +35,7 @@ enum CategoryType: String, CaseIterable {
         case .mou:
             return "협약"
         case .play:
-            return "놀거리"
+            return "핫플"
         }
     }
     

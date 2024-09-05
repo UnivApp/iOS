@@ -11,4 +11,5 @@ import SwiftUI
 extension Color {
     static let backgroundGray: Color = .init("backGray")
     static let bordergroundGray: Color = .init("borderGray")
+    static let categorygroundGray: Color = .init("categoryGray")
 }

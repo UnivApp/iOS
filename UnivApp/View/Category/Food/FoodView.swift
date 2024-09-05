@@ -79,7 +79,7 @@ struct FoodView: View {
                 }
                 .padding()
                 
-                TextField("대학명을 입력하세요", text: $viewModel.searchText)
+                TextField("대학명/소재지를 입력하세요", text: $viewModel.searchText)
                     .font(.system(size: 17, weight: .bold))
                     .padding()
             }

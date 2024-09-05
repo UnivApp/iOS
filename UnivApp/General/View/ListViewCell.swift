@@ -68,9 +68,7 @@ struct ListViewCell: View {
             
             Spacer()
             
-            Button {
-                //TODO: - 정보보기
-            } label: {
+            NavigationLink(destination: ListDetailView(viewModel: ListDetailViewModel(container: DIContainer(services: Services(authService: AuthService()))))) {
                 Text("정보보기")
                     .font(.system(size: 12, weight: .bold))
                     .foregroundColor(.orange)
