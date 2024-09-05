@@ -11,7 +11,8 @@ import Combine
 class HomeViewModel: ObservableObject {
     
     enum Action {
-        
+        case load
+        case completion
     }
     
     @Published var searchText: String
@@ -24,7 +25,12 @@ class HomeViewModel: ObservableObject {
     }
     
     func send(action: Action) {
-        
+        switch action {
+        case .load:
+            return
+        case .completion:
+            return
+        }
     }
     
 }

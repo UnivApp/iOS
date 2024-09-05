@@ -11,6 +11,7 @@ struct HomeView: View {
     @StateObject var viewModel: HomeViewModel
     @EnvironmentObject var continer: DIContainer
     @EnvironmentObject var authViewModel: AuthViewModel
+    @State private var isLoading: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -40,6 +41,7 @@ struct HomeView: View {
                     Image("logo")
                 }
             }
+            
         }
         .onAppear {
             UIPageControl.appearance().currentPageIndicatorTintColor = .black
@@ -51,7 +53,11 @@ struct HomeView: View {
             
             UINavigationBar.appearance().standardAppearance = appearance
             UINavigationBar.appearance().scrollEdgeAppearance = appearance
+            
+            self.isLoading = true
+            viewModel.send(action: .load)
         }
+        .startLoading(url: "congratulations", isLoading: $isLoading)
     }
     
     var headerView: some View {
@@ -59,6 +65,7 @@ struct HomeView: View {
             HStack {
                 Button {
                     //TODO: 검색
+                    self.isLoading = false
                 } label: {
                     Image("search")
                         .resizable()

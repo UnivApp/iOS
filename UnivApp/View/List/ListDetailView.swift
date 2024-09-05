@@ -33,6 +33,7 @@ struct ListDetailView: View {
 
                 }
             }
+            .toolbar(.hidden, for: .tabBar)
             .navigationBarBackButtonHidden(true)
             .navigationDestination(isPresented: $isNavigate) {
                 if let selectedType = selectedType {
@@ -92,7 +93,7 @@ struct ListDetailView: View {
                                 type.image
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 50, height: 50)
+                                    .frame(width: proxy.size.height / 10, height: proxy.size.height / 10)
                                 
                                 Text(type.description)
                                     .font(.system(size: 12, weight: .bold))
