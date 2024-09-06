@@ -30,6 +30,8 @@
 		E4953D4E2C89D6E3008CBDE5 /* GraduateDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D4D2C89D6E3008CBDE5 /* GraduateDetailView.swift */; };
 		E4953D502C89D704008CBDE5 /* FoodDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D4F2C89D704008CBDE5 /* FoodDetailView.swift */; };
 		E4953D522C89D725008CBDE5 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D512C89D725008CBDE5 /* EventDetailView.swift */; };
+		E4953D592C8AFF36008CBDE5 /* FoodViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D582C8AFF36008CBDE5 /* FoodViewCell.swift */; };
+		E4953D5C2C8B0544008CBDE5 /* FoodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D5B2C8B0544008CBDE5 /* FoodModel.swift */; };
 		E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */; };
 		E49C9F9F2C86CF70001F43A3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */; };
 		E49C9FA52C86D202001F43A3 /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FA42C86D202001F43A3 /* ListModel.swift */; };
@@ -104,6 +106,8 @@
 		E4953D4D2C89D6E3008CBDE5 /* GraduateDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraduateDetailView.swift; sourceTree = "<group>"; };
 		E4953D4F2C89D704008CBDE5 /* FoodDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailView.swift; sourceTree = "<group>"; };
 		E4953D512C89D725008CBDE5 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
+		E4953D582C8AFF36008CBDE5 /* FoodViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewCell.swift; sourceTree = "<group>"; };
+		E4953D5B2C8B0544008CBDE5 /* FoodModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodModel.swift; sourceTree = "<group>"; };
 		E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnivAppApp.swift; sourceTree = "<group>"; };
 		E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		E49C9FA42C86D202001F43A3 /* ListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
@@ -192,13 +196,29 @@
 			path = Loading;
 			sourceTree = "<group>";
 		};
-		E4953D402C89D4E5008CBDE5 /* List */ = {
+		E4953D402C89D4E5008CBDE5 /* ListCell */ = {
 			isa = PBXGroup;
 			children = (
 				E49C9FAC2C86D756001F43A3 /* ListViewCell.swift */,
 				E4953D412C89D516008CBDE5 /* ListCellDestination.swift */,
 			);
-			path = List;
+			path = ListCell;
+			sourceTree = "<group>";
+		};
+		E4953D532C8AF83F008CBDE5 /* FoodCell */ = {
+			isa = PBXGroup;
+			children = (
+				E4953D582C8AFF36008CBDE5 /* FoodViewCell.swift */,
+			);
+			path = FoodCell;
+			sourceTree = "<group>";
+		};
+		E4953D5A2C8B053D008CBDE5 /* Food */ = {
+			isa = PBXGroup;
+			children = (
+				E4953D5B2C8B0544008CBDE5 /* FoodModel.swift */,
+			);
+			path = Food;
 			sourceTree = "<group>";
 		};
 		E49C9FA22C86D1EB001F43A3 /* User */ = {
@@ -245,6 +265,7 @@
 		E49C9FC02C86EFB4001F43A3 /* Food */ = {
 			isa = PBXGroup;
 			children = (
+				E4953D532C8AF83F008CBDE5 /* FoodCell */,
 				E49C9FB12C86ED38001F43A3 /* FoodView.swift */,
 				E49C9FED2C870582001F43A3 /* FoodViewModel.swift */,
 				E4953D4F2C89D704008CBDE5 /* FoodDetailView.swift */,
@@ -427,6 +448,7 @@
 		E4B3FCFB2C7755AF00CB98F3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E4953D5A2C8B053D008CBDE5 /* Food */,
 				E49C9FF72C870C2F001F43A3 /* Play */,
 				E49C9FA32C86D1F2001F43A3 /* List */,
 				E49C9FA22C86D1EB001F43A3 /* User */,
@@ -484,6 +506,7 @@
 		E4B3FD122C77901900CB98F3 /* List */ = {
 			isa = PBXGroup;
 			children = (
+				E4953D402C89D4E5008CBDE5 /* ListCell */,
 				E4B3FD172C77903700CB98F3 /* ListView.swift */,
 				E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */,
 				E4953D232C897CCE008CBDE5 /* ListDetailView.swift */,
@@ -529,7 +552,6 @@
 		E4EA25662C85D6E500DC5D55 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E4953D402C89D4E5008CBDE5 /* List */,
 				E4953D3D2C89CDDF008CBDE5 /* Loading */,
 				E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */,
 				E49C9FF52C870BF8001F43A3 /* PlayViewCell.swift */,
@@ -628,6 +650,7 @@
 				E4B3FD2C2C786B0C00CB98F3 /* sha256.swift in Sources */,
 				E49C9F9F2C86CF70001F43A3 /* EmptyView.swift in Sources */,
 				E49C9FBE2C86ED82001F43A3 /* PlayView.swift in Sources */,
+				E4953D5C2C8B0544008CBDE5 /* FoodModel.swift in Sources */,
 				E49C9FA92C86D539001F43A3 /* HomeViewModel.swift in Sources */,
 				E49C9FE22C87056B001F43A3 /* InitiativeViewModel.swift in Sources */,
 				E4B3FD182C77903700CB98F3 /* ListView.swift in Sources */,
@@ -646,6 +669,7 @@
 				E4B3FD1E2C77905500CB98F3 /* SettingView.swift in Sources */,
 				E4B3FD2A2C786B0400CB98F3 /* randomNonceString.swift in Sources */,
 				E49C9FEA2C87057A001F43A3 /* GraduateViewModel.swift in Sources */,
+				E4953D592C8AFF36008CBDE5 /* FoodViewCell.swift in Sources */,
 				E49C9FEE2C870582001F43A3 /* FoodViewModel.swift in Sources */,
 				E49C9FBA2C86ED75001F43A3 /* MoneyView.swift in Sources */,
 				E49C9FB82C86ED62001F43A3 /* InitiativeView.swift in Sources */,
