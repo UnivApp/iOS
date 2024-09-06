@@ -52,6 +52,15 @@ struct FoodView: View {
         }
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .tabBar)
+        .onAppear {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = UIColor.white
+            appearance.shadowColor = nil
+            
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        }
     }
     
     var header: some View {
@@ -84,15 +93,6 @@ struct FoodView: View {
             .background(Color(.backGray))
             .cornerRadius(15)
             .padding(.horizontal, 30)
-            .onAppear {
-                let appearance = UINavigationBarAppearance()
-                appearance.configureWithOpaqueBackground()
-                appearance.backgroundColor = UIColor.white
-                appearance.shadowColor = nil
-                
-                UINavigationBar.appearance().standardAppearance = appearance
-                UINavigationBar.appearance().scrollEdgeAppearance = appearance
-            }
         }
     }
     

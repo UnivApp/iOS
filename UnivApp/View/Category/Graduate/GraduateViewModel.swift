@@ -27,11 +27,13 @@ class GraduateViewModel: ObservableObject {
         
     }
     
-    var stub: [ListModel] = [
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3")
+    var stub: [FoodModel] = [
+        FoodModel(title: "냉모밀", description: "시원한 수제 육수로 가슴 속 까지 시원해지는", image: "food_empty", school: "서울대학교 맛집 1위"),
+        FoodModel(title: "냉모밀", description: "시원한 수제 육수로 가슴 속 까지 시원해지는", image: "food_empty", school: "서울대학교 맛집 1위"),
+        FoodModel(title: "냉모밀", description: "시원한 수제 육수로 가슴 속 까지 시원해지는", image: "food_empty", school: "서울대학교 맛집 1위"),
+        FoodModel(title: "냉모밀", description: "시원한 수제 육수로 가슴 속 까지 시원해지는", image: "food_empty", school: "서울대학교 맛집 1위"),
+        FoodModel(title: "냉모밀", description: "시원한 수제 육수로 가슴 속 까지 시원해지는", image: "food_empty", school: "서울대학교 맛집 1위"),
+        FoodModel(title: "냉모밀", description: "시원한 수제 육수로 가슴 속 까지 시원해지는", image: "food_empty", school: "서울대학교 맛집 1위")
     ]
 
 }
