@@ -17,13 +17,12 @@ struct PlayView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                search
-                    .padding(.bottom, 20)
-                    .padding(.top, 20)
-                
-                Spacer()
-                
                 ScrollView(.vertical) {
+                    
+                    header
+                    
+                    Spacer()
+                    
                     list
                 }
                 .padding(.horizontal, 0)
@@ -43,10 +42,10 @@ struct PlayView: View {
                                 .scaledToFit()
                                 .frame(width: 30, height: 30)
                         })
-                        Image("play_navi")
+                        Image("food_navi")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 90, height: 60)
+                            .frame(width: 70, height: 60)
                     }
                 }
             }
@@ -64,43 +63,46 @@ struct PlayView: View {
         }
     }
     
-    var search: some View {
-        HStack {
-            Group {
-                Button {
-                    //TODO: 검색
-                } label: {
-                    Image("search")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 20, height: 20)
-                }
-                .padding()
-                
-                TextField("대학명/소재지를 입력하세요", text: $viewModel.searchText)
-                    .font(.system(size: 17, weight: .bold))
+    var header: some View {
+        VStack(spacing: 30) {
+            Image("play_poster")
+                .resizable()
+                .scaledToFill()
+                .frame(maxWidth: .infinity)
+                .frame(height: 235)
+                .padding(.top, 20)
+                .padding(.bottom, 30)
+            
+            HStack {
+                Group {
+                    Button {
+                        //TODO: 검색
+                    } label: {
+                        Image("search")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                    }
                     .padding()
+                    
+                    TextField("대학명/소재지를 입력하세요", text: $viewModel.searchText)
+                        .font(.system(size: 17, weight: .bold))
+                        .padding()
+                }
+                .padding(.leading, 10)
             }
-            .padding(.leading, 10)
+            .background(Color(.backGray))
+            .cornerRadius(15)
+            .padding(.horizontal, 30)
         }
-        .background(Color(.backGray))
-        .cornerRadius(15)
-        .padding(.horizontal, 30)
     }
     
     var list: some View {
-        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
-            ForEach(viewModel.stub, id: \.self) { cell in
-                if let image = cell.image, let title = cell.title, let heartNum = cell.heartNum {
-                    HStack(spacing: 20) {
-                        ListViewCell(image: image, title: title, heartNum: heartNum, destination: .play, heart: false)
-                            .tag(cell.id)
-                    }
-                }
-            }
+        VStack(alignment: .leading, spacing: 10) {
+            HScrollView(title: [Text("대학 주변의 "), Text("핫플 "), Text("확인하기")], array: [Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo")], pointColor: .pink)
+
+            
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 10)
     }
 }
 
