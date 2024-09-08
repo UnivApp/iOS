@@ -8,18 +8,21 @@
 import Foundation
 
 enum SettingType: CaseIterable {
-    case heart
-    case change
+    case version
+    case info
     case logout
+    case withdraw
 
     var title: String {
         switch self {
-        case .heart:
-            return "관심 학교"
-        case .change:
-            return "계정 정보 변경"
+        case .version:
+            return "버전정보"
+        case .info:
+            return "개인정보처리방침"
         case .logout:
             return "로그아웃"
+        case .withdraw:
+            return "회원탈퇴"
         }
     }
 }

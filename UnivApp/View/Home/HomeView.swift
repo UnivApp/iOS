@@ -8,21 +8,10 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State var searchText: String
-    
-    init(searchText: String) {
-        self.searchText = searchText
-        
-        UIPageControl.appearance().currentPageIndicatorTintColor = .black
-        UIPageControl.appearance().pageIndicatorTintColor = .gray
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor.white
-        appearance.shadowColor = nil
-        
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
-    }
+    @StateObject var viewModel: HomeViewModel
+    @EnvironmentObject var continer: DIContainer
+    @EnvironmentObject var authViewModel: AuthViewModel
+    @State private var isLoading: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -52,7 +41,23 @@ struct HomeView: View {
                     Image("logo")
                 }
             }
+            
         }
+        .onAppear {
+            UIPageControl.appearance().currentPageIndicatorTintColor = .black
+            UIPageControl.appearance().pageIndicatorTintColor = .gray
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = UIColor.white
+            appearance.shadowColor = nil
+            
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+            
+            self.isLoading = true
+            viewModel.send(action: .load)
+        }
+//        .startLoading(url: "congratulations", isLoading: $isLoading)
     }
     
     var headerView: some View {
@@ -60,12 +65,17 @@ struct HomeView: View {
             HStack {
                 Button {
                     //TODO: 검색
+//                    self.isLoading = false
                 } label: {
                     Image("search")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20)
                 }
                 .padding()
                 
-                TextField("대학명/소재지", text: $searchText)
+                TextField("대학명/소재지를 입력하세요", text: $viewModel.searchText)
+                    .font(.system(size: 17, weight: .bold))
                     .padding()
             }
             .padding(.horizontal, 10)
@@ -112,6 +122,8 @@ struct HomeView: View {
                                 .font(.system(size: 8, weight: .regular))
                         }
                     }
+                    .environmentObject(continer)
+                    .environmentObject(authViewModel)
                 }
             }
             .padding(.horizontal, 5)
@@ -128,7 +140,7 @@ struct HomeView: View {
                     
                 Spacer()
                 
-                NavigationLink(destination: ListView()) {
+                NavigationLink(destination: EmptyView()) {
                     Image("arrow")
                         .resizable()
                         .scaledToFit()
@@ -148,6 +160,12 @@ struct HomeView: View {
     
 }
 
-#Preview {
-    HomeView(searchText: "")
+struct HomeView_Previews: PreviewProvider {
+    static let container = DIContainer(services: StubServices(authService: StubAuthService()))
+    static let authViewModel = AuthViewModel(container: .init(services: StubServices(authService: StubAuthService())))
+    static var previews: some View {
+        HomeView(viewModel: HomeViewModel(container: Self.container, searchText: ""))
+            .environmentObject(Self.authViewModel)
+            .environmentObject(Self.container)
+    }
 }
