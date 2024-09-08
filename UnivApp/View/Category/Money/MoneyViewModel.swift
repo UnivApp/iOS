@@ -6,6 +6,7 @@
 //
 import Foundation
 import Combine
+import Charts
 
 class MoneyViewModel: ObservableObject {
     
@@ -31,6 +32,14 @@ class MoneyViewModel: ObservableObject {
         ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
         ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
         ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3")
+    ]
+    
+    var dataPoints: [ChartData] = [
+        ChartData(label: "2020", value: 60),
+        ChartData(label: "2021", value: 40),
+        ChartData(label: "2022", value: 70),
+        ChartData(label: "2023", value: 80),
+        ChartData(label: "2024", value: 90)
     ]
     
 }

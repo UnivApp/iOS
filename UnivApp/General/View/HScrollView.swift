@@ -34,6 +34,7 @@ struct HScrollView: View {
                                 Image(item.image)
                                     .resizable()
                                     .scaledToFit()
+                                    .cornerRadius(20)
                                     .frame(width: 50, height: 50)
                                 
                                 Text(item.title)

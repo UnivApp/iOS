@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Charts
 
 struct MoneyView: View {
     @EnvironmentObject var container: DIContainer
@@ -24,7 +25,7 @@ struct MoneyView: View {
                 Spacer()
                 
                 ScrollView(.vertical) {
-                    list
+                    graph
                 }
                 .padding(.horizontal, 0)
                 .padding(.bottom, 0)
@@ -54,8 +55,6 @@ struct MoneyView: View {
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .tabBar)
         .onAppear {
-            UIPageControl.appearance().currentPageIndicatorTintColor = .black
-            UIPageControl.appearance().pageIndicatorTintColor = .gray
             let appearance = UINavigationBarAppearance()
             appearance.configureWithOpaqueBackground()
             appearance.backgroundColor = UIColor.white
@@ -90,20 +89,34 @@ struct MoneyView: View {
         .padding(.horizontal, 30)
     }
     
-    var list: some View {
-        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
-            ForEach(viewModel.stub, id: \.self) { cell in
-                if let image = cell.image, let title = cell.title, let heartNum = cell.heartNum {
-                    HStack(spacing: 20) {
-                        ListViewCell(image: image, title: title, heartNum: heartNum, destination: .money, heart: false)
-                            .tag(cell.id)
+    var graph: some View {
+        VStack(spacing: 10) {
+            HScrollView(title: [Text("대학 주변의 "), Text("평균 월세 "), Text("확인하기")], array: [Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo")], pointColor: .pointColor)
+                .background(.backGray)
+            
+            Group {
+                Chart {
+                    ForEach(viewModel.dataPoints, id: \.self) { point in
+                        BarMark(x: .value("년도", point.label), y: .value("원", point.value))
+                            .foregroundStyle(Color.pointColor)
+                        PointMark(x: .value("년도", point.label), y: .value("원", point.value))
+                            .foregroundStyle(Color.black)
+                        LineMark(x: .value("년도", point.label), y: .value("원", point.value))
+                            .foregroundStyle(Color.black)
                     }
                 }
+                .padding(.horizontal, 30)
+                .padding(.vertical, 30)
+                .frame(maxWidth: .infinity)
+                .frame(height: 350)
+                .scaledToFit()
             }
+            .border(.backGray, width: 2)
+            .padding(.horizontal, 20)
+            .padding(.vertical, 20)
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 10)
     }
+    
 }
 
 struct MoneyView_Previews: PreviewProvider {
