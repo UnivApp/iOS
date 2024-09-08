@@ -70,7 +70,7 @@ struct GraduateView: View {
                 .scaledToFill()
                 .frame(maxWidth: .infinity)
                 .frame(height: 235)
-                .padding(.top, 20)
+                .padding(.vertical, 5)
             
             HStack {
                 Group {

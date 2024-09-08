@@ -70,8 +70,7 @@ struct PlayView: View {
                 .scaledToFill()
                 .frame(maxWidth: .infinity)
                 .frame(height: 235)
-                .padding(.top, 20)
-                .padding(.bottom, 30)
+                .padding(.vertical, 30)
             
             HStack {
                 Group {
