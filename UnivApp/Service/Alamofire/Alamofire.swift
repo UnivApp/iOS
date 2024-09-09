@@ -8,6 +8,7 @@
 import Foundation
 import Alamofire
 import Combine
+import SwiftKeychainWrapper
 
 final class Alamofire {
     func loginAlamofire<T:Decodable>(url: String, params: [String:Any]) -> AnyPublisher<T, Error> {
@@ -27,31 +28,35 @@ final class Alamofire {
     }
     func postAlamofire<T:Decodable>(url: String, params: [String:Any]) -> AnyPublisher<T, Error> {
         return Future<T, Error> { promise in
-            AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: ["content-Type":"application-json"])
-                .validate()
-                .responseDecodable(of: T.self) { response in
-                    switch response.result {
-                    case let .success(result):
-                        promise(.success(result))
-                    case let .failure(error):
-                        promise(.failure(error))
+            if let accessToken = KeychainWrapper.standard.string(forKey: "JWTaccessToken"){
+                AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: ["content-Type":"application-json", "Authorization":accessToken])
+                    .validate()
+                    .responseDecodable(of: T.self) { response in
+                        switch response.result {
+                        case let .success(result):
+                            promise(.success(result))
+                        case let .failure(error):
+                            promise(.failure(error))
+                        }
                     }
-                }
+            }
         }
         .eraseToAnyPublisher()
     }
     func getAlamofire<T:Decodable>(url: String) -> AnyPublisher<T, Error> {
         return Future<T, Error> { promise in
-            AF.request(url, method: .get, encoding: JSONEncoding.default, headers: ["content-Type":"application-json"])
-                .validate()
-                .responseDecodable(of: T.self) { response in
-                    switch response.result {
-                    case let .success(result):
-                        promise(.success(result))
-                    case let .failure(error):
-                        promise(.failure(error))
+            if let accessToken = KeychainWrapper.standard.string(forKey: "JWTaccessToken"){
+                AF.request(url, method: .get, encoding: JSONEncoding.default, headers: ["content-Type":"application-json", "Authorization":accessToken])
+                    .validate()
+                    .responseDecodable(of: T.self) { response in
+                        switch response.result {
+                        case let .success(result):
+                            promise(.success(result))
+                        case let .failure(error):
+                            promise(.failure(error))
+                        }
                     }
-                }
+            }
         }
         .eraseToAnyPublisher()
     }

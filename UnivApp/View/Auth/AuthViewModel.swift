@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import AuthenticationServices
+import SwiftKeychainWrapper
 
 enum AuthState {
     case unAuth
@@ -25,11 +26,13 @@ class AuthViewModel: ObservableObject {
     
     @Published var authState: AuthState = .unAuth
     @Published var isLoading: Bool = false
+    @Published var phase: Phase = .notRequested
     
     var userId: String?
     
     private var container: DIContainer
     private var subscriptions = Set<AnyCancellable>()
+    
     private var currentNonce : String?
     
     init(container: DIContainer) {
@@ -59,12 +62,17 @@ class AuthViewModel: ObservableObject {
                         self?.isLoading = false
                         self?.userId = user.accessToken
                         self?.authState = .auth
+                        if let accessToken = user.accessToken {
+                            KeychainWrapper.standard.remove(forKey: "JWTaccessToken")
+                            KeychainWrapper.standard.set("Bearer \(accessToken)", forKey: "JWTaccessToken")
+                        }
                     }.store(in: &subscriptions)
             } else if case let .failure(error) = result {
                 print(error.localizedDescription)
             }
             
         case .logout:
+            KeychainWrapper.standard.removeAllKeys()
             return
         }
     }

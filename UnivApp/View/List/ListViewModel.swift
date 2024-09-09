@@ -11,27 +11,34 @@ import Combine
 class ListViewModel: ObservableObject {
     
     enum Action {
-        
+        case load
     }
     
     @Published var searchText: String
+    @Published var summaryArray: [SummaryModel] = []
+    @Published var phase: Phase = .notRequested
     
     private var container: DIContainer
+    private var subscriptions = Set<AnyCancellable>()
     
     init(container: DIContainer, searchText: String) {
         self.container = container
         self.searchText = searchText
     }
     
-    var stub: [ListModel] = [
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3")
-    ]
+    func send(action: Action) {
+        switch action {
+        case .load:
+            container.services.listService.getSummary()
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.phase = .fail
+                    }
+                } receiveValue: { [weak self] summary in
+                    self?.phase = .success
+                    self?.summaryArray = summary
+                }.store(in: &subscriptions)
+
+        }
+    }
 }

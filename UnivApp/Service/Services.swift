@@ -14,17 +14,21 @@ enum ServicesError: Error {
 
 protocol ServicesType {
     var authService: AuthServiceType { get set }
+    var listService: ListServiceType { get set }
 }
 
 class Services: ServicesType {
     var authService: AuthServiceType
+    var listService: ListServiceType
     
-    init(authService: AuthServiceType) {
+    init() {
         self.authService = AuthService()
+        self.listService = ListService()
     }
     
 }
 
 class StubServices: ServicesType {
     var authService: AuthServiceType = StubAuthService()
+    var listService: ListServiceType = StubListService()
 }

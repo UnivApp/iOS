@@ -38,6 +38,10 @@
 		E4953D662C8ECD14008CBDE5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E4953D652C8ECD14008CBDE5 /* Alamofire */; };
 		E4953D6F2C8ECE90008CBDE5 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D6E2C8ECE90008CBDE5 /* Alamofire.swift */; };
 		E4953D712C8ED137008CBDE5 /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D702C8ED137008CBDE5 /* APIEndpoint.swift */; };
+		E4953D732C8EDB35008CBDE5 /* ListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D722C8EDB35008CBDE5 /* ListService.swift */; };
+		E4953D752C8EDC08008CBDE5 /* SummaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D742C8EDC08008CBDE5 /* SummaryModel.swift */; };
+		E4953D772C8EE00D008CBDE5 /* Phase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D762C8EE00D008CBDE5 /* Phase.swift */; };
+		E4953D7A2C8EE21D008CBDE5 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = E4953D792C8EE21D008CBDE5 /* SwiftKeychainWrapper */; };
 		E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */; };
 		E49C9F9F2C86CF70001F43A3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */; };
 		E49C9FA52C86D202001F43A3 /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FA42C86D202001F43A3 /* ListModel.swift */; };
@@ -118,6 +122,9 @@
 		E4953D622C8D8497008CBDE5 /* ChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartData.swift; sourceTree = "<group>"; };
 		E4953D6E2C8ECE90008CBDE5 /* Alamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
 		E4953D702C8ED137008CBDE5 /* APIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
+		E4953D722C8EDB35008CBDE5 /* ListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListService.swift; sourceTree = "<group>"; };
+		E4953D742C8EDC08008CBDE5 /* SummaryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryModel.swift; sourceTree = "<group>"; };
+		E4953D762C8EE00D008CBDE5 /* Phase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phase.swift; sourceTree = "<group>"; };
 		E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnivAppApp.swift; sourceTree = "<group>"; };
 		E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		E49C9FA42C86D202001F43A3 /* ListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
@@ -178,6 +185,7 @@
 			files = (
 				E4953D382C89C924008CBDE5 /* Kingfisher in Frameworks */,
 				E4953D662C8ECD14008CBDE5 /* Alamofire in Frameworks */,
+				E4953D7A2C8EE21D008CBDE5 /* SwiftKeychainWrapper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				E49C9FA42C86D202001F43A3 /* ListModel.swift */,
+				E4953D742C8EDC08008CBDE5 /* SummaryModel.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -491,6 +500,7 @@
 				E4953D692C8ECE3C008CBDE5 /* Alamofire */,
 				E4B3FD032C77577100CB98F3 /* Services.swift */,
 				E4B3FD252C77A26D00CB98F3 /* AuthService.swift */,
+				E4953D722C8EDB35008CBDE5 /* ListService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -574,6 +584,7 @@
 			isa = PBXGroup;
 			children = (
 				E4EA25662C85D6E500DC5D55 /* View */,
+				E4953D762C8EE00D008CBDE5 /* Phase.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -609,6 +620,7 @@
 			packageProductDependencies = (
 				E4953D372C89C924008CBDE5 /* Kingfisher */,
 				E4953D652C8ECD14008CBDE5 /* Alamofire */,
+				E4953D792C8EE21D008CBDE5 /* SwiftKeychainWrapper */,
 			);
 			productName = UnivApp;
 			productReference = E4B3FCC42C7751DB00CB98F3 /* UnivApp.app */;
@@ -641,6 +653,7 @@
 			packageReferences = (
 				E4953D362C89C924008CBDE5 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				E4953D642C8ECD14008CBDE5 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				E4953D782C8EE21D008CBDE5 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 			);
 			productRefGroup = E4B3FCC52C7751DB00CB98F3 /* Products */;
 			projectDirPath = "";
@@ -684,11 +697,13 @@
 				E49C9F9F2C86CF70001F43A3 /* EmptyView.swift in Sources */,
 				E49C9FBE2C86ED82001F43A3 /* PlayView.swift in Sources */,
 				E4953D712C8ED137008CBDE5 /* APIEndpoint.swift in Sources */,
+				E4953D752C8EDC08008CBDE5 /* SummaryModel.swift in Sources */,
 				E4953D5C2C8B0544008CBDE5 /* FoodModel.swift in Sources */,
 				E49C9FA92C86D539001F43A3 /* HomeViewModel.swift in Sources */,
 				E49C9FE22C87056B001F43A3 /* InitiativeViewModel.swift in Sources */,
 				E4B3FD182C77903700CB98F3 /* ListView.swift in Sources */,
 				E49C9FC82C86EFEA001F43A3 /* PlayViewModel.swift in Sources */,
+				E4953D732C8EDB35008CBDE5 /* ListService.swift in Sources */,
 				E4953D442C89D60D008CBDE5 /* PlayDetailView.swift in Sources */,
 				E49C9FBC2C86ED7C001F43A3 /* MouView.swift in Sources */,
 				E4B3FD0E2C775D7C00CB98F3 /* MainTabViewModel.swift in Sources */,
@@ -711,6 +726,7 @@
 				E4B3FD282C77A42900CB98F3 /* UserModel.swift in Sources */,
 				E4953D502C89D704008CBDE5 /* FoodDetailView.swift in Sources */,
 				E4953D3F2C89CDF6008CBDE5 /* LoadingModifier.swift in Sources */,
+				E4953D772C8EE00D008CBDE5 /* Phase.swift in Sources */,
 				E4B3FCCA2C7751DB00CB98F3 /* AuthView.swift in Sources */,
 				E49CA0112C88695F001F43A3 /* PageView.swift in Sources */,
 				E49C9FA52C86D202001F43A3 /* ListModel.swift in Sources */,
@@ -978,6 +994,14 @@
 				minimumVersion = 5.9.1;
 			};
 		};
+		E4953D782C8EE21D008CBDE5 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -990,6 +1014,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E4953D642C8ECD14008CBDE5 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		E4953D792C8EE21D008CBDE5 /* SwiftKeychainWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4953D782C8EE21D008CBDE5 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
+			productName = SwiftKeychainWrapper;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -10,6 +10,7 @@ import Foundation
 enum APIEndpoint {
     case login
     case refresh(refreshToken: String)
+    case summary
     
     var urlString: String {
         switch self {
@@ -17,6 +18,8 @@ enum APIEndpoint {
             return "http://43.200.143.28:8080/login/apple"
         case .refresh(let refreshToken):
             return ""
+        case .summary:
+            return "http://43.200.143.28:8080/api/universities/summary"
         }
     }
 }

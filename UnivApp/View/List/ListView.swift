@@ -30,6 +30,9 @@ struct ListView: View {
                 }
             }
         }
+        .onAppear {
+            viewModel.send(action: .load)
+        }
     }
     
     var search: some View {
@@ -53,11 +56,11 @@ struct ListView: View {
     var list: some View {
         ScrollView(.vertical) {
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
-                ForEach(viewModel.stub, id: \.self) { cell in
-                    if let image = cell.image, let title = cell.title, let heartNum = cell.heartNum {
+                ForEach(viewModel.summaryArray, id: \.fullName) { cell in
+                    if let image = cell.logo, let title = cell.fullName, let heartNum = cell.starNum {
                         HStack(spacing: 20) {
-                            ListViewCell(image: image, title: title, heartNum: heartNum, destination: .list, heart: false)
-                                .tag(cell.id)
+                            ListViewCell(image: image, title: title, heartNum: "\(heartNum)", destination: .list, heart: false)
+                                .tag(cell.fullName)
                         }
                     }
                 }
