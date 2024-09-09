@@ -107,8 +107,8 @@ struct InfoView: View {
 }
 
 struct InfoView_Previews: PreviewProvider {
-    static let container = DIContainer(services: StubServices(authService: StubAuthService()))
-    static let authViewModel = AuthViewModel(container: .init(services: StubServices(authService: StubAuthService())))
+    static let container = DIContainer(services: StubServices())
+    static let authViewModel = AuthViewModel(container: .init(services: StubServices()))
     static var previews: some View {
         InfoView(viewModel: InfoViewModel(searchText: "", container: Self.container))
             .environmentObject(Self.authViewModel)

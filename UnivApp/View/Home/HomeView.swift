@@ -161,8 +161,8 @@ struct HomeView: View {
 }
 
 struct HomeView_Previews: PreviewProvider {
-    static let container = DIContainer(services: StubServices(authService: StubAuthService()))
-    static let authViewModel = AuthViewModel(container: .init(services: StubServices(authService: StubAuthService())))
+    static let container = DIContainer(services: StubServices())
+    static let authViewModel = AuthViewModel(container: .init(services: StubServices()))
     static var previews: some View {
         HomeView(viewModel: HomeViewModel(container: Self.container, searchText: ""))
             .environmentObject(Self.authViewModel)

@@ -119,6 +119,6 @@ struct ListDetailView: View {
 
 struct ListDetailView_PreViews: PreviewProvider {
     static var previews: some View {
-        ListDetailView(viewModel: ListDetailViewModel(container: DIContainer(services: StubServices(authService: StubAuthService()))))
+        ListDetailView(viewModel: ListDetailViewModel(container: DIContainer(services: StubServices())))
     }
 }

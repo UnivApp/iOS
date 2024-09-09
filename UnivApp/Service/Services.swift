@@ -26,9 +26,5 @@ class Services: ServicesType {
 }
 
 class StubServices: ServicesType {
-    var authService: AuthServiceType
-    
-    init(authService: AuthServiceType) {
-        self.authService = StubAuthService()
-    }
+    var authService: AuthServiceType = StubAuthService()
 }

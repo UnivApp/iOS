@@ -12,7 +12,6 @@ import AuthenticationServices
 struct LoginView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var container: DIContainer
-    @StateObject var loginViewModel: LoginViewModel
     
     
     var body: some View {
@@ -49,5 +48,5 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView(loginViewModel: LoginViewModel(container: .init(services: Services(authService: StubAuthService()))))
+    LoginView()
 }

@@ -8,7 +8,6 @@
 import Foundation
 
 struct UserModel: Codable {
-    let name: String?
-    let email: String?
-    let code: String?
+    let accessToken: String?
+    let accessTokenExpiresIn: Double?
 }

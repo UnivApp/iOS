@@ -27,5 +27,5 @@ struct PageView: View {
 }
 
 #Preview {
-    PageView(viewModel: PlayViewModel(container: DIContainer(services: StubServices(authService: StubAuthService())), searchText: ""))
+    PageView(viewModel: PlayViewModel(container: DIContainer(services: StubServices()), searchText: ""))
 }
