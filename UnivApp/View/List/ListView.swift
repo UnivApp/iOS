@@ -13,6 +13,27 @@ struct ListView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     
     var body: some View {
+        loadedView
+    }
+    
+    @ViewBuilder
+    var contentView: some View {
+        switch viewModel.phase {
+        case .notRequested:
+            PlaceholderView()
+                .onAppear{
+                    viewModel.send(action: .load)
+                }
+        case .loading:
+            LoadingView(url: "congratulations")
+        case .success:
+            loadedView
+        case .fail:
+            ErrorView()
+        }
+    }
+    
+    var loadedView: some View {
         NavigationStack {
             VStack {
                 Spacer()
@@ -29,9 +50,6 @@ struct ListView: View {
                     Image("logo")
                 }
             }
-        }
-        .onAppear {
-            viewModel.send(action: .load)
         }
     }
     

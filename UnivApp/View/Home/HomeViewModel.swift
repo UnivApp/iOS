@@ -12,12 +12,15 @@ class HomeViewModel: ObservableObject {
     
     enum Action {
         case load
-        case completion
     }
     
     @Published var searchText: String
+    @Published var phase: Phase = .notRequested
+    @Published var banners: [BannerModel] = []
+    @Published var scoreImage: ScoreImageModel = .init(type: nil, image: nil)
     
     private var container: DIContainer
+    private var subscriptions = Set<AnyCancellable>()
     
     init(container: DIContainer, searchText: String) {
         self.container = container
@@ -27,9 +30,27 @@ class HomeViewModel: ObservableObject {
     func send(action: Action) {
         switch action {
         case .load:
-            return
-        case .completion:
-            return
+            phase = .loading
+            container.services.homeService.getBanners()
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.phase = .fail
+                    }
+                } receiveValue: { [weak self] banners in
+                    self?.phase = .success
+                    self?.banners = banners
+                }.store(in: &subscriptions)
+
+            container.services.homeService.getScoreImage()
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.phase = .fail
+                    }
+                } receiveValue: { [weak self] image in
+                    self?.phase = .success
+                    self?.scoreImage = image
+                }.store(in: &subscriptions)
+            
         }
     }
     

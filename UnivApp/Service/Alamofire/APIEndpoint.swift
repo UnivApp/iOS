@@ -11,6 +11,8 @@ enum APIEndpoint {
     case login
     case refresh(refreshToken: String)
     case summary
+    case banners
+    case scoreImage
     
     var urlString: String {
         switch self {
@@ -20,6 +22,10 @@ enum APIEndpoint {
             return ""
         case .summary:
             return "http://43.200.143.28:8080/api/universities/summary"
+        case .banners:
+            return "http://43.200.143.28:8080/api/banners"
+        case .scoreImage:
+            return ""
         }
     }
 }

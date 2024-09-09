@@ -29,6 +29,7 @@ class ListViewModel: ObservableObject {
     func send(action: Action) {
         switch action {
         case .load:
+            phase = .loading
             container.services.listService.getSummary()
                 .sink { [weak self] completion in
                     if case .failure = completion {
@@ -37,6 +38,7 @@ class ListViewModel: ObservableObject {
                 } receiveValue: { [weak self] summary in
                     self?.phase = .success
                     self?.summaryArray = summary
+                    self?.phase = .success
                 }.store(in: &subscriptions)
 
         }

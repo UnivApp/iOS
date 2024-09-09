@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ListViewCell: View {
     var image: String
@@ -24,6 +25,7 @@ struct ListViewCell: View {
             
             HStack {
                 ZStack {
+                    //TODO: - 즐겨찾기 수정
                     Image("love_empty")
                         .resizable()
                         .frame(width: 20, height: 20)
@@ -38,7 +40,7 @@ struct ListViewCell: View {
             
             Spacer()
             
-            Image("emptyLogo")
+            KFImage(URL(string: image))
                 .resizable()
                 .scaledToFit()
                 .padding(.horizontal, 30)

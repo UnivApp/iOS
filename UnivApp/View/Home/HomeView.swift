@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct HomeView: View {
     @StateObject var viewModel: HomeViewModel
@@ -14,6 +15,27 @@ struct HomeView: View {
     @State private var isLoading: Bool = false
     
     var body: some View {
+        contentView
+    }
+    
+    @ViewBuilder
+    var contentView: some View {
+        switch viewModel.phase {
+        case .notRequested:
+            loadedView
+                .onAppear {
+                    viewModel.send(action: .load)
+                }
+        case .loading:
+            LoadingView(url: "congratulations")
+        case .success:
+            loadedView
+        case .fail:
+            ErrorView()
+        }
+    }
+    
+    var loadedView: some View {
         NavigationStack {
             ScrollView(.vertical) {
                 Spacer()
@@ -41,25 +63,21 @@ struct HomeView: View {
                     Image("logo")
                 }
             }
-            
+            .onAppear {
+                UIPageControl.appearance().currentPageIndicatorTintColor = .black
+                UIPageControl.appearance().pageIndicatorTintColor = .gray
+                
+                let appearance = UINavigationBarAppearance()
+                appearance.configureWithOpaqueBackground()
+                appearance.backgroundColor = UIColor.white
+                appearance.shadowColor = nil
+                
+                UINavigationBar.appearance().standardAppearance = appearance
+                UINavigationBar.appearance().scrollEdgeAppearance = appearance
+            }
         }
-        .onAppear {
-            UIPageControl.appearance().currentPageIndicatorTintColor = .black
-            UIPageControl.appearance().pageIndicatorTintColor = .gray
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = UIColor.white
-            appearance.shadowColor = nil
-            
-            UINavigationBar.appearance().standardAppearance = appearance
-            UINavigationBar.appearance().scrollEdgeAppearance = appearance
-            
-            self.isLoading = true
-            viewModel.send(action: .load)
-        }
-//        .startLoading(url: "congratulations", isLoading: $isLoading)
     }
-    
+        
     var headerView: some View {
         VStack(alignment: .center, spacing: 5) {
             HStack {
@@ -85,8 +103,8 @@ struct HomeView: View {
             
             //임시 이미지
             TabView {
-                ForEach(0..<3) { index in
-                    Image("TestAd")
+                ForEach(viewModel.banners, id: \.image) { bannerItem in
+                    KFImage(URL(string: bannerItem.image ?? ""))
                         .resizable()
                         .scaledToFill()
                         .padding(.horizontal, 30)
@@ -141,16 +159,22 @@ struct HomeView: View {
                 Spacer()
                 
                 NavigationLink(destination: EmptyView()) {
-                    Image("arrow")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 15, height: 15)
+                    HStack(spacing: 5) {
+                        Text("더보기")
+                            .font(.system(size: 12, weight: .regular))
+                            .foregroundColor(.gray)
+                        
+                        Image("arrow")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 15, height: 15)
+                    }
                 }
                 .padding(.trailing, 20)
             }
             .padding(.horizontal, 5)
             
-            Image("group")
+            KFImage(URL(string: viewModel.scoreImage.image?[0] ?? ""))
                 .resizable()
                 .scaledToFit()
                 .padding(.horizontal, 5)
