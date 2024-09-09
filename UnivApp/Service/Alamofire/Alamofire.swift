@@ -49,6 +49,7 @@ final class Alamofire {
                 AF.request(url, method: .get, encoding: JSONEncoding.default, headers: ["content-Type":"application-json", "Authorization":accessToken])
                     .validate()
                     .responseDecodable(of: T.self) { response in
+                        print(response.debugDescription)
                         switch response.result {
                         case let .success(result):
                             promise(.success(result))

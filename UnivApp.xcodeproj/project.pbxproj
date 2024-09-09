@@ -47,6 +47,8 @@
 		E4953D802C8EECC8008CBDE5 /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D7F2C8EECC8008CBDE5 /* HomeService.swift */; };
 		E4953D852C8EED37008CBDE5 /* BannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D842C8EED37008CBDE5 /* BannerModel.swift */; };
 		E4953D872C8EEE7D008CBDE5 /* ScoreImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D862C8EEE7D008CBDE5 /* ScoreImageModel.swift */; };
+		E4953D8A2C8F1556008CBDE5 /* SVGKit in Frameworks */ = {isa = PBXBuildFile; productRef = E4953D892C8F1556008CBDE5 /* SVGKit */; };
+		E4953D8C2C8F1556008CBDE5 /* SVGKitSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E4953D8B2C8F1556008CBDE5 /* SVGKitSwift */; };
 		E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */; };
 		E49C9F9F2C86CF70001F43A3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */; };
 		E49C9FA52C86D202001F43A3 /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FA42C86D202001F43A3 /* ListModel.swift */; };
@@ -195,6 +197,8 @@
 			files = (
 				E4953D382C89C924008CBDE5 /* Kingfisher in Frameworks */,
 				E4953D662C8ECD14008CBDE5 /* Alamofire in Frameworks */,
+				E4953D8C2C8F1556008CBDE5 /* SVGKitSwift in Frameworks */,
+				E4953D8A2C8F1556008CBDE5 /* SVGKit in Frameworks */,
 				E4953D7A2C8EE21D008CBDE5 /* SwiftKeychainWrapper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -644,6 +648,8 @@
 				E4953D372C89C924008CBDE5 /* Kingfisher */,
 				E4953D652C8ECD14008CBDE5 /* Alamofire */,
 				E4953D792C8EE21D008CBDE5 /* SwiftKeychainWrapper */,
+				E4953D892C8F1556008CBDE5 /* SVGKit */,
+				E4953D8B2C8F1556008CBDE5 /* SVGKitSwift */,
 			);
 			productName = UnivApp;
 			productReference = E4B3FCC42C7751DB00CB98F3 /* UnivApp.app */;
@@ -677,6 +683,7 @@
 				E4953D362C89C924008CBDE5 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				E4953D642C8ECD14008CBDE5 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				E4953D782C8EE21D008CBDE5 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
+				E4953D882C8F1556008CBDE5 /* XCRemoteSwiftPackageReference "SVGKit" */,
 			);
 			productRefGroup = E4B3FCC52C7751DB00CB98F3 /* Products */;
 			projectDirPath = "";
@@ -1030,6 +1037,14 @@
 				minimumVersion = 4.0.1;
 			};
 		};
+		E4953D882C8F1556008CBDE5 /* XCRemoteSwiftPackageReference "SVGKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SVGKit/SVGKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1047,6 +1062,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E4953D782C8EE21D008CBDE5 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
 			productName = SwiftKeychainWrapper;
+		};
+		E4953D892C8F1556008CBDE5 /* SVGKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4953D882C8F1556008CBDE5 /* XCRemoteSwiftPackageReference "SVGKit" */;
+			productName = SVGKit;
+		};
+		E4953D8B2C8F1556008CBDE5 /* SVGKitSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4953D882C8F1556008CBDE5 /* XCRemoteSwiftPackageReference "SVGKit" */;
+			productName = SVGKitSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

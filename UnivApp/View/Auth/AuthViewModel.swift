@@ -24,7 +24,7 @@ class AuthViewModel: ObservableObject {
         case logout
     }
     
-    @Published var authState: AuthState = .unAuth
+    @Published var authState: AuthState = .auth
     @Published var isLoading: Bool = false
     @Published var phase: Phase = .notRequested
     

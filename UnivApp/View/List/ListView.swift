@@ -13,7 +13,7 @@ struct ListView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     
     var body: some View {
-        loadedView
+        contentView
     }
     
     @ViewBuilder
@@ -89,7 +89,7 @@ struct ListView: View {
         .padding(.horizontal, 0)
         .padding(.bottom, 0)
         .refreshable {
-            
+            viewModel.send(action: .load)
         }
     }
 }

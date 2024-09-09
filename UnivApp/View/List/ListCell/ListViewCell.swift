@@ -39,11 +39,13 @@ struct ListViewCell: View {
             }
             
             Spacer()
-            
-            KFImage(URL(string: image))
-                .resizable()
-                .scaledToFit()
-                .padding(.horizontal, 30)
+        
+            if let url = URL(string: image) {
+                KFImage(url)
+                    .resizable()
+                    .scaledToFit()
+                    .padding(.horizontal, 30)
+            }
             
             Spacer()
             

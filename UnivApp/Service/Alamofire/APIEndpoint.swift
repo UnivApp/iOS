@@ -25,7 +25,7 @@ enum APIEndpoint {
         case .banners:
             return "http://43.200.143.28:8080/api/banners"
         case .scoreImage:
-            return ""
+            return "http://43.200.143.28:8080/api/entrance-score-images"
         }
     }
 }

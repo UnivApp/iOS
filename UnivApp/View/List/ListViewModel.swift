@@ -36,11 +36,9 @@ class ListViewModel: ObservableObject {
                         self?.phase = .fail
                     }
                 } receiveValue: { [weak self] summary in
-                    self?.phase = .success
                     self?.summaryArray = summary
                     self?.phase = .success
                 }.store(in: &subscriptions)
-
         }
     }
 }
