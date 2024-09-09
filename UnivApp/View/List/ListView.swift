@@ -25,7 +25,7 @@ struct ListView: View {
                     viewModel.send(action: .load)
                 }
         case .loading:
-            LoadingView(url: "load")
+            LoadingView(url: "congratulations")
         case .success:
             loadedView
         case .fail:
@@ -43,7 +43,16 @@ struct ListView: View {
                 
                 Spacer()
                 
-                list
+                ZStack {
+                    
+                    if viewModel.notFound == true {
+                        Text("학교를 찾을 수 없습니다. 🧐")
+                            .font(.system(size: 15, weight: .bold))
+                            .foregroundColor(.gray)
+                    }
+                    
+                    list
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -56,7 +65,7 @@ struct ListView: View {
     var search: some View {
         HStack {
             Button {
-                //TODO: 검색
+                viewModel.send(action: .search)
             } label: {
                 Image("search")
             }

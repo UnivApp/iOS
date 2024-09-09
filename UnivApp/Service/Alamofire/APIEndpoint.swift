@@ -13,6 +13,7 @@ enum APIEndpoint {
     case summary
     case banners
     case scoreImage
+    case search
     
     var urlString: String {
         switch self {
@@ -26,6 +27,8 @@ enum APIEndpoint {
             return "http://43.200.143.28:8080/api/banners"
         case .scoreImage:
             return "http://43.200.143.28:8080/api/entrance-score-images"
+        case .search:
+            return "http://43.200.143.28:8080/api/universities/search?keyword="
         }
     }
 }

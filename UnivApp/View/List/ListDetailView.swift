@@ -11,7 +11,7 @@ struct ListDetailView: View {
     @StateObject var viewModel: ListDetailViewModel
     @State private var selectedType: ListDetailType?
     @State private var isNavigate: Bool = false
-//    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         NavigationStack {
@@ -28,23 +28,18 @@ struct ListDetailView: View {
                 }
                 
             }
-//            .toolbar {
-//                ToolbarItem(placement: .navigationBarLeading) {
-//                    Button {
-//                        dismiss()
-//                    } label: {
-//                        Image("back")
-//                    }
-//
-//                }
-//            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image("back")
+                    }
+
+                }
+            }
             .toolbar(.hidden, for: .tabBar)
-//            .navigationBarBackButtonHidden(true)
-//            .navigationDestination(isPresented: $isNavigate) {
-//                if let selectedType = selectedType {
-//                    selectedType.view
-//                }
-//            }
+            .navigationBarBackButtonHidden(true)
         }
     }
     

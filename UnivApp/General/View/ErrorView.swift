@@ -23,7 +23,7 @@ struct ErrorView: View {
             
             Group {
                 Text("일시적인 오류로 서버와 연결이 끊겼습니다.")
-                Text("잠시 후 다시 시도해 주세요")
+                Text("잠시 후 다시 시도해 주세요.")
             }
             .font(.system(size: 13, weight: .regular))
             .foregroundColor(.black)
