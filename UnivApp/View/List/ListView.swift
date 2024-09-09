@@ -25,7 +25,7 @@ struct ListView: View {
                     viewModel.send(action: .load)
                 }
         case .loading:
-            LoadingView(url: "congratulations")
+            LoadingView(url: "load")
         case .success:
             loadedView
         case .fail:
