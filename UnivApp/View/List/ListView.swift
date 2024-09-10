@@ -12,6 +12,9 @@ struct ListView: View {
     @EnvironmentObject var continer: DIContainer
     @EnvironmentObject var authViewModel: AuthViewModel
     
+    @State private var showAlert: Bool = false
+    @State private var alertMessage: String = ""
+    
     var body: some View {
         contentView
     }
@@ -28,6 +31,13 @@ struct ListView: View {
             LoadingView(url: "congratulations")
         case .success:
             loadedView
+                .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text("알림 🔔"),
+                        message: Text(alertMessage),
+                        dismissButton: .default(Text("확인"))
+                    )
+                }
         case .fail:
             ErrorView()
         }
@@ -59,6 +69,19 @@ struct ListView: View {
                     Image("logo")
                 }
             }
+            .onChange(of: viewModel.heartPhase) {
+                switch viewModel.heartPhase {
+                case .notRequested:
+                    self.showAlert = false
+                    self.alertMessage = ""
+                case .addHeart:
+                    self.showAlert = true
+                    self.alertMessage = "관심대학으로 등록되었습니다."
+                case .removeHeart:
+                    self.showAlert = true
+                    self.alertMessage = "관심대학이 삭제되었습니다."
+                }
+            }
         }
     }
     
@@ -86,7 +109,7 @@ struct ListView: View {
                 ForEach(viewModel.summaryArray, id: \.fullName) { cell in
                     if let image = cell.logo, let title = cell.fullName, let heartNum = cell.starNum {
                         HStack(spacing: 20) {
-                            ListViewCell(image: image, title: title, heartNum: "\(heartNum)", destination: .list, heart: false)
+                            ListViewCell(image: image, title: title, heartNum: "\(heartNum)", destination: .list, heart: false, listViewModel: self.viewModel)
                                 .tag(cell.fullName)
                         }
                     }

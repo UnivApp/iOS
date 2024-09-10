@@ -12,3 +12,9 @@ enum Phase {
     case success
     case fail
 }
+
+enum heartPhase {
+    case notRequested
+    case addHeart
+    case removeHeart
+}

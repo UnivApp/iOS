@@ -15,6 +15,9 @@ struct ListViewCell: View {
     var destination: ListCellDestination?
     var heart: Bool
     
+    @State private var heartTapped: Bool = false
+    @StateObject var listViewModel: ListViewModel
+    
     var body: some View {
         cell
     }
@@ -26,13 +29,28 @@ struct ListViewCell: View {
             HStack {
                 ZStack {
                     //TODO: - 즐겨찾기 수정
-                    Image("love_empty")
+                    Image("love_circle")
                         .resizable()
                         .frame(width: 20, height: 20)
                     
-                    Image("love_fill")
-                        .resizable()
-                        .frame(width: 12, height: 12)
+                    Button {
+                        self.heartTapped.toggle()
+                        if heartTapped == true {
+                            listViewModel.send(action: .addHeart(self.title))
+                        } else {
+                            listViewModel.send(action: .removeHeart(self.title))
+                        }
+                    } label: {
+                        if heartTapped == true {
+                            Image("love_fill")
+                                .resizable()
+                                .frame(width: 12, height: 12)
+                        } else {
+                            Image("love_empty")
+                                .resizable()
+                                .frame(width: 12, height: 12)
+                        }
+                    }
                 }
                 .padding(.leading, 20)
                 Spacer()
@@ -52,7 +70,7 @@ struct ListViewCell: View {
             Text(title)
                 .font(.system(size: 14, weight: .semibold))
                 .foregroundColor(.black)
-                .padding(.horizontal, 0)
+                .padding(.horizontal, 5)
             
             Spacer()
             
@@ -101,5 +119,5 @@ struct ListViewCell: View {
 }
 
 #Preview {
-    ListViewCell(image: "", title: "", heartNum: "", heart: false)
+    ListViewCell(image: "", title: "", heartNum: "", heart: false, listViewModel: ListViewModel(container: .init(services: StubServices()), searchText: ""))
 }

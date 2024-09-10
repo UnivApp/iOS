@@ -22,7 +22,7 @@ enum ListCellDestination: CaseIterable {
     var view: AnyView {
         switch self {
         case .list:
-            return AnyView(ListDetailView(viewModel: ListDetailViewModel(container: DIContainer(services: Services()))))
+            return AnyView(ListDetailView(viewModel: ListDetailViewModel(container: DIContainer(services: Services())), universityName: .init()))
         case .event:
             return AnyView(EventDetailView())
         case .food:

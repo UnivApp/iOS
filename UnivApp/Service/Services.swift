@@ -17,6 +17,7 @@ protocol ServicesType {
     var listService: ListServiceType { get set }
     var homeService: HomeServiceType { get set }
     var searchService: SearchServiceType { get set }
+    var heartService: HeartServiceType { get set }
 }
 
 class Services: ServicesType {
@@ -24,12 +25,14 @@ class Services: ServicesType {
     var listService: ListServiceType
     var homeService: HomeServiceType
     var searchService: SearchServiceType
+    var heartService: HeartServiceType
     
     init() {
         self.authService = AuthService()
         self.listService = ListService()
         self.homeService = HomeService()
         self.searchService = SearchService()
+        self.heartService = HeartService()
     }
     
 }
@@ -39,4 +42,5 @@ class StubServices: ServicesType {
     var listService: ListServiceType = StubListService()
     var homeService: HomeServiceType = StubHomeService()
     var searchService: SearchServiceType = StubSearchService()
+    var heartService: HeartServiceType = StubHeartService()
 }

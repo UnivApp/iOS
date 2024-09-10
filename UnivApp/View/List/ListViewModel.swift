@@ -13,11 +13,14 @@ class ListViewModel: ObservableObject {
     enum Action {
         case load
         case search
+        case addHeart(String)
+        case removeHeart(String)
     }
     
     @Published var searchText: String
     @Published var summaryArray: [SummaryModel] = []
     @Published var phase: Phase = .notRequested
+    @Published var heartPhase: heartPhase = .notRequested
     @Published var notFound: Bool = false
     
     private var container: DIContainer
@@ -37,11 +40,13 @@ class ListViewModel: ObservableObject {
                     if case .failure = completion {
                         self?.phase = .fail
                         self?.notFound = false
+                        self?.heartPhase = .notRequested
                     }
                 } receiveValue: { [weak self] summary in
                     self?.summaryArray = summary
                     self?.phase = .success
                     self?.notFound = false
+                    self?.heartPhase = .notRequested
                 }.store(in: &subscriptions)
         case .search:
             phase = .loading
@@ -51,11 +56,34 @@ class ListViewModel: ObservableObject {
                         self?.phase = .success
                         self?.summaryArray = []
                         self?.notFound = true
+                        self?.heartPhase = .notRequested
                     }
                 } receiveValue: { [weak self] searchResult in
                     self?.summaryArray = searchResult
                     self?.phase = .success
                     self?.notFound = false
+                    self?.heartPhase = .notRequested
+                }.store(in: &subscriptions)
+            
+        case let .addHeart(universityName):
+            container.services.heartService.addHeart(universityName: universityName)
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.heartPhase = .notRequested
+                    }
+                } receiveValue: { [weak self] addHeart in
+                    self?.heartPhase = .addHeart
+                }.store(in: &subscriptions)
+
+            
+        case let .removeHeart(universityName):
+            container.services.heartService.removeHeart(universityName: universityName)
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.heartPhase = .notRequested
+                    }
+                } receiveValue: { [weak self] removeHeart in
+                    self?.heartPhase = .removeHeart
                 }.store(in: &subscriptions)
 
         }

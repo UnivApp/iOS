@@ -13,6 +13,8 @@ struct ListDetailView: View {
     @State private var isNavigate: Bool = false
     @Environment(\.dismiss) var dismiss
     
+    var universityName: String
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -52,7 +54,7 @@ struct ListDetailView: View {
                     .frame(width: 100, height: 100)
                     .padding(.leading, 10)
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("세종대학교")
+                    Text(self.universityName)
                         .font(.system(size: 15, weight: .bold))
                     
                     Text("서울특별시 광진구 능동로 209\n02-3408-3114\n2025학년도 입학안내\n전공설치학과 및 선발 정보 보기")
@@ -114,6 +116,6 @@ struct ListDetailView: View {
 
 struct ListDetailView_PreViews: PreviewProvider {
     static var previews: some View {
-        ListDetailView(viewModel: ListDetailViewModel(container: DIContainer(services: StubServices())))
+        ListDetailView(viewModel: ListDetailViewModel(container: DIContainer(services: StubServices())), universityName: "")
     }
 }
