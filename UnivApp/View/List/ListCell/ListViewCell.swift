@@ -9,6 +9,7 @@ import SwiftUI
 import Kingfisher
 
 struct ListViewCell: View {
+    var id: Int
     var image: String
     var title: String
     var heartNum: String
@@ -36,9 +37,9 @@ struct ListViewCell: View {
                     Button {
                         self.heartTapped.toggle()
                         if heartTapped == true {
-                            listViewModel.send(action: .addHeart(self.title))
+                            listViewModel.send(action: .addHeart(self.id))
                         } else {
-                            listViewModel.send(action: .removeHeart(self.title))
+                            listViewModel.send(action: .removeHeart(self.id))
                         }
                     } label: {
                         if heartTapped == true {
@@ -119,5 +120,5 @@ struct ListViewCell: View {
 }
 
 #Preview {
-    ListViewCell(image: "", title: "", heartNum: "", heart: false, listViewModel: ListViewModel(container: .init(services: StubServices()), searchText: ""))
+    ListViewCell(id: 0, image: "", title: "", heartNum: "", heart: false, listViewModel: ListViewModel(container: .init(services: StubServices()), searchText: ""))
 }

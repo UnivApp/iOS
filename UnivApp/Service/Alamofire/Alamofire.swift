@@ -27,13 +27,54 @@ final class Alamofire {
         .eraseToAnyPublisher()
     }
     
-    func heartAlamofire(url: String, params: [String:Any]?) -> AnyPublisher<Void, Error> {
+    func nonOfZeroPost(url: String, params: [String:Any]?) -> AnyPublisher<Void, Error> {
         return Future<Void, Error> { promise in
             if let accessToken = KeychainWrapper.standard.string(forKey: "JWTaccessToken") {
-                AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: ["content-Type":"application/json", "Authorization": accessToken])
+                if let params = params {
+                    AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: ["content-Type":"application/json", "Authorization": accessToken])
+                        .validate()
+                        .response { response in
+                            print(response.debugDescription)
+                            switch response.result {
+                            case .success:
+                                if response.data?.isEmpty ?? true {
+                                    promise(.success(()))
+                                } else {
+                                    promise(.success(()))
+                                }
+                            case let .failure(error):
+                                promise(.failure(error))
+                            }
+                        }
+                } else {
+                    AF.request(url, method: .post, encoding: JSONEncoding.default, headers: ["content-Type":"application/json", "Authorization": accessToken])
+                        .validate()
+                        .response { response in
+                            print(response.debugDescription)
+                            switch response.result {
+                            case .success:
+                                if response.data?.isEmpty ?? true {
+                                    promise(.success(()))
+                                } else {
+                                    promise(.success(()))
+                                }
+                            case let .failure(error):
+                                promise(.failure(error))
+                            }
+                        }
+                }
+            } else {
+                promise(.failure(NSError(domain: "Token Error", code: 401, userInfo: nil)))
+            }
+        }.eraseToAnyPublisher()
+    }
+    
+    func delete(url: String) -> AnyPublisher<Void, Error> {
+        return Future<Void, Error> { promise in
+            if let accessToken = KeychainWrapper.standard.string(forKey: "JWTaccessToken"){
+                AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: ["content-Type":"application/json", "Authorization": accessToken])
                     .validate()
                     .response { response in
-                        print(response.debugDescription)
                         switch response.result {
                         case .success:
                             if response.data?.isEmpty ?? true {
@@ -45,8 +86,6 @@ final class Alamofire {
                             promise(.failure(error))
                         }
                     }
-            } else {
-                promise(.failure(NSError(domain: "Token Error", code: 401, userInfo: nil)))
             }
         }.eraseToAnyPublisher()
     }

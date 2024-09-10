@@ -95,7 +95,7 @@ struct InfoView: View {
             ForEach(viewModel.stub, id: \.self) { cell in
                 if let image = cell.image, let title = cell.title, let heartNum = cell.heartNum {
                     HStack(spacing: 20) {
-                        ListViewCell(image: image, title: title, heartNum: heartNum, destination: .info, heart: false, listViewModel: ListViewModel(container: .init(services: StubServices()), searchText: ""))
+                        ListViewCell(id: 0, image: image, title: title, heartNum: heartNum, destination: .info, heart: false, listViewModel: ListViewModel(container: .init(services: StubServices()), searchText: ""))
                             .tag(cell.id)
                     }
                 }

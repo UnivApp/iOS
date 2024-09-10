@@ -22,6 +22,7 @@ class AuthViewModel: ObservableObject {
         case appleLogin(ASAuthorizationAppleIDRequest)
         case appleLoginCompletion(Result<ASAuthorization, Error>)
         case logout
+        case withdraw
     }
     
     @Published var authState: AuthState = .auth
@@ -32,7 +33,6 @@ class AuthViewModel: ObservableObject {
     
     private var container: DIContainer
     private var subscriptions = Set<AnyCancellable>()
-    
     private var currentNonce : String?
     
     init(container: DIContainer) {
@@ -42,7 +42,15 @@ class AuthViewModel: ObservableObject {
     func send(action: Action) {
         switch action {
         case .checkAuthState:
-            //TODO: 로그인 상태 확인 메서드
+            container.services.authService.checkAuthState()
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        //TODO: - 상태 체크 실패
+                    }
+                } receiveValue: { [weak self] checkStatus in
+                    //TODO: - 로그인 상태 체크 성공
+                }.store(in: &subscriptions)
+
             return
             
         case let .appleLogin(request):
@@ -73,7 +81,28 @@ class AuthViewModel: ObservableObject {
             
         case .logout:
             KeychainWrapper.standard.removeAllKeys()
-            return
+            container.services.authService.logout()
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        //TODO: - 로그아웃 실패
+                    }
+                } receiveValue: { [weak self] _ in
+                    //TODO: - 로그아웃 성공
+                }.store(in: &subscriptions)
+            
+            
+            
+        case .withdraw:
+            KeychainWrapper.standard.removeAllKeys()
+            container.services.authService.withdrawMember()
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        //TODO: - 회원 탈퇴 실패
+                    }
+                } receiveValue: { [weak self] _ in
+                    //TODO: - 회원 탈퇴 성공
+                }.store(in: &subscriptions)
+
         }
     }
 }

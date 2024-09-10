@@ -13,8 +13,8 @@ class ListViewModel: ObservableObject {
     enum Action {
         case load
         case search
-        case addHeart(String)
-        case removeHeart(String)
+        case addHeart(Int)
+        case removeHeart(Int)
     }
     
     @Published var searchText: String
@@ -65,25 +65,31 @@ class ListViewModel: ObservableObject {
                     self?.heartPhase = .notRequested
                 }.store(in: &subscriptions)
             
-        case let .addHeart(universityName):
-            container.services.heartService.addHeart(universityName: universityName)
+        case let .addHeart(universityId):
+            container.services.heartService.addHeart(universityId: universityId)
                 .sink { [weak self] completion in
                     if case .failure = completion {
                         self?.heartPhase = .notRequested
                     }
                 } receiveValue: { [weak self] addHeart in
                     self?.heartPhase = .addHeart
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        self?.heartPhase = .notRequested
+                    }
                 }.store(in: &subscriptions)
 
             
-        case let .removeHeart(universityName):
-            container.services.heartService.removeHeart(universityName: universityName)
+        case let .removeHeart(universityId):
+            container.services.heartService.removeHeart(universityId: universityId)
                 .sink { [weak self] completion in
                     if case .failure = completion {
                         self?.heartPhase = .notRequested
                     }
                 } receiveValue: { [weak self] removeHeart in
                     self?.heartPhase = .removeHeart
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        self?.heartPhase = .notRequested
+                    }
                 }.store(in: &subscriptions)
 
         }

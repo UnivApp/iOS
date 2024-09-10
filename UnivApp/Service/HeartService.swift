@@ -9,16 +9,16 @@ import Foundation
 import Combine
 
 protocol HeartServiceType {
-    func addHeart(universityName: String) -> AnyPublisher<Void, Error>
-    func removeHeart(universityName: String) -> AnyPublisher<Void, Error>
+    func addHeart(universityId: Int) -> AnyPublisher<Void, Error>
+    func removeHeart(universityId: Int) -> AnyPublisher<Void, Error>
 }
 
 class HeartService: HeartServiceType {
     private var subscriptions = Set<AnyCancellable>()
     
-    func addHeart(universityName: String) -> AnyPublisher<Void, any Error> {
+    func addHeart(universityId: Int) -> AnyPublisher<Void, any Error> {
         Future<Void, Error> { promise in
-            Alamofire().heartAlamofire(url: "\(APIEndpoint.addHeart.urlString)\(universityName)", params: nil)
+            Alamofire().nonOfZeroPost(url: "\(APIEndpoint.addHeart.urlString)\(universityId)", params: nil)
                 .sink { completion in
                     switch completion {
                     case .finished:
@@ -35,9 +35,9 @@ class HeartService: HeartServiceType {
         }.eraseToAnyPublisher()
     }
     
-    func removeHeart(universityName: String) -> AnyPublisher<Void, any Error> {
+    func removeHeart(universityId: Int) -> AnyPublisher<Void, any Error> {
         Future<Void, Error> { promise in
-            Alamofire().heartAlamofire(url: "\(APIEndpoint.removeHeart.urlString)\(universityName)", params: nil)
+            Alamofire().nonOfZeroPost(url: "\(APIEndpoint.removeHeart.urlString)\(universityId)", params: nil)
                 .sink { completion in
                     switch completion {
                     case .finished:
@@ -56,11 +56,11 @@ class HeartService: HeartServiceType {
 }
 
 class StubHeartService: HeartServiceType {
-    func addHeart(universityName: String) -> AnyPublisher<Void, any Error> {
+    func addHeart(universityId: Int) -> AnyPublisher<Void, any Error> {
         Empty().eraseToAnyPublisher()
     }
     
-    func removeHeart(universityName: String) -> AnyPublisher<Void, any Error> {
+    func removeHeart(universityId: Int) -> AnyPublisher<Void, any Error> {
         Empty().eraseToAnyPublisher()
     }
 }

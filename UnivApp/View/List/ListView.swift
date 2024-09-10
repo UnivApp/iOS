@@ -95,6 +95,7 @@ struct ListView: View {
             .padding()
             
             TextField("대학명/소재지를 입력하세요", text: $viewModel.searchText)
+                .font(.system(size: 17, weight: .bold))
                 .padding()
         }
         .padding(.horizontal, 10)
@@ -106,11 +107,11 @@ struct ListView: View {
     var list: some View {
         ScrollView(.vertical) {
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
-                ForEach(viewModel.summaryArray, id: \.fullName) { cell in
-                    if let image = cell.logo, let title = cell.fullName, let heartNum = cell.starNum {
+                ForEach(viewModel.summaryArray, id: \.universityId) { cell in
+                    if let id = cell.universityId, let image = cell.logo, let title = cell.fullName, let heartNum = cell.starNum {
                         HStack(spacing: 20) {
-                            ListViewCell(image: image, title: title, heartNum: "\(heartNum)", destination: .list, heart: false, listViewModel: self.viewModel)
-                                .tag(cell.fullName)
+                            ListViewCell(id: id, image: image, title: title, heartNum: "\(heartNum)", destination: .list, heart: false, listViewModel: self.viewModel)
+                                .tag(cell.universityId)
                         }
                     }
                 }
@@ -122,6 +123,7 @@ struct ListView: View {
         .padding(.bottom, 0)
         .refreshable {
             viewModel.send(action: .load)
+            self.viewModel.searchText = ""
         }
     }
 }
