@@ -1,24 +1,24 @@
 //
-//  ListCellView.swift
+//  HeartViewCell.swift
 //  UnivApp
 //
-//  Created by 정성윤 on 9/3/24.
+//  Created by 정성윤 on 9/10/24.
 //
 
 import SwiftUI
 import Kingfisher
 
-struct ListViewCell: View {
+struct HeartViewCell: View {
     var model: SummaryModel
     var destination: ListCellDestination?
     
     @State private var heartTapped: Bool = false
-    @StateObject var listViewModel: ListViewModel
+    @StateObject var heartViewModel: HeartViewModel
     
-    init(model: SummaryModel, listViewModel: ListViewModel){
+    init(model: SummaryModel, heartViewModel: HeartViewModel){
         self.model = model
         _heartTapped = State(initialValue: model.starred ?? false)
-        _listViewModel = StateObject(wrappedValue: listViewModel)
+        _heartViewModel = StateObject(wrappedValue: heartViewModel)
     }
     
     var body: some View {
@@ -39,9 +39,11 @@ struct ListViewCell: View {
                     Button {
                         self.heartTapped.toggle()
                         if heartTapped == true {
-                            listViewModel.send(action: .addHeart(self.model.universityId ?? 0))
+                            heartViewModel.send(action: .addHeart(self.model.universityId ?? 0))
+//                            heartViewModel.send(action: .load)
                         } else {
-                            listViewModel.send(action: .removeHeart(self.model.universityId ?? 0))
+                            heartViewModel.send(action: .removeHeart(self.model.universityId ?? 0))
+//                            heartViewModel.send(action: .load)
                         }
                     } label: {
                         if heartTapped == true {
@@ -122,5 +124,5 @@ struct ListViewCell: View {
 }
 
 //#Preview {
-//    ListViewCell(model: .init(universityId: nil, fullName: nil, logo: nil, starNum: nil, starred: nil), listViewModel: ListViewModel(container: .init(services: StubServices()), searchText: ""))
+//    HeartViewCell(model: .init(universityId: nil, fullName: nil, logo: nil, starNum: nil, starred: nil), heartViewModel: HeartViewModel(container: .init(services: StubServices())))
 //}

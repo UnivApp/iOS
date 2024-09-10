@@ -108,9 +108,9 @@ struct ListView: View {
         ScrollView(.vertical) {
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
                 ForEach(viewModel.summaryArray, id: \.universityId) { cell in
-                    if let id = cell.universityId, let image = cell.logo, let title = cell.fullName, let heartNum = cell.starNum {
+                    if let id = cell.universityId, let image = cell.logo, let title = cell.fullName, let heartNum = cell.starNum, let starred = cell.starred {
                         HStack(spacing: 20) {
-                            ListViewCell(id: id, image: image, title: title, heartNum: "\(heartNum)", destination: .list, heart: false, listViewModel: self.viewModel)
+                            ListViewCell(model: SummaryModel(universityId: id, fullName: title, logo: image, starNum: heartNum, starred: starred), listViewModel: self.viewModel)
                                 .tag(cell.universityId)
                         }
                     }

@@ -11,5 +11,6 @@ struct SummaryModel: Codable {
     let universityId: Int?
     let fullName: String?
     let logo: String?
-    let starNum : Int?
+    let starNum: Int?
+    let starred: Bool?
 }

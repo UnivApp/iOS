@@ -20,6 +20,7 @@ enum APIEndpoint {
     case search
     case addHeart
     case removeHeart
+    case heartList
     
     
     var urlString: String {
@@ -47,6 +48,8 @@ enum APIEndpoint {
             return "http://43.200.143.28:8080/api/stars/add?universityId="
         case .removeHeart:
             return "http://43.200.143.28:8080/api/stars/remove?universityId="
+        case .heartList:
+            return "http://43.200.143.28:8080/api/stars/list"
         }
     }
 }

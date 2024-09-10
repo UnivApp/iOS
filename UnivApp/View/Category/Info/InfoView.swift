@@ -92,14 +92,14 @@ struct InfoView: View {
     
     var list: some View {
         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
-            ForEach(viewModel.stub, id: \.self) { cell in
-                if let image = cell.image, let title = cell.title, let heartNum = cell.heartNum {
-                    HStack(spacing: 20) {
-                        ListViewCell(id: 0, image: image, title: title, heartNum: heartNum, destination: .info, heart: false, listViewModel: ListViewModel(container: .init(services: StubServices()), searchText: ""))
-                            .tag(cell.id)
-                    }
-                }
-            }
+//            ForEach(viewModel.stub, id: \.self) { cell in
+//                if let image = cell.image, let title = cell.title, let heartNum = cell.heartNum {
+//                    HStack(spacing: 20) {
+//                        ListViewCell(id: 0, image: image, title: title, heartNum: heartNum, destination: .info, heart: false, listViewModel: ListViewModel(container: .init(services: StubServices()), searchText: ""))
+//                            .tag(cell.id)
+//                    }
+//                }
+//            }
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 10)

@@ -11,6 +11,7 @@ import Combine
 protocol HeartServiceType {
     func addHeart(universityId: Int) -> AnyPublisher<Void, Error>
     func removeHeart(universityId: Int) -> AnyPublisher<Void, Error>
+    func heartList() -> AnyPublisher<[SummaryModel], Error>
 }
 
 class HeartService: HeartServiceType {
@@ -53,6 +54,25 @@ class HeartService: HeartServiceType {
 
         }.eraseToAnyPublisher()
     }
+    
+    func heartList() -> AnyPublisher<[SummaryModel], any Error> {
+        Future<[SummaryModel], Error> { promise in
+            Alamofire().getAlamofire(url: APIEndpoint.heartList.urlString)
+                .sink { completion in
+                    switch completion {
+                    case .finished:
+                        print("관심 대학 조회 성공")
+                    case let .failure(error):
+                        print("관심 대학 조회 실패")
+                        promise(.failure(error))
+                    }
+                } receiveValue: { [weak self] (heartList: [SummaryModel]) in
+                    guard self != nil else { return }
+                    promise(.success(heartList))
+                }.store(in: &self.subscriptions)
+
+        }.eraseToAnyPublisher()
+    }
 }
 
 class StubHeartService: HeartServiceType {
@@ -61,6 +81,10 @@ class StubHeartService: HeartServiceType {
     }
     
     func removeHeart(universityId: Int) -> AnyPublisher<Void, any Error> {
+        Empty().eraseToAnyPublisher()
+    }
+    
+    func heartList() -> AnyPublisher<[SummaryModel], any Error> {
         Empty().eraseToAnyPublisher()
     }
 }
