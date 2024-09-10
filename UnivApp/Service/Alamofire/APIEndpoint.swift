@@ -15,6 +15,7 @@ enum APIEndpoint {
     case withdraw
     
     case summary
+    case listDetail
     case banners
     case scoreImage
     case search
@@ -38,6 +39,8 @@ enum APIEndpoint {
             
         case .summary:
             return "http://43.200.143.28:8080/api/universities/summary"
+        case .listDetail:
+            return "http://43.200.143.28:8080/api/universities/details/"
         case .banners:
             return "http://43.200.143.28:8080/api/banners"
         case .scoreImage:

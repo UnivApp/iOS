@@ -41,13 +41,16 @@ class ListViewModel: ObservableObject {
                         self?.phase = .fail
                         self?.notFound = false
                         self?.heartPhase = .notRequested
+                        self?.searchText = ""
                     }
                 } receiveValue: { [weak self] summary in
                     self?.summaryArray = summary
                     self?.phase = .success
                     self?.notFound = false
                     self?.heartPhase = .notRequested
+                    self?.searchText = ""
                 }.store(in: &subscriptions)
+            
         case .search:
             phase = .loading
             container.services.searchService.getSearch(searchText: self.searchText)
@@ -73,9 +76,6 @@ class ListViewModel: ObservableObject {
                     }
                 } receiveValue: { [weak self] addHeart in
                     self?.heartPhase = .addHeart
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                        self?.heartPhase = .notRequested
-                    }
                 }.store(in: &subscriptions)
 
             
@@ -87,9 +87,6 @@ class ListViewModel: ObservableObject {
                     }
                 } receiveValue: { [weak self] removeHeart in
                     self?.heartPhase = .removeHeart
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                        self?.heartPhase = .notRequested
-                    }
                 }.store(in: &subscriptions)
 
         }

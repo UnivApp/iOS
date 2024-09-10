@@ -36,6 +36,7 @@ class HeartViewModel: ObservableObject {
                     if case .failure = completion {
                         self?.phase = .success
                         self?.heartPhase = .notRequested
+                        self?.heartList = []
                     }
                 } receiveValue: { [weak self] heartList in
                     self?.heartList = heartList
@@ -51,9 +52,6 @@ class HeartViewModel: ObservableObject {
                     }
                 } receiveValue: { [weak self] addHeart in
                     self?.heartPhase = .addHeart
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                        self?.heartPhase = .notRequested
-                    }
                 }.store(in: &subscriptions)
             
         case let .removeHeart(universityId):
@@ -64,9 +62,6 @@ class HeartViewModel: ObservableObject {
                     }
                 } receiveValue: { [weak self] removeHeart in
                     self?.heartPhase = .removeHeart
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                        self?.heartPhase = .notRequested
-                    }
                 }.store(in: &subscriptions)
         }
     }

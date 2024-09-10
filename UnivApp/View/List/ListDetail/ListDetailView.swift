@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ListDetailView: View {
     @StateObject var viewModel: ListDetailViewModel
@@ -13,13 +14,36 @@ struct ListDetailView: View {
     @State private var isNavigate: Bool = false
     @Environment(\.dismiss) var dismiss
     
-    var universityName: String
+    var universityId: Int
     
     var body: some View {
+        contentView
+            .navigationTitle("")
+    }
+    
+    @ViewBuilder
+    var contentView: some View {
+        switch viewModel.phase {
+        case .notRequested:
+            PlaceholderView()
+                .onAppear{
+                    viewModel.send(action: .load(self.universityId))
+                }
+        case .loading:
+            LoadingView(url: "congratulations")
+        case .success:
+            loadedView
+        case .fail:
+            ErrorView()
+        }
+    }
+    
+    var loadedView: some View {
         NavigationStack {
             VStack {
                 info
                     .padding(.vertical, 30)
+                    .padding(.horizontal, 30)
                 
                 category
                     .padding(.vertical, 0)
@@ -47,27 +71,36 @@ struct ListDetailView: View {
     
     var info: some View {
         HStack(spacing: 10) {
-            Group {
-                Image("emptyLogo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 100, height: 100)
-                    .padding(.leading, 10)
+            NavigationLink(destination: WebKitView(url: viewModel.listDetail.website ?? "")) {
+                if let url = URL(string: viewModel.listDetail.logo ?? "") {
+                    KFImage(url)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100, height: 100)
+                        .padding(.leading, 10)
+                }
+                
                 VStack(alignment: .leading, spacing: 10) {
-                    Text(self.universityName)
+                    Text(viewModel.listDetail.fullName ?? "")
                         .font(.system(size: 15, weight: .bold))
                     
-                    Text("서울특별시 광진구 능동로 209\n02-3408-3114\n2025학년도 입학안내\n전공설치학과 및 선발 정보 보기")
-                        .font(.system(size: 12, weight: .regular))
-                    
-                    Text("메가스터디 제공")
-                        .font(.system(size: 10, weight: .thin))
+                    Group {
+                        Text("\(viewModel.listDetail.location ?? "")")
+                        Text("\(viewModel.listDetail.phoneNumber ?? "")")
+                        HStack {
+                            Spacer()
+                            Text("웹사이트로 연결 👆🏻")
+                                .foregroundColor(.pointColor)
+                        }
+                        .padding(.trailing, 10)
+                    }
+                    .font(.system(size: 12, weight: .regular))
+                    .frame(height: 12)
                 }
-                .padding(.trailing, 10)
+                .padding(.horizontal, 10)
             }
-            .padding(.horizontal, 15)
-            .padding(.vertical, 30)
         }
+        .frame(height: 150)
         .background(.white)
         .cornerRadius(15)
         .shadow(radius: 10)
@@ -116,6 +149,6 @@ struct ListDetailView: View {
 
 struct ListDetailView_PreViews: PreviewProvider {
     static var previews: some View {
-        ListDetailView(viewModel: ListDetailViewModel(container: DIContainer(services: StubServices())), universityName: "")
+        ListDetailView(viewModel: ListDetailViewModel(container: DIContainer(services: StubServices())), universityId: 0)
     }
 }

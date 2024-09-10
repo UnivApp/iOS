@@ -40,8 +40,14 @@ struct ListViewCell: View {
                         self.heartTapped.toggle()
                         if heartTapped == true {
                             listViewModel.send(action: .addHeart(self.model.universityId ?? 0))
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                                listViewModel.send(action: .load)
+                            }
                         } else {
                             listViewModel.send(action: .removeHeart(self.model.universityId ?? 0))
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                                listViewModel.send(action: .load)
+                            }
                         }
                     } label: {
                         if heartTapped == true {
@@ -94,7 +100,7 @@ struct ListViewCell: View {
             
             Spacer()
             
-            NavigationLink(destination: destination?.view) {
+            NavigationLink(destination: ListDetailView(viewModel: ListDetailViewModel(container: .init(services: Services())), universityId: model.universityId ?? 0)) {
                 Text("정보보기")
                     .font(.system(size: 12, weight: .bold))
                     .foregroundColor(.orange)

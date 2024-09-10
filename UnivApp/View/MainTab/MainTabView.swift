@@ -31,7 +31,9 @@ struct MainTabView: View {
                             .environmentObject(authViewModel)
                             .environmentObject(container)
                     case .setting:
-                        SettingView()
+                        SettingView(viewModel: SettingViewModel(container: self.container))
+                            .environmentObject(authViewModel)
+                            .environmentObject(container)
                     }
                 }
                 .tabItem {

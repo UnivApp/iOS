@@ -45,10 +45,10 @@ class AuthViewModel: ObservableObject {
             container.services.authService.checkAuthState()
                 .sink { [weak self] completion in
                     if case .failure = completion {
-                        //TODO: - 상태 체크 실패
+                        //TODO: - 수정
                     }
                 } receiveValue: { [weak self] checkStatus in
-                    //TODO: - 로그인 상태 체크 성공
+                        //TODO: - 수정
                 }.store(in: &subscriptions)
 
             return
@@ -80,27 +80,32 @@ class AuthViewModel: ObservableObject {
             }
             
         case .logout:
+            self.phase = .loading
             KeychainWrapper.standard.removeAllKeys()
             container.services.authService.logout()
                 .sink { [weak self] completion in
                     if case .failure = completion {
                         //TODO: - 로그아웃 실패
+                        self?.phase = .fail
                     }
                 } receiveValue: { [weak self] _ in
                     //TODO: - 로그아웃 성공
+                    self?.phase = .success
                 }.store(in: &subscriptions)
             
             
-            
         case .withdraw:
+            self.phase = .loading
             KeychainWrapper.standard.removeAllKeys()
             container.services.authService.withdrawMember()
                 .sink { [weak self] completion in
                     if case .failure = completion {
                         //TODO: - 회원 탈퇴 실패
+                        self?.phase = .fail
                     }
                 } receiveValue: { [weak self] _ in
                     //TODO: - 회원 탈퇴 성공
+                    self?.phase = .success
                 }.store(in: &subscriptions)
 
         }

@@ -17,6 +17,13 @@ struct HeartView: View {
     
     var body: some View {
         contentView
+            .actionSheet(isPresented: $showAlert) {
+                ActionSheet(
+                    title: Text("알림 🔔"),
+                    message: Text(alertMessage),
+                    buttons: [.default(Text("확인"))]
+                )
+            }
     }
     
     @ViewBuilder
@@ -31,13 +38,6 @@ struct HeartView: View {
             LoadingView(url: "congratulations")
         case .success:
             loadedView
-                .alert(isPresented: $showAlert) {
-                    Alert(
-                        title: Text("알림 🔔"),
-                        message: Text(alertMessage),
-                        dismissButton: .default(Text("확인"))
-                    )
-                }
         case .fail:
             ErrorView()
         }
@@ -51,6 +51,19 @@ struct HeartView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Image("logo")
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        viewModel.send(action: .load)
+                    } label: {
+                        ZStack {
+                            Image("refresh")
+                                .padding()
+                        }
+                        .frame(width: 30, height: 30)
+                        .background(Color.backGray)
+                        .clipShape(Circle())
+                    }
                 }
             }
         }

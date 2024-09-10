@@ -52,6 +52,14 @@
 		E4953D942C901972008CBDE5 /* HeartService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D932C901971008CBDE5 /* HeartService.swift */; };
 		E4953D9C2C903D41008CBDE5 /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D9B2C903D41008CBDE5 /* ListModel.swift */; };
 		E4953D9E2C903FC1008CBDE5 /* HeartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D9D2C903FC1008CBDE5 /* HeartViewCell.swift */; };
+		E4953DA02C906282008CBDE5 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D9F2C906282008CBDE5 /* SettingViewModel.swift */; };
+		E4953DA22C906399008CBDE5 /* WebKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953DA12C906399008CBDE5 /* WebKitView.swift */; };
+		E4953DA52C90643C008CBDE5 /* VersionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953DA42C90643C008CBDE5 /* VersionView.swift */; };
+		E4953DA72C90645C008CBDE5 /* PolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953DA62C90645C008CBDE5 /* PolicyView.swift */; };
+		E4953DA92C906486008CBDE5 /* WithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953DA82C906486008CBDE5 /* WithdrawView.swift */; };
+		E4953DAB2C90654E008CBDE5 /* LogoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953DAA2C90654E008CBDE5 /* LogoutView.swift */; };
+		E4953DAD2C906720008CBDE5 /* withdraw.gif in Resources */ = {isa = PBXBuildFile; fileRef = E4953DAC2C906720008CBDE5 /* withdraw.gif */; };
+		E4953DB02C906C95008CBDE5 /* ListDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953DAF2C906C95008CBDE5 /* ListDetailModel.swift */; };
 		E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */; };
 		E49C9F9F2C86CF70001F43A3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */; };
 		E49C9FA72C86D3BC001F43A3 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */; };
@@ -144,6 +152,14 @@
 		E4953D932C901971008CBDE5 /* HeartService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartService.swift; sourceTree = "<group>"; };
 		E4953D9B2C903D41008CBDE5 /* ListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
 		E4953D9D2C903FC1008CBDE5 /* HeartViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartViewCell.swift; sourceTree = "<group>"; };
+		E4953D9F2C906282008CBDE5 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
+		E4953DA12C906399008CBDE5 /* WebKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebKitView.swift; sourceTree = "<group>"; };
+		E4953DA42C90643C008CBDE5 /* VersionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionView.swift; sourceTree = "<group>"; };
+		E4953DA62C90645C008CBDE5 /* PolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyView.swift; sourceTree = "<group>"; };
+		E4953DA82C906486008CBDE5 /* WithdrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawView.swift; sourceTree = "<group>"; };
+		E4953DAA2C90654E008CBDE5 /* LogoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutView.swift; sourceTree = "<group>"; };
+		E4953DAC2C906720008CBDE5 /* withdraw.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = withdraw.gif; sourceTree = "<group>"; };
+		E4953DAF2C906C95008CBDE5 /* ListDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailModel.swift; sourceTree = "<group>"; };
 		E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnivAppApp.swift; sourceTree = "<group>"; };
 		E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
@@ -213,6 +229,7 @@
 		E4953D292C89C762008CBDE5 /* Gif */ = {
 			isa = PBXGroup;
 			children = (
+				E4953DAC2C906720008CBDE5 /* withdraw.gif */,
 				E4953D8F2C8F35BA008CBDE5 /* error.gif */,
 				E4953D2D2C89C770008CBDE5 /* congratulations.gif */,
 				E4953D2B2C89C770008CBDE5 /* firework.gif */,
@@ -294,6 +311,17 @@
 			path = ListDetail;
 			sourceTree = "<group>";
 		};
+		E4953DA32C906423008CBDE5 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				E4953DA42C90643C008CBDE5 /* VersionView.swift */,
+				E4953DA62C90645C008CBDE5 /* PolicyView.swift */,
+				E4953DA82C906486008CBDE5 /* WithdrawView.swift */,
+				E4953DAA2C90654E008CBDE5 /* LogoutView.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
 		E49C9FA22C86D1EB001F43A3 /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,6 +335,7 @@
 			children = (
 				E4953D9B2C903D41008CBDE5 /* ListModel.swift */,
 				E4953D742C8EDC08008CBDE5 /* SummaryModel.swift */,
+				E4953DAF2C906C95008CBDE5 /* ListDetailModel.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -538,8 +567,8 @@
 			children = (
 				E4953D692C8ECE3C008CBDE5 /* Alamofire */,
 				E4B3FD032C77577100CB98F3 /* Services.swift */,
-				E4B3FD252C77A26D00CB98F3 /* AuthService.swift */,
 				E4953D722C8EDB35008CBDE5 /* ListService.swift */,
+				E4B3FD252C77A26D00CB98F3 /* AuthService.swift */,
 				E4953D7F2C8EECC8008CBDE5 /* HomeService.swift */,
 				E4953D912C8F3AA3008CBDE5 /* SearchService.swift */,
 				E4953D932C901971008CBDE5 /* HeartService.swift */,
@@ -608,8 +637,10 @@
 		E4B3FD142C77902100CB98F3 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				E4953DA32C906423008CBDE5 /* Detail */,
 				E4B3FD1D2C77905500CB98F3 /* SettingView.swift */,
 				E47B2ECE2C79AF4C0039E2E0 /* SettingType.swift */,
+				E4953D9F2C906282008CBDE5 /* SettingViewModel.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -640,6 +671,7 @@
 				E49C9FF52C870BF8001F43A3 /* PlayViewCell.swift */,
 				E49CA0102C88695F001F43A3 /* PageView.swift */,
 				E4953D5F2C8B0E36008CBDE5 /* HScrollView.swift */,
+				E4953DA12C906399008CBDE5 /* WebKitView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -722,6 +754,7 @@
 				E4953D322C89C770008CBDE5 /* congratulations.gif in Resources */,
 				E4953D332C89C770008CBDE5 /* load.gif in Resources */,
 				E4B3FD312C7877C000CB98F3 /* flower.gif in Resources */,
+				E4953DAD2C906720008CBDE5 /* withdraw.gif in Resources */,
 				E4B3FCF42C7754E400CB98F3 /* Color.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -739,6 +772,7 @@
 				E4B3FD002C77560200CB98F3 /* AuthViewModel.swift in Sources */,
 				E4B3FD2C2C786B0C00CB98F3 /* sha256.swift in Sources */,
 				E4953D872C8EEE7D008CBDE5 /* ScoreImageModel.swift in Sources */,
+				E4953DB02C906C95008CBDE5 /* ListDetailModel.swift in Sources */,
 				E49C9F9F2C86CF70001F43A3 /* EmptyView.swift in Sources */,
 				E49C9FBE2C86ED82001F43A3 /* PlayView.swift in Sources */,
 				E4953D712C8ED137008CBDE5 /* APIEndpoint.swift in Sources */,
@@ -761,15 +795,19 @@
 				E4953D222C888A64008CBDE5 /* HeartViewModel.swift in Sources */,
 				E4B3FD0C2C775D7000CB98F3 /* MainTabView.swift in Sources */,
 				E4B3FD042C77577100CB98F3 /* Services.swift in Sources */,
+				E4953DA72C90645C008CBDE5 /* PolicyView.swift in Sources */,
 				E47B2ECF2C79AF4C0039E2E0 /* SettingType.swift in Sources */,
 				E4B3FD1E2C77905500CB98F3 /* SettingView.swift in Sources */,
 				E4B3FD2A2C786B0400CB98F3 /* randomNonceString.swift in Sources */,
 				E49C9FEA2C87057A001F43A3 /* GraduateViewModel.swift in Sources */,
 				E4953D592C8AFF36008CBDE5 /* FoodViewCell.swift in Sources */,
 				E49C9FEE2C870582001F43A3 /* FoodViewModel.swift in Sources */,
+				E4953DA52C90643C008CBDE5 /* VersionView.swift in Sources */,
+				E4953DA92C906486008CBDE5 /* WithdrawView.swift in Sources */,
 				E49C9FBA2C86ED75001F43A3 /* MoneyView.swift in Sources */,
 				E49C9FB82C86ED62001F43A3 /* InitiativeView.swift in Sources */,
 				E4953D462C89D649008CBDE5 /* MouDetailView.swift in Sources */,
+				E4953DAB2C90654E008CBDE5 /* LogoutView.swift in Sources */,
 				E4953D9E2C903FC1008CBDE5 /* HeartViewCell.swift in Sources */,
 				E4B3FD282C77A42900CB98F3 /* UserModel.swift in Sources */,
 				E4953D502C89D704008CBDE5 /* FoodDetailView.swift in Sources */,
@@ -796,6 +834,7 @@
 				E49C9FB02C86ED28001F43A3 /* EventView.swift in Sources */,
 				E4B3FD022C77563600CB98F3 /* DIContainer.swift in Sources */,
 				E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */,
+				E4953DA02C906282008CBDE5 /* SettingViewModel.swift in Sources */,
 				E4B3FD162C77902800CB98F3 /* HomeView.swift in Sources */,
 				E4953D422C89D516008CBDE5 /* ListCellDestination.swift in Sources */,
 				E4B3FCF72C7754F500CB98F3 /* Color+Extension.swift in Sources */,
@@ -808,6 +847,7 @@
 				E4B3FD262C77A26D00CB98F3 /* AuthService.swift in Sources */,
 				E4953D282C899013008CBDE5 /* ListDetailType.swift in Sources */,
 				E4953D5E2C8B0DC3008CBDE5 /* Object.swift in Sources */,
+				E4953DA22C906399008CBDE5 /* WebKitView.swift in Sources */,
 				E4953D632C8D8497008CBDE5 /* ChartData.swift in Sources */,
 				E4953D802C8EECC8008CBDE5 /* HomeService.swift in Sources */,
 				E4953D262C898B48008CBDE5 /* ListDetailViewModel.swift in Sources */,

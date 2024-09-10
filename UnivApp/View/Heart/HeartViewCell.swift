@@ -40,10 +40,14 @@ struct HeartViewCell: View {
                         self.heartTapped.toggle()
                         if heartTapped == true {
                             heartViewModel.send(action: .addHeart(self.model.universityId ?? 0))
-//                            heartViewModel.send(action: .load)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                                heartViewModel.send(action: .load)
+                            }
                         } else {
                             heartViewModel.send(action: .removeHeart(self.model.universityId ?? 0))
-//                            heartViewModel.send(action: .load)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                                heartViewModel.send(action: .load)
+                            }
                         }
                     } label: {
                         if heartTapped == true {
