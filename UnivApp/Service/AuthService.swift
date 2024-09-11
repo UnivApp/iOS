@@ -127,9 +127,9 @@ extension AuthService {
             .sink { completion in
                 switch completion {
                 case .finished:
-                    print("Request finished")
+                    print("로그인 성공")
                 case let .failure(error):
-                    print("Request failed \(error)")
+                    print("로그인 실패")
                 }
             } receiveValue: { [weak self] (user: UserModel) in
                 guard let self = self else { return }

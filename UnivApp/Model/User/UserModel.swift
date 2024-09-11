@@ -10,4 +10,6 @@ import Foundation
 struct UserModel: Codable {
     let accessToken: String?
     let accessTokenExpiresIn: Double?
+    let refreshToken: String?
+    let refreshTokenExpiresIn: Double?
 }

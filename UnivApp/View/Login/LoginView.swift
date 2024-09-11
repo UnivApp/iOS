@@ -16,6 +16,7 @@ struct LoginView: View {
     
     var body: some View {
         contentView
+            .navigationBarBackButtonHidden(true)
     }
     
     var contentView: some View {

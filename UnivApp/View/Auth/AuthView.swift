@@ -19,7 +19,7 @@ struct AuthView: View {
                 LoginView()
                     .environmentObject(authViewModel)
             case .auth:
-                MainTabView(mainTabViewModel: MainTabViewModel())
+                MainTabView()
                     .environmentObject(container)
                     .environmentObject(authViewModel)
             }

@@ -22,9 +22,9 @@ class ListService: ListServiceType {
                 .sink { completion in
                     switch completion {
                     case .finished:
-                        print("Request finished")
+                        print("대학 리스트 조회 성공")
                     case let .failure(error):
-                        print("Request failed \(error)")
+                        print("대학 리스트 조회 실패")
                         promise(.failure(error))
                     }
                 } receiveValue: { [weak self] (summary: [SummaryModel]) in

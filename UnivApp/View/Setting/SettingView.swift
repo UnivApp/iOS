@@ -73,7 +73,7 @@ struct SettingView: View {
     }
     
     var setting: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 15) {
             Text("계정 설정")
                 .foregroundColor(.gray)
                 .font(.system(size: 10, weight: .bold))
@@ -104,7 +104,7 @@ struct SettingView: View {
     }
     
     var support: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 15) {
             Text("지원")
                 .foregroundColor(.gray)
                 .font(.system(size: 10, weight: .bold))

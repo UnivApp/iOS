@@ -10,7 +10,6 @@ import SwiftUI
 struct MainTabView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var container: DIContainer
-    @StateObject var mainTabViewModel : MainTabViewModel
     @State private var selectedTab: MainTabType = .home
     
     var body: some View {
@@ -40,6 +39,7 @@ struct MainTabView: View {
                     Label(tab.title, image: tab.imageName(selected: selectedTab == tab))
                 }
                 .tag(tab)
+                .navigationBarBackButtonHidden(true)
             }
         }
         .tint(.black)
@@ -52,7 +52,7 @@ struct MainTabView_Preview: PreviewProvider {
     static let authViewModel: AuthViewModel = AuthViewModel(container: .init(services: StubServices()))
     
     static var previews: some View {
-        MainTabView(mainTabViewModel: MainTabViewModel())
+        MainTabView()
             .environmentObject(container)
             .environmentObject(authViewModel)
     }
