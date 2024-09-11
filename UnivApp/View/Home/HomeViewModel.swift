@@ -34,7 +34,8 @@ class HomeViewModel: ObservableObject {
             container.services.homeService.getBanners()
                 .sink { [weak self] completion in
                     if case .failure = completion {
-                        self?.phase = .fail
+                        self?.phase = .success
+                        //TODO: - 바꾸기
                     }
                 } receiveValue: { [weak self] banners in
                     self?.phase = .success
@@ -44,7 +45,8 @@ class HomeViewModel: ObservableObject {
             container.services.homeService.getScoreImage()
                 .sink { [weak self] completion in
                     if case .failure = completion {
-                        self?.phase = .fail
+                        self?.phase = .success
+                        //TODO: - 바꾸기
                     }
                 } receiveValue: { [weak self] image in
                     self?.phase = .success

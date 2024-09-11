@@ -14,16 +14,20 @@ struct ListView: View {
     
     @State private var showAlert: Bool = false
     @State private var alertMessage: String = ""
+    @FocusState private var isFocused: Bool
     
     var body: some View {
         contentView
+            .onTapGesture {
+                self.isFocused = false
+            }
             .actionSheet(isPresented: $showAlert) {
-            ActionSheet(
-                title: Text("알림 🔔"),
-                message: Text(alertMessage),
-                buttons: [.default(Text("확인"))]
-            )
-        }
+                ActionSheet(
+                    title: Text("알림 🔔"),
+                    message: Text(alertMessage),
+                    buttons: [.default(Text("확인"))]
+                )
+            }
     }
     
     @ViewBuilder
@@ -108,6 +112,7 @@ struct ListView: View {
             .padding()
             
             TextField("대학명/소재지를 입력하세요", text: $viewModel.searchText)
+                .focused($isFocused)
                 .font(.system(size: 17, weight: .bold))
                 .padding()
         }
@@ -138,6 +143,7 @@ struct ListView: View {
             viewModel.send(action: .load)
             self.viewModel.searchText = ""
         }
+        
     }
 }
 
