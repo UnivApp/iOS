@@ -23,6 +23,26 @@ struct WebKitView: UIViewRepresentable {
     }
 }
 
+struct WebKitViewContainer: View {
+    var url: String
+    @Environment(\.dismiss) var dismiss
+    
+    var body: some View {
+        WebKitView(url: url)
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image("back")
+                    }
+
+                }
+            }
+    }
+}
+
 #Preview {
     WebKitView(url: "")
 }

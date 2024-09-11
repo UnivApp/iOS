@@ -54,7 +54,7 @@ enum SupportType: CaseIterable {
     var view: AnyView {
         switch self {
         case .feedback:
-            return AnyView(WebKitView(url: ""))
+            return AnyView(WebKitViewContainer(url: "https://forms.gle/Dq5bFQvGS1h6SJ9H9"))
         }
     }
 }

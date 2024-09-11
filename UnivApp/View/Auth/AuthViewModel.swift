@@ -45,10 +45,10 @@ class AuthViewModel: ObservableObject {
             container.services.authService.checkAuthState()
                 .sink { [weak self] completion in
                     if case .failure = completion {
-                        //TODO: - 수정
+                        self?.authState = .unAuth
                     }
                 } receiveValue: { [weak self] checkStatus in
-                        //TODO: - 수정
+                    self?.authState = .auth
                 }.store(in: &subscriptions)
 
             return

@@ -20,12 +20,12 @@ struct AuthView: View {
                     .environmentObject(authViewModel)
             case .auth:
                 MainTabView(mainTabViewModel: MainTabViewModel())
+                    .environmentObject(container)
                     .environmentObject(authViewModel)
             }
         }
         .onAppear {
             authViewModel.send(action: .checkAuthState)
-//            authViewModel.send(action: .logout)
         }
     }
 }

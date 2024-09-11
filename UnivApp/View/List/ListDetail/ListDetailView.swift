@@ -71,11 +71,12 @@ struct ListDetailView: View {
     
     var info: some View {
         HStack(spacing: 10) {
-            NavigationLink(destination: WebKitView(url: viewModel.listDetail.website ?? "")) {
+            NavigationLink(destination: WebKitViewContainer(url: viewModel.listDetail.website ?? "")) {
                 if let url = URL(string: viewModel.listDetail.logo ?? "") {
                     KFImage(url)
                         .resizable()
                         .scaledToFit()
+                        .cornerRadius(15)
                         .frame(width: 100, height: 100)
                         .padding(.leading, 10)
                 }

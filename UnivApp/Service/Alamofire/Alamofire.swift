@@ -49,7 +49,7 @@ final class Alamofire {
                     AF.request(url, method: .post, encoding: JSONEncoding.default, headers: ["content-Type":"application/json", "Authorization": accessToken])
                         .validate()
                         .response { response in
-                            print(response.debugDescription)
+//                            print(response.debugDescription)
                             switch response.result {
                             case .success:
                                 if response.data?.isEmpty ?? true {
@@ -74,7 +74,7 @@ final class Alamofire {
                 AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: ["content-Type":"application/json", "Authorization": accessToken])
                     .validate()
                     .response { response in
-                        print(response.debugDescription)
+//                        print(response.debugDescription)
                         switch response.result {
                         case .success:
                             if response.data?.isEmpty ?? true {
@@ -108,7 +108,7 @@ final class Alamofire {
                     AF.request(url, method: .post, encoding: JSONEncoding.default, headers: ["content-Type":"application-json", "Authorization":accessToken])
                         .validate()
                         .responseDecodable(of: T.self) { response in
-                            print(response.debugDescription)
+//                            print(response.debugDescription)
                             switch response.result {
                             case let .success(result):
                                 promise(.success(result))
