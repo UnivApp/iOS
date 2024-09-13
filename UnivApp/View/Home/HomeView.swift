@@ -18,9 +18,9 @@ struct HomeView: View {
     
     var body: some View {
         contentView
-            .onTapGesture {
-                self.isFocused = false
-            }
+//            .onTapGesture {
+//                self.isFocused = false
+//            }
     }
     
     @ViewBuilder
@@ -99,7 +99,7 @@ struct HomeView: View {
                 
                 TextField("대학명/소재지를 입력하세요", text: $viewModel.searchText)
                     .focused($isFocused)
-                    .font(.system(size: 17, weight: .bold))
+                    .font(.system(size: 17, weight: .regular))
                     .padding()
             }
             .padding(.horizontal, 10)
@@ -107,24 +107,19 @@ struct HomeView: View {
             .cornerRadius(15)
             .padding(.horizontal, 30)
             
-            //임시 이미지
-            TabView {
-                ForEach(viewModel.banners, id: \.image) { bannerItem in
-                    KFImage(URL(string: bannerItem.image ?? ""))
-                        .resizable()
-                        .scaledToFill()
-                        .padding(.horizontal, 30)
-                        .frame(height: 150)
-                        .shadow(color: .black.opacity(0.5), radius: 10, x: 0, y: 5)
-                }
-            }
-            .frame(height: 250)
-            .tabViewStyle(PageTabViewStyle())
+            
+            CalendarContainer(eventDates: [
+                Calendar.current.startOfDay(for: Date()): UIImage(named: "star")!
+            ])
+            .padding(.horizontal, 30)
+            .padding(.vertical, 30)
+            .frame(height: 300)
         }
     }
     
     var categoryView: some View {
         VStack(alignment: .leading, spacing: 10) {
+            
             Text("카테고리")
                 .font(.system(size: 12, weight: .bold))
                 .foregroundColor(.gray)
@@ -156,6 +151,9 @@ struct HomeView: View {
     
     var footerView: some View {
         VStack(alignment: .leading) {
+            //TODO: - 구글 애드몹
+            
+            
             HStack {
                 Text("입결")
                     .font(.system(size: 12, weight: .bold))

@@ -113,7 +113,7 @@ struct ListView: View {
             
             TextField("대학명/소재지를 입력하세요", text: $viewModel.searchText)
                 .focused($isFocused)
-                .font(.system(size: 17, weight: .bold))
+                .font(.system(size: 17, weight: .regular))
                 .padding()
         }
         .padding(.horizontal, 10)
