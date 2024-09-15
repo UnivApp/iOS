@@ -21,19 +21,19 @@ enum CategoryType: String, CaseIterable {
     var title: String {
         switch self {
         case .event:
-            return "행사"
+            return "대학행사"
         case .food:
             return "맛집"
         case .graduate:
             return "졸업자"
         case .info:
-            return "정보"
+            return "대입기사"
         case .initiative:
-            return "입결"
+            return "랭킹"
         case .money:
             return "월세"
         case .mou:
-            return "협약"
+            return "대학연계"
         case .play:
             return "핫플"
         }

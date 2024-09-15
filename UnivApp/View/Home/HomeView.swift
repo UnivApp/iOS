@@ -107,7 +107,7 @@ struct HomeView: View {
             Text("카테고리")
                 .font(.system(size: 15, weight: .bold))
                 .foregroundColor(.black)
-                .padding(.leading, 20)
+                .padding(.leading, 10)
                 .padding(.bottom, 10)
             
             
@@ -123,7 +123,7 @@ struct HomeView: View {
                                 .frame(width: 40, height: 40)
                             Text(category.title)
                                 .foregroundColor(.black)
-                                .font(.system(size: 8, weight: .regular))
+                                .font(.system(size: 10, weight: .regular))
                         }
                     }
                     .environmentObject(continer)
@@ -139,10 +139,10 @@ struct HomeView: View {
             //TODO: - 구글 애드몹
             
             HStack {
-                Text("입결")
+                Text("경쟁률")
                     .font(.system(size: 15, weight: .bold))
                     .foregroundColor(.black)
-                    .padding(.leading, 20)
+                    .padding(.leading, 10)
                 
                 Spacer()
                 

@@ -11,7 +11,7 @@
 //struct AdMobView: UIViewControllerRepresentable {
 //    func makeUIViewController(context: Context) -> UIViewController {
 //        let viewController = UIViewController()
-//        let bannerSize = GADLandscapeAnchoredAdaptiveBannerAdSizeWithWidth(UIScreen.main.bounds.width - 60)
+//        let bannerSize = GADLandscapeAnchoredAdaptiveBannerAdSizeWithWidth(UIScreen.main.bounds.width)
 //        let banner = GADBannerView(adSize: bannerSize)
 //        banner.rootViewController = viewController
 //        viewController.view.addSubview(banner)

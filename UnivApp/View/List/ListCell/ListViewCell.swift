@@ -54,7 +54,7 @@ struct ListViewCell: View {
                             .frame(width: 12, height: 12)
                     }
                 }
-                .padding(.leading, 30)
+                .padding(.leading, 20)
                 Spacer()
             }
             

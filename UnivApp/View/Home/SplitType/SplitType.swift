@@ -18,9 +18,9 @@ enum SplitType: String, CaseIterable{
         case .competition:
             return "경쟁률"
         case .ontime:
-            return "정시입결"
+            return "정시 경쟁률"
         case .Occasion:
-            return "수시입결"
+            return "수시 경쟁률"
         }
     }
 }
