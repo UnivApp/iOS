@@ -108,6 +108,9 @@ struct ListView: View {
                 viewModel.send(action: .search)
             } label: {
                 Image("search")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 15, height: 15)
             }
             .padding()
             
@@ -117,9 +120,9 @@ struct ListView: View {
                 .padding()
         }
         .padding(.horizontal, 10)
-        .background(Color(.backGray))
+        .background(Color.homeColor)
         .cornerRadius(15)
-        .padding(.horizontal, 30)
+        .padding(.horizontal, 20)
     }
     
     var list: some View {

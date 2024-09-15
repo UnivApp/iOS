@@ -30,38 +30,31 @@ struct ListViewCell: View {
             Spacer()
             
             HStack {
-                ZStack {
-                    //TODO: - 즐겨찾기 수정
-                    Image("love_circle")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                    
-                    Button {
-                        self.heartTapped.toggle()
-                        if heartTapped == true {
-                            listViewModel.send(action: .addHeart(self.model.universityId ?? 0))
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                                listViewModel.send(action: .load)
-                            }
-                        } else {
-                            listViewModel.send(action: .removeHeart(self.model.universityId ?? 0))
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                                listViewModel.send(action: .load)
-                            }
+                Button {
+                    self.heartTapped.toggle()
+                    if heartTapped == true {
+                        listViewModel.send(action: .addHeart(self.model.universityId ?? 0))
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                            listViewModel.send(action: .load)
                         }
-                    } label: {
-                        if heartTapped == true {
-                            Image("love_fill")
-                                .resizable()
-                                .frame(width: 12, height: 12)
-                        } else {
-                            Image("love_empty")
-                                .resizable()
-                                .frame(width: 12, height: 12)
+                    } else {
+                        listViewModel.send(action: .removeHeart(self.model.universityId ?? 0))
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                            listViewModel.send(action: .load)
                         }
                     }
+                } label: {
+                    if heartTapped == true {
+                        Image("love_fill")
+                            .resizable()
+                            .frame(width: 12, height: 12)
+                    } else {
+                        Image("love_empty")
+                            .resizable()
+                            .frame(width: 12, height: 12)
+                    }
                 }
-                .padding(.leading, 20)
+                .padding(.leading, 30)
                 Spacer()
             }
             
@@ -127,6 +120,6 @@ struct ListViewCell: View {
     }
 }
 
-//#Preview {
-//    ListViewCell(model: .init(universityId: nil, fullName: nil, logo: nil, starNum: nil, starred: nil), listViewModel: ListViewModel(container: .init(services: StubServices()), searchText: ""))
-//}
+#Preview {
+    ListViewCell(model: .init(universityId: nil, fullName: nil, logo: nil, starNum: nil, starred: nil), listViewModel: ListViewModel(container: .init(services: StubServices()), searchText: ""))
+}

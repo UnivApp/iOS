@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import UIKit
 
 class HomeViewModel: ObservableObject {
     
@@ -16,8 +17,9 @@ class HomeViewModel: ObservableObject {
     
     @Published var searchText: String
     @Published var phase: Phase = .notRequested
-    @Published var banners: [BannerModel] = []
-    @Published var scoreImage: ScoreImageModel = .init(type: nil, image: nil)
+    @Published var calendarData: [Date:UIImage] = .init() //TODO: - 캘린더 데이터
+    @Published var InitiativeData: [InitiativeModel] = .init() //TODO: - 입결 데이터
+    
     
     private var container: DIContainer
     private var subscriptions = Set<AnyCancellable>()
@@ -30,29 +32,17 @@ class HomeViewModel: ObservableObject {
     func send(action: Action) {
         switch action {
         case .load:
-            phase = .loading
-            container.services.homeService.getBanners()
-                .sink { [weak self] completion in
-                    if case .failure = completion {
-                        self?.phase = .success
-                        //TODO: - 바꾸기
-                    }
-                } receiveValue: { [weak self] banners in
-                    self?.phase = .success
-                    self?.banners = banners
-                }.store(in: &subscriptions)
-
-            container.services.homeService.getScoreImage()
-                .sink { [weak self] completion in
-                    if case .failure = completion {
-                        self?.phase = .success
-                        //TODO: - 바꾸기
-                    }
-                } receiveValue: { [weak self] image in
-                    self?.phase = .success
-                    self?.scoreImage = image
-                }.store(in: &subscriptions)
-            
+//            phase = .loading
+            //TODO: - 캘린더 데이터 불러오기
+            //TODO: - 입결 데이터 불러오기
+            self.InitiativeData = [
+                InitiativeModel(title: "세종대학교", logo: "emptyLogo", description: "소재: 서울 백분위(영어감점): 97.41 (0.2)", rank: 1),
+                InitiativeModel(title: "세종대학교", logo: "emptyLogo", description: "소재: 서울 백분위(영어감점): 97.41 (0.2)", rank: 1),
+                InitiativeModel(title: "세종대학교", logo: "emptyLogo", description: "소재: 서울 백분위(영어감점): 97.41 (0.2)", rank: 1),
+                InitiativeModel(title: "세종대학교", logo: "emptyLogo", description: "소재: 서울 백분위(영어감점): 97.41 (0.2)", rank: 1),
+                InitiativeModel(title: "세종대학교", logo: "emptyLogo", description: "소재: 서울 백분위(영어감점): 97.41 (0.2)", rank: 1),
+                InitiativeModel(title: "세종대학교", logo: "emptyLogo", description: "소재: 서울 백분위(영어감점): 97.41 (0.2)", rank: 1)
+            ]
         }
     }
     

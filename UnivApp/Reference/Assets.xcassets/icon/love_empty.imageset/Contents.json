@@ -1,8 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "love_empty (2).svg",
-      "idiom" : "universal"
+      "filename" : "love_empty (3).svg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

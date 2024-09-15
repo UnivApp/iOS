@@ -18,9 +18,9 @@ struct HomeView: View {
     
     var body: some View {
         contentView
-//            .onTapGesture {
-//                self.isFocused = false
-//            }
+        //            .onTapGesture {
+        //                self.isFocused = false
+        //            }
     }
     
     @ViewBuilder
@@ -43,19 +43,18 @@ struct HomeView: View {
     var loadedView: some View {
         NavigationStack {
             ScrollView(.vertical) {
-                Spacer()
-                
-                headerView
-                
-                Spacer()
-                
-                categoryView
-                    .padding(.bottom, 30)
-                
-                Spacer()
-                
-                footerView
+                VStack(alignment: .center, spacing: 20) {
+                    headerView
+                        .padding(.top, 10)
+                    
+                    categoryView
+                    
+                    footerView
+                        .padding(.top, 10)
+                }
+                .padding(.horizontal, 30)
             }
+            .background(Color.white)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
@@ -68,32 +67,20 @@ struct HomeView: View {
                     Image("logo")
                 }
             }
-            .onAppear {
-                UIPageControl.appearance().currentPageIndicatorTintColor = .black
-                UIPageControl.appearance().pageIndicatorTintColor = .gray
-                
-                let appearance = UINavigationBarAppearance()
-                appearance.configureWithOpaqueBackground()
-                appearance.backgroundColor = UIColor.white
-                appearance.shadowColor = nil
-                
-                UINavigationBar.appearance().standardAppearance = appearance
-                UINavigationBar.appearance().scrollEdgeAppearance = appearance
-            }
         }
     }
-        
+    
     var headerView: some View {
-        VStack(alignment: .center, spacing: 5) {
+        VStack(alignment: .center, spacing: 20) {
             HStack {
                 Button {
                     //TODO: 검색
-//                    self.isLoading = false
+                    
                 } label: {
                     Image("search")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 20, height: 20)
+                        .frame(width: 15, height: 15)
                 }
                 .padding()
                 
@@ -102,18 +89,14 @@ struct HomeView: View {
                     .font(.system(size: 17, weight: .regular))
                     .padding()
             }
-            .padding(.horizontal, 10)
-            .background(Color(.backGray))
+            .background(Color.homeColor)
             .cornerRadius(15)
-            .padding(.horizontal, 30)
-            
             
             CalendarContainer(eventDates: [
                 Calendar.current.startOfDay(for: Date()): UIImage(named: "star")!
             ])
-            .padding(.horizontal, 30)
-            .padding(.vertical, 30)
             .frame(height: 300)
+            .background(.white)
         }
     }
     
@@ -124,7 +107,8 @@ struct HomeView: View {
                 .font(.system(size: 12, weight: .bold))
                 .foregroundColor(.gray)
                 .padding(.leading, 20)
-                
+                .padding(.bottom, 10)
+            
             
             let columns = Array(repeating: GridItem(.flexible()), count: 4)
             
@@ -145,21 +129,20 @@ struct HomeView: View {
                     .environmentObject(authViewModel)
                 }
             }
-            .padding(.horizontal, 5)
         }
     }
     
     var footerView: some View {
-        VStack(alignment: .leading) {
-            //TODO: - 구글 애드몹
+        VStack(alignment: .center, spacing: 10) {
             
+            //TODO: - 구글 애드몹
             
             HStack {
                 Text("입결")
                     .font(.system(size: 12, weight: .bold))
                     .foregroundColor(.gray)
                     .padding(.leading, 20)
-                    
+                
                 Spacer()
                 
                 NavigationLink(destination: EmptyView()) {
@@ -176,16 +159,15 @@ struct HomeView: View {
                 }
                 .padding(.trailing, 20)
             }
-            .padding(.horizontal, 5)
             
-            KFImage(URL(string: viewModel.scoreImage.image?[0] ?? ""))
-                .resizable()
-                .scaledToFit()
-                .padding(.horizontal, 5)
-                .shadow(color: .black.opacity(0.5), radius: 5, x: 0, y: 5)
+            //TODO: - 입결 리스트 불러오기
+            ForEach(viewModel.InitiativeData, id: \.rank) { item in
+                InitiativeViewCell(model: item)
+                    .padding(.horizontal, -30)
+            }
+            
         }
     }
-    
 }
 
 struct HomeView_Previews: PreviewProvider {
