@@ -42,12 +42,16 @@ struct MainTabView: View {
                 .navigationBarBackButtonHidden(true)
                 .onAppear {
                     let appearance = UINavigationBarAppearance()
+                    let tabBarAppearance = UITabBarAppearance()
                     appearance.configureWithOpaqueBackground()
                     appearance.backgroundColor = UIColor.white
                     appearance.shadowColor = nil
                     
                     UINavigationBar.appearance().standardAppearance = appearance
                     UINavigationBar.appearance().scrollEdgeAppearance = appearance
+                    UITabBar.appearance().standardAppearance = tabBarAppearance
+                    UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+                    
                 }
             }
         }

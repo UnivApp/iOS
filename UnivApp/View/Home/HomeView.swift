@@ -14,6 +14,7 @@ struct HomeView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     
     @State private var isLoading: Bool = false
+    @State private var selectedSegment: SplitType = .competition
     @FocusState private var isFocused: Bool
     
     var body: some View {
@@ -52,7 +53,7 @@ struct HomeView: View {
                     footerView
                         .padding(.top, 10)
                 }
-                .padding(.horizontal, 30)
+                .padding(.horizontal, 20)
             }
             .background(Color.white)
             .toolbar {
@@ -104,8 +105,8 @@ struct HomeView: View {
         VStack(alignment: .leading, spacing: 10) {
             
             Text("카테고리")
-                .font(.system(size: 12, weight: .bold))
-                .foregroundColor(.gray)
+                .font(.system(size: 15, weight: .bold))
+                .foregroundColor(.black)
                 .padding(.leading, 20)
                 .padding(.bottom, 10)
             
@@ -139,8 +140,8 @@ struct HomeView: View {
             
             HStack {
                 Text("입결")
-                    .font(.system(size: 12, weight: .bold))
-                    .foregroundColor(.gray)
+                    .font(.system(size: 15, weight: .bold))
+                    .foregroundColor(.black)
                     .padding(.leading, 20)
                 
                 Spacer()
@@ -157,15 +158,45 @@ struct HomeView: View {
                             .frame(width: 15, height: 15)
                     }
                 }
-                .padding(.trailing, 20)
             }
             
             //TODO: - 입결 리스트 불러오기
-            ForEach(viewModel.InitiativeData, id: \.rank) { item in
-                InitiativeViewCell(model: item)
-                    .padding(.horizontal, -30)
+            VStack {
+                HStack(spacing: 10) {
+                    ForEach(SplitType.allCases, id: \.self) { item in
+                        Button(action: {
+                            selectedSegment = item
+                        }) {
+                            Text(item.title)
+                                .font(.system(size: 15, weight: .bold))
+                                .foregroundColor(selectedSegment == item ? .black : .gray)
+                                .padding()
+                                .background(
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .fill(selectedSegment == item ? Color.yellow : Color.clear)
+                                        .frame(height: 40)
+                                )
+                                .cornerRadius(15)
+                        }
+                    }
+                }
+                .padding()
+                
+                Group {
+                    switch selectedSegment {
+                    case .competition:
+                        ForEach(viewModel.InitiativeData, id: \.rank) { cell in
+                            InitiativeViewCell(model: cell)
+                                .tag(cell.rank)
+                        }.padding(.horizontal, -20)
+                    case .Occasion:
+                        EmptyView()
+                    case .ontime:
+                        EmptyView()
+                    }
+                }
+                .padding(.horizontal)
             }
-            
         }
     }
 }

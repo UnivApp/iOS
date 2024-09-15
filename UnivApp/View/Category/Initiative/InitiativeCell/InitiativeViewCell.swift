@@ -33,7 +33,7 @@ struct InitiativeViewCell: View {
                         
                         Text(description)
                             .font(.system(size: 12, weight: .regular))
-                            .foregroundColor(Color.black)
+                            .foregroundColor(Color.gray)
                     }
                     
                     //TODO: - 관심대학 등록

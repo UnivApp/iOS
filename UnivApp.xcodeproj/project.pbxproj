@@ -113,6 +113,7 @@
 		E4F04BFA2C94479100F653DF /* AdMobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F04BF92C94479100F653DF /* AdMobView.swift */; };
 		E4F04BFE2C96C53900F653DF /* InitiativeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F04BFD2C96C53900F653DF /* InitiativeViewCell.swift */; };
 		E4F04C012C96C55B00F653DF /* InitiativeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F04C002C96C55B00F653DF /* InitiativeModel.swift */; };
+		E4F04C042C96CF3900F653DF /* SplitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F04C032C96CF3900F653DF /* SplitType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -219,6 +220,7 @@
 		E4F04BF92C94479100F653DF /* AdMobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMobView.swift; sourceTree = "<group>"; };
 		E4F04BFD2C96C53900F653DF /* InitiativeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiativeViewCell.swift; sourceTree = "<group>"; };
 		E4F04C002C96C55B00F653DF /* InitiativeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiativeModel.swift; sourceTree = "<group>"; };
+		E4F04C032C96CF3900F653DF /* SplitType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -619,6 +621,7 @@
 		E4B3FD112C77901400CB98F3 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				E4F04C022C96CF2A00F653DF /* SplitType */,
 				E4B3FD152C77902800CB98F3 /* HomeView.swift */,
 				E4B3FD362C7882C200CB98F3 /* CategoryType.swift */,
 				E49C9FA82C86D539001F43A3 /* HomeViewModel.swift */,
@@ -731,6 +734,14 @@
 			path = Initiative;
 			sourceTree = "<group>";
 		};
+		E4F04C022C96CF2A00F653DF /* SplitType */ = {
+			isa = PBXGroup;
+			children = (
+				E4F04C032C96CF3900F653DF /* SplitType.swift */,
+			);
+			path = SplitType;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -832,6 +843,7 @@
 				E4953D4C2C89D6CC008CBDE5 /* InfoDetailView.swift in Sources */,
 				E4B3FD002C77560200CB98F3 /* AuthViewModel.swift in Sources */,
 				E4B3FD2C2C786B0C00CB98F3 /* sha256.swift in Sources */,
+				E4F04C042C96CF3900F653DF /* SplitType.swift in Sources */,
 				E4953D872C8EEE7D008CBDE5 /* ScoreImageModel.swift in Sources */,
 				E4953DB02C906C95008CBDE5 /* ListDetailModel.swift in Sources */,
 				E49C9F9F2C86CF70001F43A3 /* EmptyView.swift in Sources */,
