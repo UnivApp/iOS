@@ -14,21 +14,33 @@ enum ServicesError: Error {
 
 protocol ServicesType {
     var authService: AuthServiceType { get set }
+    var listService: ListServiceType { get set }
+    var homeService: HomeServiceType { get set }
+    var searchService: SearchServiceType { get set }
+    var heartService: HeartServiceType { get set }
 }
 
 class Services: ServicesType {
     var authService: AuthServiceType
+    var listService: ListServiceType
+    var homeService: HomeServiceType
+    var searchService: SearchServiceType
+    var heartService: HeartServiceType
     
-    init(authService: AuthServiceType) {
+    init() {
         self.authService = AuthService()
+        self.listService = ListService()
+        self.homeService = HomeService()
+        self.searchService = SearchService()
+        self.heartService = HeartService()
     }
     
 }
 
 class StubServices: ServicesType {
-    var authService: AuthServiceType
-    
-    init(authService: AuthServiceType) {
-        self.authService = StubAuthService()
-    }
+    var authService: AuthServiceType = StubAuthService()
+    var listService: ListServiceType = StubListService()
+    var homeService: HomeServiceType = StubHomeService()
+    var searchService: SearchServiceType = StubSearchService()
+    var heartService: HeartServiceType = StubHeartService()
 }

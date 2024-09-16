@@ -123,8 +123,8 @@ struct FoodView: View {
 }
 
 struct FoodView_Previews: PreviewProvider {
-    static let container = DIContainer(services: StubServices(authService: StubAuthService()))
-    static let authViewModel = AuthViewModel(container: .init(services: StubServices(authService: StubAuthService())))
+    static let container = DIContainer(services: StubServices())
+    static let authViewModel = AuthViewModel(container: .init(services: StubServices()))
     static var previews: some View {
         FoodView(viewModel: FoodViewModel(searchText: "", container: Self.container))
             .environmentObject(Self.authViewModel)

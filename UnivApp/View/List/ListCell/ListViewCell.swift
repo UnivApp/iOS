@@ -6,13 +6,20 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ListViewCell: View {
-    var image: String
-    var title: String
-    var heartNum: String
+    var model: SummaryModel
     var destination: ListCellDestination?
-    var heart: Bool
+    
+    @State private var heartTapped: Bool = false
+    @StateObject var listViewModel: ListViewModel
+    
+    init(model: SummaryModel, listViewModel: ListViewModel){
+        self.model = model
+        _heartTapped = State(initialValue: model.starred ?? false)
+        _listViewModel = StateObject(wrappedValue: listViewModel)
+    }
     
     var body: some View {
         cell
@@ -23,39 +30,56 @@ struct ListViewCell: View {
             Spacer()
             
             HStack {
-                ZStack {
-                    Image("love_empty")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                    
-                    Image("love_fill")
-                        .resizable()
-                        .frame(width: 12, height: 12)
+                Button {
+                    self.heartTapped.toggle()
+                    if heartTapped == true {
+                        listViewModel.send(action: .addHeart(self.model.universityId ?? 0))
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                            listViewModel.send(action: .load)
+                        }
+                    } else {
+                        listViewModel.send(action: .removeHeart(self.model.universityId ?? 0))
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                            listViewModel.send(action: .load)
+                        }
+                    }
+                } label: {
+                    if heartTapped == true {
+                        Image("love_fill")
+                            .resizable()
+                            .frame(width: 12, height: 12)
+                    } else {
+                        Image("love_empty")
+                            .resizable()
+                            .frame(width: 12, height: 12)
+                    }
                 }
                 .padding(.leading, 20)
                 Spacer()
             }
             
             Spacer()
-            
-            Image("emptyLogo")
-                .resizable()
-                .scaledToFit()
-                .padding(.horizontal, 30)
+        
+            if let url = URL(string: model.logo ?? "") {
+                KFImage(url)
+                    .resizable()
+                    .scaledToFit()
+                    .padding(.horizontal, 30)
+            }
             
             Spacer()
             
-            Text(title)
+            Text(model.fullName ?? "")
                 .font(.system(size: 14, weight: .semibold))
                 .foregroundColor(.black)
-                .padding(.horizontal, 0)
+                .padding(.horizontal, 5)
             
             Spacer()
             
             HStack {
                 Spacer()
                 
-                Text(heartNum)
+                Text("\(model.starNum ?? 0)")
                     .font(.system(size: 12))
                     .foregroundColor(.orange)
                     .padding(.trailing, 10)
@@ -69,7 +93,7 @@ struct ListViewCell: View {
             
             Spacer()
             
-            NavigationLink(destination: destination?.view) {
+            NavigationLink(destination: ListDetailView(viewModel: ListDetailViewModel(container: .init(services: Services())), universityId: model.universityId ?? 0)) {
                 Text("정보보기")
                     .font(.system(size: 12, weight: .bold))
                     .foregroundColor(.orange)
@@ -97,5 +121,5 @@ struct ListViewCell: View {
 }
 
 #Preview {
-    ListViewCell(image: "", title: "", heartNum: "", heart: false)
+    ListViewCell(model: .init(universityId: nil, fullName: nil, logo: nil, starNum: nil, starred: nil), listViewModel: ListViewModel(container: .init(services: StubServices()), searchText: ""))
 }

@@ -106,8 +106,8 @@ struct PlayView: View {
 }
 
 struct PlayView_Previews: PreviewProvider {
-    static let container = DIContainer(services: StubServices(authService: StubAuthService()))
-    static let authViewModel = AuthViewModel(container: .init(services: StubServices(authService: StubAuthService())))
+    static let container = DIContainer(services: StubServices())
+    static let authViewModel = AuthViewModel(container: .init(services: StubServices()))
     static var previews: some View {
         PlayView(viewModel: PlayViewModel(container: Self.container, searchText: ""))
             .environmentObject(Self.authViewModel)

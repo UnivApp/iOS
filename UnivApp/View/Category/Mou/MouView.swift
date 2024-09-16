@@ -92,14 +92,14 @@ struct MouView: View {
     
     var list: some View {
         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
-            ForEach(viewModel.stub, id: \.self) { cell in
-                if let image = cell.image, let title = cell.title, let heartNum = cell.heartNum {
-                    HStack(spacing: 20) {
-                        ListViewCell(image: image, title: title, heartNum: heartNum, destination: .mou, heart: false)
-                            .tag(cell.id)
-                    }
-                }
-            }
+//            ForEach(viewModel.stub, id: \.self) { cell in
+//                if let image = cell.image, let title = cell.title, let heartNum = cell.heartNum {
+//                    HStack(spacing: 20) {
+//                        ListViewCell(id: 0, image: image, title: title, heartNum: heartNum, destination: .mou, heart: false, listViewModel: ListViewModel(container: .init(services: StubServices()), searchText: ""))
+//                            .tag(cell.id)
+//                    }
+//                }
+//            }
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 10)
@@ -107,8 +107,8 @@ struct MouView: View {
 }
 
 struct MouView_Previews: PreviewProvider {
-    static let container = DIContainer(services: StubServices(authService: StubAuthService()))
-    static let authViewModel = AuthViewModel(container: .init(services: StubServices(authService: StubAuthService())))
+    static let container = DIContainer(services: StubServices())
+    static let authViewModel = AuthViewModel(container: .init(services: StubServices()))
     static var previews: some View {
         MouView(viewModel: MouViewModel(searchText: "", container: Self.container))
             .environmentObject(Self.authViewModel)

@@ -13,4 +13,5 @@ extension Color {
     static let bordergroundGray: Color = .init("borderGray")
     static let categorygroundGray: Color = .init("categoryGray")
     static let pointColor: Color = .init("pointColor")
+    static let homeColor: Color = .init("homeColor")
 }

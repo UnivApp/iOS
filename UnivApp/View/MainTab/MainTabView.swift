@@ -10,7 +10,6 @@ import SwiftUI
 struct MainTabView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var container: DIContainer
-    @StateObject var mainTabViewModel : MainTabViewModel
     @State private var selectedTab: MainTabType = .home
     
     var body: some View {
@@ -31,13 +30,29 @@ struct MainTabView: View {
                             .environmentObject(authViewModel)
                             .environmentObject(container)
                     case .setting:
-                        SettingView()
+                        SettingView(viewModel: SettingViewModel(container: self.container))
+                            .environmentObject(authViewModel)
+                            .environmentObject(container)
                     }
                 }
                 .tabItem {
                     Label(tab.title, image: tab.imageName(selected: selectedTab == tab))
                 }
                 .tag(tab)
+                .navigationBarBackButtonHidden(true)
+                .onAppear {
+                    let appearance = UINavigationBarAppearance()
+                    let tabBarAppearance = UITabBarAppearance()
+                    appearance.configureWithOpaqueBackground()
+                    appearance.backgroundColor = UIColor.white
+                    appearance.shadowColor = nil
+                    
+                    UINavigationBar.appearance().standardAppearance = appearance
+                    UINavigationBar.appearance().scrollEdgeAppearance = appearance
+                    UITabBar.appearance().standardAppearance = tabBarAppearance
+                    UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+                    
+                }
             }
         }
         .tint(.black)
@@ -46,11 +61,11 @@ struct MainTabView: View {
 }
 
 struct MainTabView_Preview: PreviewProvider {
-    static let container: DIContainer = .init(services: StubServices(authService: StubAuthService()))
-    static let authViewModel: AuthViewModel = AuthViewModel(container: .init(services: StubServices(authService: StubAuthService())))
+    static let container: DIContainer = .init(services: StubServices())
+    static let authViewModel: AuthViewModel = AuthViewModel(container: .init(services: StubServices()))
     
     static var previews: some View {
-        MainTabView(mainTabViewModel: MainTabViewModel())
+        MainTabView()
             .environmentObject(container)
             .environmentObject(authViewModel)
     }

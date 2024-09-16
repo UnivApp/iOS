@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum SettingType: CaseIterable {
     case version
@@ -25,6 +26,19 @@ enum SettingType: CaseIterable {
             return "회원탈퇴"
         }
     }
+    
+    var view: AnyView {
+        switch self {
+        case .version:
+            return AnyView(VersionView())
+        case .info:
+            return AnyView(PolicyView())
+        case .logout:
+            return AnyView(LogoutView())
+        case .withdraw:
+            return AnyView(WithdrawView())
+        }
+    }
 }
 
 enum SupportType: CaseIterable {
@@ -37,4 +51,10 @@ enum SupportType: CaseIterable {
         }
     }
     
+    var view: AnyView {
+        switch self {
+        case .feedback:
+            return AnyView(WebKitViewContainer(url: "https://forms.gle/Dq5bFQvGS1h6SJ9H9"))
+        }
+    }
 }

@@ -21,19 +21,19 @@ enum CategoryType: String, CaseIterable {
     var title: String {
         switch self {
         case .event:
-            return "행사"
+            return "대학행사"
         case .food:
             return "맛집"
         case .graduate:
             return "졸업자"
         case .info:
-            return "정보"
+            return "대입기사"
         case .initiative:
-            return "입결"
+            return "랭킹"
         case .money:
             return "월세"
         case .mou:
-            return "협약"
+            return "대학연계"
         case .play:
             return "핫플"
         }
@@ -42,21 +42,21 @@ enum CategoryType: String, CaseIterable {
     var view: AnyView {
         switch self {
         case .event:
-            return AnyView(EventView(viewModel: EventViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
+            return AnyView(EventView(viewModel: EventViewModel(searchText: .init(), container: .init(services: Services()))))
         case .food:
-            return AnyView(FoodView(viewModel: FoodViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
+            return AnyView(FoodView(viewModel: FoodViewModel(searchText: .init(), container: .init(services: Services()))))
         case .graduate:
-            return AnyView(GraduateView(viewModel: GraduateViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
+            return AnyView(GraduateView(viewModel: GraduateViewModel(searchText: .init(), container: .init(services: Services()))))
         case .info:
-            return AnyView(InfoView(viewModel: InfoViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
+            return AnyView(InfoView(viewModel: InfoViewModel(searchText: .init(), container: .init(services: Services()))))
         case .initiative:
-            return AnyView(InitiativeView(viewModel: InitiativeViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
+            return AnyView(InitiativeView(viewModel: InitiativeViewModel(searchText: .init(), container: .init(services: Services()))))
         case .money:
-            return AnyView(MoneyView(viewModel: MoneyViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
+            return AnyView(MoneyView(viewModel: MoneyViewModel(searchText: .init(), container: .init(services: Services()))))
         case .mou:
-            return AnyView(MouView(viewModel: MouViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
+            return AnyView(MouView(viewModel: MouViewModel(searchText: .init(), container: .init(services: Services()))))
         case .play:
-            return AnyView(PlayView(viewModel: PlayViewModel(container: .init(services: Services(authService: AuthService())), searchText: .init())))
+            return AnyView(PlayView(viewModel: PlayViewModel(container: .init(services: Services()), searchText: .init())))
         }
     }
     

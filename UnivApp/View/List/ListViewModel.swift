@@ -11,27 +11,84 @@ import Combine
 class ListViewModel: ObservableObject {
     
     enum Action {
-        
+        case load
+        case search
+        case addHeart(Int)
+        case removeHeart(Int)
     }
     
     @Published var searchText: String
+    @Published var summaryArray: [SummaryModel] = []
+    @Published var phase: Phase = .notRequested
+    @Published var heartPhase: heartPhase = .notRequested
+    @Published var notFound: Bool = false
     
     private var container: DIContainer
+    private var subscriptions = Set<AnyCancellable>()
     
     init(container: DIContainer, searchText: String) {
         self.container = container
         self.searchText = searchText
     }
     
-    var stub: [ListModel] = [
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3")
-    ]
+    func send(action: Action) {
+        switch action {
+        case .load:
+            phase = .loading
+            container.services.listService.getSummary()
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.phase = .fail
+                        self?.notFound = false
+                        self?.heartPhase = .notRequested
+                        self?.searchText = ""
+                    }
+                } receiveValue: { [weak self] summary in
+                    self?.summaryArray = summary
+                    self?.phase = .success
+                    self?.notFound = false
+                    self?.heartPhase = .notRequested
+                    self?.searchText = ""
+                }.store(in: &subscriptions)
+            
+        case .search:
+            phase = .loading
+            container.services.searchService.getSearch(searchText: self.searchText)
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.phase = .success
+                        self?.summaryArray = []
+                        self?.notFound = true
+                        self?.heartPhase = .notRequested
+                    }
+                } receiveValue: { [weak self] searchResult in
+                    self?.summaryArray = searchResult
+                    self?.phase = .success
+                    self?.notFound = false
+                    self?.heartPhase = .notRequested
+                }.store(in: &subscriptions)
+            
+        case let .addHeart(universityId):
+            container.services.heartService.addHeart(universityId: universityId)
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.heartPhase = .notRequested
+                    }
+                } receiveValue: { [weak self] addHeart in
+                    self?.heartPhase = .addHeart
+                }.store(in: &subscriptions)
+
+            
+        case let .removeHeart(universityId):
+            container.services.heartService.removeHeart(universityId: universityId)
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.heartPhase = .notRequested
+                    }
+                } receiveValue: { [weak self] removeHeart in
+                    self?.heartPhase = .removeHeart
+                }.store(in: &subscriptions)
+
+        }
+    }
 }

@@ -8,7 +8,32 @@
 import SwiftUI
 
 struct SettingView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var container: DIContainer
+    @StateObject var viewModel: SettingViewModel
+    
     var body: some View {
+        contentView
+    }
+    
+    @ViewBuilder
+    var contentView: some View {
+        switch viewModel.phase {
+        case .notRequested:
+            PlaceholderView()
+                .onAppear{
+                    viewModel.send(action: .load)
+                }
+        case .loading:
+            LoadingView(url: "congratulations")
+        case .success:
+            loadedView
+        case .fail:
+            ErrorView()
+        }
+    }
+    
+    var loadedView: some View {
         NavigationStack {
             Spacer()
             
@@ -48,7 +73,7 @@ struct SettingView: View {
     }
     
     var setting: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 15) {
             Text("계정 설정")
                 .foregroundColor(.gray)
                 .font(.system(size: 10, weight: .bold))
@@ -57,7 +82,7 @@ struct SettingView: View {
             
             
             ForEach(SettingType.allCases, id: \.self) { cases in
-                NavigationLink(destination: EmptyView()) {
+                NavigationLink(destination: cases.view) {
                     HStack {
                         Text("\(cases.title)")
                             .foregroundColor(.black)
@@ -79,7 +104,7 @@ struct SettingView: View {
     }
     
     var support: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 15) {
             Text("지원")
                 .foregroundColor(.gray)
                 .font(.system(size: 10, weight: .bold))
@@ -88,7 +113,7 @@ struct SettingView: View {
             
             
             ForEach(SupportType.allCases, id: \.self) { cases in
-                NavigationLink(destination: EmptyView()) {
+                NavigationLink(destination: cases.view) {
                     HStack {
                         Text("\(cases.title)")
                             .foregroundColor(.black)
@@ -111,5 +136,7 @@ struct SettingView: View {
 }
 
 #Preview {
-    SettingView()
+    SettingView(viewModel: SettingViewModel(container: .init(services: StubServices())))
+        .environmentObject(AuthViewModel(container: .init(services: StubServices())))
+        .environmentObject(DIContainer(services: StubServices()))
 }

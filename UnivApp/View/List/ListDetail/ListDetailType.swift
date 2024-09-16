@@ -84,21 +84,21 @@ enum ListDetailType: String, CaseIterable {
     var view: AnyView {
         switch self {
         case .event:
-            return AnyView(EventView(viewModel: EventViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
+            return AnyView(EventView(viewModel: EventViewModel(searchText: .init(), container: .init(services: Services()))))
         case .food:
-            return AnyView(FoodView(viewModel: FoodViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
+            return AnyView(FoodView(viewModel: FoodViewModel(searchText: .init(), container: .init(services: Services()))))
         case .graduate:
-            return AnyView(GraduateView(viewModel: GraduateViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
+            return AnyView(GraduateView(viewModel: GraduateViewModel(searchText: .init(), container: .init(services: Services()))))
         case .info:
-            return AnyView(InfoView(viewModel: InfoViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
+            return AnyView(InfoView(viewModel: InfoViewModel(searchText: .init(), container: .init(services: Services()))))
         case .initiative:
-            return AnyView(InitiativeView(viewModel: InitiativeViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
+            return AnyView(InitiativeView(viewModel: InitiativeViewModel(searchText: .init(), container: .init(services: Services()))))
         case .money:
-            return AnyView(MoneyView(viewModel: MoneyViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
+            return AnyView(MoneyView(viewModel: MoneyViewModel(searchText: .init(), container: .init(services: Services()))))
         case .mou:
-            return AnyView(MouView(viewModel: MouViewModel(searchText: .init(), container: .init(services: Services(authService: AuthService())))))
+            return AnyView(MouView(viewModel: MouViewModel(searchText: .init(), container: .init(services: Services()))))
         case .play:
-            return AnyView(PlayView(viewModel: PlayViewModel(container: .init(services: Services(authService: AuthService())), searchText: .init())))
+            return AnyView(PlayView(viewModel: PlayViewModel(container: .init(services: Services()), searchText: .init())))
         }
     }
 }
