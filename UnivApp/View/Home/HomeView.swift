@@ -174,8 +174,7 @@ struct HomeView: View {
                                 .background(
                                     RoundedRectangle(cornerRadius: 15)
                                         .fill(selectedSegment == item ? Color.yellow : Color.clear)
-                                        .frame(height: 40)
-                                )
+                                        .frame(height: 40))
                                 .cornerRadius(15)
                         }
                     }
