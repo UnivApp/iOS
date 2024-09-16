@@ -508,6 +508,7 @@
 		E4B3FCF12C7754C800CB98F3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E4F04BED2C94474300F653DF /* Calendar */,
 				E49C9FAE2C86ED1B001F43A3 /* Category */,
 				E4B3FD142C77902100CB98F3 /* Setting */,
 				E4B3FD132C77901C00CB98F3 /* Heart */,
@@ -680,7 +681,6 @@
 		E4EA25662C85D6E500DC5D55 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E4F04BED2C94474300F653DF /* Calendar */,
 				E4F04BEC2C94472800F653DF /* AdMob */,
 				E4F04BEB2C94471F00F653DF /* Web */,
 				E4953D3D2C89CDDF008CBDE5 /* Loading */,
