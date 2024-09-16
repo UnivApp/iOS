@@ -25,6 +25,11 @@ struct MainTabView: View {
                         ListView(viewModel: ListViewModel(container: self.container, searchText: .init()))
                             .environmentObject(authViewModel)
                             .environmentObject(container)
+                    case .calendar:
+                        CalendarContainer(viewModel: CalendarViewModel(), eventDates: [
+                            Calendar.current.startOfDay(for: Date()): UIImage(named: "star")!
+                        ])
+                        .environmentObject(authViewModel)
                     case .heart:
                         HeartView(viewModel: HeartViewModel(container: self.container))
                             .environmentObject(authViewModel)

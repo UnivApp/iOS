@@ -127,17 +127,57 @@ class CalendarViewCell: FSCalendarCell {
 }
 
 struct CalendarContainer: View {
-    var eventDates: [Date: UIImage]
+    @EnvironmentObject var authViewModel: AuthViewModel
+    @StateObject var viewModel: CalendarViewModel
+    
+    var eventDates: [Date: UIImage] //TODO: - 실제 데이터 변환
     
     var body: some View {
-        CalendarView(eventImages: eventDates)
+        contentView
+    }
+    
+    @ViewBuilder
+    var contentView: some View {
+        switch viewModel.phase {
+        case .notRequested:
+            loadedView
+                .onAppear {
+                    //TODO: - send(load)
+                }
+        case .loading:
+            LoadingView(url: "congratulations")
+        case .success:
+            loadedView
+        case .fail:
+            ErrorView()
+        }
+    }
+    
+    var loadedView: some View {
+        NavigationStack {
+            GeometryReader { proxy in
+                ScrollView(.vertical) {
+                    VStack {
+                        CalendarView(eventImages: eventDates)
+                            .frame(height: proxy.size.height / 1.5)
+                            .padding(.horizontal, 20)
+                        
+                        ForEach(viewModel.calendarData, id: \.title) { item in
+                            CalendarDataCell(model: item)
+                        }
+                        .padding(.horizontal, 30)
+                    }
+                }
+            }
+        }
     }
 }
 
 struct CalendarContainer_Previews: PreviewProvider {
     static var previews: some View {
-        CalendarContainer(eventDates: [
+        CalendarContainer(viewModel: CalendarViewModel(), eventDates: [
             Calendar.current.startOfDay(for: Date()): UIImage(named: "star")!
         ])
+        .environmentObject(AuthViewModel(container: .init(services: StubServices())))
     }
 }

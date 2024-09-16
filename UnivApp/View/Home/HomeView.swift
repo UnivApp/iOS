@@ -93,11 +93,6 @@ struct HomeView: View {
             .background(Color.homeColor)
             .cornerRadius(15)
             
-            CalendarContainer(eventDates: [
-                Calendar.current.startOfDay(for: Date()): UIImage(named: "star")!
-            ])
-            .frame(height: 300)
-            .background(.white)
         }
     }
     
@@ -123,12 +118,16 @@ struct HomeView: View {
                                 .frame(width: 40, height: 40)
                             Text(category.title)
                                 .foregroundColor(.black)
-                                .font(.system(size: 10, weight: .regular))
+                                .font(.system(size: 10, weight: .semibold))
                         }
                     }
                     .environmentObject(continer)
                     .environmentObject(authViewModel)
                 }
+            }
+            
+            HStack {
+                
             }
         }
     }

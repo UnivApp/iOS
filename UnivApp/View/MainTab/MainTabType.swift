@@ -10,6 +10,7 @@ import Foundation
 enum MainTabType: String, CaseIterable {
     case home
     case list
+    case calendar
     case heart
     case setting
     
@@ -19,6 +20,8 @@ enum MainTabType: String, CaseIterable {
             return "홈"
         case .list:
             return "리스트"
+        case .calendar:
+            return "캘린더"
         case .heart:
             return "관심대학"
         case .setting:
