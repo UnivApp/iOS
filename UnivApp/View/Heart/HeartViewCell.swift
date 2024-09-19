@@ -32,10 +32,6 @@ struct HeartViewCell: View {
             HStack {
                 ZStack {
                     //TODO: - 즐겨찾기 수정
-                    Image("love_circle")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                    
                     Button {
                         self.heartTapped.toggle()
                         if heartTapped == true {

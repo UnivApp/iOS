@@ -51,7 +51,6 @@ struct HomeView: View {
                     categoryView
                     
                     footerView
-                        .padding(.top, 10)
                 }
                 .padding(.horizontal, 20)
             }

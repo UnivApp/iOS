@@ -73,7 +73,7 @@ class AuthViewModel: ObservableObject {
                             print("로그인 성공")
                             KeychainWrapper.standard.removeAllKeys()
                             KeychainWrapper.standard.set("Bearer \(accessToken)", forKey: "JWTaccessToken")
-                            KeychainWrapper.standard.set("Bearer \(accessToken)", forKey: "JWTrefreshToken")
+                            KeychainWrapper.standard.set(" \(refreshToken)", forKey: "JWTrefreshToken")
                         }
                     }.store(in: &subscriptions)
             } else if case let .failure(error) = result {

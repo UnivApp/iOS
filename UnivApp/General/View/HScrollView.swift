@@ -28,7 +28,7 @@ struct HScrollView: View {
                 .padding(.horizontal, 10)
                 
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack {
+                    HStack(spacing: 0) {
                         ForEach(array.self, id: \.self) { item in
                             VStack(spacing: 10) {
                                 Image(item.image)
