@@ -65,6 +65,7 @@ struct ListViewCell: View {
                     .resizable()
                     .scaledToFit()
                     .padding(.horizontal, 30)
+                    .background(.clear)
             }
             
             Spacer()

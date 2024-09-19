@@ -126,9 +126,8 @@ struct HomeView: View {
                 }
             }
             
-            HStack {
-                
-            }
+            HScrollView(title: [Text("이런 "), Text("핫플 "), Text("어때?")], array: [Object(title: "어린이대공원", image: "hotplace"),Object(title: "어린이대공원", image: "hotplace"),Object(title: "어린이대공원", image: "hotplace"),Object(title: "어린이대공원", image: "hotplace"),Object(title: "어린이대공원", image: "hotplace"),Object(title: "어린이대공원", image: "hotplace")], pointColor: .orange)
+                .padding(.leading, -30)
         }
     }
     

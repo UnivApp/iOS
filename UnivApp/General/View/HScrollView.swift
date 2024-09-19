@@ -27,18 +27,18 @@ struct HScrollView: View {
                 .padding(.top, 30)
                 .padding(.horizontal, 10)
                 
-                ScrollView(.horizontal) {
+                ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         ForEach(array.self, id: \.self) { item in
-                            VStack {
+                            VStack(spacing: 10) {
                                 Image(item.image)
                                     .resizable()
                                     .scaledToFit()
-                                    .cornerRadius(20)
-                                    .frame(width: 50, height: 50)
+                                    .cornerRadius(10)
+                                    .frame(width: 100, height: 100)
                                 
                                 Text(item.title)
-                                    .font(.system(size: 12, weight: .regular))
+                                    .font(.system(size: 12, weight: .bold))
                                     .foregroundColor(.black)
                             }
                             .padding(.horizontal, 10)

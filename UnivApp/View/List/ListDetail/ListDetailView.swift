@@ -129,7 +129,7 @@ struct ListDetailView: View {
                                 type.image
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: proxy.size.height / 10, height: proxy.size.height / 10)
+                                    .frame(width: proxy.size.height / 12, height: proxy.size.height / 12)
                                 
                                 Text(type.description)
                                     .font(.system(size: 12, weight: .bold))

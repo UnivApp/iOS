@@ -16,6 +16,7 @@ final class Alamofire {
             AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: ["Content-Type":"application/json"])
                 .validate()
                 .responseDecodable(of: T.self) { response in
+                    print(response.debugDescription)
                     switch response.result {
                     case let .success(result):
                         promise(.success(result))
@@ -127,7 +128,7 @@ final class Alamofire {
                 AF.request(url, method: .get, encoding: JSONEncoding.default, headers: ["content-Type":"application-json", "Authorization":accessToken])
                     .validate()
                     .responseDecodable(of: T.self) { response in
-//                        print(response.debugDescription)
+                        print(response.debugDescription)
                         switch response.result {
                         case let .success(result):
                             promise(.success(result))
