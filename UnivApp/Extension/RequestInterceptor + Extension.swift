@@ -55,7 +55,7 @@ final class TokenRequestInterceptor: RequestInterceptor {
                     KeychainWrapper.standard.removeAllKeys()
                     if let accessToken = response.accessToken,
                        let refreshToken = response.refreshToken {
-                        print("로그인 성공")
+                        print("토큰 재발행 성공")
                         KeychainWrapper.standard.set("Bearer \(accessToken)", forKey: "JWTaccessToken")
                         KeychainWrapper.standard.set(refreshToken, forKey: "JWTrefreshToken")
                     }

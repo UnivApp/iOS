@@ -25,7 +25,7 @@ struct ListDetailView: View {
     var contentView: some View {
         switch viewModel.phase {
         case .notRequested:
-            PlaceholderView()
+            loadedView
                 .onAppear{
                     viewModel.send(action: .load(self.universityId))
                 }
@@ -40,19 +40,21 @@ struct ListDetailView: View {
     
     var loadedView: some View {
         NavigationStack {
-            VStack {
-                info
-                    .padding(.vertical, 30)
-                    .padding(.horizontal, 30)
-                
-                category
-                    .padding(.vertical, 0)
-                    .padding(.horizontal, 0)
-                
-                NavigationLink(destination: selectedType?.view, isActive: $isNavigate) {
+            ScrollView(.vertical) {
+                VStack {
+                    info
+                        .padding(.vertical, 30)
+                        .padding(.horizontal, 30)
+                    
+                    category
+                        .padding(.vertical, 0)
+                        .padding(.horizontal, 0)
+                    
+                    NavigationLink(destination: selectedType?.view, isActive: $isNavigate) {
+                        
+                    }
                     
                 }
-                
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -108,41 +110,39 @@ struct ListDetailView: View {
     }
     
     var category: some View {
-        GeometryReader { proxy in
-            VStack(spacing: 0) {
-                ForEach(ListDetailType.allCases, id: \.self) { type in
-                    Button {
-                        selectedType = type
-                        self.isNavigate = true
-                    } label: {
-                        VStack {
-                            Text(type.title)
-                                .font(.system(size: 14, weight: .bold))
-                                .foregroundColor(selectedType == type ? Color.gray : Color.white)
-                                .frame(width: 50, height: proxy.size.height / 8)
-                                .background(.clear)
-                        }
-                        .frame(maxWidth: 70, alignment: .center)
-                        
-                        HStack {
-                            Group {
-                                type.image
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: proxy.size.height / 12, height: proxy.size.height / 12)
-                                
-                                Text(type.description)
-                                    .font(.system(size: 12, weight: .bold))
-                                    .foregroundColor(selectedType == type ? Color.white : Color.gray)
-                            }
-                            .frame(height: proxy.size.height / 8)
-                            .padding(.leading, 30)
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(selectedType == type ? Color.categoryGray : Color.white)
+        VStack(spacing: 0) {
+            ForEach(ListDetailType.allCases, id: \.self) { type in
+                Button {
+                    selectedType = type
+                    self.isNavigate = true
+                } label: {
+                    VStack {
+                        Text(type.title)
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundColor(selectedType == type ? Color.gray : Color.white)
+                            .frame(width: 50, height: 50)
+                            .background(.clear)
                     }
-                    .background(selectedType == type ? Color.white : Color.categoryGray)
+                    .frame(maxWidth: 70, alignment: .center)
+                    
+                    HStack {
+                        Group {
+                            type.image
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 50, height: 35)
+                            
+                            Text(type.description)
+                                .font(.system(size: 12, weight: .bold))
+                                .foregroundColor(selectedType == type ? Color.white : Color.gray)
+                        }
+                        .frame(height: 50)
+                        .padding(.leading, 30)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(selectedType == type ? Color.categoryGray : Color.white)
                 }
+                .background(selectedType == type ? Color.white : Color.categoryGray)
             }
         }
     }
