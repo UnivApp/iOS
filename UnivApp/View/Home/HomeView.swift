@@ -14,7 +14,7 @@ struct HomeView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     
     @State private var isLoading: Bool = false
-    @State private var selectedSegment: SplitType = .competition
+    @State private var selectedSegment: SplitType = .employment
     @FocusState private var isFocused: Bool
     
     var body: some View {
@@ -99,7 +99,7 @@ struct HomeView: View {
         VStack(alignment: .leading, spacing: 10) {
             
             Text("카테고리")
-                .font(.system(size: 15, weight: .bold))
+                .font(.system(size: 18, weight: .bold))
                 .foregroundColor(.black)
                 .padding(.leading, 10)
                 .padding(.bottom, 10)
@@ -137,7 +137,7 @@ struct HomeView: View {
             
             HStack {
                 Text("경쟁률")
-                    .font(.system(size: 15, weight: .bold))
+                    .font(.system(size: 18, weight: .bold))
                     .foregroundColor(.black)
                     .padding(.leading, 10)
                 
@@ -180,7 +180,7 @@ struct HomeView: View {
                 
                 Group {
                     switch selectedSegment {
-                    case .competition:
+                    case .employment:
                         ForEach(viewModel.InitiativeData, id: \.rank) { cell in
                             InitiativeViewCell(model: cell)
                                 .tag(cell.rank)

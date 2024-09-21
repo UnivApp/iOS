@@ -17,12 +17,12 @@ struct HScrollView: View {
             VStack(alignment: .leading) {
                 Group {
                     title[0]
-                        .font(.system(size: 15, weight: .bold))
+                        .font(.system(size: 18, weight: .bold))
                     + title[1]
-                        .font(.system(size: 15, weight: .bold))
+                        .font(.system(size: 18, weight: .bold))
                         .foregroundColor(self.pointColor)
                     + title[2]
-                        .font(.system(size: 15, weight: .bold))
+                        .font(.system(size: 18, weight: .bold))
                 }
                 .padding(.top, 30)
                 .padding(.horizontal, 10)

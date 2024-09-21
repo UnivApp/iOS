@@ -16,6 +16,13 @@ class ListDetailViewModel: ObservableObject {
     
     @Published var listDetail: ListDetailModel = ListDetailModel()
     @Published var phase: Phase = .notRequested
+    @Published var departList: [DepartModel] = [
+        DepartModel(title: "공학계열", description: "6개 학과"),
+        DepartModel(title: "예체능계열", description: "11개 학과"),
+        DepartModel(title: "의학계열", description: "1개 학과"),
+        DepartModel(title: "인문사회계열", description: "12개 학과"),
+        DepartModel(title: "자연과학계열", description: "4개 학과")
+    ]
     
     private var container: DIContainer
     private var subscriptions = Set<AnyCancellable>()
