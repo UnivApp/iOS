@@ -46,6 +46,7 @@ struct ListDetailView: View {
                     VStack(spacing: 20) {
                         info
                             .padding(.horizontal, 30)
+                            .padding(.top, 30)
                             .id("기본정보")
                         
                         SeperateView()
@@ -185,14 +186,16 @@ struct ListDetailView: View {
                 VStack(alignment: .leading, spacing: 10) {
                     Text(viewModel.listDetail.fullName ?? "")
                         .font(.system(size: 15, weight: .bold))
+                        .lineLimit(nil)
+                        .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
                     Spacer()
                     Group {
-                        Text("\(viewModel.listDetail.location ?? "")")
+                        Text("\(viewModel.listDetail.location ?? "")\n\(viewModel.listDetail.phoneNumber ?? "")")
                             .font(.system(size: 12, weight: .regular))
-                            .frame(height: 12)
-                        Text("\(viewModel.listDetail.phoneNumber ?? "")")
-                            .font(.system(size: 12, weight: .regular))
-                            .frame(height: 12)
+                            .lineLimit(nil)
+                            .multilineTextAlignment(.leading)
+                            .fixedSize(horizontal: false, vertical: true)
                     }
                 }
                 .padding(.horizontal, 10)

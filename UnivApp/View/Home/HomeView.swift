@@ -89,9 +89,9 @@ struct HomeView: View {
                     .font(.system(size: 17, weight: .regular))
                     .padding()
             }
+            .padding(.horizontal, 10)
             .background(Color.homeColor)
             .cornerRadius(15)
-            
         }
     }
     
