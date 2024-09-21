@@ -12,6 +12,7 @@ struct ListDetailView: View {
     @StateObject var viewModel: ListDetailViewModel
     @State private var selectedType: ListDetailType?
     @State private var isNavigate: Bool = false
+    @State private var selectedSegment: ListDetailSection = .general
     @Environment(\.dismiss) var dismiss
     
     var universityId: Int
@@ -40,69 +41,91 @@ struct ListDetailView: View {
     
     var loadedView: some View {
         NavigationStack {
-            ScrollView(.vertical) {
-                VStack(spacing: 20) {
-                    info
-                        .padding(.vertical, 10)
+            ScrollViewReader { proxy in
+                ScrollView(.vertical) {
+                    VStack(spacing: 20) {
+                        info
+                            .padding(.horizontal, 30)
+                            .id("기본정보")
+                        
+                        SeperateView()
+                            .frame(height: 10)
+                        
+                        HStack {
+                            Text("기본정보")
+                                .font(.system(size: 18, weight: .bold))
+                            Spacer()
+                        }
+                        .padding(.leading, 20)
+                        
+                        BarChartView(title: "계열별등록금", description: "출처: 대학어디가 - 2024년도" , dataPoints: [
+                            ChartData(label: "인문", value: 673, xLabel: "과", yLabel: "만원"),
+                            ChartData(label: "자연", value: 796, xLabel: "과", yLabel: "만원"),
+                            ChartData(label: "공학", value: 898, xLabel: "과", yLabel: "만원"),
+                            ChartData(label: "의학", value: 1000, xLabel: "과", yLabel: "만원"),
+                            ChartData(label: "예체", value: 901, xLabel: "과", yLabel: "만원"),
+                            ChartData(label: "평균", value: 817, xLabel: "과", yLabel: "만원")
+                        ])
                         .padding(.horizontal, 30)
-                    
-                    SeperateView()
-                        .frame(height: 10)
-                    
-                    BarChartView(title: "계열별등록금", description: "출처: 대학어디가 - 2024년도" , dataPoints: [
-                        ChartData(label: "인문", value: 673, xLabel: "과", yLabel: "만원"),
-                        ChartData(label: "자연", value: 796, xLabel: "과", yLabel: "만원"),
-                        ChartData(label: "공학", value: 898, xLabel: "과", yLabel: "만원"),
-                        ChartData(label: "의학", value: 1000, xLabel: "과", yLabel: "만원"),
-                        ChartData(label: "예체", value: 901, xLabel: "과", yLabel: "만원"),
-                        ChartData(label: "평균", value: 817, xLabel: "과", yLabel: "만원")
-                    ])
-                    .padding(.horizontal, 30)
-                    
-                    CircleChartView(title: "계열별등록금", description: "출처: 대학어디가 - 2024년도", dataPoints: [
-                        ChartData(label: "인문사회계열", value: 673, xLabel: "과", yLabel: "만원"),
-                        ChartData(label: "자연과학계열", value: 796, xLabel: "과", yLabel: "만원"),
-                        ChartData(label: "공학계열", value: 898, xLabel: "과", yLabel: "만원"),
-                        ChartData(label: "의학", value: 1000, xLabel: "과", yLabel: "만원"),
-                        ChartData(label: "예체계열", value: 901, xLabel: "과", yLabel: "만원")
-                    ])
-                    .padding(.horizontal, 30)
-                    
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 20) {
-                            BarChartView(title: "정시경쟁률", description: "", dataPoints: [
-                                ChartData(label: "인문", value: 673, xLabel: "과", yLabel: "만원"),
-                                ChartData(label: "자연", value: 796, xLabel: "과", yLabel: "만원")
-                            ])
-                            BarChartView(title: "정시경쟁률", description: "", dataPoints: [
-                                ChartData(label: "인문", value: 673, xLabel: "과", yLabel: "만원"),
-                                ChartData(label: "자연", value: 796, xLabel: "과", yLabel: "만원")
-                            ])
-                            BarChartView(title: "정시경쟁률", description: "", dataPoints: [
-                                ChartData(label: "인문", value: 673, xLabel: "과", yLabel: "만원"),
-                                ChartData(label: "자연", value: 796, xLabel: "과", yLabel: "만원")
-                            ])
+                        
+                        CircleChartView(title: "계열별등록금", description: "출처: 대학어디가 - 2024년도", dataPoints: [
+                            ChartData(label: "인문사회계열", value: 673, xLabel: "과", yLabel: "만원"),
+                            ChartData(label: "자연과학계열", value: 796, xLabel: "과", yLabel: "만원"),
+                            ChartData(label: "공학계열", value: 898, xLabel: "과", yLabel: "만원"),
+                            ChartData(label: "의학", value: 1000, xLabel: "과", yLabel: "만원"),
+                            ChartData(label: "예체계열", value: 901, xLabel: "과", yLabel: "만원")
+                        ])
+                        .padding(.horizontal, 30)
+                        
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 20) {
+                                BarChartView(title: "정시경쟁률", description: "", dataPoints: [
+                                    ChartData(label: "인문", value: 673, xLabel: "과", yLabel: "만원"),
+                                    ChartData(label: "자연", value: 796, xLabel: "과", yLabel: "만원")
+                                ])
+                                BarChartView(title: "정시경쟁률", description: "", dataPoints: [
+                                    ChartData(label: "인문", value: 673, xLabel: "과", yLabel: "만원"),
+                                    ChartData(label: "자연", value: 796, xLabel: "과", yLabel: "만원")
+                                ])
+                                BarChartView(title: "정시경쟁률", description: "", dataPoints: [
+                                    ChartData(label: "인문", value: 673, xLabel: "과", yLabel: "만원"),
+                                    ChartData(label: "자연", value: 796, xLabel: "과", yLabel: "만원")
+                                ])
+                            }
+                        }
+                        .padding(.horizontal, 30)
+                        
+                        SeperateView()
+                            .frame(height: 10)
+                        
+                        depart
+                            .padding(.bottom, -20)
+                            .id("학과목록")
+                        
+                        SeperateView()
+                            .frame(height: 10)
+                        
+                        category
+                            .padding(.vertical, 0)
+                            .padding(.horizontal, 0)
+                            .id("카테고리")
+                        
+                        NavigationLink(destination: selectedType?.view, isActive: $isNavigate) {
+                            
                         }
                     }
-                    .padding(.horizontal, 30)
-                    
-                    SeperateView()
-                        .frame(height: 10)
-                    
-                    depart
-                        .padding(.bottom, -20)
-                    
-                    SeperateView()
-                        .frame(height: 10)
-                    
-                    category
-                        .padding(.vertical, 0)
-                        .padding(.horizontal, 0)
-                    
-                    NavigationLink(destination: selectedType?.view, isActive: $isNavigate) {
-                        
+                }
+                .task(id: selectedSegment) {
+                    withAnimation(.spring()) {
+                        switch selectedSegment {
+                        case .general:
+                            proxy.scrollTo("기본정보", anchor: .center)
+                        case .depart:
+                            proxy.scrollTo("학과목록", anchor: .center)
+                        case .category:
+                            proxy.scrollTo("카테고리", anchor: .center)
+                        }
                     }
-                    
                 }
             }
             .toolbar {
@@ -112,11 +135,39 @@ struct ListDetailView: View {
                     } label: {
                         Image("back")
                     }
-
+                    
+                }
+                ToolbarItem(placement: .navigation) {
+                    section
+                        .padding()
                 }
             }
             .toolbar(.hidden, for: .tabBar)
             .navigationBarBackButtonHidden(true)
+        }
+    }
+    
+    var section: some View {
+        VStack {
+            HStack(spacing: 10) {
+                ForEach(ListDetailSection.allCases, id: \.self) { item in
+                    Button(action: {
+                        DispatchQueue.main.async {
+                            self.selectedSegment = item
+                        }
+                    }) {
+                        Text(item.title)
+                            .font(.system(size: 15, weight: .bold))
+                            .foregroundColor(selectedSegment == item ? .black : .gray)
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 15)
+                                    .fill(selectedSegment == item ? Color.yellow : Color.clear)
+                                    .frame(height: 30))
+                            .cornerRadius(15)
+                    }
+                }
+            }.padding(.horizontal, 20)
         }
     }
     
