@@ -30,24 +30,35 @@ struct HScrollView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 0) {
                         ForEach(array.self, id: \.self) { item in
-                            VStack(spacing: 10) {
-                                Image(item.image)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .cornerRadius(10)
-                                    .frame(width: 100, height: 100)
-                                
-                                Text(item.title)
-                                    .font(.system(size: 12, weight: .bold))
-                                    .foregroundColor(.black)
-                            }
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 20)
+                            HScrollViewCell(item: item)
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 20)
                         }
                     }
                 }
             }
             .padding(.leading, 30)
+        }
+    }
+}
+
+struct HScrollViewCell: View {
+    var item: Object
+    var body: some View {
+        NavigationStack {
+            NavigationLink(destination: PlayDetailView(viewModel: PlayDetailViewModel())) {
+                VStack(spacing: 10) {
+                    Image(item.image)
+                        .resizable()
+                        .scaledToFit()
+                        .cornerRadius(10)
+                        .frame(width: 100, height: 100)
+                    
+                    Text(item.title)
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundColor(.black)
+                }
+            }
         }
     }
 }
