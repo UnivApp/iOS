@@ -38,10 +38,10 @@ struct EventView: View {
                         Button(action: {
                             dismiss()
                         }, label: {
-                            Image("back")
+                            Image("blackback")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 30, height: 30)
+                                .frame(width: 20, height: 20)
                         })
                         Image("event_navi")
                             .resizable()

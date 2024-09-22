@@ -21,7 +21,10 @@ struct WithdrawView: View {
                     Button {
                         dismiss()
                     } label: {
-                        Image("back")
+                        Image("blackback")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
                     }
                 }
             }

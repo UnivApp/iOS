@@ -10,7 +10,7 @@ import SwiftUI
 struct CustomNavigationBar: View {
     var body: some View {
         HStack {
-            Image("back")
+            Image("customback")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 30, height: 30)

@@ -11,6 +11,8 @@ struct PlayDetailView: View {
     @StateObject var viewModel: PlayDetailViewModel
     @Environment(\.dismiss) var dismiss
     
+    @State var checkScrollHeight: Bool = false
+    
     var body: some View {
         contentView
     }
@@ -32,35 +34,19 @@ struct PlayDetailView: View {
         GeometryReader { proxy in
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-                    ZStack {
-                        TabView {
-                            if let images = viewModel.data.images {
-                                ForEach(images, id: \.self) { item in
-                                    if let image = item {
-                                        Image(image)
-                                            .resizable()
-                                            .scaledToFit()
-                                    }
+                    TabView {
+                        if let images = viewModel.data.images {
+                            ForEach(images, id: \.self) { item in
+                                if let image = item {
+                                    Image(image)
+                                        .resizable()
+                                        .scaledToFit()
                                 }
                             }
                         }
-                        .frame(width: proxy.size.width, height: proxy.size.width)
-                        .tabViewStyle(PageTabViewStyle())
-                        
-                        VStack {
-                            HStack {
-                                Button {
-                                    dismiss()
-                                } label: {
-                                    CustomNavigationBar()
-                                }
-                                Spacer()
-                            }
-                            Spacer()
-                        }
-                        .padding(.top, 30)
-                        .padding(.leading, 0)
                     }
+                    .frame(width: proxy.size.width, height: proxy.size.width)
+                    .tabViewStyle(PageTabViewStyle())
                     
                     Group {
                         Text(viewModel.data.title ?? "")
@@ -74,9 +60,11 @@ struct PlayDetailView: View {
                         
                         Text(viewModel.data.description ?? "")
                             .font(.system(size: 15, weight: .regular))
+                            .lineSpacing(10)
                         
                         Text(viewModel.data.tip ?? "")
                             .font(.system(size: 15, weight: .bold))
+                            .lineSpacing(10)
                     }
                     .lineLimit(nil)
                     .fixedSize(horizontal: false, vertical: true)
@@ -93,12 +81,52 @@ struct PlayDetailView: View {
                     .frame(height: 300)
                 }
                 .padding(.horizontal, 0)
+                .background(
+                    GeometryReader { innerProxy in
+                        Color.clear
+                            .onAppear {
+                                DispatchQueue.main.async {
+                                    checkScrollHeight = false
+                                }
+                            }
+                            .onChange(of: innerProxy.frame(in: .global).minY) { value, error in
+                                if value < 0 {
+                                    checkScrollHeight = true
+                                } else {
+                                    checkScrollHeight = false
+                                }
+                            }
+                    }
+                )
             }
         }
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .tabBar)
-        .toolbar(.hidden, for: .navigationBar)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    dismiss()
+                } label: {
+                    if self.checkScrollHeight {
+                        Image("blackback")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                        
+                    } else {
+                        Image("whiteback")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                    }
+                }
+
+            }
+        }
         .ignoresSafeArea()
+        .onAppear {
+            UINavigationBar.appearance().backgroundColor = .clear
+        }
     }
 }
 
