@@ -45,7 +45,7 @@ struct GraduateView: View {
                         Image("graduate_navi")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 70, height: 60)
+                            .frame(width: 110, height: 60)
                     }
                 }
             }

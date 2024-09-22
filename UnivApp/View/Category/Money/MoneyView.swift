@@ -47,7 +47,7 @@ struct MoneyView: View {
                         Image("money_navi")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 120, height: 60)
+                            .frame(width: 100, height: 60)
                     }
                 }
             }

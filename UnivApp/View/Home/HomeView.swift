@@ -28,6 +28,7 @@ struct HomeView: View {
     var contentView: some View {
         switch viewModel.phase {
         case .notRequested:
+            //TODO: - 변경
             loadedView
                 .onAppear {
                     viewModel.send(action: .load)

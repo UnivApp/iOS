@@ -46,7 +46,7 @@ struct MouView: View {
                         Image("mou_navi")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 70, height: 60)
+                            .frame(width: 120, height: 60)
                     }
                 }
             }

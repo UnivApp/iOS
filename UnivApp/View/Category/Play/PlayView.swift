@@ -15,6 +15,27 @@ struct PlayView: View {
     
     
     var body: some View {
+        contentView
+    }
+    
+    @ViewBuilder
+    var contentView: some View {
+        switch viewModel.phase {
+        case .notRequested:
+            //TODO: - 이름 변경
+            loadedView
+                .onAppear {
+                    
+                }
+        case .loading:
+            LoadingView(url: "congratulations")
+        case .success:
+            loadedView
+        case .fail:
+            ErrorView()
+        }
+    }
+    var loadedView: some View {
         NavigationStack {
             VStack {
                 ScrollView(.vertical) {
@@ -42,10 +63,10 @@ struct PlayView: View {
                                 .scaledToFit()
                                 .frame(width: 20, height: 20)
                         })
-                        Image("food_navi")
+                        Image("play_navi")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 70, height: 60)
+                            .frame(width: 100, height: 60)
                     }
                 }
             }
@@ -53,13 +74,7 @@ struct PlayView: View {
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .tabBar)
         .onAppear {
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = UIColor.white
-            appearance.shadowColor = nil
-            
-            UINavigationBar.appearance().standardAppearance = appearance
-            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+            UINavigationBar.appearance().backgroundColor = .clear
         }
     }
     

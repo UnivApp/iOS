@@ -15,6 +15,7 @@ class PlayViewModel: ObservableObject {
     }
     
     @Published var searchText: String
+    @Published var phase: Phase = .notRequested
     
     private var container: DIContainer
     

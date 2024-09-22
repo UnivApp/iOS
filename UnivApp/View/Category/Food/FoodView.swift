@@ -45,7 +45,7 @@ struct FoodView: View {
                         Image("food_navi")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 70, height: 60)
+                            .frame(width: 100, height: 60)
                     }
                 }
             }
