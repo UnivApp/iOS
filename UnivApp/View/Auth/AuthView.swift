@@ -32,4 +32,5 @@ struct AuthView: View {
 
 #Preview {
     AuthView(authViewModel: .init(container: .init(services: StubServices())))
+        .environmentObject(DIContainer(services: StubServices()))
 }
