@@ -96,7 +96,7 @@ struct HeartViewCell: View {
             
             Spacer()
             
-            NavigationLink(destination: destination?.view) {
+            NavigationLink(destination: ListDetailView(viewModel: ListDetailViewModel(container: .init(services: Services())), universityId: model.universityId ?? 0)) {
                 Text("정보보기")
                     .font(.system(size: 12, weight: .bold))
                     .foregroundColor(.orange)
