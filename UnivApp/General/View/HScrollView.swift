@@ -11,6 +11,7 @@ struct HScrollView: View {
     var title: [Text]
     var array: [Object]
     var pointColor: Color
+    var size: CGFloat
     
     var body: some View {
         NavigationStack {
@@ -30,7 +31,7 @@ struct HScrollView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 0) {
                         ForEach(array.self, id: \.self) { item in
-                            HScrollViewCell(item: item)
+                            HScrollViewCell(item: item, size: self.size)
                                 .padding(.horizontal, 10)
                                 .padding(.vertical, 20)
                         }
@@ -44,6 +45,7 @@ struct HScrollView: View {
 
 struct HScrollViewCell: View {
     var item: Object
+    var size: CGFloat
     var body: some View {
         NavigationStack {
             NavigationLink(destination: PlayDetailView(viewModel: PlayDetailViewModel())) {
@@ -52,10 +54,10 @@ struct HScrollViewCell: View {
                         .resizable()
                         .scaledToFit()
                         .cornerRadius(10)
-                        .frame(width: 100, height: 100)
+                        .frame(width: self.size, height: self.size)
                     
                     Text(item.title)
-                        .font(.system(size: 12, weight: .bold))
+                        .font(.system(size: 12, weight: .semibold))
                         .foregroundColor(.black)
                 }
             }
@@ -64,5 +66,5 @@ struct HScrollViewCell: View {
 }
 
 #Preview {
-    HScrollView(title: [Text("유명한 "), Text("선배 "), Text("확인하기 ")], array: [Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty")], pointColor: Color.orange)
+    HScrollView(title: [Text("유명한 "), Text("선배 "), Text("확인하기 ")], array: [Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty")], pointColor: Color.orange, size: 30)
 }
