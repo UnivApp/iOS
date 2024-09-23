@@ -25,6 +25,7 @@ struct GraduateView: View {
                     
                     list
                 }
+                .ignoresSafeArea()
                 .padding(.horizontal, 0)
                 .padding(.bottom, 0)
                 .refreshable {
@@ -58,10 +59,8 @@ struct GraduateView: View {
         VStack(spacing: 30) {
             Image("graduate_poster")
                 .resizable()
-                .scaledToFill()
+                .scaledToFit()
                 .frame(maxWidth: .infinity)
-                .frame(height: 235)
-                .padding(.vertical, 5)
             
             HStack {
                 Group {

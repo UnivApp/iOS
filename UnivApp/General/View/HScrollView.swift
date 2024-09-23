@@ -26,7 +26,7 @@ struct HScrollView: View {
                         .font(.system(size: 18, weight: .bold))
                 }
                 .padding(.top, 30)
-                .padding(.horizontal, 10)
+                .padding(.leading, 20)
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 0) {
@@ -37,8 +37,8 @@ struct HScrollView: View {
                         }
                     }
                 }
+                .padding(.leading, 5)
             }
-            .padding(.leading, 30)
         }
     }
 }

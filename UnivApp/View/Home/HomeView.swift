@@ -48,12 +48,13 @@ struct HomeView: View {
                 VStack(alignment: .center, spacing: 20) {
                     headerView
                         .padding(.top, 10)
+                        .padding(.horizontal, 20)
                     
                     categoryView
+//                        .padding(.horizontal, 20)
                     
                     footerView
                 }
-                .padding(.horizontal, 20)
             }
             .background(Color.white)
             .toolbar {
@@ -99,35 +100,36 @@ struct HomeView: View {
     var categoryView: some View {
         VStack(alignment: .leading, spacing: 10) {
             
-            Text("카테고리")
-                .font(.system(size: 18, weight: .bold))
-                .foregroundColor(.black)
-                .padding(.leading, 10)
-                .padding(.bottom, 10)
-            
-            
-            let columns = Array(repeating: GridItem(.flexible()), count: 4)
-            
-            LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(CategoryType.allCases, id: \.self) { category in
-                    NavigationLink(destination: category.view) {
-                        VStack {
-                            Image(category.imageName())
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 40, height: 40)
-                            Text(category.title)
-                                .foregroundColor(.black)
-                                .font(.system(size: 10, weight: .semibold))
+            Group {
+                Text("카테고리")
+                    .font(.system(size: 18, weight: .bold))
+                    .foregroundColor(.black)
+                    .padding(.leading, 10)
+                    .padding(.bottom, 10)
+                
+                
+                let columns = Array(repeating: GridItem(.flexible()), count: 4)
+                
+                LazyVGrid(columns: columns, spacing: 10) {
+                    ForEach(CategoryType.allCases, id: \.self) { category in
+                        NavigationLink(destination: category.view) {
+                            VStack {
+                                Image(category.imageName())
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 40, height: 40)
+                                Text(category.title)
+                                    .foregroundColor(.black)
+                                    .font(.system(size: 10, weight: .semibold))
+                            }
                         }
+                        .environmentObject(continer)
+                        .environmentObject(authViewModel)
                     }
-                    .environmentObject(continer)
-                    .environmentObject(authViewModel)
                 }
-            }
+            }.padding(.horizontal, 10)
             
             HScrollView(title: [Text("이런 "), Text("핫플 "), Text("어때?")], array: [Object(title: "어린이대공원", image: "hotplace1"),Object(title: "롯데월드", image: "hotplace2"),Object(title: "올림픽공원", image: "hotplace3"),Object(title: "서울숲", image: "hotplace4"),Object(title: "어린이대공원", image: "hotplace1"),Object(title: "롯데월드", image: "hotplace2")], pointColor: .orange, size: 100)
-                .padding(.leading, -30)
         }
     }
     
@@ -136,27 +138,28 @@ struct HomeView: View {
             
             //TODO: - 구글 애드몹
             
-            HStack {
-                Text("경쟁률")
-                    .font(.system(size: 18, weight: .bold))
-                    .foregroundColor(.black)
-                    .padding(.leading, 10)
-                
-                Spacer()
-                
-                NavigationLink(destination: EmptyView()) {
-                    HStack(spacing: 5) {
-                        Text("더보기")
-                            .font(.system(size: 12, weight: .regular))
-                            .foregroundColor(.gray)
-                        
-                        Image("arrow")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 15, height: 15)
+            Group {
+                HStack {
+                    Text("경쟁률")
+                        .font(.system(size: 18, weight: .bold))
+                        .foregroundColor(.black)
+                    
+                    Spacer()
+                    
+                    NavigationLink(destination: EmptyView()) {
+                        HStack(spacing: 5) {
+                            Text("더보기")
+                                .font(.system(size: 12, weight: .regular))
+                                .foregroundColor(.gray)
+                            
+                            Image("arrow")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 15, height: 15)
+                        }
                     }
                 }
-            }
+            }.padding(.horizontal, 20)
             
             //TODO: - 입결 리스트 불러오기
             VStack {

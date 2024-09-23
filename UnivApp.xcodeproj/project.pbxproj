@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		E40135E52CA15EE70021D351 /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40135E42CA15EE70021D351 /* PlayView.swift */; };
+		E40135E82CA1C4200021D351 /* HotPlaceSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40135E72CA1C4200021D351 /* HotPlaceSegmentView.swift */; };
+		E40135EA2CA1CD5F0021D351 /* SchoolSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40135E92CA1CD5F0021D351 /* SchoolSegmentView.swift */; };
+		E40135EC2CA1CDEF0021D351 /* PlaySegmentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40135EB2CA1CDEF0021D351 /* PlaySegmentType.swift */; };
 		E47B2ECF2C79AF4C0039E2E0 /* SettingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47B2ECE2C79AF4C0039E2E0 /* SettingType.swift */; };
 		E49222702C9C87DA0077EA45 /* RequestInterceptor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E492226F2C9C87DA0077EA45 /* RequestInterceptor + Extension.swift */; };
 		E49222752C9EE7650077EA45 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49222742C9EE7650077EA45 /* ChartView.swift */; };
@@ -129,6 +132,9 @@
 
 /* Begin PBXFileReference section */
 		E40135E42CA15EE70021D351 /* PlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
+		E40135E72CA1C4200021D351 /* HotPlaceSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotPlaceSegmentView.swift; sourceTree = "<group>"; };
+		E40135E92CA1CD5F0021D351 /* SchoolSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolSegmentView.swift; sourceTree = "<group>"; };
+		E40135EB2CA1CDEF0021D351 /* PlaySegmentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySegmentType.swift; sourceTree = "<group>"; };
 		E47B2ECE2C79AF4C0039E2E0 /* SettingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingType.swift; sourceTree = "<group>"; };
 		E492226F2C9C87DA0077EA45 /* RequestInterceptor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RequestInterceptor + Extension.swift"; sourceTree = "<group>"; };
 		E49222742C9EE7650077EA45 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
@@ -262,6 +268,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E40135E62CA1C4090021D351 /* PlaySegment */ = {
+			isa = PBXGroup;
+			children = (
+				E40135E72CA1C4200021D351 /* HotPlaceSegmentView.swift */,
+				E40135E92CA1CD5F0021D351 /* SchoolSegmentView.swift */,
+				E40135EB2CA1CDEF0021D351 /* PlaySegmentType.swift */,
+			);
+			path = PlaySegment;
+			sourceTree = "<group>";
+		};
 		E49222712C9EE7480077EA45 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
@@ -479,6 +495,7 @@
 				E49C9FF52C870BF8001F43A3 /* PlayViewCell.swift */,
 				E49C9FC72C86EFEA001F43A3 /* PlayViewModel.swift */,
 				E40135E42CA15EE70021D351 /* PlayView.swift */,
+				E40135E62CA1C4090021D351 /* PlaySegment */,
 				E4DCD9B72C9FFDD900E06542 /* PlayDetail */,
 			);
 			path = Play;
@@ -978,6 +995,7 @@
 				E4F04C012C96C55B00F653DF /* InitiativeModel.swift in Sources */,
 				E4953D4A2C89D6A2008CBDE5 /* InitiativeDetailView.swift in Sources */,
 				E4953D4E2C89D6E3008CBDE5 /* GraduateDetailView.swift in Sources */,
+				E40135E82CA1C4200021D351 /* HotPlaceSegmentView.swift in Sources */,
 				E4B3FD372C7882C200CB98F3 /* CategoryType.swift in Sources */,
 				E49C9FF92C870C36001F43A3 /* PlayModel.swift in Sources */,
 				E49C9FB02C86ED28001F43A3 /* EventView.swift in Sources */,
@@ -991,6 +1009,7 @@
 				E40135E52CA15EE70021D351 /* PlayView.swift in Sources */,
 				E492227C2C9F2D900077EA45 /* ListDetailSection.swift in Sources */,
 				E4953D7E2C8EE4F2008CBDE5 /* PlaceholderView.swift in Sources */,
+				E40135EA2CA1CD5F0021D351 /* SchoolSegmentView.swift in Sources */,
 				E49C9FB62C86ED54001F43A3 /* InfoView.swift in Sources */,
 				E49C9FF62C870BF8001F43A3 /* PlayViewCell.swift in Sources */,
 				E4953D522C89D725008CBDE5 /* EventDetailView.swift in Sources */,
@@ -999,6 +1018,7 @@
 				E4953D282C899013008CBDE5 /* ListDetailType.swift in Sources */,
 				E4953D5E2C8B0DC3008CBDE5 /* Object.swift in Sources */,
 				E4953DA22C906399008CBDE5 /* WebKitView.swift in Sources */,
+				E40135EC2CA1CDEF0021D351 /* PlaySegmentType.swift in Sources */,
 				E4953D632C8D8497008CBDE5 /* ChartData.swift in Sources */,
 				E4953D802C8EECC8008CBDE5 /* HomeService.swift in Sources */,
 				E4953D262C898B48008CBDE5 /* ListDetailViewModel.swift in Sources */,

@@ -25,6 +25,7 @@ struct FoodView: View {
                     
                     list
                 }
+                .ignoresSafeArea()
                 .padding(.horizontal, 0)
                 .padding(.bottom, 0)
                 .refreshable {
@@ -58,10 +59,8 @@ struct FoodView: View {
         VStack(spacing: 30) {
             Image("food_poster")
                 .resizable()
-                .scaledToFill()
+                .scaledToFit()
                 .frame(maxWidth: .infinity)
-                .frame(height: 235)
-                .padding(.vertical, 5)
             
             HStack {
                 Group {
