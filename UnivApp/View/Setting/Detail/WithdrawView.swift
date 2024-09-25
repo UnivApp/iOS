@@ -39,7 +39,7 @@ struct WithdrawView: View {
                     authViewModel.send(action: .withdraw)
                 }
         case .loading:
-            LoadingView(url: "load")
+            LoadingView(url: "load", size: [150, 150])
         case .success:
             expireUser
         case .fail:
@@ -50,7 +50,7 @@ struct WithdrawView: View {
     var expireUser: some View {
         NavigationStack {
             VStack(alignment: .center, spacing: 10) {
-                LoadingView(url: "withdraw")
+                LoadingView(url: "withdraw", size: [150, 150])
                 
                 Text("회원탈퇴 성공")
                     .font(.system(size: 20, weight: .bold))

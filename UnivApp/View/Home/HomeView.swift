@@ -17,6 +17,9 @@ struct HomeView: View {
     @State private var selectedSegment: SplitType = .employment
     @FocusState private var isFocused: Bool
     
+    @State private var currentIndex: Int = 0
+    private let timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
+    
     var body: some View {
         contentView
         //            .onTapGesture {
@@ -34,7 +37,7 @@ struct HomeView: View {
                     viewModel.send(action: .load)
                 }
         case .loading:
-            LoadingView(url: "congratulations")
+            LoadingView(url: "congratulations", size: [150, 150])
         case .success:
             loadedView
         case .fail:
@@ -46,12 +49,10 @@ struct HomeView: View {
         NavigationStack {
             ScrollView(.vertical) {
                 VStack(alignment: .center, spacing: 20) {
-                    headerView
+                    SearchView(searchText: $viewModel.searchText)
                         .padding(.top, 10)
-                        .padding(.horizontal, 20)
                     
                     categoryView
-//                        .padding(.horizontal, 20)
                     
                     footerView
                 }
@@ -72,62 +73,53 @@ struct HomeView: View {
         }
     }
     
-    var headerView: some View {
-        VStack(alignment: .center, spacing: 20) {
-            HStack {
-                Button {
-                    //TODO: 검색
-                    
-                } label: {
-                    Image("search")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 15, height: 15)
-                }
-                .padding()
-                
-                TextField("대학명/소재지를 입력하세요", text: $viewModel.searchText)
-                    .focused($isFocused)
-                    .font(.system(size: 17, weight: .regular))
-                    .padding()
-            }
-            .padding(.horizontal, 10)
-            .background(Color.homeColor)
-            .cornerRadius(15)
-        }
-    }
-    
     var categoryView: some View {
         VStack(alignment: .leading, spacing: 10) {
             
-            Group {
-                Text("카테고리")
-                    .font(.system(size: 18, weight: .bold))
-                    .foregroundColor(.black)
-                    .padding(.leading, 10)
-                    .padding(.bottom, 10)
-                
-                
-                let columns = Array(repeating: GridItem(.flexible()), count: 4)
-                
-                LazyVGrid(columns: columns, spacing: 10) {
-                    ForEach(CategoryType.allCases, id: \.self) { category in
-                        NavigationLink(destination: category.view) {
-                            VStack {
-                                Image(category.imageName())
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 40, height: 40)
-                                Text(category.title)
-                                    .foregroundColor(.black)
-                                    .font(.system(size: 10, weight: .semibold))
-                            }
+            let columns = Array(repeating: GridItem(.flexible()), count: 4)
+            
+            LazyVGrid(columns: columns, spacing: 10) {
+                ForEach(CategoryType.allCases, id: \.self) { category in
+                    NavigationLink(destination: category.view) {
+                        VStack {
+                            Image(category.imageName())
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 40, height: 40)
+                            Text(category.title)
+                                .foregroundColor(.black)
+                                .font(.system(size: 10, weight: .semibold))
                         }
-                        .environmentObject(continer)
-                        .environmentObject(authViewModel)
                     }
+                    .environmentObject(continer)
+                    .environmentObject(authViewModel)
                 }
-            }.padding(.horizontal, 10)
+            }
+            .padding(.horizontal, 10)
+            .padding(.vertical, 20)
+            
+            TabView(selection: $currentIndex) {
+                ForEach(viewModel.posterData.indices, id: \.self) { index in
+                    //TODO: - NavigationLink
+                    Image(viewModel.posterData[index])
+                        .resizable()
+                        .scaledToFill()
+                        .tag(index)
+                }
+            }
+            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width / 3)
+            .tabViewStyle(PageTabViewStyle())
+            .onReceive(timer) { _ in
+                withAnimation {
+                    currentIndex = (currentIndex + 1) % viewModel.posterData.count
+                }
+            }
+            .onAppear {
+                UIPageControl.appearance().isHidden = true
+            }
+            .onDisappear {
+                UIPageControl.appearance().isHidden = false
+            }
             
             HScrollView(title: [Text("이런 "), Text("핫플 "), Text("어때?")], array: [Object(title: "어린이대공원", image: "hotplace1"),Object(title: "롯데월드", image: "hotplace2"),Object(title: "올림픽공원", image: "hotplace3"),Object(title: "서울숲", image: "hotplace4"),Object(title: "어린이대공원", image: "hotplace1"),Object(title: "롯데월드", image: "hotplace2")], pointColor: .orange, size: 100)
         }

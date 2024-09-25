@@ -10,8 +10,4 @@ import SwiftUI
 
 extension View {
     
-    func startLoading(url: String, isLoading: Binding<Bool>) -> some View {
-        self.modifier(LoadingModifier(url: url, isLoading: isLoading))
-    }
-    
 }

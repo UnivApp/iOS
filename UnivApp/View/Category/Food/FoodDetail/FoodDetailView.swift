@@ -18,7 +18,7 @@ struct FoodDetailView: View {
         case .notRequested:
             PlaceholderView()
         case .loading:
-            LoadingView(url: "congratulations")
+            LoadingView(url: "congratulations", size: [150, 150])
         case .success:
             loadedView
         case .fail:

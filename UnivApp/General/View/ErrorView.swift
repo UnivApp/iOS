@@ -11,7 +11,7 @@ struct ErrorView: View {
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
             ZStack {
-                LoadingView(url: "error")
+                LoadingView(url: "error", size: [150, 150])
                     .padding(.horizontal, 0)
             }
             .padding(.bottom, 10)

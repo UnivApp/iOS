@@ -29,7 +29,7 @@ struct PlayView: View {
                     //TODO: - load
                 }
         case .loading:
-            LoadingView(url: "congratulations")
+            LoadingView(url: "congratulations", size: [150, 150])
         case .success:
             loadedView
         case .fail:
@@ -40,7 +40,6 @@ struct PlayView: View {
         NavigationStack {
             VStack(alignment: .center, spacing: 20) {
                 HStack(spacing: 20) {
-                    Spacer()
                     ForEach(PlaySegmentType.allCases, id: \.self) { segment in
                         Button {
                             self.segmentType = segment
@@ -54,6 +53,7 @@ struct PlayView: View {
                                     .frame(height: 40))
                         }
                     }
+                    Spacer()
                 }
                 .padding(.horizontal, 20)
                 Group {
@@ -62,7 +62,7 @@ struct PlayView: View {
                     } else {
                         SchoolSegmentView(viewModel: PlayViewModel(container: self.container, searchText: ""))
                     }
-                }.padding(.top, -20)
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {

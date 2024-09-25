@@ -17,18 +17,14 @@ struct HotPlaceSegmentView: View {
     var body: some View {
         ScrollView(.vertical) {
             VStack(alignment: .leading, spacing: 30) {
-                Text("핫플🔥 추천")
-                    .font(.system(size: 18, weight: .bold))
-                    .padding(.leading, 20)
-                
                 TabView(selection: $currentIndex) {
                     ForEach(viewModel.hotplaceData.indices, id: \.self) { index in
                         representativePlaceCell(model: viewModel.hotplaceData[index])
                             .tag(index)
                     }
                 }
+                .padding(.top, -20)
                 .frame(height: UIScreen.main.bounds.width * 0.9)
-                .padding(.top, -50)
                 .tabViewStyle(PageTabViewStyle())
                 .onAppear {
                     UIPageControl.appearance().pageIndicatorTintColor = UIColor.lightGray
@@ -44,9 +40,12 @@ struct HotPlaceSegmentView: View {
                     }
                 }
                 
-                ForEach(viewModel.hotplaceData.indices, id: \.self) { index in
-                    HotPlaceViewCell(model: viewModel.hotplaceData[index], index: index)
+                VStack(spacing: 20) {
+                    ForEach(viewModel.hotplaceData.indices, id: \.self) { index in
+                        HotPlaceViewCell(model: viewModel.hotplaceData[index], index: index)
+                    }
                 }
+                .padding(.bottom, 20)
             }
         }
     }

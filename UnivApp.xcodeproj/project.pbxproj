@@ -11,6 +11,8 @@
 		E40135E82CA1C4200021D351 /* HotPlaceSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40135E72CA1C4200021D351 /* HotPlaceSegmentView.swift */; };
 		E40135EA2CA1CD5F0021D351 /* SchoolSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40135E92CA1CD5F0021D351 /* SchoolSegmentView.swift */; };
 		E40135EC2CA1CDEF0021D351 /* PlaySegmentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40135EB2CA1CDEF0021D351 /* PlaySegmentType.swift */; };
+		E40135EE2CA3E7850021D351 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40135ED2CA3E7850021D351 /* SearchView.swift */; };
+		E40135F82CA3F5B90021D351 /* logo_Splash.gif in Resources */ = {isa = PBXBuildFile; fileRef = E40135F72CA3F5B90021D351 /* logo_Splash.gif */; };
 		E47B2ECF2C79AF4C0039E2E0 /* SettingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47B2ECE2C79AF4C0039E2E0 /* SettingType.swift */; };
 		E49222702C9C87DA0077EA45 /* RequestInterceptor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E492226F2C9C87DA0077EA45 /* RequestInterceptor + Extension.swift */; };
 		E49222752C9EE7650077EA45 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49222742C9EE7650077EA45 /* ChartView.swift */; };
@@ -135,6 +137,8 @@
 		E40135E72CA1C4200021D351 /* HotPlaceSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotPlaceSegmentView.swift; sourceTree = "<group>"; };
 		E40135E92CA1CD5F0021D351 /* SchoolSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolSegmentView.swift; sourceTree = "<group>"; };
 		E40135EB2CA1CDEF0021D351 /* PlaySegmentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySegmentType.swift; sourceTree = "<group>"; };
+		E40135ED2CA3E7850021D351 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		E40135F72CA3F5B90021D351 /* logo_Splash.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = logo_Splash.gif; sourceTree = "<group>"; };
 		E47B2ECE2C79AF4C0039E2E0 /* SettingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingType.swift; sourceTree = "<group>"; };
 		E492226F2C9C87DA0077EA45 /* RequestInterceptor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RequestInterceptor + Extension.swift"; sourceTree = "<group>"; };
 		E49222742C9EE7650077EA45 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
@@ -289,6 +293,7 @@
 		E4953D292C89C762008CBDE5 /* Gif */ = {
 			isa = PBXGroup;
 			children = (
+				E40135F72CA3F5B90021D351 /* logo_Splash.gif */,
 				E4953DAC2C906720008CBDE5 /* withdraw.gif */,
 				E4953D8F2C8F35BA008CBDE5 /* error.gif */,
 				E4953D2D2C89C770008CBDE5 /* congratulations.gif */,
@@ -762,6 +767,7 @@
 				E49222782C9F10240077EA45 /* SeperateView.swift */,
 				E4DCD9B22C9FE4D000E06542 /* SplashView.swift */,
 				E4DCD9BF2CA00B8300E06542 /* CustomNavigationBar.swift */,
+				E40135ED2CA3E7850021D351 /* SearchView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -899,6 +905,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4B3FCCF2C7751DD00CB98F3 /* Preview Assets.xcassets in Resources */,
+				E40135F82CA3F5B90021D351 /* logo_Splash.gif in Resources */,
 				E4953D302C89C770008CBDE5 /* firework.gif in Resources */,
 				E4B3FCCC2C7751DD00CB98F3 /* Assets.xcassets in Resources */,
 				E4953D2F2C89C770008CBDE5 /* location.gif in Resources */,
@@ -929,6 +936,7 @@
 				E4953D872C8EEE7D008CBDE5 /* ScoreImageModel.swift in Sources */,
 				E49222752C9EE7650077EA45 /* ChartView.swift in Sources */,
 				E4DCD9B92C9FFDE800E06542 /* PlayDetailViewModel.swift in Sources */,
+				E40135EE2CA3E7850021D351 /* SearchView.swift in Sources */,
 				E4953DB02C906C95008CBDE5 /* ListDetailModel.swift in Sources */,
 				E49C9F9F2C86CF70001F43A3 /* EmptyView.swift in Sources */,
 				E4DCD9C02CA00B8300E06542 /* CustomNavigationBar.swift in Sources */,

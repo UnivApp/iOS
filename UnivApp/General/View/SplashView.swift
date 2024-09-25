@@ -17,15 +17,16 @@ struct SplashView: View {
             AuthView(authViewModel: .init(container: container))
                 .environmentObject(container)
         } else {
-            Image("splashScreen")
-                .resizable()
-                .scaledToFill()
-                .ignoresSafeArea()
-                .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                        isActive = true
+            ZStack {
+                LoadingView(url: "logo_Splash", size: [UIScreen.main.bounds.width - 150, UIScreen.main.bounds.width - 150])
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
+                            self.isActive = true
+                        }
                     }
-                }
+                    .padding(.horizontal, 0)
+                    .padding(.vertical, 0)
+            }
         }
     }
 }
