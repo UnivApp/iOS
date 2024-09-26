@@ -18,7 +18,7 @@ struct MainTabView: View {
                 Group {
                     switch tab {
                     case .home:
-                        HomeView(viewModel: HomeViewModel(container: self.container, searchText: .init()))
+                        HomeView(viewModel: HomeViewModel(container: self.container, searchText: .init()), listViewModel: ListViewModel(container: self.container, searchText: ""))
                             .environmentObject(authViewModel)
                             .environmentObject(container)
                     case .list:
@@ -47,6 +47,8 @@ struct MainTabView: View {
                 .navigationBarBackButtonHidden(true)
                 .onAppear {
                     UINavigationBar.appearance().backgroundColor = .clear
+                    UIPageControl.appearance().pageIndicatorTintColor = .backGray
+                    UIPageControl.appearance().currentPageIndicatorTintColor = .borderGray
                 }
             }
         }

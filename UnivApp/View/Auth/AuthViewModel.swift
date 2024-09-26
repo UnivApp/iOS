@@ -25,7 +25,7 @@ class AuthViewModel: ObservableObject {
         case withdraw
     }
     
-    @Published var authState: AuthState = .unAuth
+    @Published var authState: AuthState = .auth
     @Published var phase: Phase = .notRequested
     
     var userId: String?

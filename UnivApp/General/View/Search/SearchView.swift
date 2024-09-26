@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct SearchView: View {
+    @EnvironmentObject var listViewModel : ListViewModel
     @FocusState var isFocused: Bool
     @Binding var searchText: String
+    
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
             HStack {
                 Button {
-                    //TODO: 검색
-                    
+                    listViewModel.send(action: .search)
                 } label: {
                     Image("search")
                         .resizable()
@@ -46,5 +47,6 @@ struct SearchViewProvider: PreviewProvider {
     static var previews: some View {
         @State var searchText = ""
         SearchView(searchText: $searchText)
+            .environmentObject(ListViewModel(container: DIContainer(services: StubServices()), searchText: ""))
     }
 }

@@ -51,7 +51,7 @@ class HeartViewModel: ObservableObject {
                         self?.heartPhase = .notRequested
                     }
                 } receiveValue: { [weak self] addHeart in
-                    self?.heartPhase = .addHeart
+                    self?.heartPhase = .addHeart(universityId)
                 }.store(in: &subscriptions)
             
         case let .removeHeart(universityId):
@@ -61,7 +61,7 @@ class HeartViewModel: ObservableObject {
                         self?.heartPhase = .notRequested
                     }
                 } receiveValue: { [weak self] removeHeart in
-                    self?.heartPhase = .removeHeart
+                    self?.heartPhase = .removeHeart(universityId)
                 }.store(in: &subscriptions)
         }
     }

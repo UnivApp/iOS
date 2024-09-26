@@ -60,7 +60,7 @@ struct PlayView: View {
                     if segmentType == .hotplace {
                         HotPlaceSegmentView(viewModel: PlayViewModel(container: self.container, searchText: ""))
                     } else {
-                        SchoolSegmentView(viewModel: PlayViewModel(container: self.container, searchText: ""))
+                        SchoolSegmentView(viewModel: PlayViewModel(container: self.container, searchText: ""), listViewModel: ListViewModel(container: self.container, searchText: ""))
                     }
                 }
             }

@@ -10,6 +10,7 @@ import Kingfisher
 
 struct HomeView: View {
     @StateObject var viewModel: HomeViewModel
+    @StateObject var listViewModel: ListViewModel
     @EnvironmentObject var continer: DIContainer
     @EnvironmentObject var authViewModel: AuthViewModel
     
@@ -51,6 +52,7 @@ struct HomeView: View {
                 VStack(alignment: .center, spacing: 20) {
                     SearchView(searchText: $viewModel.searchText)
                         .padding(.top, 10)
+                        .environmentObject(listViewModel)
                     
                     categoryView
                     
@@ -74,7 +76,7 @@ struct HomeView: View {
     }
     
     var categoryView: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 0) {
             
             let columns = Array(repeating: GridItem(.flexible()), count: 4)
             
@@ -96,7 +98,7 @@ struct HomeView: View {
                 }
             }
             .padding(.horizontal, 10)
-            .padding(.vertical, 20)
+            .padding(.top, 20)
             
             TabView(selection: $currentIndex) {
                 ForEach(viewModel.posterData.indices, id: \.self) { index in
@@ -104,29 +106,28 @@ struct HomeView: View {
                     Image(viewModel.posterData[index])
                         .resizable()
                         .scaledToFill()
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width / 3)
                         .tag(index)
                 }
             }
-            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width / 3)
+            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width / 2 + 10)
             .tabViewStyle(PageTabViewStyle())
             .onReceive(timer) { _ in
                 withAnimation {
                     currentIndex = (currentIndex + 1) % viewModel.posterData.count
                 }
             }
-            .onAppear {
-                UIPageControl.appearance().isHidden = true
-            }
-            .onDisappear {
-                UIPageControl.appearance().isHidden = false
-            }
             
             HScrollView(title: [Text("이런 "), Text("핫플 "), Text("어때?")], array: [Object(title: "어린이대공원", image: "hotplace1"),Object(title: "롯데월드", image: "hotplace2"),Object(title: "올림픽공원", image: "hotplace3"),Object(title: "서울숲", image: "hotplace4"),Object(title: "어린이대공원", image: "hotplace1"),Object(title: "롯데월드", image: "hotplace2")], pointColor: .orange, size: 100)
+                .padding(.top, -20)
         }
     }
     
     var footerView: some View {
-        VStack(alignment: .center, spacing: 10) {
+        VStack(alignment: .center, spacing: 20) {
+            SeperateView()
+                .frame(width: UIScreen.main.bounds.width, height: 20)
+            
             
             //TODO: - 구글 애드몹
             
@@ -197,7 +198,7 @@ struct HomeView_Previews: PreviewProvider {
     static let container = DIContainer(services: StubServices())
     static let authViewModel = AuthViewModel(container: .init(services: StubServices()))
     static var previews: some View {
-        HomeView(viewModel: HomeViewModel(container: Self.container, searchText: ""))
+        HomeView(viewModel: HomeViewModel(container: Self.container, searchText: ""), listViewModel: ListViewModel(container: Self.container, searchText: ""))
             .environmentObject(Self.authViewModel)
             .environmentObject(Self.container)
     }

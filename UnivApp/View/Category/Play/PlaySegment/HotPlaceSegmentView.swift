@@ -10,9 +10,8 @@ import SwiftUI
 struct HotPlaceSegmentView: View {
     @StateObject var viewModel: PlayViewModel
     
-    
     @State private var currentIndex: Int = 0
-    private let timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
+    private let timer = Timer.publish(every: 4, on: .main, in: .common).autoconnect()
     
     var body: some View {
         ScrollView(.vertical) {
@@ -26,14 +25,6 @@ struct HotPlaceSegmentView: View {
                 .padding(.top, -20)
                 .frame(height: UIScreen.main.bounds.width * 0.9)
                 .tabViewStyle(PageTabViewStyle())
-                .onAppear {
-                    UIPageControl.appearance().pageIndicatorTintColor = UIColor.lightGray
-                    UIPageControl.appearance().currentPageIndicatorTintColor = .black
-                }
-                .onDisappear {
-                    UIPageControl.appearance().pageIndicatorTintColor = UIColor.lightGray
-                    UIPageControl.appearance().currentPageIndicatorTintColor = .white
-                }
                 .onReceive(timer) { _ in
                     withAnimation {
                         currentIndex = (currentIndex + 1) % viewModel.hotplaceData.count
