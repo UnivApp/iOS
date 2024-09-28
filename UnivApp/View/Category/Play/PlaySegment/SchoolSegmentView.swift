@@ -13,7 +13,23 @@ struct SchoolSegmentView: View {
     var body: some View {
         ScrollView(.vertical) {
             VStack(alignment: .leading, spacing: 30) {
-                HScrollView(title: [Text("이 학교 "), Text("핫플"), Text("은 뭐가 있을까?")], array: [Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo")], pointColor: .pink, size: 60)
+                Group {
+                    Text("대학생들은 뭐하고 놀지?\n")
+                        .font(.system(size: 25, weight: .bold))
+                     + Text("서울 도심 25개 자치구 #핫플레이스")
+                        .font(.system(size: 15, weight: .regular))
+                        .foregroundColor(.gray)
+                }
+                .padding(.leading, 20)
+                .lineSpacing(10)
+                
+                Image("play_poster")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: UIScreen.main.bounds.width)
+                
+                SchoolToHotplaceCell(model: viewModel.data)
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width / 2)
                 
                 SeperateView()
                     .frame(height: 20)
@@ -32,6 +48,51 @@ struct SchoolSegmentView: View {
             }
             .padding(.top, 20)
         }
+    }
+}
+
+fileprivate struct SchoolToHotplaceCell: View {
+    var model: [PlayDetailModel]
+    
+    @State var currentIndex: Int = 0
+    private let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
+    
+    var body: some View {
+        TabView(selection: $currentIndex) {
+            ForEach(model.indices, id: \.self) { itemIndex in
+                VStack(alignment: .center) {
+                    Text("세종대학교")
+                        .font(.system(size: 20, weight: .heavy))
+                        .foregroundColor(.gray)
+                    
+                    HStack(spacing: -CGFloat((5 * model.count))) {
+                        if let images = model[itemIndex].images {
+                            ForEach(images.indices, id: \.self) { imageIndex in
+                                if imageIndex < 4 {
+                                    Image(images[imageIndex] ?? "")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 100, height: 100)
+                                        .cornerRadius(15)
+                                }
+                            }
+                        }
+                    }
+                }
+                .tag(itemIndex)
+            }
+        }
+        .tabViewStyle(PageTabViewStyle())
+        .onReceive(timer) { _ in
+            withAnimation {
+                currentIndex = (currentIndex + 1) % model.count
+            }
+        }
+        .overlay(alignment: .bottomTrailing) {
+            CustomPageControl(currentPage: $currentIndex, numberOfPages: model.count)
+                .cornerRadius(15)
+        }
+        .padding(.horizontal, 20)
     }
 }
 

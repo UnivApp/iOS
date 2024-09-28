@@ -11,7 +11,7 @@ struct HotPlaceSegmentView: View {
     @StateObject var viewModel: PlayViewModel
     
     @State private var currentIndex: Int = 0
-    private let timer = Timer.publish(every: 4, on: .main, in: .common).autoconnect()
+    private let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     
     var body: some View {
         ScrollView(.vertical) {
