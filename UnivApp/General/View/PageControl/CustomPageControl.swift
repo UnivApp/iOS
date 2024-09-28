@@ -15,14 +15,14 @@ struct CustomPageControl: View {
             //TODO: - NavigationLink
         } label: {
             Group {
-                Text("\(currentPage + 1) /")
+                Text(" \(currentPage + 1) /")
                     .foregroundColor(.white)
                 +
-                Text(" \(numberOfPages) :")
+                Text(" \(numberOfPages) +")
                     .foregroundColor(.borderGray)
             }
-            .font(.system(size: 15, weight: .bold))
-            .frame(width: 15 * 5, height: 25)
+            .font(.system(size: 12, weight: .bold))
+            .frame(width: 12 * 4, height: 20)
             .background(.black.opacity(0.6))
         }
     }
