@@ -19,7 +19,7 @@ struct HomeView: View {
     @FocusState private var isFocused: Bool
     
     @State private var currentIndex: Int = 0
-    private let timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
+    private let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     
     var body: some View {
         contentView
@@ -76,7 +76,7 @@ struct HomeView: View {
     }
     
     var categoryView: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .leading, spacing: 15) {
             
             let columns = Array(repeating: GridItem(.flexible()), count: 4)
             
@@ -98,7 +98,7 @@ struct HomeView: View {
                 }
             }
             .padding(.horizontal, 10)
-            .padding(.top, 20)
+            .padding(.vertical, 20)
             
             TabView(selection: $currentIndex) {
                 ForEach(viewModel.posterData.indices, id: \.self) { index in
@@ -110,16 +110,18 @@ struct HomeView: View {
                         .tag(index)
                 }
             }
-            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width / 2 + 10)
+            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width / 3)
             .tabViewStyle(PageTabViewStyle())
             .onReceive(timer) { _ in
                 withAnimation {
                     currentIndex = (currentIndex + 1) % viewModel.posterData.count
                 }
             }
+            .overlay(alignment: .bottomTrailing) {
+                CustomPageControl(currentPage: $currentIndex, numberOfPages: viewModel.posterData.count)
+            }
             
             HScrollView(title: [Text("이런 "), Text("핫플 "), Text("어때?")], array: [Object(title: "어린이대공원", image: "hotplace1"),Object(title: "롯데월드", image: "hotplace2"),Object(title: "올림픽공원", image: "hotplace3"),Object(title: "서울숲", image: "hotplace4"),Object(title: "어린이대공원", image: "hotplace1"),Object(title: "롯데월드", image: "hotplace2")], pointColor: .orange, size: 100)
-                .padding(.top, -20)
         }
     }
     

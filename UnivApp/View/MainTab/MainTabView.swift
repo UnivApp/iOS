@@ -47,8 +47,7 @@ struct MainTabView: View {
                 .navigationBarBackButtonHidden(true)
                 .onAppear {
                     UINavigationBar.appearance().backgroundColor = .clear
-                    UIPageControl.appearance().pageIndicatorTintColor = .backGray
-                    UIPageControl.appearance().currentPageIndicatorTintColor = .borderGray
+                    UIPageControl.appearance().isHidden = true
                 }
             }
         }

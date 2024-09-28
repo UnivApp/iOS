@@ -15,15 +15,19 @@ struct HotPlaceSegmentView: View {
     
     var body: some View {
         ScrollView(.vertical) {
-            VStack(alignment: .leading, spacing: 30) {
+            VStack(alignment: .center, spacing: 30) {
                 TabView(selection: $currentIndex) {
                     ForEach(viewModel.hotplaceData.indices, id: \.self) { index in
                         representativePlaceCell(model: viewModel.hotplaceData[index])
                             .tag(index)
                     }
                 }
-                .padding(.top, -20)
-                .frame(height: UIScreen.main.bounds.width * 0.9)
+                .overlay(alignment: .bottomTrailing) {
+                    CustomPageControl(currentPage: $currentIndex, numberOfPages: viewModel.hotplaceData.count)
+                        .cornerRadius(15)
+                }
+                .padding(.horizontal, 20)
+                .frame(height: UIScreen.main.bounds.width * 0.7)
                 .tabViewStyle(PageTabViewStyle())
                 .onReceive(timer) { _ in
                     withAnimation {
@@ -45,11 +49,11 @@ struct HotPlaceSegmentView: View {
 fileprivate struct representativePlaceCell: View {
     var model: PlayModel
     var body: some View {
-        ZStack(alignment: .bottom){
+        ZStack(alignment: .bottomLeading){
             Image(model.image ?? "")
                 .resizable()
                 .scaledToFill()
-                .frame(width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.width * 0.7)
+                .frame(height: UIScreen.main.bounds.width * 0.7)
                 .cornerRadius(15)
                 .opacity(0.7)
             
@@ -61,9 +65,9 @@ fileprivate struct representativePlaceCell: View {
                     .font(.system(size: 18, weight: .heavy))
             }
             .foregroundColor(.white)
-            .lineLimit(nil)
-            .fixedSize(horizontal: false, vertical: true)
+            .lineLimit(1)
             .padding(.bottom, 30)
+            .padding(.leading, 30)
         }
     }
 }

@@ -12,6 +12,7 @@ struct PlayDetailView: View {
     @Environment(\.dismiss) var dismiss
     
     @State var checkScrollHeight: Bool = false
+    @State private var currentIndex: Int = 0
     
     var body: some View {
         contentView
@@ -34,19 +35,25 @@ struct PlayDetailView: View {
         GeometryReader { proxy in
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-                    TabView {
+                    TabView(selection: $currentIndex) {
                         if let images = viewModel.data.images {
-                            ForEach(images, id: \.self) { item in
-                                if let image = item {
+                            ForEach(images.indices, id: \.self) { index in
+                                if let image = images[index] {
                                     Image(image)
                                         .resizable()
                                         .scaledToFit()
+                                        .tag(index)
                                 }
                             }
                         }
                     }
                     .frame(width: proxy.size.width, height: proxy.size.width)
                     .tabViewStyle(PageTabViewStyle())
+                    .overlay(alignment: .bottomTrailing) {
+                        if let numberOfPages = viewModel.data.images {
+                            CustomPageControl(currentPage: $currentIndex, numberOfPages: numberOfPages.count)
+                        }
+                    }
                     
                     Group {
                         Text(viewModel.data.title ?? "")
