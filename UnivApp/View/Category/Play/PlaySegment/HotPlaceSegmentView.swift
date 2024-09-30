@@ -25,6 +25,8 @@ struct HotPlaceSegmentView: View {
                 .overlay(alignment: .bottomTrailing) {
                     CustomPageControl(currentPage: $currentIndex, numberOfPages: viewModel.hotplaceData.count)
                         .cornerRadius(15)
+                        .padding(.bottom, 10)
+                        .padding(.trailing, 10)
                 }
                 .padding(.horizontal, 20)
                 .frame(height: UIScreen.main.bounds.width * 0.7)

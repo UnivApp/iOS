@@ -36,8 +36,8 @@ struct HScrollView: View {
                                 .padding(.vertical, 20)
                         }
                     }
+                    .padding(.leading, 10)
                 }
-                .padding(.leading, 5)
             }
         }
     }

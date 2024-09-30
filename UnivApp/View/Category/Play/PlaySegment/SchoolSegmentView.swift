@@ -29,7 +29,8 @@ struct SchoolSegmentView: View {
                     .frame(width: UIScreen.main.bounds.width)
                 
                 SchoolToHotplaceCell(model: viewModel.data)
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width / 2)
+                    .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.width / 2)
+                    .padding(.horizontal, 20)
                 
                 SeperateView()
                     .frame(height: 20)
@@ -60,19 +61,24 @@ fileprivate struct SchoolToHotplaceCell: View {
     var body: some View {
         TabView(selection: $currentIndex) {
             ForEach(model.indices, id: \.self) { itemIndex in
-                VStack(alignment: .center) {
-                    Text("세종대학교")
-                        .font(.system(size: 20, weight: .heavy))
-                        .foregroundColor(.gray)
+                HStack {
+                    VStack(alignment: .center, spacing: 5) {
+                        Text("세종대학교")
+                            .font(.system(size: 20, weight: .semibold))
+                        Text("#어린이대공원\n#롯데월드\n#뚝섬유원지")
+                            .font(.system(size: 12, weight: .regular))
+                    }.foregroundColor(.black)
                     
-                    HStack(spacing: -CGFloat((5 * model.count))) {
+                    
+                    Spacer()
+                    HStack(spacing: -CGFloat((10 * model.count))) {
                         if let images = model[itemIndex].images {
                             ForEach(images.indices, id: \.self) { imageIndex in
                                 if imageIndex < 4 {
                                     Image(images[imageIndex] ?? "")
                                         .resizable()
                                         .scaledToFit()
-                                        .frame(width: 100, height: 100)
+                                        .frame(width: 80, height: 80)
                                         .cornerRadius(15)
                                 }
                             }
@@ -91,8 +97,10 @@ fileprivate struct SchoolToHotplaceCell: View {
         .overlay(alignment: .bottomTrailing) {
             CustomPageControl(currentPage: $currentIndex, numberOfPages: model.count)
                 .cornerRadius(15)
+                .padding(.bottom, 20)
         }
         .padding(.horizontal, 20)
+        .background(RoundedRectangle(cornerRadius: 15).fill(Color.homeColor))
     }
 }
 
