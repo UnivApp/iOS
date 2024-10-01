@@ -13,12 +13,38 @@ struct MouView: View {
     @StateObject var viewModel: MouViewModel
     @Environment(\.dismiss) var dismiss
     
+    @State var mouTypeSelected: MouType? = nil
     
     var body: some View {
         NavigationStack {
             ScrollView(.vertical) {
                 VStack(alignment: .leading, spacing: 30) {
-                    //TODO: - 토글
+                    HStack(spacing: 10) {
+                        ForEach(MouType.allCases, id: \.self) { item in
+                            Button {
+                                self.mouTypeSelected = item
+                                if item == .receipt {
+                                    //TODO: - 접수 중 로드
+                                } else {
+                                    //TODO: - 접수종료 로드
+                                }
+                            } label: {
+                                Text(item.title)
+                                    .font(.system(size: 15, weight: .semibold))
+                                    .foregroundColor(mouTypeSelected == item ? .blue : .black)
+                                    .frame(width: 80, height: 30)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 15)
+                                            .stroke(mouTypeSelected == item ? . blue : .gray, lineWidth: 1)
+                                    )
+                            }
+                        }
+                    }
+                    .padding(.leading, 20)
+                    .padding(.top, 20)
+                    
+                    SeperateView()
+                        .frame(width: UIScreen.main.bounds.width, height: 20)
                     
                     Group {
                         Text("\(viewModel.MouData.count)")
