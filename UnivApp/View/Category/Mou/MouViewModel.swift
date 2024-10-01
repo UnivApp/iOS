@@ -14,25 +14,24 @@ class MouViewModel: ObservableObject {
         
     }
     
-    @Published var searchText: String
+    @Published var MouData: [MouModel] = [
+        MouModel(title: "2024학년도 지역대학 연계 진로체험", link: nil, year: "2025학년도", category: "전공체험", schoolName: "한남대학교[본교]", date: "2024-04-01, 2024-12-31", location: "[기타]한남대학교, 해당 중/고등학교 및 온라인", receipt: "접수 중", description: "**2024학년도 지역대학 연계 진로체험 프로그램**을 아래와 같이 운영하오니 많은 신청 바랍니다. \n**1. 일시:** 2024. 04. ~ 12.\n**2. 장소:** 한남대학교, 해당 중·고교 및 온라인 운영 (신청 가능 지역)\n**3. 대상:** 대전지역 중·고등학생\n**4. 운영방법:** 대면(대학방문형, 중·고교방문형) 및 비대면(블렌디드 진로체험 등) 병행\n **5. 신청방법:** 중·고등학교 업무담당교사가 「꿈길」 을 통해 진로체험 프로그램 신청  (https://www.ggoomgil.go.kr/front/index.do)\n**6. 문의:** 한남대학교 입학관리실 담당자**(☎042-629-7958)**"),
+        MouModel(title: "2024학년도 지역대학 연계 진로체험", link: nil, year: "2025학년도", category: "전공체험", schoolName: "한남대학교[본교]", date: "2024-04-01, 2024-12-31", location: "[기타]한남대학교, 해당 중/고등학교 및 온라인", receipt: "접수 종료", description: "**2024학년도 지역대학 연계 진로체험 프로그램**을 아래와 같이 운영하오니 많은 신청 바랍니다. \n**1. 일시:** 2024. 04. ~ 12.\n**2. 장소:** 한남대학교, 해당 중·고교 및 온라인 운영 (신청 가능 지역)\n**3. 대상:** 대전지역 중·고등학생\n**4. 운영방법:** 대면(대학방문형, 중·고교방문형) 및 비대면(블렌디드 진로체험 등) 병행\n **5. 신청방법:** 중·고등학교 업무담당교사가 「꿈길」 을 통해 진로체험 프로그램 신청  (https://www.ggoomgil.go.kr/front/index.do)\n**6. 문의:** 한남대학교 입학관리실 담당자**(☎042-629-7958)**"),
+        MouModel(title: "2024학년도 지역대학 연계 진로체험", link: nil, year: "2025학년도", category: "전공체험", schoolName: "한남대학교[본교]", date: "2024-04-01, 2024-12-31", location: "[기타]한남대학교, 해당 중/고등학교 및 온라인", receipt: "접수 중", description: "**2024학년도 지역대학 연계 진로체험 프로그램**을 아래와 같이 운영하오니 많은 신청 바랍니다. \n**1. 일시:** 2024. 04. ~ 12.\n**2. 장소:** 한남대학교, 해당 중·고교 및 온라인 운영 (신청 가능 지역)\n**3. 대상:** 대전지역 중·고등학생\n**4. 운영방법:** 대면(대학방문형, 중·고교방문형) 및 비대면(블렌디드 진로체험 등) 병행\n **5. 신청방법:** 중·고등학교 업무담당교사가 「꿈길」 을 통해 진로체험 프로그램 신청  (https://www.ggoomgil.go.kr/front/index.do)\n**6. 문의:** 한남대학교 입학관리실 담당자**(☎042-629-7958)**"),
+        MouModel(title: "2024학년도 지역대학 연계 진로체험", link: nil, year: "2025학년도", category: "전공체험", schoolName: "한남대학교[본교]", date: "2024-04-01, 2024-12-31", location: "[기타]한남대학교, 해당 중/고등학교 및 온라인", receipt: "접수 종료", description: "**2024학년도 지역대학 연계 진로체험 프로그램**을 아래와 같이 운영하오니 많은 신청 바랍니다. \n**1. 일시:** 2024. 04. ~ 12.\n**2. 장소:** 한남대학교, 해당 중·고교 및 온라인 운영 (신청 가능 지역)\n**3. 대상:** 대전지역 중·고등학생\n**4. 운영방법:** 대면(대학방문형, 중·고교방문형) 및 비대면(블렌디드 진로체험 등) 병행\n **5. 신청방법:** 중·고등학교 업무담당교사가 「꿈길」 을 통해 진로체험 프로그램 신청  (https://www.ggoomgil.go.kr/front/index.do)\n**6. 문의:** 한남대학교 입학관리실 담당자**(☎042-629-7958)**"),
+        MouModel(title: "2024학년도 지역대학 연계 진로체험", link: nil, year: "2025학년도", category: "전공체험", schoolName: "한남대학교[본교]", date: "2024-04-01, 2024-12-31", location: "[기타]한남대학교, 해당 중/고등학교 및 온라인", receipt: "접수 중", description: "**2024학년도 지역대학 연계 진로체험 프로그램**을 아래와 같이 운영하오니 많은 신청 바랍니다. \n**1. 일시:** 2024. 04. ~ 12.\n**2. 장소:** 한남대학교, 해당 중·고교 및 온라인 운영 (신청 가능 지역)\n**3. 대상:** 대전지역 중·고등학생\n**4. 운영방법:** 대면(대학방문형, 중·고교방문형) 및 비대면(블렌디드 진로체험 등) 병행\n **5. 신청방법:** 중·고등학교 업무담당교사가 「꿈길」 을 통해 진로체험 프로그램 신청  (https://www.ggoomgil.go.kr/front/index.do)\n**6. 문의:** 한남대학교 입학관리실 담당자**(☎042-629-7958)**"),
+        MouModel(title: "2024학년도 지역대학 연계 진로체험", link: nil, year: "2025학년도", category: "전공체험", schoolName: "한남대학교[본교]", date: "2024-04-01, 2024-12-31", location: "[기타]한남대학교, 해당 중/고등학교 및 온라인", receipt: "접수 중", description: "**2024학년도 지역대학 연계 진로체험 프로그램**을 아래와 같이 운영하오니 많은 신청 바랍니다. \n**1. 일시:** 2024. 04. ~ 12.\n**2. 장소:** 한남대학교, 해당 중·고교 및 온라인 운영 (신청 가능 지역)\n**3. 대상:** 대전지역 중·고등학생\n**4. 운영방법:** 대면(대학방문형, 중·고교방문형) 및 비대면(블렌디드 진로체험 등) 병행\n **5. 신청방법:** 중·고등학교 업무담당교사가 「꿈길」 을 통해 진로체험 프로그램 신청  (https://www.ggoomgil.go.kr/front/index.do)\n**6. 문의:** 한남대학교 입학관리실 담당자**(☎042-629-7958)**")
+    ]
     
     private var container: DIContainer
     
-    init(searchText: String, container: DIContainer) {
-        self.searchText = searchText
+    init(container: DIContainer) {
         self.container = container
     }
     
     func send(action: Action) {
         
     }
-    
-    var stub: [ListModel] = [
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3")
-    ]
     
 }
 

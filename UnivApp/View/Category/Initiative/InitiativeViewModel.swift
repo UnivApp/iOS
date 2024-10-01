@@ -14,8 +14,8 @@ class InitiativeViewModel: ObservableObject {
     }
     
     var category: [Object] = [
-        Object(title: "QS 세계대학평가", image: "QS"),
-        Object(title: "The 세계대학평가", image: "The"),
+        Object(title: "QS 대학평가", image: "QS"),
+        Object(title: "The 대학평가", image: "The"),
         Object(title: "ARWU", image: "ARWU"),
         Object(title: "CWUR", image: "CWUR"),
         Object(title: "USN & WR", image: "USNWR"),

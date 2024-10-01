@@ -39,7 +39,7 @@ struct PlayView: View {
     var loadedView: some View {
         NavigationStack {
             VStack(alignment: .center, spacing: 20) {
-                HStack(spacing: 20) {
+                HStack(spacing: 10) {
                     ForEach(PlaySegmentType.allCases, id: \.self) { segment in
                         Button {
                             self.segmentType = segment

@@ -16,8 +16,11 @@ struct AuthView: View {
         VStack {
             switch authViewModel.authState {
             case .unAuth:
-                LoginView()
+                MainTabView()
+                    .environmentObject(container)
                     .environmentObject(authViewModel)
+//                LoginView()
+//                    .environmentObject(authViewModel)
             case .auth:
                 MainTabView()
                     .environmentObject(container)

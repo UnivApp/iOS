@@ -30,7 +30,7 @@ struct InitiativeView: View {
                         .foregroundColor(.black)
                         
                     ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 5) {
+                        HStack(spacing: 15) {
                             ForEach(viewModel.category, id: \.self) { item in
                                 categoryViewCell(categoryItem: item)
                             }
@@ -85,16 +85,16 @@ fileprivate struct categoryViewCell: View {
                 Image(categoryItem.image)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 40, height: 40)
+                    .frame(width: 30, height: 30)
                     .padding()
                     .background(RoundedRectangle(cornerRadius: 15).fill(Color.homeColor))
                 
                 Text(categoryItem.title)
-                    .font(.system(size: 12, weight: .semibold))
+                    .font(.system(size: 10, weight: .semibold))
                     .foregroundColor(.black)
             }
         }
-        .frame(width: 100, height: 100)
+        .frame(height: 100)
     }
 }
 

@@ -14,7 +14,7 @@ struct SchoolSegmentView: View {
         ScrollView(.vertical) {
             VStack(alignment: .leading, spacing: 30) {
                 Group {
-                    Text("대학생들은 뭐하고 놀지?\n")
+                    Text("대학생들은 어디서 놀지?\n")
                         .font(.system(size: 25, weight: .bold))
                      + Text("서울 도심 25개 자치구 #핫플레이스")
                         .font(.system(size: 15, weight: .regular))
@@ -61,29 +61,35 @@ fileprivate struct SchoolToHotplaceCell: View {
     var body: some View {
         TabView(selection: $currentIndex) {
             ForEach(model.indices, id: \.self) { itemIndex in
-                HStack {
-                    VStack(alignment: .center, spacing: 5) {
-                        Text("세종대학교")
-                            .font(.system(size: 20, weight: .semibold))
-                        Text("#어린이대공원\n#롯데월드\n#뚝섬유원지")
-                            .font(.system(size: 12, weight: .regular))
-                    }.foregroundColor(.black)
-                    
-                    
-                    Spacer()
-                    HStack(spacing: -CGFloat((10 * model.count))) {
-                        if let images = model[itemIndex].images {
-                            ForEach(images.indices, id: \.self) { imageIndex in
-                                if imageIndex < 4 {
-                                    Image(images[imageIndex] ?? "")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 80, height: 80)
-                                        .cornerRadius(15)
+                VStack(spacing: 20) {
+                    HStack {
+                        VStack(alignment: .center, spacing: 10) {
+                            Text("세종대학교")
+                                .font(.system(size: 18, weight: .bold))
+                            Text("#어린이대공원\n#롯데월드\n#뚝섬유원지")
+                                .font(.system(size: 12, weight: .regular))
+                                .lineSpacing(3)
+                        }.foregroundColor(.black)
+                        
+                        
+                        Spacer()
+                        HStack(spacing: -CGFloat((10 * model.count))) {
+                            if let images = model[itemIndex].images {
+                                ForEach(images.indices, id: \.self) { imageIndex in
+                                    if imageIndex < 4 {
+                                        Image(images[imageIndex] ?? "")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 80, height: 80)
+                                            .cornerRadius(15)
+                                    }
                                 }
                             }
                         }
                     }
+                    Text("대학별 다양한 핫플을 확인해 보세요!")
+                        .foregroundColor(.gray)
+                        .font(.system(size: 12, weight: .semibold))
                 }
                 .tag(itemIndex)
             }

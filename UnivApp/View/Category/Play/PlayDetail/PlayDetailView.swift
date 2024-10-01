@@ -33,7 +33,7 @@ struct PlayDetailView: View {
     
     var loadedView: some View {
         GeometryReader { proxy in
-            ScrollView {
+            ScrollView(.vertical) {
                 VStack(alignment: .leading, spacing: 20) {
                     TabView(selection: $currentIndex) {
                         if let images = viewModel.data.images {
