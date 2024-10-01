@@ -90,13 +90,13 @@ enum ListDetailType: String, CaseIterable {
         case .graduate:
             return AnyView(GraduateView(viewModel: GraduateViewModel(searchText: .init(), container: .init(services: Services()))))
         case .info:
-            return AnyView(InfoView(viewModel: InfoViewModel(searchText: .init(), container: .init(services: Services()))))
+            return AnyView(InfoView(viewModel: InfoViewModel(container: .init(services: Services()))))
         case .initiative:
-            return AnyView(InitiativeView(viewModel: InitiativeViewModel(searchText: .init(), container: .init(services: Services()))))
+            return AnyView(InitiativeView(viewModel: InitiativeViewModel(container: .init(services: Services()))))
         case .money:
             return AnyView(MoneyView(viewModel: MoneyViewModel(searchText: .init(), container: .init(services: Services()))))
         case .mou:
-            return AnyView(MouView(viewModel: MouViewModel(searchText: .init(), container: .init(services: Services()))))
+            return AnyView(MouView(viewModel: MouViewModel(container: .init(services: Services()))))
         case .play:
             return AnyView(PlayView(viewModel: PlayViewModel(container: .init(services: Services()), searchText: .init())))
         }

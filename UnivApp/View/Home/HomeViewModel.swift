@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import UIKit
+import SwiftUI
 
 class HomeViewModel: ObservableObject {
     
@@ -19,6 +20,7 @@ class HomeViewModel: ObservableObject {
     @Published var phase: Phase = .notRequested
     @Published var calendarData: [Date:UIImage] = .init() //TODO: - 캘린더 데이터
     @Published var InitiativeData: [InitiativeModel] = .init() //TODO: - 입결 데이터
+    @Published var posterData: [String] = ["food_poster", "event_poster", "rank_poster", "graduate_poster", "play_poster", "news_poster"]
     
     
     private var container: DIContainer

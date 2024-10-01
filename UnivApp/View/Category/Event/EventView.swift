@@ -38,32 +38,21 @@ struct EventView: View {
                         Button(action: {
                             dismiss()
                         }, label: {
-                            Image("back")
+                            Image("blackback")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 30, height: 30)
+                                .frame(width: 20, height: 20)
                         })
                         Image("event_navi")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 70, height: 60)
+                            .frame(width: 120, height: 60)
                     }
                 }
             }
         }
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .tabBar)
-        .onAppear {
-            UIPageControl.appearance().currentPageIndicatorTintColor = .black
-            UIPageControl.appearance().pageIndicatorTintColor = .gray
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = UIColor.white
-            appearance.shadowColor = nil
-            
-            UINavigationBar.appearance().standardAppearance = appearance
-            UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        }
     }
     
     var search: some View {

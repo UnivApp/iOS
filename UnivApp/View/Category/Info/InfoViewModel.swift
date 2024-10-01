@@ -13,12 +13,19 @@ class InfoViewModel: ObservableObject {
         
     }
     
-    @Published var searchText: String
+    @Published var newsData: [NewsModel] = [
+        NewsModel(title: "통합적 관점 측정...20208 수능 통사/통과 문항 공개", link: "", date: "2024-09-26", year: "2025", extract: "발췌 <EBS뉴스 2024-09-26>"),
+        NewsModel(title: "통합적 관점 측정...20208 수능 통사/통과 문항 공개", link: "", date: "2024-09-26", year: "2025", extract: "발췌 <EBS뉴스 2024-09-26>"),
+        NewsModel(title: "통합적 관점 측정...20208 수능 통사/통과 문항 공개", link: "", date: "2024-09-26", year: "2025", extract: "발췌 <EBS뉴스 2024-09-26>"),
+        NewsModel(title: "통합적 관점 측정...20208 수능 통사/통과 문항 공개", link: "", date: "2024-09-26", year: "2025", extract: "발췌 <EBS뉴스 2024-09-26>"),
+        NewsModel(title: "통합적 관점 측정...20208 수능 통사/통과 문항 공개", link: "", date: "2024-09-26", year: "2025", extract: "발췌 <EBS뉴스 2024-09-26>"),
+        NewsModel(title: "통합적 관점 측정...20208 수능 통사/통과 문항 공개", link: "", date: "2024-09-26", year: "2025", extract: "발췌 <EBS뉴스 2024-09-26>"),
+        NewsModel(title: "통합적 관점 측정...20208 수능 통사/통과 문항 공개", link: "", date: "2024-09-26", year: "2025", extract: "발췌 <EBS뉴스 2024-09-26>")
+    ]
     
     private var container: DIContainer
     
-    init(searchText: String, container: DIContainer) {
-        self.searchText = searchText
+    init(container: DIContainer) {
         self.container = container
     }
     

@@ -16,20 +16,28 @@ struct InfoView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                search
-                    .padding(.bottom, 20)
-                    .padding(.top, 20)
-                
-                Spacer()
-                
-                ScrollView(.vertical) {
-                    list
-                }
-                .padding(.horizontal, 0)
-                .padding(.bottom, 0)
-                .refreshable {
+            ScrollView(.vertical) {
+                VStack(alignment: .leading, spacing: 30) {
+                    Image("news_poster")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: UIScreen.main.bounds.width)
+                        .padding(.top, 20)
                     
+                    Group {
+                        Text("\(viewModel.newsData.count)")
+                            .font(.system(size: 12, weight: .heavy))
+                        +
+                        Text("건\t|   날짜순")
+                            .font(.system(size: 12, weight: .regular))
+                    }
+                    .foregroundColor(.black)
+                    .padding(.leading, 20)
+                    
+                    ForEach(viewModel.newsData, id: \.self) { newsItem in
+                        NewsCell(model: newsItem)
+                            .padding(.horizontal, 20)
+                    }
                 }
             }
             .toolbar {
@@ -38,71 +46,53 @@ struct InfoView: View {
                         Button(action: {
                             dismiss()
                         }, label: {
-                            Image("back")
+                            Image("blackback")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 30, height: 30)
+                                .frame(width: 20, height: 20)
                         })
                         Image("info_navi")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 70, height: 60)
+                            .frame(width: 120, height: 60)
                     }
                 }
             }
         }
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .tabBar)
-        .onAppear {
-            UIPageControl.appearance().currentPageIndicatorTintColor = .black
-            UIPageControl.appearance().pageIndicatorTintColor = .gray
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = UIColor.white
-            appearance.shadowColor = nil
-            
-            UINavigationBar.appearance().standardAppearance = appearance
-            UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        }
     }
-    
-    var search: some View {
-        HStack {
-            Group {
-                Button {
-                    //TODO: 검색
-                } label: {
-                    Image("search")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 20, height: 20)
+}
+
+fileprivate struct NewsCell: View {
+    var model: NewsModel
+    var body: some View {
+        VStack {
+            Button {
+                //TODO: - URL Open
+            } label: {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text(model.title)
+                        .font(.system(size: 18, weight: .bold))
+                        .foregroundColor(.black)
+                        .lineLimit(nil)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .multilineTextAlignment(.leading)
+                    
+                    Text(model.extract)
+                        .font(.system(size: 15, weight: .semibold))
+                        .foregroundColor(.gray)
+                    
+                    HStack{
+                        Spacer()
+                        Text(model.date)
+                            .font(.system(size: 15, weight: .regular))
+                            .foregroundColor(.gray)
+                    }
+                    Divider()
                 }
-                .padding()
-                
-                TextField("대학명/소재지를 입력하세요", text: $viewModel.searchText)
-                    .font(.system(size: 17, weight: .bold))
-                    .padding()
             }
-            .padding(.leading, 10)
         }
-        .background(Color(.backGray))
-        .cornerRadius(15)
-        .padding(.horizontal, 30)
-    }
-    
-    var list: some View {
-        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
-//            ForEach(viewModel.stub, id: \.self) { cell in
-//                if let image = cell.image, let title = cell.title, let heartNum = cell.heartNum {
-//                    HStack(spacing: 20) {
-//                        ListViewCell(id: 0, image: image, title: title, heartNum: heartNum, destination: .info, heart: false, listViewModel: ListViewModel(container: .init(services: StubServices()), searchText: ""))
-//                            .tag(cell.id)
-//                    }
-//                }
-//            }
-        }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 10)
     }
 }
 
@@ -110,7 +100,7 @@ struct InfoView_Previews: PreviewProvider {
     static let container = DIContainer(services: StubServices())
     static let authViewModel = AuthViewModel(container: .init(services: StubServices()))
     static var previews: some View {
-        InfoView(viewModel: InfoViewModel(searchText: "", container: Self.container))
+        InfoView(viewModel: InfoViewModel(container: Self.container))
             .environmentObject(Self.authViewModel)
             .environmentObject(Self.container)
     }

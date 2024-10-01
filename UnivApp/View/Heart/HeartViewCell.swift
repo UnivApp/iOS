@@ -32,20 +32,16 @@ struct HeartViewCell: View {
             HStack {
                 ZStack {
                     //TODO: - 즐겨찾기 수정
-                    Image("love_circle")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                    
                     Button {
                         self.heartTapped.toggle()
                         if heartTapped == true {
                             heartViewModel.send(action: .addHeart(self.model.universityId ?? 0))
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                                 heartViewModel.send(action: .load)
                             }
                         } else {
                             heartViewModel.send(action: .removeHeart(self.model.universityId ?? 0))
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                                 heartViewModel.send(action: .load)
                             }
                         }
@@ -100,7 +96,7 @@ struct HeartViewCell: View {
             
             Spacer()
             
-            NavigationLink(destination: destination?.view) {
+            NavigationLink(destination: ListDetailView(viewModel: ListDetailViewModel(container: .init(services: Services())), universityId: model.universityId ?? 0)) {
                 Text("정보보기")
                     .font(.system(size: 12, weight: .bold))
                     .foregroundColor(.orange)

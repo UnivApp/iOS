@@ -34,12 +34,12 @@ struct ListViewCell: View {
                     self.heartTapped.toggle()
                     if heartTapped == true {
                         listViewModel.send(action: .addHeart(self.model.universityId ?? 0))
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                             listViewModel.send(action: .load)
                         }
                     } else {
                         listViewModel.send(action: .removeHeart(self.model.universityId ?? 0))
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                             listViewModel.send(action: .load)
                         }
                     }
@@ -65,6 +65,7 @@ struct ListViewCell: View {
                     .resizable()
                     .scaledToFit()
                     .padding(.horizontal, 30)
+                    .background(.clear)
             }
             
             Spacer()
@@ -80,9 +81,9 @@ struct ListViewCell: View {
                 Spacer()
                 
                 Text("\(model.starNum ?? 0)")
-                    .font(.system(size: 12))
+                    .font(.system(size: 12, weight: .bold))
                     .foregroundColor(.orange)
-                    .padding(.trailing, 10)
+                    .padding(.trailing, 5)
                 
                 Image("star")
                     .resizable()

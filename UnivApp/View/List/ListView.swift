@@ -15,6 +15,7 @@ struct ListView: View {
     @State private var showAlert: Bool = false
     @State private var alertMessage: String = ""
     @FocusState private var isFocused: Bool
+    @State private var universityIdToScroll: Int? = nil
     
     var body: some View {
         contentView
@@ -39,7 +40,7 @@ struct ListView: View {
                     viewModel.send(action: .load)
                 }
         case .loading:
-            LoadingView(url: "congratulations")
+            LoadingView(url: "congratulations", size: [150, 150])
         case .success:
             loadedView
         case .fail:
@@ -52,8 +53,8 @@ struct ListView: View {
             VStack {
                 Spacer()
                 
-                search
-                    .padding(.bottom, 20)
+                SearchView(searchText: $viewModel.searchText)
+                    .environmentObject(self.viewModel)
                 
                 Spacer()
                 
@@ -91,54 +92,43 @@ struct ListView: View {
                 case .notRequested:
                     self.showAlert = false
                     self.alertMessage = ""
-                case .addHeart:
+                case .addHeart(let universityId):
                     self.showAlert = true
                     self.alertMessage = "관심대학으로 등록되었습니다."
-                case .removeHeart:
+                    universityIdToScroll = universityId
+                case .removeHeart(let universityId):
                     self.showAlert = true
                     self.alertMessage = "관심대학이 삭제되었습니다."
+                    universityIdToScroll = universityId
                 }
             }
         }
-    }
-    
-    var search: some View {
-        HStack {
-            Button {
-                viewModel.send(action: .search)
-            } label: {
-                Image("search")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 15, height: 15)
-            }
-            .padding()
-            
-            TextField("대학명/소재지를 입력하세요", text: $viewModel.searchText)
-                .focused($isFocused)
-                .font(.system(size: 17, weight: .regular))
-                .padding()
-        }
-        .padding(.horizontal, 10)
-        .background(Color.homeColor)
-        .cornerRadius(15)
-        .padding(.horizontal, 20)
     }
     
     var list: some View {
         ScrollView(.vertical) {
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
-                ForEach(viewModel.summaryArray, id: \.universityId) { cell in
-                    if let id = cell.universityId, let image = cell.logo, let title = cell.fullName, let heartNum = cell.starNum, let starred = cell.starred {
-                        HStack(spacing: 20) {
-                            ListViewCell(model: SummaryModel(universityId: id, fullName: title, logo: image, starNum: heartNum, starred: starred), listViewModel: self.viewModel)
-                                .tag(cell.universityId)
+            ScrollViewReader { proxy in
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
+                    ForEach(viewModel.summaryArray, id: \.universityId) { cell in
+                        if let id = cell.universityId, let image = cell.logo, let title = cell.fullName, let heartNum = cell.starNum, let starred = cell.starred {
+                            HStack(spacing: 20) {
+                                ListViewCell(model: SummaryModel(universityId: id, fullName: title, logo: image, starNum: heartNum, starred: starred), listViewModel: self.viewModel)
+                            }
+                            .tag(cell.universityId)
                         }
                     }
                 }
+                .task {
+                    if universityIdToScroll != nil {
+                        withAnimation {
+                            proxy.scrollTo(universityIdToScroll, anchor: .center)
+                        }
+                        universityIdToScroll = nil
+                    }
+                }
+                .padding(.horizontal, 10)
+                .padding(.vertical, 10)
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 10)
         }
         .padding(.horizontal, 0)
         .padding(.bottom, 0)

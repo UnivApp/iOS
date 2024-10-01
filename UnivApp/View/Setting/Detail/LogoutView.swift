@@ -27,7 +27,7 @@ struct LogoutView: View {
                     authViewModel.send(action: .logout)
                 }
         case .loading:
-            LoadingView(url: "load")
+            LoadingView(url: "load", size: [150, 150])
         case .success:
             logoutUser
         case .fail:

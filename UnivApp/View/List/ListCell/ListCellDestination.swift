@@ -26,7 +26,7 @@ enum ListCellDestination: CaseIterable {
         case .event:
             return AnyView(EventDetailView())
         case .food:
-            return AnyView(FoodDetailView())
+            return AnyView(FoodDetailView(viewModel: FoodDetailViewModel()))
         case .graduate:
             return AnyView(GraduateDetailView())
         case .info:
@@ -38,7 +38,7 @@ enum ListCellDestination: CaseIterable {
         case .mou:
             return AnyView(MouDetailView())
         case .play:
-            return AnyView(PlayDetailView())
+            return AnyView(PlayDetailView(viewModel: PlayDetailViewModel()))
         }
     }
 }

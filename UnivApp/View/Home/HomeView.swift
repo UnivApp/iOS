@@ -10,12 +10,16 @@ import Kingfisher
 
 struct HomeView: View {
     @StateObject var viewModel: HomeViewModel
+    @StateObject var listViewModel: ListViewModel
     @EnvironmentObject var continer: DIContainer
     @EnvironmentObject var authViewModel: AuthViewModel
     
     @State private var isLoading: Bool = false
-    @State private var selectedSegment: SplitType = .competition
+    @State private var selectedSegment: SplitType = .employment
     @FocusState private var isFocused: Bool
+    
+    @State private var currentIndex: Int = 0
+    private let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     
     var body: some View {
         contentView
@@ -28,12 +32,13 @@ struct HomeView: View {
     var contentView: some View {
         switch viewModel.phase {
         case .notRequested:
+            //TODO: - 변경
             loadedView
                 .onAppear {
                     viewModel.send(action: .load)
                 }
         case .loading:
-            LoadingView(url: "congratulations")
+            LoadingView(url: "congratulations", size: [150, 150])
         case .success:
             loadedView
         case .fail:
@@ -45,15 +50,14 @@ struct HomeView: View {
         NavigationStack {
             ScrollView(.vertical) {
                 VStack(alignment: .center, spacing: 20) {
-                    headerView
+                    SearchView(searchText: $viewModel.searchText)
                         .padding(.top, 10)
+                        .environmentObject(listViewModel)
                     
                     categoryView
                     
                     footerView
-                        .padding(.top, 10)
                 }
-                .padding(.horizontal, 20)
             }
             .background(Color.white)
             .toolbar {
@@ -71,45 +75,8 @@ struct HomeView: View {
         }
     }
     
-    var headerView: some View {
-        VStack(alignment: .center, spacing: 20) {
-            HStack {
-                Button {
-                    //TODO: 검색
-                    
-                } label: {
-                    Image("search")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 15, height: 15)
-                }
-                .padding()
-                
-                TextField("대학명/소재지를 입력하세요", text: $viewModel.searchText)
-                    .focused($isFocused)
-                    .font(.system(size: 17, weight: .regular))
-                    .padding()
-            }
-            .background(Color.homeColor)
-            .cornerRadius(15)
-            
-            CalendarContainer(eventDates: [
-                Calendar.current.startOfDay(for: Date()): UIImage(named: "star")!
-            ])
-            .frame(height: 300)
-            .background(.white)
-        }
-    }
-    
     var categoryView: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            
-            Text("카테고리")
-                .font(.system(size: 15, weight: .bold))
-                .foregroundColor(.black)
-                .padding(.leading, 10)
-                .padding(.bottom, 10)
-            
+        VStack(alignment: .leading, spacing: 15) {
             
             let columns = Array(repeating: GridItem(.flexible()), count: 4)
             
@@ -123,42 +90,71 @@ struct HomeView: View {
                                 .frame(width: 40, height: 40)
                             Text(category.title)
                                 .foregroundColor(.black)
-                                .font(.system(size: 10, weight: .regular))
+                                .font(.system(size: 10, weight: .semibold))
                         }
                     }
                     .environmentObject(continer)
                     .environmentObject(authViewModel)
                 }
             }
+            .padding(.horizontal, 10)
+            .padding(.vertical, 20)
+            
+            TabView(selection: $currentIndex) {
+                ForEach(viewModel.posterData.indices, id: \.self) { index in
+                    //TODO: - NavigationLink
+                    Image(viewModel.posterData[index])
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width / 3)
+                        .tag(index)
+                }
+            }
+            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width / 3)
+            .tabViewStyle(PageTabViewStyle())
+            .onReceive(timer) { _ in
+                withAnimation {
+                    currentIndex = (currentIndex + 1) % viewModel.posterData.count
+                }
+            }
+            .overlay(alignment: .bottomTrailing) {
+                CustomPageControl(currentPage: $currentIndex, numberOfPages: viewModel.posterData.count)
+            }
+            
+            HScrollView(title: [Text("이런 "), Text("핫플 "), Text("어때요?")], array: [Object(title: "어린이대공원", image: "hotplace1"),Object(title: "롯데월드", image: "hotplace2"),Object(title: "올림픽공원", image: "hotplace3"),Object(title: "서울숲", image: "hotplace4"),Object(title: "어린이대공원", image: "hotplace1"),Object(title: "롯데월드", image: "hotplace2")], pointColor: .orange, size: 100)
         }
     }
     
     var footerView: some View {
-        VStack(alignment: .center, spacing: 10) {
+        VStack(alignment: .center, spacing: 20) {
+            SeperateView()
+                .frame(width: UIScreen.main.bounds.width, height: 20)
+            
             
             //TODO: - 구글 애드몹
             
-            HStack {
-                Text("경쟁률")
-                    .font(.system(size: 15, weight: .bold))
-                    .foregroundColor(.black)
-                    .padding(.leading, 10)
-                
-                Spacer()
-                
-                NavigationLink(destination: EmptyView()) {
-                    HStack(spacing: 5) {
-                        Text("더보기")
-                            .font(.system(size: 12, weight: .regular))
-                            .foregroundColor(.gray)
-                        
-                        Image("arrow")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 15, height: 15)
+            Group {
+                HStack {
+                    Text("경쟁률")
+                        .font(.system(size: 18, weight: .bold))
+                        .foregroundColor(.black)
+                    
+                    Spacer()
+                    
+                    NavigationLink(destination: EmptyView()) {
+                        HStack(spacing: 5) {
+                            Text("더보기")
+                                .font(.system(size: 12, weight: .regular))
+                                .foregroundColor(.gray)
+                            
+                            Image("arrow")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 15, height: 15)
+                        }
                     }
                 }
-            }
+            }.padding(.horizontal, 20)
             
             //TODO: - 입결 리스트 불러오기
             VStack {
@@ -183,7 +179,7 @@ struct HomeView: View {
                 
                 Group {
                     switch selectedSegment {
-                    case .competition:
+                    case .employment:
                         ForEach(viewModel.InitiativeData, id: \.rank) { cell in
                             InitiativeViewCell(model: cell)
                                 .tag(cell.rank)
@@ -204,7 +200,7 @@ struct HomeView_Previews: PreviewProvider {
     static let container = DIContainer(services: StubServices())
     static let authViewModel = AuthViewModel(container: .init(services: StubServices()))
     static var previews: some View {
-        HomeView(viewModel: HomeViewModel(container: Self.container, searchText: ""))
+        HomeView(viewModel: HomeViewModel(container: Self.container, searchText: ""), listViewModel: ListViewModel(container: Self.container, searchText: ""))
             .environmentObject(Self.authViewModel)
             .environmentObject(Self.container)
     }

@@ -25,6 +25,7 @@ struct FoodView: View {
                     
                     list
                 }
+                .ignoresSafeArea()
                 .padding(.horizontal, 0)
                 .padding(.bottom, 0)
                 .refreshable {
@@ -37,40 +38,29 @@ struct FoodView: View {
                         Button(action: {
                             dismiss()
                         }, label: {
-                            Image("back")
+                            Image("blackback")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 30, height: 30)
+                                .frame(width: 20, height: 20)
                         })
                         Image("food_navi")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 70, height: 60)
+                            .frame(width: 100, height: 60)
                     }
                 }
             }
         }
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .tabBar)
-        .onAppear {
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = UIColor.white
-            appearance.shadowColor = nil
-            
-            UINavigationBar.appearance().standardAppearance = appearance
-            UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        }
     }
     
     var header: some View {
         VStack(spacing: 30) {
             Image("food_poster")
                 .resizable()
-                .scaledToFill()
+                .scaledToFit()
                 .frame(maxWidth: .infinity)
-                .frame(height: 235)
-                .padding(.vertical, 5)
             
             HStack {
                 Group {

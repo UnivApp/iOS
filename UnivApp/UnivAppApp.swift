@@ -12,7 +12,7 @@ struct UnivAppApp: App {
     @StateObject var container: DIContainer = .init(services: Services())
     var body: some Scene {
         WindowGroup {
-            AuthView(authViewModel: .init(container: container))
+            SplashView()
                 .environmentObject(container)
         }
     }

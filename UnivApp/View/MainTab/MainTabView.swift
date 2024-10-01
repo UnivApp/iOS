@@ -18,13 +18,18 @@ struct MainTabView: View {
                 Group {
                     switch tab {
                     case .home:
-                        HomeView(viewModel: HomeViewModel(container: self.container, searchText: .init()))
+                        HomeView(viewModel: HomeViewModel(container: self.container, searchText: .init()), listViewModel: ListViewModel(container: self.container, searchText: ""))
                             .environmentObject(authViewModel)
                             .environmentObject(container)
                     case .list:
                         ListView(viewModel: ListViewModel(container: self.container, searchText: .init()))
                             .environmentObject(authViewModel)
                             .environmentObject(container)
+                    case .calendar:
+                        CalendarContainer(viewModel: CalendarViewModel(), eventDates: [
+                            Calendar.current.startOfDay(for: Date()): UIImage(named: "star")!
+                        ])
+                        .environmentObject(authViewModel)
                     case .heart:
                         HeartView(viewModel: HeartViewModel(container: self.container))
                             .environmentObject(authViewModel)
@@ -41,17 +46,8 @@ struct MainTabView: View {
                 .tag(tab)
                 .navigationBarBackButtonHidden(true)
                 .onAppear {
-                    let appearance = UINavigationBarAppearance()
-                    let tabBarAppearance = UITabBarAppearance()
-                    appearance.configureWithOpaqueBackground()
-                    appearance.backgroundColor = UIColor.white
-                    appearance.shadowColor = nil
-                    
-                    UINavigationBar.appearance().standardAppearance = appearance
-                    UINavigationBar.appearance().scrollEdgeAppearance = appearance
-                    UITabBar.appearance().standardAppearance = tabBarAppearance
-                    UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
-                    
+                    UINavigationBar.appearance().backgroundColor = .clear
+                    UIPageControl.appearance().isHidden = true
                 }
             }
         }

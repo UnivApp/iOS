@@ -11,4 +11,6 @@ struct ChartData: Identifiable, Hashable {
     let id = UUID()
     let label: String
     let value: Double
+    let xLabel: String
+    let yLabel: String
 }

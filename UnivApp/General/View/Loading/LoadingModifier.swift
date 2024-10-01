@@ -11,16 +11,17 @@ import SwiftUI
 
 struct LoadingModifier: ViewModifier {
     var url: String
+    var size: [CGFloat]
     @Binding var isLoading: Bool
     
     func body(content: Content) -> some View {
         ZStack {
             content
             if isLoading {
-                LoadingView(url: url)
+                LoadingView(url: url, size: size)
                     .background(.clear)
             } else {
-                LoadingView(url: "Empty")
+                LoadingView(url: "Empty", size: [0,0])
                     .background(.clear)
             }
         }

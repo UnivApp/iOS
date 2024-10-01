@@ -35,11 +35,7 @@ class MoneyViewModel: ObservableObject {
     ]
     
     var dataPoints: [ChartData] = [
-        ChartData(label: "2020", value: 60),
-        ChartData(label: "2021", value: 40),
-        ChartData(label: "2022", value: 70),
-        ChartData(label: "2023", value: 80),
-        ChartData(label: "2024", value: 90)
+        
     ]
     
 }

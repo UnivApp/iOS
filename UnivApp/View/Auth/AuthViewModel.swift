@@ -64,6 +64,7 @@ class AuthViewModel: ObservableObject {
                         if case .failure = completion {
                             print("로그인 실패")
                             self?.phase = .fail
+                            self?.authState = .unAuth
                         }
                     } receiveValue: { [weak self] user in
                         self?.userId = user.accessToken
@@ -73,7 +74,7 @@ class AuthViewModel: ObservableObject {
                             print("로그인 성공")
                             KeychainWrapper.standard.removeAllKeys()
                             KeychainWrapper.standard.set("Bearer \(accessToken)", forKey: "JWTaccessToken")
-                            KeychainWrapper.standard.set("Bearer \(accessToken)", forKey: "JWTrefreshToken")
+                            KeychainWrapper.standard.set(refreshToken, forKey: "JWTrefreshToken")
                         }
                     }.store(in: &subscriptions)
             } else if case let .failure(error) = result {

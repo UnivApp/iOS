@@ -15,5 +15,6 @@ struct ListDetailModel: Codable {
     var logo: String?
     var phoneNumber: String?
     var website: String?
+    var admissionSite: String?
     var starNum: Int?
 }

@@ -9,14 +9,14 @@ import Foundation
 import SwiftUI
 
 enum SplitType: String, CaseIterable{
-    case competition
+    case employment
     case ontime
     case Occasion
     
     var title: String {
         switch self {
-        case .competition:
-            return "경쟁률"
+        case .employment:
+            return "취업률"
         case .ontime:
             return "정시 경쟁률"
         case .Occasion:

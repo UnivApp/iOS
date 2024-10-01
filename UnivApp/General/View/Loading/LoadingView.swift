@@ -10,10 +10,11 @@ import Kingfisher
 
 struct LoadingView: View {
     var url: String
+    var size: [CGFloat]
     var body: some View {
         if let url = Bundle.main.url(forResource: self.url, withExtension: "gif") {
             KFAnimatedImage(url)
-                .frame(width: 150, height: 150)
+                .frame(width: size[0], height: size[1])
                 .scaledToFit()
                 .background(.clear)
         }
@@ -21,5 +22,5 @@ struct LoadingView: View {
 }
 
 #Preview {
-    LoadingView(url: "")
+    LoadingView(url: "", size: [150, 150])
 }

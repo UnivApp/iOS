@@ -11,7 +11,7 @@ enum APIEndpoint {
     case status
     case login
     case logout
-    case refresh(refreshToken: String)
+    case refresh
     case withdraw
     
     case summary
@@ -32,8 +32,8 @@ enum APIEndpoint {
             return "http://43.200.143.28:8080/login/apple"
         case .logout:
             return "http://43.200.143.28:8080/member/logout"
-        case .refresh(let refreshToken):
-            return ""
+        case .refresh:
+            return "http://43.200.143.28:8080/login/refresh"
         case .withdraw:
             return "http://43.200.143.28:8080/member/delete"
             

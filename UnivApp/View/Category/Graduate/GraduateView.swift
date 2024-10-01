@@ -25,6 +25,7 @@ struct GraduateView: View {
                     
                     list
                 }
+                .ignoresSafeArea()
                 .padding(.horizontal, 0)
                 .padding(.bottom, 0)
                 .refreshable {
@@ -37,40 +38,29 @@ struct GraduateView: View {
                         Button(action: {
                             dismiss()
                         }, label: {
-                            Image("back")
+                            Image("blackback")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 30, height: 30)
+                                .frame(width: 20, height: 20)
                         })
                         Image("graduate_navi")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 70, height: 60)
+                            .frame(width: 110, height: 60)
                     }
                 }
             }
         }
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .tabBar)
-        .onAppear {
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = UIColor.white
-            appearance.shadowColor = nil
-            
-            UINavigationBar.appearance().standardAppearance = appearance
-            UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        }
     }
     
     var header: some View {
         VStack(spacing: 30) {
             Image("graduate_poster")
                 .resizable()
-                .scaledToFill()
+                .scaledToFit()
                 .frame(maxWidth: .infinity)
-                .frame(height: 235)
-                .padding(.vertical, 5)
             
             HStack {
                 Group {
@@ -98,11 +88,11 @@ struct GraduateView: View {
     
     var list: some View {
         VStack(alignment: .leading, spacing: 10) {
-            HScrollView(title: [Text("유명한 "), Text("선배 "), Text("확인하기 ")], array: [Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty")], pointColor: .orange)
+            HScrollView(title: [Text("유명한 "), Text("선배 "), Text("확인하기 ")], array: [Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty")], pointColor: .orange, size: 30)
             
-            HScrollView(title: [Text("우리학교 "), Text("선배 "), Text("확인하기 ")], array: [Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo")], pointColor: .orange)
+            HScrollView(title: [Text("우리학교 "), Text("선배 "), Text("확인하기 ")], array: [Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo")], pointColor: .orange, size: 30)
             
-            HScrollView(title: [Text("유명한 "), Text("선배 "), Text("확인하기 ")], array: [Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty")], pointColor: .orange)
+            HScrollView(title: [Text("유명한 "), Text("선배 "), Text("확인하기 ")], array: [Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty")], pointColor: .orange, size: 30)
             
         }
     }
