@@ -10,6 +10,7 @@ import Kingfisher
 
 struct HotPlaceSegmentView: View {
     var topPlaceData: [PlayModel]
+    @StateObject var playViewModel = PlayViewModel(container: DIContainer(services: Services()))
     
     @State private var currentIndex: Int = 0
     private let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
@@ -19,7 +20,7 @@ struct HotPlaceSegmentView: View {
             VStack(alignment: .center, spacing: 30) {
                 TabView(selection: $currentIndex) {
                     ForEach(topPlaceData.indices, id: \.self) { index in
-                        representativePlaceCell(model: topPlaceData[index])
+                        representativePlaceCell(playDetailModel: PlayDetailModel(object: playViewModel.convertToObjects(from: topPlaceData), placeDataArray: topPlaceData, placeData: topPlaceData[index]))
                             .tag(index)
                     }
                 }
@@ -42,7 +43,7 @@ struct HotPlaceSegmentView: View {
                 
                 VStack(spacing: 20) {
                     ForEach(topPlaceData.indices, id: \.self) { index in
-                        HotPlaceViewCell(model: topPlaceData[index], index: index)
+                        HotPlaceViewCell(model: PlayDetailModel(object: playViewModel.convertToObjects(from: topPlaceData), placeDataArray: topPlaceData, placeData: topPlaceData[index]), index: index)
                     }
                 }
                 .padding(.bottom, 20)
@@ -52,73 +53,81 @@ struct HotPlaceSegmentView: View {
 }
 
 fileprivate struct representativePlaceCell: View {
-    var model: PlayModel
+    var playDetailModel: PlayDetailModel
     var body: some View {
-        ZStack(alignment: .bottomLeading){
-            if let images = model.images,
-               let firstImage = images.compactMap({ $0?.imageUrl }).first{
-                KFImage(URL(string: firstImage))
-                    .resizable()
-                    .scaledToFill()
-                    .frame(height: UIScreen.main.bounds.width * 0.7)
-                    .cornerRadius(15)
-                    .opacity(0.7)
+        if let placeData = playDetailModel.placeData {
+            NavigationLink(destination: PlayDetailView(playDetailModel: PlayDetailModel(object: playDetailModel.object, placeDataArray: playDetailModel.placeDataArray, placeData: playDetailModel.placeData))) {
+                ZStack(alignment: .bottomLeading){
+                    if let images = playDetailModel.placeData?.images,
+                       let firstImage = images.compactMap({ $0?.imageUrl }).first{
+                        KFImage(URL(string: firstImage))
+                            .resizable()
+                            .scaledToFill()
+                            .frame(height: UIScreen.main.bounds.width * 0.7)
+                            .cornerRadius(15)
+                            .opacity(0.7)
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("\(placeData.name)")
+                            .font(.system(size: 30, weight: .heavy))
+                        
+                        Text("📍 \(placeData.location)")
+                            .font(.system(size: 18, weight: .heavy))
+                    }
+                    .foregroundColor(.white)
+                    .lineLimit(1)
+                    .padding(.bottom, 30)
+                    .padding(.horizontal, 20)
+                }
             }
-            
-            VStack(alignment: .leading, spacing: 10) {
-                Text("\(model.name)")
-                    .font(.system(size: 30, weight: .heavy))
-                
-                Text("📍 \(model.location)")
-                    .font(.system(size: 18, weight: .heavy))
-            }
-            .foregroundColor(.white)
-            .lineLimit(1)
-            .padding(.bottom, 30)
-            .padding(.horizontal, 20)
         }
     }
 }
 
 fileprivate struct HotPlaceViewCell: View {
-    var model: PlayModel
+    var model: PlayDetailModel
     var index: Int
     var body: some View {
-        HStack(spacing: 30) {
-            if let images = model.images,
-               let firstImage = images.compactMap({ $0?.imageUrl}).first {
-                KFImage(URL(string: firstImage))
-                    .resizable()
-                    .scaledToFit()
-                    .cornerRadius(15)
-                    .frame(width: 100, height: 100)
-                    .overlay(alignment: .topLeading) {
-                        ZStack(alignment: .center) {
-                            Circle()
-                                .foregroundColor(.white)
-                                .frame(width: 20, height: 20)
-                                .shadow(radius: 10)
-                            
-                            Text("\(index + 1)")
-                                .font(.system(size: 10, weight: .bold))
-                                .foregroundColor(.orange)
+        if let placeData = model.placeData {
+            NavigationLink(destination: PlayDetailView(playDetailModel: PlayDetailModel(object: model.object, placeDataArray: model.placeDataArray, placeData: model.placeData))) {
+                HStack(spacing: 30) {
+                    if let images = placeData.images,
+                       let firstImage = images.compactMap({ $0?.imageUrl}).first {
+                        KFImage(URL(string: firstImage))
+                            .resizable()
+                            .scaledToFit()
+                            .cornerRadius(15)
+                            .frame(width: 100, height: 100)
+                            .overlay(alignment: .topLeading) {
+                                ZStack(alignment: .center) {
+                                    Circle()
+                                        .foregroundColor(.white)
+                                        .frame(width: 20, height: 20)
+                                        .shadow(radius: 10)
+                                    
+                                    Text("\(index + 1)")
+                                        .font(.system(size: 10, weight: .bold))
+                                        .foregroundColor(.orange)
+                                }
+                            }
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text(placeData.name)
+                            .font(.system(size: 15, weight: .bold))
+                        Text(placeData.tip)
+                            .font(.system(size: 12, weight: .regular))
+                        HStack {
+                            Spacer()
+                            Text("📍 \(placeData.location)")
+                                .font(.system(size: 12, weight: .semibold))
+                                .foregroundColor(.gray)
                         }
                     }
+                }.padding(.horizontal, 20)
             }
-            
-            VStack(alignment: .leading, spacing: 10) {
-                Text(model.name)
-                    .font(.system(size: 15, weight: .bold))
-                Text(model.tip)
-                    .font(.system(size: 12, weight: .regular))
-                HStack {
-                    Spacer()
-                    Text("📍 \(model.location)")
-                        .font(.system(size: 12, weight: .semibold))
-                        .foregroundColor(.gray)
-                }
-            }
-        }.padding(.horizontal, 20)
+        }
     }
 }
 

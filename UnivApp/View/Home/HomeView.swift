@@ -120,7 +120,7 @@ struct HomeView: View {
                 CustomPageControl(currentPage: $currentIndex, numberOfPages: viewModel.posterData.count)
             }
             
-            HScrollView(title: [Text("이런 "), Text("핫플 "), Text("어때요?")], array: viewModel.convertToObjects(from: viewModel.topPlaceData), pointColor: .orange, size: 100, placeData: viewModel.topPlaceData)
+            HScrollView(title: [Text("이런 "), Text("핫플 "), Text("어때요?")], pointColor: .orange, size: 100, playDeatilModel: PlayDetailModel(object: viewModel.convertToObjects(from: viewModel.topPlaceData), placeDataArray: viewModel.topPlaceData, placeData: nil))
         }
     }
     

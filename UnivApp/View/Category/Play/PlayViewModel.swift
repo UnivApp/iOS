@@ -40,4 +40,14 @@ class PlayViewModel: ObservableObject {
                 }.store(in: &subscriptions)
         }
     }
+    
+    func convertToObjects(from playModels: [PlayModel]) -> [Object] {
+        return playModels.map { playModel in
+            if let images = playModel.images,
+               let firstImage = images.compactMap({ $0?.imageUrl }).first {
+                return Object(title: playModel.name, image: firstImage)
+            }
+            return Object(title: "", image: "")
+        }
+    }
 }

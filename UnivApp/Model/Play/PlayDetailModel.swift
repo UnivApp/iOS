@@ -7,10 +7,8 @@
 
 import Foundation
 
-struct PlayDetailModel: Codable, Hashable {
-    var title: String?
-    var description: String?
-    var images: [String?]?
-    var location: String?
-    var tip: String?
+struct PlayDetailModel: Hashable {
+    var object: [Object]
+    var placeDataArray: [PlayModel]
+    var placeData: PlayModel?
 }

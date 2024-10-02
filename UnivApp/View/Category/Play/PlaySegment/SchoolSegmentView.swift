@@ -28,9 +28,9 @@ struct SchoolSegmentView: View {
                     .scaledToFit()
                     .frame(width: UIScreen.main.bounds.width)
                 
-                SchoolToHotplaceCell(model: viewModel.data)
-                    .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.width / 2)
-                    .padding(.horizontal, 20)
+//                SchoolToHotplaceCell(model: viewModel.data)
+//                    .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.width / 2)
+//                    .padding(.horizontal, 20)
                 
                 SeperateView()
                     .frame(height: 20)
@@ -57,65 +57,65 @@ struct SchoolSegmentView: View {
     }
 }
 
-fileprivate struct SchoolToHotplaceCell: View {
-    var model: [PlayDetailModel]
-    
-    @State var currentIndex: Int = 0
-    private let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
-    
-    var body: some View {
-        TabView(selection: $currentIndex) {
-            ForEach(model.indices, id: \.self) { itemIndex in
-                VStack(spacing: 20) {
-                    HStack {
-                        VStack(alignment: .center, spacing: 10) {
-                            Text("세종대학교")
-                                .font(.system(size: 18, weight: .bold))
-                            Text("#어린이대공원\n#롯데월드\n#뚝섬유원지")
-                                .font(.system(size: 12, weight: .regular))
-                                .lineSpacing(3)
-                        }.foregroundColor(.black)
-                        
-                        
-                        Spacer()
-                        HStack(spacing: -CGFloat((10 * model.count))) {
-                            if let images = model[itemIndex].images {
-                                ForEach(images.indices, id: \.self) { imageIndex in
-                                    if imageIndex < 4 {
-                                        Image(images[imageIndex] ?? "")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 80, height: 80)
-                                            .cornerRadius(15)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    Text("대학별 다양한 핫플을 확인해 보세요!")
-                        .foregroundColor(.gray)
-                        .font(.system(size: 12, weight: .semibold))
-                }
-                .tag(itemIndex)
-            }
-        }
-        .tabViewStyle(PageTabViewStyle())
-        .onReceive(timer) { _ in
-            withAnimation {
-                if model.count > 0 {
-                    currentIndex = (currentIndex + 1) % model.count
-                }
-            }
-        }
-        .overlay(alignment: .bottomTrailing) {
-            CustomPageControl(currentPage: $currentIndex, numberOfPages: model.count)
-                .cornerRadius(15)
-                .padding(.bottom, 20)
-        }
-        .padding(.horizontal, 20)
-        .background(RoundedRectangle(cornerRadius: 15).fill(Color.homeColor))
-    }
-}
+//fileprivate struct SchoolToHotplaceCell: View {
+//    var model: [PlayDetailModel]
+//    
+//    @State var currentIndex: Int = 0
+//    private let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
+//    
+//    var body: some View {
+//        TabView(selection: $currentIndex) {
+//            ForEach(model.indices, id: \.self) { itemIndex in
+//                VStack(spacing: 20) {
+//                    HStack {
+//                        VStack(alignment: .center, spacing: 10) {
+//                            Text("세종대학교")
+//                                .font(.system(size: 18, weight: .bold))
+//                            Text("#어린이대공원\n#롯데월드\n#뚝섬유원지")
+//                                .font(.system(size: 12, weight: .regular))
+//                                .lineSpacing(3)
+//                        }.foregroundColor(.black)
+//                        
+//                        
+//                        Spacer()
+//                        HStack(spacing: -CGFloat((10 * model.count))) {
+//                            if let images = model[itemIndex].images {
+//                                ForEach(images.indices, id: \.self) { imageIndex in
+//                                    if imageIndex < 4 {
+//                                        Image(images[imageIndex] ?? "")
+//                                            .resizable()
+//                                            .scaledToFit()
+//                                            .frame(width: 80, height: 80)
+//                                            .cornerRadius(15)
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                    Text("대학별 다양한 핫플을 확인해 보세요!")
+//                        .foregroundColor(.gray)
+//                        .font(.system(size: 12, weight: .semibold))
+//                }
+//                .tag(itemIndex)
+//            }
+//        }
+//        .tabViewStyle(PageTabViewStyle())
+//        .onReceive(timer) { _ in
+//            withAnimation {
+//                if model.count > 0 {
+//                    currentIndex = (currentIndex + 1) % model.count
+//                }
+//            }
+//        }
+//        .overlay(alignment: .bottomTrailing) {
+//            CustomPageControl(currentPage: $currentIndex, numberOfPages: model.count)
+//                .cornerRadius(15)
+//                .padding(.bottom, 20)
+//        }
+//        .padding(.horizontal, 20)
+//        .background(RoundedRectangle(cornerRadius: 15).fill(Color.homeColor))
+//    }
+//}
 
 #Preview {
     SchoolSegmentView(viewModel: PlayViewModel(container: DIContainer(services: StubServices())), listViewModel: ListViewModel(container: DIContainer(services: StubServices()), searchText: ""))
