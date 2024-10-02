@@ -9,7 +9,9 @@ import SwiftUI
 
 struct PlaceholderView: View {
     var body: some View {
-        Color.white
+        VStack {
+            Color.white
+        }.padding(.all, 0)
     }
 }
 

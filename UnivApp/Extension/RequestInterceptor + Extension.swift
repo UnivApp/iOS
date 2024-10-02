@@ -38,10 +38,18 @@ final class TokenRequestInterceptor: RequestInterceptor {
                       dueTo error: Error,
                       completion: @escaping (RetryResult) -> Void) {
         let retryLimit = 2
-
-        guard let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401, response.statusCode == 400 else {
+        
+        if let response = request.task?.response as? HTTPURLResponse {
+            if response.statusCode == 400 {
+                self.authViewModel.authState = .unAuth
+                self.authViewModel.refreshTokenState = .Expired
+            }
+        }
+        
+        guard let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 else {
             return completion(.doNotRetryWithError(error))
         }
+            
         guard request.retryCount < retryLimit else { return completion(.doNotRetryWithError(error)) }
         Task {
             guard let refreshToken = KeychainWrapper.standard.string(forKey: "JWTrefreshToken") else {

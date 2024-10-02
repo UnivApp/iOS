@@ -12,12 +12,14 @@ class PlayViewModel: ObservableObject {
     
     enum Action {
         case topPlaceLoad
+        case schoolPlaceLoad(Int)
     }
     
     @Published var phase: Phase = .notRequested
     @Published var topPlaceData: [PlayModel] = []
-    @Published var data: [PlayDetailModel] = []
-    
+    @Published var schoolPlaceData: [PlayModel] = []
+    @Published var isNavigatingToDetail: Bool = false
+
     private var container: DIContainer
     private var subscriptions = Set<AnyCancellable>()
     
@@ -36,6 +38,18 @@ class PlayViewModel: ObservableObject {
                     }
                 } receiveValue: { [weak self] topPlaceData in
                     self?.topPlaceData = topPlaceData
+                    self?.phase = .success
+                }.store(in: &subscriptions)
+            
+        case let .schoolPlaceLoad(universityId):
+            self.phase = .loading
+            container.services.playService.getSchoolPlace(universityId: universityId)
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.phase = .fail
+                    }
+                } receiveValue: { [weak self] schoolPlaceData in
+                    self?.schoolPlaceData = schoolPlaceData
                     self?.phase = .success
                 }.store(in: &subscriptions)
         }

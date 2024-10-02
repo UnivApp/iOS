@@ -116,8 +116,10 @@ fileprivate struct HotPlaceViewCell: View {
                     VStack(alignment: .leading, spacing: 10) {
                         Text(placeData.name)
                             .font(.system(size: 15, weight: .bold))
+                            .multilineTextAlignment(.leading)
                         Text(placeData.tip)
                             .font(.system(size: 12, weight: .regular))
+                            .multilineTextAlignment(.leading)
                         HStack {
                             Spacer()
                             Text("📍 \(placeData.location)")
