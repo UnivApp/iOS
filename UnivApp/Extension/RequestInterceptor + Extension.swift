@@ -9,11 +9,16 @@ import Foundation
 import Alamofire
 import Combine
 import SwiftKeychainWrapper
-
-//public protocol RequestInterceptor: RequestAdapter, RequestRetrier {}
+import SwiftUI
 
 final class TokenRequestInterceptor: RequestInterceptor {
+    @ObservedObject var authViewModel: AuthViewModel
+    
     private var subscriptions = Set<AnyCancellable>()
+    
+    init(authViewModel: AuthViewModel) {
+        self.authViewModel = AuthViewModel(container: DIContainer(services: Services()))
+    }
 
     public func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, any Error>) -> Void) {
         var urlRequest = urlRequest
@@ -34,7 +39,7 @@ final class TokenRequestInterceptor: RequestInterceptor {
                       completion: @escaping (RetryResult) -> Void) {
         let retryLimit = 2
 
-        guard let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 else {
+        guard let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401, response.statusCode == 400 else {
             return completion(.doNotRetryWithError(error))
         }
         guard request.retryCount < retryLimit else { return completion(.doNotRetryWithError(error)) }
@@ -49,7 +54,10 @@ final class TokenRequestInterceptor: RequestInterceptor {
                         print("토큰 재발행 성공")
                     case let .failure(error):
                         print("토큰 재발행 실패 \(error)")
-                        //TODO: - 재로그인
+                        DispatchQueue.main.async {
+                            self.authViewModel.authState = .unAuth
+                            self.authViewModel.refreshTokenState = .Expired
+                        }
                     }
                 } receiveValue: { (response: UserModel) in
                     KeychainWrapper.standard.removeAllKeys()

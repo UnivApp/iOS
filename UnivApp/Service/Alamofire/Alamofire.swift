@@ -12,7 +12,6 @@ import SwiftKeychainWrapper
 
 final class Alamofire {
     
-    
     func loginAlamofire<T:Decodable>(url: String, params: [String:Any]) -> AnyPublisher<T, Error> {
         return Future<T, Error> { promise in
             AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: ["Content-Type":"application/json"])
@@ -35,7 +34,7 @@ final class Alamofire {
             AF.request(url, method: .post, encoding: JSONEncoding.default, headers: ["Content-Type":"application/json", "RefreshToken":refresh])
                 .validate()
                 .responseDecodable(of: T.self) { response in
-                    print(response.debugDescription)
+//                    print(response.debugDescription)
                     switch response.result {
                     case let .success(data):
                         promise(.success(data))
@@ -49,9 +48,10 @@ final class Alamofire {
     func nonOfZeroPost(url: String, params: [String:Any]?) -> AnyPublisher<Void, Error> {
         return Future<Void, Error> { promise in
             if let params = params {
-                AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: ["content-Type":"application/json"], interceptor: TokenRequestInterceptor())
+                AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: ["content-Type":"application/json"], interceptor: TokenRequestInterceptor(authViewModel: AuthViewModel(container: DIContainer(services: Services()))))
                     .validate()
                     .response { response in
+//                        print(response.debugDescription)
                         switch response.result {
                         case .success:
                             if response.data?.isEmpty ?? true {
@@ -64,7 +64,7 @@ final class Alamofire {
                         }
                     }
             } else {
-                AF.request(url, method: .post, encoding: JSONEncoding.default, headers: ["content-Type":"application/json"], interceptor: TokenRequestInterceptor())
+                AF.request(url, method: .post, encoding: JSONEncoding.default, headers: ["content-Type":"application/json"], interceptor: TokenRequestInterceptor(authViewModel: AuthViewModel(container: DIContainer(services: Services()))))
                     .validate()
                     .response { response in
                         //                            print(response.debugDescription)
@@ -85,7 +85,7 @@ final class Alamofire {
     
     func delete(url: String) -> AnyPublisher<Void, Error> {
         return Future<Void, Error> { promise in
-            AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: ["content-Type":"application/json"], interceptor: TokenRequestInterceptor())
+            AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: ["content-Type":"application/json"], interceptor: TokenRequestInterceptor(authViewModel: AuthViewModel(container: DIContainer(services: Services()))))
                 .validate()
                 .response { response in
                     //                        print(response.debugDescription)
@@ -106,9 +106,10 @@ final class Alamofire {
     func postAlamofire<T:Decodable>(url: String, params: [String:Any]?) -> AnyPublisher<T, Error> {
         return Future<T, Error> { promise in
             if let params = params {
-                AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: ["content-Type":"application-json"], interceptor: TokenRequestInterceptor())
+                AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: ["content-Type":"application-json"], interceptor: TokenRequestInterceptor(authViewModel: AuthViewModel(container: DIContainer(services: Services()))))
                     .validate()
                     .responseDecodable(of: T.self) { response in
+//                        print(response.debugDescription)
                         switch response.result {
                         case let .success(result):
                             promise(.success(result))
@@ -117,7 +118,7 @@ final class Alamofire {
                         }
                     }
             } else {
-                AF.request(url, method: .post, encoding: JSONEncoding.default, headers: ["content-Type":"application-json"], interceptor: TokenRequestInterceptor())
+                AF.request(url, method: .post, encoding: JSONEncoding.default, headers: ["content-Type":"application-json"], interceptor: TokenRequestInterceptor(authViewModel: AuthViewModel(container: DIContainer(services: Services()))))
                     .validate()
                     .responseDecodable(of: T.self) { response in
 //                        print(response.debugDescription)
@@ -134,10 +135,10 @@ final class Alamofire {
     }
     func getAlamofire<T: Decodable>(url: String) -> AnyPublisher<T, Error> {
         return Future<T, Error> { promise in
-            AF.request(url, method: .get, encoding: JSONEncoding.default, headers: ["Content-Type": "application-json"], interceptor: TokenRequestInterceptor())
+            AF.request(url, method: .get, encoding: JSONEncoding.default, headers: ["Content-Type": "application-json"], interceptor: TokenRequestInterceptor(authViewModel: AuthViewModel(container: DIContainer(services: Services()))))
                 .validate()
                 .responseDecodable(of: T.self) { response in
-                    //                    print(response.debugDescription)
+//                    print(response.debugDescription)
                     switch response.result {
                     case let .success(result):
                         promise(.success(result))

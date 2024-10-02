@@ -56,7 +56,7 @@ enum CategoryType: String, CaseIterable {
         case .mou:
             return AnyView(MouView(viewModel: MouViewModel(container: .init(services: Services()))))
         case .play:
-            return AnyView(PlayView(viewModel: PlayViewModel(container: .init(services: Services()), searchText: .init())))
+            return AnyView(PlayView(viewModel: PlayViewModel(container: .init(services: Services()))))
         }
     }
     

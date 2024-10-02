@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SummaryModel: Codable {
+struct SummaryModel: Codable, Hashable {
     let universityId: Int?
     let fullName: String?
     let logo: String?

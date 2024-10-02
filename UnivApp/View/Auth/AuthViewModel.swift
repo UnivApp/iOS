@@ -14,6 +14,10 @@ enum AuthState {
     case unAuth
     case auth
 }
+enum RefreshTokenState {
+    case unExpired
+    case Expired
+}
 
 class AuthViewModel: ObservableObject {
     
@@ -26,6 +30,7 @@ class AuthViewModel: ObservableObject {
     }
     
     @Published var authState: AuthState = .auth
+    @Published var refreshTokenState: RefreshTokenState = .unExpired
     @Published var phase: Phase = .notRequested
     
     var userId: String?
@@ -49,8 +54,6 @@ class AuthViewModel: ObservableObject {
                 } receiveValue: { [weak self] checkStatus in
                     self?.authState = .auth
                 }.store(in: &subscriptions)
-
-            return
             
         case let .appleLogin(request):
             let nonce = container.services.authService.signInAppleRequest(request)

@@ -39,12 +39,17 @@ struct SchoolSegmentView: View {
                     .font(.system(size: 18, weight: .bold))
                     .padding(.leading, 20)
                 
-                SearchView(searchText: $viewModel.searchText)
+                SearchView(searchText: $listViewModel.searchText)
                     .environmentObject(self.listViewModel)
                 
-                ForEach(viewModel.playStub, id: \.self) { item in
-                    PlayViewCell(title: item.title ?? "", address: item.address ?? "", description: item.description ?? "", image: item.image ?? "")
-                        .padding(.horizontal, 0)
+                ForEach(listViewModel.summaryArray, id: \.self) { item in
+                    if let title = item.fullName,
+                       let address = item.fullName,
+                       let description = item.fullName,
+                       let image = item.logo {
+                        PlayViewCell(title: title, address: address, description: description, image: image)
+                            .padding(.horizontal, 0)
+                    }
                 }
             }
             .padding(.top, 20)
@@ -111,5 +116,5 @@ fileprivate struct SchoolToHotplaceCell: View {
 }
 
 #Preview {
-    SchoolSegmentView(viewModel: PlayViewModel(container: DIContainer(services: StubServices()), searchText: ""), listViewModel: ListViewModel(container: DIContainer(services: StubServices()), searchText: ""))
+    SchoolSegmentView(viewModel: PlayViewModel(container: DIContainer(services: StubServices())), listViewModel: ListViewModel(container: DIContainer(services: StubServices()), searchText: ""))
 }

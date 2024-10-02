@@ -7,10 +7,15 @@
 
 import Foundation
 
-struct PlayModel: Hashable {
-    var id = UUID()
-    var title: String?
-    var address: String?
-    var description: String?
-    var image: String?
+struct PlayModel: Codable, Hashable {
+    var name: String
+    var description: String
+    var tip: String
+    var location: String
+    var images: [PlayImages?]?
+}
+
+struct PlayImages: Codable, Hashable {
+    var imageUrl: String?
+    var source: String?
 }

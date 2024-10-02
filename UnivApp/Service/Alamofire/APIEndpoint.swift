@@ -8,20 +8,21 @@
 import Foundation
 
 enum APIEndpoint {
+    //MARK: - Auth
     case status
     case login
     case logout
     case refresh
     case withdraw
-    
+    //MARK: - List
     case summary
     case listDetail
-    case banners
-    case scoreImage
     case search
     case addHeart
     case removeHeart
     case heartList
+    //MARK: - Category
+    case topPlace
     
     
     var urlString: String {
@@ -41,10 +42,6 @@ enum APIEndpoint {
             return "http://43.200.143.28:8080/api/universities/summary"
         case .listDetail:
             return "http://43.200.143.28:8080/api/universities/details/"
-        case .banners:
-            return "http://43.200.143.28:8080/api/banners"
-        case .scoreImage:
-            return "http://43.200.143.28:8080/api/entrance-score-images"
         case .search:
             return "http://43.200.143.28:8080/api/universities/search?keyword="
         case .addHeart:
@@ -53,6 +50,9 @@ enum APIEndpoint {
             return "http://43.200.143.28:8080/api/stars/remove?universityId="
         case .heartList:
             return "http://43.200.143.28:8080/api/stars/list"
+            
+        case .topPlace:
+            return "http://43.200.143.28:8080/api/activities/top-place"
         }
     }
 }
