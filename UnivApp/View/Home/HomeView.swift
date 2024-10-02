@@ -32,8 +32,7 @@ struct HomeView: View {
     var contentView: some View {
         switch viewModel.phase {
         case .notRequested:
-            //TODO: - 변경
-            loadedView
+            PlaceholderView()
                 .onAppear {
                     viewModel.send(action: .load)
                 }
@@ -50,7 +49,7 @@ struct HomeView: View {
         NavigationStack {
             ScrollView(.vertical) {
                 VStack(alignment: .center, spacing: 20) {
-                    SearchView(searchText: $viewModel.searchText)
+                    SearchView(searchText: $listViewModel.searchText)
                         .padding(.top, 10)
                         .environmentObject(listViewModel)
                     
@@ -121,7 +120,7 @@ struct HomeView: View {
                 CustomPageControl(currentPage: $currentIndex, numberOfPages: viewModel.posterData.count)
             }
             
-            HScrollView(title: [Text("이런 "), Text("핫플 "), Text("어때요?")], array: [Object(title: "어린이대공원", image: "hotplace1"),Object(title: "롯데월드", image: "hotplace2"),Object(title: "올림픽공원", image: "hotplace3"),Object(title: "서울숲", image: "hotplace4"),Object(title: "어린이대공원", image: "hotplace1"),Object(title: "롯데월드", image: "hotplace2")], pointColor: .orange, size: 100)
+            HScrollView(title: [Text("이런 "), Text("핫플 "), Text("어때요?")], array: viewModel.convertToObjects(from: viewModel.topPlaceData), pointColor: .orange, size: 100, placeData: viewModel.topPlaceData)
         }
     }
     
@@ -200,7 +199,7 @@ struct HomeView_Previews: PreviewProvider {
     static let container = DIContainer(services: StubServices())
     static let authViewModel = AuthViewModel(container: .init(services: StubServices()))
     static var previews: some View {
-        HomeView(viewModel: HomeViewModel(container: Self.container, searchText: ""), listViewModel: ListViewModel(container: Self.container, searchText: ""))
+        HomeView(viewModel: HomeViewModel(container: Self.container), listViewModel: ListViewModel(container: Self.container, searchText: ""))
             .environmentObject(Self.authViewModel)
             .environmentObject(Self.container)
     }

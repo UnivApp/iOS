@@ -16,25 +16,22 @@ class HomeViewModel: ObservableObject {
         case load
     }
     
-    @Published var searchText: String
     @Published var phase: Phase = .notRequested
-    @Published var calendarData: [Date:UIImage] = .init() //TODO: - 캘린더 데이터
-    @Published var InitiativeData: [InitiativeModel] = .init() //TODO: - 입결 데이터
-    @Published var posterData: [String] = ["food_poster", "event_poster", "rank_poster", "graduate_poster", "play_poster", "news_poster"]
-    
+    @Published var InitiativeData: [InitiativeModel] = .init() //TODO: - 경쟁률데이터
+    @Published var topPlaceData: [PlayModel] = []
     
     private var container: DIContainer
     private var subscriptions = Set<AnyCancellable>()
+    let posterData: [String] = ["food_poster", "event_poster", "rank_poster", "graduate_poster", "play_poster", "news_poster"]
     
-    init(container: DIContainer, searchText: String) {
+    init(container: DIContainer) {
         self.container = container
-        self.searchText = searchText
     }
     
     func send(action: Action) {
         switch action {
         case .load:
-//            phase = .loading
+            self.phase = .loading
             //TODO: - 캘린더 데이터 불러오기
             //TODO: - 입결 데이터 불러오기
             self.InitiativeData = [
@@ -44,7 +41,26 @@ class HomeViewModel: ObservableObject {
                 InitiativeModel(title: "세종대학교", logo: "emptyLogo", description: "소재: 서울 백분위(영어감점): 97.41 (0.2)", rank: 1),
                 InitiativeModel(title: "세종대학교", logo: "emptyLogo", description: "소재: 서울 백분위(영어감점): 97.41 (0.2)", rank: 1)
             ]
+            container.services.playService.getTopPlace()
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.phase = .fail
+                    }
+                } receiveValue: { [weak self] topPlaceData in
+                    self?.topPlaceData = topPlaceData
+                    self?.phase = .success
+                }.store(in: &subscriptions)
+
         }
     }
     
+    func convertToObjects(from playModels: [PlayModel]) -> [Object] {
+        return playModels.map { playModel in
+            if let images = playModel.images,
+               let firstImage = images.compactMap({ $0?.imageUrl }).first {
+                return Object(title: playModel.name, image: firstImage)
+            }
+            return Object(title: "", image: "")
+        }
+    }
 }

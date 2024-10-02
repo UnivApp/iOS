@@ -6,29 +6,20 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct PlayDetailView: View {
-    @StateObject var viewModel: PlayDetailViewModel
     @Environment(\.dismiss) var dismiss
     
     @State var checkScrollHeight: Bool = false
     @State private var currentIndex: Int = 0
     
+    var object: [Object]
+    var PlaceArray: [PlayModel]
+    var PlaceData: PlayModel
+    
     var body: some View {
-        contentView
-    }
-    @ViewBuilder
-    var contentView: some View {
-        switch viewModel.phase {
-        case .notRequested:
-            loadedView //TODO: - 변경
-        case .loading:
-            LoadingView(url: "congratulations", size: [150, 150])
-        case .success:
-            loadedView
-        case .fail:
-            ErrorView()
-        }
+        loadedView
     }
     
     var loadedView: some View {
@@ -36,10 +27,10 @@ struct PlayDetailView: View {
             ScrollView(.vertical) {
                 VStack(alignment: .leading, spacing: 20) {
                     TabView(selection: $currentIndex) {
-                        if let images = viewModel.data.images {
+                        if let images = PlaceData.images {
                             ForEach(images.indices, id: \.self) { index in
                                 if let image = images[index] {
-                                    Image(image)
+                                    KFImage(URL(string: image.imageUrl ?? ""))
                                         .resizable()
                                         .scaledToFit()
                                         .tag(index)
@@ -47,29 +38,29 @@ struct PlayDetailView: View {
                             }
                         }
                     }
-                    .frame(width: proxy.size.width, height: proxy.size.width)
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
                     .tabViewStyle(PageTabViewStyle())
                     .overlay(alignment: .bottomTrailing) {
-                        if let numberOfPages = viewModel.data.images {
+                        if let numberOfPages = PlaceData.images {
                             CustomPageControl(currentPage: $currentIndex, numberOfPages: numberOfPages.count)
                         }
                     }
                     
                     Group {
-                        Text(viewModel.data.title ?? "")
+                        Text(PlaceData.name)
                             .font(.system(size: 20, weight: .bold))
                         
-                        Text("📍 \(viewModel.data.location ?? "")")
+                        Text("📍 \(PlaceData.location)")
                             .font(.system(size: 18, weight: .semibold))
                             .foregroundColor(.gray)
                         
                         Divider()
                         
-                        Text(viewModel.data.description ?? "")
+                        Text(PlaceData.description)
                             .font(.system(size: 15, weight: .regular))
                             .lineSpacing(10)
                         
-                        Text(viewModel.data.tip ?? "")
+                        Text(PlaceData.tip)
                             .font(.system(size: 15, weight: .bold))
                             .lineSpacing(10)
                     }
@@ -81,7 +72,7 @@ struct PlayDetailView: View {
                         SeperateView()
                             .frame(height: 20)
                         
-                        HScrollView(title: [Text("이런 "), Text("핫플 "), Text("어때요?")], array: [Object(title: "어린이대공원", image: "hotplace1"),Object(title: "롯데월드", image: "hotplace2"),Object(title: "올림픽공원", image: "hotplace3"),Object(title: "서울숲", image: "hotplace4"),Object(title: "어린이대공원", image: "hotplace1"),Object(title: "롯데월드", image: "hotplace2")], pointColor: .orange, size: 100)
+                        HScrollView(title: [Text("이런 "), Text("핫플 "), Text("어때요?")], array: object, pointColor: .orange, size: 100, placeData: PlaceArray)
                             .frame(height: 200)
                     }
                     .frame(height: 300)
@@ -134,5 +125,5 @@ struct PlayDetailView: View {
 }
 
 #Preview {
-    PlayDetailView(viewModel: PlayDetailViewModel())
+    PlayDetailView(object: [Object(title: "", image: "")], PlaceArray: [PlayModel(name: "", description: "", tip: "", location: "")], PlaceData: PlayModel(name: "", description: "", tip: "", location: ""))
 }

@@ -40,5 +40,4 @@ class PlayViewModel: ObservableObject {
                 }.store(in: &subscriptions)
         }
     }
-    
 }

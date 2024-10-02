@@ -102,7 +102,9 @@ fileprivate struct SchoolToHotplaceCell: View {
         .tabViewStyle(PageTabViewStyle())
         .onReceive(timer) { _ in
             withAnimation {
-                currentIndex = (currentIndex + 1) % model.count
+                if model.count > 0 {
+                    currentIndex = (currentIndex + 1) % model.count
+                }
             }
         }
         .overlay(alignment: .bottomTrailing) {

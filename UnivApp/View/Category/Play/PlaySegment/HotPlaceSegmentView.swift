@@ -75,7 +75,7 @@ fileprivate struct representativePlaceCell: View {
             .foregroundColor(.white)
             .lineLimit(1)
             .padding(.bottom, 30)
-            .padding(.leading, 30)
+            .padding(.horizontal, 20)
         }
     }
 }

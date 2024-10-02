@@ -38,7 +38,7 @@ enum ListCellDestination: CaseIterable {
         case .mou:
             return AnyView(MouDetailView())
         case .play:
-            return AnyView(PlayDetailView(viewModel: PlayDetailViewModel()))
+            return AnyView(PlayDetailView(object: [Object(title: "", image: "")], PlaceArray: [PlayModel(name: "", description: "", tip: "", location: "")], PlaceData: PlayModel(name: "", description: "", tip: "", location: "")))
         }
     }
 }
