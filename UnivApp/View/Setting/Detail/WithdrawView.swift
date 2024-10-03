@@ -42,25 +42,26 @@ struct WithdrawView: View {
             LoadingView(url: "load", size: [150, 150])
         case .success:
             expireUser
+                .onAppear {
+                    self.isShow = true
+                }
         case .fail:
             ErrorView()
         }
     }
     
     var expireUser: some View {
-        NavigationStack {
-            VStack(alignment: .center, spacing: 10) {
-                LoadingView(url: "withdraw", size: [150, 150])
-                
-                Text("회원탈퇴 성공")
-                    .font(.system(size: 20, weight: .bold))
-                    .foregroundColor(.black)
-                
-                Text("회원님의 데이터를 영구 삭제했습니다.")
-                    .font(.system(size: 13, weight: .bold))
-                    .foregroundColor(.gray)
+        LoadingView(url: "load", size: [150, 150])
+            .alert(isPresented: $isShow) {
+                Alert (
+                    title: Text("회원탈퇴 성공"),
+                    message: Text("회원님의 데이터를 영구 삭제했습니다."),
+                    dismissButton: .default(Text("확인"), action: {
+                        self.authViewModel.authState = .unAuth
+                        self.authViewModel.refreshTokenState = .unExpired
+                    })
+                )
             }
-        }
     }
 }
 

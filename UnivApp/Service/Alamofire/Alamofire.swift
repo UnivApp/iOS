@@ -88,7 +88,7 @@ final class Alamofire {
             AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: ["content-Type":"application/json"], interceptor: TokenRequestInterceptor(authViewModel: AuthViewModel(container: DIContainer(services: Services()))))
                 .validate()
                 .response { response in
-                    //                        print(response.debugDescription)
+                    print(response.debugDescription)
                     switch response.result {
                     case .success:
                         if response.data?.isEmpty ?? true {

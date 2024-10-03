@@ -96,7 +96,6 @@ class AuthViewModel: ObservableObject {
                     //TODO: - 로그아웃 성공
                     KeychainWrapper.standard.removeAllKeys()
                     self?.phase = .success
-//                    self?.authState = .unAuth
                 }.store(in: &subscriptions)
             
             
@@ -112,7 +111,6 @@ class AuthViewModel: ObservableObject {
                     //TODO: - 회원 탈퇴 성공
                     KeychainWrapper.standard.removeAllKeys()
                     self?.phase = .success
-                    self?.authState = .unAuth
                 }.store(in: &subscriptions)
 
         }
