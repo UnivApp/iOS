@@ -41,8 +41,11 @@ final class TokenRequestInterceptor: RequestInterceptor {
         
         if let response = request.task?.response as? HTTPURLResponse {
             if response.statusCode == 400 {
-                self.authViewModel.authState = .unAuth
-                self.authViewModel.refreshTokenState = .Expired
+                DispatchQueue.main.async {
+                    self.authViewModel.authState = .unAuth
+                    self.authViewModel.refreshTokenState = .Expired
+                }
+                return completion(.doNotRetryWithError(error))
             }
         }
         
@@ -62,10 +65,8 @@ final class TokenRequestInterceptor: RequestInterceptor {
                         print("토큰 재발행 성공")
                     case let .failure(error):
                         print("토큰 재발행 실패 \(error)")
-                        DispatchQueue.main.async {
-                            self.authViewModel.authState = .unAuth
-                            self.authViewModel.refreshTokenState = .Expired
-                        }
+                        self.authViewModel.authState = .unAuth
+                        self.authViewModel.refreshTokenState = .Expired
                     }
                 } receiveValue: { (response: UserModel) in
                     KeychainWrapper.standard.removeAllKeys()

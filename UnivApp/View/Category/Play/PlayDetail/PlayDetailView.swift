@@ -24,7 +24,7 @@ struct PlayDetailView: View {
         GeometryReader { proxy in
             ScrollView(.vertical) {
                 if let placeData = playDetailModel.placeData {
-                    VStack(alignment: .leading, spacing: 20) {
+                    VStack(alignment: .leading, spacing: 30) {
                         TabView(selection: $currentIndex) {
                             if let images = placeData.images {
                                 ForEach(images.indices, id: \.self) { index in
@@ -46,25 +46,56 @@ struct PlayDetailView: View {
                         }
                         
                         Group {
-                            Text(placeData.name)
-                                .font(.system(size: 20, weight: .bold))
-                            
-                            Text("📍 \(placeData.location)")
-                                .font(.system(size: 18, weight: .semibold))
-                                .foregroundColor(.gray)
+                            Group {
+                                Text(placeData.name)
+                                    .font(.system(size: 20, weight: .bold))
+                                
+                                Text("📍 \(placeData.location)")
+                                    .font(.system(size: 18, weight: .semibold))
+                                    .foregroundColor(.gray)
+                            }
                             
                             Divider()
                             
-                            Text(placeData.description)
-                                .font(.system(size: 15, weight: .regular))
-                                .lineSpacing(10)
+                            Group {
+                                Text("설명")
+                                    .font(.system(size: 18, weight: .bold))
+                                
+                                HStack {
+                                    Image("quotes_left")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 20, height: 20)
+                                    Spacer()
+                                }
+                                
+                                Text(placeData.description)
+                                    .font(.system(size: 15, weight: .regular))
+                                    .foregroundColor(.black)
+                                    .lineSpacing(10)
+                                
+                                HStack {
+                                    Spacer()
+                                    Image("quotes_right")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 20, height: 20)
+                                }
+                            }
                             
-                            Text(placeData.tip)
-                                .font(.system(size: 15, weight: .bold))
-                                .lineSpacing(10)
+                            Group {
+                                Text("🍯 꿀팁")
+                                    .font(.system(size: 18, weight: .bold))
+                                
+                                Text(placeData.tip)
+                                    .foregroundColor(.black)
+                                    .font(.system(size: 15, weight: .regular))
+                                    .lineSpacing(10)
+                            }
                         }
                         .lineLimit(nil)
                         .fixedSize(horizontal: false, vertical: true)
+                        .multilineTextAlignment(.leading)
                         .padding(.horizontal, 20)
                         
                         VStack {

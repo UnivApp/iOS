@@ -96,7 +96,7 @@ class AuthViewModel: ObservableObject {
                     //TODO: - 로그아웃 성공
                     KeychainWrapper.standard.removeAllKeys()
                     self?.phase = .success
-                    self?.authState = .unAuth
+//                    self?.authState = .unAuth
                 }.store(in: &subscriptions)
             
             

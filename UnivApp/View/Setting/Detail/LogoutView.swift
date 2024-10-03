@@ -10,8 +10,7 @@ import SwiftUI
 struct LogoutView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     
-    @State var isShow: Bool = true
-    @State var isNavigation: Bool = false
+    @State var isShow: Bool = false
     var body: some View {
         contentView
             .navigationBarBackButtonHidden(true)
@@ -30,23 +29,23 @@ struct LogoutView: View {
             LoadingView(url: "load", size: [150, 150])
         case .success:
             logoutUser
+                .onAppear {
+                    self.isShow = true
+                }
         case .fail:
             ErrorView()
         }
     }
     
     var logoutUser: some View {
-        NavigationStack {
-            NavigationLink(destination: MainTabView(), isActive: $isNavigation) {
-                
-            }
-        }
+        LoadingView(url: "load", size: [150, 150])
         .alert(isPresented: $isShow) {
             Alert (
                 title: Text("로그아웃 성공 🔓"),
                 message: Text("어플을 사용하기 위해서는 사용자 로그인이 필요합니다."),
                 dismissButton: .default(Text("확인"), action: {
-                    self.isNavigation = true
+                    self.authViewModel.authState = .unAuth
+                    self.authViewModel.refreshTokenState = .unExpired
                 })
             )
         }

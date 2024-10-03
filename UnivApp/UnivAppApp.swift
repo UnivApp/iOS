@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct UnivAppApp: App {
     @StateObject var container: DIContainer = .init(services: Services())
+    @StateObject var authViewModel: AuthViewModel = .init(container: .init(services: Services()))
     var body: some Scene {
         WindowGroup {
             SplashView()
