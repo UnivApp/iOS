@@ -17,6 +17,7 @@ struct SearchView: View {
             HStack {
                 Button {
                     listViewModel.send(action: .search)
+                    isFocused = false
                 } label: {
                     Image("search")
                         .resizable()

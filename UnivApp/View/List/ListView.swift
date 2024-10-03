@@ -43,6 +43,9 @@ struct ListView: View {
             LoadingView(url: "congratulations", size: [150, 150])
         case .success:
             loadedView
+                .onTapGesture {
+                    self.isFocused = false
+                }
         case .fail:
             ErrorView()
         }
@@ -53,8 +56,9 @@ struct ListView: View {
             VStack {
                 Spacer()
                 
-                SearchView(searchText: $viewModel.searchText)
+                SearchView(isFocused: self._isFocused, searchText: $viewModel.searchText)
                     .environmentObject(self.viewModel)
+                    
                 
                 Spacer()
                 

@@ -16,6 +16,7 @@ struct HomeView: View {
     
     @State private var isLoading: Bool = false
     @State private var selectedSegment: SplitType = .employment
+    @State private var isShowingPopup: Bool = false
     @FocusState private var isFocused: Bool
     
     @State private var currentIndex: Int = 0
@@ -23,9 +24,6 @@ struct HomeView: View {
     
     var body: some View {
         contentView
-        //            .onTapGesture {
-        //                self.isFocused = false
-        //            }
     }
     
     @ViewBuilder
@@ -40,6 +38,12 @@ struct HomeView: View {
             LoadingView(url: "congratulations", size: [150, 150])
         case .success:
             loadedView
+                .onTapGesture {
+                    self.isFocused = false
+                }
+                .sheet(isPresented: $isShowingPopup) {
+                    PopUpContentView(summary: listViewModel.summaryArray)
+                }
         case .fail:
             ErrorView()
         }
@@ -49,9 +53,8 @@ struct HomeView: View {
         NavigationStack {
             ScrollView(.vertical) {
                 VStack(alignment: .center, spacing: 20) {
-                    SearchView(searchText: $listViewModel.searchText)
+                    searchView
                         .padding(.top, 10)
-                        .environmentObject(listViewModel)
                     
                     categoryView
                     
@@ -72,6 +75,37 @@ struct HomeView: View {
                 }
             }
         }
+    }
+    
+    var searchView: some View {
+        VStack(alignment: .center, spacing: 20) {
+            HStack {
+                Button {
+                    listViewModel.send(action: .search)
+                    isShowingPopup = true
+                } label: {
+                    Image("search")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 15, height: 15)
+                }
+                .padding()
+                
+                TextField("대학명/소재지를 입력하세요", text: $listViewModel.searchText)
+                    .focused($isFocused)
+                    .font(.system(size: 15, weight: .regular))
+                    .padding()
+            }
+            .padding(.horizontal, 10)
+            .background(Color.white)
+            .border(LinearGradient(gradient: Gradient(colors: [Color.yellow, Color.orange]), startPoint: .leading, endPoint: .trailing), width: 1)
+            .cornerRadius(15)
+            .overlay (
+                RoundedRectangle(cornerRadius: 15)
+                    .stroke(LinearGradient(gradient: Gradient(colors: [Color.yellow, Color.orange]), startPoint: .leading, endPoint: .trailing), lineWidth: 1.5)
+            )
+        }
+        .padding(.horizontal, 20)
     }
     
     var categoryView: some View {

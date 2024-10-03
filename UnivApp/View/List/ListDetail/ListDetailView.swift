@@ -139,7 +139,6 @@ struct ListDetailView: View {
                             .scaledToFit()
                             .frame(width: 20, height: 20)
                     }
-                    
                 }
                 ToolbarItem(placement: .navigation) {
                     section

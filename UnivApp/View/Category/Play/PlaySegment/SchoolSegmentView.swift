@@ -10,6 +10,7 @@ import SwiftUI
 struct SchoolSegmentView: View {
     @StateObject var viewModel: PlayViewModel
     @StateObject var listViewModel: ListViewModel
+    @FocusState private var isFocused: Bool
     
     var body: some View {
         contentView
@@ -61,7 +62,7 @@ struct SchoolSegmentView: View {
                     .font(.system(size: 18, weight: .bold))
                     .padding(.leading, 20)
                 
-                SearchView(searchText: $listViewModel.searchText)
+                SearchView(isFocused: self._isFocused, searchText: $listViewModel.searchText)
                     .environmentObject(self.listViewModel)
                 
                 ForEach(listViewModel.summaryArray, id: \.self) { item in
