@@ -12,13 +12,7 @@ import SwiftKeychainWrapper
 import SwiftUI
 
 final class TokenRequestInterceptor: RequestInterceptor {
-    @ObservedObject var authViewModel: AuthViewModel
-    
     private var subscriptions = Set<AnyCancellable>()
-    
-    init(authViewModel: AuthViewModel) {
-        self.authViewModel = AuthViewModel(container: DIContainer(services: Services()))
-    }
 
     public func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, any Error>) -> Void) {
         var urlRequest = urlRequest
@@ -39,16 +33,6 @@ final class TokenRequestInterceptor: RequestInterceptor {
                       completion: @escaping (RetryResult) -> Void) {
         let retryLimit = 2
         
-        if let response = request.task?.response as? HTTPURLResponse {
-            if response.statusCode == 400 {
-                DispatchQueue.main.async {
-                    self.authViewModel.authState = .unAuth
-                    self.authViewModel.refreshTokenState = .Expired
-                }
-                return completion(.doNotRetryWithError(error))
-            }
-        }
-        
         guard let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 else {
             return completion(.doNotRetryWithError(error))
         }
@@ -59,14 +43,14 @@ final class TokenRequestInterceptor: RequestInterceptor {
                 return completion(.doNotRetryWithError(error))
             }
             Alamofire().reissueRefresh(url: APIEndpoint.refresh.urlString, refresh: refreshToken)
-                .sink { completion in
-                    switch completion {
+                .sink { completionStatus in
+                    switch completionStatus {
                     case .finished:
                         print("토큰 재발행 성공")
                     case let .failure(error):
                         print("토큰 재발행 실패 \(error)")
-                        self.authViewModel.authState = .unAuth
-                        self.authViewModel.refreshTokenState = .Expired
+                        KeychainWrapper.standard.removeAllKeys()
+                        return completion(.doNotRetryWithError(error))
                     }
                 } receiveValue: { (response: UserModel) in
                     KeychainWrapper.standard.removeAllKeys()

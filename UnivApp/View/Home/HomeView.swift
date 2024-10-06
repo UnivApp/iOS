@@ -38,6 +38,12 @@ struct HomeView: View {
             LoadingView(url: "congratulations", size: [150, 150])
         case .success:
             loadedView
+                .onAppear {
+                    listViewModel.searchText = ""
+                }
+                .refreshable {
+                    viewModel.send(action: .load)
+                }
                 .onTapGesture {
                     self.isFocused = false
                 }

@@ -49,6 +49,7 @@ class AuthViewModel: ObservableObject {
             container.services.authService.checkAuthState()
                 .sink { [weak self] completion in
                     if case .failure = completion {
+                        self?.refreshTokenState = .Expired
                         self?.authState = .unAuth
                     }
                 } receiveValue: { [weak self] checkStatus in

@@ -9,6 +9,7 @@ import SwiftUI
 import Kingfisher
 
 struct PlaySchoolView: View {
+    @Environment(\.dismiss) var dismiss
     @StateObject var viewModel: PlayViewModel
     @State var currentIndex: Int = 0
     private let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
@@ -17,6 +18,21 @@ struct PlaySchoolView: View {
     
     var body: some View {
         contentView
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    HStack(spacing: 0) {
+                        Button(action: {
+                            dismiss()
+                        }, label: {
+                            Image("blackback")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20, height: 20)
+                        })
+                    }
+                }
+            }
     }
     @ViewBuilder
     var contentView: some View {

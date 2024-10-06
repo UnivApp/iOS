@@ -14,7 +14,6 @@ struct SchoolSegmentView: View {
     
     var body: some View {
         contentView
-            .navigationTitle("")
     }
     
     @ViewBuilder

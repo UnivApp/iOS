@@ -48,7 +48,7 @@ final class Alamofire {
     func nonOfZeroPost(url: String, params: [String:Any]?) -> AnyPublisher<Void, Error> {
         return Future<Void, Error> { promise in
             if let params = params {
-                AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: ["content-Type":"application/json"], interceptor: TokenRequestInterceptor(authViewModel: AuthViewModel(container: DIContainer(services: Services()))))
+                AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: ["content-Type":"application/json"], interceptor: TokenRequestInterceptor())
                     .validate()
                     .response { response in
 //                        print(response.debugDescription)
@@ -64,7 +64,7 @@ final class Alamofire {
                         }
                     }
             } else {
-                AF.request(url, method: .post, encoding: JSONEncoding.default, headers: ["content-Type":"application/json"], interceptor: TokenRequestInterceptor(authViewModel: AuthViewModel(container: DIContainer(services: Services()))))
+                AF.request(url, method: .post, encoding: JSONEncoding.default, headers: ["content-Type":"application/json"], interceptor: TokenRequestInterceptor())
                     .validate()
                     .response { response in
                         //                            print(response.debugDescription)
@@ -85,7 +85,7 @@ final class Alamofire {
     
     func delete(url: String) -> AnyPublisher<Void, Error> {
         return Future<Void, Error> { promise in
-            AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: ["content-Type":"application/json"], interceptor: TokenRequestInterceptor(authViewModel: AuthViewModel(container: DIContainer(services: Services()))))
+            AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: ["content-Type":"application/json"], interceptor: TokenRequestInterceptor())
                 .validate()
                 .response { response in
                     print(response.debugDescription)
@@ -106,7 +106,7 @@ final class Alamofire {
     func postAlamofire<T:Decodable>(url: String, params: [String:Any]?) -> AnyPublisher<T, Error> {
         return Future<T, Error> { promise in
             if let params = params {
-                AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: ["content-Type":"application-json"], interceptor: TokenRequestInterceptor(authViewModel: AuthViewModel(container: DIContainer(services: Services()))))
+                AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: ["content-Type":"application-json"], interceptor: TokenRequestInterceptor())
                     .validate()
                     .responseDecodable(of: T.self) { response in
 //                        print(response.debugDescription)
@@ -118,7 +118,7 @@ final class Alamofire {
                         }
                     }
             } else {
-                AF.request(url, method: .post, encoding: JSONEncoding.default, headers: ["content-Type":"application-json"], interceptor: TokenRequestInterceptor(authViewModel: AuthViewModel(container: DIContainer(services: Services()))))
+                AF.request(url, method: .post, encoding: JSONEncoding.default, headers: ["content-Type":"application-json"], interceptor: TokenRequestInterceptor())
                     .validate()
                     .responseDecodable(of: T.self) { response in
 //                        print(response.debugDescription)
@@ -135,7 +135,7 @@ final class Alamofire {
     }
     func getAlamofire<T: Decodable>(url: String) -> AnyPublisher<T, Error> {
         return Future<T, Error> { promise in
-            AF.request(url, method: .get, encoding: JSONEncoding.default, headers: ["Content-Type": "application-json"], interceptor: TokenRequestInterceptor(authViewModel: AuthViewModel(container: DIContainer(services: Services()))))
+            AF.request(url, method: .get, encoding: JSONEncoding.default, headers: ["Content-Type": "application-json"], interceptor: TokenRequestInterceptor())
                 .validate()
                 .responseDecodable(of: T.self) { response in
 //                    print(response.debugDescription)

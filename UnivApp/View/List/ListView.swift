@@ -43,6 +43,9 @@ struct ListView: View {
             LoadingView(url: "congratulations", size: [150, 150])
         case .success:
             loadedView
+                .onAppear {
+                    viewModel.searchText = ""
+                }
                 .onTapGesture {
                     self.isFocused = false
                 }
