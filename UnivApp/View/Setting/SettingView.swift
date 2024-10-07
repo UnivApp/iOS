@@ -137,6 +137,6 @@ struct SettingView: View {
 
 #Preview {
     SettingView(viewModel: SettingViewModel(container: .init(services: StubServices())))
-        .environmentObject(AuthViewModel(container: .init(services: StubServices())))
+        .environmentObject(AuthViewModel(container: .init(services: StubServices()), authState: .auth))
         .environmentObject(DIContainer(services: StubServices()))
 }

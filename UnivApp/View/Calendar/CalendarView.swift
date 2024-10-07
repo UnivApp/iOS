@@ -178,6 +178,6 @@ struct CalendarContainer_Previews: PreviewProvider {
         CalendarContainer(viewModel: CalendarViewModel(), eventDates: [
             Calendar.current.startOfDay(for: Date()): UIImage(named: "star")!
         ])
-        .environmentObject(AuthViewModel(container: .init(services: StubServices())))
+        .environmentObject(AuthViewModel(container: .init(services: StubServices()), authState: .auth))
     }
 }

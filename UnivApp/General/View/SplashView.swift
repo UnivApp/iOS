@@ -14,7 +14,7 @@ struct SplashView: View {
     
     var body: some View {
         if isActive {
-            AuthView(authViewModel: .init(container: container))
+            AuthView(authViewModel: .init(container: container, authState: .auth))
                 .environmentObject(container)
         } else {
             ZStack {

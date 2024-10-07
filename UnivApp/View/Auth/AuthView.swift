@@ -24,7 +24,7 @@ struct AuthView: View {
                 case .Expired:
                     LoginView()
                         .alert(isPresented: $showAlert) {
-                            Alert(title: Text("로그인 만료 ⚠️"), message: Text("로그인 세션이 만료되어 재로그인이 필요합니다."), dismissButton: .default(Text("확인")))
+                            Alert(title: Text("로그인 만료 ⚠️"), message: Text("세션이 만료되어 재로그인이 필요합니다."), dismissButton: .default(Text("확인")))
                         }
                         .onAppear { self.showAlert = true }
                         .environmentObject(authViewModel)
@@ -42,6 +42,6 @@ struct AuthView: View {
 }
 
 #Preview {
-    AuthView(authViewModel: .init(container: .init(services: StubServices())))
+    AuthView(authViewModel: .init(container: .init(services: StubServices()), authState: .auth))
         .environmentObject(DIContainer(services: StubServices()))
 }

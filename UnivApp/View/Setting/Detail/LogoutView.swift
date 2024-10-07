@@ -54,5 +54,5 @@ struct LogoutView: View {
 
 #Preview {
     LogoutView()
-        .environmentObject(AuthViewModel(container: .init(services: StubServices())))
+        .environmentObject(AuthViewModel(container: .init(services: StubServices()), authState: .auth))
 }

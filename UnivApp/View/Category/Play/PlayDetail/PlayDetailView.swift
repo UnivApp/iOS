@@ -24,7 +24,7 @@ struct PlayDetailView: View {
         GeometryReader { proxy in
             ScrollView(.vertical) {
                 if let placeData = playDetailModel.placeData {
-                    VStack(alignment: .leading, spacing: 30) {
+                    VStack(alignment: .leading, spacing: 20) {
                         TabView(selection: $currentIndex) {
                             if let images = placeData.images {
                                 ForEach(images.indices, id: \.self) { index in
@@ -59,7 +59,7 @@ struct PlayDetailView: View {
                             
                             Group {
                                 Text("설명")
-                                    .font(.system(size: 18, weight: .bold))
+                                    .font(.system(size: 17, weight: .bold))
                                 
                                 HStack {
                                     Image("quotes_left")
@@ -72,7 +72,7 @@ struct PlayDetailView: View {
                                 Text(placeData.description)
                                     .font(.system(size: 15, weight: .regular))
                                     .foregroundColor(.black)
-                                    .lineSpacing(10)
+                                    .lineSpacing(5)
                                 
                                 HStack {
                                     Spacer()
@@ -85,12 +85,12 @@ struct PlayDetailView: View {
                             
                             Group {
                                 Text("🍯 꿀팁")
-                                    .font(.system(size: 18, weight: .bold))
+                                    .font(.system(size: 17, weight: .bold))
                                 
                                 Text(placeData.tip)
                                     .foregroundColor(.black)
                                     .font(.system(size: 15, weight: .regular))
-                                    .lineSpacing(10)
+                                    .lineSpacing(5)
                             }
                         }
                         .lineLimit(nil)
@@ -156,5 +156,5 @@ struct PlayDetailView: View {
 }
 
 #Preview {
-    PlayDetailView(playDetailModel: PlayDetailModel(object: [Object(title: "", image: "")], placeDataArray: [PlayModel(name: "", description: "", tip: "", location: "")], placeData: PlayModel(name: "", description: "", tip: "", location: "")))
+    PlayDetailView(playDetailModel: PlayDetailModel(object: [Object(title: "", image: "")], placeDataArray: [PlayModel(name: "", description: "", tip: "", location: "")], placeData: PlayModel(name: "", description: "설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다", tip: "설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다", location: "")))
 }

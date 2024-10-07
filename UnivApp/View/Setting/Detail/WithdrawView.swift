@@ -67,5 +67,5 @@ struct WithdrawView: View {
 
 #Preview {
     WithdrawView()
-        .environmentObject(AuthViewModel(container: .init(services: StubServices())))
+        .environmentObject(AuthViewModel(container: .init(services: StubServices()), authState: .auth))
 }

@@ -58,7 +58,7 @@ struct MainTabView: View {
 
 struct MainTabView_Preview: PreviewProvider {
     static let container: DIContainer = .init(services: StubServices())
-    static let authViewModel: AuthViewModel = AuthViewModel(container: .init(services: StubServices()))
+    static let authViewModel: AuthViewModel = AuthViewModel(container: .init(services: StubServices()), authState: .auth)
     
     static var previews: some View {
         MainTabView()

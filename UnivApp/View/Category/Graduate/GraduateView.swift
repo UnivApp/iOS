@@ -100,7 +100,7 @@ struct GraduateView: View {
 
 struct GraduateView_Previews: PreviewProvider {
     static let container = DIContainer(services: StubServices())
-    static let authViewModel = AuthViewModel(container: .init(services: StubServices()))
+    static let authViewModel = AuthViewModel(container: .init(services: StubServices()), authState: .auth)
     static var previews: some View {
         GraduateView(viewModel: GraduateViewModel(searchText: "", container: Self.container))
             .environmentObject(Self.authViewModel)

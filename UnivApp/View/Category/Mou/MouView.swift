@@ -140,7 +140,7 @@ fileprivate struct MouCell: View {
 
 struct MouView_Previews: PreviewProvider {
     static let container = DIContainer(services: StubServices())
-    static let authViewModel = AuthViewModel(container: .init(services: StubServices()))
+    static let authViewModel = AuthViewModel(container: .init(services: StubServices()), authState: .auth)
     static var previews: some View {
         MouView(viewModel: MouViewModel(container: Self.container))
             .environmentObject(Self.authViewModel)

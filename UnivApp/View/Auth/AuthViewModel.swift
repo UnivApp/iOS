@@ -29,7 +29,7 @@ class AuthViewModel: ObservableObject {
         case withdraw
     }
     
-    @Published var authState: AuthState = .auth
+    @Published var authState: AuthState
     @Published var refreshTokenState: RefreshTokenState = .unExpired
     @Published var phase: Phase = .notRequested
     
@@ -39,8 +39,9 @@ class AuthViewModel: ObservableObject {
     private var subscriptions = Set<AnyCancellable>()
     private var currentNonce : String?
     
-    init(container: DIContainer) {
+    init(container: DIContainer, authState: AuthState) {
         self.container = container
+        self.authState = authState
     }
     
     func send(action: Action) {
@@ -49,8 +50,12 @@ class AuthViewModel: ObservableObject {
             container.services.authService.checkAuthState()
                 .sink { [weak self] completion in
                     if case .failure = completion {
-                        self?.refreshTokenState = .Expired
                         self?.authState = .unAuth
+                        if UserDefaults.standard.string(forKey: "FirstUser") == "true" {
+                            self?.refreshTokenState = .unExpired
+                        } else {
+                            self?.refreshTokenState = .Expired
+                        }
                     }
                 } receiveValue: { [weak self] checkStatus in
                     self?.authState = .auth

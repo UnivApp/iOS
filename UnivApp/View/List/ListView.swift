@@ -149,7 +149,7 @@ struct ListView: View {
 
 struct ListView_Previews: PreviewProvider {
     static let container = DIContainer(services: StubServices())
-    static let authViewModel = AuthViewModel(container: .init(services: StubServices()))
+    static let authViewModel = AuthViewModel(container: .init(services: StubServices()), authState: .auth)
     static var previews: some View {
         ListView(viewModel: ListViewModel(container: self.container, searchText: ""))
             .environmentObject(Self.authViewModel)

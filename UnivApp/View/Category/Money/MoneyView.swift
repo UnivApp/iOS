@@ -112,7 +112,7 @@ struct MoneyView: View {
 
 struct MoneyView_Previews: PreviewProvider {
     static let container = DIContainer(services: StubServices())
-    static let authViewModel = AuthViewModel(container: .init(services: StubServices()))
+    static let authViewModel = AuthViewModel(container: .init(services: StubServices()), authState: .auth)
     static var previews: some View {
         MoneyView(viewModel: MoneyViewModel(searchText: "", container: Self.container))
             .environmentObject(Self.authViewModel)
