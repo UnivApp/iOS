@@ -219,10 +219,7 @@ struct HomeView: View {
                 Group {
                     switch selectedSegment {
                     case .employment:
-                        ForEach(viewModel.InitiativeData, id: \.rank) { cell in
-                            InitiativeViewCell(model: cell)
-                                .tag(cell.rank)
-                        }.padding(.horizontal, -20)
+                        EmptyView()
                     case .Occasion:
                         EmptyView()
                     case .ontime:

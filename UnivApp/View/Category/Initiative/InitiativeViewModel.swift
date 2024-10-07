@@ -10,7 +10,7 @@ import Combine
 class InitiativeViewModel: ObservableObject {
     
     enum Action {
-        
+        case load
     }
     
     var category: [Object] = [
@@ -22,23 +22,60 @@ class InitiativeViewModel: ObservableObject {
         Object(title: "CWTS", image: "CWTS"),
         Object(title: "Nature Index", image: "NatureIndex")
     ]
-    @Published var InitiativeData : [InitiativeModel] = [
-        InitiativeModel(title: "세종대학교", logo: "emptyLogo", description: "소재: 서울 백분위(영어감점): 97.41 (0.2)", rank: 1),
-        InitiativeModel(title: "세종대학교", logo: "emptyLogo", description: "소재: 서울 백분위(영어감점): 97.41 (0.2)", rank: 1),
-        InitiativeModel(title: "세종대학교", logo: "emptyLogo", description: "소재: 서울 백분위(영어감점): 97.41 (0.2)", rank: 1),
-        InitiativeModel(title: "세종대학교", logo: "emptyLogo", description: "소재: 서울 백분위(영어감점): 97.41 (0.2)", rank: 1),
-        InitiativeModel(title: "세종대학교", logo: "emptyLogo", description: "소재: 서울 백분위(영어감점): 97.41 (0.2)", rank: 1)
-    ]
+    
+    @Published var QSData: [InitiativeModel] = []
+    @Published var CWURData: [InitiativeModel] = []
+    @Published var ARWUData: [InitiativeModel] = []
+    @Published var USNWRData: [InitiativeModel] = []
+    @Published var NatureIndexData: [InitiativeModel] = []
+    @Published var CWTSData: [InitiativeModel] = []
+    @Published var TheData: [InitiativeModel] = []
+    
+    @Published var phase: Phase = .notRequested
     
     private var container: DIContainer
+    private var subscriptions = Set<AnyCancellable>()
     
     init(container: DIContainer) {
         self.container = container
     }
     
     func send(action: Action) {
-        
+        switch action {
+        case .load:
+            self.phase = .loading
+            container.services.rankingService.getRanking()
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.phase = .fail
+                    }
+                } receiveValue: { [weak self] RankingData in
+                    self?.seperateData(rankingData: RankingData)
+                }.store(in: &subscriptions)
+        }
     }
-    
+    func seperateData(rankingData: [InitiativeModel]) {
+        for index in rankingData.indices {
+            switch rankingData[index].displayName {
+            case "QS":
+                self.QSData.append(rankingData[index])
+            case "CWUR":
+                self.CWURData.append(rankingData[index])
+            case "ARWU":
+                self.ARWUData.append(rankingData[index])
+            case "USN & WR":
+                self.USNWRData.append(rankingData[index])
+            case "Nature Index":
+                self.NatureIndexData.append(rankingData[index])
+            case "CWTS":
+                self.CWTSData.append(rankingData[index])
+            case "The":
+                self.TheData.append(rankingData[index])
+            default:
+                break
+            }
+        }
+        self.phase = .success
+    }
 }
 

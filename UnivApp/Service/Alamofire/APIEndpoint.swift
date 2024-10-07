@@ -24,6 +24,7 @@ enum APIEndpoint {
     //MARK: - Category
     case topPlace
     case schoolPlace
+    case ranking
     
     
     var urlString: String {
@@ -56,6 +57,8 @@ enum APIEndpoint {
             return "http://43.200.143.28:8080/api/activities/top-place"
         case .schoolPlace:
             return "http://43.200.143.28:8080/api/activities?universityId="
+        case .ranking:
+            return "http://43.200.143.28:8080/api/rankings"
         }
     }
 }

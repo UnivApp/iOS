@@ -19,6 +19,7 @@ protocol ServicesType {
     var searchService: SearchServiceType { get set }
     var heartService: HeartServiceType { get set }
     var playService: PlayServiceType { get set }
+    var rankingService: RankingServiceType { get set }
 }
 
 class Services: ServicesType {
@@ -28,6 +29,7 @@ class Services: ServicesType {
     var searchService: SearchServiceType
     var heartService: HeartServiceType
     var playService: PlayServiceType
+    var rankingService: RankingServiceType
     
     init() {
         self.authService = AuthService()
@@ -36,6 +38,7 @@ class Services: ServicesType {
         self.searchService = SearchService()
         self.heartService = HeartService()
         self.playService = PlayService()
+        self.rankingService = RankingService()
     }
     
 }
@@ -47,4 +50,5 @@ class StubServices: ServicesType {
     var searchService: SearchServiceType = StubSearchService()
     var heartService: HeartServiceType = StubHeartService()
     var playService: PlayServiceType = StubPlayService()
+    var rankingService: RankingServiceType = StubRankingService()
 }

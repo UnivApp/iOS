@@ -15,6 +15,28 @@ struct InitiativeView: View {
     
     
     var body: some View {
+       contentView
+            .navigationBarBackButtonHidden(true)
+            .toolbar(.hidden, for: .tabBar)
+    }
+    
+    @ViewBuilder
+    var contentView: some View {
+        switch self.viewModel.phase {
+        case .notRequested:
+            PlaceholderView()
+                .onAppear {
+                    viewModel.send(action: .load)
+                }
+        case .loading:
+            LoadingView(url: "congratulations", size: [150, 150])
+        case .success:
+            loadedView
+        case .fail:
+            ErrorView()
+        }
+    }
+    var loadedView: some View {
         NavigationStack {
             ScrollView(.vertical) {
                 VStack(alignment: .leading, spacing: 30) {
@@ -41,14 +63,27 @@ struct InitiativeView: View {
                     SeperateView()
                         .frame(width: UIScreen.main.bounds.width, height: 20)
                     
-                    Text("QS 세계대학평가")
-                        .padding(.leading, 20)
-                        .font(.system(size: 18, weight: .bold))
-                        .foregroundColor(.black)
+                    HStack {
+                        Text("QS 세계대학평가")
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundColor(.black)
+                        Spacer()
+                        NavigationLink(destination: EmptyView()) {
+                            Text("더보기")
+                                .font(.system(size: 12, weight: .semibold))
+                                .foregroundColor(.black)
+                            Image("arrow_fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 10, height: 10)
+                        }
+                    }
+                    .padding(.horizontal, 20)
                     
-                    ForEach(viewModel.InitiativeData, id: \.rank) { cell in
-                        InitiativeViewCell(model: cell)
-                            .tag(cell.rank)
+                    ForEach(viewModel.QSData.indices, id: \.self) { index in
+                        if index < 10 {
+                            InitiativeViewCell(model: viewModel.QSData[index])
+                        }
                     }
                 }
             }
@@ -71,8 +106,6 @@ struct InitiativeView: View {
                 }
             }
         }
-        .navigationBarBackButtonHidden(true)
-        .toolbar(.hidden, for: .tabBar)
     }
 }
 

@@ -23,7 +23,7 @@ struct PlayView: View {
     var contentView: some View {
         switch viewModel.phase {
         case .notRequested:
-            PlaceholderView()
+            loadedView
                 .onAppear {
                     viewModel.send(action: .topPlaceLoad)
                 }

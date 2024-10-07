@@ -32,15 +32,7 @@ class HomeViewModel: ObservableObject {
         switch action {
         case .load:
             self.phase = .loading
-            //TODO: - 캘린더 데이터 불러오기
             //TODO: - 입결 데이터 불러오기
-            self.InitiativeData = [
-                InitiativeModel(title: "세종대학교", logo: "emptyLogo", description: "소재: 서울 백분위(영어감점): 97.41 (0.2)", rank: 1),
-                InitiativeModel(title: "세종대학교", logo: "emptyLogo", description: "소재: 서울 백분위(영어감점): 97.41 (0.2)", rank: 1),
-                InitiativeModel(title: "세종대학교", logo: "emptyLogo", description: "소재: 서울 백분위(영어감점): 97.41 (0.2)", rank: 1),
-                InitiativeModel(title: "세종대학교", logo: "emptyLogo", description: "소재: 서울 백분위(영어감점): 97.41 (0.2)", rank: 1),
-                InitiativeModel(title: "세종대학교", logo: "emptyLogo", description: "소재: 서울 백분위(영어감점): 97.41 (0.2)", rank: 1)
-            ]
             container.services.playService.getTopPlace()
                 .sink { [weak self] completion in
                     if case .failure = completion {

@@ -14,23 +14,34 @@ struct FoodView: View {
     @Environment(\.dismiss) var dismiss
     
     
+    @State private var segmentType: FoodSegmentType = .hotPlace
     var body: some View {
+        contentView
+            .navigationBarBackButtonHidden(true)
+            .toolbar(.hidden, for: .tabBar)
+    }
+    
+    @ViewBuilder
+    var contentView: some View {
+        switch viewModel.phase {
+        case .notRequested:
+            loadedView
+                .onAppear {
+                    viewModel.send(action: .load)
+                }
+        case .loading:
+            LoadingView(url: "congratulations", size: [150, 150])
+        case .success:
+            loadedView
+        case .fail:
+            ErrorView()
+        }
+    }
+    
+    var loadedView: some View {
         NavigationStack {
             VStack {
-                ScrollView(.vertical) {
-                    
-                    header
-                    
-                    Spacer()
-                    
-                    list
-                }
-                .ignoresSafeArea()
-                .padding(.horizontal, 0)
-                .padding(.bottom, 0)
-                .refreshable {
-                    
-                }
+                list
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -51,63 +62,41 @@ struct FoodView: View {
                 }
             }
         }
-        .navigationBarBackButtonHidden(true)
-        .toolbar(.hidden, for: .tabBar)
-    }
-    
-    var header: some View {
-        VStack(spacing: 30) {
-            Image("food_poster")
-                .resizable()
-                .scaledToFit()
-                .frame(maxWidth: .infinity)
-            
-            HStack {
-                Group {
-                    Button {
-                        //TODO: 검색
-                    } label: {
-                        Image("search")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 20, height: 20)
-                    }
-                    .padding()
-                    
-                    TextField("대학명/소재지를 입력하세요", text: $viewModel.searchText)
-                        .font(.system(size: 17, weight: .bold))
-                        .padding()
-                }
-                .padding(.leading, 10)
-            }
-            .background(Color(.backGray))
-            .cornerRadius(15)
-            .padding(.horizontal, 30)
-        }
     }
     
     var list: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Group {
-                Text("대학 주변 ")
-                    .font(.system(size: 15, weight: .bold))
-                + Text("맛집")
-                    .font(.system(size: 15, weight: .bold))
-                    .foregroundColor(.orange)
-                + Text(" 확인하기")
-                    .font(.system(size: 15, weight: .bold))
+        VStack(alignment: .center, spacing: 20) {
+            Image("food_poster")
+                .resizable()
+                .scaledToFit()
+                .frame(width: UIScreen.main.bounds.width)
+                .padding(.top, 20)
+            
+            HStack(spacing: 10) {
+                ForEach(FoodSegmentType.allCases, id: \.self) { segment in
+                    Button {
+                        self.segmentType = segment
+                    } label: {
+                        Text(segment.title)
+                            .padding()
+                            .foregroundColor(.black)
+                            .font(.system(size: 15, weight: .bold))
+                            .background(RoundedRectangle(cornerRadius: 15)
+                                .fill(segmentType == segment ? .yellow : .backGray)
+                                .frame(height: 40))
+                    }
+                }
+                Spacer()
             }
-            .padding(.horizontal, 30)
-            .padding(.top, 10)
-
-            ForEach(viewModel.stub, id: \.self) { food in
-                if let title = food.title,
-                   let description = food.description,
-                   let image = food.image,
-                   let school = food.school {
-                    FoodViewCell(title: title, description: description, image: image, school: school, view: AnyView(EmptyView()))
+            .padding(.horizontal, 20)
+            Group {
+                if segmentType == .hotPlace {
+                    FoodHotPlaceView(model: viewModel.foodData)
+                } else {
+                    SchoolSegmentView(viewModel: PlayViewModel(container: self.container), listViewModel: ListViewModel(container: self.container, searchText: ""))
                 }
             }
+            
         }
     }
 }
@@ -116,7 +105,7 @@ struct FoodView_Previews: PreviewProvider {
     static let container = DIContainer(services: StubServices())
     static let authViewModel = AuthViewModel(container: .init(services: StubServices()), authState: .auth)
     static var previews: some View {
-        FoodView(viewModel: FoodViewModel(searchText: "", container: Self.container))
+        FoodView(viewModel: FoodViewModel(container: Self.container))
             .environmentObject(Self.authViewModel)
             .environmentObject(Self.container)
     }
