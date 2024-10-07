@@ -33,6 +33,11 @@ struct PlayDetailView: View {
                                             .resizable()
                                             .scaledToFit()
                                             .tag(index)
+                                    } else {
+                                        Image("no_image")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .tag(index)
                                     }
                                 }
                             }
@@ -97,6 +102,28 @@ struct PlayDetailView: View {
                         .fixedSize(horizontal: false, vertical: true)
                         .multilineTextAlignment(.leading)
                         .padding(.horizontal, 20)
+                        
+                        
+                        Group {
+                            
+                            if let images = placeData.images {
+                                ForEach(images.indices, id: \.self) { index in
+                                    if let source = images[index]?.source {
+                                        if index < 1 {
+                                            Text("이미지 출처\n\n")
+                                                .font(.system(size: 10, weight: .bold))
+                                                .foregroundColor(.gray)
+                                            +
+                                            Text(source)
+                                                .font(.system(size: 8, weight: .regular))
+                                                .foregroundColor(.gray)
+                                        }
+                                    }
+                                }
+                                .padding(.horizontal, 20)
+                                .padding(.top, 20)
+                            }
+                        }
                         
                         VStack {
                             SeperateView()
