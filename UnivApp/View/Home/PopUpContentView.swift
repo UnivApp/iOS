@@ -58,7 +58,7 @@ fileprivate struct PopUpCell: View {
                 Button {
                     self.isPresented = true
                 } label: {
-                    Text("정보 보기 ➡")
+                    Text("정보 보기 >")
                         .foregroundColor(.black)
                         .font(.system(size: 12, weight: .regular))
                         .lineLimit(1)

@@ -27,7 +27,7 @@ struct FoodView: View {
         case .notRequested:
             loadedView
                 .onAppear {
-                    viewModel.send(action: .load)
+                    viewModel.send(action: .topLoad)
                 }
         case .loading:
             LoadingView(url: "congratulations", size: [150, 150])
@@ -66,12 +66,6 @@ struct FoodView: View {
     
     var list: some View {
         VStack(alignment: .center, spacing: 20) {
-            Image("food_poster")
-                .resizable()
-                .scaledToFit()
-                .frame(width: UIScreen.main.bounds.width)
-                .padding(.top, 20)
-            
             HStack(spacing: 10) {
                 ForEach(FoodSegmentType.allCases, id: \.self) { segment in
                     Button {
@@ -93,7 +87,7 @@ struct FoodView: View {
                 if segmentType == .hotPlace {
                     FoodHotPlaceView(model: viewModel.topFoodData)
                 } else {
-                    SchoolSegmentView(viewModel: PlayViewModel(container: self.container), listViewModel: ListViewModel(container: self.container, searchText: ""))
+                    FoodSchoolView(viewModel: self.viewModel, listViewModel: ListViewModel(container: .init(services: Services()), searchText: ""))
                 }
             }
             

@@ -13,5 +13,5 @@ struct FoodModel: Hashable, Codable {
     var placeUrl: String
     var hashtags: [String]
     var imageUrl: String?
-    var topMessage: String
+    var topMessage: String?
 }

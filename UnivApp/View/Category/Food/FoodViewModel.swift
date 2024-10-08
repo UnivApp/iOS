@@ -11,7 +11,8 @@ import Combine
 class FoodViewModel: ObservableObject {
     
     enum Action {
-        case load
+        case topLoad
+        case detailLoad(Int)
     }
     
     private var container: DIContainer
@@ -22,11 +23,12 @@ class FoodViewModel: ObservableObject {
     }
     
     @Published var topFoodData: [FoodModel] = []
+    @Published var schoolFoodData: [FoodModel] = []
     @Published var phase: Phase = .notRequested
     
     func send(action: Action) {
         switch action {
-        case .load:
+        case .topLoad:
             self.phase = .loading
             container.services.foodService.getTopRestaurants()
                 .sink { [weak self] completion in
@@ -35,6 +37,17 @@ class FoodViewModel: ObservableObject {
                     }
                 } receiveValue: { [weak self] topFoodData in
                     self?.topFoodData = topFoodData
+                    self?.phase = .success
+                }.store(in: &subscriptions)
+        case let .detailLoad(universityId):
+            self.phase = .loading
+            container.services.foodService.getSchoolRestaurants(universityId: universityId)
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.phase = .fail
+                    }
+                } receiveValue: { [weak self] schoolFoodData in
+                    self?.schoolFoodData = schoolFoodData
                     self?.phase = .success
                 }.store(in: &subscriptions)
         }
