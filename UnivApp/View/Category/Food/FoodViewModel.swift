@@ -21,14 +21,22 @@ class FoodViewModel: ObservableObject {
         self.container = container
     }
     
-    @Published var foodData: [FoodModel] = []
+    @Published var topFoodData: [FoodModel] = []
     @Published var phase: Phase = .notRequested
     
     func send(action: Action) {
         switch action {
         case .load:
-            //TODO: - 음식
-            return
+            self.phase = .loading
+            container.services.foodService.getTopRestaurants()
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.phase = .fail
+                    }
+                } receiveValue: { [weak self] topFoodData in
+                    self?.topFoodData = topFoodData
+                    self?.phase = .success
+                }.store(in: &subscriptions)
         }
     }
 }

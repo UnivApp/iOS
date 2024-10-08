@@ -52,28 +52,6 @@ struct InitiativeDetailView: View {
     }
     var loadedView: some View {
         VStack(spacing: 30) {
-            HStack {
-                VStack(alignment: .leading, spacing: 10) {
-                    Text(model.compactMap { $0.fullName }.first ?? "")
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundColor(.black)
-                    
-                    Text(model.compactMap { $0.description }.first ?? "")
-                        .font(.system(size: 15, weight: .regular))
-                        .foregroundColor(.gray)
-                    
-                    Text("\(model.compactMap { $0.year }.first ?? 0)년도")
-                        .font(.system(size: 15, weight: .bold))
-                        .foregroundColor(.black)
-                        .padding(.top, 10)
-                }
-                .lineSpacing(5)
-                .lineLimit(nil)
-                .fixedSize(horizontal: false, vertical: true)
-                Spacer()
-            }
-            .padding(.horizontal, 20)
-            
             if title == "CWTS" {
                 HStack {
                     ForEach(CWTSType.allCases, id: \.self) { selected in
@@ -91,13 +69,16 @@ struct InitiativeDetailView: View {
                         }
                     }
                 }
+                .padding(.bottom, -30)
                 ScrollView(.vertical) {
+                    titleView
                     ForEach(cwtsmodel.indices, id: \.self) { index  in
                         InitiativeViewCell(model: cwtsmodel[index])
                     }
                 }
             } else {
                 ScrollView(.vertical) {
+                    titleView
                     ForEach(model.indices, id: \.self) { index  in
                         InitiativeViewCell(model: model[index])
                     }
@@ -105,6 +86,31 @@ struct InitiativeDetailView: View {
             }
         }
     }
+    var titleView: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 10) {
+                Text(model.compactMap { $0.fullName }.first ?? "")
+                    .font(.system(size: 20, weight: .bold))
+                    .foregroundColor(.black)
+                
+                Text(model.compactMap { $0.description }.first ?? "")
+                    .font(.system(size: 15, weight: .regular))
+                    .foregroundColor(.gray)
+                
+                Text("\(model.compactMap { $0.year }.first ?? 0)년도")
+                    .font(.system(size: 15, weight: .bold))
+                    .foregroundColor(.black)
+                    .padding(.top, 10)
+            }
+            .lineSpacing(5)
+            .lineLimit(nil)
+            .fixedSize(horizontal: false, vertical: true)
+            Spacer()
+        }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 20)
+    }
+    
     private func filterCWTSModel() {
         switch self.segmentType {
         case .general:

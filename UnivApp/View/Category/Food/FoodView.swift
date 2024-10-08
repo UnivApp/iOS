@@ -91,7 +91,7 @@ struct FoodView: View {
             .padding(.horizontal, 20)
             Group {
                 if segmentType == .hotPlace {
-                    FoodHotPlaceView(model: viewModel.foodData)
+                    FoodHotPlaceView(model: viewModel.topFoodData)
                 } else {
                     SchoolSegmentView(viewModel: PlayViewModel(container: self.container), listViewModel: ListViewModel(container: self.container, searchText: ""))
                 }

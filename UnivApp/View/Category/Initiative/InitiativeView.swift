@@ -85,7 +85,7 @@ struct InitiativeView: View {
                             .font(.system(size: 18, weight: .bold))
                             .foregroundColor(.black)
                         Spacer()
-                        NavigationLink(destination: EmptyView()) {
+                        NavigationLink(destination: InitiativeDetailView(model: viewModel.QSData, title: "QS")) {
                             Text("더보기")
                                 .font(.system(size: 12, weight: .semibold))
                                 .foregroundColor(.black)
@@ -100,6 +100,7 @@ struct InitiativeView: View {
                     ForEach(viewModel.QSData.indices, id: \.self) { index in
                         if index < 10 {
                             InitiativeViewCell(model: viewModel.QSData[index])
+                                .padding(.vertical, -10)
                         }
                     }
                 }

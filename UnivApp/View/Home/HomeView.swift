@@ -41,8 +41,8 @@ struct HomeView: View {
                 .onAppear {
                     listViewModel.searchText = ""
                 }
-                .refreshable {
-                    viewModel.send(action: .load)
+                .onDisappear {
+                    listViewModel.searchText = ""
                 }
                 .onTapGesture {
                     self.isFocused = false

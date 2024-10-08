@@ -12,7 +12,7 @@ struct InitiativeViewCell: View {
     var model: InitiativeModel
     
     var body: some View {
-        VStack {
+        VStack(alignment: .center) {
             HStack(spacing: 40) {
                 if let rankingResponses = model.universityRankingResponses.first {
                     Text("\(rankingResponses.rank) 위")
@@ -39,10 +39,11 @@ struct InitiativeViewCell: View {
                     Spacer()
                 }
             }
-            Divider()
-                .padding(.top, 10)
+//            Divider()
+//                .padding(.top, 10)
         }
         .padding(.horizontal, 30)
+        .padding(.vertical, 10)
     }
 }
 
