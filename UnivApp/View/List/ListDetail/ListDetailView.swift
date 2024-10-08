@@ -205,25 +205,33 @@ struct ListDetailView: View {
             }
             HStack(spacing: 10) {
                 //TODO: - 네비게이션 변경
-                NavigationLink(destination: WebKitViewContainer(url: viewModel.listDetail.admissionSite ?? "")) {
-                    Text("입학처 열기 🎓")
-                        .font(.system(size: 12, weight: .bold))
-                        .foregroundColor(.white)
+                if let addmissionSite = viewModel.listDetail.admissionSite,
+                   let website = viewModel.listDetail.website,
+                   let addmissionSiteURL = URL(string: addmissionSite),
+                   let websiteURL = URL(string: website){
+                    Button {
+                        UIApplication.shared.open(addmissionSiteURL)
+                    } label: {
+                        Text("입학처 열기 🎓")
+                            .font(.system(size: 12, weight: .bold))
+                            .foregroundColor(.white)
+                    }
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 15)
+                        .fill(.orange)
+                        .frame(height: 30))
+                    Button {
+                        UIApplication.shared.open(websiteURL)
+                    } label: {
+                        Text("홈페이지 열기 🏫")
+                            .font(.system(size: 12, weight: .bold))
+                            .foregroundColor(.white)
+                    }
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 15)
+                        .fill(.orange)
+                        .frame(height: 30))
                 }
-                .padding()
-                .background(RoundedRectangle(cornerRadius: 15)
-                    .fill(.orange)
-                    .frame(height: 30))
-                NavigationLink(destination: WebKitViewContainer(url: viewModel.listDetail.website ?? "")) {
-                    Text("홈페이지 열기 🏫")
-                        .font(.system(size: 12, weight: .bold))
-                        .foregroundColor(.white)
-                }
-                .padding()
-                .background(RoundedRectangle(cornerRadius: 15)
-                    .fill(.orange)
-                    .frame(height: 30))
-                
             }
             .padding(.trailing, 10)
             .padding(.vertical, 10)

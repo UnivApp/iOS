@@ -8,9 +8,10 @@
 import Foundation
 
 struct NewsModel: Codable, Hashable {
+    var newsId: Int
     var title: String
-    var link: String
-    var date: String
-    var year: String
-    var extract: String
+    var link: String?
+    var publishedDate: String
+    var admissionYear: Int
+    var source: String?
 }

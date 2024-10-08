@@ -21,6 +21,7 @@ protocol ServicesType {
     var playService: PlayServiceType { get set }
     var rankingService: RankingServiceType { get set }
     var foodService: FoodServiceType { get set }
+    var infoService: InfoServiceType { get set }
 }
 
 class Services: ServicesType {
@@ -32,6 +33,7 @@ class Services: ServicesType {
     var playService: PlayServiceType
     var rankingService: RankingServiceType
     var foodService: FoodServiceType
+    var infoService: InfoServiceType
     
     init() {
         self.authService = AuthService()
@@ -42,6 +44,7 @@ class Services: ServicesType {
         self.playService = PlayService()
         self.rankingService = RankingService()
         self.foodService = FoodService()
+        self.infoService = InfoService()
     }
     
 }
@@ -55,4 +58,5 @@ class StubServices: ServicesType {
     var playService: PlayServiceType = StubPlayService()
     var rankingService: RankingServiceType = StubRankingService()
     var foodService: FoodServiceType = StubFoodService()
+    var infoService: InfoServiceType = StubInfoService()
 }

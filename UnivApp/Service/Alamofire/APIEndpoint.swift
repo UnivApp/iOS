@@ -27,6 +27,7 @@ enum APIEndpoint {
     case ranking
     case schoolFood
     case topFood
+    case news
     
     var urlString: String {
         switch self {
@@ -64,6 +65,8 @@ enum APIEndpoint {
             return "http://43.200.143.28:8080/api/restaurants?universityId="
         case .topFood:
             return "http://43.200.143.28:8080/api/restaurants/top"
+        case .news:
+            return "http://43.200.143.28:8080/api/news"
         }
     }
 }

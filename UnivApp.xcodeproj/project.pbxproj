@@ -125,6 +125,7 @@
 		E4C264472CB40AF900E01480 /* FoodSchoolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C264462CB40AF900E01480 /* FoodSchoolView.swift */; };
 		E4CEEFB12CB517E8001F4DAE /* FoodService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CEEFB02CB517E8001F4DAE /* FoodService.swift */; };
 		E4CEEFB42CB51F28001F4DAE /* FoodSchoolDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CEEFB32CB51F28001F4DAE /* FoodSchoolDetailView.swift */; };
+		E4CEEFB62CB54513001F4DAE /* InfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CEEFB52CB54513001F4DAE /* InfoService.swift */; };
 		E4D626012CA5347E008596D0 /* SearchViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D626002CA5347E008596D0 /* SearchViewModelType.swift */; };
 		E4D626062CA7F611008596D0 /* CustomPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D626052CA7F611008596D0 /* CustomPageControl.swift */; };
 		E4DCD9B32C9FE4D000E06542 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DCD9B22C9FE4D000E06542 /* SplashView.swift */; };
@@ -261,6 +262,7 @@
 		E4C264462CB40AF900E01480 /* FoodSchoolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSchoolView.swift; sourceTree = "<group>"; };
 		E4CEEFB02CB517E8001F4DAE /* FoodService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodService.swift; sourceTree = "<group>"; };
 		E4CEEFB32CB51F28001F4DAE /* FoodSchoolDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSchoolDetailView.swift; sourceTree = "<group>"; };
+		E4CEEFB52CB54513001F4DAE /* InfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoService.swift; sourceTree = "<group>"; };
 		E4D626002CA5347E008596D0 /* SearchViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModelType.swift; sourceTree = "<group>"; };
 		E4D626052CA7F611008596D0 /* CustomPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPageControl.swift; sourceTree = "<group>"; };
 		E4DCD9B22C9FE4D000E06542 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
@@ -777,6 +779,7 @@
 				E409A13E2CAD1ADF00E9CB1C /* PlayService.swift */,
 				E4C2643F2CB3FE9000E01480 /* RankingService.swift */,
 				E4CEEFB02CB517E8001F4DAE /* FoodService.swift */,
+				E4CEEFB52CB54513001F4DAE /* InfoService.swift */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1033,6 +1036,7 @@
 				E4B3FD2C2C786B0C00CB98F3 /* sha256.swift in Sources */,
 				E4F04C042C96CF3900F653DF /* SplitType.swift in Sources */,
 				E4953D872C8EEE7D008CBDE5 /* ScoreImageModel.swift in Sources */,
+				E4CEEFB62CB54513001F4DAE /* InfoService.swift in Sources */,
 				E49222752C9EE7650077EA45 /* ChartView.swift in Sources */,
 				E40135EE2CA3E7850021D351 /* SearchView.swift in Sources */,
 				E4953DB02C906C95008CBDE5 /* ListDetailModel.swift in Sources */,

@@ -37,7 +37,7 @@ struct FoodSchoolDetailView: View {
                     viewModel.send(action: .detailLoad(model.universityId ?? 0))
                 }
         case .loading:
-            LoadingView(url: "", size: [150, 150])
+            LoadingView(url: "congratulations", size: [150, 150])
         case .success:
             loadedView
                 .refreshable {
