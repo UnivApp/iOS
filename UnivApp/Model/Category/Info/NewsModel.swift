@@ -12,6 +12,6 @@ struct NewsModel: Codable, Hashable {
     var title: String
     var link: String?
     var publishedDate: String
-    var admissionYear: Int
+    var admissionYear: String
     var source: String?
 }
