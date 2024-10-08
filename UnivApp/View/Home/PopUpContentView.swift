@@ -68,7 +68,7 @@ fileprivate struct PopUpCell: View {
             }
             Divider()
         }
-        .sheet(isPresented: $isPresented) {
+        .fullScreenCover(isPresented: $isPresented) {
             ListDetailView(viewModel: ListDetailViewModel(container: .init(services: Services())), universityId: summaryModel.universityId ?? 0)
         }
         .padding(.horizontal, 20)

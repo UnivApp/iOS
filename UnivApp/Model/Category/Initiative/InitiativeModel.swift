@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct InitiativeModel: Codable, Hashable {
     var displayName: String
@@ -15,6 +16,7 @@ struct InitiativeModel: Codable, Hashable {
     var category: String?
     var universityRankingResponses: [UniversityRankingResponses]
 }
+
 struct UniversityRankingResponses: Codable, Hashable {
     var universityName: String
     var logo: String?

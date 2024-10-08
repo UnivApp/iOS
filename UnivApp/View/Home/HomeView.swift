@@ -47,7 +47,7 @@ struct HomeView: View {
                 .onTapGesture {
                     self.isFocused = false
                 }
-                .sheet(isPresented: $isShowingPopup) {
+                .fullScreenCover(isPresented: $isShowingPopup) {
                     PopUpContentView(summary: listViewModel.summaryArray)
                 }
         case .fail:

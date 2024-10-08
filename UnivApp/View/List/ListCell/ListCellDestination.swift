@@ -32,7 +32,7 @@ enum ListCellDestination: CaseIterable {
         case .info:
             return AnyView(InfoDetailView())
         case .initiative:
-            return AnyView(InitiativeDetailView())
+            return AnyView(InitiativeView(viewModel: InitiativeViewModel(container: .init(services: Services()))))
         case .money:
             return AnyView(MoneyDetailView())
         case .mou:

@@ -83,7 +83,7 @@ struct HeartViewCell: View {
                 Spacer()
                 
                 Text("\(model.starNum ?? 0)")
-                    .font(.system(size: 12))
+                    .font(.system(size: 12, weight: .bold))
                     .foregroundColor(.orange)
                     .padding(.trailing, 10)
                 

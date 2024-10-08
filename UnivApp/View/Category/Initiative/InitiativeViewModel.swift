@@ -69,7 +69,7 @@ class InitiativeViewModel: ObservableObject {
                 self.NatureIndexData.append(rankingData[index])
             case "CWTS":
                 self.CWTSData.append(rankingData[index])
-            case "The":
+            case "THE":
                 self.TheData.append(rankingData[index])
             default:
                 break

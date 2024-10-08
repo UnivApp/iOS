@@ -53,8 +53,25 @@ struct InitiativeView: View {
                         
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 15) {
-                            ForEach(viewModel.category, id: \.self) { item in
-                                categoryViewCell(categoryItem: item)
+                            ForEach(viewModel.category.indices, id: \.self) { index in
+                                switch viewModel.category[index].image {
+                                case "QS":
+                                    categoryViewCell(categoryItem: viewModel.category[index], model: viewModel.QSData)
+                                case "The":
+                                    categoryViewCell(categoryItem: viewModel.category[index], model: viewModel.TheData)
+                                case "ARWU":
+                                    categoryViewCell(categoryItem: viewModel.category[index], model: viewModel.ARWUData)
+                                case "CWUR":
+                                    categoryViewCell(categoryItem: viewModel.category[index], model: viewModel.CWURData)
+                                case "USNWR":
+                                    categoryViewCell(categoryItem: viewModel.category[index], model: viewModel.USNWRData)
+                                case "CWTS":
+                                    categoryViewCell(categoryItem: viewModel.category[index], model: viewModel.CWTSData)
+                                case "NatureIndex":
+                                    categoryViewCell(categoryItem: viewModel.category[index], model: viewModel.NatureIndexData)
+                                default:
+                                    categoryViewCell(categoryItem: viewModel.category[index], model: viewModel.QSData)
+                                }
                             }
                         }
                         .padding(.horizontal, 20)
@@ -111,9 +128,10 @@ struct InitiativeView: View {
 
 fileprivate struct categoryViewCell: View {
     var categoryItem: Object
+    var model: [InitiativeModel]
     
     var body: some View {
-        NavigationLink(destination: EmptyView()) {
+        NavigationLink(destination: InitiativeDetailView(model: model, title: categoryItem.title)) {
             VStack(spacing: 10) {
                 Image(categoryItem.image)
                     .resizable()
