@@ -87,8 +87,8 @@ fileprivate struct FoodSchoolCell: View {
                 Spacer()
                 NavigationLink(destination: FoodSchoolDetailView(viewModel: FoodViewModel(container: .init(services: Services())), model: summaryModel)) {
                     Text("주변 맛집 알아보기 >")
-                        .foregroundColor(.black)
-                        .font(.system(size: 12, weight: .regular))
+                        .foregroundColor(.black.opacity(0.5))
+                        .font(.system(size: 12, weight: .semibold))
                         .lineLimit(1)
                         .fixedSize(horizontal: true, vertical: false)
                 }

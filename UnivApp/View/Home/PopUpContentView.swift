@@ -59,8 +59,8 @@ fileprivate struct PopUpCell: View {
                     self.isPresented = true
                 } label: {
                     Text("정보 보기 >")
-                        .foregroundColor(.black)
-                        .font(.system(size: 12, weight: .regular))
+                        .foregroundColor(.black.opacity(0.5))
+                        .font(.system(size: 12, weight: .semibold))
                         .lineLimit(1)
                         .fixedSize(horizontal: true, vertical: false)
                 }

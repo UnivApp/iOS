@@ -46,52 +46,60 @@ fileprivate struct FoodHotPlaceCell: View {
     private let scrollDuration: TimeInterval = 5.0
     
     var body: some View {
-        HStack(spacing: 20) {
-            KFImage(URL(string: cell.imageUrl ?? ""))
-                .resizable()
-                .scaledToFit()
-                .frame(width: 80, height: 80)
-                .background(.backGray)
-                .cornerRadius(15)
-            
-            Spacer()
-            
-            VStack(alignment: .center, spacing: 10) {
-                Text(cell.name)
-                    .font(.system(size: 18, weight: .bold))
+        Button  {
+            if let url = URL(string: cell.placeUrl){
+                UIApplication.shared.open(url)
+            }
+        } label: {
+            HStack(spacing: 20) {
+                KFImage(URL(string: cell.imageUrl ?? ""))
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 80, height: 80)
+                    .background(.backGray)
+                    .cornerRadius(15)
                 
-                GeometryReader { geometry in
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 5) {
-                            ForEach(cell.hashtags, id: \.self) { hashtag in
-                                Text("#\(hashtag)")
-                                    .font(.system(size: 14, weight: .semibold))
-                                    .padding(5)
-                                    .background(Color.yellow.opacity(0.3))
-                                    .cornerRadius(5)
+                Spacer()
+                
+                VStack(alignment: .center, spacing: 10) {
+                    Text(cell.name)
+                        .font(.system(size: 18, weight: .bold))
+                    
+                    GeometryReader { geometry in
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 5) {
+                                ForEach(cell.hashtags, id: \.self) { hashtag in
+                                    Text("#\(hashtag)")
+                                        .font(.system(size: 14, weight: .semibold))
+                                        .padding(5)
+                                        .background(Color.yellow.opacity(0.3))
+                                        .cornerRadius(5)
+                                }
+                            }
+                            .offset(x: scrollOffset)
+                            .onAppear {
+                                startScrolling(geometry: geometry)
+                            }
+                            .onDisappear {
+                                stopScrolling()
                             }
                         }
-                        .offset(x: scrollOffset)
-                        .onAppear {
-                            startScrolling(geometry: geometry)
-                        }
-                        .onDisappear {
-                            stopScrolling()
-                        }
                     }
-                }
-                .frame(height: 30)
+                    .frame(height: 30)
 
-                if let address = cell.topMessage {
-                    HStack {
-                        Text("📍 \(address)")
-                            .font(.system(size: 12, weight: .semibold))
-                            .foregroundColor(.gray)
-                            .lineLimit(1)
+                    if let address = cell.topMessage {
+                        HStack {
+                            Text("📍 \(address)")
+                                .font(.system(size: 12, weight: .semibold))
+                                .foregroundColor(.gray)
+                                .lineLimit(1)
+                        }
                     }
                 }
             }
-        }.padding(.horizontal, 30)
+            .padding(.horizontal, 30)
+            .padding(.vertical, 10)
+        }
     }
     
     private func startScrolling(geometry: GeometryProxy) {

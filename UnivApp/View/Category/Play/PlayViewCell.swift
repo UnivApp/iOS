@@ -33,8 +33,8 @@ struct PlayViewCell: View {
                 Spacer()
                 NavigationLink(destination: PlaySchoolView(viewModel: self.playViewModel, summaryModel: self.summaryModel)) {
                     Text("주변 핫플 알아보기 >")
-                        .foregroundColor(.black)
-                        .font(.system(size: 12, weight: .regular))
+                        .foregroundColor(.black.opacity(0.5))
+                        .font(.system(size: 12, weight: .semibold))
                         .lineLimit(1)
                         .fixedSize(horizontal: true, vertical: false)
                 }
