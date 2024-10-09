@@ -17,8 +17,6 @@ struct FoodView: View {
     @State private var segmentType: FoodSegmentType = .hotPlace
     var body: some View {
         contentView
-            .navigationBarBackButtonHidden(true)
-            .toolbar(.hidden, for: .tabBar)
     }
     
     @ViewBuilder
@@ -62,6 +60,8 @@ struct FoodView: View {
                 }
             }
         }
+        .navigationBarBackButtonHidden(true)
+        .toolbar(.hidden, for: .tabBar)
     }
     
     var list: some View {

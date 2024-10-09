@@ -169,7 +169,7 @@ struct PlayDetailView: View {
                             .frame(width: 20, height: 20)
                         
                     } else {
-                        if playDetailModel.placeData?.images?.compactMap({ $0?.imageUrl }).first == "https://wedle.s3.ap-northeast-2.amazonaws.com/activity/noimage.png" {
+                        if playDetailModel.placeData?.images?.compactMap({ $0?.imageUrl }).first == "https://d1irw3ts7iwo2y.cloudfront.net/activity/noimage.png" {
                             Image("blackback")
                                 .resizable()
                                 .scaledToFit()

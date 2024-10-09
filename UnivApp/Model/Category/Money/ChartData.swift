@@ -13,4 +13,5 @@ struct ChartData: Identifiable, Hashable {
     let value: Double
     let xLabel: String
     let yLabel: String
+    let year: String
 }

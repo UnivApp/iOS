@@ -23,19 +23,19 @@ enum ListDetailType: String, CaseIterable {
         case .play:
             return "핫플"
         case .mou:
-            return "협약"
+            return "대학연계"
         case .money:
-            return "평균월세"
+            return "월세"
         case .initiative:
-            return "순위"
+            return "랭킹"
         case .info:
-            return "기사"
+            return "대입기사"
         case .graduate:
             return "졸업자"
         case .food:
             return "맛집"
         case .event:
-            return "행사"
+            return "대학행사"
         }
     }
     

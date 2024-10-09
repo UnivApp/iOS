@@ -10,8 +10,6 @@ import Kingfisher
 
 struct ListDetailView: View {
     @StateObject var viewModel: ListDetailViewModel
-    @State private var selectedType: ListDetailType?
-    @State private var isNavigate: Bool = false
     @State private var selectedSegment: ListDetailSection = .general
     @Environment(\.dismiss) var dismiss
     
@@ -60,41 +58,35 @@ struct ListDetailView: View {
                         .padding(.leading, 20)
                         
                         BarChartView(title: "계열별등록금", description: "출처: 대학어디가 - 2024년도" , dataPoints: [
-                            ChartData(label: "인문", value: 673, xLabel: "과", yLabel: "만원"),
-                            ChartData(label: "자연", value: 796, xLabel: "과", yLabel: "만원"),
-                            ChartData(label: "공학", value: 898, xLabel: "과", yLabel: "만원"),
-                            ChartData(label: "의학", value: 1000, xLabel: "과", yLabel: "만원"),
-                            ChartData(label: "예체", value: 901, xLabel: "과", yLabel: "만원"),
-                            ChartData(label: "평균", value: 817, xLabel: "과", yLabel: "만원")
+                            ChartData(label: "인문", value: 673, xLabel: "과", yLabel: "만원", year: "2024"),
+                            ChartData(label: "자연", value: 796, xLabel: "과", yLabel: "만원", year: "2024"),
+                            ChartData(label: "공학", value: 898, xLabel: "과", yLabel: "만원", year: "2024"),
+                            ChartData(label: "의학", value: 1000, xLabel: "과", yLabel: "만원", year: "2024"),
+                            ChartData(label: "예체", value: 901, xLabel: "과", yLabel: "만원", year: "2024"),
+                            ChartData(label: "평균", value: 817, xLabel: "과", yLabel: "만원", year: "2024")
                         ])
                         .padding(.horizontal, 30)
-                        
-                        CircleChartView(title: "계열별등록금", description: "출처: 대학어디가 - 2024년도", dataPoints: [
-                            ChartData(label: "인문사회계열", value: 673, xLabel: "과", yLabel: "만원"),
-                            ChartData(label: "자연과학계열", value: 796, xLabel: "과", yLabel: "만원"),
-                            ChartData(label: "공학계열", value: 898, xLabel: "과", yLabel: "만원"),
-                            ChartData(label: "의학", value: 1000, xLabel: "과", yLabel: "만원"),
-                            ChartData(label: "예체계열", value: 901, xLabel: "과", yLabel: "만원")
-                        ])
-                        .padding(.horizontal, 30)
+                        //TODO: - 데이터 변경 필요
+                        CircleChartView(title: "학과 정보", description: "대학어디가 - 정보제공", dataPoints: viewModel.departmentData)
+                            .padding(.horizontal, 30)
                         
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 20) {
-                                BarChartView(title: "정시경쟁률", description: "", dataPoints: [
-                                    ChartData(label: "인문", value: 673, xLabel: "과", yLabel: "만원"),
-                                    ChartData(label: "자연", value: 796, xLabel: "과", yLabel: "만원")
-                                ])
-                                BarChartView(title: "정시경쟁률", description: "", dataPoints: [
-                                    ChartData(label: "인문", value: 673, xLabel: "과", yLabel: "만원"),
-                                    ChartData(label: "자연", value: 796, xLabel: "과", yLabel: "만원")
-                                ])
-                                BarChartView(title: "정시경쟁률", description: "", dataPoints: [
-                                    ChartData(label: "인문", value: 673, xLabel: "과", yLabel: "만원"),
-                                    ChartData(label: "자연", value: 796, xLabel: "과", yLabel: "만원")
-                                ])
+                                ForEach(viewModel.competitionRateData.indices, id: \.self) { index in
+                                    BarChartView(title: "경쟁률", description: "대학어디가 - 정보제공", dataPoints: viewModel.competitionRateData[index])
+                                }
                             }
+                            .padding(.horizontal, 30)
                         }
-                        .padding(.horizontal, 30)
+                        
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 20) {
+                                ForEach(viewModel.employmentRateData.indices, id: \.self) { index in
+                                    BarChartView(title: "취업률", description: "대학어디가 - 정보제공", dataPoints: viewModel.employmentRateData[index])
+                                }
+                            }
+                            .padding(.horizontal, 30)
+                        }
                         
                         SeperateView()
                             .frame(height: 10)
@@ -106,14 +98,10 @@ struct ListDetailView: View {
                         SeperateView()
                             .frame(height: 10)
                         
-                        category
+                        ListCategoryView(universityID: self.universityId)
                             .padding(.vertical, 0)
                             .padding(.horizontal, 0)
                             .id("카테고리")
-                        
-                        NavigationLink(destination: selectedType?.view, isActive: $isNavigate) {
-                            
-                        }
                     }
                 }
                 .task(id: selectedSegment) {
@@ -188,18 +176,18 @@ struct ListDetailView: View {
                 VStack(alignment: .leading, spacing: 10) {
                     Text(viewModel.listDetail.fullName ?? "")
                         .font(.system(size: 15, weight: .bold))
-                        .lineLimit(nil)
-                        .multilineTextAlignment(.leading)
-                        .fixedSize(horizontal: false, vertical: true)
                     Spacer()
                     Group {
+                        Text("\(viewModel.listDetail.type ?? "")대학교\n\n")
+                            .font(.system(size: 12, weight: .semibold))
+                                  +
                         Text("\(viewModel.listDetail.location ?? "")\n\(viewModel.listDetail.phoneNumber ?? "")")
                             .font(.system(size: 12, weight: .regular))
-                            .lineLimit(nil)
-                            .multilineTextAlignment(.leading)
-                            .fixedSize(horizontal: false, vertical: true)
                     }
                 }
+                .lineLimit(nil)
+                .multilineTextAlignment(.leading)
+                .fixedSize(horizontal: false, vertical: true)
                 .padding(.horizontal, 10)
                 .padding(.vertical, 30)
             }
@@ -240,25 +228,25 @@ struct ListDetailView: View {
     }
     
     var depart: some View {
-        VStack(spacing: 0) {
-            Group {
-                HStack {
-                    Text("학과목록")
-                        .font(.system(size: 18, weight: .bold))
-                    Spacer()
-                }
-                .padding(.leading, 20)
-                
-                VStack {
-                    ForEach(viewModel.departList, id: \.id) { cell in
+        VStack(alignment: .leading, spacing: 0) {
+            HStack {
+                Text("학과목록")
+                    .font(.system(size: 18, weight: .bold))
+                Spacer()
+            }
+            .padding(.leading, 20)
+            
+            VStack(spacing: 30) {
+                if let departmentResponses = viewModel.listDetail.departmentResponses {
+                    ForEach(departmentResponses, id: \.self) { depart in
                         VStack {
                             HStack {
-                                Text(cell.title ?? "")
+                                Text(depart?.type ?? "")
                                     .foregroundColor(.black)
                                     .font(.system(size: 14, weight: .bold))
                                 
                                 Spacer()
-                                Text(cell.description ?? "")
+                                Text("\(depart?.name?.count ?? 0)개")
                                     .foregroundColor(.gray)
                                     .font(.system(size: 12, weight: .regular))
                                     .padding(.trailing, 10)
@@ -268,62 +256,13 @@ struct ListDetailView: View {
                                     .scaledToFit()
                                     .frame(width: 5, height: 10)
                             }
-                            .padding(.bottom, 10)
                             Divider()
                         }
-                        .padding(.horizontal, 30)
                     }
-                    .padding(.bottom, 20)
                 }
-                .padding(.top, -20)
             }
+            .padding(.horizontal, 30)
             .padding(.vertical, 30)
-        }
-    }
-    
-    var category: some View {
-        VStack(spacing: 0) {
-            HStack {
-                Text("카테고리")
-                    .font(.system(size: 18, weight: .bold))
-                Spacer()
-            }
-            .padding(.leading, 20)
-            .padding(.bottom, 20)
-            
-            ForEach(ListDetailType.allCases, id: \.self) { type in
-                Button {
-                    selectedType = type
-                    self.isNavigate = true
-                } label: {
-                    VStack {
-                        Text(type.title)
-                            .font(.system(size: 14, weight: .bold))
-                            .foregroundColor(selectedType == type ? Color.gray : Color.white)
-                            .frame(width: 50, height: 50)
-                            .background(.clear)
-                    }
-                    .frame(maxWidth: 70, alignment: .center)
-                    
-                    HStack {
-                        Group {
-                            type.image
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 50, height: 35)
-                            
-                            Text(type.description)
-                                .font(.system(size: 12, weight: .bold))
-                                .foregroundColor(selectedType == type ? Color.white : Color.gray)
-                        }
-                        .frame(height: 50)
-                        .padding(.leading, 30)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(selectedType == type ? Color.categoryGray : Color.white)
-                }
-                .background(selectedType == type ? Color.white : Color.categoryGray)
-            }
         }
     }
 }
