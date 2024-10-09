@@ -48,5 +48,5 @@ struct InitiativeViewCell: View {
 }
 
 #Preview {
-    InitiativeViewCell(model: InitiativeModel(displayName: "", fullName: "", description: "", year: 0, category: "", universityRankingResponses: [UniversityRankingResponses(universityName: "", logo: "", rank: 1)]))
+    InitiativeViewCell(model: InitiativeModel(displayName: "", fullName: "", description: "", year: "", category: "", universityRankingResponses: [UniversityRankingResponses(universityName: "", logo: "", rank: 1)]))
 }

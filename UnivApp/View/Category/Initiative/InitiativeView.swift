@@ -81,9 +81,16 @@ struct InitiativeView: View {
                         .frame(width: UIScreen.main.bounds.width, height: 20)
                     
                     HStack {
-                        Text("QS 세계대학평가")
-                            .font(.system(size: 18, weight: .bold))
-                            .foregroundColor(.black)
+                        VStack(alignment: .leading, spacing: 10) {
+                            Text("QS 세계대학평가")
+                                .font(.system(size: 18, weight: .bold))
+                                .foregroundColor(.black)
+                            
+                            Text("\(viewModel.QSData.compactMap { $0.year }.first ?? "")년도")
+                                .font(.system(size: 15, weight: .semibold))
+                                .foregroundColor(.black)
+                                .padding(.leading, 0)
+                        }
                         Spacer()
                         NavigationLink(destination: InitiativeDetailView(model: viewModel.QSData, title: "QS")) {
                             Text("더보기")

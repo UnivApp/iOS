@@ -54,7 +54,11 @@ class ListDetailViewModel: ObservableObject {
                 if let depart = depart,
                    let name = depart.name,
                    let type = depart.type {
-                    self.departmentData.append(ChartData(label: type, value: Double(name.count / departmentResponses.compactMap { $0?.name }.count), xLabel: "과", yLabel: "", year: ""))
+                    var sum: Int = 0
+                    for n in departmentResponses.compactMap({ $0?.name }) {
+                        sum += n.count
+                    }
+                    self.departmentData.append(ChartData(label: type, value: Double(Double(name.count) / Double(sum)), xLabel: "과", yLabel: "", year: ""))
                 }
             }
             

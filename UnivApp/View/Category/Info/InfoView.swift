@@ -13,6 +13,8 @@ struct InfoView: View {
     
     var body: some View {
         contentView
+            .navigationBarBackButtonHidden(true)
+            .toolbar(.hidden, for: .tabBar)
     }
     
     @ViewBuilder
@@ -77,8 +79,6 @@ struct InfoView: View {
                 }
             }
         }
-        .navigationBarBackButtonHidden(true)
-        .toolbar(.hidden, for: .tabBar)
     }
 }
 

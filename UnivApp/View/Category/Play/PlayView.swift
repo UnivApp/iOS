@@ -17,6 +17,8 @@ struct PlayView: View {
     
     var body: some View {
         contentView
+            .navigationBarBackButtonHidden(true)
+            .toolbar(.hidden, for: .tabBar)
     }
     
     @ViewBuilder
@@ -83,8 +85,6 @@ struct PlayView: View {
                 }
             }
         }
-        .navigationBarBackButtonHidden(true)
-        .toolbar(.hidden, for: .tabBar)
     }
 }
 

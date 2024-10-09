@@ -39,23 +39,11 @@ struct SchoolSegmentView: View {
     var loadedView: some View {
         ScrollView(.vertical) {
             VStack(alignment: .leading, spacing: 30) {
-                Group {
-                    Text("대학생들은 어디서 놀지?\n")
-                        .font(.system(size: 25, weight: .bold))
-                     + Text("서울 도심 25개 자치구 #핫플레이스")
-                        .font(.system(size: 15, weight: .regular))
-                        .foregroundColor(.gray)
-                }
-                .padding(.leading, 20)
-                .lineSpacing(10)
-                
                 Image("play_poster")
                     .resizable()
                     .scaledToFit()
                     .frame(width: UIScreen.main.bounds.width)
-                
-                SeperateView()
-                    .frame(height: 20)
+                    .padding(.top, -20)
                 
                 Text("학교 목록")
                     .font(.system(size: 18, weight: .bold))

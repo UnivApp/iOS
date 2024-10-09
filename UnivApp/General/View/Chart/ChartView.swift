@@ -98,6 +98,11 @@ struct CircleChartView: View {
                             angularInset: 1.5
                         )
                         .foregroundStyle(color[index % color.count])
+                        .annotation(position: .overlay) {
+                            Text(String(format: "%.1f", point.value))
+                                .font(.system(size: 10, weight: .bold))
+                                .foregroundColor(.white)
+                        }
                     }
                 }
                 .chartYAxis{}

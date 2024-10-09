@@ -23,7 +23,7 @@ struct ListDetailModel: Hashable, Codable {
 }
 
 struct DepartmentResponses: Hashable, Codable {
-    var name: String?
+    var name: [String]?
     var type: String?
 }
 

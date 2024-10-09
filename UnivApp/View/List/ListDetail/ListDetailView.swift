@@ -11,6 +11,7 @@ import Kingfisher
 struct ListDetailView: View {
     @StateObject var viewModel: ListDetailViewModel
     @State private var selectedSegment: ListDetailSection = .general
+    @State private var expandedDepartIds: Set<Int> = []
     @Environment(\.dismiss) var dismiss
     
     var universityId: Int
@@ -238,25 +239,39 @@ struct ListDetailView: View {
             
             VStack(spacing: 30) {
                 if let departmentResponses = viewModel.listDetail.departmentResponses {
-                    ForEach(departmentResponses, id: \.self) { depart in
-                        VStack {
-                            HStack {
-                                Text(depart?.type ?? "")
-                                    .foregroundColor(.black)
-                                    .font(.system(size: 14, weight: .bold))
-                                
-                                Spacer()
-                                Text("\(depart?.name?.count ?? 0)개")
-                                    .foregroundColor(.gray)
-                                    .font(.system(size: 12, weight: .regular))
-                                    .padding(.trailing, 10)
-                                
-                                Image("arrow_fill")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 5, height: 10)
+                    ForEach(departmentResponses.indices, id: \.self) { index in
+                        if let depart = departmentResponses[index],
+                           let name = depart.name,
+                           let type = depart.type {
+                            VStack {
+                                HStack {
+                                    Text(type)
+                                        .foregroundColor(.black)
+                                        .font(.system(size: 14, weight: .bold))
+                                    
+                                    Spacer()
+                                    
+                                    Button {
+                                        toggleDepart(departId: index)
+                                    } label: {
+                                        HStack(spacing: 30) {
+                                            Text("\(name.count)개")
+                                                .foregroundColor(.gray)
+                                                .font(.system(size: 12, weight: .regular))
+                                                .padding(.trailing, 10)
+                                            
+                                            Image(self.expandedDepartIds.contains(index) ? "arrow_down" : "arrow_fill")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 5, height: 10)
+                                        }
+                                    }
+                                }
+                                if self.expandedDepartIds.contains(index) {
+                                    departCell(names: name)
+                                }
+                                Divider()
                             }
-                            Divider()
                         }
                     }
                 }
@@ -264,6 +279,29 @@ struct ListDetailView: View {
             .padding(.horizontal, 30)
             .padding(.vertical, 30)
         }
+    }
+    private func toggleDepart(departId: Int) {
+        if expandedDepartIds.contains(departId) {
+            expandedDepartIds.remove(departId)
+        } else {
+            expandedDepartIds.insert(departId)
+        }
+    }
+}
+
+fileprivate struct departCell: View {
+    var names: [String]
+    var body: some View {
+        ForEach(names.indices, id: \.self) { index in
+            HStack {
+                Text("\(index+1). \(names[index])")
+                    .font(.system(size: 12, weight: .semibold))
+                    .multilineTextAlignment(.leading)
+                Spacer()
+            }
+            .padding(.horizontal, 40)
+        }
+        .padding(.vertical, 5)
     }
 }
 

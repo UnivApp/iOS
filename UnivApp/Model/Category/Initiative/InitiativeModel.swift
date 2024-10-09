@@ -12,7 +12,7 @@ struct InitiativeModel: Codable, Hashable {
     var displayName: String
     var fullName: String
     var description: String
-    var year: Int
+    var year: String
     var category: String?
     var universityRankingResponses: [UniversityRankingResponses]
 }
