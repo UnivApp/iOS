@@ -104,7 +104,7 @@ fileprivate struct NewsCell: View {
                     
                     Text("출처 \(model.link ?? "")")
                         .font(.system(size: 10, weight: .regular))
-                        .foregroundColor(.blue.opacity(0.5))
+                        .foregroundColor(.orange)
                     
                     HStack{
                         Text("\(model.admissionYear)년도 대입")

@@ -85,33 +85,60 @@ fileprivate struct PlaySchoolCell: View {
     var body: some View {
         if let placeData = model.placeData {
             NavigationLink(destination: PlayDetailView(playDetailModel: PlayDetailModel(object: model.object, placeDataArray: model.placeDataArray, placeData: model.placeData))) {
-                VStack(alignment: .leading, spacing: 10) {
-                    Text(placeData.name)
-                        .font(.system(size: 15, weight: .bold))
-                        .padding(.horizontal, 20)
-                    HStack {
-                        Spacer()
-                        Text("📍 \(placeData.location)")
-                            .font(.system(size: 12, weight: .semibold))
-                            .foregroundColor(.gray)
-                            .padding(.horizontal, 20)
-                    }
-                    
+                VStack(alignment: .leading, spacing: 20) {
                     ScrollView(.horizontal, showsIndicators: false) {
                         if let images = placeData.images {
-                            HStack(spacing: 10) {
+                            HStack(spacing: 3) {
                                 ForEach(images.indices, id: \.self) { index in
                                     if let imageUrl = images[index]?.imageUrl {
                                         KFImage(URL(string: imageUrl))
                                             .resizable()
                                             .scaledToFit()
-                                            .cornerRadius(15)
-                                            .frame(width: 100, height: 100)
+                                            .frame(width: UIScreen.main.bounds.width / 3, height: UIScreen.main.bounds.width / 3)
                                     }
                                 }
-                            }.padding(.horizontal, 20)
+                            }
                         }
                     }
+                    .overlay(alignment: .bottomTrailing) {
+                        Group {
+                            if let images = placeData.images {
+                                if images.count > 3 {
+                                    Text(" \(images.count)+ ")
+                                } else {
+                                    Text(" \(images.count)  ")
+                                }
+                            }
+                        }
+                        .padding(5)
+                        .background(RoundedRectangle(cornerRadius: 15).fill(.black.opacity(0.5)))
+                        .foregroundColor(.white)
+                        .font(.system(size: 12, weight: .bold))
+                        .padding(.bottom, 10)
+                        .padding(.trailing, 10)
+                        .multilineTextAlignment(.center)
+                    }
+                    
+                    Group {
+                        HStack {
+                            Text(placeData.name)
+                                .font(.system(size: 15, weight: .bold))
+                            Spacer()
+                            Image("arrow_fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 10, height: 10)
+                        }
+                        
+                        Text("📍 \(placeData.location)")
+                            .font(.system(size: 12, weight: .semibold))
+                            .foregroundColor(.gray)
+                    }
+                    .padding(.horizontal, 20)
+                    .multilineTextAlignment(.leading)
+                    
+                    SeperateView()
+                        .frame(width: UIScreen.main.bounds.width, height: 10)
                 }
             }
             .simultaneousGesture(TapGesture().onEnded {
