@@ -31,6 +31,7 @@ struct CompetitionRateResponses: Hashable, Codable {
     var earlyAdmissionRate: Double?
     var regularAdmissionRate: Double?
     var year: String?
+    var averageAdmissionRate: Double?
 }
 
 struct EmploymentRateResponses: Hashable, Codable {

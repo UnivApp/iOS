@@ -10,26 +10,32 @@ import Kingfisher
 
 struct PopUpContentView: View {
     var summary: [SummaryModel]
-    @Environment(\.dismiss) var dismiss
+    @Binding var isShowingPopup: Bool
     var body: some View {
         VStack {
             HStack {
                 Spacer()
                 Button(action: {
-                    dismiss()
+                    withAnimation {
+                        self.isShowingPopup = false
+                    }
                 }) {
                     Image(systemName: "xmark.circle.fill")
                         .resizable()
-                        .frame(width: 24, height: 24)
+                        .scaledToFit()
+                        .frame(width: 20, height: 20)
                         .foregroundColor(.gray)
                 }
                 .padding()
             }
+            .padding(.bottom, 10)
+            
             ForEach(summary, id: \.self) { item in
                 PopUpCell(summaryModel: item)
                     .padding(.horizontal, 0)
             }
         }
+        .background(.white)
     }
 }
 fileprivate struct PopUpCell: View {
@@ -75,6 +81,6 @@ fileprivate struct PopUpCell: View {
     }
 }
 
-#Preview {
-    PopUpContentView(summary: [SummaryModel(universityId: nil, fullName: nil, logo: nil, starNum: nil, starred: nil)])
-}
+//struct  {
+//    PopUpContentView(summary: [SummaryModel(universityId: nil, fullName: nil, logo: nil, starNum: nil, starred: nil)], isShowingPopup: <#Binding<Bool>#>)
+//}

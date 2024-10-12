@@ -39,8 +39,6 @@ struct InitiativeViewCell: View {
                     Spacer()
                 }
             }
-//            Divider()
-//                .padding(.top, 10)
         }
         .padding(.horizontal, 30)
         .padding(.vertical, 10)

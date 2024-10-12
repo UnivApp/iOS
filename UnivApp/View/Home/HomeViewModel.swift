@@ -17,8 +17,9 @@ class HomeViewModel: ObservableObject {
     }
     
     @Published var phase: Phase = .notRequested
-    @Published var InitiativeData: [InitiativeModel] = .init() //TODO: - 경쟁률데이터
     @Published var topPlaceData: [PlayModel] = []
+    @Published var employmentData: [EmploymentModel] = []
+    @Published var competitionData: [CompetitionModel] = []
     
     private var container: DIContainer
     private var subscriptions = Set<AnyCancellable>()
@@ -32,7 +33,6 @@ class HomeViewModel: ObservableObject {
         switch action {
         case .load:
             self.phase = .loading
-            //TODO: - 입결 데이터 불러오기
             container.services.playService.getTopPlace()
                 .sink { [weak self] completion in
                     if case .failure = completion {
@@ -42,7 +42,6 @@ class HomeViewModel: ObservableObject {
                     self?.topPlaceData = topPlaceData
                     self?.phase = .success
                 }.store(in: &subscriptions)
-
         }
     }
     

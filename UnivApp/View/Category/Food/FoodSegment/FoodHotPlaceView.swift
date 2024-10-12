@@ -8,31 +8,47 @@
 import SwiftUI
 import Kingfisher
 
+
 struct FoodHotPlaceView: View {
     var model: [FoodModel]
+    @State private var isPresented: Bool = false
+    @State private var selectedModel: FoodModel?
+    
     var body: some View {
         VStack(alignment: .center, spacing: 30) {
-            ScrollView(.vertical) {
-                Image("food_poster")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: UIScreen.main.bounds.width)
-                
-                HStack {
-                    Text("대학 주변 ")
-                    + Text("맛집")
-                        .foregroundColor(.orange)
-                    + Text(" 확인하기")
-                    Spacer()
+            ZStack {
+                ScrollView(.vertical) {
+                    Image("food_poster")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: UIScreen.main.bounds.width)
+                        .overlay(
+                            isPresented ? Color.black.opacity(0.3) : Color.clear
+                        )
+                    
+                    HStack {
+                        Text("대학 주변 ")
+                        + Text("맛집")
+                            .foregroundColor(.orange)
+                        + Text(" 확인하기")
+                        Spacer()
+                    }
+                    .font(.system(size: 18, weight: .bold))
+                    .padding(.horizontal, 30)
+                    .padding(.vertical, 20)
+                    
+                    ForEach(model.indices, id: \.self) { index in
+                        FoodHotPlaceCell(cell: model[index], isPresented: $isPresented, selectedModel: $selectedModel)
+                    }
                 }
-                .font(.system(size: 18, weight: .bold))
-                .padding(.horizontal, 30)
-                .padding(.vertical, 20)
-                
-                ForEach(model, id: \.self) { cell in
-                    FoodHotPlaceCell(cell: cell)
+                if isPresented {
+                    if let model = selectedModel {
+                        FoodSelectedPopupView(model: model, isPresented: $isPresented)
+                            .animation(.easeInOut, value: isPresented)
+                    }
                 }
             }
+            .background(isPresented ? .black.opacity(0.3) : .white)
         }
     }
 }
@@ -45,25 +61,33 @@ fileprivate struct FoodHotPlaceCell: View {
     @State private var isScrollingRight = true
     private let scrollDuration: TimeInterval = 5.0
     
+    @Binding var isPresented: Bool
+    @Binding var selectedModel: FoodModel?
+    
     var body: some View {
-        Button  {
-            if let url = URL(string: cell.placeUrl){
-                UIApplication.shared.open(url)
+        Button {
+            self.selectedModel = cell
+            withAnimation {
+                self.isPresented = true
             }
         } label: {
             HStack(spacing: 20) {
-                KFImage(URL(string: cell.imageUrl ?? ""))
-                    .resizable()
-                    .scaledToFit()
+                MapView(model: cell)
                     .frame(width: 80, height: 80)
-                    .background(.backGray)
                     .cornerRadius(15)
+                    .allowsHitTesting(false)
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 15)
+                            .fill(isPresented ? Color.black.opacity(0.3) : Color.clear)
+                    }
+                
                 
                 Spacer()
                 
                 VStack(alignment: .center, spacing: 10) {
                     Text(cell.name)
                         .font(.system(size: 18, weight: .bold))
+                        .foregroundColor(.black)
                     
                     GeometryReader { geometry in
                         ScrollView(.horizontal, showsIndicators: false) {
@@ -73,6 +97,7 @@ fileprivate struct FoodHotPlaceCell: View {
                                         .font(.system(size: 14, weight: .semibold))
                                         .padding(5)
                                         .background(Color.yellow.opacity(0.3))
+                                        .foregroundColor(.black)
                                         .cornerRadius(5)
                                 }
                             }
@@ -93,6 +118,8 @@ fileprivate struct FoodHotPlaceCell: View {
                                 .font(.system(size: 12, weight: .semibold))
                                 .foregroundColor(.gray)
                                 .lineLimit(1)
+                                .multilineTextAlignment(.leading)
+                            Spacer()
                         }
                     }
                 }
@@ -144,6 +171,80 @@ fileprivate struct FoodHotPlaceCell: View {
     }
 }
 
+fileprivate struct FoodSelectedPopupView: View {
+    var model: FoodModel
+    @Binding var isPresented: Bool
+    var body: some View {
+        VStack(alignment: .leading, spacing: 15) {
+            Group {
+                HStack {
+                    Spacer()
+                    Button {
+                        self.isPresented = false
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(.gray)
+                    }
+                }
+                .padding(.top, 20)
+                
+                Group {
+                    Text(model.name)
+                        .font(.system(size: 15, weight: .bold))
+                    
+                    HStack {
+                        Text("📍 \(model.location)")
+                            .font(.system(size: 12, weight: .semibold))
+                        Spacer()
+                        Button {
+                            if let url = URL(string: model.placeUrl){
+                                UIApplication.shared.open(url)
+                            }
+                        } label: {
+                            Text("네이버 리뷰")
+                                .foregroundColor(.green.opacity(5.0))
+                                .font(.system(size: 13, weight: .regular))
+                                .overlay(alignment: .bottom) {
+                                    Color.green.opacity(5.0)
+                                        .frame(height: 1)
+                                }
+                        }
+                    }
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 10) {
+                            ForEach(model.hashtags, id: \.self) { hashtag in
+                                Text("#\(hashtag)")
+                                    .font(.system(size: 14, weight: .semibold))
+                                    .padding(5)
+                                    .background(Color.yellow.opacity(0.3))
+                                    .foregroundColor(.black)
+                                    .cornerRadius(5)
+                            }
+                        }
+                    }
+                }
+                .foregroundColor(.black)
+                .multilineTextAlignment(.leading)
+                
+                MapView(model: model)
+                    .cornerRadius(15)
+                    .padding(.horizontal, 0)
+                    .padding(.bottom, 20)
+            }
+            .padding(.horizontal, 20)
+        }
+        .background(.white)
+        .cornerRadius(15)
+        .padding(.horizontal, 20)
+        .frame(width: UIScreen.main.bounds.width - 20, height: UIScreen.main.bounds.height / 1.8)
+    }
+}
+
 #Preview {
-    FoodHotPlaceView(model: [FoodModel(name: "깍뚝", location: "서울특별시 광진구 동일로", placeUrl: "", hashtags: ["삼겹살", "가브리살", "무한리필"], imageUrl: "", topMessage: "세종대학교 1등 맛집")])
+        FoodHotPlaceView(model: [FoodModel(name: "깍뚝", location: "서울특별시 광진구 동일로", placeUrl: "", hashtags: ["삼겹살", "가브리살", "무한리필"], imageUrl: "", topMessage: "세종대학교 1등 맛집")])
+//    FoodSelectedPopupView(model: FoodModel(name: "깍뚝", location: "광진구 동일로", placeUrl: "", hashtags: ["좋아", "좋아", "좋아"]))
 }

@@ -263,7 +263,7 @@ struct ListDetailView: View {
                                             Image(self.expandedDepartIds.contains(index) ? "arrow_down" : "arrow_fill")
                                                 .resizable()
                                                 .scaledToFit()
-                                                .frame(width: 5, height: 10)
+                                                .frame(width: 10, height: 10)
                                         }
                                     }
                                 }

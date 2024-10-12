@@ -13,6 +13,7 @@ struct PlayDetailView: View {
     
     @State var checkScrollHeight: Bool = false
     @State private var currentIndex: Int = 0
+    @State private var imageResource: Bool = false
     
     var playDetailModel: PlayDetailModel
     
@@ -105,23 +106,33 @@ struct PlayDetailView: View {
                         
                         
                         Group {
-                            
                             if let images = placeData.images {
-                                ForEach(images.indices, id: \.self) { index in
-                                    if let source = images[index]?.source {
-                                        if index < 1 {
-                                            Text("이미지 출처\n\n")
+                                let nonNilSources = images.compactMap { $0?.source }
+                                if !nonNilSources.isEmpty { 
+                                    Button {
+                                        self.imageResource.toggle()
+                                    } label: {
+                                        HStack(spacing: 20) {
+                                            Text("이미지 출처")
+                                                .font(.system(size: 10, weight: .bold))
+                                                .foregroundColor(.orange)
+                                            Image(self.imageResource ? "arrow_down" : "arrow_fill")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 10, height: 10)
+                                        }
+                                        .frame(width: UIScreen.main.bounds.width / 3)
+                                    }
+                                    if imageResource {
+                                        ForEach(nonNilSources, id: \.self) { source in
+                                            Text(source)
                                                 .font(.system(size: 10, weight: .bold))
                                                 .foregroundColor(.gray)
-                                            +
-                                            Text(source)
-                                                .font(.system(size: 8, weight: .regular))
-                                                .foregroundColor(.gray)
                                         }
+                                        .padding(.horizontal, 20)
+                                        .padding(.top, 5)
                                     }
                                 }
-                                .padding(.horizontal, 20)
-                                .padding(.top, 20)
                             }
                         }
                         

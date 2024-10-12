@@ -47,9 +47,6 @@ struct HomeView: View {
                 .onTapGesture {
                     self.isFocused = false
                 }
-                .fullScreenCover(isPresented: $isShowingPopup) {
-                    PopUpContentView(summary: listViewModel.summaryArray)
-                }
         case .fail:
             ErrorView()
         }
@@ -57,17 +54,25 @@ struct HomeView: View {
     
     var loadedView: some View {
         NavigationStack {
-            ScrollView(.vertical) {
-                VStack(alignment: .center, spacing: 20) {
-                    searchView
-                        .padding(.top, 10)
-                    
-                    categoryView
-                    
-                    footerView
+            ZStack {
+                ScrollView(.vertical) {
+                    VStack(alignment: .center, spacing: 20) {
+                        searchView
+                            .padding(.top, 10)
+                        
+                        categoryView
+                        
+                        footerView
+                    }
+                }
+                if isShowingPopup {
+                    PopUpContentView(summary: listViewModel.summaryArray, isShowingPopup: $isShowingPopup)
+                        .animation(.easeInOut, value: isShowingPopup)
+                        .cornerRadius(15)
+                        .padding(.horizontal, 20)
                 }
             }
-            .background(Color.white)
+            .background(isShowingPopup ? .black.opacity(0.3) : .white)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
@@ -88,7 +93,9 @@ struct HomeView: View {
             HStack {
                 Button {
                     listViewModel.send(action: .search)
-                    isShowingPopup = true
+                    withAnimation {
+                        isShowingPopup = true
+                    }
                 } label: {
                     Image("search")
                         .resizable()
@@ -174,9 +181,17 @@ struct HomeView: View {
             
             Group {
                 HStack {
-                    Text("경쟁률")
-                        .font(.system(size: 18, weight: .bold))
-                        .foregroundColor(.black)
+                    Group {
+                        Text("취업 ")
+                            .foregroundColor(.red.opacity(0.7))
+                        +
+                        Text("경쟁 ")
+                            .foregroundColor(.orange)
+                        +
+                        Text("률")
+                            .foregroundColor(.black)
+                    }
+                    .font(.system(size: 18, weight: .bold))
                     
                     Spacer()
                     
@@ -194,8 +209,6 @@ struct HomeView: View {
                     }
                 }
             }.padding(.horizontal, 20)
-            
-            //TODO: - 입결 리스트 불러오기
             VStack {
                 HStack(spacing: 10) {
                     ForEach(SplitType.allCases, id: \.self) { item in
@@ -227,6 +240,27 @@ struct HomeView: View {
                     }
                 }
                 .padding(.horizontal)
+            }
+        }
+    }
+}
+
+fileprivate struct RateCell: View {
+    @EnvironmentObject var viewModel: HomeViewModel
+    private var selectedType: SplitType
+    var body: some View {
+        switch selectedType {
+        case .employment:
+            ForEach(viewModel.employmentData.indices, id: \.self) { index in
+                
+            }
+        case .ontime:
+            ForEach(viewModel.competitionData.indices, id: \.self) { index in
+                
+            }
+        case .Occasion:
+            ForEach(viewModel.competitionData.indices, id: \.self) { index in
+                
             }
         }
     }

@@ -28,6 +28,9 @@ enum APIEndpoint {
     case schoolFood
     case topFood
     case news
+    //MARK: - Home
+    case employment
+    case competition
     
     var urlString: String {
         switch self {
@@ -67,6 +70,11 @@ enum APIEndpoint {
             return "http://43.200.143.28:8080/api/restaurants/top"
         case .news:
             return "http://43.200.143.28:8080/api/news"
+            
+        case .employment:
+            return "http://43.200.143.28:8080/api/employment-rate?universityId="
+        case .competition:
+            return "http://43.200.143.28:8080/api/competition-rate?universityId="
         }
     }
 }

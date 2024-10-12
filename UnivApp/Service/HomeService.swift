@@ -13,7 +13,7 @@ protocol HomeServiceType {
 }
 
 class HomeService: HomeServiceType {
-    private var subscriptions = Set<AnyCancellable>()
+   
     
 }
 
