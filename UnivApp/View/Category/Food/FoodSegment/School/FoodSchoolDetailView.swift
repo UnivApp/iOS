@@ -15,18 +15,7 @@ struct FoodSchoolDetailView: View {
         contentView
             .navigationBarBackButtonHidden(true)
             .toolbar(.hidden, for: .tabBar)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        dismiss()
-                    }, label: {
-                        Image("blackback")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 20, height: 20)
-                    })
-                }
-            }
+            .toolbar(.hidden, for: .navigationBar)
     }
     @ViewBuilder
     var contentView: some View {
@@ -49,16 +38,37 @@ struct FoodSchoolDetailView: View {
     }
     
     var loadedView: some View {
-        ScrollView(.vertical) {
-            VStack(spacing: 20) {
-                HStack{
-                    Text(model.fullName ?? "")
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundColor(.black)
-                    Spacer()
-                }.padding(.horizontal, 30)
-                
-                FoodHotPlaceView(model: viewModel.schoolFoodData)
+        VStack {
+            HStack(spacing: 0) {
+                Button(action: {
+                    dismiss()
+                }, label: {
+                    Image("blackback")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20)
+                })
+                Image("food_navi")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 60)
+                Spacer()
+            }
+            .padding(.horizontal, 10)
+            
+            ScrollView(.vertical) {
+                VStack(spacing: 20) {
+                    HStack{
+                        Text(model.fullName ?? "")
+                            .font(.system(size: 25, weight: .bold))
+                            .foregroundColor(.black)
+                            .lineLimit(nil)
+                            .fixedSize(horizontal: false, vertical: true)
+                        Spacer()
+                    }.padding(.horizontal, 30)
+                    
+                    FoodHotPlaceView(model: viewModel.schoolFoodData)
+                }
             }
         }
     }

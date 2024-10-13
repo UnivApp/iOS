@@ -9,7 +9,7 @@ import SwiftUI
 import Kingfisher
 
 struct FoodSchoolView: View {
-    @StateObject var viewModel: FoodViewModel
+    @EnvironmentObject var viewModel: FoodViewModel
     @StateObject var listViewModel: ListViewModel
     @FocusState private var isFocused: Bool
     
@@ -101,5 +101,6 @@ fileprivate struct FoodSchoolCell: View {
 
 
 #Preview {
-    FoodSchoolView(viewModel: FoodViewModel(container: .init(services: StubServices())), listViewModel: .init(container: .init(services: StubServices()), searchText: ""))
+    FoodSchoolView(listViewModel: ListViewModel(container: .init(services: StubServices()), searchText: ""))
+        .environmentObject(FoodViewModel(container: .init(services: StubServices())))
 }

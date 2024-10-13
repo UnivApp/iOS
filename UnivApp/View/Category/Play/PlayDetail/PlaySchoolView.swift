@@ -19,6 +19,7 @@ struct PlaySchoolView: View {
     var body: some View {
         contentView
             .navigationBarBackButtonHidden(true)
+            .toolbar(.hidden, for: .tabBar)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     HStack(spacing: 0) {

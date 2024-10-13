@@ -20,6 +20,7 @@ struct HomeView: View {
     @FocusState private var isFocused: Bool
     
     @State private var currentIndex: Int = 0
+    @State private var popupOpacity: Double = 0
     private let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     
     var body: some View {
@@ -65,14 +66,26 @@ struct HomeView: View {
                         footerView
                     }
                 }
-                if isShowingPopup {
-                    PopUpContentView(summary: listViewModel.summaryArray, isShowingPopup: $isShowingPopup)
-                        .animation(.easeInOut, value: isShowingPopup)
-                        .cornerRadius(15)
-                        .padding(.horizontal, 20)
-                }
             }
-            .background(isShowingPopup ? .black.opacity(0.3) : .white)
+            .fullScreenCover(isPresented: $isShowingPopup) {
+                PopUpContentView(summary: listViewModel.summaryArray, isShowingPopup: $isShowingPopup)
+                    .cornerRadius(15)
+                    .padding(.horizontal, 20)
+                    .presentationBackground(.black.opacity(0.3))
+                    .onAppear {
+                        withAnimation {
+                            popupOpacity = 1
+                        }
+                    }
+                    .onDisappear {
+                        withAnimation {
+                            popupOpacity = 0
+                        }
+                    }
+                    .opacity(popupOpacity)
+                    .animation(.easeInOut, value: popupOpacity)
+            }
+            .transaction { $0.disablesAnimations = true }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
@@ -92,10 +105,13 @@ struct HomeView: View {
         VStack(alignment: .center, spacing: 20) {
             HStack {
                 Button {
-                    listViewModel.send(action: .search)
-                    withAnimation {
-                        isShowingPopup = true
+                    if listViewModel.searchText != "" {
+                        listViewModel.send(action: .search)
+                        withAnimation {
+                            isShowingPopup = true
+                        }
                     }
+                    listViewModel.searchText = ""
                 } label: {
                     Image("search")
                         .resizable()

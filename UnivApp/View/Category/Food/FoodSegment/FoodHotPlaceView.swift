@@ -11,44 +11,81 @@ import Kingfisher
 
 struct FoodHotPlaceView: View {
     var model: [FoodModel]
+    
     @State private var isPresented: Bool = false
     @State private var selectedModel: FoodModel?
+    @State private var isFullCover: Bool = false
+    @State private var popupOpacity: Double = 0
     
     var body: some View {
-        VStack(alignment: .center, spacing: 30) {
-            ZStack {
-                ScrollView(.vertical) {
-                    Image("food_poster")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: UIScreen.main.bounds.width)
-                        .overlay(
-                            isPresented ? Color.black.opacity(0.3) : Color.clear
-                        )
-                    
-                    HStack {
-                        Text("대학 주변 ")
-                        + Text("맛집")
-                            .foregroundColor(.orange)
-                        + Text(" 확인하기")
-                        Spacer()
-                    }
-                    .font(.system(size: 18, weight: .bold))
-                    .padding(.horizontal, 30)
-                    .padding(.vertical, 20)
-                    
-                    ForEach(model.indices, id: \.self) { index in
-                        FoodHotPlaceCell(cell: model[index], isPresented: $isPresented, selectedModel: $selectedModel)
-                    }
-                }
-                if isPresented {
-                    if let model = selectedModel {
-                        FoodSelectedPopupView(model: model, isPresented: $isPresented)
-                            .animation(.easeInOut, value: isPresented)
-                    }
+        loadedView
+            .fullScreenCover(isPresented: $isPresented) {
+                if let model = selectedModel {
+                    FoodSelectedPopupView(model: model, isPresented: $isPresented, isFullCover: $isFullCover)
+                        .presentationBackground(.black.opacity(0.3))
+                        .onAppear {
+                            withAnimation {
+                                popupOpacity = 1
+                            }
+                        }
+                        .onDisappear {
+                            withAnimation {
+                                popupOpacity = 0
+                            }
+                        }
+                        .opacity(popupOpacity)
+                        .animation(.easeInOut, value: popupOpacity)
                 }
             }
             .background(isPresented ? .black.opacity(0.3) : .white)
+            .fullScreenCover(isPresented: $isFullCover) {
+                if let model = selectedModel {
+                    MapView(model: model, isPopup: true, isCover: true)
+                        .presentationBackground(.black.opacity(0.3))
+                        .onAppear {
+                            withAnimation {
+                                popupOpacity = 1
+                            }
+                        }
+                        .onDisappear {
+                            withAnimation {
+                                popupOpacity = 0
+                            }
+                        }
+                        .opacity(popupOpacity)
+                        .animation(.easeInOut, value: popupOpacity)
+                }
+            }
+            .transaction { $0.disablesAnimations = true }
+    }
+    
+    var loadedView: some View {
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack(alignment: .center, spacing: 20) {
+                Image("food_poster")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: UIScreen.main.bounds.width)
+                
+                HStack {
+                    Text("대학별 ")
+                    + Text("1등👑 맛집")
+                        .foregroundColor(.orange)
+                    + Text(" 확인하기")
+                    Spacer()
+                }
+                .font(.system(size: 18, weight: .bold))
+                .padding(.horizontal, 30)
+                .padding(.vertical, 20)
+                
+                ForEach(model.indices, id: \.self) { index in
+                    VStack {
+                        FoodHotPlaceCell(cell: model[index], isPresented: $isPresented, selectedModel: $selectedModel, isFullCover: $isFullCover)
+                            .id(index)
+                            .padding(.vertical, -5)
+                    }
+                }
+            }
         }
     }
 }
@@ -59,12 +96,18 @@ fileprivate struct FoodHotPlaceCell: View {
     @State private var scrollOffset: CGFloat = 20
     @State private var timer: Timer? = nil
     @State private var isScrollingRight = true
+    
     private let scrollDuration: TimeInterval = 5.0
     
     @Binding var isPresented: Bool
     @Binding var selectedModel: FoodModel?
+    @Binding var isFullCover: Bool
     
     var body: some View {
+        loadedView
+    }
+    
+    var loadedView: some View {
         Button {
             self.selectedModel = cell
             withAnimation {
@@ -72,7 +115,7 @@ fileprivate struct FoodHotPlaceCell: View {
             }
         } label: {
             HStack(spacing: 20) {
-                MapView(model: cell)
+                MapView(model: cell, isPopup: false, isCover: false)
                     .frame(width: 80, height: 80)
                     .cornerRadius(15)
                     .allowsHitTesting(false)
@@ -80,7 +123,6 @@ fileprivate struct FoodHotPlaceCell: View {
                         RoundedRectangle(cornerRadius: 15)
                             .fill(isPresented ? Color.black.opacity(0.3) : Color.clear)
                     }
-                
                 
                 Spacer()
                 
@@ -111,7 +153,7 @@ fileprivate struct FoodHotPlaceCell: View {
                         }
                     }
                     .frame(height: 30)
-
+                    
                     if let address = cell.topMessage {
                         HStack {
                             Text("📍 \(address)")
@@ -174,7 +216,12 @@ fileprivate struct FoodHotPlaceCell: View {
 fileprivate struct FoodSelectedPopupView: View {
     var model: FoodModel
     @Binding var isPresented: Bool
+    @Binding var isFullCover: Bool
     var body: some View {
+        loadedView
+    }
+    
+    var loadedView: some View {
         VStack(alignment: .leading, spacing: 15) {
             Group {
                 HStack {
@@ -230,10 +277,17 @@ fileprivate struct FoodSelectedPopupView: View {
                 .foregroundColor(.black)
                 .multilineTextAlignment(.leading)
                 
-                MapView(model: model)
-                    .cornerRadius(15)
-                    .padding(.horizontal, 0)
-                    .padding(.bottom, 20)
+                Button {
+                    withAnimation {
+                        self.isFullCover = true
+                        self.isPresented = false
+                    }
+                } label: {
+                    MapView(model: model, isPopup: true, isCover: false)
+                        .cornerRadius(15)
+                        .padding(.horizontal, 0)
+                        .padding(.bottom, 20)
+                }
             }
             .padding(.horizontal, 20)
         }
@@ -241,6 +295,7 @@ fileprivate struct FoodSelectedPopupView: View {
         .cornerRadius(15)
         .padding(.horizontal, 20)
         .frame(width: UIScreen.main.bounds.width - 20, height: UIScreen.main.bounds.height / 1.8)
+        .toolbar(.hidden, for: .tabBar)
     }
 }
 

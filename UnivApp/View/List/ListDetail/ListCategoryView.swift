@@ -10,6 +10,7 @@ import SwiftUI
 struct ListCategoryView: View {
     @State private var selectedType: ListDetailType?
     @State private var isPresented: Bool = false
+    @State private var popupOpacity: Double = 0
     var universityID: Int
     var body: some View {
         VStack(spacing: 0) {
@@ -24,7 +25,9 @@ struct ListCategoryView: View {
             ForEach(ListDetailType.allCases, id: \.self) { type in
                 Button {
                     selectedType = type
-                    self.isPresented = true
+                    withAnimation {
+                        self.isPresented = true
+                    }
                 } label: {
                     VStack {
                         Text(type.title)
@@ -57,7 +60,20 @@ struct ListCategoryView: View {
         }
         .fullScreenCover(isPresented: $isPresented) {
             self.selectedType?.view
+                .onAppear {
+                    withAnimation {
+                        popupOpacity = 1
+                    }
+                }
+                .onDisappear {
+                    withAnimation {
+                        popupOpacity = 0
+                    }
+                }
+                .opacity(popupOpacity)
+                .animation(.easeInOut, value: popupOpacity)
         }
+        .transaction { $0.disablesAnimations = true }
     }
 }
 

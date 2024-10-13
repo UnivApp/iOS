@@ -57,11 +57,13 @@ struct PlayView: View {
                     Spacer()
                 }
                 .padding(.horizontal, 20)
+                
                 Group {
                     if segmentType == .hotplace {
                         HotPlaceSegmentView(topPlaceData: viewModel.topPlaceData)
                     } else {
-                        SchoolSegmentView(viewModel: PlayViewModel(container: self.container), listViewModel: ListViewModel(container: self.container, searchText: ""))
+                        SchoolSegmentView(listViewModel: ListViewModel(container: self.container, searchText: ""))
+                            .environmentObject(self.viewModel)
                     }
                 }
             }
@@ -71,7 +73,6 @@ struct PlayView: View {
                         Button(action: {
                             dismiss()
                         }, label: {
-                            //TODO: - whiteback 추가
                             Image("blackback")
                                 .resizable()
                                 .scaledToFit()

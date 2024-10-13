@@ -30,17 +30,23 @@ struct PopUpContentView: View {
             }
             .padding(.bottom, 10)
             
-            ForEach(summary, id: \.self) { item in
-                PopUpCell(summaryModel: item)
-                    .padding(.horizontal, 0)
+            ScrollView(.vertical, showsIndicators: true) {
+                VStack {
+                    ForEach(summary, id: \.self) { item in
+                        PopUpCell(summaryModel: item)
+                            .padding(.horizontal, 0)
+                    }
+                }
             }
         }
+        .frame(maxHeight: UIScreen.main.bounds.height / 1.5)
         .background(.white)
     }
 }
 fileprivate struct PopUpCell: View {
     var summaryModel: SummaryModel
     @State var isPresented: Bool = false
+    @State private var popupOpacity: Double = 0
     
     var body: some View {
         cell
@@ -76,7 +82,20 @@ fileprivate struct PopUpCell: View {
         }
         .fullScreenCover(isPresented: $isPresented) {
             ListDetailView(viewModel: ListDetailViewModel(container: .init(services: Services())), universityId: summaryModel.universityId ?? 0)
+                .onAppear {
+                    withAnimation {
+                        popupOpacity = 1
+                    }
+                }
+                .onDisappear {
+                    withAnimation {
+                        popupOpacity = 0
+                    }
+                }
+                .opacity(popupOpacity)
+                .animation(.easeInOut, value: popupOpacity)
         }
+        .transaction { $0.disablesAnimations = true }
         .padding(.horizontal, 20)
     }
 }

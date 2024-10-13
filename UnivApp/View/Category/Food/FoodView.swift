@@ -19,6 +19,7 @@ struct FoodView: View {
         contentView
             .navigationBarBackButtonHidden(true)
             .toolbar(.hidden, for: .tabBar)
+            .toolbar(.hidden, for: .navigationBar)
     }
     
     @ViewBuilder
@@ -40,57 +41,52 @@ struct FoodView: View {
     
     var loadedView: some View {
         NavigationStack {
-            VStack {
-                list
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    HStack(spacing: 0) {
-                        Button(action: {
-                            dismiss()
-                        }, label: {
-                            Image("blackback")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 20, height: 20)
-                        })
-                        Image("food_navi")
+            VStack(alignment: .center, spacing: 20) {
+                HStack(spacing: 0) {
+                    Button(action: {
+                        dismiss()
+                    }, label: {
+                        Image("blackback")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 100, height: 60)
+                            .frame(width: 20, height: 20)
+                    })
+                    Image("food_navi")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100, height: 60)
+                    Spacer()
+                }
+                .padding(.horizontal, 10)
+                
+                HStack(spacing: 10) {
+                    ForEach(FoodSegmentType.allCases, id: \.self) { segment in
+                        Button {
+                            self.segmentType = segment
+                        } label: {
+                            Text(segment.title)
+                                .padding()
+                                .foregroundColor(.black)
+                                .font(.system(size: 15, weight: .bold))
+                                .background(RoundedRectangle(cornerRadius: 15)
+                                    .fill(segmentType == segment ? .yellow : .backGray)
+                                    .frame(height: 40))
+                        }
+                    }
+                    Spacer()
+                }
+                .padding(.horizontal, 20)
+                .padding(.top, -20)
+                
+                Group {
+                    if segmentType == .hotPlace {
+                        FoodHotPlaceView(model: viewModel.topFoodData)
+                    } else {
+                        FoodSchoolView(listViewModel: ListViewModel(container: .init(services: Services()), searchText: ""))
+                            .environmentObject(self.viewModel)
                     }
                 }
             }
-        }
-    }
-    
-    var list: some View {
-        VStack(alignment: .center, spacing: 20) {
-            HStack(spacing: 10) {
-                ForEach(FoodSegmentType.allCases, id: \.self) { segment in
-                    Button {
-                        self.segmentType = segment
-                    } label: {
-                        Text(segment.title)
-                            .padding()
-                            .foregroundColor(.black)
-                            .font(.system(size: 15, weight: .bold))
-                            .background(RoundedRectangle(cornerRadius: 15)
-                                .fill(segmentType == segment ? .yellow : .backGray)
-                                .frame(height: 40))
-                    }
-                }
-                Spacer()
-            }
-            .padding(.horizontal, 20)
-            Group {
-                if segmentType == .hotPlace {
-                    FoodHotPlaceView(model: viewModel.topFoodData)
-                } else {
-                    FoodSchoolView(viewModel: self.viewModel, listViewModel: ListViewModel(container: .init(services: Services()), searchText: ""))
-                }
-            }
-            
         }
     }
 }

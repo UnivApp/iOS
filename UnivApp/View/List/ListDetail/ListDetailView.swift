@@ -19,6 +19,8 @@ struct ListDetailView: View {
     var body: some View {
         contentView
             .navigationTitle("")
+            .toolbar(.hidden, for: .tabBar)
+            .navigationBarBackButtonHidden(true)
     }
     
     @ViewBuilder
@@ -134,8 +136,6 @@ struct ListDetailView: View {
                         .padding()
                 }
             }
-            .toolbar(.hidden, for: .tabBar)
-            .navigationBarBackButtonHidden(true)
         }
     }
     

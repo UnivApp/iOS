@@ -43,8 +43,8 @@ struct MainTabView: View {
                 .tabItem {
                     Label(tab.title, image: tab.imageName(selected: selectedTab == tab))
                 }
-                .tag(tab)
                 .navigationBarBackButtonHidden(true)
+                .tag(tab)
                 .onAppear {
                     UINavigationBar.appearance().backgroundColor = .clear
                     UIPageControl.appearance().isHidden = true

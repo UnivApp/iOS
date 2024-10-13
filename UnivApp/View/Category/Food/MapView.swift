@@ -9,24 +9,47 @@ import SwiftUI
 import MapKit
 
 struct MapView: View {
-    @State private var region: MKCoordinateRegion
+    @Environment(\.dismiss) var dismiss
+    @State private var region: MKCoordinateRegion = .init(center: CLLocationCoordinate2D(latitude: 37.5666791, longitude: 126.9782914), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
     var model: FoodModel
-    
-    init(model: FoodModel) {
-        self.model = model
-        self._region = State(initialValue: MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: 37.5666791, longitude: 126.9782914),
-            span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-        ))
-    }
+    var isPopup: Bool
+    var isCover: Bool
     
     var body: some View {
-        Map(initialPosition: .region(region), interactionModes: .all) {
-            Marker(model.name, coordinate: region.center)
-                .tint(.orange)
-        }
-        .onAppear {
-            geocodeAddress(model.location)
+        ZStack {
+            if isPopup {
+                Map(interactionModes: .all) {
+                    Marker(model.name, coordinate: region.center)
+                        .tint(.orange)
+                }
+                .onAppear {
+                    geocodeAddress(model.location)
+                }
+            } else {
+                Map(initialPosition: .region(region), interactionModes: .all) {
+                    Marker(model.name, coordinate: region.center)
+                        .tint(.orange)
+                }
+            }
+            if isCover {
+                VStack {
+                    HStack {
+                        Spacer()
+                        Button {
+                            dismiss()
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 30, height: 30)
+                                .foregroundColor(.gray)
+                        }
+                    }
+                    Spacer()
+                }
+                .padding(.horizontal, 20)
+                .padding(.vertical, 20)
+            }
         }
     }
     
@@ -42,12 +65,17 @@ struct MapView: View {
                 return
             }
             DispatchQueue.main.async {
-                region.center = location.coordinate
+                withAnimation {
+                    region = MKCoordinateRegion(
+                        center: location.coordinate,
+                        span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+                    )
+                }
             }
         }
     }
 }
 
 #Preview {
-    MapView(model: FoodModel(name: "", location: "", placeUrl: "", hashtags: [""]))
+    MapView(model: FoodModel(name: "", location: "", placeUrl: "", hashtags: [""]), isPopup: true, isCover: true)
 }
