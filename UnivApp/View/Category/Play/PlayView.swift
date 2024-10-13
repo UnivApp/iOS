@@ -57,13 +57,11 @@ struct PlayView: View {
                     Spacer()
                 }
                 .padding(.horizontal, 20)
-                
                 Group {
                     if segmentType == .hotplace {
                         HotPlaceSegmentView(topPlaceData: viewModel.topPlaceData)
                     } else {
-                        SchoolSegmentView(listViewModel: ListViewModel(container: self.container, searchText: ""))
-                            .environmentObject(self.viewModel)
+                        SchoolSegmentView(viewModel: PlayViewModel(container: self.container), listViewModel: ListViewModel(container: self.container, searchText: ""))
                     }
                 }
             }

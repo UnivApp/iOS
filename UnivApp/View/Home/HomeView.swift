@@ -248,11 +248,14 @@ struct HomeView: View {
                 Group {
                     switch selectedSegment {
                     case .employment:
-                        EmptyView()
+                        RateList(selectedType: $selectedSegment)
+                            .environmentObject(self.viewModel)
                     case .Occasion:
-                        EmptyView()
+                        RateList(selectedType: $selectedSegment)
+                            .environmentObject(self.viewModel)
                     case .ontime:
-                        EmptyView()
+                        RateList(selectedType: $selectedSegment)
+                            .environmentObject(self.viewModel)
                     }
                 }
                 .padding(.horizontal)
@@ -261,22 +264,22 @@ struct HomeView: View {
     }
 }
 
-fileprivate struct RateCell: View {
+fileprivate struct RateList: View {
     @EnvironmentObject var viewModel: HomeViewModel
-    private var selectedType: SplitType
+    @Binding var selectedType: SplitType
     var body: some View {
         switch selectedType {
         case .employment:
             ForEach(viewModel.employmentData.indices, id: \.self) { index in
-                
+                Text(viewModel.employmentData[index].name)
             }
         case .ontime:
             ForEach(viewModel.competitionData.indices, id: \.self) { index in
-                
+                Text(viewModel.competitionData[index].name)
             }
         case .Occasion:
             ForEach(viewModel.competitionData.indices, id: \.self) { index in
-                
+                Text(viewModel.competitionData[index].name)
             }
         }
     }

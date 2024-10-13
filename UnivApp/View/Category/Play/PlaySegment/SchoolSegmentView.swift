@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SchoolSegmentView: View {
-    @EnvironmentObject var viewModel: PlayViewModel
+    @StateObject var viewModel: PlayViewModel
     @StateObject var listViewModel: ListViewModel
     @FocusState private var isFocused: Bool
     
@@ -63,6 +63,5 @@ struct SchoolSegmentView: View {
 }
 
 #Preview {
-    SchoolSegmentView(listViewModel: ListViewModel(container: DIContainer(services: StubServices()), searchText: ""))
-        .environmentObject(PlayViewModel(container: DIContainer(services: StubServices())))
+    SchoolSegmentView(viewModel: PlayViewModel(container: DIContainer(services: StubServices())), listViewModel: ListViewModel(container: DIContainer(services: StubServices()), searchText: ""))
 }

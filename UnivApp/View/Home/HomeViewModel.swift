@@ -14,6 +14,8 @@ class HomeViewModel: ObservableObject {
     
     enum Action {
         case load
+        case employLoad
+        case competitionLoad
     }
     
     @Published var phase: Phase = .notRequested
@@ -40,6 +42,28 @@ class HomeViewModel: ObservableObject {
                     }
                 } receiveValue: { [weak self] topPlaceData in
                     self?.topPlaceData = topPlaceData
+                    self?.send(action: .employLoad)
+                }.store(in: &subscriptions)
+            
+        case .employLoad:
+            container.services.homeService.getTopEmployment()
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.phase = .fail
+                    }
+                } receiveValue: { [weak self] employData in
+                    self?.employmentData = employData
+                    self?.send(action: .competitionLoad)
+                }.store(in: &subscriptions)
+            
+        case .competitionLoad:
+            container.services.homeService.getTopCompetition()
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.phase = .fail
+                    }
+                } receiveValue: { [weak self] competData in
+                    self?.competitionData = competData
                     self?.phase = .success
                 }.store(in: &subscriptions)
         }

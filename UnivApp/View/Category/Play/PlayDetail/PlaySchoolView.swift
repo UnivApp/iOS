@@ -57,10 +57,16 @@ struct PlaySchoolView: View {
     var loadedView: some View {
         ScrollView(.vertical) {
             VStack(alignment: .leading, spacing: 30) {
-                Text("\(summaryModel.fullName ?? "")")
-                    .font(.system(size: 25, weight: .bold))
-                    .padding(.horizontal, 20)
-                    .multilineTextAlignment(.leading)
+                HStack {
+                    Text("\(summaryModel.fullName ?? "")")
+                        .font(.system(size: 25, weight: .bold))
+                        .foregroundColor(.black)
+                        .lineLimit(nil)
+                        .fixedSize(horizontal: false, vertical: true)
+                    
+                    Spacer()
+                }
+                .padding(.horizontal, 20)
                 
                 ForEach(viewModel.schoolPlaceData.indices, id: \.self) { index in
                     PlaySchoolCell(model: PlayDetailModel(object: viewModel.convertToObjects(from: viewModel.schoolPlaceData), placeDataArray: viewModel.schoolPlaceData, placeData: viewModel.schoolPlaceData[index]), index: index)

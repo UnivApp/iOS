@@ -7,8 +7,14 @@
 
 import Foundation
 struct CompetitionModel: Codable, Hashable {
+    var name: String
+    var logo: String
+    var competitionRateResponses: [HomeCompetitionRateResponses]?
+}
+
+struct HomeCompetitionRateResponses: Codable, Hashable {
     var earlyAdmissionRate: Double?
     var regularAdmissionRate: Double?
-    var year : String?
+    var year: String?
     var averageAdmissionRate: Double?
 }

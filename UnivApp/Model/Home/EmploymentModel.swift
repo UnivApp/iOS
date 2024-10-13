@@ -7,6 +7,12 @@
 
 import Foundation
 struct EmploymentModel: Codable, Hashable {
-    var employmentRate: Double?
+    var name: String
+    var logo: String
+    var employmentRateResponses: [HomeEmploymentRateResponses]?
+}
+
+struct HomeEmploymentRateResponses: Codable, Hashable {
     var year: String?
+    var employmentRate: Double?
 }
