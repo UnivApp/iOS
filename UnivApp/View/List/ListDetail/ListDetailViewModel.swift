@@ -17,6 +17,7 @@ class ListDetailViewModel: ObservableObject {
     
     @Published var phase: Phase = .notRequested
     @Published var listDetail: ListDetailModel = ListDetailModel()
+    @Published var tuitionFeeData: [ChartData] = []
     @Published var departmentData: [ChartData] = []
     @Published var competitionRateData: [[ChartData]] = []
     @Published var employmentRateData: [[ChartData]] = []
@@ -47,9 +48,18 @@ class ListDetailViewModel: ObservableObject {
     }
     
     func setChartData() {
-        if let departmentResponses = listDetail.departmentResponses,
+        if let tuitionResponses = listDetail.tuitionFeeResponse,
+           let departmentResponses = listDetail.departmentResponses,
            let competitionRateResponses = listDetail.competitionRateResponses,
            let employmentRateResponses = listDetail.employmentRateResponses {
+            
+            if let year = tuitionResponses.year,
+               let tuitionList = tuitionResponses.tuitionFeeResponseList {
+                for tuition in tuitionList {
+                    self.tuitionFeeData.append(ChartData(label: tuition.departmentType, value: Double(Double(tuition.feeAmount) / Double(12)), xLabel: "", yLabel: "", year: year))
+                }
+            }
+            
             for depart in departmentResponses {
                 if let depart = depart,
                    let name = depart.name,

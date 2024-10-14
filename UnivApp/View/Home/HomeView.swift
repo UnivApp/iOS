@@ -195,92 +195,9 @@ struct HomeView: View {
             
             //TODO: - 구글 애드몹
             
-            Group {
-                HStack {
-                    Group {
-                        Text("취업 ")
-                            .foregroundColor(.red.opacity(0.7))
-                        +
-                        Text("경쟁 ")
-                            .foregroundColor(.orange)
-                        +
-                        Text("률")
-                            .foregroundColor(.black)
-                    }
-                    .font(.system(size: 18, weight: .bold))
-                    
-                    Spacer()
-                    
-                    NavigationLink(destination: EmptyView()) {
-                        HStack(spacing: 5) {
-                            Text("더보기")
-                                .font(.system(size: 12, weight: .regular))
-                                .foregroundColor(.gray)
-                            
-                            Image("arrow")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 15, height: 15)
-                        }
-                    }
-                }
-            }.padding(.horizontal, 20)
-            VStack {
-                HStack(spacing: 10) {
-                    ForEach(SplitType.allCases, id: \.self) { item in
-                        Button(action: {
-                            selectedSegment = item
-                        }) {
-                            Text(item.title)
-                                .font(.system(size: 15, weight: .bold))
-                                .foregroundColor(selectedSegment == item ? .black : .gray)
-                                .padding()
-                                .background(
-                                    RoundedRectangle(cornerRadius: 15)
-                                        .fill(selectedSegment == item ? Color.yellow : Color.clear)
-                                        .frame(height: 40))
-                                .cornerRadius(15)
-                        }
-                    }
-                }
-                .padding()
-                
-                Group {
-                    switch selectedSegment {
-                    case .employment:
-                        RateList(selectedType: $selectedSegment)
-                            .environmentObject(self.viewModel)
-                    case .Occasion:
-                        RateList(selectedType: $selectedSegment)
-                            .environmentObject(self.viewModel)
-                    case .ontime:
-                        RateList(selectedType: $selectedSegment)
-                            .environmentObject(self.viewModel)
-                    }
-                }
-                .padding(.horizontal)
-            }
-        }
-    }
-}
-
-fileprivate struct RateList: View {
-    @EnvironmentObject var viewModel: HomeViewModel
-    @Binding var selectedType: SplitType
-    var body: some View {
-        switch selectedType {
-        case .employment:
-            ForEach(viewModel.employmentData.indices, id: \.self) { index in
-                Text(viewModel.employmentData[index].name)
-            }
-        case .ontime:
-            ForEach(viewModel.competitionData.indices, id: \.self) { index in
-                Text(viewModel.competitionData[index].name)
-            }
-        case .Occasion:
-            ForEach(viewModel.competitionData.indices, id: \.self) { index in
-                Text(viewModel.competitionData[index].name)
-            }
+            
+            RateView(rateViewModel: RateViewModel(container: .init(services: Services())), selectedSegment: $selectedSegment)
+                .environmentObject(self.viewModel)
         }
     }
 }

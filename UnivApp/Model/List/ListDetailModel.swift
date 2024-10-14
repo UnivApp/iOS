@@ -17,9 +17,20 @@ struct ListDetailModel: Hashable, Codable {
     var website: String?
     var admissionSite: String?
     var starNum: Int?
+    var tuitionFeeResponse: TuitionFeeResponse?
     var departmentResponses: [DepartmentResponses?]?
     var competitionRateResponses: [CompetitionRateResponses?]?
     var employmentRateResponses: [EmploymentRateResponses?]?
+}
+
+struct TuitionFeeResponse: Codable, Hashable {
+    var year: String?
+    var tuitionFeeResponseList: [TuitionFeeResponseList]?
+    
+    struct TuitionFeeResponseList: Codable, Hashable {
+        var departmentType: String
+        var feeAmount: Double
+    }
 }
 
 struct DepartmentResponses: Hashable, Codable {

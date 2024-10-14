@@ -60,16 +60,9 @@ struct ListDetailView: View {
                         }
                         .padding(.leading, 20)
                         
-                        BarChartView(title: "계열별등록금", description: "출처: 대학어디가 - 2024년도" , dataPoints: [
-                            ChartData(label: "인문", value: 673, xLabel: "과", yLabel: "만원", year: "2024"),
-                            ChartData(label: "자연", value: 796, xLabel: "과", yLabel: "만원", year: "2024"),
-                            ChartData(label: "공학", value: 898, xLabel: "과", yLabel: "만원", year: "2024"),
-                            ChartData(label: "의학", value: 1000, xLabel: "과", yLabel: "만원", year: "2024"),
-                            ChartData(label: "예체", value: 901, xLabel: "과", yLabel: "만원", year: "2024"),
-                            ChartData(label: "평균", value: 817, xLabel: "과", yLabel: "만원", year: "2024")
-                        ])
+                        BarChartView(title: "계열별등록금", description: "출처: 대학어디가 - 2024년도" , dataPoints: viewModel.tuitionFeeData)
                         .padding(.horizontal, 30)
-                        //TODO: - 데이터 변경 필요
+                        
                         CircleChartView(title: "학과 정보", description: "대학어디가 - 정보제공", dataPoints: viewModel.departmentData)
                             .padding(.horizontal, 30)
                         
