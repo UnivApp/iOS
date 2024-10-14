@@ -198,6 +198,7 @@ struct HomeView: View {
             
             RateView(rateViewModel: RateViewModel(container: .init(services: Services())), selectedSegment: $selectedSegment)
                 .environmentObject(self.viewModel)
+                .padding(.bottom, 30)
         }
     }
 }

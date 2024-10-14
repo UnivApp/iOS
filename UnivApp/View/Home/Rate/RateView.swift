@@ -13,7 +13,7 @@ struct RateView: View {
     @StateObject var rateViewModel: RateViewModel
     @Binding var selectedSegment: SplitType
     var body: some View {
-        VStack {
+        VStack(spacing: 10) {
             HStack {
                 Group {
                     Text("취업 ")
@@ -29,10 +29,10 @@ struct RateView: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: EmptyView()) {
+                NavigationLink(destination: RateDetailView(viewModel: RateDetailViewModel(container: .init(services: Services())), listViewModel: ListViewModel(container: .init(services: Services()), searchText: ""))) {
                     HStack(spacing: 5) {
                         Text("더보기")
-                            .font(.system(size: 12, weight: .regular))
+                            .font(.system(size: 12, weight: .semibold))
                             .foregroundColor(.gray)
                         
                         Image("arrow")
@@ -42,43 +42,44 @@ struct RateView: View {
                     }
                 }
             }
-        }.padding(.horizontal, 20)
-        
-        VStack {
-            HStack(spacing: 10) {
-                ForEach(SplitType.allCases, id: \.self) { item in
-                    Button(action: {
-                        selectedSegment = item
-                    }) {
-                        Text(item.title)
-                            .font(.system(size: 15, weight: .bold))
-                            .foregroundColor(selectedSegment == item ? .black : .gray)
-                            .padding()
-                            .background(
-                                RoundedRectangle(cornerRadius: 15)
-                                    .fill(selectedSegment == item ? Color.yellow : Color.clear)
-                                    .frame(height: 40))
-                            .cornerRadius(15)
+            
+            VStack {
+                HStack(spacing: 10) {
+                    ForEach(SplitType.allCases, id: \.self) { item in
+                        Button(action: {
+                            selectedSegment = item
+                        }) {
+                            Text(item.title)
+                                .font(.system(size: 15, weight: .bold))
+                                .foregroundColor(selectedSegment == item ? .black : .gray)
+                                .padding()
+                                .background(
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .fill(selectedSegment == item ? Color.yellow : Color.backGray)
+                                        .frame(height: 40))
+                                .cornerRadius(15)
+                        }
                     }
                 }
-            }
-            .padding()
-            
-            Group {
-                switch selectedSegment {
-                case .employment:
-                    RateList(selectedType: $selectedSegment)
-                        .environmentObject(self.rateViewModel)
-                case .Occasion:
-                    RateList(selectedType: $selectedSegment)
-                        .environmentObject(self.rateViewModel)
-                case .ontime:
-                    RateList(selectedType: $selectedSegment)
-                        .environmentObject(self.rateViewModel)
+                .padding()
+                
+                Group {
+                    switch selectedSegment {
+                    case .employment:
+                        RateList(selectedType: $selectedSegment)
+                            .environmentObject(self.rateViewModel)
+                    case .Occasion:
+                        RateList(selectedType: $selectedSegment)
+                            .environmentObject(self.rateViewModel)
+                    case .ontime:
+                        RateList(selectedType: $selectedSegment)
+                            .environmentObject(self.rateViewModel)
+                    }
                 }
+                .padding(.horizontal)
             }
-            .padding(.horizontal)
         }
+        .padding(.horizontal, 20)
     }
 }
 
@@ -90,15 +91,21 @@ fileprivate struct RateList: View {
         switch selectedType {
         case .employment:
             ForEach(viewModel.employmentData.indices, id: \.self) { index in
-                RateCell(employModel: viewModel.employmentData[index], selectedType: $selectedType)
+                VStack(spacing: 5) {
+                    RateCell(employModel: viewModel.employmentData[index], selectedType: $selectedType)
+                }
             }
         case .ontime:
             ForEach(viewModel.competitionData.indices, id: \.self) { index in
-                RateCell(competitionModel: viewModel.competitionData[index], selectedType: $selectedType)
+                VStack(spacing: 5) {
+                    RateCell(competitionModel: viewModel.competitionData[index], selectedType: $selectedType)
+                }
             }
         case .Occasion:
             ForEach(viewModel.competitionData.indices, id: \.self) { index in
-                RateCell(competitionModel: viewModel.competitionData[index], selectedType: $selectedType)
+                VStack(spacing: 5) {
+                    RateCell(competitionModel: viewModel.competitionData[index], selectedType: $selectedType)
+                }
             }
         }
     }
@@ -110,77 +117,89 @@ fileprivate struct RateCell: View {
     @Binding var selectedType: SplitType
     
     var body: some View {
-        HStack(spacing: 40) {
+        HStack {
             if let employModel = employModel,
-               let imageUrl = URL(string: employModel.logo),
+               let imageUrl = URL(string: employModel.logo ?? ""),
                let rates = employModel.employmentRateResponses {
-                KFImage(imageUrl)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 45, height: 45)
-                
-                Text(employModel.name)
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundColor(Color.black)
-                    .multilineTextAlignment(.center)
-                
-                ForEach(rates.indices, id: \.self) { index in
-                    HStack {
+                VStack(spacing: 5) {
+                    KFImage(imageUrl)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 40, height: 40)
+                    
+                    Text(employModel.name ?? "")
+                        .font(.system(size: 10, weight: .semibold))
+                        .foregroundColor(Color.black)
+                        .multilineTextAlignment(.center)
+                }
+                .frame(width: 60)
+                Spacer()
+                HStack(spacing: 30) {
+                    ForEach(rates.indices, id: \.self) { index in
                         VStack(spacing: 5) {
-                            Text(String(format: "%.2f", rates[index].employmentRate ?? 0))
-                                .font(.system(size: 12, weight: .bold))
-                            Text("\(rates[index].year ?? "")")
-                                .font(.system(size: 10, weight: .semibold))
+                            Text(String(format: "%.1f", rates[index].employmentRate ?? 0))
+                                .font(.system(size: 13, weight: .bold))
+                                .foregroundColor(Color.black)
+                            
+                            Text("\(rates[index].year ?? "")년")
+                                .font(.system(size: 11, weight: .semibold))
+                                .foregroundColor(Color.gray)
                         }
+                        .multilineTextAlignment(.center)
                     }
-                    .foregroundColor(Color.black)
-                    .multilineTextAlignment(.center)
                 }
             }
             
             if let competitionModel = competitionModel,
-               let imageUrl = URL(string: competitionModel.logo),
+               let imageUrl = URL(string: competitionModel.logo ?? ""),
                let rates = competitionModel.competitionRateResponses {
-                KFImage(imageUrl)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 45, height: 45)
-                
-                Text(competitionModel.name)
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundColor(Color.black)
-                    .multilineTextAlignment(.center)
-                
-                if self.selectedType == .Occasion {
-                    ForEach(rates.indices, id: \.self) { index in
-                        HStack {
-                            VStack(spacing: 5) {
-                                Text(String(format: "%.2f", rates[index].earlyAdmissionRate ?? 0))
-                                    .font(.system(size: 12, weight: .bold))
-                                Text("\(rates[index].year ?? "")")
-                                    .font(.system(size: 10, weight: .semibold))
-                            }
-                        }
+                VStack(spacing: 5) {
+                    KFImage(imageUrl)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 40, height: 40)
+                    
+                    Text(competitionModel.name ?? "")
+                        .font(.system(size: 10, weight: .semibold))
                         .foregroundColor(Color.black)
                         .multilineTextAlignment(.center)
+                }
+                .frame(width: 60)
+                Spacer()
+                if self.selectedType == .Occasion {
+                    HStack(spacing: 30) {
+                        ForEach(rates.indices, id: \.self) { index in
+                            VStack(spacing: 5) {
+                                Text(String(format: "%.1f", rates[index].earlyAdmissionRate ?? 0))
+                                    .font(.system(size: 13, weight: .bold))
+                                    .foregroundColor(Color.black)
+                                
+                                Text("\(rates[index].year ?? "")년")
+                                    .font(.system(size: 11, weight: .semibold))
+                                    .foregroundColor(Color.gray)
+                            }
+                            .multilineTextAlignment(.center)
+                        }
                     }
                 } else if self.selectedType == .ontime {
-                    ForEach(rates.indices, id: \.self) { index in
-                        HStack {
+                    HStack(spacing: 30) {
+                        ForEach(rates.indices, id: \.self) { index in
                             VStack(spacing: 5) {
-                                Text(String(format: "%.2f", rates[index].regularAdmissionRate ?? 0))
-                                    .font(.system(size: 12, weight: .bold))
-                                Text("\(rates[index].year ?? "")")
-                                    .font(.system(size: 10, weight: .semibold))
+                                Text(String(format: "%.1f", rates[index].regularAdmissionRate ?? 0))
+                                    .font(.system(size: 13, weight: .bold))
+                                    .foregroundColor(Color.black)
+                                
+                                Text("\(rates[index].year ?? "")년")
+                                    .font(.system(size: 11, weight: .semibold))
+                                    .foregroundColor(Color.gray)
                             }
+                            .multilineTextAlignment(.center)
                         }
-                        .foregroundColor(Color.black)
-                        .multilineTextAlignment(.center)
                     }
                 }
             }
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 10)
     }
 }
 

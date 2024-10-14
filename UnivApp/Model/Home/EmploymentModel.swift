@@ -7,8 +7,8 @@
 
 import Foundation
 struct EmploymentModel: Codable, Hashable {
-    var name: String
-    var logo: String
+    var name: String?
+    var logo: String?
     var employmentRateResponses: [HomeEmploymentRateResponses]?
 }
 
