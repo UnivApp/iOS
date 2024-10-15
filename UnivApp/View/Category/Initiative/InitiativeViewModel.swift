@@ -58,25 +58,18 @@ class InitiativeViewModel: ObservableObject {
         for index in rankingData.indices {
             switch rankingData[index].displayName {
             case "QS":
-                self.QSData = []
                 self.QSData.append(rankingData[index])
             case "CWUR":
-                self.CWURData = []
                 self.CWURData.append(rankingData[index])
             case "ARWU":
-                self.ARWUData = []
                 self.ARWUData.append(rankingData[index])
             case "USN & WR":
-                self.USNWRData = []
                 self.USNWRData.append(rankingData[index])
             case "Nature Index":
-                self.NatureIndexData = []
                 self.NatureIndexData.append(rankingData[index])
             case "CWTS":
-                self.CWTSData = []
                 self.CWTSData.append(rankingData[index])
             case "THE":
-                self.TheData = []
                 self.TheData.append(rankingData[index])
             default:
                 break

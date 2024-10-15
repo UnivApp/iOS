@@ -227,7 +227,9 @@ fileprivate struct FoodSelectedPopupView: View {
                 HStack {
                     Spacer()
                     Button {
-                        self.isPresented = false
+                        withAnimation {
+                            self.isPresented = false
+                        }
                     } label: {
                         Image(systemName: "xmark.circle.fill")
                             .resizable()

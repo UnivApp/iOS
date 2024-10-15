@@ -23,6 +23,7 @@ protocol ServicesType {
     var foodService: FoodServiceType { get set }
     var infoService: InfoServiceType { get set }
     var rateService: RateServiceType { get set }
+    var mouService: MouServiceType { get set }
 }
 
 class Services: ServicesType {
@@ -36,6 +37,7 @@ class Services: ServicesType {
     var foodService: FoodServiceType
     var infoService: InfoServiceType
     var rateService: RateServiceType
+    var mouService: MouServiceType
     
     init() {
         self.authService = AuthService()
@@ -48,6 +50,7 @@ class Services: ServicesType {
         self.foodService = FoodService()
         self.infoService = InfoService()
         self.rateService = RateService()
+        self.mouService = MouService()
     }
     
 }
@@ -63,4 +66,5 @@ class StubServices: ServicesType {
     var foodService: FoodServiceType = StubFoodService()
     var infoService: InfoServiceType = StubInfoService()
     var rateService: RateServiceType = StubRateService()
+    var mouService: MouServiceType = StubMouService()
 }

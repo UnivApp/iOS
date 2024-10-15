@@ -124,6 +124,7 @@ struct HomeView: View {
                     .focused($isFocused)
                     .font(.system(size: 15, weight: .regular))
                     .padding()
+                    .submitLabel(.search)
                     .onSubmit {
                         listViewModel.send(action: .search)
                         listViewModel.searchText = ""

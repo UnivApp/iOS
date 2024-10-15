@@ -28,6 +28,9 @@ enum APIEndpoint {
     case schoolFood
     case topFood
     case news
+    case expo
+    case searchExpo
+    case statusExpo
     //MARK: - Home
     case topEmployment
     case topCompetition
@@ -72,6 +75,12 @@ enum APIEndpoint {
             return "http://43.200.143.28:8080/api/restaurants/top"
         case .news:
             return "http://43.200.143.28:8080/api/news"
+        case .expo:
+            return "http://43.200.143.28:8080/api/expo"
+        case .searchExpo:
+            return "http://43.200.143.28:8080/api/expo/search?keyword="
+        case .statusExpo:
+            return "http://43.200.143.28:8080/api/expo/status?status="
             
         case .topEmployment:
             return "http://43.200.143.28:8080/api/employment-rate/top-5"

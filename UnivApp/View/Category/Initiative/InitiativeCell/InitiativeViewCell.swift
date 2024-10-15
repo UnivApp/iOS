@@ -15,9 +15,12 @@ struct InitiativeViewCell: View {
         VStack(alignment: .center) {
             HStack(spacing: 40) {
                 if let rankingResponses = model.universityRankingResponses.first {
-                    Text("\(rankingResponses.rank) 위")
-                        .font(.system(size: 15, weight: .heavy))
-                        .foregroundColor(Color.blue)
+                    Text("\(rankingResponses.rank)")
+                        .font(.system(size: 13, weight: .bold))
+                        .foregroundColor(Color.white)
+                        .padding(5)
+                        .background(Circle().fill(.orange))
+                        .multilineTextAlignment(.center)
                     
                     Group {
                         if let image = rankingResponses.logo {

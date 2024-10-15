@@ -8,13 +8,13 @@
 import Foundation
 
 struct MouModel: Codable, Hashable {
+    var expoId: Int
     var title: String
-    var link: String?
-    var year: String
     var category: String
-    var schoolName: String
-    var date: String
+    var expoYear: String
+    var status: String
+    var link: String?
     var location: String
-    var receipt: String
-    var description: String
+    var content: String
+    var date: String
 }

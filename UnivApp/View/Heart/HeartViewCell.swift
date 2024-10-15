@@ -10,7 +10,6 @@ import Kingfisher
 
 struct HeartViewCell: View {
     var model: SummaryModel
-    var destination: ListCellDestination?
     
     @State private var heartTapped: Bool = false
     @StateObject var heartViewModel: HeartViewModel
