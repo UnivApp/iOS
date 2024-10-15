@@ -79,7 +79,7 @@ struct RateDetailView: View {
                         }
                     }
                 }
-                .padding()
+                .padding(.top, -10)
                 
                 ScrollView(.vertical) {
                     Group {
@@ -114,6 +114,7 @@ fileprivate struct RateDetailViewList: View {
             VStack(spacing: 30) {
                 RateDetailViewCell(summaryModel: listViewModel.summaryArray[index], selectedType: $selectedType, index: index)
                     .environmentObject(viewModel)
+                    .environmentObject(listViewModel)
             }
         }
     }
@@ -121,10 +122,10 @@ fileprivate struct RateDetailViewList: View {
 
 fileprivate struct RateDetailViewCell: View {
     @EnvironmentObject var viewModel: RateDetailViewModel
+    @EnvironmentObject var listViewModel: ListViewModel
     var summaryModel: SummaryModel
     
     @Binding var selectedType: SplitType
-    @State var showRate: Bool = false
     var index: Int
     
     var body: some View {
@@ -148,7 +149,7 @@ fileprivate struct RateDetailViewCell: View {
                     
                     Spacer()
                     Button {
-                        self.showRate.toggle()
+                        toggleRate(for: index)
                     } label: {
                         HStack(spacing: 10) {
                             switch selectedType {
@@ -166,7 +167,7 @@ fileprivate struct RateDetailViewCell: View {
                                     .font(.system(size: 12, weight: .bold))
                                     .foregroundColor(.black)
                             }
-                            Image(self.showRate ? "arrow_down" : "arrow_fill")
+                            Image(listViewModel.showRateArray[index] ? "arrow_down" : "arrow_fill")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 10, height: 10)
@@ -174,7 +175,7 @@ fileprivate struct RateDetailViewCell: View {
                     }
                 }
             }
-            if showRate {
+            if listViewModel.showRateArray[index] {
                 switch selectedType {
                 case .employment:
                     RateDetailCell(employModel: viewModel.employmentData, selectedType: $selectedType)
@@ -193,10 +194,22 @@ fileprivate struct RateDetailViewCell: View {
                         }
                 }
             }
-            Divider()
         }
         .padding(.horizontal, 30)
+        .padding(.vertical, 10)
     }
+    
+    private func toggleRate(for index: Int) {
+        if listViewModel.showRateArray[index] {
+            listViewModel.showRateArray[index] = false
+        } else {
+            for i in 0..<listViewModel.showRateArray.count {
+                listViewModel.showRateArray[i] = false
+            }
+            listViewModel.showRateArray[index] = true
+        }
+    }
+
 }
 
 fileprivate struct RateDetailCell: View {

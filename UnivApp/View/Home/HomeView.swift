@@ -124,6 +124,14 @@ struct HomeView: View {
                     .focused($isFocused)
                     .font(.system(size: 15, weight: .regular))
                     .padding()
+                    .onSubmit {
+                        listViewModel.send(action: .search)
+                        listViewModel.searchText = ""
+                        isFocused = false
+                        withAnimation {
+                            isShowingPopup = true
+                        }
+                    }
             }
             .padding(.horizontal, 10)
             .background(Color.white)

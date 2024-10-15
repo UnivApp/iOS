@@ -56,7 +56,6 @@ class ListDetailViewModel: ObservableObject {
             if let year = tuitionResponses.year,
                let tuitionList = tuitionResponses.tuitionFeeResponseList {
                 for tuition in tuitionList {
-                    self.tuitionFeeData = []
                     self.tuitionFeeData.append(ChartData(label: tuition.departmentType, value: Double(Double(tuition.feeAmount) / Double(12)), xLabel: "", yLabel: "", year: year))
                 }
             }
@@ -69,7 +68,6 @@ class ListDetailViewModel: ObservableObject {
                     for n in departmentResponses.compactMap({ $0?.name }) {
                         sum += n.count
                     }
-                    self.departmentData = []
                     self.departmentData.append(ChartData(label: type, value: Double(Double(name.count) / Double(sum)), xLabel: "과", yLabel: "", year: ""))
                 }
             }
@@ -79,7 +77,6 @@ class ListDetailViewModel: ObservableObject {
                    let earlyAdmissionRate = competition.earlyAdmissionRate,
                    let regularAdmissionRate = competition.regularAdmissionRate,
                    let year = competition.year {
-                    self.competitionRateData = []
                     self.competitionRateData.append([ChartData(label: "수시", value: Double(earlyAdmissionRate), xLabel: "년도", yLabel: "비율", year: year), ChartData(label: "정시", value: Double(regularAdmissionRate), xLabel: "년도", yLabel: "비율", year: year)])
                 }
             }
@@ -88,7 +85,6 @@ class ListDetailViewModel: ObservableObject {
                 if let employment = employment,
                    let employmentRate = employment.employmentRate,
                    let year = employment.year {
-                    self.employmentRateData = []
                     self.employmentRateData.append([ChartData(label: "취업률", value: Double(employmentRate), xLabel: "년도", yLabel: "비율", year: year)])
                 }
             }

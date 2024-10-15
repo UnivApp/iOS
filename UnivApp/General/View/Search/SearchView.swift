@@ -31,6 +31,11 @@ struct SearchView: View {
                     .focused($isFocused)
                     .font(.system(size: 15, weight: .regular))
                     .padding()
+                    .onSubmit {
+                        listViewModel.send(action: .search)
+                        listViewModel.searchText = ""
+                        isFocused = false
+                    }
             }
             .padding(.horizontal, 10)
             .background(Color.white)
