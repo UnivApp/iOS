@@ -472,7 +472,7 @@
 				E49C9FC42C86EFD1001F43A3 /* Money */,
 				E49C9FC32C86EFC9001F43A3 /* Initiative */,
 				E49C9FC22C86EFC2001F43A3 /* Info */,
-				E49C9FC12C86EFBA001F43A3 /* Graduate */,
+				E49C9FC12C86EFBA001F43A3 /* Diagnosis */,
 				E49C9FC02C86EFB4001F43A3 /* Food */,
 				E49C9FBF2C86EFAA001F43A3 /* Event */,
 			);
@@ -503,14 +503,14 @@
 			path = Food;
 			sourceTree = "<group>";
 		};
-		E49C9FC12C86EFBA001F43A3 /* Graduate */ = {
+		E49C9FC12C86EFBA001F43A3 /* Diagnosis */ = {
 			isa = PBXGroup;
 			children = (
 				E49C9FB32C86ED41001F43A3 /* GraduateView.swift */,
 				E49C9FE92C87057A001F43A3 /* GraduateViewModel.swift */,
 				E4953D4D2C89D6E3008CBDE5 /* GraduateDetailView.swift */,
 			);
-			path = Graduate;
+			path = Diagnosis;
 			sourceTree = "<group>";
 		};
 		E49C9FC22C86EFC2001F43A3 /* Info */ = {
