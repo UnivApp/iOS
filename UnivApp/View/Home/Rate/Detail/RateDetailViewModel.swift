@@ -31,6 +31,7 @@ class RateDetailViewModel: ObservableObject {
         switch action {
         case let .employLoad(id):
             self.phase = .loading
+            self.employmentData = .init()
             container.services.rateService.getEmployRate(universityId: id)
                 .sink { [weak self] completion in
                     if case .failure = completion {
@@ -41,6 +42,7 @@ class RateDetailViewModel: ObservableObject {
                     self?.phase = .success
                 }.store(in: &subscriptions)
         case let .competitionLoad(id):
+            self.competitionData = .init()
             container.services.rateService.getCompetitionRate(universityId: id)
                 .sink { [weak self] completion in
                     if case .failure = completion {

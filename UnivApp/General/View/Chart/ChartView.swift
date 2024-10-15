@@ -12,7 +12,7 @@ struct BarChartView: View {
     var title: String
     var description: String
     var dataPoints: [ChartData]
-    var color: [Color] = [.red, .orange, .green, .yellow, .blue, .gray]
+    var color: [Color] = [.red.opacity(0.7), .orange.opacity(0.7), .green.opacity(0.7), .yellow.opacity(0.7), .blue.opacity(0.7), .gray.opacity(0.7)]
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -72,7 +72,7 @@ struct CircleChartView: View {
     var title: String
     var description: String
     var dataPoints: [ChartData]
-    var color: [Color] = [.red, .orange, .green, .yellow, .blue, .gray]
+    var color: [Color] = [.red.opacity(0.7), .orange.opacity(0.7), .green.opacity(0.7), .yellow.opacity(0.7), .blue.opacity(0.7), .gray.opacity(0.7)]
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(title)

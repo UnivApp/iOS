@@ -18,24 +18,6 @@ struct MouView: View {
         contentView
             .navigationBarBackButtonHidden(true)
             .toolbar(.hidden, for: .tabBar)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    HStack(spacing: 0) {
-                        Button(action: {
-                            dismiss()
-                        }, label: {
-                            Image("blackback")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 20, height: 20)
-                        })
-                        Image("mou_navi")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 120, height: 60)
-                    }
-                }
-            }
     }
     
     @ViewBuilder
@@ -47,7 +29,7 @@ struct MouView: View {
                     viewModel.send(action: .load)
                 }
         case .loading:
-            LoadingView(url: "", size: [150,150])
+            LoadingView(url: "congratulations", size: [150,150])
         case .success:
             loadedView
                 .alert(isPresented: $viewModel.textPhase) {
@@ -119,6 +101,24 @@ struct MouView: View {
                 }
                 .refreshable {
                     viewModel.send(action: .load)
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    HStack(spacing: 0) {
+                        Button(action: {
+                            dismiss()
+                        }, label: {
+                            Image("blackback")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20, height: 20)
+                        })
+                        Image("mou_navi")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 120, height: 60)
+                    }
                 }
             }
         }
