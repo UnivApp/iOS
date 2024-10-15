@@ -23,19 +23,19 @@ enum ListDetailType: String, CaseIterable {
         case .play:
             return "핫플"
         case .mou:
-            return "협약"
+            return "대학연계"
         case .money:
-            return "평균월세"
+            return "월세"
         case .initiative:
-            return "순위"
+            return "랭킹"
         case .info:
-            return "기사"
+            return "대입기사"
         case .graduate:
             return "졸업자"
         case .food:
             return "맛집"
         case .event:
-            return "행사"
+            return "대학행사"
         }
     }
     
@@ -86,7 +86,7 @@ enum ListDetailType: String, CaseIterable {
         case .event:
             return AnyView(EventView(viewModel: EventViewModel(searchText: .init(), container: .init(services: Services()))))
         case .food:
-            return AnyView(FoodView(viewModel: FoodViewModel(searchText: .init(), container: .init(services: Services()))))
+            return AnyView(FoodView(viewModel: FoodViewModel(container: .init(services: Services()))))
         case .graduate:
             return AnyView(GraduateView(viewModel: GraduateViewModel(searchText: .init(), container: .init(services: Services()))))
         case .info:
@@ -98,7 +98,7 @@ enum ListDetailType: String, CaseIterable {
         case .mou:
             return AnyView(MouView(viewModel: MouViewModel(container: .init(services: Services()))))
         case .play:
-            return AnyView(PlayView(viewModel: PlayViewModel(container: .init(services: Services()), searchText: .init())))
+            return AnyView(PlayView(viewModel: PlayViewModel(container: .init(services: Services()))))
         }
     }
 }

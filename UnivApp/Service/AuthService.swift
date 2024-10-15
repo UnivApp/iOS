@@ -129,10 +129,10 @@ extension AuthService {
                 case .finished:
                     print("로그인 성공")
                 case let .failure(error):
-                    print("로그인 실패")
+                    print("로그인 실패 \(error)")
                 }
             } receiveValue: { [weak self] (user: UserModel) in
-                guard let self = self else { return }
+                guard self != nil else { return }
                 completion(.success(user))
             }.store(in: &subscriptions)
     }

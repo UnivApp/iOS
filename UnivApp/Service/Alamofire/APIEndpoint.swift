@@ -8,21 +8,34 @@
 import Foundation
 
 enum APIEndpoint {
+    //MARK: - Auth
     case status
     case login
     case logout
     case refresh
     case withdraw
-    
+    //MARK: - List
     case summary
     case listDetail
-    case banners
-    case scoreImage
     case search
     case addHeart
     case removeHeart
     case heartList
-    
+    //MARK: - Category
+    case topPlace
+    case schoolPlace
+    case ranking
+    case schoolFood
+    case topFood
+    case news
+    case expo
+    case searchExpo
+    case statusExpo
+    //MARK: - Home
+    case topEmployment
+    case topCompetition
+    case employment
+    case competition
     
     var urlString: String {
         switch self {
@@ -41,10 +54,6 @@ enum APIEndpoint {
             return "http://43.200.143.28:8080/api/universities/summary"
         case .listDetail:
             return "http://43.200.143.28:8080/api/universities/details/"
-        case .banners:
-            return "http://43.200.143.28:8080/api/banners"
-        case .scoreImage:
-            return "http://43.200.143.28:8080/api/entrance-score-images"
         case .search:
             return "http://43.200.143.28:8080/api/universities/search?keyword="
         case .addHeart:
@@ -53,6 +62,34 @@ enum APIEndpoint {
             return "http://43.200.143.28:8080/api/stars/remove?universityId="
         case .heartList:
             return "http://43.200.143.28:8080/api/stars/list"
+            
+        case .topPlace:
+            return "http://43.200.143.28:8080/api/activities/top-place"
+        case .schoolPlace:
+            return "http://43.200.143.28:8080/api/activities?universityId="
+        case .ranking:
+            return "http://43.200.143.28:8080/api/rankings"
+        case .schoolFood:
+            return "http://43.200.143.28:8080/api/restaurants?universityId="
+        case .topFood:
+            return "http://43.200.143.28:8080/api/restaurants/top"
+        case .news:
+            return "http://43.200.143.28:8080/api/news"
+        case .expo:
+            return "http://43.200.143.28:8080/api/expo"
+        case .searchExpo:
+            return "http://43.200.143.28:8080/api/expo/search?keyword="
+        case .statusExpo:
+            return "http://43.200.143.28:8080/api/expo/status?status="
+            
+        case .topEmployment:
+            return "http://43.200.143.28:8080/api/employment-rate/top-5"
+        case .topCompetition:
+            return "http://43.200.143.28:8080/api/competition-rate/top-5"
+        case .employment:
+            return "http://43.200.143.28:8080/api/employment-rate?universityId="
+        case .competition:
+            return "http://43.200.143.28:8080/api/competition-rate?universityId="
         }
     }
 }

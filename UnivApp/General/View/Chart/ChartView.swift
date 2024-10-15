@@ -12,7 +12,7 @@ struct BarChartView: View {
     var title: String
     var description: String
     var dataPoints: [ChartData]
-    var color: [Color] = [.red, .orange, .green, .yellow, .blue, .gray]
+    var color: [Color] = [.red.opacity(0.7), .orange.opacity(0.7), .green.opacity(0.7), .yellow.opacity(0.7), .blue.opacity(0.7), .gray.opacity(0.7)]
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -22,6 +22,9 @@ struct BarChartView: View {
                 .padding(.vertical, 20)
             
             HStack {
+                Text((dataPoints.compactMap { $0.year }).first ?? "")
+                    .font(.system(size: 10, weight: .regular))
+                    .foregroundColor(.gray)
                 Spacer()
                 Text(description)
                     .font(.system(size: 10, weight: .regular))
@@ -40,9 +43,16 @@ struct BarChartView: View {
                     .opacity(0.9)
                     .foregroundStyle(color[index % color.count])
                     .annotation(position: .overlay) {
-                        Text("\(Int(point.value))만원")
-                            .font(.system(size: 10, weight: .bold))
-                            .foregroundColor(.white)
+                        if title == "계열별등록금" {
+                            Text(String(format: "%.0f만원", point.value))
+                                .font(.system(size: 10, weight: .bold))
+                                .foregroundColor(.white)
+                                .multilineTextAlignment(.center)
+                        } else {
+                            Text(String(format: "%.1f", point.value))
+                                .font(.system(size: 10, weight: .bold))
+                                .foregroundColor(.white)
+                        }
                     }
                 }
             }
@@ -62,7 +72,7 @@ struct CircleChartView: View {
     var title: String
     var description: String
     var dataPoints: [ChartData]
-    var color: [Color] = [.red, .orange, .green, .yellow, .blue, .gray]
+    var color: [Color] = [.red.opacity(0.7), .orange.opacity(0.7), .green.opacity(0.7), .yellow.opacity(0.7), .blue.opacity(0.7), .gray.opacity(0.7)]
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(title)
@@ -88,6 +98,11 @@ struct CircleChartView: View {
                             angularInset: 1.5
                         )
                         .foregroundStyle(color[index % color.count])
+                        .annotation(position: .overlay) {
+                            Text(String(format: "%.1f", point.value))
+                                .font(.system(size: 10, weight: .bold))
+                                .foregroundColor(.white)
+                        }
                     }
                 }
                 .chartYAxis{}
@@ -116,14 +131,4 @@ struct CircleChartView: View {
         .background(Color.homeColor)
         .cornerRadius(15)
     }
-}
-
-#Preview {
-    CircleChartView(title: "계열별등록금", description: "출처: 대학어디가 - 2024년도", dataPoints: [
-        ChartData(label: "인문사회계열", value: 673, xLabel: "과", yLabel: "만원"),
-        ChartData(label: "자연과학계열", value: 796, xLabel: "과", yLabel: "만원"),
-        ChartData(label: "공학계열", value: 898, xLabel: "과", yLabel: "만원"),
-        ChartData(label: "의학", value: 1000, xLabel: "과", yLabel: "만원"),
-        ChartData(label: "예체계열", value: 901, xLabel: "과", yLabel: "만원")
-    ])
 }

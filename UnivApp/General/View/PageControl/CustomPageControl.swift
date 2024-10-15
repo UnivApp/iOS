@@ -18,7 +18,7 @@ struct CustomPageControl: View {
                 Text(" \(currentPage + 1) ")
                     .foregroundColor(.white)
                 +
-                Text("/ \(numberOfPages) +")
+                Text("/ \(numberOfPages) ")
                     .foregroundColor(.borderGray)
             }
             .font(.system(size: 12, weight: .bold))

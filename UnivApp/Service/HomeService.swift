@@ -9,57 +9,57 @@ import Foundation
 import Combine
 
 protocol HomeServiceType {
-    func getBanners() -> AnyPublisher<[BannerModel], Error>
-    func getScoreImage() -> AnyPublisher<ScoreImageModel, Error>
+    func getTopEmployment() -> AnyPublisher<[EmploymentModel], Error>
+    func getTopCompetition() -> AnyPublisher<[CompetitionModel], Error>
 }
 
 class HomeService: HomeServiceType {
     private var subscriptions = Set<AnyCancellable>()
     
-    func getBanners() -> AnyPublisher<[BannerModel], any Error> {
-        Future<[BannerModel], Error> { promise in
-            Alamofire().getAlamofire(url: APIEndpoint.banners.urlString)
+    func getTopEmployment() -> AnyPublisher<[EmploymentModel], any Error> {
+        Future<[EmploymentModel], Error> { promise in
+            Alamofire().getAlamofire(url: APIEndpoint.topEmployment.urlString)
                 .sink { completion in
                     switch completion {
                     case .finished:
-                        print("Request finished")
+                        print("탑 취업률 조회 성공")
                     case let .failure(error):
-                        print("Request failed \(error)")
+                        print("탑 취업률 조회 실패 \(error)")
                         promise(.failure(error))
                     }
-                } receiveValue: { [weak self] (banners: [BannerModel]) in
+                } receiveValue: { [weak self] (employData: [EmploymentModel]) in
                     guard self != nil else { return }
-                    promise(.success(banners))
+                    promise(.success(employData))
                 }.store(in: &self.subscriptions)
         }.eraseToAnyPublisher()
     }
     
-    func getScoreImage() -> AnyPublisher<ScoreImageModel, any Error> {
-        Future<ScoreImageModel, Error> { promise in
-            Alamofire().getAlamofire(url: APIEndpoint.scoreImage.urlString)
+    func getTopCompetition() -> AnyPublisher<[CompetitionModel], any Error> {
+        Future<[CompetitionModel], Error> { promise in
+            Alamofire().getAlamofire(url: APIEndpoint.topCompetition.urlString)
                 .sink { completion in
                     switch completion {
                     case .finished:
-                        print("Request finished")
+                        print("탑 경쟁률 조회 성공")
                     case let .failure(error):
-                        print("Request failed \(error)")
+                        print("탑 경쟁률 조회 실패 \(error)")
                         promise(.failure(error))
                     }
-                } receiveValue: { [weak self] (image: ScoreImageModel) in
+                } receiveValue: { [weak self] (competitionData: [CompetitionModel]) in
                     guard self != nil else { return }
-                    promise(.success(image))
+                    promise(.success(competitionData))
                 }.store(in: &self.subscriptions)
-
         }.eraseToAnyPublisher()
     }
 }
 
 class StubHomeService: HomeServiceType {
-    func getBanners() -> AnyPublisher<[BannerModel], any Error> {
+    
+    func getTopEmployment() -> AnyPublisher<[EmploymentModel], any Error> {
         Empty().eraseToAnyPublisher()
     }
     
-    func getScoreImage() -> AnyPublisher<ScoreImageModel, any Error> {
+    func getTopCompetition() -> AnyPublisher<[CompetitionModel], any Error> {
         Empty().eraseToAnyPublisher()
     }
 }

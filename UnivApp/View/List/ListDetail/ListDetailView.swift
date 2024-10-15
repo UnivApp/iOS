@@ -10,9 +10,8 @@ import Kingfisher
 
 struct ListDetailView: View {
     @StateObject var viewModel: ListDetailViewModel
-    @State private var selectedType: ListDetailType?
-    @State private var isNavigate: Bool = false
     @State private var selectedSegment: ListDetailSection = .general
+    @State private var expandedDepartIds: Set<Int> = []
     @Environment(\.dismiss) var dismiss
     
     var universityId: Int
@@ -20,6 +19,8 @@ struct ListDetailView: View {
     var body: some View {
         contentView
             .navigationTitle("")
+            .toolbar(.hidden, for: .tabBar)
+            .navigationBarBackButtonHidden(true)
     }
     
     @ViewBuilder
@@ -59,42 +60,29 @@ struct ListDetailView: View {
                         }
                         .padding(.leading, 20)
                         
-                        BarChartView(title: "계열별등록금", description: "출처: 대학어디가 - 2024년도" , dataPoints: [
-                            ChartData(label: "인문", value: 673, xLabel: "과", yLabel: "만원"),
-                            ChartData(label: "자연", value: 796, xLabel: "과", yLabel: "만원"),
-                            ChartData(label: "공학", value: 898, xLabel: "과", yLabel: "만원"),
-                            ChartData(label: "의학", value: 1000, xLabel: "과", yLabel: "만원"),
-                            ChartData(label: "예체", value: 901, xLabel: "과", yLabel: "만원"),
-                            ChartData(label: "평균", value: 817, xLabel: "과", yLabel: "만원")
-                        ])
+                        BarChartView(title: "계열별등록금", description: "출처: 대학어디가 - 2024년도" , dataPoints: viewModel.tuitionFeeData)
                         .padding(.horizontal, 30)
                         
-                        CircleChartView(title: "계열별등록금", description: "출처: 대학어디가 - 2024년도", dataPoints: [
-                            ChartData(label: "인문사회계열", value: 673, xLabel: "과", yLabel: "만원"),
-                            ChartData(label: "자연과학계열", value: 796, xLabel: "과", yLabel: "만원"),
-                            ChartData(label: "공학계열", value: 898, xLabel: "과", yLabel: "만원"),
-                            ChartData(label: "의학", value: 1000, xLabel: "과", yLabel: "만원"),
-                            ChartData(label: "예체계열", value: 901, xLabel: "과", yLabel: "만원")
-                        ])
-                        .padding(.horizontal, 30)
+                        CircleChartView(title: "학과 정보", description: "대학어디가 - 정보제공", dataPoints: viewModel.departmentData)
+                            .padding(.horizontal, 30)
                         
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 20) {
-                                BarChartView(title: "정시경쟁률", description: "", dataPoints: [
-                                    ChartData(label: "인문", value: 673, xLabel: "과", yLabel: "만원"),
-                                    ChartData(label: "자연", value: 796, xLabel: "과", yLabel: "만원")
-                                ])
-                                BarChartView(title: "정시경쟁률", description: "", dataPoints: [
-                                    ChartData(label: "인문", value: 673, xLabel: "과", yLabel: "만원"),
-                                    ChartData(label: "자연", value: 796, xLabel: "과", yLabel: "만원")
-                                ])
-                                BarChartView(title: "정시경쟁률", description: "", dataPoints: [
-                                    ChartData(label: "인문", value: 673, xLabel: "과", yLabel: "만원"),
-                                    ChartData(label: "자연", value: 796, xLabel: "과", yLabel: "만원")
-                                ])
+                                ForEach(viewModel.competitionRateData.indices, id: \.self) { index in
+                                    BarChartView(title: "경쟁률", description: "대학어디가 - 정보제공", dataPoints: viewModel.competitionRateData[index])
+                                }
                             }
+                            .padding(.horizontal, 30)
                         }
-                        .padding(.horizontal, 30)
+                        
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 20) {
+                                ForEach(viewModel.employmentRateData.indices, id: \.self) { index in
+                                    BarChartView(title: "취업률", description: "대학어디가 - 정보제공", dataPoints: viewModel.employmentRateData[index])
+                                }
+                            }
+                            .padding(.horizontal, 30)
+                        }
                         
                         SeperateView()
                             .frame(height: 10)
@@ -106,14 +94,10 @@ struct ListDetailView: View {
                         SeperateView()
                             .frame(height: 10)
                         
-                        category
+                        ListCategoryView(universityID: self.universityId)
                             .padding(.vertical, 0)
                             .padding(.horizontal, 0)
                             .id("카테고리")
-                        
-                        NavigationLink(destination: selectedType?.view, isActive: $isNavigate) {
-                            
-                        }
                     }
                 }
                 .task(id: selectedSegment) {
@@ -139,15 +123,12 @@ struct ListDetailView: View {
                             .scaledToFit()
                             .frame(width: 20, height: 20)
                     }
-                    
                 }
                 ToolbarItem(placement: .navigation) {
                     section
                         .padding()
                 }
             }
-            .toolbar(.hidden, for: .tabBar)
-            .navigationBarBackButtonHidden(true)
         }
     }
     
@@ -189,42 +170,50 @@ struct ListDetailView: View {
                 VStack(alignment: .leading, spacing: 10) {
                     Text(viewModel.listDetail.fullName ?? "")
                         .font(.system(size: 15, weight: .bold))
-                        .lineLimit(nil)
-                        .multilineTextAlignment(.leading)
-                        .fixedSize(horizontal: false, vertical: true)
                     Spacer()
                     Group {
+                        Text("\(viewModel.listDetail.type ?? "")대학교\n\n")
+                            .font(.system(size: 12, weight: .semibold))
+                                  +
                         Text("\(viewModel.listDetail.location ?? "")\n\(viewModel.listDetail.phoneNumber ?? "")")
                             .font(.system(size: 12, weight: .regular))
-                            .lineLimit(nil)
-                            .multilineTextAlignment(.leading)
-                            .fixedSize(horizontal: false, vertical: true)
                     }
                 }
+                .lineLimit(nil)
+                .multilineTextAlignment(.leading)
+                .fixedSize(horizontal: false, vertical: true)
                 .padding(.horizontal, 10)
                 .padding(.vertical, 30)
             }
             HStack(spacing: 10) {
                 //TODO: - 네비게이션 변경
-                NavigationLink(destination: WebKitViewContainer(url: viewModel.listDetail.admissionSite ?? "")) {
-                    Text("입학처 열기 🎓")
-                        .font(.system(size: 12, weight: .bold))
-                        .foregroundColor(.white)
+                if let addmissionSite = viewModel.listDetail.admissionSite,
+                   let website = viewModel.listDetail.website,
+                   let addmissionSiteURL = URL(string: addmissionSite),
+                   let websiteURL = URL(string: website){
+                    Button {
+                        UIApplication.shared.open(addmissionSiteURL)
+                    } label: {
+                        Text("입학처 열기 🎓")
+                            .font(.system(size: 12, weight: .bold))
+                            .foregroundColor(.white)
+                    }
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 15)
+                        .fill(.orange)
+                        .frame(height: 30))
+                    Button {
+                        UIApplication.shared.open(websiteURL)
+                    } label: {
+                        Text("홈페이지 열기 🏫")
+                            .font(.system(size: 12, weight: .bold))
+                            .foregroundColor(.white)
+                    }
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 15)
+                        .fill(.orange)
+                        .frame(height: 30))
                 }
-                .padding()
-                .background(RoundedRectangle(cornerRadius: 15)
-                    .fill(.orange)
-                    .frame(height: 30))
-                NavigationLink(destination: WebKitViewContainer(url: viewModel.listDetail.website ?? "")) {
-                    Text("홈페이지 열기 🏫")
-                        .font(.system(size: 12, weight: .bold))
-                        .foregroundColor(.white)
-                }
-                .padding()
-                .background(RoundedRectangle(cornerRadius: 15)
-                    .fill(.orange)
-                    .frame(height: 30))
-                
             }
             .padding(.trailing, 10)
             .padding(.vertical, 10)
@@ -233,91 +222,79 @@ struct ListDetailView: View {
     }
     
     var depart: some View {
-        VStack(spacing: 0) {
-            Group {
-                HStack {
-                    Text("학과목록")
-                        .font(.system(size: 18, weight: .bold))
-                    Spacer()
-                }
-                .padding(.leading, 20)
-                
-                VStack {
-                    ForEach(viewModel.departList, id: \.id) { cell in
-                        VStack {
-                            HStack {
-                                Text(cell.title ?? "")
-                                    .foregroundColor(.black)
-                                    .font(.system(size: 14, weight: .bold))
-                                
-                                Spacer()
-                                Text(cell.description ?? "")
-                                    .foregroundColor(.gray)
-                                    .font(.system(size: 12, weight: .regular))
-                                    .padding(.trailing, 10)
-                                
-                                Image("arrow_fill")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 5, height: 10)
-                            }
-                            .padding(.bottom, 10)
-                            Divider()
-                        }
-                        .padding(.horizontal, 30)
-                    }
-                    .padding(.bottom, 20)
-                }
-                .padding(.top, -20)
-            }
-            .padding(.vertical, 30)
-        }
-    }
-    
-    var category: some View {
-        VStack(spacing: 0) {
+        VStack(alignment: .leading, spacing: 0) {
             HStack {
-                Text("카테고리")
+                Text("학과목록")
                     .font(.system(size: 18, weight: .bold))
                 Spacer()
             }
             .padding(.leading, 20)
-            .padding(.bottom, 20)
             
-            ForEach(ListDetailType.allCases, id: \.self) { type in
-                Button {
-                    selectedType = type
-                    self.isNavigate = true
-                } label: {
-                    VStack {
-                        Text(type.title)
-                            .font(.system(size: 14, weight: .bold))
-                            .foregroundColor(selectedType == type ? Color.gray : Color.white)
-                            .frame(width: 50, height: 50)
-                            .background(.clear)
-                    }
-                    .frame(maxWidth: 70, alignment: .center)
-                    
-                    HStack {
-                        Group {
-                            type.image
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 50, height: 35)
-                            
-                            Text(type.description)
-                                .font(.system(size: 12, weight: .bold))
-                                .foregroundColor(selectedType == type ? Color.white : Color.gray)
+            VStack(spacing: 30) {
+                if let departmentResponses = viewModel.listDetail.departmentResponses {
+                    ForEach(departmentResponses.indices, id: \.self) { index in
+                        if let depart = departmentResponses[index],
+                           let name = depart.name,
+                           let type = depart.type {
+                            VStack {
+                                HStack {
+                                    Text(type)
+                                        .foregroundColor(.black)
+                                        .font(.system(size: 14, weight: .bold))
+                                    
+                                    Spacer()
+                                    
+                                    Button {
+                                        toggleDepart(departId: index)
+                                    } label: {
+                                        HStack(spacing: 30) {
+                                            Text("\(name.count)개")
+                                                .foregroundColor(.gray)
+                                                .font(.system(size: 12, weight: .regular))
+                                                .padding(.trailing, 10)
+                                            
+                                            Image(self.expandedDepartIds.contains(index) ? "arrow_down" : "arrow_fill")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 10, height: 10)
+                                        }
+                                    }
+                                }
+                                if self.expandedDepartIds.contains(index) {
+                                    departCell(names: name)
+                                }
+                                Divider()
+                            }
                         }
-                        .frame(height: 50)
-                        .padding(.leading, 30)
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(selectedType == type ? Color.categoryGray : Color.white)
                 }
-                .background(selectedType == type ? Color.white : Color.categoryGray)
             }
+            .padding(.horizontal, 30)
+            .padding(.vertical, 30)
         }
+    }
+    private func toggleDepart(departId: Int) {
+        if expandedDepartIds.contains(departId) {
+            expandedDepartIds.remove(departId)
+        } else {
+            expandedDepartIds.insert(departId)
+        }
+    }
+}
+
+fileprivate struct departCell: View {
+    var names: [String]
+    var body: some View {
+        ForEach(names.indices, id: \.self) { index in
+            HStack {
+                Text("\(index+1). \(names[index])")
+                    .font(.system(size: 12, weight: .semibold))
+                    .multilineTextAlignment(.leading)
+                Spacer()
+            }
+            .padding(.horizontal, 40)
+        }
+        .padding(.vertical, 5)
     }
 }
 

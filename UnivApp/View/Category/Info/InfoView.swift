@@ -8,13 +8,33 @@
 import SwiftUI
 
 struct InfoView: View {
-    @EnvironmentObject var container: DIContainer
-    @EnvironmentObject var authViewModel: AuthViewModel
     @StateObject var viewModel: InfoViewModel
     @Environment(\.dismiss) var dismiss
     
-    
     var body: some View {
+        contentView
+            .navigationBarBackButtonHidden(true)
+            .toolbar(.hidden, for: .tabBar)
+    }
+    
+    @ViewBuilder
+    var contentView: some View {
+        switch self.viewModel.phase {
+        case .notRequested:
+            PlaceholderView()
+                .onAppear {
+                    viewModel.send(action: .load)
+                }
+        case .loading:
+            LoadingView(url: "congratulations", size: [150, 150])
+        case .success:
+            loadedView
+        case .fail:
+            ErrorView()
+        }
+    }
+    
+    var loadedView: some View {
         NavigationStack {
             ScrollView(.vertical) {
                 VStack(alignment: .leading, spacing: 30) {
@@ -59,50 +79,53 @@ struct InfoView: View {
                 }
             }
         }
-        .navigationBarBackButtonHidden(true)
-        .toolbar(.hidden, for: .tabBar)
     }
 }
 
 fileprivate struct NewsCell: View {
     var model: NewsModel
+    
     var body: some View {
         VStack {
             Button {
-                //TODO: - URL Open
+                if let newsLink = model.link,
+                   let url = URL(string: newsLink){
+                    UIApplication.shared.open(url)
+                }
             } label: {
-                VStack(alignment: .leading, spacing: 10) {
+                VStack(alignment: .leading, spacing: 20) {
                     Text(model.title)
                         .font(.system(size: 18, weight: .bold))
                         .foregroundColor(.black)
-                        .lineLimit(nil)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .multilineTextAlignment(.leading)
                     
-                    Text(model.extract)
+                    Text(model.source ?? "")
                         .font(.system(size: 15, weight: .semibold))
-                        .foregroundColor(.gray)
+                        .foregroundColor(Color.black.opacity(0.7))
+                    
+                    Text("출처 \(model.link ?? "")")
+                        .font(.system(size: 10, weight: .regular))
+                        .foregroundColor(.orange)
                     
                     HStack{
+                        Text("\(model.admissionYear)년도 대입")
                         Spacer()
-                        Text(model.date)
-                            .font(.system(size: 15, weight: .regular))
-                            .foregroundColor(.gray)
+                        Text("\(model.publishedDate) 발행")
                     }
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundColor(.gray)
                     Divider()
                 }
+                .lineLimit(nil)
+                .fixedSize(horizontal: false, vertical: true)
+                .multilineTextAlignment(.leading)
             }
         }
     }
 }
 
 struct InfoView_Previews: PreviewProvider {
-    static let container = DIContainer(services: StubServices())
-    static let authViewModel = AuthViewModel(container: .init(services: StubServices()))
     static var previews: some View {
-        InfoView(viewModel: InfoViewModel(container: Self.container))
-            .environmentObject(Self.authViewModel)
-            .environmentObject(Self.container)
+        InfoView(viewModel: InfoViewModel(container: .init(services: StubServices())))
     }
 }
 

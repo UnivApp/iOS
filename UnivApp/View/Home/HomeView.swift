@@ -16,24 +16,22 @@ struct HomeView: View {
     
     @State private var isLoading: Bool = false
     @State private var selectedSegment: SplitType = .employment
+    @State private var isShowingPopup: Bool = false
     @FocusState private var isFocused: Bool
     
     @State private var currentIndex: Int = 0
+    @State private var popupOpacity: Double = 0
     private let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     
     var body: some View {
         contentView
-        //            .onTapGesture {
-        //                self.isFocused = false
-        //            }
     }
     
     @ViewBuilder
     var contentView: some View {
         switch viewModel.phase {
         case .notRequested:
-            //TODO: - 변경
-            loadedView
+            PlaceholderView()
                 .onAppear {
                     viewModel.send(action: .load)
                 }
@@ -41,6 +39,15 @@ struct HomeView: View {
             LoadingView(url: "congratulations", size: [150, 150])
         case .success:
             loadedView
+                .onAppear {
+                    listViewModel.searchText = ""
+                }
+                .onDisappear {
+                    listViewModel.searchText = ""
+                }
+                .onTapGesture {
+                    self.isFocused = false
+                }
         case .fail:
             ErrorView()
         }
@@ -48,18 +55,37 @@ struct HomeView: View {
     
     var loadedView: some View {
         NavigationStack {
-            ScrollView(.vertical) {
-                VStack(alignment: .center, spacing: 20) {
-                    SearchView(searchText: $viewModel.searchText)
-                        .padding(.top, 10)
-                        .environmentObject(listViewModel)
-                    
-                    categoryView
-                    
-                    footerView
+            ZStack {
+                ScrollView(.vertical) {
+                    VStack(alignment: .center, spacing: 20) {
+                        searchView
+                            .padding(.top, 10)
+                        
+                        categoryView
+                        
+                        footerView
+                    }
                 }
             }
-            .background(Color.white)
+            .fullScreenCover(isPresented: $isShowingPopup) {
+                PopUpContentView(summary: listViewModel.summaryArray, isShowingPopup: $isShowingPopup)
+                    .cornerRadius(15)
+                    .padding(.horizontal, 20)
+                    .presentationBackground(.black.opacity(0.3))
+                    .onAppear {
+                        withAnimation {
+                            popupOpacity = 1
+                        }
+                    }
+                    .onDisappear {
+                        withAnimation {
+                            popupOpacity = 0
+                        }
+                    }
+                    .opacity(popupOpacity)
+                    .animation(.easeInOut, value: popupOpacity)
+            }
+            .transaction { $0.disablesAnimations = true }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
@@ -73,6 +99,51 @@ struct HomeView: View {
                 }
             }
         }
+    }
+    
+    var searchView: some View {
+        VStack(alignment: .center, spacing: 20) {
+            HStack {
+                Button {
+                    if listViewModel.searchText != "" {
+                        listViewModel.send(action: .search)
+                        withAnimation {
+                            isShowingPopup = true
+                        }
+                    }
+                    listViewModel.searchText = ""
+                } label: {
+                    Image("search")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 15, height: 15)
+                }
+                .padding()
+                
+                TextField("대학명/소재지를 입력하세요", text: $listViewModel.searchText)
+                    .focused($isFocused)
+                    .font(.system(size: 15, weight: .regular))
+                    .padding()
+                    .submitLabel(.search)
+                    .onSubmit {
+                        listViewModel.send(action: .search)
+                        listViewModel.searchText = ""
+                        isFocused = false
+                        withAnimation {
+                            isShowingPopup = true
+                        }
+                    }
+            }
+            .padding(.horizontal, 10)
+            .background(Color.white)
+            .border(LinearGradient(gradient: Gradient(colors: [Color.yellow, Color.orange]), startPoint: .leading, endPoint: .trailing), width: 1)
+            .cornerRadius(15)
+            .overlay (
+                RoundedRectangle(cornerRadius: 15)
+                    .stroke(LinearGradient(gradient: Gradient(colors: [Color.yellow, Color.orange]), startPoint: .leading, endPoint: .trailing), lineWidth: 1.5)
+            )
+        }
+        .padding(.horizontal, 20)
     }
     
     var categoryView: some View {
@@ -121,7 +192,7 @@ struct HomeView: View {
                 CustomPageControl(currentPage: $currentIndex, numberOfPages: viewModel.posterData.count)
             }
             
-            HScrollView(title: [Text("이런 "), Text("핫플 "), Text("어때요?")], array: [Object(title: "어린이대공원", image: "hotplace1"),Object(title: "롯데월드", image: "hotplace2"),Object(title: "올림픽공원", image: "hotplace3"),Object(title: "서울숲", image: "hotplace4"),Object(title: "어린이대공원", image: "hotplace1"),Object(title: "롯데월드", image: "hotplace2")], pointColor: .orange, size: 100)
+            HScrollView(title: [Text("이런 "), Text("핫플 "), Text("어때요?")], pointColor: .orange, size: 100, playDeatilModel: PlayDetailModel(object: viewModel.convertToObjects(from: viewModel.topPlaceData), placeDataArray: viewModel.topPlaceData, placeData: nil))
         }
     }
     
@@ -133,74 +204,19 @@ struct HomeView: View {
             
             //TODO: - 구글 애드몹
             
-            Group {
-                HStack {
-                    Text("경쟁률")
-                        .font(.system(size: 18, weight: .bold))
-                        .foregroundColor(.black)
-                    
-                    Spacer()
-                    
-                    NavigationLink(destination: EmptyView()) {
-                        HStack(spacing: 5) {
-                            Text("더보기")
-                                .font(.system(size: 12, weight: .regular))
-                                .foregroundColor(.gray)
-                            
-                            Image("arrow")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 15, height: 15)
-                        }
-                    }
-                }
-            }.padding(.horizontal, 20)
             
-            //TODO: - 입결 리스트 불러오기
-            VStack {
-                HStack(spacing: 10) {
-                    ForEach(SplitType.allCases, id: \.self) { item in
-                        Button(action: {
-                            selectedSegment = item
-                        }) {
-                            Text(item.title)
-                                .font(.system(size: 15, weight: .bold))
-                                .foregroundColor(selectedSegment == item ? .black : .gray)
-                                .padding()
-                                .background(
-                                    RoundedRectangle(cornerRadius: 15)
-                                        .fill(selectedSegment == item ? Color.yellow : Color.clear)
-                                        .frame(height: 40))
-                                .cornerRadius(15)
-                        }
-                    }
-                }
-                .padding()
-                
-                Group {
-                    switch selectedSegment {
-                    case .employment:
-                        ForEach(viewModel.InitiativeData, id: \.rank) { cell in
-                            InitiativeViewCell(model: cell)
-                                .tag(cell.rank)
-                        }.padding(.horizontal, -20)
-                    case .Occasion:
-                        EmptyView()
-                    case .ontime:
-                        EmptyView()
-                    }
-                }
-                .padding(.horizontal)
-            }
+            RateView(rateViewModel: RateViewModel(container: .init(services: Services())), selectedSegment: $selectedSegment)
+                .environmentObject(self.viewModel)
+                .padding(.bottom, 30)
         }
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static let container = DIContainer(services: StubServices())
-    static let authViewModel = AuthViewModel(container: .init(services: StubServices()))
+    static let authViewModel = AuthViewModel(container: .init(services: StubServices()), authState: .auth)
     static var previews: some View {
-        HomeView(viewModel: HomeViewModel(container: Self.container, searchText: ""), listViewModel: ListViewModel(container: Self.container, searchText: ""))
+        HomeView(viewModel: HomeViewModel(container: Self.container), listViewModel: ListViewModel(container: Self.container, searchText: ""))
             .environmentObject(Self.authViewModel)
             .environmentObject(Self.container)
     }

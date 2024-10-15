@@ -14,6 +14,10 @@ enum AuthState {
     case unAuth
     case auth
 }
+enum RefreshTokenState {
+    case unExpired
+    case Expired
+}
 
 class AuthViewModel: ObservableObject {
     
@@ -25,7 +29,8 @@ class AuthViewModel: ObservableObject {
         case withdraw
     }
     
-    @Published var authState: AuthState = .auth
+    @Published var authState: AuthState
+    @Published var refreshTokenState: RefreshTokenState = .unExpired
     @Published var phase: Phase = .notRequested
     
     var userId: String?
@@ -34,8 +39,9 @@ class AuthViewModel: ObservableObject {
     private var subscriptions = Set<AnyCancellable>()
     private var currentNonce : String?
     
-    init(container: DIContainer) {
+    init(container: DIContainer, authState: AuthState) {
         self.container = container
+        self.authState = authState
     }
     
     func send(action: Action) {
@@ -45,12 +51,15 @@ class AuthViewModel: ObservableObject {
                 .sink { [weak self] completion in
                     if case .failure = completion {
                         self?.authState = .unAuth
+                        if UserDefaults.standard.string(forKey: "FirstUser") == "true" {
+                            self?.refreshTokenState = .unExpired
+                        } else {
+                            self?.refreshTokenState = .Expired
+                        }
                     }
                 } receiveValue: { [weak self] checkStatus in
                     self?.authState = .auth
                 }.store(in: &subscriptions)
-
-            return
             
         case let .appleLogin(request):
             let nonce = container.services.authService.signInAppleRequest(request)
@@ -93,7 +102,6 @@ class AuthViewModel: ObservableObject {
                     //TODO: - 로그아웃 성공
                     KeychainWrapper.standard.removeAllKeys()
                     self?.phase = .success
-                    self?.authState = .unAuth
                 }.store(in: &subscriptions)
             
             
@@ -109,7 +117,6 @@ class AuthViewModel: ObservableObject {
                     //TODO: - 회원 탈퇴 성공
                     KeychainWrapper.standard.removeAllKeys()
                     self?.phase = .success
-                    self?.authState = .unAuth
                 }.store(in: &subscriptions)
 
         }

@@ -82,8 +82,8 @@ struct MoneyView: View {
     
     var graph: some View {
         VStack(spacing: 10) {
-            HScrollView(title: [Text("대학 주변의 "), Text("평균 월세 "), Text("확인하기")], array: [Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo")], pointColor: .pointColor, size: 30)
-                .background(.backGray)
+//            HScrollView(title: [Text("대학 주변의 "), Text("평균 월세 "), Text("확인하기")], array: [Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo"), Object(title: "세종대학교", image: "emptyLogo")], pointColor: .pointColor, size: 30)
+//                .background(.backGray)
             
             Group {
                 Chart {
@@ -112,7 +112,7 @@ struct MoneyView: View {
 
 struct MoneyView_Previews: PreviewProvider {
     static let container = DIContainer(services: StubServices())
-    static let authViewModel = AuthViewModel(container: .init(services: StubServices()))
+    static let authViewModel = AuthViewModel(container: .init(services: StubServices()), authState: .auth)
     static var previews: some View {
         MoneyView(viewModel: MoneyViewModel(searchText: "", container: Self.container))
             .environmentObject(Self.authViewModel)

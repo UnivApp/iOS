@@ -6,104 +6,164 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct PlayDetailView: View {
-    @StateObject var viewModel: PlayDetailViewModel
     @Environment(\.dismiss) var dismiss
     
     @State var checkScrollHeight: Bool = false
     @State private var currentIndex: Int = 0
+    @State private var imageResource: Bool = false
+    
+    var playDetailModel: PlayDetailModel
     
     var body: some View {
-        contentView
-    }
-    @ViewBuilder
-    var contentView: some View {
-        switch viewModel.phase {
-        case .notRequested:
-            loadedView //TODO: - 변경
-        case .loading:
-            LoadingView(url: "congratulations", size: [150, 150])
-        case .success:
-            loadedView
-        case .fail:
-            ErrorView()
-        }
+        loadedView
     }
     
     var loadedView: some View {
         GeometryReader { proxy in
             ScrollView(.vertical) {
-                VStack(alignment: .leading, spacing: 20) {
-                    TabView(selection: $currentIndex) {
-                        if let images = viewModel.data.images {
-                            ForEach(images.indices, id: \.self) { index in
-                                if let image = images[index] {
-                                    Image(image)
+                if let placeData = playDetailModel.placeData {
+                    VStack(alignment: .leading, spacing: 20) {
+                        TabView(selection: $currentIndex) {
+                            if let images = placeData.images {
+                                ForEach(images.indices, id: \.self) { index in
+                                    if let image = images[index] {
+                                        KFImage(URL(string: image.imageUrl ?? ""))
+                                            .resizable()
+                                            .scaledToFit()
+                                            .tag(index)
+                                    } else {
+                                        Image("no_image")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .tag(index)
+                                    }
+                                }
+                            }
+                        }
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
+                        .tabViewStyle(PageTabViewStyle())
+                        .overlay(alignment: .bottomTrailing) {
+                            if let numberOfPages = playDetailModel.placeData?.images {
+                                CustomPageControl(currentPage: $currentIndex, numberOfPages: numberOfPages.count)
+                            }
+                        }
+                        
+                        Group {
+                            Group {
+                                Text(placeData.name)
+                                    .font(.system(size: 20, weight: .bold))
+                                
+                                Text("📍 \(placeData.location)")
+                                    .font(.system(size: 18, weight: .semibold))
+                                    .foregroundColor(.gray)
+                            }
+                            
+                            Divider()
+                            
+                            Group {
+                                Text("설명")
+                                    .font(.system(size: 17, weight: .bold))
+                                
+                                HStack {
+                                    Image("quotes_left")
                                         .resizable()
                                         .scaledToFit()
-                                        .tag(index)
+                                        .frame(width: 20, height: 20)
+                                    Spacer()
+                                }
+                                
+                                Text(placeData.description)
+                                    .font(.system(size: 15, weight: .regular))
+                                    .foregroundColor(.black)
+                                    .lineSpacing(5)
+                                
+                                HStack {
+                                    Spacer()
+                                    Image("quotes_right")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 20, height: 20)
+                                }
+                            }
+                            
+                            Group {
+                                Text("🍯 꿀팁")
+                                    .font(.system(size: 17, weight: .bold))
+                                
+                                Text(placeData.tip)
+                                    .foregroundColor(.black)
+                                    .font(.system(size: 15, weight: .regular))
+                                    .lineSpacing(5)
+                            }
+                        }
+                        .lineLimit(nil)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .multilineTextAlignment(.leading)
+                        .padding(.horizontal, 20)
+                        
+                        
+                        Group {
+                            if let images = placeData.images {
+                                let nonNilSources = images.compactMap { $0?.source }
+                                if !nonNilSources.isEmpty { 
+                                    Button {
+                                        self.imageResource.toggle()
+                                    } label: {
+                                        HStack(spacing: 20) {
+                                            Text("이미지 출처")
+                                                .font(.system(size: 10, weight: .bold))
+                                                .foregroundColor(.orange)
+                                            Image(self.imageResource ? "arrow_down" : "arrow_fill")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 10, height: 10)
+                                        }
+                                        .frame(width: UIScreen.main.bounds.width / 3)
+                                    }
+                                    if imageResource {
+                                        ForEach(nonNilSources, id: \.self) { source in
+                                            Text(source)
+                                                .font(.system(size: 10, weight: .bold))
+                                                .foregroundColor(.gray)
+                                        }
+                                        .padding(.horizontal, 20)
+                                        .padding(.top, 5)
+                                    }
                                 }
                             }
                         }
-                    }
-                    .frame(width: proxy.size.width, height: proxy.size.width)
-                    .tabViewStyle(PageTabViewStyle())
-                    .overlay(alignment: .bottomTrailing) {
-                        if let numberOfPages = viewModel.data.images {
-                            CustomPageControl(currentPage: $currentIndex, numberOfPages: numberOfPages.count)
+                        
+                        VStack {
+                            SeperateView()
+                                .frame(height: 20)
+                            
+                            HScrollView(title: [Text("이런 "), Text("핫플 "), Text("어때요?")], pointColor: .orange, size: 100, playDeatilModel: PlayDetailModel(object: playDetailModel.object, placeDataArray: playDetailModel.placeDataArray, placeData: playDetailModel.placeData))
+                                .frame(height: 200)
                         }
+                        .frame(height: 300)
                     }
-                    
-                    Group {
-                        Text(viewModel.data.title ?? "")
-                            .font(.system(size: 20, weight: .bold))
-                        
-                        Text("📍 \(viewModel.data.location ?? "")")
-                            .font(.system(size: 18, weight: .semibold))
-                            .foregroundColor(.gray)
-                        
-                        Divider()
-                        
-                        Text(viewModel.data.description ?? "")
-                            .font(.system(size: 15, weight: .regular))
-                            .lineSpacing(10)
-                        
-                        Text(viewModel.data.tip ?? "")
-                            .font(.system(size: 15, weight: .bold))
-                            .lineSpacing(10)
-                    }
-                    .lineLimit(nil)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding(.horizontal, 20)
-                    
-                    VStack {
-                        SeperateView()
-                            .frame(height: 20)
-                        
-                        HScrollView(title: [Text("이런 "), Text("핫플 "), Text("어때요?")], array: [Object(title: "어린이대공원", image: "hotplace1"),Object(title: "롯데월드", image: "hotplace2"),Object(title: "올림픽공원", image: "hotplace3"),Object(title: "서울숲", image: "hotplace4"),Object(title: "어린이대공원", image: "hotplace1"),Object(title: "롯데월드", image: "hotplace2")], pointColor: .orange, size: 100)
-                            .frame(height: 200)
-                    }
-                    .frame(height: 300)
+                    .padding(.horizontal, 0)
+                    .background(
+                        GeometryReader { innerProxy in
+                            Color.clear
+                                .onAppear {
+                                    DispatchQueue.main.async {
+                                        checkScrollHeight = false
+                                    }
+                                }
+                                .onChange(of: innerProxy.frame(in: .global).minY) { value, error in
+                                    if value < 0 {
+                                        checkScrollHeight = true
+                                    } else {
+                                        checkScrollHeight = false
+                                    }
+                                }
+                        }
+                    )
                 }
-                .padding(.horizontal, 0)
-                .background(
-                    GeometryReader { innerProxy in
-                        Color.clear
-                            .onAppear {
-                                DispatchQueue.main.async {
-                                    checkScrollHeight = false
-                                }
-                            }
-                            .onChange(of: innerProxy.frame(in: .global).minY) { value, error in
-                                if value < 0 {
-                                    checkScrollHeight = true
-                                } else {
-                                    checkScrollHeight = false
-                                }
-                            }
-                    }
-                )
             }
         }
         .navigationBarBackButtonHidden(true)
@@ -120,10 +180,17 @@ struct PlayDetailView: View {
                             .frame(width: 20, height: 20)
                         
                     } else {
-                        Image("whiteback")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 20, height: 20)
+                        if playDetailModel.placeData?.images?.compactMap({ $0?.imageUrl }).first == "https://d1irw3ts7iwo2y.cloudfront.net/activity/noimage.png" {
+                            Image("blackback")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20, height: 20)
+                        } else {
+                            Image("whiteback")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20, height: 20)
+                        }
                     }
                 }
 
@@ -134,5 +201,5 @@ struct PlayDetailView: View {
 }
 
 #Preview {
-    PlayDetailView(viewModel: PlayDetailViewModel())
+    PlayDetailView(playDetailModel: PlayDetailModel(object: [Object(title: "", image: "")], placeDataArray: [PlayModel(name: "", description: "", tip: "", location: "")], placeData: PlayModel(name: "", description: "설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다", tip: "설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다설명입니다", location: "")))
 }

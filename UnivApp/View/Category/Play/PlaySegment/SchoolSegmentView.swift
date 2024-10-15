@@ -10,40 +10,50 @@ import SwiftUI
 struct SchoolSegmentView: View {
     @StateObject var viewModel: PlayViewModel
     @StateObject var listViewModel: ListViewModel
+    @FocusState private var isFocused: Bool
+    
     var body: some View {
+        contentView
+    }
+    
+    @ViewBuilder
+    var contentView: some View {
+        switch listViewModel.phase {
+        case .notRequested:
+            PlaceholderView()
+                .onAppear {
+                    listViewModel.send(action: .load)
+                }
+        case .loading:
+            LoadingView(url: "congratulations", size: [150, 150])
+        case .success:
+            loadedView
+                .refreshable {
+                    listViewModel.send(action: .load)
+                }
+        case .fail:
+            ErrorView()
+        }
+    }
+    
+    var loadedView: some View {
         ScrollView(.vertical) {
             VStack(alignment: .leading, spacing: 30) {
-                Group {
-                    Text("대학생들은 어디서 놀지?\n")
-                        .font(.system(size: 25, weight: .bold))
-                     + Text("서울 도심 25개 자치구 #핫플레이스")
-                        .font(.system(size: 15, weight: .regular))
-                        .foregroundColor(.gray)
-                }
-                .padding(.leading, 20)
-                .lineSpacing(10)
-                
                 Image("play_poster")
                     .resizable()
                     .scaledToFit()
                     .frame(width: UIScreen.main.bounds.width)
-                
-                SchoolToHotplaceCell(model: viewModel.data)
-                    .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.width / 2)
-                    .padding(.horizontal, 20)
-                
-                SeperateView()
-                    .frame(height: 20)
+                    .padding(.top, -20)
                 
                 Text("학교 목록")
                     .font(.system(size: 18, weight: .bold))
                     .padding(.leading, 20)
                 
-                SearchView(searchText: $viewModel.searchText)
+                SearchView(isFocused: self._isFocused, searchText: $listViewModel.searchText)
                     .environmentObject(self.listViewModel)
                 
-                ForEach(viewModel.playStub, id: \.self) { item in
-                    PlayViewCell(title: item.title ?? "", address: item.address ?? "", description: item.description ?? "", image: item.image ?? "")
+                ForEach(listViewModel.summaryArray, id: \.self) { item in
+                    PlayViewCell(playViewModel: self.viewModel, summaryModel: item)
                         .padding(.horizontal, 0)
                 }
             }
@@ -52,64 +62,6 @@ struct SchoolSegmentView: View {
     }
 }
 
-fileprivate struct SchoolToHotplaceCell: View {
-    var model: [PlayDetailModel]
-    
-    @State var currentIndex: Int = 0
-    private let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
-    
-    var body: some View {
-        TabView(selection: $currentIndex) {
-            ForEach(model.indices, id: \.self) { itemIndex in
-                VStack(spacing: 20) {
-                    HStack {
-                        VStack(alignment: .center, spacing: 10) {
-                            Text("세종대학교")
-                                .font(.system(size: 18, weight: .bold))
-                            Text("#어린이대공원\n#롯데월드\n#뚝섬유원지")
-                                .font(.system(size: 12, weight: .regular))
-                                .lineSpacing(3)
-                        }.foregroundColor(.black)
-                        
-                        
-                        Spacer()
-                        HStack(spacing: -CGFloat((10 * model.count))) {
-                            if let images = model[itemIndex].images {
-                                ForEach(images.indices, id: \.self) { imageIndex in
-                                    if imageIndex < 4 {
-                                        Image(images[imageIndex] ?? "")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 80, height: 80)
-                                            .cornerRadius(15)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    Text("대학별 다양한 핫플을 확인해 보세요!")
-                        .foregroundColor(.gray)
-                        .font(.system(size: 12, weight: .semibold))
-                }
-                .tag(itemIndex)
-            }
-        }
-        .tabViewStyle(PageTabViewStyle())
-        .onReceive(timer) { _ in
-            withAnimation {
-                currentIndex = (currentIndex + 1) % model.count
-            }
-        }
-        .overlay(alignment: .bottomTrailing) {
-            CustomPageControl(currentPage: $currentIndex, numberOfPages: model.count)
-                .cornerRadius(15)
-                .padding(.bottom, 20)
-        }
-        .padding(.horizontal, 20)
-        .background(RoundedRectangle(cornerRadius: 15).fill(Color.homeColor))
-    }
-}
-
 #Preview {
-    SchoolSegmentView(viewModel: PlayViewModel(container: DIContainer(services: StubServices()), searchText: ""), listViewModel: ListViewModel(container: DIContainer(services: StubServices()), searchText: ""))
+    SchoolSegmentView(viewModel: PlayViewModel(container: DIContainer(services: StubServices())), listViewModel: ListViewModel(container: DIContainer(services: StubServices()), searchText: ""))
 }

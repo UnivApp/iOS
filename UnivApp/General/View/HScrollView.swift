@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct HScrollView: View {
     var title: [Text]
-    var array: [Object]
     var pointColor: Color
     var size: CGFloat
+    var playDeatilModel: PlayDetailModel
     
     var body: some View {
         NavigationStack {
@@ -30,8 +31,8 @@ struct HScrollView: View {
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 0) {
-                        ForEach(array.self, id: \.self) { item in
-                            HScrollViewCell(item: item, size: self.size)
+                        ForEach(playDeatilModel.object.self, id: \.self) { item in
+                            HScrollViewCell(item: item, size: self.size, playDetailModel: PlayDetailModel(object: playDeatilModel.object, placeDataArray: playDeatilModel.placeDataArray, placeData: playDeatilModel.placeData))
                                 .padding(.horizontal, 10)
                                 .padding(.vertical, 20)
                         }
@@ -46,25 +47,26 @@ struct HScrollView: View {
 struct HScrollViewCell: View {
     var item: Object
     var size: CGFloat
+    var playDetailModel: PlayDetailModel
+    
     var body: some View {
         NavigationStack {
-            NavigationLink(destination: PlayDetailView(viewModel: PlayDetailViewModel())) {
-                VStack(spacing: 10) {
-                    Image(item.image)
-                        .resizable()
-                        .scaledToFit()
-                        .cornerRadius(10)
-                        .frame(width: self.size, height: self.size)
-                    
-                    Text(item.title)
-                        .font(.system(size: 12, weight: .semibold))
-                        .foregroundColor(.black)
+            if let selectedPlace = playDetailModel.placeDataArray.first(where: { $0.name == item.title }) {
+                NavigationLink(destination: PlayDetailView(playDetailModel: PlayDetailModel(object: playDetailModel.object, placeDataArray: playDetailModel.placeDataArray, placeData: selectedPlace))) {
+                    VStack(spacing: 10) {
+                        KFImage(URL(string: item.image))
+                            .resizable()
+                            .scaledToFit()
+                            .cornerRadius(10)
+                            .frame(width: self.size, height: self.size)
+                        
+                        Text(item.title)
+                            .font(.system(size: 12, weight: .semibold))
+                            .foregroundColor(.black)
+                    }
                 }
             }
         }
     }
 }
 
-#Preview {
-    HScrollView(title: [Text("유명한 "), Text("선배 "), Text("확인하기 ")], array: [Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty"), Object(title: "신혜선", image: "talent_empty")], pointColor: Color.orange, size: 30)
-}

@@ -22,6 +22,7 @@ class ListViewModel: ObservableObject {
     @Published var phase: Phase = .notRequested
     @Published var heartPhase: heartPhase = .notRequested
     @Published var notFound: Bool = false
+    @Published var showRateArray: [Bool] = []
     
     private var container: DIContainer
     private var subscriptions = Set<AnyCancellable>()
@@ -45,6 +46,7 @@ class ListViewModel: ObservableObject {
                     }
                 } receiveValue: { [weak self] summary in
                     self?.summaryArray = summary
+                    self?.showRateArray = Array(repeating: false, count: summary.count)
                     self?.phase = .success
                     self?.notFound = false
                     self?.heartPhase = .notRequested
@@ -63,6 +65,7 @@ class ListViewModel: ObservableObject {
                     }
                 } receiveValue: { [weak self] searchResult in
                     self?.summaryArray = searchResult
+                    self?.showRateArray = Array(repeating: false, count: searchResult.count)
                     self?.phase = .success
                     self?.notFound = false
                     self?.heartPhase = .notRequested

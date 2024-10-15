@@ -15,6 +15,28 @@ struct InitiativeView: View {
     
     
     var body: some View {
+       contentView
+            .navigationBarBackButtonHidden(true)
+            .toolbar(.hidden, for: .tabBar)
+    }
+    
+    @ViewBuilder
+    var contentView: some View {
+        switch self.viewModel.phase {
+        case .notRequested:
+            PlaceholderView()
+                .onAppear {
+                    viewModel.send(action: .load)
+                }
+        case .loading:
+            LoadingView(url: "congratulations", size: [150, 150])
+        case .success:
+            loadedView
+        case .fail:
+            ErrorView()
+        }
+    }
+    var loadedView: some View {
         NavigationStack {
             ScrollView(.vertical) {
                 VStack(alignment: .leading, spacing: 30) {
@@ -31,8 +53,25 @@ struct InitiativeView: View {
                         
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 15) {
-                            ForEach(viewModel.category, id: \.self) { item in
-                                categoryViewCell(categoryItem: item)
+                            ForEach(viewModel.category.indices, id: \.self) { index in
+                                switch viewModel.category[index].image {
+                                case "QS":
+                                    categoryViewCell(categoryItem: viewModel.category[index], model: viewModel.QSData)
+                                case "The":
+                                    categoryViewCell(categoryItem: viewModel.category[index], model: viewModel.TheData)
+                                case "ARWU":
+                                    categoryViewCell(categoryItem: viewModel.category[index], model: viewModel.ARWUData)
+                                case "CWUR":
+                                    categoryViewCell(categoryItem: viewModel.category[index], model: viewModel.CWURData)
+                                case "USNWR":
+                                    categoryViewCell(categoryItem: viewModel.category[index], model: viewModel.USNWRData)
+                                case "CWTS":
+                                    categoryViewCell(categoryItem: viewModel.category[index], model: viewModel.CWTSData)
+                                case "NatureIndex":
+                                    categoryViewCell(categoryItem: viewModel.category[index], model: viewModel.NatureIndexData)
+                                default:
+                                    categoryViewCell(categoryItem: viewModel.category[index], model: viewModel.QSData)
+                                }
                             }
                         }
                         .padding(.horizontal, 20)
@@ -41,14 +80,35 @@ struct InitiativeView: View {
                     SeperateView()
                         .frame(width: UIScreen.main.bounds.width, height: 20)
                     
-                    Text("QS 세계대학평가")
-                        .padding(.leading, 20)
-                        .font(.system(size: 18, weight: .bold))
-                        .foregroundColor(.black)
+                    HStack {
+                        VStack(alignment: .leading, spacing: 10) {
+                            Text("QS 세계대학평가")
+                                .font(.system(size: 18, weight: .bold))
+                                .foregroundColor(.black)
+                            
+                            Text("\(viewModel.QSData.compactMap { $0.year }.first ?? "")년도")
+                                .font(.system(size: 15, weight: .semibold))
+                                .foregroundColor(.black)
+                                .padding(.leading, 0)
+                        }
+                        Spacer()
+                        NavigationLink(destination: InitiativeDetailView(model: viewModel.QSData, title: "QS")) {
+                            Text("더보기")
+                                .font(.system(size: 12, weight: .semibold))
+                                .foregroundColor(.black)
+                            Image("arrow_fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 10, height: 10)
+                        }
+                    }
+                    .padding(.horizontal, 20)
                     
-                    ForEach(viewModel.InitiativeData, id: \.rank) { cell in
-                        InitiativeViewCell(model: cell)
-                            .tag(cell.rank)
+                    ForEach(viewModel.QSData.indices, id: \.self) { index in
+                        if index < 10 {
+                            InitiativeViewCell(model: viewModel.QSData[index])
+                                .padding(.vertical, -10)
+                        }
                     }
                 }
             }
@@ -71,16 +131,15 @@ struct InitiativeView: View {
                 }
             }
         }
-        .navigationBarBackButtonHidden(true)
-        .toolbar(.hidden, for: .tabBar)
     }
 }
 
 fileprivate struct categoryViewCell: View {
     var categoryItem: Object
+    var model: [InitiativeModel]
     
     var body: some View {
-        NavigationLink(destination: EmptyView()) {
+        NavigationLink(destination: InitiativeDetailView(model: model, title: categoryItem.title)) {
             VStack(spacing: 10) {
                 Image(categoryItem.image)
                     .resizable()
@@ -100,7 +159,7 @@ fileprivate struct categoryViewCell: View {
 
 struct InitiativeView_Previews: PreviewProvider {
     static let container = DIContainer(services: StubServices())
-    static let authViewModel = AuthViewModel(container: .init(services: StubServices()))
+    static let authViewModel = AuthViewModel(container: .init(services: StubServices()), authState: .auth)
     static var previews: some View {
         InitiativeView(viewModel: InitiativeViewModel(container: Self.container))
             .environmentObject(Self.authViewModel)

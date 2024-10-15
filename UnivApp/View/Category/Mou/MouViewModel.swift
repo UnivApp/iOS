@@ -25,26 +25,67 @@ enum MouType: String, CaseIterable, Hashable {
 class MouViewModel: ObservableObject {
     
     enum Action {
-        
+        case load
+        case search(String)
+        case status(String)
     }
     
-    @Published var MouData: [MouModel] = [
-        MouModel(title: "2024학년도 지역대학 연계 진로체험", link: nil, year: "2025학년도", category: "전공체험", schoolName: "한남대학교[본교]", date: "2024-04-01, 2024-12-31", location: "[기타]한남대학교, 해당 중/고등학교 및 온라인", receipt: "접수 중", description: "**2024학년도 지역대학 연계 진로체험 프로그램**을 아래와 같이 운영하오니 많은 신청 바랍니다. \n**1. 일시:** 2024. 04. ~ 12.\n**2. 장소:** 한남대학교, 해당 중·고교 및 온라인 운영 (신청 가능 지역)\n**3. 대상:** 대전지역 중·고등학생\n**4. 운영방법:** 대면(대학방문형, 중·고교방문형) 및 비대면(블렌디드 진로체험 등) 병행\n **5. 신청방법:** 중·고등학교 업무담당교사가 「꿈길」 을 통해 진로체험 프로그램 신청  (https://www.ggoomgil.go.kr/front/index.do)\n**6. 문의:** 한남대학교 입학관리실 담당자**(☎042-629-7958)**"),
-        MouModel(title: "2024학년도 지역대학 연계 진로체험", link: nil, year: "2025학년도", category: "전공체험", schoolName: "한남대학교[본교]", date: "2024-04-01, 2024-12-31", location: "[기타]한남대학교, 해당 중/고등학교 및 온라인", receipt: "접수종료", description: "**2024학년도 지역대학 연계 진로체험 프로그램**을 아래와 같이 운영하오니 많은 신청 바랍니다. \n**1. 일시:** 2024. 04. ~ 12.\n**2. 장소:** 한남대학교, 해당 중·고교 및 온라인 운영 (신청 가능 지역)\n**3. 대상:** 대전지역 중·고등학생\n**4. 운영방법:** 대면(대학방문형, 중·고교방문형) 및 비대면(블렌디드 진로체험 등) 병행\n **5. 신청방법:** 중·고등학교 업무담당교사가 「꿈길」 을 통해 진로체험 프로그램 신청  (https://www.ggoomgil.go.kr/front/index.do)\n**6. 문의:** 한남대학교 입학관리실 담당자**(☎042-629-7958)**"),
-        MouModel(title: "2024학년도 지역대학 연계 진로체험", link: nil, year: "2025학년도", category: "전공체험", schoolName: "한남대학교[본교]", date: "2024-04-01, 2024-12-31", location: "[기타]한남대학교, 해당 중/고등학교 및 온라인", receipt: "접수 중", description: "**2024학년도 지역대학 연계 진로체험 프로그램**을 아래와 같이 운영하오니 많은 신청 바랍니다. \n**1. 일시:** 2024. 04. ~ 12.\n**2. 장소:** 한남대학교, 해당 중·고교 및 온라인 운영 (신청 가능 지역)\n**3. 대상:** 대전지역 중·고등학생\n**4. 운영방법:** 대면(대학방문형, 중·고교방문형) 및 비대면(블렌디드 진로체험 등) 병행\n **5. 신청방법:** 중·고등학교 업무담당교사가 「꿈길」 을 통해 진로체험 프로그램 신청  (https://www.ggoomgil.go.kr/front/index.do)\n**6. 문의:** 한남대학교 입학관리실 담당자**(☎042-629-7958)**"),
-        MouModel(title: "2024학년도 지역대학 연계 진로체험", link: nil, year: "2025학년도", category: "전공체험", schoolName: "한남대학교[본교]", date: "2024-04-01, 2024-12-31", location: "[기타]한남대학교, 해당 중/고등학교 및 온라인", receipt: "접수종료", description: "**2024학년도 지역대학 연계 진로체험 프로그램**을 아래와 같이 운영하오니 많은 신청 바랍니다. \n**1. 일시:** 2024. 04. ~ 12.\n**2. 장소:** 한남대학교, 해당 중·고교 및 온라인 운영 (신청 가능 지역)\n**3. 대상:** 대전지역 중·고등학생\n**4. 운영방법:** 대면(대학방문형, 중·고교방문형) 및 비대면(블렌디드 진로체험 등) 병행\n **5. 신청방법:** 중·고등학교 업무담당교사가 「꿈길」 을 통해 진로체험 프로그램 신청  (https://www.ggoomgil.go.kr/front/index.do)\n**6. 문의:** 한남대학교 입학관리실 담당자**(☎042-629-7958)**"),
-        MouModel(title: "2024학년도 지역대학 연계 진로체험", link: nil, year: "2025학년도", category: "전공체험", schoolName: "한남대학교[본교]", date: "2024-04-01, 2024-12-31", location: "[기타]한남대학교, 해당 중/고등학교 및 온라인", receipt: "접수 중", description: "**2024학년도 지역대학 연계 진로체험 프로그램**을 아래와 같이 운영하오니 많은 신청 바랍니다. \n**1. 일시:** 2024. 04. ~ 12.\n**2. 장소:** 한남대학교, 해당 중·고교 및 온라인 운영 (신청 가능 지역)\n**3. 대상:** 대전지역 중·고등학생\n**4. 운영방법:** 대면(대학방문형, 중·고교방문형) 및 비대면(블렌디드 진로체험 등) 병행\n **5. 신청방법:** 중·고등학교 업무담당교사가 「꿈길」 을 통해 진로체험 프로그램 신청  (https://www.ggoomgil.go.kr/front/index.do)\n**6. 문의:** 한남대학교 입학관리실 담당자**(☎042-629-7958)**"),
-        MouModel(title: "2024학년도 지역대학 연계 진로체험", link: nil, year: "2025학년도", category: "전공체험", schoolName: "한남대학교[본교]", date: "2024-04-01, 2024-12-31", location: "[기타]한남대학교, 해당 중/고등학교 및 온라인", receipt: "접수 중", description: "**2024학년도 지역대학 연계 진로체험 프로그램**을 아래와 같이 운영하오니 많은 신청 바랍니다. \n**1. 일시:** 2024. 04. ~ 12.\n**2. 장소:** 한남대학교, 해당 중·고교 및 온라인 운영 (신청 가능 지역)\n**3. 대상:** 대전지역 중·고등학생\n**4. 운영방법:** 대면(대학방문형, 중·고교방문형) 및 비대면(블렌디드 진로체험 등) 병행\n **5. 신청방법:** 중·고등학교 업무담당교사가 「꿈길」 을 통해 진로체험 프로그램 신청  (https://www.ggoomgil.go.kr/front/index.do)\n**6. 문의:** 한남대학교 입학관리실 담당자**(☎042-629-7958)**")
-    ]
+    @Published var MouData: [MouModel] = []
+    @Published var phase: Phase = .notRequested
+    @Published var textPhase: Bool = false
+    @Published var searchText: String = ""
     
     private var container: DIContainer
+    private var subscriptions = Set<AnyCancellable>()
     
     init(container: DIContainer) {
         self.container = container
     }
     
     func send(action: Action) {
-        
+        switch action {
+        case .load:
+            self.phase = .loading
+            container.services.mouService.getExpo()
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.phase = .fail
+                    }
+                } receiveValue: { [weak self] mouData in
+                    self?.MouData = mouData
+                    self?.phase = .success
+                }.store(in: &subscriptions)
+            
+        case let .search(searchText):
+            self.phase = .loading
+            container.services.mouService.searchExpo(searchText: searchText)
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.textPhase = true
+                        self?.phase = .fail
+                    }
+                } receiveValue: { [weak self] mouSearchData in
+                    self?.MouData = mouSearchData
+                    self?.phase = .success
+                    if (self?.MouData != []) {
+                        self?.textPhase = false
+                    } else {
+                        self?.textPhase = true
+                    }
+                }.store(in: &subscriptions)
+            
+        case let .status(status):
+            self.phase = .loading
+            container.services.mouService.statusExpo(status: status)
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.phase = .fail
+                    }
+                } receiveValue: { [weak self] mouStatusData in
+                    self?.MouData = mouStatusData
+                    self?.phase = .success
+                }.store(in: &subscriptions)
+        }
     }
     
 }

@@ -27,11 +27,5 @@ class EventViewModel: ObservableObject {
         
     }
     
-    var stub: [ListModel] = [
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3"),
-        ListModel(image: "emptyLogo", title: "세종대학교", heartNum: "3")
-    ]
 }
 

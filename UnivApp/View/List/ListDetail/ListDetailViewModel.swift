@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 class ListDetailViewModel: ObservableObject {
     
@@ -14,15 +15,13 @@ class ListDetailViewModel: ObservableObject {
         case load(Int)
     }
     
-    @Published var listDetail: ListDetailModel = ListDetailModel()
     @Published var phase: Phase = .notRequested
-    @Published var departList: [DepartModel] = [
-        DepartModel(title: "공학계열", description: "6개 학과"),
-        DepartModel(title: "예체능계열", description: "11개 학과"),
-        DepartModel(title: "의학계열", description: "1개 학과"),
-        DepartModel(title: "인문사회계열", description: "12개 학과"),
-        DepartModel(title: "자연과학계열", description: "4개 학과")
-    ]
+    @Published var listDetail: ListDetailModel = ListDetailModel()
+    @Published var tuitionFeeData: [ChartData] = []
+    @Published var departmentData: [ChartData] = []
+    @Published var competitionRateData: [[ChartData]] = []
+    @Published var employmentRateData: [[ChartData]] = []
+    
     
     private var container: DIContainer
     private var subscriptions = Set<AnyCancellable>()
@@ -41,11 +40,55 @@ class ListDetailViewModel: ObservableObject {
                         self?.phase = .fail
                     }
                 } receiveValue: { [weak self] listDetail in
-                    self?.phase = .success
                     self?.listDetail = listDetail
+                    self?.setChartData()
                 }.store(in: &subscriptions)
 
         }
     }
     
+    func setChartData() {
+        if let tuitionResponses = listDetail.tuitionFeeResponse,
+           let departmentResponses = listDetail.departmentResponses,
+           let competitionRateResponses = listDetail.competitionRateResponses,
+           let employmentRateResponses = listDetail.employmentRateResponses {
+            
+            if let year = tuitionResponses.year,
+               let tuitionList = tuitionResponses.tuitionFeeResponseList {
+                for tuition in tuitionList {
+                    self.tuitionFeeData.append(ChartData(label: tuition.departmentType, value: Double(Double(tuition.feeAmount) / Double(12)), xLabel: "", yLabel: "", year: year))
+                }
+            }
+            
+            for depart in departmentResponses {
+                if let depart = depart,
+                   let name = depart.name,
+                   let type = depart.type {
+                    var sum: Int = 0
+                    for n in departmentResponses.compactMap({ $0?.name }) {
+                        sum += n.count
+                    }
+                    self.departmentData.append(ChartData(label: type, value: Double(Double(name.count) / Double(sum)), xLabel: "과", yLabel: "", year: ""))
+                }
+            }
+            
+            for competition in competitionRateResponses {
+                if let competition = competition,
+                   let earlyAdmissionRate = competition.earlyAdmissionRate,
+                   let regularAdmissionRate = competition.regularAdmissionRate,
+                   let year = competition.year {
+                    self.competitionRateData.append([ChartData(label: "수시", value: Double(earlyAdmissionRate), xLabel: "년도", yLabel: "비율", year: year), ChartData(label: "정시", value: Double(regularAdmissionRate), xLabel: "년도", yLabel: "비율", year: year)])
+                }
+            }
+            
+            for employment in employmentRateResponses {
+                if let employment = employment,
+                   let employmentRate = employment.employmentRate,
+                   let year = employment.year {
+                    self.employmentRateData.append([ChartData(label: "취업률", value: Double(employmentRate), xLabel: "년도", yLabel: "비율", year: year)])
+                }
+            }
+        }
+        self.phase = .success
+    }
 }

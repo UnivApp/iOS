@@ -18,7 +18,7 @@ struct MainTabView: View {
                 Group {
                     switch tab {
                     case .home:
-                        HomeView(viewModel: HomeViewModel(container: self.container, searchText: .init()), listViewModel: ListViewModel(container: self.container, searchText: ""))
+                        HomeView(viewModel: HomeViewModel(container: self.container), listViewModel: ListViewModel(container: self.container, searchText: ""))
                             .environmentObject(authViewModel)
                             .environmentObject(container)
                     case .list:
@@ -43,8 +43,8 @@ struct MainTabView: View {
                 .tabItem {
                     Label(tab.title, image: tab.imageName(selected: selectedTab == tab))
                 }
-                .tag(tab)
                 .navigationBarBackButtonHidden(true)
+                .tag(tab)
                 .onAppear {
                     UINavigationBar.appearance().backgroundColor = .clear
                     UIPageControl.appearance().isHidden = true
@@ -58,7 +58,7 @@ struct MainTabView: View {
 
 struct MainTabView_Preview: PreviewProvider {
     static let container: DIContainer = .init(services: StubServices())
-    static let authViewModel: AuthViewModel = AuthViewModel(container: .init(services: StubServices()))
+    static let authViewModel: AuthViewModel = AuthViewModel(container: .init(services: StubServices()), authState: .auth)
     
     static var previews: some View {
         MainTabView()

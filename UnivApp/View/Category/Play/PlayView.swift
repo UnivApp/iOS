@@ -17,16 +17,17 @@ struct PlayView: View {
     
     var body: some View {
         contentView
+            .navigationBarBackButtonHidden(true)
+            .toolbar(.hidden, for: .tabBar)
     }
     
     @ViewBuilder
     var contentView: some View {
         switch viewModel.phase {
         case .notRequested:
-            //TODO: - ExchangeView
             loadedView
                 .onAppear {
-                    //TODO: - load
+                    viewModel.send(action: .topPlaceLoad)
                 }
         case .loading:
             LoadingView(url: "congratulations", size: [150, 150])
@@ -58,9 +59,9 @@ struct PlayView: View {
                 .padding(.horizontal, 20)
                 Group {
                     if segmentType == .hotplace {
-                        HotPlaceSegmentView(viewModel: PlayViewModel(container: self.container, searchText: ""))
+                        HotPlaceSegmentView(topPlaceData: viewModel.topPlaceData)
                     } else {
-                        SchoolSegmentView(viewModel: PlayViewModel(container: self.container, searchText: ""), listViewModel: ListViewModel(container: self.container, searchText: ""))
+                        SchoolSegmentView(viewModel: PlayViewModel(container: self.container), listViewModel: ListViewModel(container: self.container, searchText: ""))
                     }
                 }
             }
@@ -70,7 +71,6 @@ struct PlayView: View {
                         Button(action: {
                             dismiss()
                         }, label: {
-                            //TODO: - whiteback 추가
                             Image("blackback")
                                 .resizable()
                                 .scaledToFit()
@@ -84,16 +84,15 @@ struct PlayView: View {
                 }
             }
         }
-        .navigationBarBackButtonHidden(true)
-        .toolbar(.hidden, for: .tabBar)
+        
     }
 }
 
 struct PlayView_Previews: PreviewProvider {
     static let container = DIContainer(services: StubServices())
-    static let authViewModel = AuthViewModel(container: .init(services: StubServices()))
+    static let authViewModel = AuthViewModel(container: .init(services: StubServices()), authState: .auth)
     static var previews: some View {
-        PlayView(viewModel: PlayViewModel(container: Self.container, searchText: ""))
+        PlayView(viewModel: PlayViewModel(container: Self.container))
             .environmentObject(Self.authViewModel)
             .environmentObject(Self.container)
     }

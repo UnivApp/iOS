@@ -17,6 +17,8 @@ struct SearchView: View {
             HStack {
                 Button {
                     listViewModel.send(action: .search)
+                    listViewModel.searchText = ""
+                    isFocused = false
                 } label: {
                     Image("search")
                         .resizable()
@@ -29,6 +31,12 @@ struct SearchView: View {
                     .focused($isFocused)
                     .font(.system(size: 15, weight: .regular))
                     .padding()
+                    .submitLabel(.search)
+                    .onSubmit {
+                        listViewModel.send(action: .search)
+                        listViewModel.searchText = ""
+                        isFocused = false
+                    }
             }
             .padding(.horizontal, 10)
             .background(Color.white)

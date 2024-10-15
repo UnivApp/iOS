@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import SwiftKeychainWrapper
 
 @main
 struct UnivAppApp: App {
-    @StateObject var container: DIContainer = .init(services: Services())
+    @ObservedObject var container: DIContainer = .init(services: Services())
+    @ObservedObject var authViewModel: AuthViewModel = .init(container: .init(services: Services()), authState: .unAuth)
+    
     var body: some Scene {
         WindowGroup {
             SplashView()

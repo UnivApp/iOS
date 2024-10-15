@@ -11,30 +11,46 @@ import Combine
 class FoodViewModel: ObservableObject {
     
     enum Action {
-        
+        case topLoad
+        case detailLoad(Int)
     }
     
-    @Published var searchText: String
-    
     private var container: DIContainer
+    private var subscriptions = Set<AnyCancellable>()
     
-    init(searchText: String, container: DIContainer) {
-        self.searchText = searchText
+    init(container: DIContainer) {
         self.container = container
     }
     
-    func send(action: Action) {
-        
-    }
+    @Published var topFoodData: [FoodModel] = []
+    @Published var schoolFoodData: [FoodModel] = []
+    @Published var phase: Phase = .notRequested
     
-    var stub: [FoodModel] = [
-        FoodModel(title: "냉모밀", description: "시원한 수제 육수로 가슴 속 까지 시원해지는", image: "food_empty", school: "서울대학교 맛집 1위"),
-        FoodModel(title: "냉모밀", description: "시원한 수제 육수로 가슴 속 까지 시원해지는", image: "food_empty", school: "서울대학교 맛집 1위"),
-        FoodModel(title: "냉모밀", description: "시원한 수제 육수로 가슴 속 까지 시원해지는", image: "food_empty", school: "서울대학교 맛집 1위"),
-        FoodModel(title: "냉모밀", description: "시원한 수제 육수로 가슴 속 까지 시원해지는", image: "food_empty", school: "서울대학교 맛집 1위"),
-        FoodModel(title: "냉모밀", description: "시원한 수제 육수로 가슴 속 까지 시원해지는", image: "food_empty", school: "서울대학교 맛집 1위"),
-        FoodModel(title: "냉모밀", description: "시원한 수제 육수로 가슴 속 까지 시원해지는", image: "food_empty", school: "서울대학교 맛집 1위")
-    ]
-
+    func send(action: Action) {
+        switch action {
+        case .topLoad:
+            self.phase = .loading
+            container.services.foodService.getTopRestaurants()
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.phase = .fail
+                    }
+                } receiveValue: { [weak self] topFoodData in
+                    self?.topFoodData = topFoodData
+                    self?.phase = .success
+                }.store(in: &subscriptions)
+        case let .detailLoad(universityId):
+            self.phase = .loading
+            container.services.foodService.getSchoolRestaurants(universityId: universityId)
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.phase = .fail
+                    }
+                } receiveValue: { [weak self] schoolFoodData in
+                    self?.schoolFoodData = schoolFoodData
+                    self?.phase = .success
+                }.store(in: &subscriptions)
+        }
+    }
 }
 

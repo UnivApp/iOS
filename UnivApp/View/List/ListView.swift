@@ -43,6 +43,12 @@ struct ListView: View {
             LoadingView(url: "congratulations", size: [150, 150])
         case .success:
             loadedView
+                .onAppear {
+                    viewModel.searchText = ""
+                }
+                .onTapGesture {
+                    self.isFocused = false
+                }
         case .fail:
             ErrorView()
         }
@@ -53,8 +59,9 @@ struct ListView: View {
             VStack {
                 Spacer()
                 
-                SearchView(searchText: $viewModel.searchText)
+                SearchView(isFocused: self._isFocused, searchText: $viewModel.searchText)
                     .environmentObject(self.viewModel)
+                    
                 
                 Spacer()
                 
@@ -142,7 +149,7 @@ struct ListView: View {
 
 struct ListView_Previews: PreviewProvider {
     static let container = DIContainer(services: StubServices())
-    static let authViewModel = AuthViewModel(container: .init(services: StubServices()))
+    static let authViewModel = AuthViewModel(container: .init(services: StubServices()), authState: .auth)
     static var previews: some View {
         ListView(viewModel: ListViewModel(container: self.container, searchText: ""))
             .environmentObject(Self.authViewModel)

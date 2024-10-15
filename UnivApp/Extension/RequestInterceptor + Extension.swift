@@ -9,8 +9,7 @@ import Foundation
 import Alamofire
 import Combine
 import SwiftKeychainWrapper
-
-//public protocol RequestInterceptor: RequestAdapter, RequestRetrier {}
+import SwiftUI
 
 final class TokenRequestInterceptor: RequestInterceptor {
     private var subscriptions = Set<AnyCancellable>()
@@ -33,23 +32,25 @@ final class TokenRequestInterceptor: RequestInterceptor {
                       dueTo error: Error,
                       completion: @escaping (RetryResult) -> Void) {
         let retryLimit = 2
-
+        
         guard let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 else {
             return completion(.doNotRetryWithError(error))
         }
+            
         guard request.retryCount < retryLimit else { return completion(.doNotRetryWithError(error)) }
         Task {
             guard let refreshToken = KeychainWrapper.standard.string(forKey: "JWTrefreshToken") else {
                 return completion(.doNotRetryWithError(error))
             }
             Alamofire().reissueRefresh(url: APIEndpoint.refresh.urlString, refresh: refreshToken)
-                .sink { completion in
-                    switch completion {
+                .sink { completionStatus in
+                    switch completionStatus {
                     case .finished:
                         print("토큰 재발행 성공")
                     case let .failure(error):
                         print("토큰 재발행 실패 \(error)")
-                        //TODO: - 재로그인
+                        KeychainWrapper.standard.removeAllKeys()
+                        return completion(.doNotRetryWithError(error))
                     }
                 } receiveValue: { (response: UserModel) in
                     KeychainWrapper.standard.removeAllKeys()
