@@ -79,11 +79,9 @@ struct FoodHotPlaceView: View {
                 .padding(.vertical, 20)
                 
                 ForEach(model.indices, id: \.self) { index in
-                    VStack {
-                        FoodHotPlaceCell(cell: model[index], isPresented: $isPresented, selectedModel: $selectedModel, isFullCover: $isFullCover)
-                            .id(index)
-                            .padding(.vertical, -5)
-                    }
+                    FoodHotPlaceCell(cell: model[index], isPresented: $isPresented, selectedModel: $selectedModel, isFullCover: $isFullCover)
+                        .id(index)
+                        .padding(.vertical, -5)
                 }
             }
         }

@@ -11,7 +11,7 @@ import SwiftUI
 enum CategoryType: String, CaseIterable {
     case event
     case food
-    case graduate
+    case Diagnosis
     case info
     case initiative
     case money
@@ -24,8 +24,8 @@ enum CategoryType: String, CaseIterable {
             return "대학행사"
         case .food:
             return "맛집"
-        case .graduate:
-            return "졸업자"
+        case .Diagnosis:
+            return "학과매칭"
         case .info:
             return "대입기사"
         case .initiative:
@@ -45,8 +45,8 @@ enum CategoryType: String, CaseIterable {
             return AnyView(EventView(viewModel: EventViewModel(searchText: .init(), container: .init(services: Services()))))
         case .food:
             return AnyView(FoodView(viewModel: FoodViewModel(container: .init(services: Services()))))
-        case .graduate:
-            return AnyView(GraduateView(viewModel: GraduateViewModel(searchText: .init(), container: .init(services: Services()))))
+        case .Diagnosis:
+            return AnyView(DiagnosisView(viewModel: DiagnosisViewModel(container: .init(services: Services()))))
         case .info:
             return AnyView(InfoView(viewModel: InfoViewModel(container: .init(services: Services()))))
         case .initiative:

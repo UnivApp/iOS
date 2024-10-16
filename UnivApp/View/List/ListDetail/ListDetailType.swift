@@ -14,7 +14,7 @@ enum ListDetailType: String, CaseIterable {
     case money
     case initiative
     case info
-    case graduate
+    case Diagnosis
     case food
     case event
     
@@ -30,8 +30,8 @@ enum ListDetailType: String, CaseIterable {
             return "랭킹"
         case .info:
             return "대입기사"
-        case .graduate:
-            return "졸업자"
+        case .Diagnosis:
+            return "학과매칭"
         case .food:
             return "맛집"
         case .event:
@@ -51,8 +51,8 @@ enum ListDetailType: String, CaseIterable {
             return Image("initiative")
         case .info:
             return Image("info")
-        case .graduate:
-            return Image("graduate")
+        case .Diagnosis:
+            return Image("Diagnosis")
         case .food:
             return Image("food")
         case .event:
@@ -72,8 +72,8 @@ enum ListDetailType: String, CaseIterable {
             return "대학의 순위를 확인해 보세요!"
         case .info:
             return "대학의 기사를 확인해 보세요!"
-        case .graduate:
-            return "해당 대학의 졸업자를 확인해 보세요!"
+        case .Diagnosis:
+            return "나에게 맞는 학과를 확인해 보세요!"
         case .food:
             return "대학 주변의 맛집을 확인해 보세요!"
         case .event:
@@ -87,8 +87,8 @@ enum ListDetailType: String, CaseIterable {
             return AnyView(EventView(viewModel: EventViewModel(searchText: .init(), container: .init(services: Services()))))
         case .food:
             return AnyView(FoodView(viewModel: FoodViewModel(container: .init(services: Services()))))
-        case .graduate:
-            return AnyView(GraduateView(viewModel: GraduateViewModel(searchText: .init(), container: .init(services: Services()))))
+        case .Diagnosis:
+            return AnyView(DiagnosisView(viewModel: DiagnosisViewModel(container: .init(services: Services()))))
         case .info:
             return AnyView(InfoView(viewModel: InfoViewModel(container: .init(services: Services()))))
         case .initiative:
