@@ -13,53 +13,68 @@ struct DiagnosisDetailView: View {
     @State private var opacity: Double = 0
     @State private var diagnosisIndex: Int = 0
     @State private var isNext: Bool = false
+    @State private var isResult: Bool = false
     var body: some View {
+        contentView
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    HStack(spacing: 0) {
+                        Button(action: {
+                            dismiss()
+                        }, label: {
+                            Image("blackback")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20, height: 20)
+                        })
+                    }
+                }
+            }
+            .navigationBarBackButtonHidden(true)
+            .toolbar(.hidden, for: .tabBar)
+    }
+    
+    @ViewBuilder
+    var contentView: some View {
         NavigationStack {
-            VStack {
-                DiagnosisQuestionView(isNext: $isNext, model: viewModel.question[diagnosisIndex])
-                    .environmentObject(viewModel)
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarLeading) {
-                            HStack(spacing: 0) {
-                                Button(action: {
-                                    dismiss()
-                                }, label: {
-                                    Image("blackback")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 20, height: 20)
-                                })
+            if isResult {
+                DiagnosisResultView(viewModel: viewModel)
+            } else {
+                VStack {
+                    ProgressView(value: Double(diagnosisIndex) / Double(viewModel.question.count))
+                        .tint(.orange)
+                        .padding(.horizontal, 20)
+                    
+                    DiagnosisQuestionView(isNext: $isNext, model: viewModel.question[diagnosisIndex])
+                        .environmentObject(viewModel)
+                }
+                .onChange(of: isNext) {
+                    if isNext {
+                        if self.diagnosisIndex < viewModel.question.count - 1 {
+                            withAnimation {
+                                self.diagnosisIndex += 1
+                                self.isNext = false
                             }
+                        } else {
+                            print("토탈 : \(viewModel.totalAnswer)")
+                            self.isResult = true
                         }
                     }
-            }
-            .onChange(of: isNext) {
-                if isNext {
-                    if self.diagnosisIndex < viewModel.question.count - 1 {
-                        withAnimation {
-                            self.diagnosisIndex += 1
-                            self.isNext = false
-                        }
-                    } else {
-                        print("토탈 : \(viewModel.totalAnswer)")
+                }
+                .onAppear {
+                    withAnimation {
+                        opacity = 1
                     }
                 }
-            }
-            .onAppear {
-                withAnimation {
-                    opacity = 1
+                .onDisappear {
+                    withAnimation {
+                        opacity = 0
+                    }
                 }
+                .opacity(opacity)
+                .animation(.easeInOut(duration: 1.5), value: opacity)
             }
-            .onDisappear {
-                withAnimation {
-                    opacity = 0
-                }
-            }
-            .opacity(opacity)
-            .animation(.easeInOut(duration: 1.5), value: opacity)
         }
-        .navigationBarBackButtonHidden(true)
-        .toolbar(.hidden, for: .tabBar)
     }
 }
 

@@ -80,6 +80,7 @@ class DiagnosisViewModel: ObservableObject {
     ]
     @Published var selectedAnswer: Array<Int> = Array(repeating: 0, count: 5)
     @Published var totalAnswer: [Int] = []
+    @Published var result: DiagnosisResultModel = .init(type: "전문 연구형", recommand: ["생명과학과", "화학과", "사회학과"], description: "이 점수대에 해당하는 학생들은 깊이 있는 연구와 탐구를 통해 새로운 지식을 창출하는 데 관심이 많습니다. 생명과학과나 화학과와 같은 분야에서는 실험과 연구가 중요한 역할을 하므로 이 학생들이 과학적 사고와 문제 해결 능력을 발휘할 수 있는 환경을 제공합니다. 사회학과 또한 사회적 현상에 대한 깊은 이해와 연구가 필요한 분야이므로 이들이 갖춘 탐구적인 성향과 잘 맞아떨어집니다. 전문 연구형 학생들은 학문적 깊이를 필요로 하는 분야에서 뛰어난 성과를 이룰 가능성이 높습니다.")
     
     init(container: DIContainer) {
         self.container = container

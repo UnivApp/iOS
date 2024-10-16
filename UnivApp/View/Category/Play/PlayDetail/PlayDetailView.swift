@@ -76,8 +76,8 @@ struct PlayDetailView: View {
                                 }
                                 
                                 Text(placeData.description)
-                                    .font(.system(size: 15, weight: .regular))
-                                    .foregroundColor(.black)
+                                    .font(.system(size: 15, weight: .semibold))
+                                    .foregroundColor(.black.opacity(0.7))
                                     .lineSpacing(5)
                                 
                                 HStack {
@@ -94,8 +94,8 @@ struct PlayDetailView: View {
                                     .font(.system(size: 17, weight: .bold))
                                 
                                 Text(placeData.tip)
-                                    .foregroundColor(.black)
-                                    .font(.system(size: 15, weight: .regular))
+                                    .foregroundColor(.black.opacity(0.7))
+                                    .font(.system(size: 15, weight: .semibold))
                                     .lineSpacing(5)
                             }
                         }

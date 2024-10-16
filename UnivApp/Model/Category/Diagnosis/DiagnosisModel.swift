@@ -10,10 +10,10 @@ import Foundation
 struct DiagnosisModel: Codable, Hashable {
     var category: String?
     var question: [String]?
-    
-    init(category: String, question: [String]) {
-        self.category = category
-        self.question = question
-    }
 }
 
+struct DiagnosisResultModel: Codable, Hashable {
+    var type: String?
+    var recommand: [String]?
+    var description: String?
+}
