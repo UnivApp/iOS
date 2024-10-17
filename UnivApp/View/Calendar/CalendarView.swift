@@ -44,6 +44,8 @@ struct CalendarView: UIViewRepresentable {
         func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
             if let data = parent.groupedData[date] {
                 self.parent.selectedData = data
+            } else {
+                self.parent.selectedData = []
             }
         }
         
@@ -111,8 +113,8 @@ class CalendarViewCell: FSCalendarCell {
         contentView.addSubview(eventImageView)
         eventImageView.snp.makeConstraints { make in
             make.width.height.equalTo(5)
-            make.bottom.equalToSuperview().inset(5)
             make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(8)
         }
     }
     
