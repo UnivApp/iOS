@@ -95,7 +95,7 @@ struct InitiativeView: View {
                         NavigationLink(destination: InitiativeDetailView(model: viewModel.QSData, title: "QS")) {
                             Text("더보기")
                                 .font(.system(size: 12, weight: .semibold))
-                                .foregroundColor(.black)
+                                .foregroundColor(.gray)
                             Image("arrow_fill")
                                 .resizable()
                                 .scaledToFit()

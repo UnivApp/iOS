@@ -14,11 +14,33 @@ struct PlayDetailView: View {
     @State var checkScrollHeight: Bool = false
     @State private var currentIndex: Int = 0
     @State private var imageResource: Bool = false
+    @State private var imageScreenCover: Bool = false
+    @State private var opacity: Double = 0
     
     var playDetailModel: PlayDetailModel
     
     var body: some View {
         loadedView
+            .fullScreenCover(isPresented: $imageScreenCover) {
+                if let imagesData = playDetailModel.placeData?.images{
+                    ImageScreen(images: imagesData.compactMap({ $0?.imageUrl}), isPopup: $imageScreenCover)
+                        .presentationBackground(.black.opacity(0.7))
+                        .onAppear {
+                            withAnimation {
+                                opacity = 1
+                            }
+                        }
+                        .onDisappear {
+                            withAnimation {
+                                opacity = 0
+                            }
+                        }
+                        .opacity(opacity)
+                        .animation(.easeInOut(duration: 1.5), value: opacity)
+                    
+                }
+            }
+            .transaction { $0.disablesAnimations = true }
     }
     
     var loadedView: some View {
@@ -30,10 +52,14 @@ struct PlayDetailView: View {
                             if let images = placeData.images {
                                 ForEach(images.indices, id: \.self) { index in
                                     if let image = images[index] {
-                                        KFImage(URL(string: image.imageUrl ?? ""))
-                                            .resizable()
-                                            .scaledToFit()
-                                            .tag(index)
+                                        Button {
+                                            self.imageScreenCover = true
+                                        } label: {
+                                            KFImage(URL(string: image.imageUrl ?? ""))
+                                                .resizable()
+                                                .scaledToFit()
+                                                .tag(index)
+                                        }
                                     } else {
                                         Image("no_image")
                                             .resizable()
@@ -197,6 +223,95 @@ struct PlayDetailView: View {
             }
         }
         .ignoresSafeArea()
+    }
+}
+
+fileprivate struct ImageScreen: View {
+    var images: [String]
+    
+    @Binding var isPopup: Bool
+    
+    @State private var currentIndex: Int = 0
+    @GestureState private var magnifyBy = 1.0
+    @State private var lastScaleValue: CGFloat = 1.0
+    @State private var dragOffset: CGSize = .zero
+    @State private var lastDragOffset: CGSize = .zero
+    
+    var magnification: some Gesture {
+        MagnifyGesture()
+            .updating($magnifyBy) { value, gestureState, _ in
+                gestureState = value.magnification
+            }
+            .onEnded { value in
+                lastScaleValue *= value.magnification
+                if lastScaleValue < 1.0 {
+                    lastScaleValue = 1.0
+                    dragOffset = .zero
+                    lastDragOffset = .zero
+                }
+            }
+    }
+    
+    var drag: some Gesture {
+        DragGesture()
+            .onChanged { value in
+                if lastScaleValue * magnifyBy > 1.0 {
+                    let newOffset = CGSize(width: lastDragOffset.width + value.translation.width,
+                                           height: lastDragOffset.height + value.translation.height)
+                    
+                    let maxOffsetX = (lastScaleValue - 1) * UIScreen.main.bounds.width / 2
+                    let maxOffsetY = (lastScaleValue - 1) * UIScreen.main.bounds.height / 2
+                    
+                    dragOffset = CGSize(
+                        width: min(max(newOffset.width, -maxOffsetX), maxOffsetX),
+                        height: min(max(newOffset.height, -maxOffsetY), maxOffsetY)
+                    )
+                }
+            }
+            .onEnded { _ in
+                lastDragOffset = dragOffset
+            }
+    }
+    
+    var body: some View {
+        ZStack {
+            TabView(selection: $currentIndex) {
+                ForEach(images.indices, id: \.self) { index in
+                    KFImage(URL(string: images[index]))
+                        .resizable()
+                        .scaledToFit()
+                        .tag(index)
+                        .scaleEffect(max(lastScaleValue * magnifyBy, 1.0))
+                        .offset(x: dragOffset.width, y: dragOffset.height)
+                        .gesture(magnification.simultaneously(with: lastScaleValue > 1.0 ? drag : nil))
+                }
+                .overlay(alignment: .bottomTrailing) {
+                    CustomPageControl(currentPage: $currentIndex, numberOfPages: images.count)
+                }
+            }
+            .padding(.all, 0)
+            .tabViewStyle(PageTabViewStyle())
+            
+            VStack {
+                HStack {
+                    Spacer()
+                    Button {
+                        withAnimation {
+                            self.isPopup = false
+                        }
+                    } label: {
+                        Image("close_white")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(.gray)
+                            .padding(.top, 20)
+                            .padding(.trailing, 20)
+                    }
+                }
+                Spacer()
+            }
+        }
     }
 }
 

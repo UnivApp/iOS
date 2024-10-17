@@ -81,9 +81,9 @@ struct FoodHotPlaceView: View {
                 ForEach(model.indices, id: \.self) { index in
                     FoodHotPlaceCell(cell: model[index], isPresented: $isPresented, selectedModel: $selectedModel, isFullCover: $isFullCover)
                         .id(index)
-                        .padding(.vertical, -5)
                 }
             }
+            .padding(.bottom, 30)
         }
     }
 }

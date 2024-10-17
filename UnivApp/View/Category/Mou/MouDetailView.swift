@@ -55,6 +55,7 @@ struct MouDetailView: View {
             ScrollView(.vertical, showsIndicators: true) {
                 Text(model.content)
                     .font(.system(size: 12, weight: .semibold))
+                    .padding(.bottom, 30)
             }
         }
         .foregroundColor(.black)
