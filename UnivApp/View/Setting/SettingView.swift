@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct SettingView: View {
-    @EnvironmentObject var authViewModel: AuthViewModel
-    @EnvironmentObject var container: DIContainer
     @StateObject var viewModel: SettingViewModel
     
     var body: some View {
@@ -137,6 +135,4 @@ struct SettingView: View {
 
 #Preview {
     SettingView(viewModel: SettingViewModel(container: .init(services: StubServices())))
-        .environmentObject(AuthViewModel(container: .init(services: StubServices()), authState: .auth))
-        .environmentObject(DIContainer(services: StubServices()))
 }

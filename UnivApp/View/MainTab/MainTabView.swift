@@ -19,25 +19,18 @@ struct MainTabView: View {
                     switch tab {
                     case .home:
                         HomeView(viewModel: HomeViewModel(container: self.container), listViewModel: ListViewModel(container: self.container, searchText: ""))
-                            .environmentObject(authViewModel)
-                            .environmentObject(container)
+                        
                     case .list:
                         ListView(viewModel: ListViewModel(container: self.container, searchText: .init()))
-                            .environmentObject(authViewModel)
-                            .environmentObject(container)
+                        
                     case .calendar:
-                        CalendarContainer(viewModel: CalendarViewModel(), eventDates: [
-                            Calendar.current.startOfDay(for: Date()): UIImage(named: "star")!
-                        ])
-                        .environmentObject(authViewModel)
+                        CalendarContainer(viewModel: CalendarViewModel(container: .init(services: Services())))
+                        
                     case .heart:
                         HeartView(viewModel: HeartViewModel(container: self.container))
-                            .environmentObject(authViewModel)
-                            .environmentObject(container)
+                        
                     case .setting:
                         SettingView(viewModel: SettingViewModel(container: self.container))
-                            .environmentObject(authViewModel)
-                            .environmentObject(container)
                     }
                 }
                 .tabItem {

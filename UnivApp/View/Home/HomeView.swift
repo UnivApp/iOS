@@ -11,8 +11,6 @@ import Kingfisher
 struct HomeView: View {
     @StateObject var viewModel: HomeViewModel
     @StateObject var listViewModel: ListViewModel
-    @EnvironmentObject var continer: DIContainer
-    @EnvironmentObject var authViewModel: AuthViewModel
     
     @State private var isLoading: Bool = false
     @State private var selectedSegment: SplitType = .employment
@@ -164,8 +162,6 @@ struct HomeView: View {
                                 .font(.system(size: 10, weight: .semibold))
                         }
                     }
-                    .environmentObject(continer)
-                    .environmentObject(authViewModel)
                 }
             }
             .padding(.horizontal, 10)
@@ -217,7 +213,5 @@ struct HomeView_Previews: PreviewProvider {
     static let authViewModel = AuthViewModel(container: .init(services: StubServices()), authState: .auth)
     static var previews: some View {
         HomeView(viewModel: HomeViewModel(container: Self.container), listViewModel: ListViewModel(container: Self.container, searchText: ""))
-            .environmentObject(Self.authViewModel)
-            .environmentObject(Self.container)
     }
 }

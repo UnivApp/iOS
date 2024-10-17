@@ -36,6 +36,8 @@ enum APIEndpoint {
     case topCompetition
     case employment
     case competition
+    //MARK: - Calendar
+    case totalCalendar
     
     var urlString: String {
         switch self {
@@ -90,6 +92,9 @@ enum APIEndpoint {
             return "http://43.200.143.28:8080/api/employment-rate?universityId="
         case .competition:
             return "http://43.200.143.28:8080/api/competition-rate?universityId="
+            
+        case .totalCalendar:
+            return "http://43.200.143.28:8080/api/calendar-events"
         }
     }
 }
