@@ -47,6 +47,7 @@ struct CalendarContainer: View {
                     CalendarView(calenderData: viewModel.calendarData, selectedData: $viewModel.selectedCalendar)
                         .frame(height: isSelected ? UIScreen.main.bounds.height / 1.7 : UIScreen.main.bounds.height / 1.2)
                         .animation(.easeInOut, value: isSelected)
+                        .padding(.horizontal, -10)
                     
                     ForEach(viewModel.selectedCalendar, id: \.id) { item in
                         CalendarDataCell(model: item)

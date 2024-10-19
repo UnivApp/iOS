@@ -130,6 +130,11 @@
 		E4C264472CB40AF900E01480 /* FoodSchoolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C264462CB40AF900E01480 /* FoodSchoolView.swift */; };
 		E4CCE6C82CC0EEE300483A87 /* CalendarContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CCE6C72CC0EEE300483A87 /* CalendarContainer.swift */; };
 		E4CCE6CA2CC0F2BA00483A87 /* CalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CCE6C92CC0F2BA00483A87 /* CalendarService.swift */; };
+		E4CCE6CC2CC2797900483A87 /* MoneyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CCE6CB2CC2797900483A87 /* MoneyService.swift */; };
+		E4CCE6CE2CC27A1C00483A87 /* MoneyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CCE6CD2CC27A1C00483A87 /* MoneyModel.swift */; };
+		E4CCE6D82CC2C7B000483A87 /* coinGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = E4CCE6D72CC2C7B000483A87 /* coinGif.gif */; };
+		E4CCE6DA2CC3892E00483A87 /* MoneySelectedType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CCE6D92CC3892E00483A87 /* MoneySelectedType.swift */; };
+		E4CCE6DF2CC396A200483A87 /* MoneyDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CCE6DE2CC396A200483A87 /* MoneyDetailViewModel.swift */; };
 		E4CEEFB12CB517E8001F4DAE /* FoodService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CEEFB02CB517E8001F4DAE /* FoodService.swift */; };
 		E4CEEFB42CB51F28001F4DAE /* FoodSchoolDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CEEFB32CB51F28001F4DAE /* FoodSchoolDetailView.swift */; };
 		E4CEEFB62CB54513001F4DAE /* InfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CEEFB52CB54513001F4DAE /* InfoService.swift */; };
@@ -279,6 +284,11 @@
 		E4C264462CB40AF900E01480 /* FoodSchoolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSchoolView.swift; sourceTree = "<group>"; };
 		E4CCE6C72CC0EEE300483A87 /* CalendarContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarContainer.swift; sourceTree = "<group>"; };
 		E4CCE6C92CC0F2BA00483A87 /* CalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarService.swift; sourceTree = "<group>"; };
+		E4CCE6CB2CC2797900483A87 /* MoneyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyService.swift; sourceTree = "<group>"; };
+		E4CCE6CD2CC27A1C00483A87 /* MoneyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyModel.swift; sourceTree = "<group>"; };
+		E4CCE6D72CC2C7B000483A87 /* coinGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = coinGif.gif; sourceTree = "<group>"; };
+		E4CCE6D92CC3892E00483A87 /* MoneySelectedType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneySelectedType.swift; sourceTree = "<group>"; };
+		E4CCE6DE2CC396A200483A87 /* MoneyDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyDetailViewModel.swift; sourceTree = "<group>"; };
 		E4CEEFB02CB517E8001F4DAE /* FoodService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodService.swift; sourceTree = "<group>"; };
 		E4CEEFB32CB51F28001F4DAE /* FoodSchoolDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSchoolDetailView.swift; sourceTree = "<group>"; };
 		E4CEEFB52CB54513001F4DAE /* InfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoService.swift; sourceTree = "<group>"; };
@@ -394,6 +404,7 @@
 				E4953D2C2C89C770008CBDE5 /* star.gif */,
 				E4953D2E2C89C770008CBDE5 /* load.gif */,
 				E4953D2A2C89C76F008CBDE5 /* location.gif */,
+				E4CCE6D72CC2C7B000483A87 /* coinGif.gif */,
 			);
 			path = Gif;
 			sourceTree = "<group>";
@@ -434,7 +445,7 @@
 		E4953D612C8D8489008CBDE5 /* Money */ = {
 			isa = PBXGroup;
 			children = (
-				E4953D622C8D8497008CBDE5 /* ChartData.swift */,
+				E4CCE6CD2CC27A1C00483A87 /* MoneyModel.swift */,
 			);
 			path = Money;
 			sourceTree = "<group>";
@@ -571,9 +582,10 @@
 		E49C9FC42C86EFD1001F43A3 /* Money */ = {
 			isa = PBXGroup;
 			children = (
+				E4CCE6E02CC396A500483A87 /* Detail */,
 				E49C9FB92C86ED75001F43A3 /* MoneyView.swift */,
 				E49C9FDD2C87055D001F43A3 /* MoneyViewModel.swift */,
-				E4953D472C89D67C008CBDE5 /* MoneyDetailView.swift */,
+				E4CCE6D92CC3892E00483A87 /* MoneySelectedType.swift */,
 			);
 			path = Money;
 			sourceTree = "<group>";
@@ -728,6 +740,7 @@
 			isa = PBXGroup;
 			children = (
 				E4953D5D2C8B0DC3008CBDE5 /* Object.swift */,
+				E4953D622C8D8497008CBDE5 /* ChartData.swift */,
 				E4C2643D2CB3FCF500E01480 /* Category */,
 				E4F04C0D2C987C9800F653DF /* Calendar */,
 				E4953D812C8EED27008CBDE5 /* Home */,
@@ -847,6 +860,7 @@
 				E4CEEFB02CB517E8001F4DAE /* FoodService.swift */,
 				E4CEEFB52CB54513001F4DAE /* InfoService.swift */,
 				E41589192CBE409D00EDB211 /* MouService.swift */,
+				E4CCE6CB2CC2797900483A87 /* MoneyService.swift */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -858,6 +872,15 @@
 				E4C264442CB40AF200E01480 /* FoodHotPlaceView.swift */,
 			);
 			path = FoodSegment;
+			sourceTree = "<group>";
+		};
+		E4CCE6E02CC396A500483A87 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				E4953D472C89D67C008CBDE5 /* MoneyDetailView.swift */,
+				E4CCE6DE2CC396A200483A87 /* MoneyDetailViewModel.swift */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 		E4CEEFB22CB51F1A001F4DAE /* School */ = {
@@ -1079,6 +1102,7 @@
 				E4953D302C89C770008CBDE5 /* firework.gif in Resources */,
 				E41589372CBE923400EDB211 /* DG2.gif in Resources */,
 				E41589392CBE92DE00EDB211 /* DG5.gif in Resources */,
+				E4CCE6D82CC2C7B000483A87 /* coinGif.gif in Resources */,
 				E4B3FCCC2C7751DD00CB98F3 /* Assets.xcassets in Resources */,
 				E4953D2F2C89C770008CBDE5 /* location.gif in Resources */,
 				E4953D312C89C770008CBDE5 /* star.gif in Resources */,
@@ -1137,6 +1161,7 @@
 				E4953D242C897CCE008CBDE5 /* ListDetailView.swift in Sources */,
 				E49C9FDA2C870557001F43A3 /* MouViewModel.swift in Sources */,
 				E4953D482C89D67C008CBDE5 /* MoneyDetailView.swift in Sources */,
+				E4CCE6DF2CC396A200483A87 /* MoneyDetailViewModel.swift in Sources */,
 				E4F04C0F2C987CA500F653DF /* CalendarModel.swift in Sources */,
 				E4B3FD082C775B5300CB98F3 /* LoginView.swift in Sources */,
 				E4F04BFA2C94479100F653DF /* AdMobView.swift in Sources */,
@@ -1193,10 +1218,12 @@
 				E4B3FD372C7882C200CB98F3 /* CategoryType.swift in Sources */,
 				E4CEEFB82CB675A1001F4DAE /* ListCategoryView.swift in Sources */,
 				E49C9FF92C870C36001F43A3 /* PlayModel.swift in Sources */,
+				E4CCE6DA2CC3892E00483A87 /* MoneySelectedType.swift in Sources */,
 				E4D626012CA5347E008596D0 /* SearchViewModelType.swift in Sources */,
 				E49C9FB02C86ED28001F43A3 /* EventView.swift in Sources */,
 				E4B3FD022C77563600CB98F3 /* DIContainer.swift in Sources */,
 				E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */,
+				E4CCE6CE2CC27A1C00483A87 /* MoneyModel.swift in Sources */,
 				E409A1412CAD563600E9CB1C /* PlaySchoolView.swift in Sources */,
 				E4C264452CB40AF200E01480 /* FoodHotPlaceView.swift in Sources */,
 				E4CEEFBA2CB7F193001F4DAE /* EmploymentModel.swift in Sources */,
@@ -1215,6 +1242,7 @@
 				E4B3FD262C77A26D00CB98F3 /* AuthService.swift in Sources */,
 				E4953D282C899013008CBDE5 /* ListDetailType.swift in Sources */,
 				E4953D5E2C8B0DC3008CBDE5 /* Object.swift in Sources */,
+				E4CCE6CC2CC2797900483A87 /* MoneyService.swift in Sources */,
 				E4953DA22C906399008CBDE5 /* WebKitView.swift in Sources */,
 				E40135EC2CA1CDEF0021D351 /* PlaySegmentType.swift in Sources */,
 				E4953D632C8D8497008CBDE5 /* ChartData.swift in Sources */,

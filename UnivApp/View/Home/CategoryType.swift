@@ -52,7 +52,7 @@ enum CategoryType: String, CaseIterable {
         case .initiative:
             return AnyView(InitiativeView(viewModel: InitiativeViewModel(container: .init(services: Services()))))
         case .money:
-            return AnyView(MoneyView(viewModel: MoneyViewModel(searchText: .init(), container: .init(services: Services()))))
+            return AnyView(MoneyView(listViewModel: ListViewModel(container: .init(services: Services()), searchText: .init()), viewModel: MoneyViewModel(container: .init(services: Services()))))
         case .mou:
             return AnyView(MouView(viewModel: MouViewModel(container: .init(services: Services()))))
         case .play:

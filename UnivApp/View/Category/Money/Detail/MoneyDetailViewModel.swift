@@ -1,17 +1,18 @@
 //
-//  MoneyViewModel.swift
+//  MoneyDetailViewModel.swift
 //  UnivApp
 //
-//  Created by 정성윤 on 9/3/24.
+//  Created by 정성윤 on 10/19/24.
 //
 import Foundation
 import Combine
 import Charts
 
-class MoneyViewModel: ObservableObject {
+class MoneyDetailViewModel: ObservableObject {
     
     enum Action {
         case load(String, String)
+        case addressLoad(Int, String)
     }
     
     @Published var phase: Phase = .notRequested
@@ -47,6 +48,21 @@ class MoneyViewModel: ObservableObject {
                     self?.phase = .success
                 }
                 .store(in: &subscriptions)
+        case let .addressLoad(universityId, BLDG_USG):
+            self.phase = .loading
+            container.services.listService.getDetail(universityId: universityId)
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.phase = .fail
+                    }
+                } receiveValue: { [weak self] universityData in
+                    if let address = universityData.location {
+                        self?.address = address
+                        if let extractAddress = self?.extractGu(from: address) {
+                            self?.send(action: .load(extractAddress, BLDG_USG))
+                        }
+                    }
+                }.store(in: &subscriptions)
 
         }
     }
@@ -63,6 +79,16 @@ class MoneyViewModel: ObservableObject {
         let averageAREA = count > 0 ? totalAREA / count : 0
         
         return ["\(averageGRFE)", "\(averageRTFE)", "\(averageAREA)"]
+    }
+    
+    func extractGu(from location: String) -> String? {
+        let components = location.split(separator: " ")
+        
+        if let gu = components.first(where: { $0.hasSuffix("구") }) {
+            return String(gu)
+        }
+        
+        return nil
     }
 
 }
