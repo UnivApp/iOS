@@ -32,6 +32,8 @@ enum APIEndpoint {
     case searchExpo
     case statusExpo
     case rent
+    case diagnosisQuestion
+    case diagnosisResult
     //MARK: - Home
     case topEmployment
     case topCompetition
@@ -85,7 +87,11 @@ enum APIEndpoint {
         case .statusExpo:
             return "http://43.200.143.28:8080/api/expo/status?status="
         case .rent:
-            return "http://openapi.seoul.go.kr:8088/인증키/json/tbLnOpendataRentV/1/50/2024/ /"
+            return "http://openapi.seoul.go.kr:8088/sample/json/tbLnOpendataRentV/1/50/2024/ /"
+        case .diagnosisQuestion:
+            return "http://43.200.143.28:8080/api/questionnaires"
+        case .diagnosisResult:
+            return "http://43.200.143.28:8080/api/questionnaires/results?score="
         
         case .topEmployment:
             return "http://43.200.143.28:8080/api/employment-rate/top-5"

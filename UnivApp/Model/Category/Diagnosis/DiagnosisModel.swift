@@ -13,7 +13,8 @@ struct DiagnosisModel: Codable, Hashable {
 }
 
 struct DiagnosisResultModel: Codable, Hashable {
-    var type: String?
-    var recommand: [String]?
+    var matchingResultId: Int?
+    var matchingResultType: String?
+    var recommand: String?
     var description: String?
 }

@@ -14,6 +14,7 @@ struct DiagnosisDetailView: View {
     @State private var diagnosisIndex: Int = 0
     @State private var isNext: Bool = false
     @State private var isResult: Bool = false
+    
     var body: some View {
         contentView
             .toolbar {
@@ -36,9 +37,25 @@ struct DiagnosisDetailView: View {
     
     @ViewBuilder
     var contentView: some View {
+        switch viewModel.phase {
+        case .notRequested:
+            PlaceholderView()
+                .onAppear {
+                    viewModel.send(action: .questionLoad)
+                }
+        case .loading:
+            LoadingView(url: "congratulations", size: [150, 150])
+        case .success:
+            loadedView
+        case .fail:
+            ErrorView()
+        }
+    }
+    
+    var loadedView: some View {
         NavigationStack {
             if isResult {
-                DiagnosisResultView(viewModel: viewModel)
+                DiagnosisResultView(viewModel: DiagnosisResultViewModel(container: .init(services: Services())), totalScore: viewModel.totalAnswer.reduce(0, +))
             } else {
                 VStack {
                     ProgressView(value: Double(diagnosisIndex) / Double(viewModel.question.count))
@@ -56,7 +73,6 @@ struct DiagnosisDetailView: View {
                                 self.isNext = false
                             }
                         } else {
-                            print("토탈 : \(viewModel.totalAnswer)")
                             self.isResult = true
                         }
                     }

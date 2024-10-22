@@ -69,7 +69,7 @@ struct DiagnosisView: View {
             
             VStack {
                 Spacer()
-                NavigationLink(destination: DiagnosisDetailView(viewModel: DiagnosisViewModel(container: .init(services: StubServices())))) {
+                NavigationLink(destination: DiagnosisDetailView(viewModel: DiagnosisViewModel(container: .init(services: Services())))) {
                     Group {
                         Text("검사를 하려면 ")
                             .foregroundColor(.gray)

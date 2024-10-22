@@ -82,9 +82,13 @@ struct PlayDetailView: View {
                                 Text(placeData.name)
                                     .font(.system(size: 20, weight: .bold))
                                 
-                                Text("📍 \(placeData.location)")
-                                    .font(.system(size: 18, weight: .semibold))
-                                    .foregroundColor(.gray)
+                                HStack {
+                                    LoadingView(url: "location", size: [50, 50])
+                                    Text("\(placeData.location)")
+                                        .font(.system(size: 18, weight: .semibold))
+                                        .foregroundColor(.gray)
+                                    Spacer()
+                                }
                             }
                             
                             Divider()
