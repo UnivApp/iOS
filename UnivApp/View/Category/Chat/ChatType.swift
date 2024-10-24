@@ -9,36 +9,36 @@ import Combine
 import SwiftUI
 
 enum ChatType: String, CaseIterable {
-    case food
     case news
     case ranking
     case rent
-    case info
-    case hotplace
     case employment
+    case mou
+    case food
+    case hotplace
     case ontime
     case Occasion
     
     var title: String {
         switch self {
         case .food:
-            return "맛집"
+            return "맛집🍲"
         case .news:
-            return "대입기사"
+            return "대입기사📰"
         case .ranking:
-            return "랭킹"
+            return "랭킹🥇"
         case .rent:
-            return  "월세"
-        case .info:
-            return "대학연계"
+            return  "월세🧧"
+        case .mou:
+            return "대학연계🎓"
         case .hotplace:
-            return "핫플"
+            return "핫플🌄"
         case .employment:
-            return "취업률"
+            return "취업률💼"
         case .ontime:
             return "정시경쟁률"
         case .Occasion:
-            return "수시경쟁률"
+            return "수시 경쟁률"
         }
     }
     
@@ -52,7 +52,7 @@ enum ChatType: String, CaseIterable {
             return AnyView(InitiativeView(viewModel: InitiativeViewModel(container: .init(services: Services()))))
         case .rent:
             return AnyView(MoneyView(listViewModel: ListViewModel(container: .init(services: Services()), searchText: .init()), viewModel: MoneyViewModel(container: .init(services: Services()))))
-        case .info:
+        case .mou:
             return AnyView(MouView(viewModel: MouViewModel(container: .init(services: Services()))))
         case .hotplace:
             return AnyView(PlayView(viewModel: PlayViewModel(container: .init(services: Services()))))

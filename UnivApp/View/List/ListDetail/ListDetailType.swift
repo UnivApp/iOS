@@ -35,7 +35,7 @@ enum ListDetailType: String, CaseIterable {
         case .food:
             return "맛집"
         case .event:
-            return "대학행사"
+            return "위봇"
         }
     }
     
@@ -56,7 +56,7 @@ enum ListDetailType: String, CaseIterable {
         case .food:
             return Image("food")
         case .event:
-            return Image("event")
+            return Image("chatIcon")
         }
     }
     

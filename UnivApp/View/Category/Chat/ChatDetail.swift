@@ -16,7 +16,7 @@ struct ChatQuestionView: View {
             HStack {
                 Text("궁금한 점을 물어보세요!")
                     .font(.system(size: 15, weight: .semibold))
-                    .foregroundColor(.black.opacity(0.7))
+                    .foregroundColor(.black)
                 Spacer()
             }
             HStack {
@@ -29,26 +29,24 @@ struct ChatQuestionView: View {
                                 viewModel.mineList[viewModel.mineList.count - 1] = ("\(type.title)")
                                 viewModel.mineList.append("")
                                 viewModel.chatList.append("")
-                                viewModel.isLoading = true
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                                     viewModel.chatList[viewModel.chatList.count - 1] = ("\(type.title)에 대해 궁금하시군요! 제가 알려드릴게요 🧐")
-                                    viewModel.isLoading = false
                                     viewModel.send(action: type)
                                 }
                             }
                         } label: {
                             Text(type.title)
-                                .font(.system(size: 12, weight: .heavy))
-                                .foregroundColor(self.chatType == type ? .white : .gray)
+                                .font(.system(size: 11, weight: .heavy))
+                                .foregroundColor(self.chatType == type ? .white : .black.opacity(0.5))
                                 .padding(10)
-                                .background(RoundedRectangle(cornerRadius: 15).fill(self.chatType == type ? .orange : .white))
+                                .background(RoundedRectangle(cornerRadius: 15).fill(self.chatType == type ? .orange : .white).stroke(self.chatType == type ? .orange : .gray, lineWidth: 1))
                         }
                         
                     }
                 }
             }
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 0)
     }
 }
 
@@ -57,34 +55,41 @@ struct chatListView: View {
     @Binding var isAlert: Bool
     @Binding var chatType: ChatType?
     @FocusState var focusState: Bool
+    
     var index: Int
     var body: some View {
         VStack(spacing: 5) {
-            HStack {
-                Image("chat6")
+            HStack(spacing: 10) {
+                Image("chatIcon")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 30, height: 30)
                     .padding(5)
-                    .background(.white)
-                    .clipShape(Circle())
+                    .background(Circle().fill(Color.white))
+                    .overlay(
+                        Circle()
+                            .stroke(.gray.opacity(0.5), lineWidth: 1)
+                    )
+                Text("위봇")
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundColor(.black)
                 Spacer()
             }
             HStack(spacing: 10) {
-                if (viewModel.isLoading) && (viewModel.chatList[index] == "") {
-                    LoadingView(url: "chat", size: [40, 40])
-                        .cornerRadius(15)
-                }
-                Text(viewModel.chatList[index])
+                Text(viewModel.chatList[index] == "" ? "💬" : viewModel.chatList[index])
                     .padding(10)
-                    .background(viewModel.chatList[index] == "" ? .clear : .white)
+                    .background(.backGray)
                     .cornerRadius(10)
                     .foregroundColor(.black.opacity(0.7))
+                    .font(.system(size: 15, weight: .semibold))
+                    .onAppear {
+                        
+                    }
                 Spacer()
             }
             .padding(.leading, 40)
             
-            if (viewModel.isUniversityTyping) && ((viewModel.chatList[index] == "다른 대학교가 궁금하신가요?" || viewModel.chatList[index] == "더 많은 결과를 자세히 보시겠습니까?")) {
+            if (viewModel.isUniversityTyping) && (viewModel.chatList[index].contains("?")) {
                 HStack(spacing: 20) {
                     ForEach(0...1, id: \.self) { index in
                         Button {
@@ -110,12 +115,12 @@ struct chatListView: View {
                 .padding(.vertical, 20)
                 
                 if isAlert {
-                    ChatPopup(viewModel: viewModel, chatType: $chatType, isAlert: $isAlert, focusState: _focusState)
+                    HStack {
+                        ChatPopup(viewModel: viewModel, chatType: $chatType, isAlert: $isAlert, focusState: _focusState)
+                        Spacer()
+                    }
+                    .padding(.leading, 40)
                 }
-            }
-            
-            if (viewModel.isScrollData) {
-                
             }
         }
         .padding(.trailing, 10)
@@ -134,6 +139,7 @@ struct mineListView: View {
                     .background(.orange)
                     .cornerRadius(10)
                     .foregroundColor(.white)
+                    .font(.system(size: 15, weight: .semibold))
             }
             .padding(.leading, 10)
         }
@@ -146,10 +152,10 @@ struct ChatPopup: View {
     @Binding var isAlert: Bool
     @FocusState var focusState: Bool
     var body: some View {
-        VStack {
-            TextField("대학이름을 입력하세요!", text: $viewModel.universityName)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
+        VStack(alignment: .center, spacing: 20) {
+            Spacer()
+            TextField("대학이름을 입력하세요", text: $viewModel.universityName)
+                .background(.backGray)
                 .submitLabel(.search)
                 .onSubmit {
                     if let chatType = chatType {
@@ -157,32 +163,33 @@ struct ChatPopup: View {
                         viewModel.universityName = ""
                     }
                 }
+                .padding(.horizontal, 10)
+                .multilineTextAlignment(.center)
             
             Button {
                 if let chatType = chatType {
                     viewModel.subSend(action: chatType)
-                    self.isAlert = false
-                    self.focusState = false
+                    isAlert = false
+                    focusState = false
+                    viewModel.phase = .notRequested
                 }
             } label: {
                 Text("검색")
                     .font(.system(size: 15, weight: .semibold))
                     .foregroundColor(.black.opacity(0.7))
             }
-            .padding()
+            Spacer()
         }
-        .background(.white)
-        .frame(width: UIScreen.main.bounds.width / 3, height: 100)
+        .background(.backGray)
+        .frame(width: UIScreen.main.bounds.width / 2, height: 100)
         .cornerRadius(15)
     }
 }
 
-struct chatScrollView: View {
-    @StateObject var viewModel: ChatViewModel
-    
-    var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            
-        }
+
+
+struct Previews: PreviewProvider {
+    static var previews: some View {
+        mineListView(viewModel: ChatViewModel(container: .init(services: StubServices())), index: 0)
     }
 }
