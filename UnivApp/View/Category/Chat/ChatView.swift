@@ -11,7 +11,9 @@ struct ChatView: View {
     @StateObject var viewModel: ChatViewModel
     @State private var chatType: ChatType? = nil
     @State private var isAlert: Bool = false
-    @FocusState private var focusState: Bool
+    @State private var isPresented: Bool = true
+    @FocusState private var isTextFieldFocused: Bool
+    
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -19,6 +21,9 @@ struct ChatView: View {
             .navigationBarBackButtonHidden(true)
             .toolbar(.hidden, for: .tabBar)
             .toolbar(.hidden, for: .navigationBar)
+            .onTapGesture {
+                isTextFieldFocused = false
+            }
     }
     @ViewBuilder
     var contentView: some View {
@@ -27,9 +32,6 @@ struct ChatView: View {
             loadedView
         case .loading:
             loadedView
-                .onTapGesture {
-                    focusState = false
-                }
         case .success:
             loadedView
         case .fail:
@@ -40,58 +42,113 @@ struct ChatView: View {
     var loadedView: some View {
         VStack(alignment: .center, spacing: 10) {
             ChatNavigationView(dismiss: _dismiss)
-            ScrollViewReader { proxy in
-                ScrollView(.vertical) {
-                    VStack(alignment: .center, spacing: 20) {
-                        Text(viewModel.calculateDate())
-                            .font(.system(size: 13, weight: .semibold))
-                            .foregroundColor(.gray)
-                        
-                        
-                        let chatCount = viewModel.chatList.count
-                        let mineCount = viewModel.mineList.count
-                        let totalCount = max(chatCount, mineCount)
-                        
-                        ForEach(0..<totalCount, id: \.self) { index in
-                            if index < chatCount {
-                                VStack {
-                                    chatListView(viewModel: viewModel, isAlert: $isAlert, chatType: $chatType, focusState: _focusState, index: index)
-                                    if (viewModel.isScrollType == .food) {
-                                        if let foodData = viewModel.foodState.data, index < foodData.count , foodData[index] != [] {
-                                            ChatScrollView(food: foodData[index])
-                                        } else {
+            ZStack {
+                ScrollViewReader { proxy in
+                    ScrollView(.vertical) {
+                        VStack(alignment: .center, spacing: 20) {
+                            Text(viewModel.calculateDate())
+                                .font(.system(size: 13, weight: .semibold))
+                                .foregroundColor(.gray)
+                            
+                            let chatCount = viewModel.chatList.count
+                            let mineCount = viewModel.mineList.count
+                            let totalCount = max(chatCount, mineCount)
+                            
+                            ForEach(0..<totalCount, id: \.self) { index in
+                                if index < chatCount {
+                                    VStack {
+                                        chatListView(viewModel: viewModel, isAlert: $isAlert, chatType: $chatType, index: index)
+                                        switch viewModel.isScrollType {
+                                        case .news:
+                                            Color.clear
+                                        case .ranking:
+                                            Color.clear
+                                        case .rent:
+                                            Color.clear
+                                        case .employment:
+                                            Color.clear
+                                        case .mou:
+                                            Color.clear
+                                        case .food:
+                                            if let foodData = viewModel.foodState.data, index < foodData.count , foodData[index] != [] {
+                                                HStack {
+                                                    LoadingView(url: "chat_food", size: [100, 100])
+                                                        .padding(.leading, 40)
+                                                    Spacer()
+                                                }
+                                                ChatScrollView(food: foodData[index])
+                                            }
+                                        case .hotplace:
+                                            Color.clear
+                                        case .ontime:
+                                            Color.clear
+                                        case .Occasion:
+                                            Color.clear
+                                        case .none:
+                                            Color.clear
                                         }
                                     }
-                                }
-                                .id(index)
-                            }
-                            if index < mineCount {
-                                mineListView(viewModel: viewModel, index: index)
                                     .id(index)
+                                }
+                                if index < mineCount {
+                                    mineListView(viewModel: viewModel, index: index)
+                                        .id(index)
+                                }
                             }
+                            .font(.system(size: 15, weight: .semibold))
                         }
-                        .font(.system(size: 15, weight: .semibold))
-                        
-                        Spacer()
-                        
-                        if (viewModel.phase == .notRequested) || ((viewModel.phase == .success) && (viewModel.isUniversityTyping == false)) {
-                            ChatQuestionView(viewModel: viewModel, chatType: $chatType)
-                                .id(viewModel.chatList.count-1)
-                                .padding(.bottom, 20)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 20)
+                    }
+                    .task {
+                        withAnimation {
+                            proxy.scrollTo(viewModel.chatList.count-1, anchor: .bottom)
                         }
                     }
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 20)
+                    .task {
+                        withAnimation {
+                            proxy.scrollTo(viewModel.chatList.count-1, anchor: .bottom)
+                        }
+                    }
+                    .onChange(of: isPresented) {
+                        withAnimation {
+                            let MaxCount: Int = max((viewModel.chatList.count - 1), (viewModel.chatList.count - 1))
+                            proxy.scrollTo(MaxCount, anchor: .bottom)
+                        }
+                    }
                 }
-                .task {
-                    proxy.scrollTo(viewModel.chatList.count-1, anchor: .bottom)
+                VStack {
+                    Spacer()
+                    QuestionButton(isPresented: $isPresented)
                 }
-                .task {
-                    proxy.scrollTo(viewModel.chatList.count-1, anchor: .bottom)
-                }
+            }
+            if isPresented {
+                ChatQuestionView(viewModel: viewModel, chatType: $chatType)
+                    .padding(.bottom, -50)
+            }
+            if isAlert {
+                ChatSearchView(viewModel: viewModel, chatType: $chatType, isAlert: $isAlert)
             }
         }
         .background(.white)
+    }
+}
+
+fileprivate struct QuestionButton: View {
+    @Binding var isPresented: Bool
+    var body: some View {
+        Button {
+            withAnimation {
+                isPresented.toggle()
+            }
+        } label: {
+            Image(isPresented ? "arrow_up" : "arrow_down")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 25, height: 25)
+        }
+        .padding(.vertical, 10)
+        .background(.clear)
     }
 }
 

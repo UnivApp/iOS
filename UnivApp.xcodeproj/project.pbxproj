@@ -81,8 +81,8 @@
 		E4953DAB2C90654E008CBDE5 /* LogoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953DAA2C90654E008CBDE5 /* LogoutView.swift */; };
 		E4953DB02C906C95008CBDE5 /* ListDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953DAF2C906C95008CBDE5 /* ListDetailModel.swift */; };
 		E4982CEA2CC8D0E100D0F1A7 /* ChatScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982CE92CC8D0E100D0F1A7 /* ChatScrollView.swift */; };
-		E4982CEC2CCA423100D0F1A7 /* chat1.gif in Resources */ = {isa = PBXBuildFile; fileRef = E4982CEB2CCA423100D0F1A7 /* chat1.gif */; };
-		E4982CEF2CCA42F900D0F1A7 /* chat2.gif in Resources */ = {isa = PBXBuildFile; fileRef = E4982CEE2CCA42F900D0F1A7 /* chat2.gif */; };
+		E4982CF12CCB748500D0F1A7 /* chat_food.gif in Resources */ = {isa = PBXBuildFile; fileRef = E4982CF02CCB748500D0F1A7 /* chat_food.gif */; };
+		E4982CF32CCB782100D0F1A7 /* chat_play.gif in Resources */ = {isa = PBXBuildFile; fileRef = E4982CF22CCB782100D0F1A7 /* chat_play.gif */; };
 		E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */; };
 		E49C9F9F2C86CF70001F43A3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */; };
 		E49C9FA72C86D3BC001F43A3 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */; };
@@ -239,8 +239,8 @@
 		E4953DAA2C90654E008CBDE5 /* LogoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutView.swift; sourceTree = "<group>"; };
 		E4953DAF2C906C95008CBDE5 /* ListDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailModel.swift; sourceTree = "<group>"; };
 		E4982CE92CC8D0E100D0F1A7 /* ChatScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScrollView.swift; sourceTree = "<group>"; };
-		E4982CEB2CCA423100D0F1A7 /* chat1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = chat1.gif; sourceTree = "<group>"; };
-		E4982CEE2CCA42F900D0F1A7 /* chat2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = chat2.gif; sourceTree = "<group>"; };
+		E4982CF02CCB748500D0F1A7 /* chat_food.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = chat_food.gif; sourceTree = "<group>"; };
+		E4982CF22CCB782100D0F1A7 /* chat_play.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = chat_play.gif; sourceTree = "<group>"; };
 		E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnivAppApp.swift; sourceTree = "<group>"; };
 		E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
@@ -502,8 +502,8 @@
 		E4982CED2CCA426D00D0F1A7 /* chat */ = {
 			isa = PBXGroup;
 			children = (
-				E4982CEB2CCA423100D0F1A7 /* chat1.gif */,
-				E4982CEE2CCA42F900D0F1A7 /* chat2.gif */,
+				E4982CF02CCB748500D0F1A7 /* chat_food.gif */,
+				E4982CF22CCB782100D0F1A7 /* chat_play.gif */,
 			);
 			path = chat;
 			sourceTree = "<group>";
@@ -1145,16 +1145,16 @@
 				E41589372CBE923400EDB211 /* DG2.gif in Resources */,
 				E41589392CBE92DE00EDB211 /* DG5.gif in Resources */,
 				E4CCE6D82CC2C7B000483A87 /* coinGif.gif in Resources */,
+				E4982CF32CCB782100D0F1A7 /* chat_play.gif in Resources */,
 				E4B3FCCC2C7751DD00CB98F3 /* Assets.xcassets in Resources */,
-				E4982CEF2CCA42F900D0F1A7 /* chat2.gif in Resources */,
 				E4953D2F2C89C770008CBDE5 /* location.gif in Resources */,
 				E4953D312C89C770008CBDE5 /* star.gif in Resources */,
 				E4953D902C8F35BA008CBDE5 /* error.gif in Resources */,
+				E4982CF12CCB748500D0F1A7 /* chat_food.gif in Resources */,
 				E41589362CBE923400EDB211 /* DG1.gif in Resources */,
 				E4953D322C89C770008CBDE5 /* congratulations.gif in Resources */,
 				E4953D332C89C770008CBDE5 /* load.gif in Resources */,
 				E4B3FCF42C7754E400CB98F3 /* Color.xcassets in Resources */,
-				E4982CEC2CCA423100D0F1A7 /* chat1.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

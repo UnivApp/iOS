@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 enum CategoryType: String, CaseIterable {
-    case chatIcon
+    case chat
     case food
     case Diagnosis
     case info
@@ -20,7 +20,7 @@ enum CategoryType: String, CaseIterable {
     
     var title: String {
         switch self {
-        case .chatIcon:
+        case .chat:
             return "위봇"
         case .food:
             return "맛집"
@@ -41,7 +41,7 @@ enum CategoryType: String, CaseIterable {
     
     var view: AnyView {
         switch self {
-        case .chatIcon:
+        case .chat:
             return AnyView(ChatView(viewModel: ChatViewModel(container: .init(services: Services()))))
         case .food:
             return AnyView(FoodView(viewModel: FoodViewModel(container: .init(services: Services()))))

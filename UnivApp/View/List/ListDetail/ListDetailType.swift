@@ -56,7 +56,7 @@ enum ListDetailType: String, CaseIterable {
         case .food:
             return Image("food")
         case .event:
-            return Image("chatIcon")
+            return Image("chat")
         }
     }
     

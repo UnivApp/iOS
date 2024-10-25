@@ -30,11 +30,11 @@ enum chatScrollType {
 class ChatViewModel: ObservableObject {
     
     @Published var phase: Phase = .notRequested
-    @Published var chatList: [String] = ["안녕하세요! 무엇을 도와드릴까요 💭"]
-    @Published var mineList: [String] = [""]
+    @Published var chatList: [String] = ["안녕하세요! 제 이름은 위봇입니다", "무엇을 도와드릴까요 💭"]
+    @Published var mineList: [String] = ["", ""]
     
     @Published var universityName: String = ""
-    @Published var isUniversityTyping: Bool = false
+    @Published var isUniversityTyping: [Bool] = [false, false]
     @Published var isScrollType: chatScrollType? = nil
     
     //MARK: - Data
@@ -67,8 +67,8 @@ class ChatViewModel: ObservableObject {
                     self?.isScrollType = .food
                     self?.ensureDataCapacity(state: &self!.foodState, index: (self?.chatList.count ?? 0) - 1)
                     self?.foodState.data?[(self?.chatList.count ?? 0) - 1] = topFood
-                    self?.appendTotal("다른 대학교가 궁금하신가요?")
-                    self?.isUniversityTyping = true
+                    self?.appendTotal("다른 대학교가 궁금하신가요? 🎓")
+                    self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = true
                     self?.phase = .success
                 }.store(in: &subscripttions)
             
@@ -108,7 +108,7 @@ class ChatViewModel: ObservableObject {
                     if case .failure = completion {
                         self?.appendTotal("검색 결과를 찾을 수 없어요 😢")
                         self?.phase = .notRequested
-                        self?.isUniversityTyping = false
+                        self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = false
                     }
                 } receiveValue: { [weak self] searchResult in
                     if let universityId = searchResult.compactMap({ $0.universityId }).first {
@@ -117,16 +117,16 @@ class ChatViewModel: ObservableObject {
                                 if case .failure = completion {
                                     self?.appendTotal("검색 결과를 찾을 수 없어요 😢")
                                     self?.phase = .notRequested
-                                    self?.isUniversityTyping = false
+                                    self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = false
                                 }
                             } receiveValue: { [weak self] foodSearch in
                                 self?.isScrollType = .food
                                 self?.appendTotal("\(self?.universityName ?? "") 주변 맛집 정보입니다!")
                                 self?.ensureDataCapacity(state: &self!.foodState, index: (self?.chatList.count ?? 0) - 1)
                                 self?.foodState.data?[(self?.chatList.count ?? 0) - 1] = foodSearch
-                                self?.appendTotal("더 자세한 정보를 알고 싶으신가요?")
+                                self?.appendTotal("더 자세한 정보를 알고 싶으신가요? 👀")
                                 self?.phase = .notRequested
-                                self?.isUniversityTyping = false
+                                self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = true
                             }.store(in: &self!.subscripttions)
                     }
                 }.store(in: &subscripttions)
@@ -172,6 +172,7 @@ class ChatViewModel: ObservableObject {
     func appendTotal(_ string: String) {
         self.chatList.append("")
         self.mineList.append("")
+        self.isUniversityTyping.append(false)
         self.chatList[chatList.count - 1] = string
     }
     

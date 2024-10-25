@@ -26,6 +26,7 @@ struct ChatQuestionView: View {
                         Button {
                             withAnimation {
                                 chatType = type
+                                viewModel.isUniversityTyping.append(false)
                                 viewModel.mineList[viewModel.mineList.count - 1] = ("\(type.title)")
                                 viewModel.mineList.append("")
                                 viewModel.chatList.append("")
@@ -46,7 +47,12 @@ struct ChatQuestionView: View {
                 }
             }
         }
-        .padding(.horizontal, 0)
+        .padding(.top, 20)
+        .padding(.horizontal, 20)
+        .padding(.bottom, 70)
+        .background(.white)
+        .cornerRadius(40)
+        .shadow(color: .orange, radius: 2)
     }
 }
 
@@ -55,6 +61,9 @@ struct chatListView: View {
     @Binding var isAlert: Bool
     @Binding var chatType: ChatType?
     @FocusState var focusState: Bool
+    
+    @State private var isMore: Bool = false
+    @State private var isSheet: Bool = false
     
     var index: Int
     var body: some View {
@@ -80,7 +89,7 @@ struct chatListView: View {
                     .padding(10)
                     .background(.backGray)
                     .cornerRadius(10)
-                    .foregroundColor(.black.opacity(0.7))
+                    .foregroundColor(.black.opacity(0.8))
                     .font(.system(size: 15, weight: .semibold))
                     .onAppear {
                         
@@ -89,15 +98,22 @@ struct chatListView: View {
             }
             .padding(.leading, 40)
             
-            if (viewModel.isUniversityTyping) && (viewModel.chatList[index].contains("?")) {
+            if (viewModel.isUniversityTyping[index]) && (viewModel.chatList[index].contains("?")) {
                 HStack(spacing: 20) {
                     ForEach(0...1, id: \.self) { index in
                         Button {
-                            if index == 0 {
-                                self.isAlert = true
+                            if viewModel.chatList[self.index].contains("🎓") {
+                                if index == 0 {
+                                    self.isAlert = true
+                                    viewModel.isUniversityTyping[self.index] = false
+                                } else {
+                                    self.isAlert = false
+                                    viewModel.isUniversityTyping[self.index] = false
+                                }
                             } else {
-                                viewModel.phase = .notRequested
-                                viewModel.isUniversityTyping = false
+                                self.isAlert = false
+                                viewModel.isUniversityTyping[self.index] = false
+                                self.isMore = true
                             }
                         } label: {
                             Text(index == 0 ? "예" : "아니오")
@@ -113,17 +129,38 @@ struct chatListView: View {
                 }
                 .padding(.leading, 40)
                 .padding(.vertical, 20)
-                
-                if isAlert {
-                    HStack {
-                        ChatPopup(viewModel: viewModel, chatType: $chatType, isAlert: $isAlert, focusState: _focusState)
-                        Spacer()
-                    }
-                    .padding(.leading, 40)
-                }
+            }
+            
+            if isMore {
+                detailNavigation
             }
         }
         .padding(.trailing, 10)
+        .padding(.bottom, 20)
+        .sheet(isPresented: $isSheet) {
+            if let view = chatType?.view {
+                view
+            }
+        }
+    }
+    
+    var detailNavigation: some View {
+        HStack {
+            Spacer()
+            Button(action: {
+                self.isSheet = true
+            }, label: {
+                HStack {
+                    Spacer()
+                    Text("자세히 보기 👉🏻")
+                        .padding(5)
+                        .font(.system(size: 15, weight: .semibold))
+                        .foregroundColor(.black.opacity(0.7))
+                }
+                .padding(.top, 10)
+                .padding(.horizontal, 40)
+            })
+        }
     }
 }
 
@@ -146,50 +183,83 @@ struct mineListView: View {
     }
 }
 
-struct ChatPopup: View {
+struct ChatSearchView: View {
     @StateObject var viewModel: ChatViewModel
+    @FocusState private var isTextFieldFocused: Bool
     @Binding var chatType: ChatType?
     @Binding var isAlert: Bool
-    @FocusState var focusState: Bool
     var body: some View {
-        VStack(alignment: .center, spacing: 20) {
+        HStack {
+            Button {
+                isTextFieldFocused = false
+                isAlert = false
+            } label: {
+                Image(systemName: "xmark.circle.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 20, height: 20)
+                    .foregroundColor(.gray)
+            }
+            .padding(.leading, 10)
             Spacer()
-            TextField("대학이름을 입력하세요", text: $viewModel.universityName)
-                .background(.backGray)
-                .submitLabel(.search)
-                .onSubmit {
-                    if let chatType = chatType {
-                        viewModel.subSend(action: chatType)
-                        viewModel.universityName = ""
+            VStack(alignment: .center, spacing: 20) {
+                HStack {
+                    Button {
+                        if let chatType = chatType {
+                            viewModel.subSend(action: chatType)
+                            isAlert = false
+                            isTextFieldFocused = false
+                        }
+                    } label: {
+                        Image("search")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 15, height: 15)
                     }
+                    .padding()
+                    
+                    TextField("대학명/소재지를 입력하세요", text: $viewModel.universityName)
+                        .font(.system(size: 15, weight: .regular))
+                        .focused($isTextFieldFocused)
+                        .padding()
+                        .submitLabel(.search)
+                        .onAppear {
+                            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                                isTextFieldFocused = true
+                            }
+                        }
+                        .onSubmit {
+                            if let chatType = chatType {
+                                viewModel.subSend(action: chatType)
+                                isAlert = false
+                                isTextFieldFocused = false
+                            }
+                        }
                 }
                 .padding(.horizontal, 10)
-                .multilineTextAlignment(.center)
-            
-            Button {
-                if let chatType = chatType {
-                    viewModel.subSend(action: chatType)
-                    isAlert = false
-                    focusState = false
-                    viewModel.phase = .notRequested
-                }
-            } label: {
-                Text("검색")
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundColor(.black.opacity(0.7))
+                .background(Color.white)
+                .border(LinearGradient(gradient: Gradient(colors: [Color.yellow, Color.orange]), startPoint: .leading, endPoint: .trailing), width: 1)
+                .cornerRadius(15)
+                .overlay (
+                    RoundedRectangle(cornerRadius: 15)
+                        .stroke(LinearGradient(gradient: Gradient(colors: [Color.yellow, Color.orange]), startPoint: .leading, endPoint: .trailing), lineWidth: 1.5)
+                )
             }
-            Spacer()
+            .padding(.trailing, 10)
+            .padding(.vertical, 10)
+            .onAppear {
+                viewModel.universityName = ""
+            }
         }
-        .background(.backGray)
-        .frame(width: UIScreen.main.bounds.width / 2, height: 100)
-        .cornerRadius(15)
+        .background(.white)
     }
 }
 
 
-
 struct Previews: PreviewProvider {
     static var previews: some View {
-        mineListView(viewModel: ChatViewModel(container: .init(services: StubServices())), index: 0)
+        @State var ChatType: ChatType? = .Occasion
+        @State var isPresented: Bool = true
+        ChatQuestionView(viewModel: ChatViewModel(container: .init(services: StubServices())), chatType: $ChatType)
     }
 }
