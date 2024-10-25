@@ -99,7 +99,8 @@ class ChatViewModel: ObservableObject {
                     self?.isScrollType[(self?.chatList.count ?? 0) - 1] = .ranking
                     self?.ensureDataCapacity(state: &self!.rankState, index: (self?.chatList.count ?? 0) - 1)
                     self?.rankState.data?[(self?.chatList.count ?? 0) - 1] = rankData
-                    self?.appendTotal("가장 대표적인 랭킹 정보인 'QS 세계대학 평가'에 대해 알려드렸습니다. 더 자세한 정보를 알고 싶으신가요? 👀")
+                    self?.appendTotal("가장 대표적인 랭킹 정보인 'QS 세계대학 평가'에 대해 알려드렸습니다.")
+                    self?.appendTotal("더 자세한 정보를 알고 싶으신가요? 👀")
                     self?.phase = .success
                     self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = true
                 }.store(in: &subscripttions)
@@ -109,6 +110,18 @@ class ChatViewModel: ObservableObject {
             
         case .mou:
             self.phase = .loading
+            container.services.mouService.statusExpo(status: "OPEN")
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.phase = .fail
+                    }
+                } receiveValue: { [weak self] mouData in
+                    self?.appendTotal("현재 접수 진행 중인 대학 연계활동입니다!")
+                    self?.isScrollType[(self?.chatList.count ?? 0) - 1] = .mou
+                    self?.ensureDataCapacity(state: &self!.mouState, index: (self?.chatList.count ?? 0) - 1)
+                    self?.mouState.data?[(self?.chatList.count ?? 0) - 1] = mouData
+                    self?.phase = .success
+                }.store(in: &subscripttions)
             
         case .hotplace:
             self.phase = .loading
@@ -146,8 +159,8 @@ class ChatViewModel: ObservableObject {
                                     self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = false
                                 }
                             } receiveValue: { [weak self] foodSearch in
-                                self?.isScrollType[(self?.chatList.count ?? 0) - 1] = .food
                                 self?.appendTotal("\(self?.universityName ?? "") 주변 맛집 정보입니다!")
+                                self?.isScrollType[(self?.chatList.count ?? 0) - 1] = .food
                                 self?.ensureDataCapacity(state: &self!.foodState, index: (self?.chatList.count ?? 0) - 1)
                                 self?.foodState.data?[(self?.chatList.count ?? 0) - 1] = foodSearch
                                 self?.appendTotal("더 자세한 정보를 알고 싶으신가요? 👀")
@@ -165,7 +178,7 @@ class ChatViewModel: ObservableObject {
             self.phase = .loading
             
         case .mou:
-            self.phase = .loading
+            return
             
         case .hotplace:
             self.phase = .loading

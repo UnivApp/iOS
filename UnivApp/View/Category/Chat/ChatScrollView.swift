@@ -31,7 +31,7 @@ struct ChatScrollView: View {
                 } else if let rent = rent {
                     
                 } else if let mou = mou {
-                    
+                    ChatMouView(model: mou)
                 } else if let hotplace = hotplace {
                     
                 } else if let employment = employment {
@@ -49,6 +49,60 @@ struct ChatScrollView: View {
     }
 }
 
+fileprivate struct ChatMouView: View {
+    var model: [MouModel]
+    var body: some View {
+        ForEach(model.indices, id: \.self) { index in
+            VStack(alignment: .leading, spacing: 20) {
+                HStack {
+                    Text(model[index].category)
+                        .font(.system(size: 12, weight: .semibold))
+                        .foregroundColor(.black)
+                        .multilineTextAlignment(.leading)
+                    Spacer()
+                    Group {
+                        if model[index].status == "접수 중" {
+                            Text(model[index].status)
+                                .background(RoundedRectangle(cornerRadius: 10).fill(.orange).frame(width: 80, height: 30))
+                        } else {
+                            Text(model[index].status)
+                                .background(RoundedRectangle(cornerRadius: 10).fill(.gray).frame(width: 80, height: 30))
+                        }
+                    }
+                    .padding(.trailing, 20)
+                    .multilineTextAlignment(.center)
+                    .font(.system(size: 13, weight: .heavy))
+                    .foregroundColor(.white)
+                }
+                
+                Text(model[index].title)
+                    .font(.system(size: 15, weight: .bold))
+                    .foregroundColor(.black)
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(nil)
+                    .fixedSize(horizontal: false, vertical: true)
+                
+                HStack {
+                    Text(model[index].date)
+                        .font(.system(size: 10, weight: .regular))
+                        .foregroundColor(.black)
+                        .multilineTextAlignment(.trailing)
+                    Spacer()
+                    Text("\(model[index].expoYear) 대입")
+                        .font(.system(size: 10, weight: .semibold))
+                        .foregroundColor(.gray)
+                        .multilineTextAlignment(.trailing)
+                }
+            }
+            .padding(30)
+            .background(.white)
+            .cornerRadius(15)
+            .shadow(color: .orange, radius: 2)
+        }
+        .padding(.vertical, 10)
+    }
+}
+
 fileprivate struct ChatRankView: View {
     var model: [InitiativeModel]
     var body: some View {
@@ -62,7 +116,7 @@ fileprivate struct ChatRankView: View {
             }
             ForEach(model.indices, id: \.self) { index in
                 if index < 5 {
-                    HStack(spacing: 40) {
+                    HStack(spacing: 10) {
                         if let rankingResponses = model[index].universityRankingResponses.first {
                             Text("\(rankingResponses.rank)")
                                 .font(.system(size: 10, weight: .bold))
@@ -87,7 +141,8 @@ fileprivate struct ChatRankView: View {
                             Text(rankingResponses.universityName)
                                 .font(.system(size: 12, weight: .semibold))
                                 .foregroundColor(Color.black)
-                                .multilineTextAlignment(.center)
+                                .multilineTextAlignment(.leading)
+                            Spacer()
                         }
                     }
                     .padding(.horizontal, 30)
@@ -101,7 +156,6 @@ fileprivate struct ChatRankView: View {
                 .stroke(.orange, lineWidth: 2)
         }
         .cornerRadius(15)
-        .frame(width: 300)
     }
 }
 
@@ -198,5 +252,5 @@ fileprivate struct ChatFoodView: View {
 }
 
 #Preview {
-    ChatScrollView(rank: [InitiativeModel(displayName: "세종", fullName: "세종대", description: "ㅋㅋ", year: "ㅋㅋ", category: "ㅋㅋ", universityRankingResponses: [UniversityRankingResponses(universityName: "이거지", logo: "d", rank: 2)]),InitiativeModel(displayName: "세종", fullName: "세종대", description: "ㅋㅋ", year: "ㅋㅋ", category: "ㅋㅋ", universityRankingResponses: [UniversityRankingResponses(universityName: "이거지", logo: "d", rank: 2)]),InitiativeModel(displayName: "세종", fullName: "세종대", description: "ㅋㅋ", year: "ㅋㅋ", category: "ㅋㅋ", universityRankingResponses: [UniversityRankingResponses(universityName: "이거지", logo: "d", rank: 2)])])
+    ChatScrollView(mou: [MouModel(expoId: 0, title: "헬로헬로방구방구", category: "취업진로", expoYear: "2023.12.12 ~ 2023.12.12", status: "접수 중", location: "서울시 광진구 동일로", content: "s", date: "2023.12.12")])
 }

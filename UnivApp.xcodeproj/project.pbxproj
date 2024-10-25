@@ -85,6 +85,7 @@
 		E4982CF32CCB782100D0F1A7 /* chat_play.gif in Resources */ = {isa = PBXBuildFile; fileRef = E4982CF22CCB782100D0F1A7 /* chat_play.gif */; };
 		E4982CF52CCBB46400D0F1A7 /* chat_news.gif in Resources */ = {isa = PBXBuildFile; fileRef = E4982CF42CCBB46400D0F1A7 /* chat_news.gif */; };
 		E4982CF72CCBBA2300D0F1A7 /* chat_rank.gif in Resources */ = {isa = PBXBuildFile; fileRef = E4982CF62CCBBA2200D0F1A7 /* chat_rank.gif */; };
+		E4982CF92CCC05BC00D0F1A7 /* chat_mou.gif in Resources */ = {isa = PBXBuildFile; fileRef = E4982CF82CCC05BC00D0F1A7 /* chat_mou.gif */; };
 		E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */; };
 		E49C9F9F2C86CF70001F43A3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */; };
 		E49C9FA72C86D3BC001F43A3 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */; };
@@ -245,6 +246,7 @@
 		E4982CF22CCB782100D0F1A7 /* chat_play.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = chat_play.gif; sourceTree = "<group>"; };
 		E4982CF42CCBB46400D0F1A7 /* chat_news.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = chat_news.gif; sourceTree = "<group>"; };
 		E4982CF62CCBBA2200D0F1A7 /* chat_rank.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = chat_rank.gif; sourceTree = "<group>"; };
+		E4982CF82CCC05BC00D0F1A7 /* chat_mou.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = chat_mou.gif; sourceTree = "<group>"; };
 		E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnivAppApp.swift; sourceTree = "<group>"; };
 		E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
@@ -510,6 +512,7 @@
 				E4982CF02CCB748500D0F1A7 /* chat_food.gif */,
 				E4982CF22CCB782100D0F1A7 /* chat_play.gif */,
 				E4982CF62CCBBA2200D0F1A7 /* chat_rank.gif */,
+				E4982CF82CCC05BC00D0F1A7 /* chat_mou.gif */,
 			);
 			path = chat;
 			sourceTree = "<group>";
@@ -1163,6 +1166,7 @@
 				E4953D332C89C770008CBDE5 /* load.gif in Resources */,
 				E4982CF52CCBB46400D0F1A7 /* chat_news.gif in Resources */,
 				E4B3FCF42C7754E400CB98F3 /* Color.xcassets in Resources */,
+				E4982CF92CCC05BC00D0F1A7 /* chat_mou.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

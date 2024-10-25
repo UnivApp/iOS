@@ -82,7 +82,14 @@ struct ChatView: View {
                                         case .employment:
                                             Color.clear
                                         case .mou:
-                                            Color.clear
+                                            if let mouData = viewModel.mouState.data, index < mouData.count , mouData[index] != [] {
+                                                HStack {
+                                                    LoadingView(url: "chat_mou", size: [100, 100])
+                                                        .padding(.leading, 40)
+                                                    Spacer()
+                                                }
+                                                ChatScrollView(mou: mouData[index])
+                                            }
                                         case .food:
                                             if let foodData = viewModel.foodState.data, index < foodData.count , foodData[index] != [] {
                                                 HStack {
@@ -121,7 +128,7 @@ struct ChatView: View {
                     }
                     .task {
                         withAnimation {
-                            proxy.scrollTo(viewModel.chatList.count-1, anchor: .bottom)
+                            proxy.scrollTo(viewModel.mineList.count-1, anchor: .bottom)
                         }
                     }
                     .onChange(of: isPresented) {
@@ -137,7 +144,7 @@ struct ChatView: View {
                 }
             }
             if isPresented {
-                ChatQuestionView(viewModel: viewModel, chatType: $chatType)
+                ChatQuestionView(viewModel: viewModel, chatType: $chatType, isPresented: $isPresented)
                     .padding(.bottom, -50)
             }
             if isAlert {

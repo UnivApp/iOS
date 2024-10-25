@@ -10,6 +10,7 @@ import SwiftUI
 struct ChatQuestionView: View {
     @StateObject var viewModel: ChatViewModel
     @Binding var chatType: ChatType?
+    @Binding var isPresented: Bool
     
     var body: some View {
         VStack(spacing: 20) {
@@ -26,6 +27,7 @@ struct ChatQuestionView: View {
                         Button {
                             withAnimation {
                                 chatType = type
+                                isPresented = false
                                 viewModel.isUniversityTyping.append(false)
                                 viewModel.isScrollType.append(nil)
                                 viewModel.mineList[viewModel.mineList.count - 1] = ("\(type.title)")
@@ -127,7 +129,7 @@ struct chatListView: View {
                                 .padding(10)
                                 .foregroundColor(index != 0 ? .red.opacity(0.7) : .blue.opacity(0.7))
                                 .font(.system(size: 15, weight: .semibold))
-                                .background(.white)
+                                .background(.clear)
                                 .cornerRadius(15)
                         }
                         .frame(height: 20)
@@ -267,6 +269,7 @@ struct Previews: PreviewProvider {
     static var previews: some View {
         @State var ChatType: ChatType? = .Occasion
         @State var isPresented: Bool = true
-        ChatQuestionView(viewModel: ChatViewModel(container: .init(services: StubServices())), chatType: $ChatType)
+        @State var isAlert: Bool = true
+        ChatQuestionView(viewModel: ChatViewModel(container: .init(services: StubServices())), chatType: $ChatType, isPresented: $isAlert)
     }
 }
