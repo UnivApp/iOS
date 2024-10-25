@@ -58,11 +58,25 @@ struct ChatView: View {
                                 if index < chatCount {
                                     VStack {
                                         chatListView(viewModel: viewModel, isAlert: $isAlert, chatType: $chatType, index: index)
-                                        switch viewModel.isScrollType {
+                                        switch viewModel.isScrollType[index] {
                                         case .news:
-                                            Color.clear
+                                            if let newsData = viewModel.newsState.data, index < newsData.count , newsData[index] != [] {
+                                                HStack {
+                                                    LoadingView(url: "chat_news", size: [100, 100])
+                                                        .padding(.leading, 40)
+                                                    Spacer()
+                                                }
+                                                ChatScrollView(news: newsData[index])
+                                            }
                                         case .ranking:
-                                            Color.clear
+                                            if let rankData = viewModel.rankState.data, index < rankData.count , rankData[index] != [] {
+                                                HStack {
+                                                    LoadingView(url: "chat_rank", size: [100, 100])
+                                                        .padding(.leading, 40)
+                                                    Spacer()
+                                                }
+                                                ChatScrollView(rank: rankData[index])
+                                            }
                                         case .rent:
                                             Color.clear
                                         case .employment:

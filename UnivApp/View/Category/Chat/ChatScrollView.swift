@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ChatScrollView: View {
     var food: [FoodModel]?
@@ -24,9 +25,9 @@ struct ChatScrollView: View {
                 if let food = food {
                     ChatFoodView(model: food)
                 } else if let news = news {
-                    
+                    ChatNewsView(model: news)
                 } else if let rank = rank {
-                    
+                    ChatRankView(model: rank)
                 } else if let rent = rent {
                     
                 } else if let mou = mou {
@@ -45,6 +46,106 @@ struct ChatScrollView: View {
         }
         .frame(height: 200)
         .background(.white)
+    }
+}
+
+fileprivate struct ChatRankView: View {
+    var model: [InitiativeModel]
+    var body: some View {
+        
+        VStack(alignment: .center) {
+            HStack {
+                Text("QS 세계대학평가")
+                    .font(.system(size: 13, weight: .bold))
+                    .foregroundColor(.black)
+                Spacer()
+            }
+            ForEach(model.indices, id: \.self) { index in
+                if index < 5 {
+                    HStack(spacing: 40) {
+                        if let rankingResponses = model[index].universityRankingResponses.first {
+                            Text("\(rankingResponses.rank)")
+                                .font(.system(size: 10, weight: .bold))
+                                .foregroundColor(Color.white)
+                                .padding(5)
+                                .background(Circle().fill(.orange))
+                                .multilineTextAlignment(.center)
+                            
+                            Group {
+                                if let image = rankingResponses.logo {
+                                    KFImage(URL(string: image))
+                                        .resizable()
+                                        .scaledToFit()
+                                } else {
+                                    Image("no_image")
+                                        .resizable()
+                                        .scaledToFit()
+                                }
+                            }
+                            .frame(width: 20, height: 20)
+                            
+                            Text(rankingResponses.universityName)
+                                .font(.system(size: 12, weight: .semibold))
+                                .foregroundColor(Color.black)
+                                .multilineTextAlignment(.center)
+                        }
+                    }
+                    .padding(.horizontal, 30)
+                }
+            }
+            .padding(.vertical, 0)
+        }
+        .padding(10)
+        .overlay {
+            RoundedRectangle(cornerRadius: 15)
+                .stroke(.orange, lineWidth: 2)
+        }
+        .cornerRadius(15)
+        .frame(width: 300)
+    }
+}
+
+fileprivate struct ChatNewsView: View {
+    var model: [NewsModel]
+    var body: some View {
+        ForEach(model.indices, id: \.self) { index in
+            if index < 10 {
+                ZStack {
+                    Image("info")
+                        .resizable()
+                        .scaledToFill()
+                        .opacity(0.1)
+                    
+                    Button  {
+                        if let url = URL(string: model[index].link ?? "" ){
+                            UIApplication.shared.open(url)
+                        }
+                    } label: {
+                        VStack(spacing: 10) {
+                            Text(model[index].title)
+                                .font(.system(size: 15, weight: .bold))
+                                .foregroundColor(.black)
+                                .padding(.top, 25)
+                            
+                            HStack {
+                                Spacer()
+                                Text(model[index].admissionYear)
+                                    .font(.system(size: 11, weight: .semibold))
+                                    .foregroundColor(.black.opacity(0.7))
+                            }
+                            
+                            Text(model[index].source ?? "")
+                                .font(.system(size: 13, weight: .semibold))
+                                .foregroundColor(.black.opacity(0.7))
+                        }
+                        .padding(.horizontal, 20)
+                    }
+                }
+                .frame(width: 200, height: 200)
+                .padding(.horizontal, 20)
+            }
+        }
+        .padding(.vertical, 0)
     }
 }
 
@@ -97,5 +198,5 @@ fileprivate struct ChatFoodView: View {
 }
 
 #Preview {
-    ChatScrollView(food: [FoodModel(name: "깍뚝", location: "광진구 동일로 459", placeUrl: "ㅋ", hashtags: ["ㅋㅋㅋ", "ㅋㅋㅋ"], topMessage: "광진구 1등 맛집"), FoodModel(name: "깍뚝", location: "광진구 동일로 459", placeUrl: "ㅋ", hashtags: ["ㅋㅋㅋ", "ㅋㅋㅋ"]), FoodModel(name: "깍뚝", location: "광진구 동일로 459", placeUrl: "ㅋ", hashtags: ["ㅋㅋㅋ", "ㅋㅋㅋ"])])
+    ChatScrollView(rank: [InitiativeModel(displayName: "세종", fullName: "세종대", description: "ㅋㅋ", year: "ㅋㅋ", category: "ㅋㅋ", universityRankingResponses: [UniversityRankingResponses(universityName: "이거지", logo: "d", rank: 2)]),InitiativeModel(displayName: "세종", fullName: "세종대", description: "ㅋㅋ", year: "ㅋㅋ", category: "ㅋㅋ", universityRankingResponses: [UniversityRankingResponses(universityName: "이거지", logo: "d", rank: 2)]),InitiativeModel(displayName: "세종", fullName: "세종대", description: "ㅋㅋ", year: "ㅋㅋ", category: "ㅋㅋ", universityRankingResponses: [UniversityRankingResponses(universityName: "이거지", logo: "d", rank: 2)])])
 }

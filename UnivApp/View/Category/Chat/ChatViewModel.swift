@@ -35,7 +35,7 @@ class ChatViewModel: ObservableObject {
     
     @Published var universityName: String = ""
     @Published var isUniversityTyping: [Bool] = [false, false]
-    @Published var isScrollType: chatScrollType? = nil
+    @Published var isScrollType: [chatScrollType?] = [nil, nil]
     
     //MARK: - Data
     @Published var foodState = ChatState<FoodModel>()
@@ -64,7 +64,7 @@ class ChatViewModel: ObservableObject {
                         self?.phase = .fail
                     }
                 } receiveValue: { [weak self] (topFood) in
-                    self?.isScrollType = .food
+                    self?.isScrollType[(self?.chatList.count ?? 0) - 1] = .food
                     self?.ensureDataCapacity(state: &self!.foodState, index: (self?.chatList.count ?? 0) - 1)
                     self?.foodState.data?[(self?.chatList.count ?? 0) - 1] = topFood
                     self?.appendTotal("다른 대학교가 궁금하신가요? 🎓")
@@ -74,9 +74,35 @@ class ChatViewModel: ObservableObject {
             
         case .news:
             self.phase = .loading
+            container.services.infoService.getNewsList()
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.phase = .fail
+                    }
+                } receiveValue: { [weak self] (newsData) in
+                    self?.isScrollType[(self?.chatList.count ?? 0) - 1] = .news
+                    self?.ensureDataCapacity(state: &self!.newsState, index: (self?.chatList.count ?? 0) - 1)
+                    self?.newsState.data?[(self?.chatList.count ?? 0) - 1] = newsData
+                    self?.appendTotal("더 자세한 정보를 알고 싶으신가요? 👀")
+                    self?.phase = .success
+                    self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = true
+                }.store(in: &subscripttions)
             
         case .ranking:
             self.phase = .loading
+            container.services.rankingService.getRanking()
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.phase = .fail
+                    }
+                } receiveValue: { [weak self] (rankData) in
+                    self?.isScrollType[(self?.chatList.count ?? 0) - 1] = .ranking
+                    self?.ensureDataCapacity(state: &self!.rankState, index: (self?.chatList.count ?? 0) - 1)
+                    self?.rankState.data?[(self?.chatList.count ?? 0) - 1] = rankData
+                    self?.appendTotal("가장 대표적인 랭킹 정보인 'QS 세계대학 평가'에 대해 알려드렸습니다. 더 자세한 정보를 알고 싶으신가요? 👀")
+                    self?.phase = .success
+                    self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = true
+                }.store(in: &subscripttions)
             
         case .rent:
             self.phase = .loading
@@ -120,24 +146,21 @@ class ChatViewModel: ObservableObject {
                                     self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = false
                                 }
                             } receiveValue: { [weak self] foodSearch in
-                                self?.isScrollType = .food
+                                self?.isScrollType[(self?.chatList.count ?? 0) - 1] = .food
                                 self?.appendTotal("\(self?.universityName ?? "") 주변 맛집 정보입니다!")
                                 self?.ensureDataCapacity(state: &self!.foodState, index: (self?.chatList.count ?? 0) - 1)
                                 self?.foodState.data?[(self?.chatList.count ?? 0) - 1] = foodSearch
                                 self?.appendTotal("더 자세한 정보를 알고 싶으신가요? 👀")
-                                self?.phase = .notRequested
+                                self?.phase = .success
                                 self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = true
                             }.store(in: &self!.subscripttions)
                     }
                 }.store(in: &subscripttions)
 
-            
         case .news:
-            self.phase = .loading
-            
+            return
         case .ranking:
-            self.phase = .loading
-            
+            return
         case .rent:
             self.phase = .loading
             
@@ -173,6 +196,7 @@ class ChatViewModel: ObservableObject {
         self.chatList.append("")
         self.mineList.append("")
         self.isUniversityTyping.append(false)
+        self.isScrollType.append(nil)
         self.chatList[chatList.count - 1] = string
     }
     

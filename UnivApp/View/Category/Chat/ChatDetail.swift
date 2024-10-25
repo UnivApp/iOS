@@ -27,6 +27,7 @@ struct ChatQuestionView: View {
                             withAnimation {
                                 chatType = type
                                 viewModel.isUniversityTyping.append(false)
+                                viewModel.isScrollType.append(nil)
                                 viewModel.mineList[viewModel.mineList.count - 1] = ("\(type.title)")
                                 viewModel.mineList.append("")
                                 viewModel.chatList.append("")
@@ -111,9 +112,15 @@ struct chatListView: View {
                                     viewModel.isUniversityTyping[self.index] = false
                                 }
                             } else {
-                                self.isAlert = false
-                                viewModel.isUniversityTyping[self.index] = false
-                                self.isMore = true
+                                if index == 0 {
+                                    self.isAlert = false
+                                    viewModel.isUniversityTyping[self.index] = false
+                                    self.isMore = true
+                                } else {
+                                    self.isAlert = false
+                                    viewModel.isUniversityTyping[self.index] = false
+                                    self.isMore = false
+                                }
                             }
                         } label: {
                             Text(index == 0 ? "예" : "아니오")
