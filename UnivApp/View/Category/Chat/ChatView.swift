@@ -80,7 +80,14 @@ struct ChatView: View {
                                         case .rent:
                                             Color.clear
                                         case .employment:
-                                            Color.clear
+                                            if let employData = viewModel.employmentState.data, index < employData.count , employData[index] != [] {
+                                                HStack {
+                                                    LoadingView(url: "chat_rate", size: [100, 100])
+                                                        .padding(.leading, 40)
+                                                    Spacer()
+                                                }
+                                                ChatScrollView(employment: employData[index])
+                                            }
                                         case .mou:
                                             if let mouData = viewModel.mouState.data, index < mouData.count , mouData[index] != [] {
                                                 HStack {
@@ -100,11 +107,32 @@ struct ChatView: View {
                                                 ChatScrollView(food: foodData[index])
                                             }
                                         case .hotplace:
-                                            Color.clear
+                                            if let hotplaceData = viewModel.hotplaceState.data, index < hotplaceData.count , hotplaceData[index] != [] {
+                                                HStack {
+                                                    LoadingView(url: "chat_play", size: [100, 100])
+                                                        .padding(.leading, 40)
+                                                    Spacer()
+                                                }
+                                                ChatScrollView(hotplace: hotplaceData[index])
+                                            }
                                         case .ontime:
-                                            Color.clear
+                                            if let ontimeData = viewModel.ontimeState.data, index < ontimeData.count , ontimeData[index] != [] {
+                                                HStack {
+                                                    LoadingView(url: "chat_rate", size: [100, 100])
+                                                        .padding(.leading, 40)
+                                                    Spacer()
+                                                }
+                                                ChatScrollView(ontime: ontimeData[index])
+                                            }
                                         case .Occasion:
-                                            Color.clear
+                                            if let occasionData = viewModel.occasionState.data, index < occasionData.count , occasionData[index] != [] {
+                                                HStack {
+                                                    LoadingView(url: "chat_rate", size: [100, 100])
+                                                        .padding(.leading, 40)
+                                                    Spacer()
+                                                }
+                                                ChatScrollView(occasion: occasionData[index])
+                                            }
                                         case .none:
                                             Color.clear
                                         }

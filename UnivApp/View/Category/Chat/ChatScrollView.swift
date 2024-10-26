@@ -14,10 +14,10 @@ struct ChatScrollView: View {
     var rank: [InitiativeModel]?
     var rent: [MoneyModel]?
     var mou: [MouModel]?
-    var hotplace: [PlayDetailModel]?
-    var employment: [EmploymentRateResponses]?
-    var ontime: [CompetitionRateResponses]?
-    var occasion: [CompetitionRateResponses]?
+    var hotplace: [PlayModel]?
+    var employment: [EmploymentModel]?
+    var ontime: [CompetitionModel]?
+    var occasion: [CompetitionModel]?
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
@@ -33,19 +33,98 @@ struct ChatScrollView: View {
                 } else if let mou = mou {
                     ChatMouView(model: mou)
                 } else if let hotplace = hotplace {
-                    
+                    ChatPlayView(playViewModel: PlayViewModel(container: .init(services: Services())), model: hotplace)
                 } else if let employment = employment {
-                    
+                    ChatRateView(employModel: employment, modelType: "취업률")
                 } else if let ontime = ontime {
-                    
+                    ChatRateView(competitionModel: ontime, modelType: "정시 경쟁률")
                 } else if let occasion = occasion {
-                    
+                    ChatRateView(competitionModel: occasion, modelType: "수시 경쟁률")
                 }
             }
             .padding(.horizontal, 40)
         }
         .frame(height: 200)
         .background(.white)
+    }
+}
+
+fileprivate struct ChatPlayView: View {
+    @StateObject var playViewModel: PlayViewModel
+    
+    var model: [PlayModel]
+    var body: some View {
+        ForEach(model.indices, id: \.self) { index in
+            representativePlaceCell(playDetailModel: PlayDetailModel(object: playViewModel.convertToObjects(from: model), placeDataArray: model, placeData: model[index]))
+        }
+        .frame(height: 220)
+        .cornerRadius(15)
+    }
+}
+
+fileprivate struct ChatRateView: View {
+    var employModel: [EmploymentModel]?
+    var competitionModel: [CompetitionModel]?
+    var modelType: String
+    
+    @State var chartData: [[ChartData]] = []
+    @State private var phase: Phase = .notRequested
+    var body: some View {
+        contentView
+    }
+    @ViewBuilder
+    var contentView: some View {
+        switch self.phase {
+        case .notRequested:
+            PlaceholderView().onAppear { self.setChartData() }
+        case .loading:
+            LoadingView(url: "load", size: [100, 100])
+        case .success:
+            loadedView
+        case .fail:
+            ErrorView()
+        }
+    }
+    
+    var loadedView: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 20) {
+                ForEach(chartData.indices, id: \.self) { index in
+                    BarChartView(title: modelType, description: "대학어디가 - 정보제공", dataPoints: chartData[index])
+                }
+            }
+            .padding(.vertical, 10)
+            .padding(.horizontal, 10)
+        }
+    }
+    
+    private func setChartData() {
+        chartData = []
+        self.phase = .loading
+        if let eModel = employModel,
+        let rate = eModel.compactMap({ $0.employmentRateResponses }).first {
+            let value = rate.compactMap { $0.employmentRate }
+            let year = rate.compactMap { $0.year }
+            
+            for index in value.indices {
+                chartData.append([ChartData(label: "취업률", value: value[index], xLabel: "년도", yLabel: "비율", year: year[index])])
+            }
+        } else if let cModel = competitionModel,
+                  let rate = cModel.compactMap({ $0.competitionRateResponses }).first {
+            let earlyValue = rate.compactMap { $0.earlyAdmissionRate }
+            let regularValue = rate.compactMap { $0.regularAdmissionRate }
+            let year = rate.compactMap { $0.year }
+            if modelType == "수시 경쟁률" {
+                for index in earlyValue.indices {
+                    chartData.append([ChartData(label: "수시", value: earlyValue[index], xLabel: "년도", yLabel: "비율", year: year[index])])
+                }
+            } else {
+                for index in regularValue.indices {
+                    chartData.append([ChartData(label: "정시", value: regularValue[index], xLabel: "년도", yLabel: "비율", year: year[index])])
+                }
+            }
+        }
+        self.phase = .success
     }
 }
 
@@ -252,5 +331,5 @@ fileprivate struct ChatFoodView: View {
 }
 
 #Preview {
-    ChatScrollView(mou: [MouModel(expoId: 0, title: "헬로헬로방구방구", category: "취업진로", expoYear: "2023.12.12 ~ 2023.12.12", status: "접수 중", location: "서울시 광진구 동일로", content: "s", date: "2023.12.12")])
+    ChatScrollView(hotplace: [PlayModel(name: "서울월드컵경기장", description: "", tip: "", location: "서울시 광진구 동일로")])
 }

@@ -60,6 +60,7 @@ struct RateDetailView: View {
         VStack(spacing: 30) {
             SearchView(isFocused: self._isFocused, searchText: $listViewModel.searchText)
                 .environmentObject(self.listViewModel)
+                .padding(.top, 20)
             
             VStack {
                 HStack(spacing: 10) {

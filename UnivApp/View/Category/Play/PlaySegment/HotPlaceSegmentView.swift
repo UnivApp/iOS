@@ -52,7 +52,7 @@ struct HotPlaceSegmentView: View {
     }
 }
 
-fileprivate struct representativePlaceCell: View {
+struct representativePlaceCell: View {
     var playDetailModel: PlayDetailModel
     var body: some View {
         if let placeData = playDetailModel.placeData {
