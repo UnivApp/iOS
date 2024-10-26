@@ -12,7 +12,7 @@ struct ChatScrollView: View {
     var food: [FoodModel]?
     var news: [NewsModel]?
     var rank: [InitiativeModel]?
-    var rent: [MoneyModel]?
+    var rent: [String]?
     var mou: [MouModel]?
     var hotplace: [PlayModel]?
     var employment: [EmploymentModel]?
@@ -29,7 +29,7 @@ struct ChatScrollView: View {
                 } else if let rank = rank {
                     ChatRankView(model: rank)
                 } else if let rent = rent {
-                    
+                    ChatRentView(averageRent: rent)
                 } else if let mou = mou {
                     ChatMouView(model: mou)
                 } else if let hotplace = hotplace {
@@ -48,6 +48,47 @@ struct ChatScrollView: View {
         .background(.white)
     }
 }
+
+fileprivate struct ChatRentView: View {
+    var averageRent: [String]
+    var body: some View {
+        VStack {
+            ZStack {
+                VStack(spacing: 10) {
+                    Text("\(averageRent[0])/\(averageRent[1])")
+                        .font(.system(size: 20, weight: .bold))
+                        .foregroundColor(.orange)
+                    Text("평균 평수 : \(averageRent[2])㎡")
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundColor(.blue.opacity(0.5))
+                    Text("서울 지역 월세 평균 호가 🔍")
+                        .font(.system(size: 15, weight: .bold))
+                        .foregroundColor(.black.opacity(0.7))
+                }
+                HStack(alignment: .center) {
+                    Spacer()
+                    LoadingView(url: "coinGif", size: [80,200])
+                        .opacity(0.7)
+                }
+            }
+            
+            HStack {
+                Spacer()
+                Text("정보제공 : 서울 열린데이터 광장")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundColor(.gray)
+            }
+        }
+        .padding(.horizontal, 20)
+        .padding(.bottom, 5)
+        .overlay {
+            RoundedRectangle(cornerRadius: 15)
+                .stroke(.orange, lineWidth: 2)
+        }
+        .cornerRadius(15)
+    }
+}
+
 
 fileprivate struct ChatPlayView: View {
     @StateObject var playViewModel: PlayViewModel
@@ -327,5 +368,5 @@ fileprivate struct ChatFoodView: View {
 }
 
 #Preview {
-    ChatScrollView(hotplace: [PlayModel(name: "서울월드컵경기장", description: "", tip: "", location: "서울시 광진구 동일로")])
+    ChatScrollView(rent: ["123","123","123"])
 }

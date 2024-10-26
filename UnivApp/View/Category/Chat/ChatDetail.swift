@@ -215,9 +215,17 @@ struct ChatSearchView: View {
                 HStack {
                     Button {
                         if let chatType = chatType {
-                            viewModel.subSend(action: chatType)
                             isAlert = false
                             isTextFieldFocused = false
+                            viewModel.isUniversityTyping.append(false)
+                            viewModel.isScrollType.append(nil)
+                            viewModel.mineList[viewModel.mineList.count - 1] = (viewModel.universityName)
+                            viewModel.mineList.append("")
+                            viewModel.chatList.append("")
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                viewModel.chatList[viewModel.chatList.count - 1] = ("\(viewModel.universityName) 궁금하시군요 🤔")
+                                viewModel.subSend(action: chatType)
+                            }
                         }
                     } label: {
                         Image("search")
@@ -239,9 +247,17 @@ struct ChatSearchView: View {
                         }
                         .onSubmit {
                             if let chatType = chatType {
-                                viewModel.subSend(action: chatType)
                                 isAlert = false
                                 isTextFieldFocused = false
+                                viewModel.isUniversityTyping.append(false)
+                                viewModel.isScrollType.append(nil)
+                                viewModel.mineList[viewModel.mineList.count - 1] = (viewModel.universityName)
+                                viewModel.mineList.append("")
+                                viewModel.chatList.append("")
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                    viewModel.chatList[viewModel.chatList.count - 1] = ("\(viewModel.universityName) 궁금하시군요 🤔")
+                                    viewModel.subSend(action: chatType)
+                                }
                             }
                         }
                 }

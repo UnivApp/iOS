@@ -87,6 +87,7 @@
 		E4982CF72CCBBA2300D0F1A7 /* chat_rank.gif in Resources */ = {isa = PBXBuildFile; fileRef = E4982CF62CCBBA2200D0F1A7 /* chat_rank.gif */; };
 		E4982CF92CCC05BC00D0F1A7 /* chat_mou.gif in Resources */ = {isa = PBXBuildFile; fileRef = E4982CF82CCC05BC00D0F1A7 /* chat_mou.gif */; };
 		E4982CFB2CCCD5A700D0F1A7 /* chat_rate.gif in Resources */ = {isa = PBXBuildFile; fileRef = E4982CFA2CCCD5A700D0F1A7 /* chat_rate.gif */; };
+		E4982CFD2CCD453400D0F1A7 /* chat_rent.gif in Resources */ = {isa = PBXBuildFile; fileRef = E4982CFC2CCD453400D0F1A7 /* chat_rent.gif */; };
 		E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */; };
 		E49C9F9F2C86CF70001F43A3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */; };
 		E49C9FA72C86D3BC001F43A3 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */; };
@@ -249,6 +250,7 @@
 		E4982CF62CCBBA2200D0F1A7 /* chat_rank.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = chat_rank.gif; sourceTree = "<group>"; };
 		E4982CF82CCC05BC00D0F1A7 /* chat_mou.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = chat_mou.gif; sourceTree = "<group>"; };
 		E4982CFA2CCCD5A700D0F1A7 /* chat_rate.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = chat_rate.gif; sourceTree = "<group>"; };
+		E4982CFC2CCD453400D0F1A7 /* chat_rent.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = chat_rent.gif; sourceTree = "<group>"; };
 		E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnivAppApp.swift; sourceTree = "<group>"; };
 		E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
@@ -516,6 +518,7 @@
 				E4982CF62CCBBA2200D0F1A7 /* chat_rank.gif */,
 				E4982CF82CCC05BC00D0F1A7 /* chat_mou.gif */,
 				E4982CFA2CCCD5A700D0F1A7 /* chat_rate.gif */,
+				E4982CFC2CCD453400D0F1A7 /* chat_rent.gif */,
 			);
 			path = chat;
 			sourceTree = "<group>";
@@ -1152,6 +1155,7 @@
 				E41589342CBE923400EDB211 /* DG3.gif in Resources */,
 				E4B3FCCF2C7751DD00CB98F3 /* Preview Assets.xcassets in Resources */,
 				E40135F82CA3F5B90021D351 /* logo_Splash.gif in Resources */,
+				E4982CFD2CCD453400D0F1A7 /* chat_rent.gif in Resources */,
 				E41589332CBE923400EDB211 /* DG4.gif in Resources */,
 				E4953D302C89C770008CBDE5 /* firework.gif in Resources */,
 				E41589372CBE923400EDB211 /* DG2.gif in Resources */,

@@ -36,12 +36,12 @@ class ChatViewModel: ObservableObject {
     @Published var universityName: String = ""
     @Published var isUniversityTyping: [Bool] = [false, false]
     @Published var isScrollType: [chatScrollType?] = [nil, nil]
+    @Published var averageRent: [String] = []
     
     //MARK: - Data
     @Published var foodState = ChatState<FoodModel>()
     @Published var newsState = ChatState<NewsModel>()
     @Published var rankState = ChatState<InitiativeModel>()
-    @Published var rentState = ChatState<MoneyModel>()
     @Published var mouState = ChatState<MouModel>()
     @Published var hotplaceState = ChatState<PlayModel>()
     @Published var employmentState = ChatState<EmploymentModel>()
@@ -108,6 +108,22 @@ class ChatViewModel: ObservableObject {
             
         case .rent:
             self.phase = .loading
+            container.services.moneyService.getRent(CGG_NM: "", BLDG_USG: "오피스텔")
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.phase = .fail
+                    }
+                } receiveValue: { [weak self] (averageData) in
+                    if  let response = averageData.tbLnOpendataRentV?.row,
+                        let average = self?.calculateAverage(data: response) {
+                        self?.appendTotal("서울 지역 오피스텔 기준 평균 월세입니다")
+                        self?.isScrollType[(self?.chatList.count ?? 0) - 1] = .rent
+                        self?.averageRent = average
+                        self?.appendTotal("다른 대학교가 궁금하신가요? 🎓")
+                        self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = true
+                        self?.phase = .success
+                    }
+                }.store(in: &subscripttions)
             
         case .mou:
             self.phase = .loading
@@ -198,6 +214,46 @@ class ChatViewModel: ObservableObject {
             return
         case .rent:
             self.phase = .loading
+            container.services.searchService.getSearch(searchText: universityName)
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.appendTotal("검색 결과를 찾을 수 없어요 😢")
+                        self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = false
+                        self?.phase = .notRequested
+                    }
+                } receiveValue: { [weak self] searchResult in
+                    if let universityId = searchResult.compactMap({ $0.universityId }).first {
+                        self?.container.services.listService.getDetail(universityId: universityId)
+                            .sink { [weak self] completion in
+                                if case .failure = completion {
+                                    self?.phase = .fail
+                                }
+                            } receiveValue: { [weak self] universityData in
+                                if let address = universityData.location {
+                                    if let extractAddress = self?.extractGu(from: address) {
+                                        self?.container.services.moneyService.getRent(CGG_NM: extractAddress, BLDG_USG: "오피스텔")
+                                            .sink { [weak self] completion in
+                                                if case .failure = completion {
+                                                    self?.phase = .fail
+                                                }
+                                            } receiveValue: { [weak self] response in
+                                                if  let response = response.tbLnOpendataRentV?.row,
+                                                    let average = self?.calculateAverage(data: response) {
+                                                    self?.appendTotal("\(self?.universityName ?? "") 주변 월세 정보입니다!")
+                                                    self?.isScrollType[(self?.chatList.count ?? 0) - 1] = .rent
+                                                    self?.averageRent = average
+                                                    self?.appendTotal("더 자세한 정보를 알고 싶으신가요? 👀")
+                                                    self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = true
+                                                    self?.phase = .success
+                                                }
+                                                self?.phase = .success
+                                            }
+                                            .store(in: &self!.subscripttions)
+                                    }
+                                }
+                            }.store(in: &self!.subscripttions)
+                    }
+                }.store(in: &subscripttions)
             
         case .mou:
             return
@@ -342,22 +398,36 @@ class ChatViewModel: ObservableObject {
         self.chatList[chatList.count - 1] = string
     }
     
-    func appendChatList(_ string: String) {
-        self.chatList.append("")
-        self.chatList[chatList.count - 1] = string
-    }
-    
-    func appendMineList(_ string: String) {
-        self.mineList.append("")
-        self.mineList[mineList.count - 1] = string
-    }
-    
     func calculateDate() -> String {
         let today = Date()
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ko_KR")
         formatter.dateFormat = "yyyy년 MM월 dd일 EEEE"
         return formatter.string(from: today)
+    }
+    
+    func calculateAverage(data: [MoneyModel]) -> [String] {
+        let totalGRFE = data.compactMap { Int($0.GRFE) }.reduce(0, +)
+        let totalRTFE = data.compactMap { Int($0.RTFE) }.reduce(0, +)
+        let totalAREA = data.compactMap { Int($0.RENT_AREA) }.reduce(0, +)
+        
+        let count = data.count
+        
+        let averageGRFE = count > 0 ? totalGRFE / count : 0
+        let averageRTFE = count > 0 ? totalRTFE / count : 0
+        let averageAREA = count > 0 ? totalAREA / count : 0
+        
+        return ["\(averageGRFE)", "\(averageRTFE)", "\(averageAREA)"]
+    }
+    
+    func extractGu(from location: String) -> String? {
+        let components = location.split(separator: " ")
+        
+        if let gu = components.first(where: { $0.hasSuffix("구") }) {
+            return String(gu)
+        }
+        
+        return nil
     }
     
 }

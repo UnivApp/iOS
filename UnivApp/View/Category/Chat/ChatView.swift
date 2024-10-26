@@ -78,7 +78,12 @@ struct ChatView: View {
                                                 ChatScrollView(rank: rankData[index])
                                             }
                                         case .rent:
-                                            Color.clear
+                                            HStack {
+                                                LoadingView(url: "chat_rent", size: [100, 100])
+                                                    .padding(.leading, 40)
+                                                Spacer()
+                                            }
+                                            ChatScrollView(rent: viewModel.averageRent)
                                         case .employment:
                                             if let employData = viewModel.employmentState.data, index < employData.count , employData[index] != [] {
                                                 HStack {
