@@ -87,19 +87,14 @@ fileprivate struct ChatRateView: View {
     }
     
     var loadedView: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 20) {
-                ForEach(chartData.indices, id: \.self) { index in
-                    BarChartView(title: modelType, description: "대학어디가 - 정보제공", dataPoints: chartData[index])
-                }
-            }
-            .padding(.vertical, 10)
-            .padding(.horizontal, 10)
+        ForEach(chartData.indices, id: \.self) { index in
+            BarChartView(title: modelType, description: "대학어디가 - 정보제공", dataPoints: chartData[index])
+                .frame(width: 200)
         }
     }
     
     private func setChartData() {
-        chartData = []
+        var sectionChartData: [ChartData] = []
         self.phase = .loading
         if let eModel = employModel,
         let rate = eModel.compactMap({ $0.employmentRateResponses }).first {
@@ -107,7 +102,7 @@ fileprivate struct ChatRateView: View {
             let year = rate.compactMap { $0.year }
             
             for index in value.indices {
-                chartData.append([ChartData(label: "취업률", value: value[index], xLabel: "년도", yLabel: "비율", year: year[index])])
+                sectionChartData.append(ChartData(label: year[index], value: value[index], xLabel: "년도", yLabel: "비율", year: year[index]))
             }
         } else if let cModel = competitionModel,
                   let rate = cModel.compactMap({ $0.competitionRateResponses }).first {
@@ -116,14 +111,15 @@ fileprivate struct ChatRateView: View {
             let year = rate.compactMap { $0.year }
             if modelType == "수시 경쟁률" {
                 for index in earlyValue.indices {
-                    chartData.append([ChartData(label: "수시", value: earlyValue[index], xLabel: "년도", yLabel: "비율", year: year[index])])
+                    sectionChartData.append(ChartData(label: year[index], value: earlyValue[index], xLabel: "년도", yLabel: "비율", year: year[index]))
                 }
             } else {
                 for index in regularValue.indices {
-                    chartData.append([ChartData(label: "정시", value: regularValue[index], xLabel: "년도", yLabel: "비율", year: year[index])])
+                    sectionChartData.append(ChartData(label: year[index], value: regularValue[index], xLabel: "년도", yLabel: "비율", year: year[index]))
                 }
             }
         }
+        self.chartData.append(sectionChartData)
         self.phase = .success
     }
 }
