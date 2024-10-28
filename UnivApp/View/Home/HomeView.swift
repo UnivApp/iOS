@@ -53,16 +53,14 @@ struct HomeView: View {
     
     var loadedView: some View {
         NavigationStack {
-            ZStack {
-                ScrollView(.vertical) {
-                    VStack(alignment: .center, spacing: 20) {
-                        searchView
-                            .padding(.top, 10)
-                        
-                        categoryView
-                        
-                        footerView
-                    }
+            ScrollView(.vertical) {
+                VStack(alignment: .center, spacing: 10) {
+                    searchView
+                        .padding(.top, 10)
+                    
+                    categoryView
+                    
+                    footerView
                 }
             }
             .fullScreenCover(isPresented: $isShowingPopup) {

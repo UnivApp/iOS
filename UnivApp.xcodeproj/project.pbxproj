@@ -88,6 +88,9 @@
 		E4982CF92CCC05BC00D0F1A7 /* chat_mou.gif in Resources */ = {isa = PBXBuildFile; fileRef = E4982CF82CCC05BC00D0F1A7 /* chat_mou.gif */; };
 		E4982CFB2CCCD5A700D0F1A7 /* chat_rate.gif in Resources */ = {isa = PBXBuildFile; fileRef = E4982CFA2CCCD5A700D0F1A7 /* chat_rate.gif */; };
 		E4982CFD2CCD453400D0F1A7 /* chat_rent.gif in Resources */ = {isa = PBXBuildFile; fileRef = E4982CFC2CCD453400D0F1A7 /* chat_rent.gif */; };
+		E4982D002CCF5AC400D0F1A7 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = E4982CFF2CCF5AC400D0F1A7 /* FirebaseMessaging */; };
+		E4982D022CCF60DC00D0F1A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982D012CCF60DC00D0F1A7 /* AppDelegate.swift */; };
+		E4982D042CCF629D00D0F1A7 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = E4982D032CCF629D00D0F1A7 /* FirebaseCore */; };
 		E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */; };
 		E49C9F9F2C86CF70001F43A3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */; };
 		E49C9FA72C86D3BC001F43A3 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */; };
@@ -251,6 +254,7 @@
 		E4982CF82CCC05BC00D0F1A7 /* chat_mou.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = chat_mou.gif; sourceTree = "<group>"; };
 		E4982CFA2CCCD5A700D0F1A7 /* chat_rate.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = chat_rate.gif; sourceTree = "<group>"; };
 		E4982CFC2CCD453400D0F1A7 /* chat_rent.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = chat_rent.gif; sourceTree = "<group>"; };
+		E4982D012CCF60DC00D0F1A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnivAppApp.swift; sourceTree = "<group>"; };
 		E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
@@ -342,9 +346,11 @@
 			files = (
 				E4F04BF82C94478800F653DF /* GoogleMobileAds in Frameworks */,
 				E4953D382C89C924008CBDE5 /* Kingfisher in Frameworks */,
+				E4982D002CCF5AC400D0F1A7 /* FirebaseMessaging in Frameworks */,
 				E4F04BF22C94477600F653DF /* FSCalendar in Frameworks */,
 				E4953D662C8ECD14008CBDE5 /* Alamofire in Frameworks */,
 				E4953D7A2C8EE21D008CBDE5 /* SwiftKeychainWrapper in Frameworks */,
+				E4982D042CCF629D00D0F1A7 /* FirebaseCore in Frameworks */,
 				E4F04BF52C94477F00F653DF /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -688,6 +694,7 @@
 				E4EA25602C85CEF000DC5D55 /* Info.plist */,
 				E4B3FD2D2C786F0000CB98F3 /* UnivApp.entitlements */,
 				E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */,
+				E4982D012CCF60DC00D0F1A7 /* AppDelegate.swift */,
 				E4EA25652C85D6DC00DC5D55 /* General */,
 				E4B3FCFC2C7755B500CB98F3 /* Service */,
 				E4B3FCFB2C7755AF00CB98F3 /* Model */,
@@ -1101,6 +1108,8 @@
 				E4F04BF12C94477600F653DF /* FSCalendar */,
 				E4F04BF42C94477F00F653DF /* SnapKit */,
 				E4F04BF72C94478800F653DF /* GoogleMobileAds */,
+				E4982CFF2CCF5AC400D0F1A7 /* FirebaseMessaging */,
+				E4982D032CCF629D00D0F1A7 /* FirebaseCore */,
 			);
 			productName = UnivApp;
 			productReference = E4B3FCC42C7751DB00CB98F3 /* UnivApp.app */;
@@ -1137,6 +1146,7 @@
 				E4F04BF02C94477600F653DF /* XCRemoteSwiftPackageReference "FSCalendar" */,
 				E4F04BF32C94477F00F653DF /* XCRemoteSwiftPackageReference "SnapKit" */,
 				E4F04BF62C94478800F653DF /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				E4982CFE2CCF5AB500D0F1A7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = E4B3FCC52C7751DB00CB98F3 /* Products */;
 			projectDirPath = "";
@@ -1233,6 +1243,7 @@
 				E49222792C9F10240077EA45 /* SeperateView.swift in Sources */,
 				E4953D222C888A64008CBDE5 /* HeartViewModel.swift in Sources */,
 				E4B3FD0C2C775D7000CB98F3 /* MainTabView.swift in Sources */,
+				E4982D022CCF60DC00D0F1A7 /* AppDelegate.swift in Sources */,
 				E415893F2CBE971500EDB211 /* DiagnosisModel.swift in Sources */,
 				E49222702C9C87DA0077EA45 /* RequestInterceptor + Extension.swift in Sources */,
 				E4CEEFC02CBA4E19001F4DAE /* MapView.swift in Sources */,
@@ -1570,6 +1581,14 @@
 				minimumVersion = 4.0.1;
 			};
 		};
+		E4982CFE2CCF5AB500D0F1A7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.4.0;
+			};
+		};
 		E4F04BF02C94477600F653DF /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
@@ -1611,6 +1630,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E4953D782C8EE21D008CBDE5 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
 			productName = SwiftKeychainWrapper;
+		};
+		E4982CFF2CCF5AC400D0F1A7 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4982CFE2CCF5AB500D0F1A7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		E4982D032CCF629D00D0F1A7 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4982CFE2CCF5AB500D0F1A7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
 		};
 		E4F04BF12C94477600F653DF /* FSCalendar */ = {
 			isa = XCSwiftPackageProductDependency;
