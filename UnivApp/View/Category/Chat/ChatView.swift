@@ -42,6 +42,12 @@ struct ChatView: View {
     var loadedView: some View {
         VStack(alignment: .center, spacing: 10) {
             ChatNavigationView(dismiss: _dismiss)
+            GADBannerViewController(type: .banner)
+                .frame(width: UIScreen.main.bounds.width - 40, height: (UIScreen.main.bounds.width - 40) / 3.2)
+                .overlay {
+                    RoundedRectangle(cornerRadius: 15).stroke(.backGray)
+                }
+            
             ZStack {
                 ScrollViewReader { proxy in
                     ScrollView(.vertical) {

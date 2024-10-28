@@ -10,6 +10,7 @@ import Combine
 
 protocol CalendarServiceType {
     func getTotalCalendar() -> AnyPublisher<[CalendarModel], Error>
+    func postAlarm(date: String, eventId: String) -> AnyPublisher<AlarmModel, Error>
 }
 
 class CalendarService: CalendarServiceType {
@@ -34,11 +35,40 @@ class CalendarService: CalendarServiceType {
         }.eraseToAnyPublisher()
     }
     
+    func postAlarm(date: String, eventId: String) -> AnyPublisher<AlarmModel, any Error> {
+        Future<AlarmModel, Error> { promise in
+            if let deviceToken = UserDefaults.standard.value(forKey: "DeviceToken") {
+                let params: [String:Any] = [
+                    "token": deviceToken,
+                    "date": date,
+                    "eventId": eventId
+                ]
+                Alamofire().postAlamofire(url: "", params: params)
+                    .sink { completion in
+                        switch completion {
+                        case .finished:
+                            print("알림 설정 성공")
+                        case let .failure(error):
+                            print("알림 설정 실패 \(error)")
+                            promise(.failure(error))
+                        }
+                    } receiveValue: { [weak self] (result: AlarmModel) in
+                        guard self != nil else { return }
+                        promise(.success(result))
+                    }.store(in: &self.subscriptions)
+            }
+        }.eraseToAnyPublisher()
+    }
+    
 }
 
 class StubCalendarService: CalendarServiceType {
     
     func getTotalCalendar() -> AnyPublisher<[CalendarModel], any Error> {
+        Empty().eraseToAnyPublisher()
+    }
+    
+    func postAlarm(date: String, eventId: String) -> AnyPublisher<AlarmModel, any Error> {
         Empty().eraseToAnyPublisher()
     }
     

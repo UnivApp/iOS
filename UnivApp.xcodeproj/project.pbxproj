@@ -94,6 +94,7 @@
 		E4982D082CCF65E400D0F1A7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4982D072CCF65E400D0F1A7 /* GoogleService-Info.plist */; };
 		E4982D0A2CCF6DC800D0F1A7 /* GADBannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982D092CCF6DC800D0F1A7 /* GADBannerViewController.swift */; };
 		E4982D0E2CCF706000D0F1A7 /* ServicesKEY.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982D0D2CCF706000D0F1A7 /* ServicesKEY.swift */; };
+		E4982D102CCF81A900D0F1A7 /* AlarmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982D0F2CCF81A900D0F1A7 /* AlarmModel.swift */; };
 		E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */; };
 		E49C9F9F2C86CF70001F43A3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */; };
 		E49C9FA72C86D3BC001F43A3 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */; };
@@ -261,6 +262,7 @@
 		E4982D072CCF65E400D0F1A7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E4982D092CCF6DC800D0F1A7 /* GADBannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GADBannerViewController.swift; sourceTree = "<group>"; };
 		E4982D0D2CCF706000D0F1A7 /* ServicesKEY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesKEY.swift; sourceTree = "<group>"; };
+		E4982D0F2CCF81A900D0F1A7 /* AlarmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmModel.swift; sourceTree = "<group>"; };
 		E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnivAppApp.swift; sourceTree = "<group>"; };
 		E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
@@ -1090,6 +1092,7 @@
 			isa = PBXGroup;
 			children = (
 				E4F04C0E2C987CA500F653DF /* CalendarModel.swift */,
+				E4982D0F2CCF81A900D0F1A7 /* AlarmModel.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -1216,6 +1219,7 @@
 				E4953D4C2C89D6CC008CBDE5 /* InfoDetailView.swift in Sources */,
 				E4B3FD002C77560200CB98F3 /* AuthViewModel.swift in Sources */,
 				E4B3FD2C2C786B0C00CB98F3 /* sha256.swift in Sources */,
+				E4982D102CCF81A900D0F1A7 /* AlarmModel.swift in Sources */,
 				E4F04C042C96CF3900F653DF /* SplitType.swift in Sources */,
 				E4CEEFB62CB54513001F4DAE /* InfoService.swift in Sources */,
 				E49222752C9EE7650077EA45 /* ChartView.swift in Sources */,

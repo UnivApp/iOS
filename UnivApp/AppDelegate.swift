@@ -19,6 +19,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         UNUserNotificationCenter.current().delegate = self
         FirebaseApp.configure()
         
+        
         return true
     }
     
@@ -37,9 +38,3 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
 }
 
-extension AppDelegate: MessagingDelegate {
-    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        let deviceToken: [String:String] = ["token": fcmToken ?? ""]
-        print("Device Token: \(deviceToken)")
-    }
-}

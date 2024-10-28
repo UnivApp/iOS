@@ -11,7 +11,7 @@ struct CalendarContainer: View {
     @StateObject var viewModel: CalendarViewModel
     @State var isSelected: Bool = false
     @State var opacity: Double = 0
-    
+
     var body: some View {
         contentView
             .onChange(of: viewModel.selectedCalendar) {
@@ -51,6 +51,7 @@ struct CalendarContainer: View {
                     
                     ForEach(viewModel.selectedCalendar, id: \.id) { item in
                         CalendarDataCell(model: item)
+                            .environmentObject(viewModel)
                     }
                     .onAppear {
                         opacity = 1

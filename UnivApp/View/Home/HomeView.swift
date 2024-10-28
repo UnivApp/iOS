@@ -200,7 +200,11 @@ struct HomeView: View {
                 .frame(width: UIScreen.main.bounds.width, height: 20)
             
             
-            //TODO: - 구글 애드몹
+            GADBannerViewController(type: .banner)
+                .frame(width: UIScreen.main.bounds.width - 40, height: (UIScreen.main.bounds.width - 40) / 3.2)
+                .overlay {
+                    RoundedRectangle(cornerRadius: 15).stroke(.backGray)
+                }
             
             
             RateView(rateViewModel: RateViewModel(container: .init(services: Services())), selectedSegment: $selectedSegment)
