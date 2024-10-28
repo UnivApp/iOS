@@ -6,6 +6,8 @@
 GoogleService-Info.plist
 # Info: .gitignore
 Info.plist
+# HideKey: .gitignore
+ServicesKEY.swift
 
 ## User settings
 xcuserdata/
