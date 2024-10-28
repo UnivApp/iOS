@@ -91,7 +91,8 @@
 		E4982D002CCF5AC400D0F1A7 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = E4982CFF2CCF5AC400D0F1A7 /* FirebaseMessaging */; };
 		E4982D022CCF60DC00D0F1A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982D012CCF60DC00D0F1A7 /* AppDelegate.swift */; };
 		E4982D042CCF629D00D0F1A7 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = E4982D032CCF629D00D0F1A7 /* FirebaseCore */; };
-		E4982D062CCF659F00D0F1A7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4982D052CCF659F00D0F1A7 /* GoogleService-Info.plist */; };
+		E4982D082CCF65E400D0F1A7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4982D072CCF65E400D0F1A7 /* GoogleService-Info.plist */; };
+		E4982D0A2CCF6DC800D0F1A7 /* GADBannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982D092CCF6DC800D0F1A7 /* GADBannerViewController.swift */; };
 		E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */; };
 		E49C9F9F2C86CF70001F43A3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */; };
 		E49C9FA72C86D3BC001F43A3 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */; };
@@ -256,7 +257,8 @@
 		E4982CFA2CCCD5A700D0F1A7 /* chat_rate.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = chat_rate.gif; sourceTree = "<group>"; };
 		E4982CFC2CCD453400D0F1A7 /* chat_rent.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = chat_rent.gif; sourceTree = "<group>"; };
 		E4982D012CCF60DC00D0F1A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E4982D052CCF659F00D0F1A7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E4982D072CCF65E400D0F1A7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E4982D092CCF6DC800D0F1A7 /* GADBannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GADBannerViewController.swift; sourceTree = "<group>"; };
 		E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnivAppApp.swift; sourceTree = "<group>"; };
 		E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
@@ -697,7 +699,7 @@
 				E4B3FD2D2C786F0000CB98F3 /* UnivApp.entitlements */,
 				E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */,
 				E4982D012CCF60DC00D0F1A7 /* AppDelegate.swift */,
-				E4982D052CCF659F00D0F1A7 /* GoogleService-Info.plist */,
+				E4982D072CCF65E400D0F1A7 /* GoogleService-Info.plist */,
 				E4EA25652C85D6DC00DC5D55 /* General */,
 				E4B3FCFC2C7755B500CB98F3 /* Service */,
 				E4B3FCFB2C7755AF00CB98F3 /* Model */,
@@ -1025,6 +1027,7 @@
 				E4953D5F2C8B0E36008CBDE5 /* HScrollView.swift */,
 				E49222782C9F10240077EA45 /* SeperateView.swift */,
 				E4DCD9B22C9FE4D000E06542 /* SplashView.swift */,
+				E4982D092CCF6DC800D0F1A7 /* GADBannerViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1182,7 +1185,7 @@
 				E4953D902C8F35BA008CBDE5 /* error.gif in Resources */,
 				E4982CFB2CCCD5A700D0F1A7 /* chat_rate.gif in Resources */,
 				E4982CF12CCB748500D0F1A7 /* chat_food.gif in Resources */,
-				E4982D062CCF659F00D0F1A7 /* GoogleService-Info.plist in Resources */,
+				E4982D082CCF65E400D0F1A7 /* GoogleService-Info.plist in Resources */,
 				E41589362CBE923400EDB211 /* DG1.gif in Resources */,
 				E4953D322C89C770008CBDE5 /* congratulations.gif in Resources */,
 				E4953D332C89C770008CBDE5 /* load.gif in Resources */,
@@ -1264,6 +1267,7 @@
 				E49C9FEA2C87057A001F43A3 /* DiagnosisViewModel.swift in Sources */,
 				E4953D592C8AFF36008CBDE5 /* FoodViewCell.swift in Sources */,
 				E49C9FEE2C870582001F43A3 /* FoodViewModel.swift in Sources */,
+				E4982D0A2CCF6DC800D0F1A7 /* GADBannerViewController.swift in Sources */,
 				E4953DA52C90643C008CBDE5 /* VersionView.swift in Sources */,
 				E4D626062CA7F611008596D0 /* CustomPageControl.swift in Sources */,
 				E4C264422CB40A8400E01480 /* FoodSegmentType.swift in Sources */,

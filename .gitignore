@@ -4,6 +4,8 @@
 
 # GoogleService: .gitignore
 GoogleService-Info.plist
+# Info: .gitignore
+Info.plist
 
 ## User settings
 xcuserdata/

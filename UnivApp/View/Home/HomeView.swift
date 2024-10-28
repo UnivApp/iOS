@@ -143,7 +143,7 @@ struct HomeView: View {
     }
     
     var categoryView: some View {
-        VStack(alignment: .leading, spacing: 15) {
+        VStack(alignment: .leading, spacing: 10) {
             
             let columns = Array(repeating: GridItem(.flexible()), count: 4)
             
@@ -154,7 +154,7 @@ struct HomeView: View {
                             Image(category.imageName())
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 40, height: 40)
+                                .frame(width: 35, height: 35)
                             Text(category.title)
                                 .foregroundColor(.black)
                                 .font(.system(size: 10, weight: .semibold))
@@ -171,11 +171,10 @@ struct HomeView: View {
                     Image(viewModel.posterData[index])
                         .resizable()
                         .scaledToFill()
-                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width / 3)
                         .tag(index)
                 }
             }
-            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width / 3)
+            .frame(width: UIScreen.main.bounds.width - 40, height: (UIScreen.main.bounds.width - 40) / 3)
             .tabViewStyle(PageTabViewStyle())
             .onReceive(timer) { _ in
                 withAnimation {
@@ -184,7 +183,12 @@ struct HomeView: View {
             }
             .overlay(alignment: .bottomTrailing) {
                 CustomPageControl(currentPage: $currentIndex, numberOfPages: viewModel.posterData.count)
+                    .cornerRadius(15)
+                    .padding(.trailing, 10)
+                    .padding(.bottom, 10)
             }
+            .cornerRadius(15)
+            .padding(.horizontal, 20)
             
             HScrollView(title: [Text("이런 "), Text("핫플 "), Text("어때요?")], pointColor: .orange, size: 100, playDeatilModel: PlayDetailModel(object: viewModel.convertToObjects(from: viewModel.topPlaceData), placeDataArray: viewModel.topPlaceData, placeData: nil))
         }
