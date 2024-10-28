@@ -17,7 +17,7 @@ struct GADBannerViewController: UIViewControllerRepresentable {
         let viewController = UIViewController()
         let view = GADBannerView()
         
-        view.adUnitID = "ad unit id"
+        view.adUnitID = AdMob_UnitID
         view.rootViewController = viewController
         viewController.view.addSubview(view)
         view.snp.makeConstraints { make in

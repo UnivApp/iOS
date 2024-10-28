@@ -87,7 +87,7 @@ enum APIEndpoint {
         case .statusExpo:
             return "http://43.200.143.28:8080/api/expo/status?status="
         case .rent:
-            return "http://openapi.seoul.go.kr:8088/인증키/json/tbLnOpendataRentV/1/50/2024/ /"
+            return "http://openapi.seoul.go.kr:8088/\(OpenApiKey)/json/tbLnOpendataRentV/1/50/2024/ /"
         case .diagnosisQuestion:
             return "http://43.200.143.28:8080/api/questionnaires"
         case .diagnosisResult:
