@@ -8,8 +8,8 @@
 import Foundation
 
 struct CalendarModel: Codable, Hashable {
+    var id: Int?
     var title: String?
-    var description: String?
-    var image: String?
     var date: String?
+    var type: String?
 }

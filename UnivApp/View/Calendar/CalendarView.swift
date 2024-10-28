@@ -12,16 +12,26 @@ import SnapKit
 
 struct CalendarView: UIViewRepresentable {
     typealias UIViewType = FSCalendar
-    var eventImages: [Date: UIImage]
-    var eventDateRange: [Date] {
-        let calendar = Calendar.current
-        let today = Date()
+    var calenderData: [CalendarModel]
+    
+    @Binding var selectedData: [CalendarModel]
+    
+    var groupedData: [Date: [CalendarModel]] {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         
-        let day1 = today
-        let day2 = calendar.date(byAdding: .day, value: 1, to: today)!
-        let day3 = calendar.date(byAdding: .day, value: 2, to: today)!
+        var grouped: [Date: [CalendarModel]] = [:]
         
-        return [day1, day2, day3]
+        for model in calenderData {
+            if let dateString = model.date, let date = dateFormatter.date(from: dateString) {
+                if grouped[date] != nil {
+                    grouped[date]?.append(model)
+                } else {
+                    grouped[date] = [model]
+                }
+            }
+        }
+        return grouped
     }
     
     class Coordinator: NSObject, FSCalendarDelegate, FSCalendarDataSource {
@@ -31,12 +41,18 @@ struct CalendarView: UIViewRepresentable {
             self.parent = parent
         }
         
+        func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+            if let data = parent.groupedData[date] {
+                self.parent.selectedData = data
+            } else {
+                self.parent.selectedData = []
+            }
+        }
         
         func calendar(_ calendar: FSCalendar, cellFor date: Date, at position: FSCalendarMonthPosition) -> FSCalendarCell {
             let cell = calendar.dequeueReusableCell(withIdentifier: "CalendarViewCell", for: date, at: position) as! CalendarViewCell
             
-            
-            if let eventImage = parent.eventImages[date] {
+            if let events = parent.groupedData[date], let eventImage = UIImage(named: "calendar_icon"), !events.isEmpty {
                 cell.setEventImage(date: date, image: eventImage)
             } else {
                 cell.setEventImage(date: date, image: nil)
@@ -44,22 +60,6 @@ struct CalendarView: UIViewRepresentable {
             return cell
         }
         
-        // 날짜 범위를 강조
-        func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillFor date: Date) -> UIColor? {
-            // 날짜가 이벤트 범위에 있는 경우 형광펜 효과
-            if parent.eventDateRange.contains(where: { Calendar.current.isDate($0, inSameDayAs: date) }) {
-                return UIColor.yellow.withAlphaComponent(0.5) // 형광펜 효과
-            }
-            return nil
-        }
-        
-        // 날짜에 대한 텍스트 색상 조정 (형광펜 효과에 맞춰 텍스트 색상 변경)
-        func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
-            if parent.eventDateRange.contains(where: { Calendar.current.isDate($0, inSameDayAs: date) }) {
-                return .black // 이벤트 날짜의 텍스트 색상을 검정으로
-            }
-            return nil
-        }
     }
     
     
@@ -106,78 +106,19 @@ class CalendarViewCell: FSCalendarCell {
     }
     
     private func configureImageView() {
-        let width = contentView.bounds.width - 5
-        let height = contentView.bounds.height - 5
-        
-        let size = (width > height) ? height : width
         eventImageView = UIImageView()
         eventImageView.contentMode = .scaleAspectFit
-        eventImageView.alpha = 0.5
+        eventImageView.alpha = 1.0
         
         contentView.addSubview(eventImageView)
         eventImageView.snp.makeConstraints { make in
-            make.width.height.equalTo(size)
-            make.center.equalToSuperview()
+            make.width.height.equalTo(5)
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(8)
         }
     }
     
     func setEventImage(date: Date, image: UIImage?) {
         eventImageView.image = image
-    }
-}
-
-struct CalendarContainer: View {
-    @EnvironmentObject var authViewModel: AuthViewModel
-    @StateObject var viewModel: CalendarViewModel
-    
-    var eventDates: [Date: UIImage] //TODO: - 실제 데이터 변환
-    
-    var body: some View {
-        contentView
-    }
-    
-    @ViewBuilder
-    var contentView: some View {
-        switch viewModel.phase {
-        case .notRequested:
-            loadedView
-                .onAppear {
-                    //TODO: - send(load)
-                }
-        case .loading:
-            LoadingView(url: "congratulations", size: [150, 150])
-        case .success:
-            loadedView
-        case .fail:
-            ErrorView()
-        }
-    }
-    
-    var loadedView: some View {
-        NavigationStack {
-            GeometryReader { proxy in
-                ScrollView(.vertical) {
-                    VStack {
-                        CalendarView(eventImages: eventDates)
-                            .frame(height: proxy.size.height / 1.5)
-                            .padding(.horizontal, 20)
-                        
-                        ForEach(viewModel.calendarData, id: \.title) { item in
-                            CalendarDataCell(model: item)
-                        }
-                        .padding(.horizontal, 30)
-                    }
-                }
-            }
-        }
-    }
-}
-
-struct CalendarContainer_Previews: PreviewProvider {
-    static var previews: some View {
-        CalendarContainer(viewModel: CalendarViewModel(), eventDates: [
-            Calendar.current.startOfDay(for: Date()): UIImage(named: "star")!
-        ])
-        .environmentObject(AuthViewModel(container: .init(services: StubServices()), authState: .auth))
     }
 }

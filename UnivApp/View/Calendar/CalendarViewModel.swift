@@ -10,15 +10,36 @@ import Combine
 
 class CalendarViewModel: ObservableObject {
     
+    enum Action {
+        case totalLoad
+    }
+    
     @Published var phase: Phase = .notRequested
-    @Published var calendarData: [CalendarModel] = [
-        CalendarModel(title: "오늘의 일정", description: "오늘의 일정", image: "nil", date: "2024-09-17"),
-        CalendarModel(title: "오늘의 일정", description: "오늘의 일정", image: "nil", date: "2024-09-17"),
-        CalendarModel(title: "오늘의 일정", description: "오늘의 일정", image: "nil", date: "2024-09-17"),
-        CalendarModel(title: "오늘의 일정", description: "오늘의 일정", image: "nil", date: "2024-09-17"),
-        CalendarModel(title: "오늘의 일정", description: "오늘의 일정", image: "nil", date: "2024-09-17"),
-        CalendarModel(title: "오늘의 일정", description: "오늘의 일정", image: "nil", date: "2024-09-17"),
-        CalendarModel(title: "오늘의 일정", description: "오늘의 일정", image: "nil", date: "2024-09-17")
-    ]
+    @Published var calendarData: [CalendarModel] = []
+    @Published var selectedCalendar: [CalendarModel] = []
+    
+    private let container: DIContainer
+    private var subscriptions = Set<AnyCancellable>()
+    
+    init(container: DIContainer) {
+        self.container = container
+    }
+    
+    func send(action: Action) {
+        switch action {
+        case .totalLoad:
+            self.phase = .loading
+            container.services.calendarService.getTotalCalendar()
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.phase = .fail
+                    }
+                } receiveValue: { [weak self] calendarData in
+                    self?.calendarData = calendarData
+                    self?.phase = .success
+                }.store(in: &subscriptions)
+
+        }
+    }
     
 }

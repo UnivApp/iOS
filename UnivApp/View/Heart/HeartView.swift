@@ -9,8 +9,6 @@ import SwiftUI
 
 struct HeartView: View {
     @StateObject var viewModel: HeartViewModel
-    @EnvironmentObject var continer: DIContainer
-    @EnvironmentObject var authViewModel: AuthViewModel
     
     @State private var showAlert: Bool = false
     @State private var alertMessage: String = ""
@@ -110,7 +108,5 @@ struct HeartView_Previews: PreviewProvider {
     static let authViewModel = AuthViewModel(container: .init(services: StubServices()), authState: .auth)
     static var previews: some View {
         HeartView(viewModel: HeartViewModel(container: self.container))
-            .environmentObject(Self.authViewModel)
-            .environmentObject(Self.container)
     }
 }

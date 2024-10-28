@@ -93,9 +93,7 @@ struct MouView: View {
                         .padding(.leading, 20)
                         
                         ForEach(viewModel.MouData, id: \.self) { cell in
-                            VStack {
-                                MouCell(model: cell)
-                            }
+                            MouCell(model: cell)
                         }
                     }
                 }

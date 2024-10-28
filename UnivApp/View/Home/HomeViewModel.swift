@@ -25,7 +25,7 @@ class HomeViewModel: ObservableObject {
     
     private var container: DIContainer
     private var subscriptions = Set<AnyCancellable>()
-    let posterData: [String] = ["food_poster", "event_poster", "rank_poster", "graduate_poster", "play_poster", "news_poster"]
+    let posterData: [String] = ["food_poster", "event_poster", "rank_poster",  "mou_poster", "play_poster", "news_poster"]
     
     init(container: DIContainer) {
         self.container = container

@@ -137,9 +137,13 @@ fileprivate struct PlaySchoolCell: View {
                                 .frame(width: 10, height: 10)
                         }
                         
-                        Text("📍 \(placeData.location)")
-                            .font(.system(size: 12, weight: .semibold))
-                            .foregroundColor(.gray)
+                        HStack {
+                            LoadingView(url: "location", size: [50, 50])
+                            Text("\(placeData.location)")
+                                .font(.system(size: 12, weight: .semibold))
+                                .foregroundColor(.gray)
+                            Spacer()
+                        }
                     }
                     .padding(.horizontal, 20)
                     .multilineTextAlignment(.leading)

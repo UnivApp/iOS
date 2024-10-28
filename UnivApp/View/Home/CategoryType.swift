@@ -9,9 +9,9 @@ import Foundation
 import SwiftUI
 
 enum CategoryType: String, CaseIterable {
-    case event
+    case chat
     case food
-    case graduate
+    case Diagnosis
     case info
     case initiative
     case money
@@ -20,12 +20,12 @@ enum CategoryType: String, CaseIterable {
     
     var title: String {
         switch self {
-        case .event:
-            return "대학행사"
+        case .chat:
+            return "위봇"
         case .food:
             return "맛집"
-        case .graduate:
-            return "졸업자"
+        case .Diagnosis:
+            return "학과매칭"
         case .info:
             return "대입기사"
         case .initiative:
@@ -41,18 +41,18 @@ enum CategoryType: String, CaseIterable {
     
     var view: AnyView {
         switch self {
-        case .event:
-            return AnyView(EventView(viewModel: EventViewModel(searchText: .init(), container: .init(services: Services()))))
+        case .chat:
+            return AnyView(ChatView(viewModel: ChatViewModel(container: .init(services: Services()))))
         case .food:
             return AnyView(FoodView(viewModel: FoodViewModel(container: .init(services: Services()))))
-        case .graduate:
-            return AnyView(GraduateView(viewModel: GraduateViewModel(searchText: .init(), container: .init(services: Services()))))
+        case .Diagnosis:
+            return AnyView(DiagnosisView(viewModel: DiagnosisViewModel(container: .init(services: Services()))))
         case .info:
             return AnyView(InfoView(viewModel: InfoViewModel(container: .init(services: Services()))))
         case .initiative:
             return AnyView(InitiativeView(viewModel: InitiativeViewModel(container: .init(services: Services()))))
         case .money:
-            return AnyView(MoneyView(viewModel: MoneyViewModel(searchText: .init(), container: .init(services: Services()))))
+            return AnyView(MoneyView(listViewModel: ListViewModel(container: .init(services: Services()), searchText: .init()), viewModel: MoneyViewModel(container: .init(services: Services()))))
         case .mou:
             return AnyView(MouView(viewModel: MouViewModel(container: .init(services: Services()))))
         case .play:

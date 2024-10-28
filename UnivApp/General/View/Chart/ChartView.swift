@@ -50,7 +50,7 @@ struct BarChartView: View {
                                 .multilineTextAlignment(.center)
                         } else {
                             Text(String(format: "%.1f", point.value))
-                                .font(.system(size: 10, weight: .bold))
+                                .font(.system(size: 9, weight: .bold))
                                 .foregroundColor(.white)
                         }
                     }
@@ -59,7 +59,7 @@ struct BarChartView: View {
             .chartYAxis{}
             .frame(height: 100)
             .aspectRatio(contentMode: .fit)
-            .scaledToFit()
+            .scaledToFill()
             .padding(.horizontal, 20)
             .padding(.vertical, 20)
         }

@@ -10,45 +10,50 @@ import SwiftUI
 struct CalendarDataCell: View {
     var model: CalendarModel
     
+    @State var bellSelected: Bool = false
     var body: some View {
         VStack {
             HStack(spacing: 20) {
                 if let title = model.title,
-                   let description = model.description,
+                   let description = model.type,
                    let date = model.date {
                     Text(date)
-                        .font(.system(size: 15, weight: .heavy))
+                        .font(.system(size: 15, weight: .semibold))
                         .foregroundColor(Color.orange)
                     
                     
                     VStack(alignment: .leading, spacing: 5) {
                         Text(title)
                             .font(.system(size: 15, weight: .heavy))
-                            .foregroundColor(Color.black)
+                            .foregroundColor(Color.black.opacity(0.7))
                         
                         Text(description)
                             .font(.system(size: 12, weight: .regular))
                             .foregroundColor(Color.gray)
                     }
+                    .lineLimit(nil)
+                    .fixedSize(horizontal: false, vertical: true)
                     
                     Spacer()
                     
-                    //TODO: - 알림 등록
-                    Image(systemName: "bell.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 20, height: 25)
-                        .foregroundColor(.gray)
-                    
+                    Button  {
+                        bellSelected.toggle()
+                        //TODO: - 알림설정
+                    } label: {
+                        Image(systemName: "bell.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(bellSelected ? .yellow : .gray)
+                    }
                 }
             }
             Divider()
-                .padding(.top, 10)
-                .padding(.horizontal, 30)
         }
+        .padding(.horizontal, 10)
     }
 }
 
 #Preview {
-    CalendarDataCell(model: CalendarModel(title: "오늘의 행사", description: "오늘의 행사", image: "emptyLogo", date: "2024-03-01"))
+    CalendarDataCell(model: CalendarModel(title: "", date: ""))
 }
