@@ -22,21 +22,31 @@ struct CalendarContainer: View {
                 self.isSelected = !viewModel.selectedCalendar.isEmpty
             }
             .fullScreenCover(isPresented: $isAlert) {
-                CustomAlertView(selectedIndex: $selectedIndex, type: "등록")
-                    .environmentObject(viewModel)
-                    .presentationBackground(.black.opacity(0.7))
+                if viewModel.selectedCalendar[selectedIndex].notificationActive {
+                    CustomAlertView(selectedIndex: $selectedIndex, isAlert: $isAlert, type: "삭제")
+                        .environmentObject(viewModel)
+                        .presentationBackground(.black.opacity(0.7))
+                        .animation(.easeInOut, value: isAlert)
+                } else {
+                    CustomAlertView(selectedIndex: $selectedIndex, isAlert: $isAlert, type: "등록")
+                        .environmentObject(viewModel)
+                        .presentationBackground(.black.opacity(0.7))
+                        .animation(.easeInOut, value: isAlert)
+                }
             }
-            .fullScreenCover(isPresented: $isCancel) {
-                CustomAlertView(selectedIndex: $selectedIndex, type: "삭제")
-                    .environmentObject(viewModel)
-                    .presentationBackground(.black.opacity(0.7))
-            }
-            .actionSheet(isPresented: $viewModel.isalarmSetting.isAlarmPhase) {
+            .actionSheet(isPresented: $viewModel.isalarmSetting.isAlarmFail) {
                 ActionSheet(
-                    title: Text("알림 \(viewModel.isalarmSetting.selectedType)에 실패했습니다!"),
+                    title: Text("알림 \(viewModel.isalarmSetting.selectedType) 실패! 😔"),
                     buttons: [.default(Text("확인"))]
                 )
             }
+            .actionSheet(isPresented: $viewModel.isalarmSetting.isAlarmSuccess) {
+                ActionSheet(
+                    title: Text("알림 \(viewModel.isalarmSetting.selectedType) 성공! 😊"),
+                    buttons: [.default(Text("확인"))]
+                )
+            }
+            .transaction { $0.disablesAnimations = true }
     }
     
     @ViewBuilder
@@ -70,7 +80,7 @@ struct CalendarContainer: View {
                         .padding(.horizontal, -10)
                     
                     ForEach(viewModel.selectedCalendar.indices, id: \.self) { index in
-                        CalendarDataCell(model: CalendarDetailModel(model: viewModel.selectedCalendar[index], bellSelected: viewModel.selectedCalendar[index].notificationActive, index: index), selectedIndex: self.$selectedIndex, isAlert: $isAlert, isCancel: $isCancel)
+                        CalendarDataCell(model: CalendarDetailModel(model: viewModel.selectedCalendar[index], bellSelected: viewModel.selectedCalendar[index].notificationActive, index: index), selectedIndex: self.$selectedIndex, isAlert: $isAlert)
                     }
                     .onAppear {
                         opacity = 1
@@ -107,8 +117,8 @@ struct CalendarContainer: View {
 
 fileprivate struct CustomAlertView: View {
     @EnvironmentObject var viewModel: CalendarViewModel
-    @Environment(\.dismiss) var dismiss
     @Binding var selectedIndex: Int
+    @Binding var isAlert: Bool
     
     var type: String
     var buttonTypes: [String] = ["1일 전", "당일"]
@@ -118,7 +128,9 @@ fileprivate struct CustomAlertView: View {
             HStack {
                 Spacer()
                 Button  {
-                    dismiss()
+                    withAnimation {
+                        isAlert = false
+                    }
                 } label: {
                     Image(systemName: "xmark.circle.fill")
                         .resizable()
@@ -134,32 +146,21 @@ fileprivate struct CustomAlertView: View {
                     .font(.system(size: 15, weight: .bold))
                     .foregroundColor(.black.opacity(0.7))
                 
-                HStack(spacing: 10) {
-                    ForEach(buttonTypes, id: \.self) { type in
-                        Button {
-                            if let date = viewModel.selectedCalendar[selectedIndex].date,
-                               let calendarId = viewModel.selectedCalendar[selectedIndex].calendarEventId,
-                               let previousDate = viewModel.calculatePreviousDate(from: date) {
-                                if type == "1일 전" {
-                                    viewModel.send(action: .alarmLoad(previousDate, calendarId))
-                                    if viewModel.phase == .success {
-                                        viewModel.selectedCalendar[selectedIndex].notificationActive = true
-                                    }
-                                } else {
-                                    viewModel.send(action: .alarmLoad(date, calendarId))
-                                    if viewModel.phase == .success {
-                                        viewModel.selectedCalendar[selectedIndex].notificationActive = true
-                                    }
-                                }
-                            }
-                        } label: {
-                            Text(type)
-                                .padding(10)
-                                .font(.system(size: 13, weight: .heavy))
-                                .foregroundColor(.white)
-                                .background(RoundedRectangle(cornerRadius: 15).fill(.orange))
+                Button {
+                    if let date = viewModel.selectedCalendar[selectedIndex].date,
+                       let calendarId = viewModel.selectedCalendar[selectedIndex].calendarEventId,
+                       let previousDate = viewModel.calculatePreviousDate(from: date) {
+                        if viewModel.phase == .success {
+                            viewModel.selectedCalendar[selectedIndex].notificationActive = true
+                            isAlert = false
                         }
                     }
+                } label: {
+                    Text("확인")
+                        .padding(10)
+                        .font(.system(size: 13, weight: .heavy))
+                        .foregroundColor(.white)
+                        .background(RoundedRectangle(cornerRadius: 15).fill(.orange))
                 }
             } else {
                 Text("알림을 취소하시겠습니까? 🔕")
@@ -171,7 +172,7 @@ fileprivate struct CustomAlertView: View {
                         viewModel.send(action: .alarmRemove("\(notificationId)"))
                         if viewModel.phase == .success {
                             viewModel.selectedCalendar[selectedIndex].notificationActive = false
-                            
+                            isAlert = false
                         }
                     }
                 } label: {

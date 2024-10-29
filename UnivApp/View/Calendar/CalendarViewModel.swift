@@ -9,7 +9,8 @@ import Foundation
 import Combine
 
 struct FailAlarmModel {
-    var isAlarmPhase: Bool
+    var isAlarmFail: Bool
+    var isAlarmSuccess: Bool
     var selectedType: String
 }
 
@@ -24,7 +25,7 @@ class CalendarViewModel: ObservableObject {
     @Published var phase: Phase = .notRequested
     @Published var calendarData: [CalendarModel] = []
     @Published var selectedCalendar: [CalendarModel] = []
-    @Published var isalarmSetting: FailAlarmModel = FailAlarmModel(isAlarmPhase: false, selectedType: "")
+    @Published var isalarmSetting: FailAlarmModel = FailAlarmModel(isAlarmFail: false, isAlarmSuccess: false, selectedType: "")
     
     
     private let container: DIContainer
@@ -53,11 +54,13 @@ class CalendarViewModel: ObservableObject {
             container.services.calendarService.addAlarm(date: date, eventId: id)
                 .sink { [weak self] completion in
                     if case .failure = completion {
-                        self?.isalarmSetting = FailAlarmModel(isAlarmPhase: true, selectedType: "등록")
+                        self?.isalarmSetting = FailAlarmModel(isAlarmFail: true, isAlarmSuccess: false, selectedType: "등록")
                     }
                 } receiveValue: { [weak self]  alarmResult in
-                    print(alarmResult)
                     self?.phase = .success
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0 ){
+                        self?.isalarmSetting = FailAlarmModel(isAlarmFail: false, isAlarmSuccess: true, selectedType: "등록")
+                    }
                 }.store(in: &subscriptions)
             
         case let .alarmRemove(notificationId):
@@ -65,10 +68,13 @@ class CalendarViewModel: ObservableObject {
             container.services.calendarService.removeAlarm(notificationId: notificationId)
                 .sink { [weak self] completion in
                     if case .failure = completion {
-                        self?.isalarmSetting = FailAlarmModel(isAlarmPhase: true, selectedType: "삭제")
+                        self?.isalarmSetting = FailAlarmModel(isAlarmFail: true, isAlarmSuccess: false, selectedType: "삭제")
                     }
                 } receiveValue: { [weak self] result in
                     self?.phase = .success
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0 ){
+                        self?.isalarmSetting = FailAlarmModel(isAlarmFail: false, isAlarmSuccess: true, selectedType: "삭제")
+                    }
                 }.store(in: &self.subscriptions)
         }
     }

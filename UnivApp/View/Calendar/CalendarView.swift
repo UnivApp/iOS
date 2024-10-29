@@ -70,7 +70,7 @@ struct CalendarView: UIViewRepresentable {
         calendar.locale = Locale(identifier: "ko_KR")
         
         calendar.today = nil
-        calendar.scrollDirection = .vertical
+        calendar.scrollDirection = .horizontal
         calendar.scope = .month
         calendar.appearance.headerTitleColor = .black
         calendar.appearance.weekdayTextColor = .orange

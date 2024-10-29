@@ -31,6 +31,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                 print("FCM 토큰 조회 실패 \(error)")
             } else if let token = token {
                 print("FCM 토큰")
+                KeychainWrapper.standard.remove(forKey: "DeviceToken")
                 KeychainWrapper.standard.set(token, forKey: "DeviceToken")
             }
         }
@@ -53,7 +54,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.badge, .banner])
+        completionHandler([.badge, .banner, .sound])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {

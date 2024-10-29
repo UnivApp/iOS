@@ -18,7 +18,6 @@ struct CalendarDataCell: View {
     
     @Binding var selectedIndex: Int
     @Binding var isAlert: Bool
-    @Binding var isCancel: Bool
     
     var body: some View {
         loadedView
@@ -49,13 +48,8 @@ struct CalendarDataCell: View {
                     Spacer()
                     
                     Button  {
-                        if model.bellSelected {
-                            isAlert = false
-                            isCancel = true
-                            selectedIndex = model.index
-                        } else {
+                        withAnimation {
                             isAlert = true
-                            isCancel = false
                             selectedIndex = model.index
                         }
                     } label: {
