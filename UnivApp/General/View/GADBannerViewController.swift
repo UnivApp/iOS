@@ -21,7 +21,7 @@ struct GADBannerViewController: UIViewControllerRepresentable {
     var type: AdTypes?
     func makeUIViewController(context: Context) -> some UIViewController {
         let viewController = UIViewController()
-        let view = GADBannerView(adSize: GADAdSize())
+        let view = GADBannerView(adSize: GADAdSizeBanner)
         
         switch type {
         case .banner:

@@ -109,7 +109,7 @@ final class Alamofire {
                 AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: ["content-Type":"application-json"], interceptor: TokenRequestInterceptor())
                     .validate()
                     .responseDecodable(of: T.self) { response in
-//                        print(response.debugDescription)
+                        print(response.debugDescription)
                         switch response.result {
                         case let .success(result):
                             promise(.success(result))

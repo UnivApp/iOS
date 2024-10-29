@@ -41,6 +41,8 @@ enum APIEndpoint {
     case competition
     //MARK: - Calendar
     case totalCalendar
+    case addAlarm
+    case removeAlarm
     
     var urlString: String {
         switch self {
@@ -104,6 +106,10 @@ enum APIEndpoint {
             
         case .totalCalendar:
             return "http://43.200.143.28:8080/api/calendar-events"
+        case .addAlarm:
+            return "http://43.200.143.28:8080/api/notifications"
+        case .removeAlarm:
+            return "http://43.200.143.28:8080/api/notifications?notificationId="
         }
     }
 }

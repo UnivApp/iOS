@@ -7,51 +7,28 @@
 
 import SwiftUI
 
-struct CalendarDataCell: View {
+struct CalendarDetailModel: Hashable {
     var model: CalendarModel
+    var bellSelected: Bool
+    var index: Int
+}
+
+struct CalendarDataCell: View {
+    var model: CalendarDetailModel
     
-    @EnvironmentObject var viewModel: CalendarViewModel
-    @State var bellSelected: Bool = false
-    @State var isAlert: Bool
-    @State var isCancel: Bool
+    @Binding var selectedIndex: Int
+    @Binding var isAlert: Bool
+    @Binding var isCancel: Bool
     
     var body: some View {
         loadedView
-            .alert(isPresented: $isAlert) {
-                Alert(title: Text("알림 받을 날을 선택하세요! 🔔"), primaryButton: .default(Text("1일 전"), action: {
-                    if let date = model.date,
-                       let id = model.id {
-                        viewModel.send(action: .alarmLoad([date, "\(id)"]))
-                        if viewModel.phase == .success {
-                            bellSelected = true
-                        }
-                    }
-                }), secondaryButton: .default(Text("당일"), action: {
-                    if let date = model.date,
-                       let id = model.id {
-                        viewModel.send(action: .alarmLoad([date, "\(id)"]))
-                        if viewModel.phase == .success {
-                            bellSelected = true
-                        }
-                    }
-                }))
-            }
-            .alert(isPresented: $isCancel) {
-                Alert(title: Text("알림이 취소되었습니다! 🔕"), dismissButton: .default(Text("확인"), action: {
-                    viewModel.send(action: .alarmRemove)
-                    if viewModel.phase == .success {
-                        bellSelected = false
-                    }
-                }))
-            }
     }
     var loadedView: some View{
         VStack {
             HStack(spacing: 20) {
-                if let title = model.title,
-                   let description = model.type,
-                   let date = model.date,
-                   let id = model.id {
+                if let title = model.model.title,
+                   let description = model.model.type,
+                   let date = model.model.date {
                     Text(date)
                         .font(.system(size: 15, weight: .semibold))
                         .foregroundColor(Color.orange)
@@ -72,19 +49,21 @@ struct CalendarDataCell: View {
                     Spacer()
                     
                     Button  {
-                        if bellSelected {
+                        if model.bellSelected {
                             isAlert = false
                             isCancel = true
+                            selectedIndex = model.index
                         } else {
                             isAlert = true
                             isCancel = false
+                            selectedIndex = model.index
                         }
                     } label: {
                         Image(systemName: "bell.fill")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 20, height: 20)
-                            .foregroundColor(bellSelected ? .yellow : .gray)
+                            .foregroundColor(model.bellSelected ? .yellow : .gray)
                     }
                 }
             }
@@ -92,10 +71,5 @@ struct CalendarDataCell: View {
         }
         .padding(.horizontal, 10)
     }
+    
 }
-
-
-//
-//#Preview {
-//    CalendarDataCell(model: CalendarModel(title: "", date: ""), bellSelected: <#T##Binding<Bool>#>)
-//}

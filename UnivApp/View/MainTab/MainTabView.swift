@@ -24,7 +24,7 @@ struct MainTabView: View {
                         ListView(viewModel: ListViewModel(container: self.container, searchText: .init()))
                         
                     case .calendar:
-                        CalendarContainer(viewModel: CalendarViewModel(container: .init(services: Services())))
+                        CalendarContainer(viewModel: CalendarViewModel(container: self.container))
                         
                     case .heart:
                         HeartView(viewModel: HeartViewModel(container: self.container))

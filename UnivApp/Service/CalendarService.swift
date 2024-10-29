@@ -7,10 +7,16 @@
 
 import Foundation
 import Combine
+import SwiftKeychainWrapper
+
+enum DeviceTokenError: Error {
+    case deviceTokenNotFound
+}
 
 protocol CalendarServiceType {
     func getTotalCalendar() -> AnyPublisher<[CalendarModel], Error>
-    func postAlarm(date: String, eventId: String) -> AnyPublisher<AlarmModel, Error>
+    func addAlarm(date: String, eventId: Int) -> AnyPublisher<AddAlarmModel, Error>
+    func removeAlarm(notificationId: String) -> AnyPublisher<Void, Error>
 }
 
 class CalendarService: CalendarServiceType {
@@ -35,15 +41,15 @@ class CalendarService: CalendarServiceType {
         }.eraseToAnyPublisher()
     }
     
-    func postAlarm(date: String, eventId: String) -> AnyPublisher<AlarmModel, any Error> {
-        Future<AlarmModel, Error> { promise in
-            if let deviceToken = UserDefaults.standard.value(forKey: "DeviceToken") {
+    func addAlarm(date: String, eventId: Int) -> AnyPublisher<AddAlarmModel, any Error> {
+        Future<AddAlarmModel, Error> { promise in
+            if let deviceToken = KeychainWrapper.standard.string(forKey: "DeviceToken") {
                 let params: [String:Any] = [
-                    "token": deviceToken,
-                    "date": date,
+                    "registrationTokens": [deviceToken],
+                    "notificationDate": date,
                     "eventId": eventId
                 ]
-                Alamofire().postAlamofire(url: "", params: params)
+                Alamofire().postAlamofire(url: APIEndpoint.addAlarm.urlString, params: params)
                     .sink { completion in
                         switch completion {
                         case .finished:
@@ -52,14 +58,34 @@ class CalendarService: CalendarServiceType {
                             print("알림 설정 실패 \(error)")
                             promise(.failure(error))
                         }
-                    } receiveValue: { [weak self] (result: AlarmModel) in
+                    } receiveValue: { [weak self] (result: AddAlarmModel) in
                         guard self != nil else { return }
                         promise(.success(result))
                     }.store(in: &self.subscriptions)
+            } else {
+                promise(.failure(DeviceTokenError.deviceTokenNotFound))
             }
         }.eraseToAnyPublisher()
     }
     
+    func removeAlarm(notificationId: String) -> AnyPublisher<Void, any Error> {
+        Future<Void, Error> { promise in
+            Alamofire().delete(url: APIEndpoint.removeAlarm.urlString)
+                .sink { completion in
+                    switch completion {
+                    case .finished:
+                        print("알림 삭제 성공")
+                    case let .failure(error):
+                        print("알림 삭제 실패 \(error)")
+                        promise(.failure(error))
+                    }
+                } receiveValue: { [weak self] (result: Void) in
+                    guard self != nil else { return }
+                    promise(.success(()))
+                }.store(in: &self.subscriptions)
+
+        }.eraseToAnyPublisher()
+    }
 }
 
 class StubCalendarService: CalendarServiceType {
@@ -68,7 +94,11 @@ class StubCalendarService: CalendarServiceType {
         Empty().eraseToAnyPublisher()
     }
     
-    func postAlarm(date: String, eventId: String) -> AnyPublisher<AlarmModel, any Error> {
+    func addAlarm(date: String, eventId: Int) -> AnyPublisher<AddAlarmModel, any Error> {
+        Empty().eraseToAnyPublisher()
+    }
+    
+    func removeAlarm(notificationId: String) -> AnyPublisher<Void, any Error> {
         Empty().eraseToAnyPublisher()
     }
     

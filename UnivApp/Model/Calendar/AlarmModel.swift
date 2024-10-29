@@ -7,6 +7,10 @@
 
 import Foundation
 
-struct AlarmModel: Codable {
-    
+struct AddAlarmModel: Codable {
+    var notificationId: Int
+    var notificationDate: String
+    var eventId: Int
+    var registrationTokens: [String]
+    var active: Bool
 }

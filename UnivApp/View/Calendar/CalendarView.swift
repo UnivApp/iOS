@@ -70,11 +70,11 @@ struct CalendarView: UIViewRepresentable {
         calendar.locale = Locale(identifier: "ko_KR")
         
         calendar.today = nil
-        calendar.scrollDirection = .horizontal
+        calendar.scrollDirection = .vertical
         calendar.scope = .month
         calendar.appearance.headerTitleColor = .black
         calendar.appearance.weekdayTextColor = .orange
-        calendar.appearance.selectionColor = .clear
+        calendar.appearance.selectionColor = .backGray
         calendar.appearance.titleSelectionColor = .systemRed
         
         
@@ -110,11 +110,20 @@ class CalendarViewCell: FSCalendarCell {
         eventImageView.contentMode = .scaleAspectFit
         eventImageView.alpha = 1.0
         
+        let Spacer = UIView()
+        Spacer.backgroundColor = .backGray
+        
         contentView.addSubview(eventImageView)
+        contentView.addSubview(Spacer)
         eventImageView.snp.makeConstraints { make in
             make.width.height.equalTo(5)
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview().offset(8)
+        }
+        Spacer.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().offset(5)
+            make.height.equalTo(1)
         }
     }
     
