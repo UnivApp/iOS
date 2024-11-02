@@ -15,6 +15,7 @@ struct HomePopupModel {
     enum HomePopupType {
         case search
         case alert
+        case chat
     }
 }
 
@@ -28,11 +29,11 @@ struct HomeView: View {
     @FocusState private var isFocused: Bool
     
     @State private var currentIndex: Int = 0
-    @State private var popupOpacity: Double = 0
+    @State private var popupOpacity: Bool = false
     private let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        contentView
+        loadedView
     }
     
     @ViewBuilder
@@ -63,36 +64,51 @@ struct HomeView: View {
     
     var loadedView: some View {
         NavigationStack {
-            ScrollView(.vertical) {
-                VStack(alignment: .center, spacing: 10) {
-                    searchView
-                        .padding(.top, 10)
-                    
-                    categoryView
-                    
-                    footerView
+            ZStack {
+                ScrollView(.vertical) {
+                    VStack(alignment: .center, spacing: 10) {
+                        searchView
+                            .padding(.top, 10)
+                        
+                        categoryView
+                        
+                        footerView
+                    }
                 }
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        Button {
+                            withAnimation {
+                                isShowingPopup = .init(isPresented: true, type: .chat)
+                            }
+                        } label: {
+                            Image("chat")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 30, height: 30)
+                                .padding(10)
+                                .background(Circle().fill(.orange.opacity(0.5)))
+                        }
+                    }
+                }
+                .padding(.trailing, 30)
+                .padding(.bottom, 30)
             }
             .fullScreenCover(isPresented: $isShowingPopup.isPresented) {
                 if isShowingPopup.type == .alert {
                     BellView(viewModel: CalendarViewModel(container: .init(services: Services())), isPopup: $isShowingPopup.isPresented)
-                } else {
+                        .fadeInOut($popupOpacity)
+                } else if isShowingPopup.type == .search {
                     PopUpContentView(summary: listViewModel.summaryArray, isShowingPopup: $isShowingPopup.isPresented)
                         .cornerRadius(15)
                         .padding(.horizontal, 20)
                         .presentationBackground(.black.opacity(0.3))
-                        .onAppear {
-                            withAnimation {
-                                popupOpacity = 1
-                            }
-                        }
-                        .onDisappear {
-                            withAnimation {
-                                popupOpacity = 0
-                            }
-                        }
-                        .opacity(popupOpacity)
-                        .animation(.easeInOut, value: popupOpacity)
+                        .fadeInOut($popupOpacity)
+                } else {
+                    ChatView(viewModel: ChatViewModel(container: .init(services: Services())), isPopup: $isShowingPopup.isPresented)
+                        .fadeInOut($popupOpacity)
                 }
             }
             .transaction { $0.disablesAnimations = true }

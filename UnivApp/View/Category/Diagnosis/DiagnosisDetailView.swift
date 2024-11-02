@@ -10,7 +10,7 @@ import SwiftUI
 struct DiagnosisDetailView: View {
     @StateObject var viewModel: DiagnosisViewModel
     @Environment(\.dismiss) var dismiss
-    @State private var opacity: Double = 0
+    @State private var opacity: Bool = false
     @State private var diagnosisIndex: Int = 0
     @State private var isNext: Bool = false
     @State private var isResult: Bool = false
@@ -77,18 +77,7 @@ struct DiagnosisDetailView: View {
                         }
                     }
                 }
-                .onAppear {
-                    withAnimation {
-                        opacity = 1
-                    }
-                }
-                .onDisappear {
-                    withAnimation {
-                        opacity = 0
-                    }
-                }
-                .opacity(opacity)
-                .animation(.easeInOut(duration: 1.5), value: opacity)
+                .fadeInOut($opacity)
             }
         }
     }

@@ -166,7 +166,7 @@ struct MouView: View {
 fileprivate struct MouCell: View {
     var model: MouModel
     @State var isPopup: Bool = false
-    @State private var popupOpacity: Double = 0
+    @State private var popupOpacity: Bool = false
     var body: some View {
         Button {
             withAnimation {
@@ -221,18 +221,7 @@ fileprivate struct MouCell: View {
         .fullScreenCover(isPresented: $isPopup) {
             MouDetailView(model: model, isPopup: $isPopup)
                 .presentationBackground(.black.opacity(0.3))
-                .onAppear {
-                    withAnimation {
-                        popupOpacity = 1
-                    }
-                }
-                .onDisappear {
-                    withAnimation {
-                        popupOpacity = 0
-                    }
-                }
-                .opacity(popupOpacity)
-                .animation(.easeInOut, value: popupOpacity)
+                .fadeInOut($popupOpacity)
         }
         .transaction { $0.disablesAnimations = true }
     }

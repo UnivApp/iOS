@@ -10,7 +10,7 @@ import Foundation
 struct UserModel: Codable {
     let accessToken: String?
     let refreshToken: String?
-    let existingMember: Bool
+    let existingMember: Bool?
 }
 
 struct AuthStateModel: Codable {

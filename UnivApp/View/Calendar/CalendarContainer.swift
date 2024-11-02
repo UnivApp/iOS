@@ -19,7 +19,7 @@ struct CalendarContainer: View {
     @State var isSelected: Bool = false
     @State var isAlert: Bool = false
     @State var selectedIndex: Int = 0
-    @State var opacity: Double = 0
+    @State var opacity: Bool = false
     @State var alarmPhase: AlarmPhase = .init(isSheet: false, isSuccess: false, type: "")
 
     var body: some View {
@@ -100,14 +100,7 @@ struct CalendarContainer: View {
                     ForEach(viewModel.selectedCalendar.indices, id: \.self) { index in
                         CalendarDataCell(model: CalendarDetailModel(model: viewModel.selectedCalendar[index], bellSelected: viewModel.selectedCalendar[index].notificationActive, index: index), selectedIndex: self.$selectedIndex, isAlert: $isAlert)
                     }
-                    .onAppear {
-                        opacity = 1
-                    }
-                    .onDisappear {
-                        opacity = 0
-                    }
-                    .opacity(opacity)
-                    .animation(.easeInOut, value: opacity)
+                    .fadeInOut($opacity)
                 }
                 .padding(.horizontal, 20)
             }

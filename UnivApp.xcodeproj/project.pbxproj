@@ -99,6 +99,7 @@
 		E4982D142CD4B7CA00D0F1A7 /* NickNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982D132CD4B7CA00D0F1A7 /* NickNameView.swift */; };
 		E4982D162CD4C7E700D0F1A7 /* SettingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982D152CD4C7E700D0F1A7 /* SettingService.swift */; };
 		E4982D182CD4D21B00D0F1A7 /* NicknameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982D172CD4D21B00D0F1A7 /* NicknameModel.swift */; };
+		E4982D1B2CD60F1F00D0F1A7 /* FestivalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982D1A2CD60F1F00D0F1A7 /* FestivalView.swift */; };
 		E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */; };
 		E49C9F9F2C86CF70001F43A3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */; };
 		E49C9FA72C86D3BC001F43A3 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */; };
@@ -271,6 +272,7 @@
 		E4982D132CD4B7CA00D0F1A7 /* NickNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameView.swift; sourceTree = "<group>"; };
 		E4982D152CD4C7E700D0F1A7 /* SettingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingService.swift; sourceTree = "<group>"; };
 		E4982D172CD4D21B00D0F1A7 /* NicknameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameModel.swift; sourceTree = "<group>"; };
+		E4982D1A2CD60F1F00D0F1A7 /* FestivalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FestivalView.swift; sourceTree = "<group>"; };
 		E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnivAppApp.swift; sourceTree = "<group>"; };
 		E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
@@ -545,6 +547,14 @@
 			path = chat;
 			sourceTree = "<group>";
 		};
+		E4982D192CD60F1200D0F1A7 /* Festival */ = {
+			isa = PBXGroup;
+			children = (
+				E4982D1A2CD60F1F00D0F1A7 /* FestivalView.swift */,
+			);
+			path = Festival;
+			sourceTree = "<group>";
+		};
 		E49C9FA22C86D1EB001F43A3 /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -566,6 +576,7 @@
 		E49C9FAE2C86ED1B001F43A3 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				E4982D192CD60F1200D0F1A7 /* Festival */,
 				E49C9FC62C86EFDE001F43A3 /* Play */,
 				E49C9FC52C86EFD7001F43A3 /* Mou */,
 				E49C9FC42C86EFD1001F43A3 /* Money */,
@@ -1254,6 +1265,7 @@
 				E4F04BFE2C96C53900F653DF /* InitiativeViewCell.swift in Sources */,
 				E4B3FD182C77903700CB98F3 /* ListView.swift in Sources */,
 				E49C9FC82C86EFEA001F43A3 /* PlayViewModel.swift in Sources */,
+				E4982D1B2CD60F1F00D0F1A7 /* FestivalView.swift in Sources */,
 				E4953D732C8EDB35008CBDE5 /* ListService.swift in Sources */,
 				E4953D442C89D60D008CBDE5 /* PlayDetailView.swift in Sources */,
 				E4F04BEF2C94475100F653DF /* CalendarView.swift in Sources */,

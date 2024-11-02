@@ -15,7 +15,7 @@ struct FoodHotPlaceView: View {
     @State private var isPresented: Bool = false
     @State private var selectedModel: FoodModel?
     @State private var isFullCover: Bool = false
-    @State private var popupOpacity: Double = 0
+    @State private var opacity: Bool = false
     
     var body: some View {
         loadedView
@@ -23,18 +23,7 @@ struct FoodHotPlaceView: View {
                 if let model = selectedModel {
                     FoodSelectedPopupView(model: model, isPresented: $isPresented, isFullCover: $isFullCover)
                         .presentationBackground(.black.opacity(0.3))
-                        .onAppear {
-                            withAnimation {
-                                popupOpacity = 1
-                            }
-                        }
-                        .onDisappear {
-                            withAnimation {
-                                popupOpacity = 0
-                            }
-                        }
-                        .opacity(popupOpacity)
-                        .animation(.easeInOut, value: popupOpacity)
+                        .fadeInOut($opacity)
                 }
             }
             .background(isPresented ? .black.opacity(0.3) : .white)
@@ -42,18 +31,7 @@ struct FoodHotPlaceView: View {
                 if let model = selectedModel {
                     MapView(model: model, isPopup: true, isCover: true)
                         .presentationBackground(.black.opacity(0.3))
-                        .onAppear {
-                            withAnimation {
-                                popupOpacity = 1
-                            }
-                        }
-                        .onDisappear {
-                            withAnimation {
-                                popupOpacity = 0
-                            }
-                        }
-                        .opacity(popupOpacity)
-                        .animation(.easeInOut, value: popupOpacity)
+                        .fadeInOut($opacity)
                 }
             }
             .transaction { $0.disablesAnimations = true }

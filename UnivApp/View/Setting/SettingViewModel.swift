@@ -65,6 +65,7 @@ class SettingViewModel: ObservableObject {
                 } receiveValue: { [weak self] result in
                     self?.nickNamePhase = .success
                 }.store(in: &subscriptions)
+            
         case .checkLoad:
             container.services.settingService.checkNickname(nickName: self.nickNameText)
                 .sink { [weak self] completion in
@@ -72,7 +73,11 @@ class SettingViewModel: ObservableObject {
                         self?.duplicatePhase = false
                     }
                 } receiveValue: { [weak self] result in
-                    self?.duplicatePhase = true
+                    if result.duplicate {
+                        self?.duplicatePhase = false
+                    } else {
+                        self?.duplicatePhase = true
+                    }
                 }.store(in: &subscriptions)
 
         }
