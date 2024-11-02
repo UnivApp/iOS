@@ -14,3 +14,13 @@ struct AddAlarmModel: Codable {
     var registrationTokens: [String]
     var active: Bool
 }
+
+struct AlarmListModel: Codable {
+    let notificationId: Int
+    let title: String
+    let type: String
+    let notificationDate: String
+    let eventId: Int
+    let registrationTokens: [String]
+    let active: Bool
+}

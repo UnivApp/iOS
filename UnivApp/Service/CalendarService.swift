@@ -17,7 +17,7 @@ protocol CalendarServiceType {
     func getTotalCalendar() -> AnyPublisher<[CalendarModel], Error>
     func addAlarm(date: String, eventId: Int) -> AnyPublisher<AddAlarmModel, Error>
     func removeAlarm(notificationId: Int) -> AnyPublisher<Void, Error>
-    func getAlarm() -> AnyPublisher<AddAlarmModel, Error>
+    func getAlarm() -> AnyPublisher<[AlarmListModel], Error>
 }
 
 class CalendarService: CalendarServiceType {
@@ -101,8 +101,8 @@ class CalendarService: CalendarServiceType {
         }.eraseToAnyPublisher()
     }
     
-    func getAlarm() -> AnyPublisher<AddAlarmModel, any Error> {
-        Future<AddAlarmModel, Error> { promise in
+    func getAlarm() -> AnyPublisher<[AlarmListModel], any Error> {
+        Future<[AlarmListModel], Error> { promise in
             Alamofire().getAlamofire(url: APIEndpoint.getAlarm.urlString)
                 .sink { completion in
                     switch completion {
@@ -112,7 +112,7 @@ class CalendarService: CalendarServiceType {
                         print("알림 조회 실패 \(error)")
                         promise(.failure(error))
                     }
-                } receiveValue: { [weak self] (result: AddAlarmModel) in
+                } receiveValue: { [weak self] (result: [AlarmListModel]) in
                     guard self != nil else { return }
                     promise(.success(result))
                 }.store(in: &self.subscriptions)
@@ -135,7 +135,7 @@ class StubCalendarService: CalendarServiceType {
         Empty().eraseToAnyPublisher()
     }
     
-    func getAlarm() -> AnyPublisher<AddAlarmModel, any Error> {
+    func getAlarm() -> AnyPublisher<[AlarmListModel], any Error> {
         Empty().eraseToAnyPublisher()
     }
     

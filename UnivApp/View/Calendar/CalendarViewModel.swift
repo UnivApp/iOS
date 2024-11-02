@@ -21,7 +21,7 @@ class CalendarViewModel: ObservableObject {
     @Published var calendarData: [CalendarModel] = []
     @Published var selectedCalendar: [CalendarModel] = []
     @Published var isAlarm: Phase = .notRequested
-    @Published var alarmData: [AddAlarmModel] = []
+    @Published var alarmData: [AlarmListModel] = []
     
     
     private let container: DIContainer
@@ -66,6 +66,7 @@ class CalendarViewModel: ObservableObject {
                 } receiveValue: { [weak self] result in
                     self?.isAlarm = .success
                 }.store(in: &self.subscriptions)
+            
         case .getAlarm:
             self.phase = .loading
             container.services.calendarService.getAlarm()
@@ -74,7 +75,7 @@ class CalendarViewModel: ObservableObject {
                         self?.phase = .fail
                     }
                 } receiveValue: { [weak self] alarmData in
-                    
+                    self?.alarmData = alarmData
                     self?.phase = .success
                 }.store(in: &subscriptions)
         }

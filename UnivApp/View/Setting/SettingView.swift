@@ -72,7 +72,7 @@ struct SettingView: View {
                     RoundedRectangle(cornerRadius: 15).stroke(.black, lineWidth: 4)
                 }
             
-            Text(viewModel.userNickname)
+            Text("  \(viewModel.userNickname)")
                 .foregroundColor(.black)
                 .font(.system(size: 20, weight: .bold))
                 .padding(.top, 10)
