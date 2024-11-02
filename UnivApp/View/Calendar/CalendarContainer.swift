@@ -7,46 +7,64 @@
 
 import SwiftUI
 
+struct AlarmPhase {
+    var isSheet: Bool
+    var isSuccess: Bool
+    var type: String
+}
+
 struct CalendarContainer: View {
     @StateObject var viewModel: CalendarViewModel
-    @State var isSelected: Bool = false
-    @State var opacity: Double = 0
     
+    @State var isSelected: Bool = false
     @State var isAlert: Bool = false
-    @State var isCancel: Bool = false
     @State var selectedIndex: Int = 0
+    @State var opacity: Double = 0
+    @State var alarmPhase: AlarmPhase = .init(isSheet: false, isSuccess: false, type: "")
 
     var body: some View {
         contentView
             .onChange(of: viewModel.selectedCalendar) {
                 self.isSelected = !viewModel.selectedCalendar.isEmpty
             }
+            .onReceive(viewModel.$isAlarm) { isAlarm in
+                if isAlarm == .success {
+                    if viewModel.selectedCalendar[selectedIndex].notificationActive {
+                        viewModel.selectedCalendar[selectedIndex].notificationActive = false
+                    } else {
+                        viewModel.selectedCalendar[selectedIndex].notificationActive = true
+                    }
+                    viewModel.send(action: .totalLoad)
+                    isAlert = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        alarmPhase = AlarmPhase(isSheet: true, isSuccess: true, type: "등록")
+                    }
+                } else if isAlarm == .fail {
+                    isAlert = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        alarmPhase = AlarmPhase(isSheet: true, isSuccess: false, type: "삭제")
+                    }
+                }
+            }
             .fullScreenCover(isPresented: $isAlert) {
                 if viewModel.selectedCalendar[selectedIndex].notificationActive {
-                    CustomAlertView(selectedIndex: $selectedIndex, isAlert: $isAlert, type: "삭제")
+                    CustomAlertView(selectedIndex: $selectedIndex, isAlert: $isAlert, isSheet: $alarmPhase.isSheet, type: "삭제")
                         .environmentObject(viewModel)
                         .presentationBackground(.black.opacity(0.7))
                         .animation(.easeInOut, value: isAlert)
                 } else {
-                    CustomAlertView(selectedIndex: $selectedIndex, isAlert: $isAlert, type: "등록")
+                    CustomAlertView(selectedIndex: $selectedIndex, isAlert: $isAlert, isSheet: $alarmPhase.isSheet, type: "등록")
                         .environmentObject(viewModel)
                         .presentationBackground(.black.opacity(0.7))
                         .animation(.easeInOut, value: isAlert)
                 }
             }
-            .actionSheet(isPresented: $viewModel.isalarmSetting.isAlarmFail) {
+            .actionSheet(isPresented: $alarmPhase.isSheet) {
                 ActionSheet(
-                    title: Text("알림 \(viewModel.isalarmSetting.selectedType) 실패! 😔"),
+                    title: Text("알림  \(alarmPhase.type) \(alarmPhase.isSuccess ? "성공" : "실패") 🔔"),
                     buttons: [.default(Text("확인"))]
                 )
             }
-            .actionSheet(isPresented: $viewModel.isalarmSetting.isAlarmSuccess) {
-                ActionSheet(
-                    title: Text("알림 \(viewModel.isalarmSetting.selectedType) 성공! 😊"),
-                    buttons: [.default(Text("확인"))]
-                )
-            }
-            .transaction { $0.disablesAnimations = true }
     }
     
     @ViewBuilder
@@ -119,18 +137,17 @@ fileprivate struct CustomAlertView: View {
     @EnvironmentObject var viewModel: CalendarViewModel
     @Binding var selectedIndex: Int
     @Binding var isAlert: Bool
+    @Binding var isSheet: Bool
     
     var type: String
     var buttonTypes: [String] = ["1일 전", "당일"]
     
     var body: some View {
-        VStack(alignment: .center, spacing: 30) {
+        VStack(alignment: .center, spacing: 20) {
             HStack {
                 Spacer()
                 Button  {
-                    withAnimation {
-                        isAlert = false
-                    }
+                    isAlert = false
                 } label: {
                     Image(systemName: "xmark.circle.fill")
                         .resizable()
@@ -142,19 +159,16 @@ fileprivate struct CustomAlertView: View {
             .padding(.trailing, 20)
             
             if type == "등록" {
-                Text("알림 받을 날을 선택하세요! 🔔")
+                Text("알림을 받으시겠습니까? 🔔")
                     .font(.system(size: 15, weight: .bold))
                     .foregroundColor(.black.opacity(0.7))
                 
+                Text("매일 오전 10시에 일정 알림이 보내집니다")
+                    .font(.system(size: 11, weight: .bold))
+                    .foregroundColor(.gray)
+                
                 Button {
-                    if let date = viewModel.selectedCalendar[selectedIndex].date,
-                       let calendarId = viewModel.selectedCalendar[selectedIndex].calendarEventId,
-                       let previousDate = viewModel.calculatePreviousDate(from: date) {
-                        if viewModel.phase == .success {
-                            viewModel.selectedCalendar[selectedIndex].notificationActive = true
-                            isAlert = false
-                        }
-                    }
+                    viewModel.send(action: .alarmLoad(viewModel.selectedCalendar[selectedIndex].date, viewModel.selectedCalendar[selectedIndex].calendarEventId))
                 } label: {
                     Text("확인")
                         .padding(10)
@@ -168,13 +182,7 @@ fileprivate struct CustomAlertView: View {
                     .foregroundColor(.black.opacity(0.7))
                 
                 Button {
-                    if let notificationId = viewModel.selectedCalendar[selectedIndex].notificationId {
-                        viewModel.send(action: .alarmRemove("\(notificationId)"))
-                        if viewModel.phase == .success {
-                            viewModel.selectedCalendar[selectedIndex].notificationActive = false
-                            isAlert = false
-                        }
-                    }
+                    viewModel.send(action: .alarmRemove(viewModel.selectedCalendar[selectedIndex].notificationId ?? 0))
                 } label: {
                     Text("확인")
                         .padding(10)
@@ -184,7 +192,7 @@ fileprivate struct CustomAlertView: View {
                 }
             }
         }
-        .frame(width: UIScreen.main.bounds.width - 60, height: UIScreen.main.bounds.height / 4)
+        .frame(width: UIScreen.main.bounds.width - 60, height: UIScreen.main.bounds.height / 3.5)
         .background(.white)
         .cornerRadius(15)
     }

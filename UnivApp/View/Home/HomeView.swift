@@ -8,13 +8,23 @@
 import SwiftUI
 import Kingfisher
 
+struct HomePopupModel {
+    var isPresented: Bool
+    var type: HomePopupType?
+    
+    enum HomePopupType {
+        case search
+        case alert
+    }
+}
+
 struct HomeView: View {
     @StateObject var viewModel: HomeViewModel
     @StateObject var listViewModel: ListViewModel
     
     @State private var isLoading: Bool = false
     @State private var selectedSegment: SplitType = .employment
-    @State private var isShowingPopup: Bool = false
+    @State private var isShowingPopup: HomePopupModel = .init(isPresented: false)
     @FocusState private var isFocused: Bool
     
     @State private var currentIndex: Int = 0
@@ -63,29 +73,33 @@ struct HomeView: View {
                     footerView
                 }
             }
-            .fullScreenCover(isPresented: $isShowingPopup) {
-                PopUpContentView(summary: listViewModel.summaryArray, isShowingPopup: $isShowingPopup)
-                    .cornerRadius(15)
-                    .padding(.horizontal, 20)
-                    .presentationBackground(.black.opacity(0.3))
-                    .onAppear {
-                        withAnimation {
-                            popupOpacity = 1
+            .fullScreenCover(isPresented: $isShowingPopup.isPresented) {
+                if isShowingPopup.type == .alert {
+                    BellView(viewModel: CalendarViewModel(container: .init(services: Services())), isPopup: $isShowingPopup.isPresented)
+                } else {
+                    PopUpContentView(summary: listViewModel.summaryArray, isShowingPopup: $isShowingPopup.isPresented)
+                        .cornerRadius(15)
+                        .padding(.horizontal, 20)
+                        .presentationBackground(.black.opacity(0.3))
+                        .onAppear {
+                            withAnimation {
+                                popupOpacity = 1
+                            }
                         }
-                    }
-                    .onDisappear {
-                        withAnimation {
-                            popupOpacity = 0
+                        .onDisappear {
+                            withAnimation {
+                                popupOpacity = 0
+                            }
                         }
-                    }
-                    .opacity(popupOpacity)
-                    .animation(.easeInOut, value: popupOpacity)
+                        .opacity(popupOpacity)
+                        .animation(.easeInOut, value: popupOpacity)
+                }
             }
             .transaction { $0.disablesAnimations = true }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        //TODO: 알림
+                        isShowingPopup = .init(isPresented: true, type: .alert)
                     }, label: {
                         Image("bell")
                     })
@@ -104,7 +118,7 @@ struct HomeView: View {
                     if listViewModel.searchText != "" {
                         listViewModel.send(action: .search)
                         withAnimation {
-                            isShowingPopup = true
+                            isShowingPopup = .init(isPresented: true, type: .search)
                         }
                     }
                     listViewModel.searchText = ""
@@ -126,7 +140,7 @@ struct HomeView: View {
                         listViewModel.searchText = ""
                         isFocused = false
                         withAnimation {
-                            isShowingPopup = true
+                            isShowingPopup = .init(isPresented: true, type: .search)
                         }
                     }
             }
@@ -167,7 +181,6 @@ struct HomeView: View {
             
             TabView(selection: $currentIndex) {
                 ForEach(viewModel.posterData.indices, id: \.self) { index in
-                    //TODO: - NavigationLink
                     Image(viewModel.posterData[index])
                         .resizable()
                         .scaledToFill()

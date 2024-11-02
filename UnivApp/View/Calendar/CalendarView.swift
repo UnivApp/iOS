@@ -23,7 +23,7 @@ struct CalendarView: UIViewRepresentable {
         var grouped: [Date: [CalendarModel]] = [:]
         
         for model in calenderData {
-            if let dateString = model.date, let date = dateFormatter.date(from: dateString) {
+            if let date = dateFormatter.date(from: model.date) {
                 if grouped[date] != nil {
                     grouped[date]?.append(model)
                 } else {

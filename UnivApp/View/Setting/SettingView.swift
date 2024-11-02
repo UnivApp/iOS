@@ -9,9 +9,19 @@ import SwiftUI
 
 struct SettingView: View {
     @StateObject var viewModel: SettingViewModel
+    @State var isPresented: Bool = false
     
     var body: some View {
         contentView
+            .fullScreenCover(isPresented: $isPresented) {
+                NickNameView(viewModel: viewModel, isPresented: $isPresented, type: .change)
+                    .presentationBackground(.black.opacity(0.7))
+            }
+            .onChange(of: isPresented) {
+                if isPresented == false {
+                    viewModel.send(action: .getLoad)
+                }
+            }
     }
     
     @ViewBuilder
@@ -20,14 +30,17 @@ struct SettingView: View {
         case .notRequested:
             PlaceholderView()
                 .onAppear{
-                    viewModel.send(action: .load)
+                    viewModel.send(action: .getLoad)
                 }
         case .loading:
             LoadingView(url: "congratulations", size: [150, 150])
         case .success:
             loadedView
         case .fail:
-            ErrorView()
+            loadedView
+                .onAppear {
+                    viewModel.userNickname = "닉네임을 설정해 주세요"
+                }
         }
     }
     
@@ -49,24 +62,33 @@ struct SettingView: View {
     }
     
     var profile: some View {
-        VStack(alignment: .center) {
-            Image("person")
+        VStack(alignment: .center, spacing: 20) {
+            Image("smile")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 120, height: 100)
-                .padding(.horizontal, 20)
+                .frame(width: 80, height: 80)
+                .padding(15)
+                .overlay {
+                    RoundedRectangle(cornerRadius: 15).stroke(.black, lineWidth: 4)
+                }
             
-            Text("성윤님")
+            Text(viewModel.userNickname)
                 .foregroundColor(.black)
                 .font(.system(size: 20, weight: .bold))
                 .padding(.top, 10)
-            
-            
-            Text("jeoungsung12@naver.com")
-                .foregroundColor(.black)
-                .font(.system(size: 12, weight: .regular))
-                .padding(.top, 10)
-            
+                .overlay(alignment: .topLeading) {
+                    Button {
+                        isPresented = true
+                    } label: {
+                        Image(systemName: "pencil.circle.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 15, height: 15)
+                            .foregroundColor(.blue.opacity(0.7))
+                            .padding(.top, -5)
+                            .padding(.leading, -10)
+                    }
+                }
         }
     }
     

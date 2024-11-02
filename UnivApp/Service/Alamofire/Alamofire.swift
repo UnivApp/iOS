@@ -88,7 +88,7 @@ final class Alamofire {
             AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: ["content-Type":"application/json"], interceptor: TokenRequestInterceptor())
                 .validate()
                 .response { response in
-                    print(response.debugDescription)
+//                    print(response.debugDescription)
                     switch response.result {
                     case .success:
                         if response.data?.isEmpty ?? true {
@@ -136,6 +136,22 @@ final class Alamofire {
     func getAlamofire<T: Decodable>(url: String) -> AnyPublisher<T, Error> {
         return Future<T, Error> { promise in
             AF.request(url, method: .get, encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"], interceptor: TokenRequestInterceptor())
+                .validate()
+                .responseDecodable(of: T.self) { response in
+//                    print(response.debugDescription)
+                    switch response.result {
+                    case let .success(result):
+                        promise(.success(result))
+                    case let .failure(error):
+                        promise(.failure(error))
+                    }
+                }
+        }
+        .eraseToAnyPublisher()
+    }
+    func putAlamofire<T: Decodable>(url: String, params: [String:Any]) -> AnyPublisher<T, Error> {
+        return Future<T, Error> { promise in
+            AF.request(url, method: .put, parameters: params, encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"], interceptor: TokenRequestInterceptor())
                 .validate()
                 .responseDecodable(of: T.self) { response in
 //                    print(response.debugDescription)

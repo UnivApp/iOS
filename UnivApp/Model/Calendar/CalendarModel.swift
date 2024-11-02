@@ -8,10 +8,10 @@
 import Foundation
 
 struct CalendarModel: Codable, Hashable {
-    var calendarEventId: Int?
-    var title: String?
-    var date: String?
-    var type: String?
+    var calendarEventId: Int
+    var title: String
+    var date: String
+    var type: String
     var notificationActive: Bool
     var notificationId: Int?
 }

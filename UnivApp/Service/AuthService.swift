@@ -17,7 +17,7 @@ enum AuthError: Error {
 }
 
 protocol AuthServiceType {
-    func checkAuthState() -> AnyPublisher<Void, ServicesError>
+    func checkAuthState() -> AnyPublisher<AuthStateModel, ServicesError>
     func signInAppleRequest(_ request: ASAuthorizationAppleIDRequest) -> String
     func signInAppleCompletion(_ auth: ASAuthorization, none: String) -> AnyPublisher<UserModel, ServicesError>
     func logout() -> AnyPublisher<Void, ServicesError>
@@ -28,10 +28,9 @@ class AuthService: AuthServiceType {
     
     private var subscriptions = Set<AnyCancellable>()
     
-    func checkAuthState() -> AnyPublisher<Void, ServicesError> {
-        //TODO: 사용자 로그인 체크 -> 메서드 필요
-        Future<Void, ServicesError> { promise in
-            Alamofire().nonOfZeroPost(url: APIEndpoint.status.urlString, params: nil)
+    func checkAuthState() -> AnyPublisher<AuthStateModel, ServicesError> {
+        Future<AuthStateModel, ServicesError> { promise in
+            Alamofire().postAlamofire(url: APIEndpoint.status.urlString, params: nil)
                 .sink { completion in
                     switch completion {
                     case .finished:
@@ -40,9 +39,9 @@ class AuthService: AuthServiceType {
                         print("로그인 상태 체크 실패")
                         promise(.failure(ServicesError.error(error)))
                     }
-                } receiveValue: { [weak self] _ in
+                } receiveValue: { [weak self] (result: AuthStateModel) in
                     guard self != nil else { return }
-                    promise(.success(()))
+                    promise(.success((result)))
                 }.store(in: &self.subscriptions)
         }.eraseToAnyPublisher()
     }
@@ -140,7 +139,7 @@ extension AuthService {
 
 class StubAuthService: AuthServiceType {
     
-    func checkAuthState() -> AnyPublisher<Void, ServicesError> {
+    func checkAuthState() -> AnyPublisher<AuthStateModel, ServicesError> {
         Empty().eraseToAnyPublisher()
     }
     

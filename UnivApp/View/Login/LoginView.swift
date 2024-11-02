@@ -36,7 +36,6 @@ struct LoginView: View {
                 .frame(height: 50)
                 .padding(.horizontal, 30)
                 .padding(.bottom, 40)
-
             }
         }
         .ignoresSafeArea()

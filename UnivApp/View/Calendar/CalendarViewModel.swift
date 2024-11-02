@@ -8,24 +8,20 @@
 import Foundation
 import Combine
 
-struct FailAlarmModel {
-    var isAlarmFail: Bool
-    var isAlarmSuccess: Bool
-    var selectedType: String
-}
-
 class CalendarViewModel: ObservableObject {
     
     enum Action {
         case totalLoad
         case alarmLoad(String, Int)
-        case alarmRemove(String)
+        case alarmRemove(Int)
+        case getAlarm
     }
     
     @Published var phase: Phase = .notRequested
     @Published var calendarData: [CalendarModel] = []
     @Published var selectedCalendar: [CalendarModel] = []
-    @Published var isalarmSetting: FailAlarmModel = FailAlarmModel(isAlarmFail: false, isAlarmSuccess: false, selectedType: "")
+    @Published var isAlarm: Phase = .notRequested
+    @Published var alarmData: [AddAlarmModel] = []
     
     
     private let container: DIContainer
@@ -50,51 +46,38 @@ class CalendarViewModel: ObservableObject {
                 }.store(in: &subscriptions)
             
         case let .alarmLoad(date, id):
-            self.phase = .loading
+            self.isAlarm = .loading
             container.services.calendarService.addAlarm(date: date, eventId: id)
                 .sink { [weak self] completion in
                     if case .failure = completion {
-                        self?.isalarmSetting = FailAlarmModel(isAlarmFail: true, isAlarmSuccess: false, selectedType: "등록")
+                        self?.isAlarm = .fail
                     }
                 } receiveValue: { [weak self]  alarmResult in
-                    self?.phase = .success
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0 ){
-                        self?.isalarmSetting = FailAlarmModel(isAlarmFail: false, isAlarmSuccess: true, selectedType: "등록")
-                    }
+                    self?.isAlarm = .success
                 }.store(in: &subscriptions)
             
         case let .alarmRemove(notificationId):
-            self.phase = .loading
+            self.isAlarm = .loading
             container.services.calendarService.removeAlarm(notificationId: notificationId)
                 .sink { [weak self] completion in
                     if case .failure = completion {
-                        self?.isalarmSetting = FailAlarmModel(isAlarmFail: true, isAlarmSuccess: false, selectedType: "삭제")
+                        self?.isAlarm = .fail
                     }
                 } receiveValue: { [weak self] result in
-                    self?.phase = .success
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0 ){
-                        self?.isalarmSetting = FailAlarmModel(isAlarmFail: false, isAlarmSuccess: true, selectedType: "삭제")
-                    }
+                    self?.isAlarm = .success
                 }.store(in: &self.subscriptions)
+        case .getAlarm:
+            self.phase = .loading
+            container.services.calendarService.getAlarm()
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.phase = .fail
+                    }
+                } receiveValue: { [weak self] alarmData in
+                    
+                    self?.phase = .success
+                }.store(in: &subscriptions)
         }
-    }
-    
-    func calculatePreviousDate(from dateString: String) -> String? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        
-        guard let date = dateFormatter.date(from: dateString) else {
-            print("날짜 변환에 실패했습니다.")
-            return nil
-        }
-        
-        guard let previousDate = Calendar.current.date(byAdding: .day, value: -1, to: date) else {
-            print("날짜 계산에 실패했습니다.")
-            return nil
-        }
-        
-        let previousDateString = dateFormatter.string(from: previousDate)
-        return previousDateString
     }
     
 }

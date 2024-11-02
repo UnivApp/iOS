@@ -16,10 +16,25 @@ enum DeviceTokenError: Error {
 protocol CalendarServiceType {
     func getTotalCalendar() -> AnyPublisher<[CalendarModel], Error>
     func addAlarm(date: String, eventId: Int) -> AnyPublisher<AddAlarmModel, Error>
-    func removeAlarm(notificationId: String) -> AnyPublisher<Void, Error>
+    func removeAlarm(notificationId: Int) -> AnyPublisher<Void, Error>
+    func getAlarm() -> AnyPublisher<AddAlarmModel, Error>
 }
 
 class CalendarService: CalendarServiceType {
+    
+    init() {
+        NotificationCenter.default.publisher(for: .deviceTokenDidSave)
+            .sink { [weak self] _ in
+                self?.fetchDeviceToken()
+            }
+            .store(in: &subscriptions)
+    }
+    
+    private var deviceToken: String?
+    
+    private func fetchDeviceToken() {
+        self.deviceToken = KeychainWrapper.standard.string(forKey: "DeviceToken")
+    }
     
     private var subscriptions = Set<AnyCancellable>()
     
@@ -43,32 +58,31 @@ class CalendarService: CalendarServiceType {
     
     func addAlarm(date: String, eventId: Int) -> AnyPublisher<AddAlarmModel, any Error> {
         Future<AddAlarmModel, Error> { promise in
-            if let deviceToken = KeychainWrapper.standard.string(forKey: "DeviceToken") {
-                let params: [String:Any] = [
-                    "registrationTokens": [deviceToken],
-                    "notificationDate": date,
-                    "eventId": eventId
-                ]
-                Alamofire().postAlamofire(url: APIEndpoint.addAlarm.urlString, params: params)
-                    .sink { completion in
-                        switch completion {
-                        case .finished:
-                            print("알림 설정 성공")
-                        case let .failure(error):
-                            print("알림 설정 실패 \(error)")
-                            promise(.failure(error))
-                        }
-                    } receiveValue: { [weak self] (result: AddAlarmModel) in
-                        guard self != nil else { return }
-                        promise(.success(result))
-                    }.store(in: &self.subscriptions)
-            } else {
+            guard let token = self.deviceToken else {
                 promise(.failure(DeviceTokenError.deviceTokenNotFound))
+                return
             }
+            let params: [String: Any] = [
+                "registrationTokens": [token],
+                "notificationDate": date,
+                "eventId": eventId
+            ]
+            Alamofire().postAlamofire(url: APIEndpoint.addAlarm.urlString, params: params)
+                .sink(receiveCompletion: { completion in
+                    switch completion {
+                    case .finished:
+                        print("알림 설정 성공")
+                    case let .failure(error):
+                        print("알림 설정 실패 \(error)")
+                        promise(.failure(error))
+                    }
+                }, receiveValue: { result in
+                    promise(.success(result))
+                }).store(in: &self.subscriptions)
         }.eraseToAnyPublisher()
     }
     
-    func removeAlarm(notificationId: String) -> AnyPublisher<Void, any Error> {
+    func removeAlarm(notificationId: Int) -> AnyPublisher<Void, any Error> {
         Future<Void, Error> { promise in
             Alamofire().delete(url: APIEndpoint.removeAlarm.urlString)
                 .sink { completion in
@@ -86,6 +100,25 @@ class CalendarService: CalendarServiceType {
 
         }.eraseToAnyPublisher()
     }
+    
+    func getAlarm() -> AnyPublisher<AddAlarmModel, any Error> {
+        Future<AddAlarmModel, Error> { promise in
+            Alamofire().getAlamofire(url: APIEndpoint.getAlarm.urlString)
+                .sink { completion in
+                    switch completion {
+                    case .finished:
+                        print("알림 조회 성공")
+                    case let .failure(error):
+                        print("알림 조회 실패 \(error)")
+                        promise(.failure(error))
+                    }
+                } receiveValue: { [weak self] (result: AddAlarmModel) in
+                    guard self != nil else { return }
+                    promise(.success(result))
+                }.store(in: &self.subscriptions)
+
+        }.eraseToAnyPublisher()
+    }
 }
 
 class StubCalendarService: CalendarServiceType {
@@ -98,7 +131,11 @@ class StubCalendarService: CalendarServiceType {
         Empty().eraseToAnyPublisher()
     }
     
-    func removeAlarm(notificationId: String) -> AnyPublisher<Void, any Error> {
+    func removeAlarm(notificationId: Int) -> AnyPublisher<Void, any Error> {
+        Empty().eraseToAnyPublisher()
+    }
+    
+    func getAlarm() -> AnyPublisher<AddAlarmModel, any Error> {
         Empty().eraseToAnyPublisher()
     }
     

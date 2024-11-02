@@ -95,6 +95,10 @@
 		E4982D0A2CCF6DC800D0F1A7 /* GADBannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982D092CCF6DC800D0F1A7 /* GADBannerViewController.swift */; };
 		E4982D0E2CCF706000D0F1A7 /* ServicesKEY.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982D0D2CCF706000D0F1A7 /* ServicesKEY.swift */; };
 		E4982D102CCF81A900D0F1A7 /* AlarmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982D0F2CCF81A900D0F1A7 /* AlarmModel.swift */; };
+		E4982D122CD4ABCB00D0F1A7 /* BellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982D112CD4ABCB00D0F1A7 /* BellView.swift */; };
+		E4982D142CD4B7CA00D0F1A7 /* NickNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982D132CD4B7CA00D0F1A7 /* NickNameView.swift */; };
+		E4982D162CD4C7E700D0F1A7 /* SettingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982D152CD4C7E700D0F1A7 /* SettingService.swift */; };
+		E4982D182CD4D21B00D0F1A7 /* NicknameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982D172CD4D21B00D0F1A7 /* NicknameModel.swift */; };
 		E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */; };
 		E49C9F9F2C86CF70001F43A3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */; };
 		E49C9FA72C86D3BC001F43A3 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */; };
@@ -263,6 +267,10 @@
 		E4982D092CCF6DC800D0F1A7 /* GADBannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GADBannerViewController.swift; sourceTree = "<group>"; };
 		E4982D0D2CCF706000D0F1A7 /* ServicesKEY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesKEY.swift; sourceTree = "<group>"; };
 		E4982D0F2CCF81A900D0F1A7 /* AlarmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmModel.swift; sourceTree = "<group>"; };
+		E4982D112CD4ABCB00D0F1A7 /* BellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellView.swift; sourceTree = "<group>"; };
+		E4982D132CD4B7CA00D0F1A7 /* NickNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameView.swift; sourceTree = "<group>"; };
+		E4982D152CD4C7E700D0F1A7 /* SettingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingService.swift; sourceTree = "<group>"; };
+		E4982D172CD4D21B00D0F1A7 /* NicknameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameModel.swift; sourceTree = "<group>"; };
 		E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnivAppApp.swift; sourceTree = "<group>"; };
 		E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
@@ -541,6 +549,7 @@
 			isa = PBXGroup;
 			children = (
 				E4B3FD272C77A42900CB98F3 /* UserModel.swift */,
+				E4982D172CD4D21B00D0F1A7 /* NicknameModel.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -814,6 +823,7 @@
 				E4953D932C901971008CBDE5 /* HeartService.swift */,
 				E4CEEFBD2CBA4A9D001F4DAE /* RateService.swift */,
 				E4CCE6C92CC0F2BA00483A87 /* CalendarService.swift */,
+				E4982D152CD4C7E700D0F1A7 /* SettingService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -823,6 +833,7 @@
 			children = (
 				E4B3FCC92C7751DB00CB98F3 /* AuthView.swift */,
 				E4B3FCFF2C77560200CB98F3 /* AuthViewModel.swift */,
+				E4982D132CD4B7CA00D0F1A7 /* NickNameView.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -853,6 +864,7 @@
 				E4B3FD362C7882C200CB98F3 /* CategoryType.swift */,
 				E409A1442CAE8B7F00E9CB1C /* PopUpContentView.swift */,
 				E49C9FA82C86D539001F43A3 /* HomeViewModel.swift */,
+				E4982D112CD4ABCB00D0F1A7 /* BellView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1225,6 +1237,7 @@
 				E49222752C9EE7650077EA45 /* ChartView.swift in Sources */,
 				E40135EE2CA3E7850021D351 /* SearchView.swift in Sources */,
 				E4953DB02C906C95008CBDE5 /* ListDetailModel.swift in Sources */,
+				E4982D122CD4ABCB00D0F1A7 /* BellView.swift in Sources */,
 				E49C9F9F2C86CF70001F43A3 /* EmptyView.swift in Sources */,
 				E4DCD9B62C9FFC8600E06542 /* FoodDetailViewModel.swift in Sources */,
 				E4953D712C8ED137008CBDE5 /* APIEndpoint.swift in Sources */,
@@ -1253,6 +1266,7 @@
 				E4CCE6DF2CC396A200483A87 /* MoneyDetailViewModel.swift in Sources */,
 				E4F04C0F2C987CA500F653DF /* CalendarModel.swift in Sources */,
 				E4B3FD082C775B5300CB98F3 /* LoginView.swift in Sources */,
+				E4982D142CD4B7CA00D0F1A7 /* NickNameView.swift in Sources */,
 				E4F04BFA2C94479100F653DF /* AdMobView.swift in Sources */,
 				E49222792C9F10240077EA45 /* SeperateView.swift in Sources */,
 				E4953D222C888A64008CBDE5 /* HeartViewModel.swift in Sources */,
@@ -1277,6 +1291,7 @@
 				E4982D0A2CCF6DC800D0F1A7 /* GADBannerViewController.swift in Sources */,
 				E4953DA52C90643C008CBDE5 /* VersionView.swift in Sources */,
 				E4D626062CA7F611008596D0 /* CustomPageControl.swift in Sources */,
+				E4982D182CD4D21B00D0F1A7 /* NicknameModel.swift in Sources */,
 				E4C264422CB40A8400E01480 /* FoodSegmentType.swift in Sources */,
 				E4953DA92C906486008CBDE5 /* WithdrawView.swift in Sources */,
 				E49C9FBA2C86ED75001F43A3 /* MoneyView.swift in Sources */,
@@ -1302,6 +1317,7 @@
 				E49C9FAD2C86D756001F43A3 /* ListViewCell.swift in Sources */,
 				E4B3FD102C778D6C00CB98F3 /* MainTabType.swift in Sources */,
 				E49C9FE62C870572001F43A3 /* InfoViewModel.swift in Sources */,
+				E4982D162CD4C7E700D0F1A7 /* SettingService.swift in Sources */,
 				E49C9FF22C870589001F43A3 /* ChatViewModel.swift in Sources */,
 				E4982D0E2CCF706000D0F1A7 /* ServicesKEY.swift in Sources */,
 				E409A1452CAE8B7F00E9CB1C /* PopUpContentView.swift in Sources */,

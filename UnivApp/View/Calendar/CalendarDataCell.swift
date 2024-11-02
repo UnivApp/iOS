@@ -25,40 +25,36 @@ struct CalendarDataCell: View {
     var loadedView: some View{
         VStack {
             HStack(spacing: 20) {
-                if let title = model.model.title,
-                   let description = model.model.type,
-                   let date = model.model.date {
-                    Text(date)
-                        .font(.system(size: 15, weight: .semibold))
-                        .foregroundColor(Color.orange)
+                Text(model.model.date)
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundColor(Color.orange)
+                
+                
+                VStack(alignment: .leading, spacing: 5) {
+                    Text(model.model.title)
+                        .font(.system(size: 15, weight: .heavy))
+                        .foregroundColor(Color.black.opacity(0.7))
                     
-                    
-                    VStack(alignment: .leading, spacing: 5) {
-                        Text(title)
-                            .font(.system(size: 15, weight: .heavy))
-                            .foregroundColor(Color.black.opacity(0.7))
-                        
-                        Text(description)
-                            .font(.system(size: 12, weight: .regular))
-                            .foregroundColor(Color.gray)
+                    Text(model.model.type)
+                        .font(.system(size: 12, weight: .regular))
+                        .foregroundColor(Color.gray)
+                }
+                .lineLimit(nil)
+                .fixedSize(horizontal: false, vertical: true)
+                
+                Spacer()
+                
+                Button  {
+                    withAnimation {
+                        isAlert = true
+                        selectedIndex = model.index
                     }
-                    .lineLimit(nil)
-                    .fixedSize(horizontal: false, vertical: true)
-                    
-                    Spacer()
-                    
-                    Button  {
-                        withAnimation {
-                            isAlert = true
-                            selectedIndex = model.index
-                        }
-                    } label: {
-                        Image(systemName: "bell.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(model.bellSelected ? .yellow : .gray)
-                    }
+                } label: {
+                    Image(systemName: "bell.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(model.bellSelected ? .yellow : .gray)
                 }
             }
             Divider()

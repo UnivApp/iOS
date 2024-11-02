@@ -33,6 +33,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                 print("FCM 토큰")
                 KeychainWrapper.standard.remove(forKey: "DeviceToken")
                 KeychainWrapper.standard.set(token, forKey: "DeviceToken")
+                NotificationCenter.default.post(name: .deviceTokenDidSave, object: nil)
             }
         }
     }
@@ -50,6 +51,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         }
     }
     
+}
+
+extension Notification.Name {
+    static let deviceTokenDidSave = Notification.Name("deviceTokenDidSave")
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
