@@ -89,7 +89,8 @@ struct HomeView: View {
                                 .scaledToFit()
                                 .frame(width: 30, height: 30)
                                 .padding(10)
-                                .background(Circle().fill(.orange.opacity(0.5)))
+                                .background(Circle().fill(.yellow))
+                                .shadow(radius: 3)
                         }
                     }
                 }
