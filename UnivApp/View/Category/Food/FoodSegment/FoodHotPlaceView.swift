@@ -27,9 +27,9 @@ struct FoodHotPlaceView: View {
             .background(isPresented ? .black.opacity(0.3) : .white)
             .fullScreenCover(isPresented: $isFullCover) {
                 if let model = selectedModel {
-                    MapView(model: model, isCover: true)
-                        .presentationBackground(.black.opacity(0.3))
-                        .fadeInOut($opacity[1])
+//                    MapView(model: model, isFull: true)
+//                        .presentationBackground(.black.opacity(0.3))
+//                        .fadeInOut($opacity[1])
                 }
             }
             .transaction { $0.disablesAnimations = true }
