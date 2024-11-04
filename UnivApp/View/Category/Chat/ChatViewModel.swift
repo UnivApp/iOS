@@ -59,19 +59,8 @@ class ChatViewModel: ObservableObject {
         switch action {
         case .food:
             self.phase = .loading
-            container.services.foodService.getTopRestaurants()
-                .sink { [weak self] completion in
-                    if case .failure = completion {
-                        self?.phase = .fail
-                    }
-                } receiveValue: { [weak self] (topFood) in
-                    self?.isScrollType[(self?.chatList.count ?? 0) - 1] = .food
-                    self?.ensureDataCapacity(state: &self!.foodState, index: (self?.chatList.count ?? 0) - 1)
-                    self?.foodState.data?[(self?.chatList.count ?? 0) - 1] = topFood
-                    self?.appendTotal("다른 대학교가 궁금하신가요? 🎓")
-                    self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = true
-                    self?.phase = .success
-                }.store(in: &subscripttions)
+            self.appendTotal("궁금하신? 대학교를 알려주세요! 🎓")
+            self.isUniversityTyping[(self.chatList.count) - 1] = true
             
         case .news:
             self.phase = .loading
@@ -188,8 +177,8 @@ class ChatViewModel: ObservableObject {
                         self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = false
                     }
                 } receiveValue: { [weak self] searchResult in
-                    if let universityId = searchResult.compactMap({ $0.universityId }).first {
-                        self?.container.services.foodService.getSchoolRestaurants(universityId:  universityId)
+                    if let universityName = searchResult.compactMap({ $0.fullName }).first {
+                        self?.container.services.foodService.getSearchFood(universityName: universityName)
                             .sink { [weak self] completion in
                                 if case .failure = completion {
                                     self?.appendTotal("검색 결과를 찾을 수 없어요 😢")

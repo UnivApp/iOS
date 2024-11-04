@@ -329,18 +329,11 @@ fileprivate struct ChatFoodView: View {
                     .foregroundColor(.black)
                     .padding(.top, 25)
                 
-                Text(model[index].topMessage ?? "")
+                Text(model[index].addressName)
                     .font(.system(size: 13, weight: .semibold))
                     .foregroundColor(.black.opacity(0.7))
                 
-                HStack(spacing: 5) {
-                    ForEach(model[index].hashtags, id: \.self) { hashtag in
-                        Text("#\(hashtag) ")
-                            .font(.system(size: 12, weight: .semibold))
-                    }
-                }
-                
-                Text("📍 \(model[index].location)")
+                Text("📍 \(model[index].roadAddressName)")
                     .font(.system(size: 12, weight: .semibold))
                     .foregroundColor(.gray)
                 

@@ -25,8 +25,7 @@ enum APIEndpoint {
     case topPlace
     case schoolPlace
     case ranking
-    case schoolFood
-    case topFood
+    case food
     case news
     case expo
     case searchExpo
@@ -82,10 +81,8 @@ enum APIEndpoint {
             return "http://43.200.143.28:8080/api/activities?universityId="
         case .ranking:
             return "http://43.200.143.28:8080/api/rankings"
-        case .schoolFood:
-            return "http://43.200.143.28:8080/api/restaurants?universityId="
-        case .topFood:
-            return "http://43.200.143.28:8080/api/restaurants/top"
+        case .food:
+            return "http://43.200.143.28:8080/api/kakao-search/kakao?universityName="
         case .news:
             return "http://43.200.143.28:8080/api/news"
         case .expo:

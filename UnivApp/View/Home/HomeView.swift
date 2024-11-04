@@ -29,7 +29,7 @@ struct HomeView: View {
     @FocusState private var isFocused: Bool
     
     @State private var currentIndex: Int = 0
-    @State private var popupOpacity: Bool = false
+    @State private var popupOpacity: [Bool] = [false, false, false]
     private let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     
     var body: some View {
@@ -87,7 +87,7 @@ struct HomeView: View {
                             Image("chat")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 30, height: 30)
+                                .frame(width: 25, height: 25)
                                 .padding(10)
                                 .background(Circle().fill(.yellow))
                                 .shadow(radius: 3)
@@ -100,16 +100,16 @@ struct HomeView: View {
             .fullScreenCover(isPresented: $isShowingPopup.isPresented) {
                 if isShowingPopup.type == .alert {
                     BellView(viewModel: CalendarViewModel(container: .init(services: Services())), isPopup: $isShowingPopup.isPresented)
-                        .fadeInOut($popupOpacity)
+                        .fadeInOut($popupOpacity[0])
                 } else if isShowingPopup.type == .search {
                     PopUpContentView(summary: listViewModel.summaryArray, isShowingPopup: $isShowingPopup.isPresented)
                         .cornerRadius(15)
                         .padding(.horizontal, 20)
                         .presentationBackground(.black.opacity(0.3))
-                        .fadeInOut($popupOpacity)
+                        .fadeInOut($popupOpacity[1])
                 } else {
                     ChatView(viewModel: ChatViewModel(container: .init(services: Services())), isPopup: $isShowingPopup.isPresented)
-                        .fadeInOut($popupOpacity)
+                        .fadeInOut($popupOpacity[2])
                 }
             }
             .transaction { $0.disablesAnimations = true }

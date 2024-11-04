@@ -23,14 +23,14 @@ struct FoodSchoolDetailView: View {
         case .notRequested:
             PlaceholderView()
                 .onAppear {
-                    viewModel.send(action: .detailLoad(model.universityId ?? 0))
+                    viewModel.send(action: .load(model.fullName ?? ""))
                 }
         case .loading:
             LoadingView(url: "congratulations", size: [150, 150])
         case .success:
             loadedView
                 .refreshable {
-                    viewModel.send(action: .detailLoad(model.universityId ?? 0))
+                    viewModel.send(action: .load(model.fullName ?? ""))
                 }
         case .fail:
             ErrorView()
@@ -67,7 +67,7 @@ struct FoodSchoolDetailView: View {
                         Spacer()
                     }.padding(.horizontal, 30)
                     
-                    FoodHotPlaceView(model: viewModel.schoolFoodData)
+                    FoodHotPlaceView(model: viewModel.FoodData)
                 }
             }
         }

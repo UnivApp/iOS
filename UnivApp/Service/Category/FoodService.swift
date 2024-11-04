@@ -9,16 +9,15 @@ import Foundation
 import Combine
 
 protocol FoodServiceType {
-    func getSchoolRestaurants(universityId: Int) -> AnyPublisher<[FoodModel], Error>
-    func getTopRestaurants() -> AnyPublisher<[FoodModel], Error>
+    func getSearchFood(universityName: String) -> AnyPublisher<[FoodModel], Error>
 }
 
 class FoodService: FoodServiceType {
     private var subscriptions = Set<AnyCancellable>()
     
-    func getSchoolRestaurants(universityId: Int) -> AnyPublisher<[FoodModel], any Error> {
+    func getSearchFood(universityName: String) -> AnyPublisher<[FoodModel], any Error> {
         Future<[FoodModel], Error> { promise in
-            Alamofire().getAlamofire(url: "\(APIEndpoint.schoolFood.urlString)\(universityId)")
+            Alamofire().getAlamofire(url: "\(APIEndpoint.food.urlString)\(universityName)")
                 .sink { completion in
                     switch completion {
                     case .finished:
@@ -27,28 +26,9 @@ class FoodService: FoodServiceType {
                         print("학교 주변 맛집 조회 실패 \(error)")
                         promise(.failure(error))
                     }
-                } receiveValue: { [weak self] (schoolFoodData: [FoodModel]) in
+                } receiveValue: { [weak self] (FoodData: [FoodModel]) in
                     guard self != nil else { return }
-                    promise(.success(schoolFoodData))
-                }.store(in: &self.subscriptions)
-
-        }.eraseToAnyPublisher()
-    }
-    
-    func getTopRestaurants() -> AnyPublisher<[FoodModel], any Error> {
-        Future<[FoodModel], Error> { promise in
-            Alamofire().getAlamofire(url: APIEndpoint.topFood.urlString)
-                .sink { completion in
-                    switch completion {
-                    case .finished:
-                        print("탑 맛집 조회 성공")
-                    case let .failure(error):
-                        print("탑 맛집 조회 실패 \(error)")
-                        promise(.failure(error))
-                    }
-                } receiveValue: { [weak self] (topFoodData: [FoodModel]) in
-                    guard self != nil else { return }
-                    promise(.success(topFoodData))
+                    promise(.success(FoodData))
                 }.store(in: &self.subscriptions)
 
         }.eraseToAnyPublisher()
@@ -57,11 +37,8 @@ class FoodService: FoodServiceType {
 
 class StubFoodService: FoodServiceType {
     
-    func getSchoolRestaurants(universityId: Int) -> AnyPublisher<[FoodModel], any Error> {
+    func getSearchFood(universityName: String) -> AnyPublisher<[FoodModel], any Error> {
         Empty().eraseToAnyPublisher()
     }
     
-    func getTopRestaurants() -> AnyPublisher<[FoodModel], any Error> {
-        Empty().eraseToAnyPublisher()
-    }
 }

@@ -71,7 +71,7 @@ struct MoneyView: View {
                         .environmentObject(viewModel)
                         .padding(.top, 20)
                     
-                    SearchView(isFocused: self._isFocused, searchText: $listViewModel.searchText)
+                    SearchView(isFocused: self._isFocused, searchText: $listViewModel.searchText, color: .white)
                         .environmentObject(self.listViewModel)
                     
                     ForEach(listViewModel.summaryArray, id: \.self) { item in

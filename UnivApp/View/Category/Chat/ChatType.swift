@@ -45,7 +45,7 @@ enum ChatType: String, CaseIterable {
     var view: AnyView {
         switch self {
         case .food:
-            return AnyView(FoodView(viewModel: FoodViewModel(container: .init(services: Services()))))
+            return AnyView(FoodView(viewModel: FoodViewModel(container: .init(services: Services())), listViewModel: ListViewModel(container: .init(services: Services()), searchText: .init())))
         case .news:
             return AnyView(InfoView(viewModel: InfoViewModel(container: .init(services: Services()))))
         case .ranking:

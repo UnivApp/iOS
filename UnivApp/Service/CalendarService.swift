@@ -84,7 +84,7 @@ class CalendarService: CalendarServiceType {
     
     func removeAlarm(notificationId: Int) -> AnyPublisher<Void, any Error> {
         Future<Void, Error> { promise in
-            Alamofire().delete(url: APIEndpoint.removeAlarm.urlString)
+            Alamofire().delete(url: "\(APIEndpoint.removeAlarm.urlString)\(notificationId)")
                 .sink { completion in
                     switch completion {
                     case .finished:

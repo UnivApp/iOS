@@ -22,6 +22,7 @@ struct BellView: View {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         alarmPhase = AlarmPhase(isSheet: true, isSuccess: true, type: "등록")
                     }
+                    viewModel.send(action: .getAlarm)
                 } else if isAlarm == .fail {
                     isAlert = false
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -57,7 +58,7 @@ struct BellView: View {
         }
     }
     var loadedView: some View {
-        VStack(alignment: .center) {
+        VStack(alignment: .center, spacing: 20) {
             HStack {
                 Spacer()
                 Button {
@@ -136,7 +137,7 @@ fileprivate struct AlarmDataCell: View {
             }
             Divider()
         }
-        .padding(.horizontal, 10)
+        .padding(.horizontal, 20)
     }
     
 }

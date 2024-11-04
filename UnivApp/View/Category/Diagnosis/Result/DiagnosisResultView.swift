@@ -10,7 +10,7 @@ import Kingfisher
 
 struct DiagnosisResultView: View {
     @StateObject var viewModel: DiagnosisResultViewModel
-    @State private var opacity: Bool = false
+    @State private var opacity: [Bool] = [false, false]
     @State private var isLoaded: Bool = false
     @State private var loadingType: String = "load"
     
@@ -78,7 +78,7 @@ struct DiagnosisResultView: View {
             LoadingView(url: self.loadingType, size: [150, 150])
             Spacer()
         }
-        .fadeInOut($opacity)
+        .fadeInOut($opacity[0])
     }
     
     var loadedView: some View {
@@ -125,7 +125,7 @@ struct DiagnosisResultView: View {
             }
             .padding(.horizontal, 20)
         }
-        .fadeInOut($opacity)
+        .fadeInOut($opacity[1])
     }
 }
 

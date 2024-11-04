@@ -86,7 +86,7 @@ enum ListDetailType: String, CaseIterable {
         case .festival:
             return AnyView(FestivalView())
         case .food:
-            return AnyView(FoodView(viewModel: FoodViewModel(container: .init(services: Services()))))
+            return AnyView(FoodView(viewModel: FoodViewModel(container: .init(services: Services())), listViewModel: ListViewModel(container: .init(services: Services()), searchText: .init())))
         case .Diagnosis:
             return AnyView(DiagnosisView(viewModel: DiagnosisViewModel(container: .init(services: Services()))))
         case .info:
