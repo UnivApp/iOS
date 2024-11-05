@@ -13,6 +13,8 @@ struct MapView: View {
     @State private var region: [MKCoordinateRegion]
     @State private var cameraPosition: MapCameraPosition
     @State private var opacity: Bool = false
+    @State private var selectedTag: Int?
+    @State private var isPresented: Bool = false
     var model: [FoodModel]
     
     init(model: [FoodModel]) {
@@ -24,11 +26,11 @@ struct MapView: View {
     }
     
     var body: some View {
-        Map(position: $cameraPosition, interactionModes: .all) {
+        Map(position: $cameraPosition, interactionModes: .all, selection: $selectedTag) {
             ForEach(model.indices, id: \.self) { index in
                 Marker(model[index].name, coordinate: region[index].center)
                     .tint(.orange)
-                    
+                    .tag(index)
             }
         }
         .onAppear {
@@ -36,30 +38,33 @@ struct MapView: View {
         }
         .onChange(of: model) {
             geocodeAddress()
+            self.selectedTag = nil
         }
+        .onChange(of: selectedTag) {
+            if selectedTag != nil {
+                isPresented = true
+            }
+        }
+        .fullScreenCover(isPresented: $isPresented) {
+            if let index = selectedTag {
+                FoodSelectedPopupView(model: [model[index]], isPresented: $isPresented)
+                    .presentationBackground(.black.opacity(0.7))
+                    .fadeInOut($opacity)
+            }
+        }
+        .transaction { $0.disablesAnimations = true }
     }
     
     private func geocodeAddress() {
         for (index, model) in self.model.enumerated() {
-            let geocoder = CLGeocoder()
-            geocoder.geocodeAddressString(model.roadAddressName) { placemarks, error in
-                if let error = error {
-                    print("Geocoding error: \(error.localizedDescription)")
-                    return
-                }
-                guard let placemark = placemarks?.first, let location = placemark.location else {
-                    print("No location found")
-                    return
-                }
-                DispatchQueue.main.async {
-                    withAnimation {
-                        region[index] = MKCoordinateRegion(
-                            center: location.coordinate,
-                            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-                        )
-                        if index == 0 {
-                            cameraPosition = MapCameraPosition.region(region[0])
-                        }
+            DispatchQueue.main.async {
+                withAnimation {
+                    region[index] = MKCoordinateRegion(
+                        center: CLLocationCoordinate2D(latitude: model.y, longitude: model.x),
+                        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+                    )
+                    if index == 0 {
+                        cameraPosition = MapCameraPosition.region(region[0])
                     }
                 }
             }
@@ -130,6 +135,7 @@ struct FoodSelectedPopupView: View {
                 .multilineTextAlignment(.leading)
                 
                 MapView(model: model)
+                    .allowsHitTesting(false)
                     .cornerRadius(15)
                     .padding(.horizontal, 0)
                     .padding(.bottom, 20)

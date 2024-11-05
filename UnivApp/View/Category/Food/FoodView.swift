@@ -93,17 +93,23 @@ struct FoodView: View {
                     }
                     
                     if (isModal[0] == false) {
-                        ScrollView(.vertical) {
-                            ForEach(viewModel.FoodData.indices, id: \.self) { index in
-                                VStack(spacing: 5) {
-                                    FoodHotPlaceCell(cell: [viewModel.FoodData[index]], index: index)
-                                    SeperateView()
-                                        .frame(width: UIScreen.main.bounds.width, height: 10)
+                        ScrollViewReader { proxy in
+                            ScrollView(.vertical) {
+                                ForEach(viewModel.FoodData.indices, id: \.self) { index in
+                                    VStack(spacing: 5) {
+                                        FoodHotPlaceCell(cell: [viewModel.FoodData[index]], index: index)
+                                        SeperateView()
+                                            .frame(width: UIScreen.main.bounds.width, height: 10)
+                                    }
+                                    .id(index)
+                                    .padding(.top, 5)
                                 }
-                                .padding(.top, 5)
                             }
+                            .onChange(of: viewModel.FoodData) {
+                                proxy.scrollTo(0, anchor: .top)
+                            }
+                            .frame(width: UIScreen.main.bounds.width, height: (isModal[2]) ? UIScreen.main.bounds.height / 1.5 :  UIScreen.main.bounds.height / 3)
                         }
-                        .frame(width: UIScreen.main.bounds.width, height: (isModal[2]) ? UIScreen.main.bounds.height / 1.5 :  UIScreen.main.bounds.height / 3)
                     }
                 }
                 VStack(spacing: 5) {
@@ -128,7 +134,7 @@ struct FoodView: View {
                             Image("refresh")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 20, height: 20)
+                                .frame(width: 25, height: 25)
                         }
                     }
                     .padding(.horizontal, 20)

@@ -14,4 +14,6 @@ struct FoodModel: Hashable, Codable {
     var phone: String
     var categoryName: String
     var placeUrl: String
+    var x: Double
+    var y: Double
 }
