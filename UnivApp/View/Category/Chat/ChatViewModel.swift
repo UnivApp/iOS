@@ -34,6 +34,7 @@ class ChatViewModel: ObservableObject {
     @Published var mineList: [String] = ["", ""]
     
     @Published var universityName: String = ""
+    @Published var summaryArray: [SummaryModel] = []
     @Published var isUniversityTyping: [Bool] = [false, false]
     @Published var isScrollType: [chatScrollType?] = [nil, nil]
     @Published var averageRent: [String] = []
@@ -165,37 +166,28 @@ class ChatViewModel: ObservableObject {
         }
     }
     
-    func subSend(action: ChatType) {
+    func subSend(action: ChatType, selectedItem: SummaryModel) {
         switch action {
         case .food:
             self.phase = .loading
-            container.services.searchService.getSearch(searchText: universityName)
-                .sink { [weak self] completion in
-                    if case .failure = completion {
-                        self?.appendTotal("검색 결과를 찾을 수 없어요 😢")
-                        self?.phase = .notRequested
-                        self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = false
-                    }
-                } receiveValue: { [weak self] searchResult in
-                    if let universityName = searchResult.compactMap({ $0.fullName }).first {
-                        self?.container.services.foodService.getSearchFood(universityName: universityName)
-                            .sink { [weak self] completion in
-                                if case .failure = completion {
-                                    self?.appendTotal("검색 결과를 찾을 수 없어요 😢")
-                                    self?.phase = .notRequested
-                                    self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = false
-                                }
-                            } receiveValue: { [weak self] foodSearch in
-                                self?.appendTotal("\(self?.universityName ?? "") 주변 맛집 정보입니다!")
-                                self?.isScrollType[(self?.chatList.count ?? 0) - 1] = .food
-                                self?.ensureDataCapacity(state: &self!.foodState, index: (self?.chatList.count ?? 0) - 1)
-                                self?.foodState.data?[(self?.chatList.count ?? 0) - 1] = foodSearch
-                                self?.appendTotal("더 자세한 정보를 알고 싶으신가요? 👀")
-                                self?.phase = .success
-                                self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = true
-                            }.store(in: &self!.subscripttions)
-                    }
-                }.store(in: &subscripttions)
+            if let universityName = selectedItem.fullName {
+                self.container.services.foodService.getSearchFood(universityName: universityName)
+                    .sink { [weak self] completion in
+                        if case .failure = completion {
+                            self?.appendTotal("검색 결과를 찾을 수 없어요 😢")
+                            self?.phase = .notRequested
+                            self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = false
+                        }
+                    } receiveValue: { [weak self] foodSearch in
+                        self?.appendTotal("\(self?.universityName ?? "") 주변 맛집 정보입니다!")
+                        self?.isScrollType[(self?.chatList.count ?? 0) - 1] = .food
+                        self?.ensureDataCapacity(state: &self!.foodState, index: (self?.chatList.count ?? 0) - 1)
+                        self?.foodState.data?[(self?.chatList.count ?? 0) - 1] = foodSearch
+                        self?.appendTotal("더 자세한 정보를 알고 싶으신가요? 👀")
+                        self?.phase = .success
+                        self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = true
+                    }.store(in: &self.subscripttions)
+            }
 
         case .news:
             return
@@ -203,170 +195,139 @@ class ChatViewModel: ObservableObject {
             return
         case .rent:
             self.phase = .loading
-            container.services.searchService.getSearch(searchText: universityName)
-                .sink { [weak self] completion in
-                    if case .failure = completion {
-                        self?.appendTotal("검색 결과를 찾을 수 없어요 😢")
-                        self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = false
-                        self?.phase = .notRequested
-                    }
-                } receiveValue: { [weak self] searchResult in
-                    if let universityId = searchResult.compactMap({ $0.universityId }).first {
-                        self?.container.services.listService.getDetail(universityId: universityId)
-                            .sink { [weak self] completion in
-                                if case .failure = completion {
-                                    self?.phase = .fail
-                                }
-                            } receiveValue: { [weak self] universityData in
-                                if let address = universityData.location {
-                                    if let extractAddress = self?.extractGu(from: address) {
-                                        self?.container.services.moneyService.getRent(CGG_NM: extractAddress, BLDG_USG: "오피스텔")
-                                            .sink { [weak self] completion in
-                                                if case .failure = completion {
-                                                    self?.phase = .fail
-                                                }
-                                            } receiveValue: { [weak self] response in
-                                                if  let response = response.tbLnOpendataRentV?.row,
-                                                    let average = self?.calculateAverage(data: response) {
-                                                    self?.appendTotal("\(self?.universityName ?? "") 주변 월세 정보입니다!")
-                                                    self?.isScrollType[(self?.chatList.count ?? 0) - 1] = .rent
-                                                    self?.averageRent = average
-                                                    self?.appendTotal("더 자세한 정보를 알고 싶으신가요? 👀")
-                                                    self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = true
-                                                    self?.phase = .success
-                                                }
-                                                self?.phase = .success
-                                            }
-                                            .store(in: &self!.subscripttions)
+            if let universityId = selectedItem.universityId {
+                self.container.services.listService.getDetail(universityId: universityId)
+                    .sink { [weak self] completion in
+                        if case .failure = completion {
+                            self?.phase = .fail
+                        }
+                    } receiveValue: { [weak self] universityData in
+                        if let address = universityData.location {
+                            if let extractAddress = self?.extractGu(from: address) {
+                                self?.container.services.moneyService.getRent(CGG_NM: extractAddress, BLDG_USG: "오피스텔")
+                                    .sink { [weak self] completion in
+                                        if case .failure = completion {
+                                            self?.phase = .fail
+                                        }
+                                    } receiveValue: { [weak self] response in
+                                        if  let response = response.tbLnOpendataRentV?.row,
+                                            let average = self?.calculateAverage(data: response) {
+                                            self?.appendTotal("\(self?.universityName ?? "") 주변 월세 정보입니다!")
+                                            self?.isScrollType[(self?.chatList.count ?? 0) - 1] = .rent
+                                            self?.averageRent = average
+                                            self?.appendTotal("더 자세한 정보를 알고 싶으신가요? 👀")
+                                            self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = true
+                                            self?.phase = .success
+                                        }
+                                        self?.phase = .success
                                     }
-                                }
-                            }.store(in: &self!.subscripttions)
-                    }
-                }.store(in: &subscripttions)
-            
+                                    .store(in: &self!.subscripttions)
+                            }
+                        }
+                    }.store(in: &self.subscripttions)
+            }
         case .mou:
             return
             
         case .hotplace:
             self.phase = .loading
-            container.services.searchService.getSearch(searchText: universityName)
-                .sink { [weak self] completion in
-                    if case .failure = completion {
-                        self?.appendTotal("검색 결과를 찾을 수 없어요 😢")
-                        self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = false
-                        self?.phase = .notRequested
-                    }
-                } receiveValue: { [weak self] searchResult in
-                    if let universityId = searchResult.compactMap({ $0.universityId }).first {
-                        self?.container.services.playService.getSchoolPlace(universityId: universityId)
-                            .sink { [weak self] completion in
-                                if case .failure = completion {
-                                    self?.appendTotal("검색 결과를 찾을 수 없어요 😢")
-                                    self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = false
-                                    self?.phase = .notRequested
-                                }
-                            } receiveValue: { [weak self] playDetail in
-                                self?.appendTotal("\(self?.universityName ?? "") 주변 핫플 정보입니다!")
-                                self?.isScrollType[(self?.chatList.count ?? 0) - 1] = .hotplace
-                                self?.ensureDataCapacity(state: &self!.hotplaceState, index: (self?.chatList.count ?? 0) - 1)
-                                self?.hotplaceState.data?[(self?.chatList.count ?? 0) - 1] = playDetail
-                                self?.appendTotal("더 자세한 정보를 알고 싶으신가요? 👀")
-                                self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = true
-                                self?.phase = .success
-                            }.store(in: &self!.subscripttions)
-                    }
-                }.store(in: &subscripttions)
+            if let universityId = selectedItem.universityId {
+                self.container.services.playService.getSchoolPlace(universityId: universityId)
+                    .sink { [weak self] completion in
+                        if case .failure = completion {
+                            self?.appendTotal("검색 결과를 찾을 수 없어요 😢")
+                            self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = false
+                            self?.phase = .notRequested
+                        }
+                    } receiveValue: { [weak self] playDetail in
+                        self?.appendTotal("\(self?.universityName ?? "") 주변 핫플 정보입니다!")
+                        self?.isScrollType[(self?.chatList.count ?? 0) - 1] = .hotplace
+                        self?.ensureDataCapacity(state: &self!.hotplaceState, index: (self?.chatList.count ?? 0) - 1)
+                        self?.hotplaceState.data?[(self?.chatList.count ?? 0) - 1] = playDetail
+                        self?.appendTotal("더 자세한 정보를 알고 싶으신가요? 👀")
+                        self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = true
+                        self?.phase = .success
+                    }.store(in: &self.subscripttions)
+            }
             
         case .employment:
             self.phase = .loading
-            container.services.searchService.getSearch(searchText: universityName)
-                .sink { [weak self] completion in
-                    if case .failure = completion {
-                        self?.appendTotal("검색 결과를 찾을 수 없어요 😢")
-                        self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = false
-                        self?.phase = .notRequested
-                    }
-                } receiveValue: { [weak self] searchResult in
-                    if let universityId = searchResult.compactMap({ $0.universityId }).first {
-                        self?.container.services.rateService.getEmployRate(universityId: universityId)
-                            .sink { [weak self] completion in
-                                if case .failure = completion {
-                                    self?.appendTotal("검색 결과를 찾을 수 없어요 😢")
-                                    self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = false
-                                    self?.phase = .notRequested
-                                }
-                            } receiveValue: { [weak self] employmentData in
-                                self?.appendTotal("\(self?.universityName ?? "") 취업률 정보입니다!")
-                                self?.isScrollType[(self?.chatList.count ?? 0) - 1] = .employment
-                                self?.ensureDataCapacity(state: &self!.employmentState, index: (self?.chatList.count ?? 0) - 1)
-                                self?.employmentState.data?[(self?.chatList.count ?? 0) - 1] = [employmentData]
-                                self?.appendTotal("더 자세한 정보를 알고 싶으신가요? 👀")
-                                self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = true
-                                self?.phase = .success
-                            }.store(in: &self!.subscripttions)
-                    }
-                }.store(in: &subscripttions)
+            if let universityId = selectedItem.universityId {
+                self.container.services.rateService.getEmployRate(universityId: universityId)
+                    .sink { [weak self] completion in
+                        if case .failure = completion {
+                            self?.appendTotal("검색 결과를 찾을 수 없어요 😢")
+                            self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = false
+                            self?.phase = .notRequested
+                        }
+                    } receiveValue: { [weak self] employmentData in
+                        self?.appendTotal("\(self?.universityName ?? "") 취업률 정보입니다!")
+                        self?.isScrollType[(self?.chatList.count ?? 0) - 1] = .employment
+                        self?.ensureDataCapacity(state: &self!.employmentState, index: (self?.chatList.count ?? 0) - 1)
+                        self?.employmentState.data?[(self?.chatList.count ?? 0) - 1] = [employmentData]
+                        self?.appendTotal("더 자세한 정보를 알고 싶으신가요? 👀")
+                        self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = true
+                        self?.phase = .success
+                    }.store(in: &self.subscripttions)
+            }
             
         case .ontime:
             self.phase = .loading
-            container.services.searchService.getSearch(searchText: universityName)
-                .sink { [weak self] completion in
-                    if case .failure = completion {
-                        self?.appendTotal("검색 결과를 찾을 수 없어요 😢")
-                        self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = false
-                        self?.phase = .notRequested
-                    }
-                } receiveValue: { [weak self] searchResult in
-                    if let universityId = searchResult.compactMap({ $0.universityId }).first {
-                        self?.container.services.rateService.getCompetitionRate(universityId: universityId)
-                            .sink { [weak self] completion in
-                                if case .failure = completion {
-                                    self?.appendTotal("검색 결과를 찾을 수 없어요 😢")
-                                    self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = false
-                                    self?.phase = .notRequested
-                                }
-                            } receiveValue: { [weak self] competitionData in
-                                self?.appendTotal("\(self?.universityName ?? "") 정시 경쟁률 정보입니다!")
-                                self?.isScrollType[(self?.chatList.count ?? 0) - 1] = .ontime
-                                self?.ensureDataCapacity(state: &self!.ontimeState, index: (self?.chatList.count ?? 0) - 1)
-                                self?.ontimeState.data?[(self?.chatList.count ?? 0) - 1] = [competitionData]
-                                self?.appendTotal("더 자세한 정보를 알고 싶으신가요? 👀")
-                                self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = true
-                                self?.phase = .success
-                            }.store(in: &self!.subscripttions)
-                    }
-                }.store(in: &subscripttions)
+            if let universityId = selectedItem.universityId {
+                self.container.services.rateService.getCompetitionRate(universityId: universityId)
+                    .sink { [weak self] completion in
+                        if case .failure = completion {
+                            self?.appendTotal("검색 결과를 찾을 수 없어요 😢")
+                            self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = false
+                            self?.phase = .notRequested
+                        }
+                    } receiveValue: { [weak self] competitionData in
+                        self?.appendTotal("\(self?.universityName ?? "") 정시 경쟁률 정보입니다!")
+                        self?.isScrollType[(self?.chatList.count ?? 0) - 1] = .ontime
+                        self?.ensureDataCapacity(state: &self!.ontimeState, index: (self?.chatList.count ?? 0) - 1)
+                        self?.ontimeState.data?[(self?.chatList.count ?? 0) - 1] = [competitionData]
+                        self?.appendTotal("더 자세한 정보를 알고 싶으신가요? 👀")
+                        self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = true
+                        self?.phase = .success
+                    }.store(in: &self.subscripttions)
+            }
             
         case .Occasion:
             self.phase = .loading
-            container.services.searchService.getSearch(searchText: universityName)
-                .sink { [weak self] completion in
-                    if case .failure = completion {
-                        self?.appendTotal("검색 결과를 찾을 수 없어요 😢")
-                        self?.phase = .notRequested
-                        self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = false
-                    }
-                } receiveValue: { [weak self] searchResult in
-                    if let universityId = searchResult.compactMap({ $0.universityId }).first {
-                        self?.container.services.rateService.getCompetitionRate(universityId: universityId)
-                            .sink { [weak self] completion in
-                                if case .failure = completion {
-                                    self?.appendTotal("검색 결과를 찾을 수 없어요 😢")
-                                    self?.phase = .notRequested
-                                    self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = false
-                                }
-                            } receiveValue: { [weak self] competitionData in
-                                self?.appendTotal("\(self?.universityName ?? "") 수시 경쟁률 정보입니다!")
-                                self?.isScrollType[(self?.chatList.count ?? 0) - 1] = .Occasion
-                                self?.ensureDataCapacity(state: &self!.occasionState, index: (self?.chatList.count ?? 0) - 1)
-                                self?.occasionState.data?[(self?.chatList.count ?? 0) - 1] = [competitionData]
-                                self?.appendTotal("더 자세한 정보를 알고 싶으신가요? 👀")
-                                self?.phase = .success
-                                self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = true
-                            }.store(in: &self!.subscripttions)
-                    }
-                }.store(in: &subscripttions)
+            if let universityId = selectedItem.universityId {
+                self.container.services.rateService.getCompetitionRate(universityId: universityId)
+                    .sink { [weak self] completion in
+                        if case .failure = completion {
+                            self?.appendTotal("검색 결과를 찾을 수 없어요 😢")
+                            self?.phase = .notRequested
+                            self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = false
+                        }
+                    } receiveValue: { [weak self] competitionData in
+                        self?.appendTotal("\(self?.universityName ?? "") 수시 경쟁률 정보입니다!")
+                        self?.isScrollType[(self?.chatList.count ?? 0) - 1] = .Occasion
+                        self?.ensureDataCapacity(state: &self!.occasionState, index: (self?.chatList.count ?? 0) - 1)
+                        self?.occasionState.data?[(self?.chatList.count ?? 0) - 1] = [competitionData]
+                        self?.appendTotal("더 자세한 정보를 알고 싶으신가요? 👀")
+                        self?.phase = .success
+                        self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = true
+                    }.store(in: &self.subscripttions)
+            }
         }
+    }
+    
+    func search() {
+        self.phase = .loading
+        container.services.searchService.getSearch(searchText: universityName)
+            .sink { [weak self] completion in
+                if case .failure = completion {
+                    self?.appendTotal("검색 결과를 찾을 수 없어요 😢")
+                    self?.phase = .notRequested
+                    self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = false
+                }
+            } receiveValue: { [weak self] searchResult in
+                self?.summaryArray = searchResult
+                self?.phase = .success
+            }.store(in: &subscripttions)
     }
     
     func ensureDataCapacity<T>(state: inout ChatState<T>, index: Int) {

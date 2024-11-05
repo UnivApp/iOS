@@ -8,6 +8,12 @@
 import SwiftUI
 import Kingfisher
 
+enum FoodModalType {
+    case close
+    case half
+    case full
+}
+
 struct FoodView: View {
     @EnvironmentObject var container: DIContainer
     @EnvironmentObject var authViewModel: AuthViewModel
@@ -15,7 +21,7 @@ struct FoodView: View {
     @StateObject var listViewModel: ListViewModel
     @Environment(\.dismiss) var dismiss
     
-    @State private var isModal: [Bool] = [false, true, false]
+    @State private var isModal: FoodModalType = .half
     @State private var isSearch: Bool = false
     
     var body: some View {
@@ -56,10 +62,13 @@ struct FoodView: View {
                                 Spacer()
                                 Button  {
                                     withAnimation {
-                                        if (isModal[0] == true) && (isModal[1] == false) && (isModal[2] == false) {
-                                            isModal = [false, true, false]
-                                        } else if (isModal[0] == false) && (isModal[1] == true) && (isModal[2] == false) {
-                                            isModal = [false, false, true]
+                                        switch isModal {
+                                        case .close:
+                                            isModal = .half
+                                        case .half:
+                                            isModal = .full
+                                        case .full:
+                                            isModal = .full
                                         }
                                     }
                                 } label: {
@@ -72,10 +81,13 @@ struct FoodView: View {
                                 }
                                 Button  {
                                     withAnimation {
-                                        if (isModal[0] == false) && (isModal[1] == false) && (isModal[2] == true) {
-                                            isModal = [false, true, false]
-                                        } else if (isModal[0] == false) && (isModal[1] == true) && (isModal[2] == false) {
-                                            isModal = [true, false, false]
+                                        switch isModal {
+                                        case .close:
+                                            isModal = .close
+                                        case .half:
+                                            isModal = .close
+                                        case .full:
+                                            isModal = .half
                                         }
                                     }
                                 } label: {
@@ -92,7 +104,7 @@ struct FoodView: View {
                         .padding(.bottom, 10)
                     }
                     
-                    if (isModal[0] == false) {
+                    if (isModal != .close) {
                         ScrollViewReader { proxy in
                             ScrollView(.vertical) {
                                 ForEach(viewModel.FoodData.indices, id: \.self) { index in
@@ -108,7 +120,7 @@ struct FoodView: View {
                             .onChange(of: viewModel.FoodData) {
                                 proxy.scrollTo(0, anchor: .top)
                             }
-                            .frame(width: UIScreen.main.bounds.width, height: (isModal[2]) ? UIScreen.main.bounds.height / 1.5 :  UIScreen.main.bounds.height / 3)
+                            .frame(width: UIScreen.main.bounds.width, height: (isModal == .full) ? UIScreen.main.bounds.height / 1.5 :  UIScreen.main.bounds.height / 3)
                         }
                     }
                 }
@@ -142,7 +154,7 @@ struct FoodView: View {
                     SearchView(searchText: $listViewModel.searchText, color: .clear)
                         .environmentObject(listViewModel)
                         .onTapGesture {
-                            isModal = [false, true, false]
+                            isModal = .half
                         }
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {

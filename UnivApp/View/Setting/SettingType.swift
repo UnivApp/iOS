@@ -10,42 +10,18 @@ import SwiftUI
 
 enum SettingType: CaseIterable {
     case version
-    case info
     case logout
     case withdraw
+    case feedback
 
     var title: String {
         switch self {
         case .version:
-            return "버전정보"
-        case .info:
-            return "개인정보처리방침"
+            return "버전 정보"
         case .logout:
             return "로그아웃"
         case .withdraw:
-            return "회원탈퇴"
-        }
-    }
-    
-    var view: AnyView {
-        switch self {
-        case .version:
-            return AnyView(VersionView())
-        case .info:
-            return AnyView(PolicyView())
-        case .logout:
-            return AnyView(LogoutView())
-        case .withdraw:
-            return AnyView(WithdrawView())
-        }
-    }
-}
-
-enum SupportType: CaseIterable {
-    case feedback
-    
-    var title: String {
-        switch self {
+            return "회원 탈퇴"
         case .feedback:
             return "피드백 보내기"
         }
@@ -53,8 +29,27 @@ enum SupportType: CaseIterable {
     
     var view: AnyView {
         switch self {
+        case .version:
+            return AnyView(VersionView())
+        case .logout:
+            return AnyView(LogoutView())
+        case .withdraw:
+            return AnyView(WithdrawView())
         case .feedback:
             return AnyView(WebKitViewContainer(url: "https://forms.gle/Dq5bFQvGS1h6SJ9H9"))
+        }
+    }
+    
+    var image: String {
+        switch self {
+        case .version:
+            return "ℹ️"
+        case .logout:
+            return "🔐"
+        case .withdraw:
+            return "🗑️"
+        case .feedback:
+            return "📨"
         }
     }
 }

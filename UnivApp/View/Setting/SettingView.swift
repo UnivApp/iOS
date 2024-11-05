@@ -46,112 +46,105 @@ struct SettingView: View {
     
     var loadedView: some View {
         NavigationStack {
-            Spacer()
-            
-            profile
-            
-            Spacer()
-            
-            setting
-                .padding(.bottom, 30)
-            
-            support
-            
-            Spacer()
+            ScrollView(.vertical) {
+                VStack(spacing: 20) {
+                    profile
+                    
+                    setting
+                    
+                    GADBannerViewController(type: .banner)
+                        .frame(width: UIScreen.main.bounds.width - 40, height: (UIScreen.main.bounds.width - 40) / 3.2)
+                    
+                    Spacer()
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Image("logo")
+                }
+            }
         }
     }
     
     var profile: some View {
-        VStack(alignment: .center, spacing: 20) {
+        VStack(alignment: .center, spacing: 0) {
             Image("smile")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 80, height: 80)
-                .padding(15)
-                .overlay {
-                    RoundedRectangle(cornerRadius: 15).stroke(.black, lineWidth: 4)
-                }
+                .padding(.top, 20)
             
-            Text("  \(viewModel.userNickname)")
-                .foregroundColor(.black)
-                .font(.system(size: 20, weight: .bold))
-                .padding(.top, 10)
-                .overlay(alignment: .topLeading) {
-                    Button {
-                        isPresented = true
-                    } label: {
-                        Image(systemName: "pencil.circle.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 15, height: 15)
-                            .foregroundColor(.blue.opacity(0.7))
-                            .padding(.top, -5)
-                            .padding(.leading, -10)
-                    }
+            Group {
+                Text("  \(viewModel.userNickname)")
+                    .foregroundColor(.orange)
+                    .font(.system(size: 25, weight: .heavy))
+                +
+                Text("님\n 환영합니다!")
+                    .foregroundColor(.black)
+                    .font(.system(size: 25, weight: .semibold))
+            }
+            .multilineTextAlignment(.center)
+            .padding(.top, 10)
+            .overlay(alignment: .topLeading) {
+                Button {
+                    isPresented = true
+                } label: {
+                    Image(systemName: "pencil.circle.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 15, height: 15)
+                        .foregroundColor(.blue.opacity(0.7))
+                        .padding(.top, -5)
+                        .padding(.leading, -10)
                 }
+            }
         }
     }
     
     var setting: some View {
-        VStack(alignment: .leading, spacing: 15) {
-            Text("계정 설정")
-                .foregroundColor(.gray)
-                .font(.system(size: 10, weight: .bold))
-                .padding(.leading, 20)
-                .padding(.bottom, 20)
+        VStack(alignment: .center, spacing: 20) {
+            HStack {
+                Text("계정 설정")
+                    .foregroundColor(.black)
+                    .font(.system(size: 15, weight: .bold))
+                Spacer()
+            }
+            .padding(.leading, -10)
             
-            
-            ForEach(SettingType.allCases, id: \.self) { cases in
-                NavigationLink(destination: cases.view) {
-                    HStack {
-                        Text("\(cases.title)")
-                            .foregroundColor(.black)
-                            .font(.system(size: 14, weight: .bold))
-                            .padding(.leading, 30)
-                        
-                        Spacer()
-                        
-                        Image("arrow_fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 5, height: 10)
-                            .padding(.trailing, 30)
+            VStack(spacing: 10) {
+                ForEach(SettingType.allCases, id: \.self) { cases in
+                    NavigationLink(destination: cases.view) {
+                        VStack(spacing: 20) {
+                            HStack {
+                                HStack(alignment: .center, spacing: 10) {
+                                    Text(cases.image)
+                                        .font(.system(size: 20))
+                                    VStack(alignment: .leading) {
+                                        Text(cases.title)
+                                            .foregroundColor(.black.opacity(0.7))
+                                            .font(.system(size: 13, weight: .bold))
+                                        if cases == .feedback {
+                                            Text("앱의 불편 사항을 보내주세요!")
+                                                .foregroundColor(.gray)
+                                                .font(.system(size: 12, weight: .regular))
+                                        }
+                                    }
+                                    Spacer()
+                                    Image("arrow_fill")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 15, height: 15)
+                                }
+                                .multilineTextAlignment(.leading)
+                            }
+                            Divider()
+                        }
+                        .padding(.vertical, 10)
                     }
-                    .padding(.bottom, 10)
                 }
             }
         }
-    }
-    
-    var support: some View {
-        VStack(alignment: .leading, spacing: 15) {
-            Text("지원")
-                .foregroundColor(.gray)
-                .font(.system(size: 10, weight: .bold))
-                .padding(.leading, 20)
-                .padding(.bottom, 20)
-            
-            
-            ForEach(SupportType.allCases, id: \.self) { cases in
-                NavigationLink(destination: cases.view) {
-                    HStack {
-                        Text("\(cases.title)")
-                            .foregroundColor(.black)
-                            .font(.system(size: 14, weight: .bold))
-                            .padding(.leading, 30)
-                        
-                        Spacer()
-                        
-                        Image("arrow_fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 5, height: 10)
-                            .padding(.trailing, 30)
-                    }
-                    .padding(.bottom, 10)
-                }
-            }
-        }
+        .padding(.horizontal, 30)
     }
 }
 
