@@ -27,6 +27,19 @@ enum SettingType: CaseIterable {
         }
     }
     
+    var description: String {
+        switch self {
+        case .version:
+            return "버전 정보와 제공 기능을 확인해 보세요! 👀"
+        case .logout:
+            return "로그아웃으로 계정 관리를 해보세요 🛠️"
+        case .withdraw:
+            return "회원 탈퇴 시 기존의 모든 정보가 삭제돼요 😭"
+        case .feedback:
+            return "어플의 불편 사항을 보내주세요! 🤲🏻"
+        }
+    }
+    
     var view: AnyView {
         switch self {
         case .version:

@@ -123,11 +123,10 @@ struct SettingView: View {
                                         Text(cases.title)
                                             .foregroundColor(.black.opacity(0.7))
                                             .font(.system(size: 13, weight: .bold))
-                                        if cases == .feedback {
-                                            Text("앱의 불편 사항을 보내주세요!")
-                                                .foregroundColor(.gray)
-                                                .font(.system(size: 12, weight: .regular))
-                                        }
+                                        
+                                        Text(cases.description)
+                                            .foregroundColor(.gray)
+                                            .font(.system(size: 12, weight: .regular))
                                     }
                                     Spacer()
                                     Image("arrow_fill")
@@ -139,7 +138,7 @@ struct SettingView: View {
                             }
                             Divider()
                         }
-                        .padding(.vertical, 10)
+                        .padding(.vertical, 5)
                     }
                 }
             }
