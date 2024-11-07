@@ -97,6 +97,10 @@
 		E4982D162CD4C7E700D0F1A7 /* SettingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982D152CD4C7E700D0F1A7 /* SettingService.swift */; };
 		E4982D182CD4D21B00D0F1A7 /* NicknameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982D172CD4D21B00D0F1A7 /* NicknameModel.swift */; };
 		E4982D1B2CD60F1F00D0F1A7 /* FestivalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982D1A2CD60F1F00D0F1A7 /* FestivalView.swift */; };
+		E4982D202CDC9CDC00D0F1A7 /* FestivalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982D1F2CDC9CDC00D0F1A7 /* FestivalViewModel.swift */; };
+		E4982D232CDC9DB800D0F1A7 /* FestivalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982D222CDC9DB800D0F1A7 /* FestivalModel.swift */; };
+		E4982D262CDC9FC600D0F1A7 /* FestivalSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982D252CDC9FC600D0F1A7 /* FestivalSegmentView.swift */; };
+		E4982D282CDC9FD700D0F1A7 /* FestivalSchoolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982D272CDC9FD700D0F1A7 /* FestivalSchoolView.swift */; };
 		E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */; };
 		E49C9F9F2C86CF70001F43A3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */; };
 		E49C9FA72C86D3BC001F43A3 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */; };
@@ -261,6 +265,10 @@
 		E4982D152CD4C7E700D0F1A7 /* SettingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingService.swift; sourceTree = "<group>"; };
 		E4982D172CD4D21B00D0F1A7 /* NicknameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameModel.swift; sourceTree = "<group>"; };
 		E4982D1A2CD60F1F00D0F1A7 /* FestivalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FestivalView.swift; sourceTree = "<group>"; };
+		E4982D1F2CDC9CDC00D0F1A7 /* FestivalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FestivalViewModel.swift; sourceTree = "<group>"; };
+		E4982D222CDC9DB800D0F1A7 /* FestivalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FestivalModel.swift; sourceTree = "<group>"; };
+		E4982D252CDC9FC600D0F1A7 /* FestivalSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FestivalSegmentView.swift; sourceTree = "<group>"; };
+		E4982D272CDC9FD700D0F1A7 /* FestivalSchoolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FestivalSchoolView.swift; sourceTree = "<group>"; };
 		E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnivAppApp.swift; sourceTree = "<group>"; };
 		E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
@@ -523,9 +531,28 @@
 		E4982D192CD60F1200D0F1A7 /* Festival */ = {
 			isa = PBXGroup;
 			children = (
+				E4982D242CDC9FB300D0F1A7 /* SegmentType */,
 				E4982D1A2CD60F1F00D0F1A7 /* FestivalView.swift */,
+				E4982D1F2CDC9CDC00D0F1A7 /* FestivalViewModel.swift */,
 			);
 			path = Festival;
+			sourceTree = "<group>";
+		};
+		E4982D212CDC9DAD00D0F1A7 /* Festival */ = {
+			isa = PBXGroup;
+			children = (
+				E4982D222CDC9DB800D0F1A7 /* FestivalModel.swift */,
+			);
+			path = Festival;
+			sourceTree = "<group>";
+		};
+		E4982D242CDC9FB300D0F1A7 /* SegmentType */ = {
+			isa = PBXGroup;
+			children = (
+				E4982D252CDC9FC600D0F1A7 /* FestivalSegmentView.swift */,
+				E4982D272CDC9FD700D0F1A7 /* FestivalSchoolView.swift */,
+			);
+			path = SegmentType;
 			sourceTree = "<group>";
 		};
 		E49C9FA22C86D1EB001F43A3 /* User */ = {
@@ -884,6 +911,7 @@
 		E4C2643D2CB3FCF500E01480 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				E4982D212CDC9DAD00D0F1A7 /* Festival */,
 				E415893D2CBE970700EDB211 /* Diagnosis */,
 				E49C9FF72C870C2F001F43A3 /* Play */,
 				E4953D5A2C8B053D008CBDE5 /* Food */,
@@ -1222,6 +1250,7 @@
 				E49222792C9F10240077EA45 /* SeperateView.swift in Sources */,
 				E4953D222C888A64008CBDE5 /* HeartViewModel.swift in Sources */,
 				E4B3FD0C2C775D7000CB98F3 /* MainTabView.swift in Sources */,
+				E4982D262CDC9FC600D0F1A7 /* FestivalSegmentView.swift in Sources */,
 				E4982D022CCF60DC00D0F1A7 /* AppDelegate.swift in Sources */,
 				E415893F2CBE971500EDB211 /* DiagnosisModel.swift in Sources */,
 				E49222702C9C87DA0077EA45 /* RequestInterceptor + Extension.swift in Sources */,
@@ -1244,10 +1273,12 @@
 				E4953DA92C906486008CBDE5 /* WithdrawView.swift in Sources */,
 				E49C9FBA2C86ED75001F43A3 /* MoneyView.swift in Sources */,
 				E4DCD9BB2C9FFF5500E06542 /* PlayDetailModel.swift in Sources */,
+				E4982D202CDC9CDC00D0F1A7 /* FestivalViewModel.swift in Sources */,
 				E49C9FB82C86ED62001F43A3 /* InitiativeView.swift in Sources */,
 				E4953D462C89D649008CBDE5 /* MouDetailView.swift in Sources */,
 				E4953DAB2C90654E008CBDE5 /* LogoutView.swift in Sources */,
 				E4953D9E2C903FC1008CBDE5 /* HeartViewCell.swift in Sources */,
+				E4982D232CDC9DB800D0F1A7 /* FestivalModel.swift in Sources */,
 				E4B3FD282C77A42900CB98F3 /* UserModel.swift in Sources */,
 				E4953D3F2C89CDF6008CBDE5 /* LoadingModifier.swift in Sources */,
 				E4953D772C8EE00D008CBDE5 /* Phase.swift in Sources */,
@@ -1263,6 +1294,7 @@
 				E49C9FAD2C86D756001F43A3 /* ListViewCell.swift in Sources */,
 				E4B3FD102C778D6C00CB98F3 /* MainTabType.swift in Sources */,
 				E49C9FE62C870572001F43A3 /* InfoViewModel.swift in Sources */,
+				E4982D282CDC9FD700D0F1A7 /* FestivalSchoolView.swift in Sources */,
 				E4982D162CD4C7E700D0F1A7 /* SettingService.swift in Sources */,
 				E49C9FF22C870589001F43A3 /* ChatViewModel.swift in Sources */,
 				E4982D0E2CCF706000D0F1A7 /* ServicesKEY.swift in Sources */,

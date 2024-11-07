@@ -13,6 +13,7 @@ enum SettingType: CaseIterable {
     case logout
     case withdraw
     case feedback
+    case bell
 
     var title: String {
         switch self {
@@ -24,6 +25,8 @@ enum SettingType: CaseIterable {
             return "회원 탈퇴"
         case .feedback:
             return "피드백 보내기"
+        case .bell:
+            return "알림 확인"
         }
     }
     
@@ -37,6 +40,8 @@ enum SettingType: CaseIterable {
             return "회원 탈퇴 시 모든 정보가 삭제돼요 😭"
         case .feedback:
             return "어플의 불편 사항을 보내주세요! 🤲🏻"
+        case .bell:
+            return "설정한 알림을 확인해 보세요! 🔔"
         }
     }
     
@@ -50,6 +55,8 @@ enum SettingType: CaseIterable {
             return AnyView(WithdrawView())
         case .feedback:
             return AnyView(WebKitViewContainer(url: "https://forms.gle/Dq5bFQvGS1h6SJ9H9"))
+        case .bell:
+            return AnyView(EmptyView())
         }
     }
     
@@ -63,6 +70,8 @@ enum SettingType: CaseIterable {
             return "trash"
         case .feedback:
             return "envelope"
+        case .bell:
+            return "bell"
         }
     }
 }

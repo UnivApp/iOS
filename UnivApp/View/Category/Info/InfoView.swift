@@ -49,7 +49,7 @@ struct InfoView: View {
                             .font(.system(size: 12, weight: .heavy))
                         +
                         Text("건\t|   날짜순")
-                            .font(.system(size: 12, weight: .regular))
+                            .font(.system(size: 12, weight: .semibold))
                     }
                     .foregroundColor(.black)
                     .padding(.leading, 20)

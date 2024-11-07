@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BellView: View {
     @StateObject var viewModel: CalendarViewModel
+    @Environment(\.dismiss) var dismiss
     @Binding var isPopup: Bool
     
     @State private var isAlert: Bool = false
@@ -36,6 +37,7 @@ struct BellView: View {
                     buttons: [.default(Text("확인"))]
                 )
             }
+            .navigationBarBackButtonHidden(true)
     }
     
     @ViewBuilder
@@ -64,6 +66,7 @@ struct BellView: View {
                 Button {
                     withAnimation {
                         self.isPopup = false
+                        dismiss()
                     }
                 } label: {
                     Image("close_black")
@@ -78,10 +81,16 @@ struct BellView: View {
             
             ScrollViewReader { proxy in
                 ScrollView(.vertical) {
-                    ForEach(viewModel.alarmData.indices, id: \.self) { index in
-                        AlarmDataCell(selectedIndex: $ScrollIndex, model: viewModel.alarmData[index], index: index)
-                            .environmentObject(viewModel)
-                            .id(index)
+                    if viewModel.alarmData.isEmpty {
+                        Text("설정된 알림이 없어요! 🔕")
+                            .font(.system(size: 15, weight: .bold))
+                            .foregroundColor(.black.opacity(0.7))
+                    } else {
+                        ForEach(viewModel.alarmData.indices, id: \.self) { index in
+                            AlarmDataCell(selectedIndex: $ScrollIndex, model: viewModel.alarmData[index], index: index)
+                                .environmentObject(viewModel)
+                                .id(index)
+                        }
                     }
                 }
                 .onChange(of: viewModel.alarmData.count) {
