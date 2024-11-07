@@ -23,6 +23,7 @@ enum FestivalType: String, CaseIterable {
 
 struct FestivalView: View {
     @StateObject var viewModel: FestivalViewModel
+    @StateObject var listViewModel: ListViewModel
     @State var type: FestivalType = .festival
     @Environment(\.dismiss) var dismiss
     
@@ -52,6 +53,7 @@ struct FestivalView: View {
             PlaceholderView()
                 .onAppear {
                     viewModel.send(action: .topLoad)
+                    listViewModel.send(action: .load)
                 }
         case .loading:
             LoadingView(url: "congratulations", size: [150, 150])
@@ -83,9 +85,9 @@ struct FestivalView: View {
                 .padding(.horizontal, 20)
                 Group {
                     if type == .festival {
-                        FestivalSegmentView(model: viewModel.talentData)
+                        FestivalSegmentView(model: viewModel.talentData, summaryArray: listViewModel.summaryArray)
                     } else {
-                        FestivalSchoolView(viewModel: viewModel, listViewModel: ListViewModel(container: .init(services: Services()), searchText: ""))
+                        FestivalSchoolView(viewModel: viewModel, listViewModel: listViewModel)
                     }
                 }
             }
@@ -94,5 +96,5 @@ struct FestivalView: View {
 }
 
 #Preview {
-    FestivalView(viewModel: .init(container: .init(services: StubServices())))
+    FestivalView(viewModel: .init(container: .init(services: StubServices())), listViewModel: .init(container: .init(services: StubServices()), searchText: ""))
 }

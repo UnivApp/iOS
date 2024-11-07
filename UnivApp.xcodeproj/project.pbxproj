@@ -31,6 +31,7 @@
 		E415893F2CBE971500EDB211 /* DiagnosisModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E415893E2CBE971500EDB211 /* DiagnosisModel.swift */; };
 		E41589422CBFCA9F00EDB211 /* DiagnosisResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41589412CBFCA9F00EDB211 /* DiagnosisResultView.swift */; };
 		E47B2ECF2C79AF4C0039E2E0 /* SettingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47B2ECE2C79AF4C0039E2E0 /* SettingType.swift */; };
+		E48904C42CDCE060003F566A /* firework-unscreen.gif in Resources */ = {isa = PBXBuildFile; fileRef = E48904C32CDCE060003F566A /* firework-unscreen.gif */; };
 		E49222702C9C87DA0077EA45 /* RequestInterceptor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E492226F2C9C87DA0077EA45 /* RequestInterceptor + Extension.swift */; };
 		E49222752C9EE7650077EA45 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49222742C9EE7650077EA45 /* ChartView.swift */; };
 		E49222792C9F10240077EA45 /* SeperateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49222782C9F10240077EA45 /* SeperateView.swift */; };
@@ -204,6 +205,7 @@
 		E415893E2CBE971500EDB211 /* DiagnosisModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisModel.swift; sourceTree = "<group>"; };
 		E41589412CBFCA9F00EDB211 /* DiagnosisResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisResultView.swift; sourceTree = "<group>"; };
 		E47B2ECE2C79AF4C0039E2E0 /* SettingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingType.swift; sourceTree = "<group>"; };
+		E48904C32CDCE060003F566A /* firework-unscreen.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "firework-unscreen.gif"; sourceTree = "<group>"; };
 		E492226F2C9C87DA0077EA45 /* RequestInterceptor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RequestInterceptor + Extension.swift"; sourceTree = "<group>"; };
 		E49222742C9EE7650077EA45 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		E49222782C9F10240077EA45 /* SeperateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeperateView.swift; sourceTree = "<group>"; };
@@ -952,6 +954,7 @@
 				E4953D2E2C89C770008CBDE5 /* load.gif */,
 				E4953D2C2C89C770008CBDE5 /* star.gif */,
 				E4953D2B2C89C770008CBDE5 /* firework.gif */,
+				E48904C32CDCE060003F566A /* firework-unscreen.gif */,
 				E4953D2D2C89C770008CBDE5 /* congratulations.gif */,
 				E4953D8F2C8F35BA008CBDE5 /* error.gif */,
 				E40135F72CA3F5B90021D351 /* logo_Splash.gif */,
@@ -1168,6 +1171,7 @@
 			files = (
 				E41589342CBE923400EDB211 /* DG3.gif in Resources */,
 				E4B3FCCF2C7751DD00CB98F3 /* Preview Assets.xcassets in Resources */,
+				E48904C42CDCE060003F566A /* firework-unscreen.gif in Resources */,
 				E40135F82CA3F5B90021D351 /* logo_Splash.gif in Resources */,
 				E4982CFD2CCD453400D0F1A7 /* chat_rent.gif in Resources */,
 				E41589332CBE923400EDB211 /* DG4.gif in Resources */,

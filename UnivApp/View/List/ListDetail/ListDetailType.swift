@@ -84,7 +84,7 @@ enum ListDetailType: String, CaseIterable {
     var view: AnyView {
         switch self {
         case .festival:
-            return AnyView(FestivalView(viewModel: .init(container: .init(services: Services()))))
+            return AnyView(FestivalView(viewModel: .init(container: .init(services: Services())), listViewModel: ListViewModel(container: .init(services: Services()), searchText: .init())))
         case .food:
             return AnyView(FoodView(viewModel: FoodViewModel(container: .init(services: Services())), listViewModel: ListViewModel(container: .init(services: Services()), searchText: .init())))
         case .Diagnosis:
