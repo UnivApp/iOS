@@ -16,11 +16,11 @@ struct NickNameView: View {
     @StateObject var viewModel: SettingViewModel
     @Binding var isPresented: Bool
     @State private var checkStateStress: Bool = false
+    @State private var textState: String = ""
     var type: NickNameType
     
     var body: some View {
         loadedView
-            .onAppear { viewModel.nickNamePhase = .notRequested }
     }
     @ViewBuilder
     var loadedView: some View {
@@ -37,6 +37,7 @@ struct NickNameView: View {
                     .font(.system(size: 15, weight: .semibold))
                     
                     Button {
+                        textState = viewModel.nickNameText
                         if viewModel.nickNameText != "" {
                             viewModel.send(action: .checkLoad)
                         }
@@ -52,11 +53,17 @@ struct NickNameView: View {
                 .padding(.horizontal, 10)
                 
                 if let duplicatePhase = viewModel.duplicatePhase {
-                    Text("\(duplicatePhase ? "사용 가능한 닉네임 입니다!" : "사용 불가한 닉네임 입니다!")")
-                        .font(.system(size: 12, weight: .semibold))
-                        .foregroundColor(duplicatePhase ? .blue.opacity(0.7) : .red.opacity(0.7))
+                    if textState == viewModel.nickNameText {
+                        Text("\((duplicatePhase) && (textState != "") ? "사용 가능한 닉네임 입니다!" : "사용 불가한 닉네임 입니다!")")
+                            .font(.system(size: 12, weight: .semibold))
+                            .foregroundColor(duplicatePhase ? .blue.opacity(0.7) : .red.opacity(0.7))
+                    } else {
+                        Text(viewModel.nickNameText == "" ? "빈 닉네임은 사용할 수 없어요😭" : "닉네임 중복 체크를 해주세요 ✅")
+                            .font(.system(size: 12, weight: checkStateStress ? .heavy : .semibold))
+                            .foregroundColor(checkStateStress ? .red.opacity(0.7) : .gray)
+                    }
                 } else {
-                    Text("닉네임 중복 체크를 해주세요 ✅")
+                    Text(textState == "" ? "빈 닉네임은 사용할 수 없어요😭" : "닉네임 중복 체크를 해주세요 ✅")
                         .font(.system(size: 12, weight: checkStateStress ? .heavy : .semibold))
                         .foregroundColor(checkStateStress ? .red.opacity(0.7) : .gray)
                 }
@@ -65,7 +72,7 @@ struct NickNameView: View {
                 
                 if type == .create {
                     Button {
-                        if (viewModel.duplicatePhase ?? false) {
+                        if (viewModel.duplicatePhase ?? false) && ((textState != "") && (textState == viewModel.nickNameText)){
                             viewModel.send(action: .createLoad)
                             viewModel.nickNameText = ""
                         } else { 
@@ -88,7 +95,7 @@ struct NickNameView: View {
                         }
                         Divider()
                         Button {
-                            if (viewModel.duplicatePhase ?? false) {
+                            if (viewModel.duplicatePhase ?? false) && ((textState != "") && (textState == viewModel.nickNameText)){
                                 viewModel.send(action: .changeLoad)
                                 viewModel.nickNameText = ""
                             } else {
@@ -115,6 +122,9 @@ struct NickNameView: View {
                 .background(RoundedRectangle(cornerRadius: 15).fill(.orange.opacity(0.8)))
                 .onAppear {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        viewModel.duplicatePhase = false
+                        viewModel.nickNameText = ""
+                        viewModel.nickNamePhase = .notRequested
                         isPresented = false
                     }
                 }

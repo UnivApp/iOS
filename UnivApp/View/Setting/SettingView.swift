@@ -50,6 +50,9 @@ struct SettingView: View {
                 VStack(spacing: 20) {
                     profile
                     
+                    SeperateView()
+                        .frame(width: UIScreen.main.bounds.width, height: 10)
+                    
                     setting
                     
                     GADBannerViewController(type: .banner)
@@ -67,23 +70,24 @@ struct SettingView: View {
     }
     
     var profile: some View {
-        VStack(alignment: .center, spacing: 0) {
+        HStack(alignment: .center, spacing: 40) {
             Image("smile")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 80, height: 80)
-                .padding(.top, 20)
+                .frame(width: 50, height: 50)
+                .padding(10)
+                .background(Circle().fill(.white).shadow(radius: 1))
             
             Group {
                 Text("  \(viewModel.userNickname)")
                     .foregroundColor(.orange)
-                    .font(.system(size: 25, weight: .heavy))
+                    .font(.system(size: 20, weight: .heavy))
                 +
                 Text("님\n 환영합니다!")
                     .foregroundColor(.black)
-                    .font(.system(size: 25, weight: .semibold))
+                    .font(.system(size: 20, weight: .semibold))
             }
-            .multilineTextAlignment(.center)
+            .multilineTextAlignment(.leading)
             .padding(.top, 10)
             .overlay(alignment: .topLeading) {
                 Button {
@@ -98,7 +102,10 @@ struct SettingView: View {
                         .padding(.leading, -10)
                 }
             }
+            Spacer()
         }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 20)
     }
     
     var setting: some View {
@@ -116,9 +123,13 @@ struct SettingView: View {
                     NavigationLink(destination: cases.view) {
                         VStack(spacing: 20) {
                             HStack {
-                                HStack(alignment: .center, spacing: 10) {
-                                    Text(cases.image)
-                                        .font(.system(size: 20))
+                                HStack(alignment: .center, spacing: 20) {
+                                    Image(systemName: cases.image)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 20, height: 20)
+                                        .foregroundColor(.black.opacity(0.7))
+                                    
                                     VStack(alignment: .leading) {
                                         Text(cases.title)
                                             .foregroundColor(.black.opacity(0.7))
