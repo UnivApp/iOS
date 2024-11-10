@@ -137,7 +137,7 @@ struct FestivalChartView: View {
                         y: .value(point.yLabel, point.value)
                     )
                     .opacity(0.9)
-                    .foregroundStyle(.orange)
+                    .foregroundStyle(.orange.opacity(0.7))
                     .annotation(position: .overlay) {
                         VStack {
                             if self.index[index] == 1 {
