@@ -7,47 +7,21 @@
 
 import SwiftUI
 import Kingfisher
+import Charts
+
 struct FestivalSegmentView: View {
     var model: [TalentModel]
     var summaryArray: [SummaryModel]
-    var date: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy년 MM월 dd일"
-        formatter.locale = Locale(identifier: "ko_KR")
-        return formatter.string(from: Date())
-    }
     var body: some View {
         ScrollView(.vertical) {
             VStack(alignment: .center, spacing: 30) {
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text("대학 축제 출연 ")
-                            .font(.system(size: 20, weight: .bold))
-                            .foregroundColor(.black)
-                        +
-                        Text("랭킹")
-                            .font(.system(size: 20, weight: .bold))
-                            .foregroundColor(.orange)
-                        Text("\(date) 기준 🗓️")
-                            .font(.system(size: 13, weight: .semibold))
-                            .foregroundColor(.gray)
-                    }
-                    .multilineTextAlignment(.leading)
-                    Spacer()
-                }
-                .padding(.horizontal, 20)
+                Image("festivalTitle")
+                    .resizable()
+                    .scaledToFit()
+                    .padding(.horizontal, 40)
                 
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(alignment: .center, spacing: 20) {
-                        TalentCellView(model: model[0], index: 1)
-                        HStack {
-                            TalentCellView(model: model[1], index: 2)
-                            Spacer()
-                            TalentCellView(model: model[1], index: 3)
-                        }
-                    }
-                    .padding(.horizontal, 20)
-                }
+                FestivalChartView(dataPoints: [ChartData(label: model[1].name, value: Double(model[1].count), xLabel: "", yLabel: "", year: ""), ChartData(label: model[0].name, value: Double(model[0].count), xLabel: "", yLabel: "", year: ""), ChartData(label: model[2].name, value: Double(model[2].count), xLabel: "", yLabel: "", year: "")], index: [2, 1, 3])
+                    .padding(.top, -30)
                 
                 Image("festival_poster")
                     .resizable()
@@ -118,51 +92,89 @@ struct FestivalSegmentView: View {
     }
 }
 
-fileprivate struct TalentCellView: View {
-    var model: TalentModel
-    var index: Int
+struct FestivalChartView: View {
+    var dataPoints: [ChartData]
+    var index: [Int]
+    var date: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy년 MM월 dd일"
+        formatter.locale = Locale(identifier: "ko_KR")
+        return formatter.string(from: Date())
+    }
     var body: some View {
-        HStack(alignment: .center, spacing: 30) {
-            Spacer()
-            ZStack {
-                LoadingView(url: "firework-unscreen", size: [150, 150])
-                    .padding(.leading, -40)
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("\(index)")
-                        .font(.system(size: 50, weight: .heavy))
-                        .foregroundColor(.orange)
-                    Text(model.name)
-                        .font(.system(size: 30, weight: .bold))
-                        .foregroundColor(.primary)
-                    Text("\(model.count)회")
-                        .font(.system(size: 20, weight: .semibold))
-                        .foregroundColor(.gray)
-                }
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                Text("축제에 가장 많이 출연한 연예인")
+                    .font(.system(size: 15, weight: .regular))
+                
+                Text("TOP3")
+                    .font(.system(size: 15, weight: .bold))
+                    .overlay(alignment: .bottom) {
+                        Color.orange.opacity(0.5)
+                            .frame(height: 5)
+                    }
             }
-            VStack {
-                //TODO: - KFImage로 변경
-                Image("psy")
-                    .resizable()
-                    .scaledToFill()
-                    .clipShape(Circle())
-                    .frame(width: 100, height: 100)
-                Group {
-                    if index == 1 {
-                        Text("🥇")
-                    } else if index == 2 {
-                        Text("🥈")
-                    } else if index == 3 {
-                        Text("🥉")
+            .padding(.horizontal, 20)
+            .padding(.vertical, 20)
+            
+            HStack {
+                Text((dataPoints.compactMap { $0.year }).first ?? "")
+                    .font(.system(size: 10, weight: .regular))
+                    .foregroundColor(.gray)
+                Spacer()
+                Text("\(date) 기준 🗓️")
+                    .font(.system(size: 10, weight: .regular))
+                    .foregroundColor(.gray)
+            }
+            .padding(.horizontal, 20)
+            .padding(.vertical, -20)
+            
+            Chart {
+                ForEach(dataPoints.indices, id: \.self) { index in
+                    let point = dataPoints[index]
+                    BarMark(
+                        x: .value(point.xLabel, point.label),
+                        y: .value(point.yLabel, point.value)
+                    )
+                    .opacity(0.9)
+                    .foregroundStyle(.orange)
+                    .annotation(position: .overlay) {
+                        VStack {
+                            if self.index[index] == 1 {
+                                Text("\(self.index[index])st")
+                                    .font(.system(size: 12, weight: .bold))
+                            } else if self.index[index] == 2 {
+                                Text("\(self.index[index])nd")
+                                    .font(.system(size: 12, weight: .bold))
+                            } else {
+                                Text("\(self.index[index])rd")
+                                    .font(.system(size: 12, weight: .bold))
+                            }
+                            
+                            Text(String(format: "%.0f회", point.value))
+                                .font(.system(size: 9, weight: .bold))
+                        }
+                        .foregroundColor(.white)
+                    }
+                    .annotation(position: .top) {
+                            Image("psy")
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 30, height: 30)
+                                .cornerRadius(15)
+                                .padding(.bottom, -10)
                     }
                 }
-                .font(.system(size: 40, weight: .heavy))
-                .padding(.top, -20)
             }
-            Spacer()
+            .chartYAxis{}
+            .frame(height: 100)
+            .aspectRatio(contentMode: .fit)
+            .scaledToFill()
+            .padding(.horizontal, 20)
+            .padding(.vertical, 20)
         }
-        .frame(width: UIScreen.main.bounds.width - 60, height: (UIScreen.main.bounds.width - 60) / 1.6)
-        .background(RoundedRectangle(cornerRadius: 15).fill(.white).stroke(.orange.opacity(0.7), lineWidth: 20))
-        .cornerRadius(15)
+        .background(.white)
+        .padding(.horizontal, 30)
     }
 }
 
@@ -203,5 +215,5 @@ fileprivate struct TalentListCellView: View {
 
 
 #Preview {
-    FestivalSegmentView(model: [TalentModel(name: "싸이", image: "", count: 1231),TalentModel(name: "싸이", image: "", count: 1231),TalentModel(name: "싸이", image: "", count: 1231),TalentModel(name: "싸이", image: "", count: 1231)], summaryArray: [SummaryModel(universityId: nil, fullName: nil, logo: nil, starNum: nil, starred: nil)])
+    FestivalSegmentView(model: [TalentModel(name: "싸이", image: "", count: 300),TalentModel(name: "다비치", image: "", count: 200),TalentModel(name: "다니아믹듀오", image: "", count: 100),TalentModel(name: "싸이", image: "", count: 78)], summaryArray: [SummaryModel(universityId: nil, fullName: nil, logo: nil, starNum: nil, starred: nil)])
 }

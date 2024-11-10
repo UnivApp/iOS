@@ -15,7 +15,7 @@ class FestivalViewModel: ObservableObject {
         case detailLoad
     }
     
-    @Published var talentData: [TalentModel] = [TalentModel(name: "싸이", image: "", count: 1231),TalentModel(name: "싸이", image: "", count: 1231),TalentModel(name: "싸이", image: "", count: 1231),TalentModel(name: "싸이", image: "", count: 1231)]
+    @Published var talentData: [TalentModel] = [TalentModel(name: "싸이", image: "", count: 12),TalentModel(name: "다비치", image: "", count: 9),TalentModel(name: "다니아믹듀오", image: "", count: 6),TalentModel(name: "싸이", image: "", count: 78)]
     @Published var festivalData: [FestivalModel] = []
     @Published var phase: Phase = .notRequested
     private var container: DIContainer

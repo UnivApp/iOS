@@ -101,8 +101,8 @@ struct SettingView: View {
             }
             Spacer()
         }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 20)
+        .padding(.horizontal, 30)
+        .padding(.top, 30)
     }
     
     var setting: some View {
