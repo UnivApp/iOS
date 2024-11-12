@@ -16,6 +16,7 @@ extension View {
                 withAnimation(.easeInOut(duration: duration)) {
                     isVisible.wrappedValue = true
                 }
+                
             }
             .onDisappear {
                 withAnimation(.easeInOut(duration: duration)) {

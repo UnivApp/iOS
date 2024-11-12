@@ -17,6 +17,7 @@ struct NickNameView: View {
     @Binding var isPresented: Bool
     @State private var checkStateStress: Bool = false
     @State private var textState: String = ""
+    @State private var userTextInfo: String = ""
     var type: NickNameType
     
     var body: some View {
@@ -25,10 +26,14 @@ struct NickNameView: View {
     @ViewBuilder
     var loadedView: some View {
         ZStack {
-            VStack(alignment: .center, spacing: 30) {
+            VStack(alignment: .center, spacing: 20) {
                 Text("닉네임 설정")
-                    .font(.system(size: 20, weight: .bold))
-                    .foregroundColor(.black)
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(.primary)
+                    .overlay(alignment: .bottom) {
+                        Color.orange.opacity(0.3)
+                            .frame(height: 10)
+                    }
                 
                 HStack {
                     TextField(text: $viewModel.nickNameText) {
@@ -49,8 +54,9 @@ struct NickNameView: View {
                     .padding(.trailing, 10)
                 }
                 .padding(15)
-                .background(RoundedRectangle(cornerRadius: 5).stroke(.gray, lineWidth: 1))
+                .background(RoundedRectangle(cornerRadius: 15).fill(.gray.opacity(0.1)))
                 .padding(.horizontal, 10)
+                
                 
                 if let duplicatePhase = viewModel.duplicatePhase {
                     if textState == viewModel.nickNameText {
@@ -63,7 +69,7 @@ struct NickNameView: View {
                             .foregroundColor(checkStateStress ? .red.opacity(0.7) : .gray)
                     }
                 } else {
-                    Text(textState == "" ? "빈 닉네임은 사용할 수 없어요😭" : "닉네임 중복 체크를 해주세요 ✅")
+                    Text(viewModel.nickNameText == "" ? "빈 닉네임은 사용할 수 없어요😭" : "닉네임 중복 체크를 해주세요 ✅")
                         .font(.system(size: 12, weight: checkStateStress ? .heavy : .semibold))
                         .foregroundColor(checkStateStress ? .red.opacity(0.7) : .gray)
                 }
@@ -82,7 +88,10 @@ struct NickNameView: View {
                     } label: {
                         Text("생성하기")
                             .font(.system(size: 15, weight: .semibold))
-                            .foregroundColor((viewModel.duplicatePhase ?? false) ? .orange : .gray)
+                            .foregroundColor(.white)
+                            .padding(10)
+                            .background(.orange)
+                            .cornerRadius(15)
                     }
                 } else {
                     HStack(alignment: .center, spacing: 40) {
@@ -92,6 +101,9 @@ struct NickNameView: View {
                             Text("취소하기")
                                 .font(.system(size: 15, weight: .semibold))
                                 .foregroundColor(.gray)
+                                .padding(10)
+                                .background(.gray.opacity(0.1))
+                                .cornerRadius(15)
                         }
                         Divider()
                         Button {
@@ -105,7 +117,10 @@ struct NickNameView: View {
                         } label: {
                             Text("변경하기")
                                 .font(.system(size: 15, weight: .semibold))
-                                .foregroundColor((viewModel.duplicatePhase ?? false) ? .orange : .gray)
+                                .foregroundColor(.white)
+                                .padding(10)
+                                .background(.orange)
+                                .cornerRadius(15)
                         }
                     }
                     .padding(.horizontal, 20)

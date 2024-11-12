@@ -38,6 +38,7 @@ struct BellView: View {
                 )
             }
             .navigationBarBackButtonHidden(true)
+            .toolbar(.hidden, for: .tabBar)
     }
     
     @ViewBuilder
