@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "DiagnosisTitle.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

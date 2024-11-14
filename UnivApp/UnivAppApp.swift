@@ -6,12 +6,18 @@
 //
 
 import SwiftUI
+import SwiftKeychainWrapper
 
 @main
 struct UnivAppApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @ObservedObject var container: DIContainer = .init(services: Services())
+    @ObservedObject var authViewModel: AuthViewModel = .init(container: .init(services: Services()), authState: .unAuth)
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SplashView()
+                .environmentObject(container)
         }
     }
 }
