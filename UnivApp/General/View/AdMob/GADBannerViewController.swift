@@ -40,7 +40,6 @@ struct GADBannerViewController: UIViewControllerRepresentable {
             make.width.equalTo(UIScreen.main.bounds.width - 40)
             make.height.equalTo((UIScreen.main.bounds.width - 40) / 3.2)
         }
-        view.layer.cornerRadius = 15
         view.load(GADRequest())
         
         return viewController

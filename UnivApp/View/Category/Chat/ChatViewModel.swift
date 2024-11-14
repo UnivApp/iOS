@@ -143,7 +143,7 @@ class ChatViewModel: ObservableObject {
                     self?.isScrollType[(self?.chatList.count ?? 0) - 1] = .hotplace
                     self?.ensureDataCapacity(state: &self!.hotplaceState, index: (self?.chatList.count ?? 0) - 1)
                     self?.hotplaceState.data?[(self?.chatList.count ?? 0) - 1] = topPlace
-                    self?.appendTotal("다른 대학교가 궁금하신가요? 🎓")
+                    self?.appendTotal("궁금하신? 대학교를 알려주세요! 🎓")
                     self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = true
                     self?.phase = .success
                 }.store(in: &subscripttions)

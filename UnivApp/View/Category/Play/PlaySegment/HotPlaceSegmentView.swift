@@ -57,28 +57,26 @@ struct representativePlaceCell: View {
     var body: some View {
         if let placeData = playDetailModel.placeData {
             NavigationLink(destination: PlayDetailView(playDetailModel: PlayDetailModel(object: playDetailModel.object, placeDataArray: playDetailModel.placeDataArray, placeData: playDetailModel.placeData))) {
-                ZStack(alignment: .bottomLeading){
-                    if let images = playDetailModel.placeData?.images,
-                       let firstImage = images.compactMap({ $0?.imageUrl }).first{
-                        KFImage(URL(string: firstImage))
-                            .resizable()
-                            .scaledToFill()
-                            .frame(height: UIScreen.main.bounds.width * 0.7)
-                            .cornerRadius(15)
-                            .opacity(0.7)
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("\(placeData.name)")
-                            .font(.system(size: 30, weight: .heavy))
-                        
-                        Text("📍 \(placeData.location)")
-                            .font(.system(size: 18, weight: .heavy))
-                    }
-                    .foregroundColor(.white)
-                    .lineLimit(1)
-                    .padding(.bottom, 30)
-                    .padding(.horizontal, 20)
+                if let images = playDetailModel.placeData?.images,
+                   let firstImage = images.compactMap({ $0?.imageUrl }).first{
+                    KFImage(URL(string: firstImage))
+                        .resizable()
+                        .scaledToFill()
+                        .frame(height: UIScreen.main.bounds.width * 0.7)
+                        .cornerRadius(15)
+                        .opacity(0.7)
+                        .overlay(alignment: .bottomLeading) {
+                            VStack(alignment: .leading, spacing: 10) {
+                                Text("\(placeData.name)")
+                                    .font(.system(size: 30, weight: .heavy))
+                                
+                                Text("📍 \(placeData.location)")
+                                    .font(.system(size: 18, weight: .heavy))
+                            }
+                            .foregroundColor(.white)
+                            .padding(.bottom, 50)
+                            .padding(.horizontal, 20)
+                        }
                 }
             }
         }

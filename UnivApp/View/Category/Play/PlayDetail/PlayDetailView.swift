@@ -157,6 +157,8 @@ struct PlayDetailView: View {
                         
                         GADBannerViewController(type: .banner)
                             .frame(width: UIScreen.main.bounds.width - 40, height: (UIScreen.main.bounds.width - 40) / 3.2)
+                            .padding(.horizontal, 20)
+                            .padding(.top, 20)
                         
                         VStack {
                             SeperateView()

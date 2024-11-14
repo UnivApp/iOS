@@ -74,8 +74,6 @@ struct NickNameView: View {
                         .foregroundColor(checkStateStress ? .red.opacity(0.7) : .gray)
                 }
                 
-                Divider()
-                
                 if type == .create {
                     Button {
                         if (viewModel.duplicatePhase ?? false) && ((textState != "") && (textState == viewModel.nickNameText)){
@@ -105,7 +103,6 @@ struct NickNameView: View {
                                 .background(.gray.opacity(0.1))
                                 .cornerRadius(15)
                         }
-                        Divider()
                         Button {
                             if (viewModel.duplicatePhase ?? false) && ((textState != "") && (textState == viewModel.nickNameText)){
                                 viewModel.send(action: .changeLoad)

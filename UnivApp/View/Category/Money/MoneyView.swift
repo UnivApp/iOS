@@ -19,24 +19,6 @@ struct MoneyView: View {
         contentView
             .navigationBarBackButtonHidden(true)
             .toolbar(.hidden, for: .tabBar)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    HStack(spacing: 0) {
-                        Button(action: {
-                            dismiss()
-                        }, label: {
-                            Image("blackback")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 20, height: 20)
-                        })
-                        Image("money_navi")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 100, height: 60)
-                    }
-                }
-            }
     }
     @ViewBuilder
     var contentView: some View {
@@ -77,6 +59,24 @@ struct MoneyView: View {
                     ForEach(listViewModel.summaryArray, id: \.self) { item in
                         MoneySchoolCell(summaryModel: item)
                             .padding(.horizontal, 0)
+                    }
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    HStack(spacing: 0) {
+                        Button(action: {
+                            dismiss()
+                        }, label: {
+                            Image("blackback")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20, height: 20)
+                        })
+                        Image("money_navi")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 100, height: 60)
                     }
                 }
             }

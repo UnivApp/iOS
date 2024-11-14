@@ -107,14 +107,17 @@ fileprivate struct DiagnosisQuestionView: View {
                             .padding(.top, 20)
                             
                             ForEach(questions.indices, id: \.self) { index in
-                                VStack(alignment: .leading, spacing: 20) {
-                                    Text(questions[index])
-                                        .foregroundColor(.black)
-                                        .font(.system(size: 15, weight: .semibold))
-                                        .lineLimit(nil)
-                                        .lineSpacing(5)
-                                        .multilineTextAlignment(.leading)
-                                        .fixedSize(horizontal: false, vertical: true)
+                                VStack(alignment: .center, spacing: 20) {
+                                    HStack {
+                                        Text(questions[index])
+                                            .foregroundColor(.black)
+                                            .font(.system(size: 15, weight: .semibold))
+                                            .lineLimit(nil)
+                                            .lineSpacing(5)
+                                            .multilineTextAlignment(.leading)
+                                            .fixedSize(horizontal: false, vertical: true)
+                                        Spacer()
+                                    }
                                     
                                     DiagnosisSelectView(selectedPoint: $viewModel.selectedAnswer[index])
                                 }
