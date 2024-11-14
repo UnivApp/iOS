@@ -1,15 +1,15 @@
 //
-//  FoodSchoolView.swift
+//  FestivalSchoolView.swift
 //  UnivApp
 //
-//  Created by 정성윤 on 10/7/24.
+//  Created by 정성윤 on 11/7/24.
 //
 
 import SwiftUI
 import Kingfisher
 
-struct FoodSchoolView: View {
-    @EnvironmentObject var viewModel: FoodViewModel
+struct FestivalSchoolView: View {
+    @StateObject var viewModel: FestivalViewModel
     @StateObject var listViewModel: ListViewModel
     @FocusState private var isFocused: Bool
     
@@ -40,7 +40,7 @@ struct FoodSchoolView: View {
     var loadedView: some View {
         ScrollView(.vertical) {
             VStack(alignment: .leading, spacing: 30) {
-                Image("food_poster")
+                Image("festival_poster")
                     .resizable()
                     .scaledToFit()
                     .frame(width: UIScreen.main.bounds.width)
@@ -50,11 +50,11 @@ struct FoodSchoolView: View {
                     .font(.system(size: 18, weight: .bold))
                     .padding(.leading, 20)
                 
-                SearchView(isFocused: self._isFocused, searchText: $listViewModel.searchText)
+                SearchView(isFocused: self._isFocused, searchText: $listViewModel.searchText, color: .white)
                     .environmentObject(self.listViewModel)
                 
                 ForEach(listViewModel.summaryArray, id: \.self) { item in
-                    FoodSchoolCell(summaryModel: item)
+                    FestivalViewCell(summaryModel: item)
                         .padding(.horizontal, 0)
                 }
             }
@@ -63,7 +63,7 @@ struct FoodSchoolView: View {
     }
 }
 
-fileprivate struct FoodSchoolCell: View {
+fileprivate struct FestivalViewCell: View {
     var summaryModel: SummaryModel
     
     var body: some View {
@@ -85,8 +85,8 @@ fileprivate struct FoodSchoolCell: View {
                     .font(.system(size: 13, weight: .semibold))
                     .foregroundColor(.black)
                 Spacer()
-                NavigationLink(destination: FoodSchoolDetailView(viewModel: FoodViewModel(container: .init(services: Services())), model: summaryModel)) {
-                    Text("주변 맛집 알아보기 >")
+                NavigationLink(destination: EmptyView()) {
+                    Text("학교 축제 알아보기 >")
                         .foregroundColor(.black.opacity(0.5))
                         .font(.system(size: 12, weight: .semibold))
                         .lineLimit(1)
@@ -100,7 +100,7 @@ fileprivate struct FoodSchoolCell: View {
 }
 
 
+
 #Preview {
-    FoodSchoolView(listViewModel: ListViewModel(container: .init(services: StubServices()), searchText: ""))
-        .environmentObject(FoodViewModel(container: .init(services: StubServices())))
+    FestivalSchoolView(viewModel: .init(container: .init(services: StubServices())), listViewModel: .init(container: .init(services: StubServices()), searchText: ""))
 }

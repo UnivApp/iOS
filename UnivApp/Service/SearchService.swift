@@ -21,9 +21,9 @@ class SearchService: SearchServiceType {
                 .sink {  completion in
                     switch completion {
                     case .finished:
-                        print("Request finished")
+                        print("학교 검색 성공")
                     case let .failure(error):
-                        print("Request failed \(error)")
+                        print("학교 검색 실패 \(error)")
                         promise(.failure(error))
                     }
                 } receiveValue: { [weak self] (search: [SummaryModel]) in

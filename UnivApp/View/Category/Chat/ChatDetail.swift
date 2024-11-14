@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ChatQuestionView: View {
     @StateObject var viewModel: ChatViewModel
@@ -198,56 +199,56 @@ struct ChatSearchView: View {
     @Binding var chatType: ChatType?
     @Binding var isAlert: Bool
     var body: some View {
-        HStack {
-            Button {
-                isTextFieldFocused = false
-                isAlert = false
-            } label: {
-                Image(systemName: "xmark.circle.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 20, height: 20)
-                    .foregroundColor(.gray)
-            }
-            .padding(.leading, 10)
-            Spacer()
-            VStack(alignment: .center, spacing: 20) {
-                HStack {
-                    Button {
-                        if let chatType = chatType {
-                            isAlert = false
-                            isTextFieldFocused = false
-                            viewModel.isUniversityTyping.append(false)
-                            viewModel.isScrollType.append(nil)
-                            viewModel.mineList[viewModel.mineList.count - 1] = (viewModel.universityName)
-                            viewModel.mineList.append("")
-                            viewModel.chatList.append("")
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                                viewModel.chatList[viewModel.chatList.count - 1] = ("\(viewModel.universityName) 궁금하시군요 🤔")
-                                viewModel.subSend(action: chatType)
-                            }
-                        }
-                    } label: {
-                        Image("search")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 15, height: 15)
-                    }
-                    .padding()
-                    
-                    TextField("대학명/소재지를 입력하세요", text: $viewModel.universityName)
-                        .font(.system(size: 15, weight: .regular))
-                        .focused($isTextFieldFocused)
-                        .padding()
-                        .submitLabel(.search)
-                        .onAppear {
-                            DispatchQueue.main.asyncAfter(deadline: .now()) {
-                                isTextFieldFocused = true
-                            }
-                        }
-                        .onSubmit {
+        VStack {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 10) {
+                    ForEach(viewModel.summaryArray.indices, id: \.self) { index in
+                        Button  {
                             if let chatType = chatType {
+                                viewModel.subSend(action: chatType, selectedItem: viewModel.summaryArray[index])
                                 isAlert = false
+                                viewModel.summaryArray = []
+                            }
+                        } label: {
+                            VStack(spacing: 5) {
+                                if let url = viewModel.summaryArray[index].logo,
+                                   let imageURL = URL(string: url),
+                                   let name = viewModel.summaryArray[index].fullName{
+                                    KFImage(imageURL)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 30, height: 30)
+                                    Text(name)
+                                        .font(.system(size: 12, weight: .semibold))
+                                        .foregroundColor(.black)
+                                }
+                            }
+                        }
+                        .frame(width: 80, height: 100)
+                        .padding(10)
+                        .background(RoundedRectangle(cornerRadius: 15).fill(.white).shadow(radius: 1))
+                    }
+                    .padding(.vertical, 5)
+                }
+                .padding(.horizontal, 20)
+            }
+            HStack {
+                Button {
+                    isTextFieldFocused = false
+                    isAlert = false
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(.gray)
+                }
+                .padding(.leading, 10)
+                Spacer()
+                VStack(alignment: .center, spacing: 20) {
+                    HStack {
+                        Button {
+                            if let chatType = chatType {
                                 isTextFieldFocused = false
                                 viewModel.isUniversityTyping.append(false)
                                 viewModel.isScrollType.append(nil)
@@ -256,27 +257,59 @@ struct ChatSearchView: View {
                                 viewModel.chatList.append("")
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                                     viewModel.chatList[viewModel.chatList.count - 1] = ("\(viewModel.universityName) 궁금하시군요 🤔")
-                                    viewModel.subSend(action: chatType)
+                                    viewModel.search()
                                 }
                             }
+                        } label: {
+                            Image("search")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 15, height: 15)
                         }
+                        .padding()
+                        
+                        TextField("대학명/소재지를 입력하세요", text: $viewModel.universityName)
+                            .font(.system(size: 15, weight: .regular))
+                            .focused($isTextFieldFocused)
+                            .padding()
+                            .submitLabel(.search)
+                            .onAppear {
+                                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                                    isTextFieldFocused = true
+                                }
+                            }
+                            .onSubmit {
+                                if let chatType = chatType {
+                                    isTextFieldFocused = false
+                                    viewModel.isUniversityTyping.append(false)
+                                    viewModel.isScrollType.append(nil)
+                                    viewModel.mineList[viewModel.mineList.count - 1] = (viewModel.universityName)
+                                    viewModel.mineList.append("")
+                                    viewModel.chatList.append("")
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                        viewModel.chatList[viewModel.chatList.count - 1] = ("\(viewModel.universityName) 궁금하시군요 🤔")
+                                        viewModel.search()
+                                    }
+                                }
+                            }
+                    }
+                    .padding(.horizontal, 10)
+                    .background(Color.white)
+                    .border(LinearGradient(gradient: Gradient(colors: [Color.yellow, Color.orange]), startPoint: .leading, endPoint: .trailing), width: 1)
+                    .cornerRadius(15)
+                    .overlay (
+                        RoundedRectangle(cornerRadius: 15)
+                            .stroke(LinearGradient(gradient: Gradient(colors: [Color.yellow, Color.orange]), startPoint: .leading, endPoint: .trailing), lineWidth: 1.5)
+                    )
                 }
-                .padding(.horizontal, 10)
-                .background(Color.white)
-                .border(LinearGradient(gradient: Gradient(colors: [Color.yellow, Color.orange]), startPoint: .leading, endPoint: .trailing), width: 1)
-                .cornerRadius(15)
-                .overlay (
-                    RoundedRectangle(cornerRadius: 15)
-                        .stroke(LinearGradient(gradient: Gradient(colors: [Color.yellow, Color.orange]), startPoint: .leading, endPoint: .trailing), lineWidth: 1.5)
-                )
+                .padding(.trailing, 10)
+                .padding(.vertical, 10)
+                .onAppear {
+                    viewModel.universityName = ""
+                }
             }
-            .padding(.trailing, 10)
-            .padding(.vertical, 10)
-            .onAppear {
-                viewModel.universityName = ""
-            }
+            .background(.white)
         }
-        .background(.white)
     }
 }
 

@@ -43,6 +43,7 @@ struct WebKitViewContainer: View {
 
                 }
             }
+            .toolbar(.hidden, for: .tabBar)
     }
 }
 

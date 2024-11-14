@@ -8,17 +8,28 @@
 import SwiftUI
 import Kingfisher
 
+struct HomePopupModel {
+    var isPresented: Bool
+    var type: HomePopupType?
+    
+    enum HomePopupType {
+        case search
+        case alert
+        case chat
+    }
+}
+
 struct HomeView: View {
     @StateObject var viewModel: HomeViewModel
     @StateObject var listViewModel: ListViewModel
     
     @State private var isLoading: Bool = false
     @State private var selectedSegment: SplitType = .employment
-    @State private var isShowingPopup: Bool = false
+    @State private var isShowingPopup: HomePopupModel = .init(isPresented: false)
     @FocusState private var isFocused: Bool
     
     @State private var currentIndex: Int = 0
-    @State private var popupOpacity: Double = 0
+    @State private var popupOpacity: [Bool] = [false, false, false]
     private let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     
     var body: some View {
@@ -53,41 +64,36 @@ struct HomeView: View {
     
     var loadedView: some View {
         NavigationStack {
-            ZStack {
-                ScrollView(.vertical) {
-                    VStack(alignment: .center, spacing: 20) {
-                        searchView
-                            .padding(.top, 10)
-                        
-                        categoryView
-                        
-                        footerView
-                    }
+            ScrollView(.vertical) {
+                VStack(alignment: .center, spacing: 10) {
+                    searchView
+                        .padding(.top, 10)
+                    
+                    categoryView
+                    
+                    footerView
                 }
             }
-            .fullScreenCover(isPresented: $isShowingPopup) {
-                PopUpContentView(summary: listViewModel.summaryArray, isShowingPopup: $isShowingPopup)
-                    .cornerRadius(15)
-                    .padding(.horizontal, 20)
-                    .presentationBackground(.black.opacity(0.3))
-                    .onAppear {
-                        withAnimation {
-                            popupOpacity = 1
-                        }
-                    }
-                    .onDisappear {
-                        withAnimation {
-                            popupOpacity = 0
-                        }
-                    }
-                    .opacity(popupOpacity)
-                    .animation(.easeInOut, value: popupOpacity)
+            .fullScreenCover(isPresented: $isShowingPopup.isPresented) {
+                if isShowingPopup.type == .alert {
+                    BellView(viewModel: CalendarViewModel(container: .init(services: Services())), isPopup: $isShowingPopup.isPresented)
+                        .fadeInOut($popupOpacity[0])
+                } else if isShowingPopup.type == .search {
+                    PopUpContentView(summary: listViewModel.summaryArray, isShowingPopup: $isShowingPopup.isPresented)
+                        .cornerRadius(15)
+                        .padding(.horizontal, 20)
+                        .presentationBackground(.black.opacity(0.3))
+                        .fadeInOut($popupOpacity[1])
+                } else {
+                    ChatView(viewModel: ChatViewModel(container: .init(services: Services())))
+                        .fadeInOut($popupOpacity[2])
+                }
             }
             .transaction { $0.disablesAnimations = true }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        //TODO: 알림
+                        isShowingPopup = .init(isPresented: true, type: .alert)
                     }, label: {
                         Image("bell")
                     })
@@ -106,7 +112,7 @@ struct HomeView: View {
                     if listViewModel.searchText != "" {
                         listViewModel.send(action: .search)
                         withAnimation {
-                            isShowingPopup = true
+                            isShowingPopup = .init(isPresented: true, type: .search)
                         }
                     }
                     listViewModel.searchText = ""
@@ -128,7 +134,7 @@ struct HomeView: View {
                         listViewModel.searchText = ""
                         isFocused = false
                         withAnimation {
-                            isShowingPopup = true
+                            isShowingPopup = .init(isPresented: true, type: .search)
                         }
                     }
             }
@@ -145,7 +151,7 @@ struct HomeView: View {
     }
     
     var categoryView: some View {
-        VStack(alignment: .leading, spacing: 15) {
+        VStack(alignment: .leading, spacing: 10) {
             
             let columns = Array(repeating: GridItem(.flexible()), count: 4)
             
@@ -156,7 +162,7 @@ struct HomeView: View {
                             Image(category.imageName())
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 40, height: 40)
+                                .frame(width: 35, height: 35)
                             Text(category.title)
                                 .foregroundColor(.black)
                                 .font(.system(size: 10, weight: .semibold))
@@ -169,15 +175,13 @@ struct HomeView: View {
             
             TabView(selection: $currentIndex) {
                 ForEach(viewModel.posterData.indices, id: \.self) { index in
-                    //TODO: - NavigationLink
                     Image(viewModel.posterData[index])
                         .resizable()
                         .scaledToFill()
-                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width / 3)
                         .tag(index)
                 }
             }
-            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width / 3)
+            .frame(width: UIScreen.main.bounds.width - 40, height: (UIScreen.main.bounds.width - 40) / 3)
             .tabViewStyle(PageTabViewStyle())
             .onReceive(timer) { _ in
                 withAnimation {
@@ -186,7 +190,12 @@ struct HomeView: View {
             }
             .overlay(alignment: .bottomTrailing) {
                 CustomPageControl(currentPage: $currentIndex, numberOfPages: viewModel.posterData.count)
+                    .cornerRadius(15)
+                    .padding(.trailing, 10)
+                    .padding(.bottom, 10)
             }
+            .cornerRadius(15)
+            .padding(.horizontal, 20)
             
             HScrollView(title: [Text("이런 "), Text("핫플 "), Text("어때요?")], pointColor: .orange, size: 100, playDeatilModel: PlayDetailModel(object: viewModel.convertToObjects(from: viewModel.topPlaceData), placeDataArray: viewModel.topPlaceData, placeData: nil))
         }
@@ -198,7 +207,8 @@ struct HomeView: View {
                 .frame(width: UIScreen.main.bounds.width, height: 20)
             
             
-            //TODO: - 구글 애드몹
+            GADBannerViewController(type: .banner)
+                .frame(width: UIScreen.main.bounds.width - 40, height: (UIScreen.main.bounds.width - 40) / 3.2)
             
             
             RateView(rateViewModel: RateViewModel(container: .init(services: Services())), selectedSegment: $selectedSegment)

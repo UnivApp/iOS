@@ -61,9 +61,15 @@ fileprivate struct ChatRentView: View {
                     Text("평균 평수 : \(averageRent[2])㎡")
                         .font(.system(size: 13, weight: .semibold))
                         .foregroundColor(.blue.opacity(0.5))
-                    Text("서울 지역 월세 평균 호가 🔍")
-                        .font(.system(size: 15, weight: .bold))
-                        .foregroundColor(.black.opacity(0.7))
+                    Group {
+                        if averageRent.count == 4 {
+                            Text("\(averageRent[3]) 지역 월세 평균 호가 🔍")
+                        } else {
+                            Text("서울 지역 월세 평균 호가 🔍")
+                        }
+                    }
+                    .font(.system(size: 15, weight: .bold))
+                    .foregroundColor(.black.opacity(0.7))
                 }
                 HStack(alignment: .center) {
                     Spacer()
@@ -329,18 +335,11 @@ fileprivate struct ChatFoodView: View {
                     .foregroundColor(.black)
                     .padding(.top, 25)
                 
-                Text(model[index].topMessage ?? "")
+                Text(model[index].addressName)
                     .font(.system(size: 13, weight: .semibold))
                     .foregroundColor(.black.opacity(0.7))
                 
-                HStack(spacing: 5) {
-                    ForEach(model[index].hashtags, id: \.self) { hashtag in
-                        Text("#\(hashtag) ")
-                            .font(.system(size: 12, weight: .semibold))
-                    }
-                }
-                
-                Text("📍 \(model[index].location)")
+                Text("📍 \(model[index].roadAddressName)")
                     .font(.system(size: 12, weight: .semibold))
                     .foregroundColor(.gray)
                 

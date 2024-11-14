@@ -53,10 +53,12 @@ class ListDetailViewModel: ObservableObject {
            let competitionRateResponses = listDetail.competitionRateResponses,
            let employmentRateResponses = listDetail.employmentRateResponses {
             
-            if let year = tuitionResponses.year,
-               let tuitionList = tuitionResponses.tuitionFeeResponseList {
+            if let year = tuitionResponses[0].year,
+               let tuitionList = tuitionResponses[0].tuitionFeeResponseList {
                 for tuition in tuitionList {
-                    self.tuitionFeeData.append(ChartData(label: tuition.departmentType, value: Double(Double(tuition.feeAmount) / Double(12)), xLabel: "", yLabel: "", year: year))
+                    if tuition.feeAmount > 0 {
+                        self.tuitionFeeData.append(ChartData(label: tuition.departmentType, value: Double(Double(tuition.feeAmount) / Double(12)), xLabel: "", yLabel: "", year: year))
+                    }
                 }
             }
             

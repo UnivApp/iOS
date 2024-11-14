@@ -23,7 +23,7 @@ struct CalendarView: UIViewRepresentable {
         var grouped: [Date: [CalendarModel]] = [:]
         
         for model in calenderData {
-            if let dateString = model.date, let date = dateFormatter.date(from: dateString) {
+            if let date = dateFormatter.date(from: model.date) {
                 if grouped[date] != nil {
                     grouped[date]?.append(model)
                 } else {
@@ -74,7 +74,7 @@ struct CalendarView: UIViewRepresentable {
         calendar.scope = .month
         calendar.appearance.headerTitleColor = .black
         calendar.appearance.weekdayTextColor = .orange
-        calendar.appearance.selectionColor = .clear
+        calendar.appearance.selectionColor = .backGray
         calendar.appearance.titleSelectionColor = .systemRed
         
         
@@ -110,11 +110,20 @@ class CalendarViewCell: FSCalendarCell {
         eventImageView.contentMode = .scaleAspectFit
         eventImageView.alpha = 1.0
         
+        let Spacer = UIView()
+        Spacer.backgroundColor = .backGray
+        
         contentView.addSubview(eventImageView)
+        contentView.addSubview(Spacer)
         eventImageView.snp.makeConstraints { make in
             make.width.height.equalTo(5)
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview().offset(8)
+        }
+        Spacer.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().offset(5)
+            make.height.equalTo(1)
         }
     }
     

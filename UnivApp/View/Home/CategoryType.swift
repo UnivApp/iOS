@@ -42,9 +42,9 @@ enum CategoryType: String, CaseIterable {
     var view: AnyView {
         switch self {
         case .chat:
-            return AnyView(ChatView(viewModel: ChatViewModel(container: .init(services: Services()))))
+            return AnyView(ChatView(viewModel: .init(container: .init(services: Services()))))
         case .food:
-            return AnyView(FoodView(viewModel: FoodViewModel(container: .init(services: Services()))))
+            return AnyView(FoodView(viewModel: FoodViewModel(container: .init(services: Services())), listViewModel: ListViewModel(container: .init(services: Services()), searchText: .init())))
         case .Diagnosis:
             return AnyView(DiagnosisView(viewModel: DiagnosisViewModel(container: .init(services: Services()))))
         case .info:

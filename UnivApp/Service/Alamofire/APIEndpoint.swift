@@ -25,8 +25,7 @@ enum APIEndpoint {
     case topPlace
     case schoolPlace
     case ranking
-    case schoolFood
-    case topFood
+    case food
     case news
     case expo
     case searchExpo
@@ -41,6 +40,14 @@ enum APIEndpoint {
     case competition
     //MARK: - Calendar
     case totalCalendar
+    case addAlarm
+    case removeAlarm
+    case getAlarm
+    //MARK: - Nickname
+    case createNickname
+    case changeNickname
+    case getNickname
+    case checkNickname
     
     var urlString: String {
         switch self {
@@ -74,10 +81,8 @@ enum APIEndpoint {
             return "http://43.200.143.28:8080/api/activities?universityId="
         case .ranking:
             return "http://43.200.143.28:8080/api/rankings"
-        case .schoolFood:
-            return "http://43.200.143.28:8080/api/restaurants?universityId="
-        case .topFood:
-            return "http://43.200.143.28:8080/api/restaurants/top"
+        case .food:
+            return "http://43.200.143.28:8080/api/kakao-search/kakao?universityName="
         case .news:
             return "http://43.200.143.28:8080/api/news"
         case .expo:
@@ -87,7 +92,7 @@ enum APIEndpoint {
         case .statusExpo:
             return "http://43.200.143.28:8080/api/expo/status?status="
         case .rent:
-            return "http://openapi.seoul.go.kr:8088/sample/json/tbLnOpendataRentV/1/50/2024/ /"
+            return "http://openapi.seoul.go.kr:8088/\(OpenApiKey)/json/tbLnOpendataRentV/1/50/2024/ /"
         case .diagnosisQuestion:
             return "http://43.200.143.28:8080/api/questionnaires"
         case .diagnosisResult:
@@ -104,6 +109,21 @@ enum APIEndpoint {
             
         case .totalCalendar:
             return "http://43.200.143.28:8080/api/calendar-events"
+        case .addAlarm:
+            return "http://43.200.143.28:8080/api/notifications"
+        case .removeAlarm:
+            return "http://43.200.143.28:8080/api/notifications?notificationId="
+        case .getAlarm:
+            return "http://43.200.143.28:8080/api/notifications/member"
+            
+        case .createNickname:
+            return "http://43.200.143.28:8080/api/members/nickname?nickName="
+        case .changeNickname:
+            return "http://43.200.143.28:8080/api/members/nickname"
+        case .getNickname:
+            return "http://43.200.143.28:8080/api/members/nickname"
+        case .checkNickname:
+            return "http://43.200.143.28:8080/api/members/nickname/check?nickname="
         }
     }
 }

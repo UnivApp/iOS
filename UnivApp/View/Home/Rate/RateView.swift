@@ -46,6 +46,7 @@ struct RateView: View {
             VStack {
                 HStack(spacing: 10) {
                     ForEach(SplitType.allCases, id: \.self) { item in
+                        
                         Button(action: {
                             selectedSegment = item
                         }) {
@@ -91,15 +92,21 @@ fileprivate struct RateList: View {
         switch selectedType {
         case .employment:
             ForEach(viewModel.employmentData.indices, id: \.self) { index in
-                RateCell(employModel: viewModel.employmentData[index], selectedType: $selectedType)
+                if index < 5 {
+                    RateCell(employModel: viewModel.employmentData[index], selectedType: $selectedType)
+                }
             }
         case .ontime:
             ForEach(viewModel.competitionData.indices, id: \.self) { index in
-                RateCell(competitionModel: viewModel.competitionData[index], selectedType: $selectedType)
+                if index < 5 {
+                    RateCell(competitionModel: viewModel.competitionData[index], selectedType: $selectedType)
+                }
             }
         case .Occasion:
             ForEach(viewModel.competitionData.indices, id: \.self) { index in
-                RateCell(competitionModel: viewModel.competitionData[index], selectedType: $selectedType)
+                if index < 5 {
+                    RateCell(competitionModel: viewModel.competitionData[index], selectedType: $selectedType)
+                }
             }
         }
     }
@@ -123,7 +130,7 @@ fileprivate struct RateCell: View {
                     
                     Text(employModel.name ?? "")
                         .font(.system(size: 10, weight: .semibold))
-                        .foregroundColor(Color.black)
+                        .foregroundColor(.black.opacity(0.7))
                         .multilineTextAlignment(.center)
                 }
                 .frame(width: 60)

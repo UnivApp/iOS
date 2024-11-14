@@ -7,53 +7,59 @@
 
 import SwiftUI
 
-struct CalendarDataCell: View {
+struct CalendarDetailModel: Hashable {
     var model: CalendarModel
+    var bellSelected: Bool
+    var index: Int
+}
+
+struct CalendarDataCell: View {
+    var model: CalendarDetailModel
     
-    @State var bellSelected: Bool = false
+    @Binding var selectedIndex: Int
+    @Binding var isAlert: Bool
+    
     var body: some View {
+        loadedView
+    }
+    var loadedView: some View{
         VStack {
             HStack(spacing: 20) {
-                if let title = model.title,
-                   let description = model.type,
-                   let date = model.date {
-                    Text(date)
-                        .font(.system(size: 15, weight: .semibold))
-                        .foregroundColor(Color.orange)
+                Text(model.model.date)
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundColor(Color.orange)
+                
+                
+                VStack(alignment: .leading, spacing: 5) {
+                    Text(model.model.title)
+                        .font(.system(size: 15, weight: .heavy))
+                        .foregroundColor(Color.black.opacity(0.7))
                     
-                    
-                    VStack(alignment: .leading, spacing: 5) {
-                        Text(title)
-                            .font(.system(size: 15, weight: .heavy))
-                            .foregroundColor(Color.black.opacity(0.7))
-                        
-                        Text(description)
-                            .font(.system(size: 12, weight: .regular))
-                            .foregroundColor(Color.gray)
+                    Text(model.model.type)
+                        .font(.system(size: 12, weight: .regular))
+                        .foregroundColor(Color.gray)
+                }
+                .lineLimit(nil)
+                .fixedSize(horizontal: false, vertical: true)
+                
+                Spacer()
+                
+                Button  {
+                    withAnimation {
+                        isAlert = true
+                        selectedIndex = model.index
                     }
-                    .lineLimit(nil)
-                    .fixedSize(horizontal: false, vertical: true)
-                    
-                    Spacer()
-                    
-                    Button  {
-                        bellSelected.toggle()
-                        //TODO: - 알림설정
-                    } label: {
-                        Image(systemName: "bell.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(bellSelected ? .yellow : .gray)
-                    }
+                } label: {
+                    Image(systemName: "bell.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(model.bellSelected ? .yellow : .gray)
                 }
             }
             Divider()
         }
         .padding(.horizontal, 10)
     }
-}
-
-#Preview {
-    CalendarDataCell(model: CalendarModel(title: "", date: ""))
+    
 }

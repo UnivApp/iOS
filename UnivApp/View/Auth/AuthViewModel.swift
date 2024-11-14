@@ -32,6 +32,7 @@ class AuthViewModel: ObservableObject {
     @Published var authState: AuthState
     @Published var refreshTokenState: RefreshTokenState = .unExpired
     @Published var phase: Phase = .notRequested
+    @Published var isNicknamePopup: Bool = false
     
     var userId: String?
     
@@ -58,7 +59,19 @@ class AuthViewModel: ObservableObject {
                         }
                     }
                 } receiveValue: { [weak self] checkStatus in
-                    self?.authState = .auth
+                    if checkStatus.loggedIn {
+                        self?.authState = .auth
+                        if checkStatus.nicknameSet == false {
+                            self?.isNicknamePopup = true
+                        }
+                    } else {
+                        self?.authState = .unAuth
+                        if UserDefaults.standard.string(forKey: "FirstUser") == "true" {
+                            self?.refreshTokenState = .unExpired
+                        } else {
+                            self?.refreshTokenState = .Expired
+                        }
+                    }
                 }.store(in: &subscriptions)
             
         case let .appleLogin(request):
@@ -71,7 +84,6 @@ class AuthViewModel: ObservableObject {
                 container.services.authService.signInAppleCompletion(authorization, none: nonce)
                     .sink { [weak self] completion in
                         if case .failure = completion {
-                            print("로그인 실패")
                             self?.phase = .fail
                             self?.authState = .unAuth
                         }
@@ -80,10 +92,10 @@ class AuthViewModel: ObservableObject {
                         self?.authState = .auth
                         if let accessToken = user.accessToken,
                            let refreshToken = user.refreshToken {
-                            print("로그인 성공")
                             KeychainWrapper.standard.removeAllKeys()
                             KeychainWrapper.standard.set("Bearer \(accessToken)", forKey: "JWTaccessToken")
                             KeychainWrapper.standard.set(refreshToken, forKey: "JWTrefreshToken")
+                            self?.send(action: .checkAuthState)
                         }
                     }.store(in: &subscriptions)
             } else if case let .failure(error) = result {
@@ -95,11 +107,9 @@ class AuthViewModel: ObservableObject {
             container.services.authService.logout()
                 .sink { [weak self] completion in
                     if case .failure = completion {
-                        //TODO: - 로그아웃 실패
                         self?.phase = .fail
                     }
                 } receiveValue: { [weak self] _ in
-                    //TODO: - 로그아웃 성공
                     KeychainWrapper.standard.removeAllKeys()
                     self?.phase = .success
                 }.store(in: &subscriptions)
@@ -110,11 +120,9 @@ class AuthViewModel: ObservableObject {
             container.services.authService.withdrawMember()
                 .sink { [weak self] completion in
                     if case .failure = completion {
-                        //TODO: - 회원 탈퇴 실패
                         self?.phase = .fail
                     }
                 } receiveValue: { [weak self] _ in
-                    //TODO: - 회원 탈퇴 성공
                     KeychainWrapper.standard.removeAllKeys()
                     self?.phase = .success
                 }.store(in: &subscriptions)

@@ -14,8 +14,6 @@ struct ChatView: View {
     @State private var isPresented: Bool = true
     @FocusState private var isTextFieldFocused: Bool
     
-    @Environment(\.dismiss) var dismiss
-    
     var body: some View {
         contentView
             .navigationBarBackButtonHidden(true)
@@ -41,7 +39,8 @@ struct ChatView: View {
     
     var loadedView: some View {
         VStack(alignment: .center, spacing: 10) {
-            ChatNavigationView(dismiss: _dismiss)
+            ChatNavigationView()
+            
             ZStack {
                 ScrollViewReader { proxy in
                     ScrollView(.vertical) {
@@ -241,6 +240,7 @@ fileprivate struct ChatNavigationView: View {
 
 struct ChatView_Previews: PreviewProvider {
     static var previews: some View {
+        
         ChatView(viewModel: ChatViewModel(container: .init(services: StubServices())))
     }
 }

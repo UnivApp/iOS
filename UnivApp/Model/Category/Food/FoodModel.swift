@@ -9,9 +9,11 @@ import Foundation
 
 struct FoodModel: Hashable, Codable {
     var name: String
-    var location: String
+    var roadAddressName: String
+    var addressName: String
+    var phone: String
+    var categoryName: String
     var placeUrl: String
-    var hashtags: [String]
-    var imageUrl: String?
-    var topMessage: String?
+    var x: Double
+    var y: Double
 }

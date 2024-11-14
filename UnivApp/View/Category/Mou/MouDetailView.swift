@@ -11,63 +11,60 @@ struct MouDetailView: View {
     var model: MouModel
     @Binding var isPopup: Bool
     var body: some View {
-        VStack(alignment: .leading, spacing: 30) {
-            HStack {
-                Spacer()
-                Button {
-                    withAnimation {
-                        self.isPopup = false
-                    }
-                } label: {
-                    Image(systemName: "xmark.circle.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 20, height: 20)
-                        .foregroundColor(.gray)
-                }
-            }
-            .padding(.top, 20)
-            
-            Text(model.title)
-                .font(.system(size: 16, weight: .bold))
-            
-            HStack {
-                Text(model.category)
-                    .font(.system(size: 12, weight: .semibold))
-                Spacer()
-                if let websiteLink = model.link {
+        ScrollView(.vertical, showsIndicators: true) {
+            VStack(alignment: .leading, spacing: 30) {
+                HStack {
+                    Spacer()
                     Button {
-                        if let url = URL(string: websiteLink){
-                            UIApplication.shared.open(url)
+                        withAnimation {
+                            self.isPopup = false
                         }
                     } label: {
-                        Text("👉🏻 웹사이트로 이동")
-                            .foregroundColor(.blue.opacity(5.0))
-                            .font(.system(size: 12, weight: .regular))
-                            .overlay(alignment: .bottom) {
-                                Color.blue.opacity(5.0)
-                                    .frame(height: 1)
-                            }
+                        Image(systemName: "xmark.circle.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(.gray)
                     }
                 }
-            }
-            Divider()
-            ScrollView(.vertical, showsIndicators: true) {
+                .padding(.top, 20)
+                
+                Text(model.title)
+                    .font(.system(size: 16, weight: .bold))
+                
+                HStack {
+                    Text(model.category)
+                        .font(.system(size: 12, weight: .semibold))
+                    Spacer()
+                    if let websiteLink = model.link {
+                        Button {
+                            if let url = URL(string: websiteLink){
+                                UIApplication.shared.open(url)
+                            }
+                        } label: {
+                            Text("👉🏻 웹사이트로 이동")
+                                .foregroundColor(.blue.opacity(5.0))
+                                .font(.system(size: 12, weight: .regular))
+                                .overlay(alignment: .bottom) {
+                                    Color.blue.opacity(5.0)
+                                        .frame(height: 1)
+                                }
+                        }
+                    }
+                }
+                Divider()
                 Text(model.content)
                     .font(.system(size: 12, weight: .semibold))
                     .padding(.bottom, 30)
             }
+            .padding(.horizontal, 20)
         }
         .foregroundColor(.black)
         .multilineTextAlignment(.leading)
         .lineSpacing(5)
-        .lineLimit(nil)
-        .fixedSize(horizontal: false, vertical: true)
-        .padding(.horizontal, 20)
         .background(.white)
         .cornerRadius(15)
-        .padding(.horizontal, 20)
-        .frame(width: UIScreen.main.bounds.width - 20, height: UIScreen.main.bounds.height / 1.8)
+        .frame(width: UIScreen.main.bounds.width - 60, height: UIScreen.main.bounds.height / 1.5)
         .toolbar(.hidden, for: .tabBar)
     }
 }

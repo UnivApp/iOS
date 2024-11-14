@@ -46,7 +46,7 @@ struct PopUpContentView: View {
 fileprivate struct PopUpCell: View {
     var summaryModel: SummaryModel
     @State var isPresented: Bool = false
-    @State private var popupOpacity: Double = 0
+    @State private var opacity: Bool = false
     
     var body: some View {
         cell
@@ -82,18 +82,7 @@ fileprivate struct PopUpCell: View {
         }
         .fullScreenCover(isPresented: $isPresented) {
             ListDetailView(viewModel: ListDetailViewModel(container: .init(services: Services())), universityId: summaryModel.universityId ?? 0)
-                .onAppear {
-                    withAnimation {
-                        popupOpacity = 1
-                    }
-                }
-                .onDisappear {
-                    withAnimation {
-                        popupOpacity = 0
-                    }
-                }
-                .opacity(popupOpacity)
-                .animation(.easeInOut, value: popupOpacity)
+                .fadeInOut($opacity)
         }
         .transaction { $0.disablesAnimations = true }
         .padding(.horizontal, 20)

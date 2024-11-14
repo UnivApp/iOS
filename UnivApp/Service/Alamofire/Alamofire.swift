@@ -106,7 +106,7 @@ final class Alamofire {
     func postAlamofire<T:Decodable>(url: String, params: [String:Any]?) -> AnyPublisher<T, Error> {
         return Future<T, Error> { promise in
             if let params = params {
-                AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: ["content-Type":"application-json"], interceptor: TokenRequestInterceptor())
+                AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: ["content-Type":"application/json"], interceptor: TokenRequestInterceptor())
                     .validate()
                     .responseDecodable(of: T.self) { response in
 //                        print(response.debugDescription)
@@ -118,7 +118,7 @@ final class Alamofire {
                         }
                     }
             } else {
-                AF.request(url, method: .post, encoding: JSONEncoding.default, headers: ["content-Type":"application-json"], interceptor: TokenRequestInterceptor())
+                AF.request(url, method: .post, encoding: JSONEncoding.default, headers: ["content-Type":"application/json"], interceptor: TokenRequestInterceptor())
                     .validate()
                     .responseDecodable(of: T.self) { response in
 //                        print(response.debugDescription)
@@ -135,7 +135,23 @@ final class Alamofire {
     }
     func getAlamofire<T: Decodable>(url: String) -> AnyPublisher<T, Error> {
         return Future<T, Error> { promise in
-            AF.request(url, method: .get, encoding: JSONEncoding.default, headers: ["Content-Type": "application-json"], interceptor: TokenRequestInterceptor())
+            AF.request(url, method: .get, encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"], interceptor: TokenRequestInterceptor())
+                .validate()
+                .responseDecodable(of: T.self) { response in
+//                    print(response.debugDescription)
+                    switch response.result {
+                    case let .success(result):
+                        promise(.success(result))
+                    case let .failure(error):
+                        promise(.failure(error))
+                    }
+                }
+        }
+        .eraseToAnyPublisher()
+    }
+    func putAlamofire<T: Decodable>(url: String, params: [String:Any]) -> AnyPublisher<T, Error> {
+        return Future<T, Error> { promise in
+            AF.request(url, method: .put, parameters: params, encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"], interceptor: TokenRequestInterceptor())
                 .validate()
                 .responseDecodable(of: T.self) { response in
 //                    print(response.debugDescription)

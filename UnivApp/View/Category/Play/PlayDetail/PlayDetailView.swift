@@ -15,7 +15,7 @@ struct PlayDetailView: View {
     @State private var currentIndex: Int = 0
     @State private var imageResource: Bool = false
     @State private var imageScreenCover: Bool = false
-    @State private var opacity: Double = 0
+    @State private var opacity: Bool = false
     
     var playDetailModel: PlayDetailModel
     
@@ -25,18 +25,7 @@ struct PlayDetailView: View {
                 if let imagesData = playDetailModel.placeData?.images{
                     ImageScreen(images: imagesData.compactMap({ $0?.imageUrl}), isPopup: $imageScreenCover)
                         .presentationBackground(.black.opacity(0.7))
-                        .onAppear {
-                            withAnimation {
-                                opacity = 1
-                            }
-                        }
-                        .onDisappear {
-                            withAnimation {
-                                opacity = 0
-                            }
-                        }
-                        .opacity(opacity)
-                        .animation(.easeInOut(duration: 1.5), value: opacity)
+                        .fadeInOut($opacity)
                     
                 }
             }
@@ -165,6 +154,11 @@ struct PlayDetailView: View {
                                 }
                             }
                         }
+                        
+                        GADBannerViewController(type: .banner)
+                            .frame(width: UIScreen.main.bounds.width - 40, height: (UIScreen.main.bounds.width - 40) / 3.2)
+                            .padding(.horizontal, 20)
+                            .padding(.top, 20)
                         
                         VStack {
                             SeperateView()

@@ -10,8 +10,7 @@ import Kingfisher
 
 struct DiagnosisResultView: View {
     @StateObject var viewModel: DiagnosisResultViewModel
-    @State private var splashOpacity: Double = 0
-    @State private var loadedOpacity: Double = 0
+    @State private var opacity: [Bool] = [false, false]
     @State private var isLoaded: Bool = false
     @State private var loadingType: String = "load"
     
@@ -79,18 +78,7 @@ struct DiagnosisResultView: View {
             LoadingView(url: self.loadingType, size: [150, 150])
             Spacer()
         }
-        .onAppear {
-            withAnimation {
-                splashOpacity = 1
-            }
-        }
-        .onDisappear {
-            withAnimation {
-                splashOpacity = 0
-            }
-        }
-        .opacity(splashOpacity)
-        .animation(.easeInOut(duration: 1.5), value: splashOpacity)
+        .fadeInOut($opacity[0])
     }
     
     var loadedView: some View {
@@ -137,18 +125,7 @@ struct DiagnosisResultView: View {
             }
             .padding(.horizontal, 20)
         }
-        .onAppear {
-            withAnimation {
-                loadedOpacity = 1
-            }
-        }
-        .onDisappear {
-            withAnimation {
-                loadedOpacity = 0
-            }
-        }
-        .opacity(loadedOpacity)
-        .animation(.easeInOut(duration: 1.5), value: loadedOpacity)
+        .fadeInOut($opacity[1])
     }
 }
 

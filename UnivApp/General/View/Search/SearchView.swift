@@ -11,6 +11,7 @@ struct SearchView: View {
     @EnvironmentObject var listViewModel : ListViewModel
     @FocusState var isFocused: Bool
     @Binding var searchText: String
+    var color: Color
     
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
@@ -39,7 +40,7 @@ struct SearchView: View {
                     }
             }
             .padding(.horizontal, 10)
-            .background(Color.white)
+            .background(.white)
             .border(LinearGradient(gradient: Gradient(colors: [Color.yellow, Color.orange]), startPoint: .leading, endPoint: .trailing), width: 1)
             .cornerRadius(15)
             .overlay (
@@ -47,6 +48,7 @@ struct SearchView: View {
                     .stroke(LinearGradient(gradient: Gradient(colors: [Color.yellow, Color.orange]), startPoint: .leading, endPoint: .trailing), lineWidth: 1.5)
             )
         }
+        .background(self.color)
         .padding(.horizontal, 20)
     }
 }
@@ -54,7 +56,7 @@ struct SearchView: View {
 struct SearchViewProvider: PreviewProvider {
     static var previews: some View {
         @State var searchText = ""
-        SearchView(searchText: $searchText)
+        SearchView(searchText: $searchText, color: .white)
             .environmentObject(ListViewModel(container: DIContainer(services: StubServices()), searchText: ""))
     }
 }

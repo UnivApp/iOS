@@ -16,17 +16,8 @@ struct WithdrawView: View {
         contentView
             .navigationBarBackButtonHidden(true)
             .toolbar(.hidden, for: .tabBar)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image("blackback")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 20, height: 20)
-                    }
-                }
+            .onAppear {
+                authViewModel.phase = .notRequested
             }
     }
     
