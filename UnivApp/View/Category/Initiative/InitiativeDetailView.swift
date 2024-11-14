@@ -53,27 +53,32 @@ struct InitiativeDetailView: View {
     var loadedView: some View {
         VStack(spacing: 30) {
             if title == "CWTS" {
-                HStack {
-                    ForEach(CWTSType.allCases, id: \.self) { selected in
-                        Button {
-                            self.segmentType = selected
-                            self.filterCWTSModel()
-                        } label: {
-                            Text(selected.title)
-                                .padding()
-                                .foregroundColor(.black)
-                                .font(.system(size: 15, weight: .bold))
-                                .background(RoundedRectangle(cornerRadius: 15)
-                                    .fill(segmentType == selected ? .yellow : .backGray)
-                                    .frame(height: 40))
+                ScrollViewReader { proxy in
+                    HStack {
+                        ForEach(CWTSType.allCases, id: \.self) { selected in
+                            Button {
+                                self.segmentType = selected
+                                self.filterCWTSModel()
+                                withAnimation {
+                                    proxy.scrollTo(0)
+                                }
+                            } label: {
+                                Text(selected.title)
+                                    .padding()
+                                    .foregroundColor(.black)
+                                    .font(.system(size: 15, weight: .bold))
+                                    .background(RoundedRectangle(cornerRadius: 15)
+                                        .fill(segmentType == selected ? .yellow : .backGray)
+                                        .frame(height: 40))
+                            }
                         }
                     }
-                }
-                .padding(.bottom, -30)
-                ScrollView(.vertical) {
-                    titleView
-                    ForEach(cwtsmodel.indices, id: \.self) { index  in
-                        InitiativeViewCell(model: cwtsmodel[index])
+                    ScrollView(.vertical) {
+                        titleView
+                            .id(0)
+                        ForEach(cwtsmodel.indices, id: \.self) { index  in
+                            InitiativeViewCell(model: cwtsmodel[index])
+                        }
                     }
                 }
             } else {

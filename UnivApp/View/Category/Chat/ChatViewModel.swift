@@ -211,10 +211,11 @@ class ChatViewModel: ObservableObject {
                                         }
                                     } receiveValue: { [weak self] response in
                                         if  let response = response.tbLnOpendataRentV?.row,
-                                            let average = self?.calculateAverage(data: response) {
+                                            var average = self?.calculateAverage(data: response) {
                                             self?.appendTotal("\(self?.universityName ?? "") 주변 월세 정보입니다!")
                                             self?.isScrollType[(self?.chatList.count ?? 0) - 1] = .rent
-                                            self?.averageRent = average
+                                            average.append((self?.universityName ?? ""))
+                                            self?.averageRent = (average)
                                             self?.appendTotal("더 자세한 정보를 알고 싶으신가요? 👀")
                                             self?.isUniversityTyping[(self?.chatList.count ?? 0) - 1] = true
                                             self?.phase = .success

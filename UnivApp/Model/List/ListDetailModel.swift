@@ -17,7 +17,7 @@ struct ListDetailModel: Hashable, Codable {
     var website: String?
     var admissionSite: String?
     var starNum: Int?
-    var tuitionFeeResponse: TuitionFeeResponse?
+    var tuitionFeeResponse: [TuitionFeeResponse]?
     var departmentResponses: [DepartmentResponses?]?
     var competitionRateResponses: [CompetitionRateResponses?]?
     var employmentRateResponses: [EmploymentRateResponses?]?

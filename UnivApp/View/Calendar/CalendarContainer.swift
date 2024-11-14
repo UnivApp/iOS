@@ -31,18 +31,21 @@ struct CalendarContainer: View {
                 if isAlarm == .success {
                     if viewModel.selectedCalendar[selectedIndex].notificationActive {
                         viewModel.selectedCalendar[selectedIndex].notificationActive = false
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            alarmPhase = AlarmPhase(isSheet: true, isSuccess: true, type: "삭제")
+                        }
                     } else {
                         viewModel.selectedCalendar[selectedIndex].notificationActive = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            alarmPhase = AlarmPhase(isSheet: true, isSuccess: true, type: "등록")
+                        }
                     }
                     viewModel.send(action: .totalLoad)
                     isAlert = false
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        alarmPhase = AlarmPhase(isSheet: true, isSuccess: true, type: "등록")
-                    }
                 } else if isAlarm == .fail {
                     isAlert = false
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        alarmPhase = AlarmPhase(isSheet: true, isSuccess: false, type: "삭제")
+                        alarmPhase = AlarmPhase(isSheet: true, isSuccess: false, type: "설정")
                     }
                 }
             }
@@ -61,7 +64,7 @@ struct CalendarContainer: View {
             }
             .actionSheet(isPresented: $alarmPhase.isSheet) {
                 ActionSheet(
-                    title: Text("알림  \(alarmPhase.type) \(alarmPhase.isSuccess ? "성공" : "실패") 🔔"),
+                    title: Text("알림 \(alarmPhase.type) \(alarmPhase.isSuccess ? "성공" : "실패") 🔔"),
                     buttons: [.default(Text("확인"))]
                 )
             }

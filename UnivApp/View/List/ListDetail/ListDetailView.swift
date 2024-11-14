@@ -186,7 +186,6 @@ struct ListDetailView: View {
                 .padding(.vertical, 30)
             }
             HStack(spacing: 10) {
-                //TODO: - 네비게이션 변경
                 if let addmissionSite = viewModel.listDetail.admissionSite,
                    let website = viewModel.listDetail.website,
                    let addmissionSiteURL = URL(string: addmissionSite),

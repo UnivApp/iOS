@@ -60,9 +60,7 @@ struct ListCategoryView: View {
         }
         .fullScreenCover(isPresented: $isPresented) {
             self.selectedType?.view
-                .fadeInOut($opacity)
         }
-        .transaction { $0.disablesAnimations = true }
     }
 }
 

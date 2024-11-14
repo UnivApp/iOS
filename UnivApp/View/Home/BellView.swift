@@ -84,8 +84,8 @@ struct BellView: View {
                 ScrollView(.vertical) {
                     if viewModel.alarmData.isEmpty {
                         Text("설정된 알림이 없어요! 🔕")
-                            .font(.system(size: 15, weight: .bold))
-                            .foregroundColor(.black.opacity(0.7))
+                            .font(.system(size: 15, weight: .semibold))
+                            .foregroundColor(.gray)
                     } else {
                         ForEach(viewModel.alarmData.indices, id: \.self) { index in
                             AlarmDataCell(selectedIndex: $ScrollIndex, model: viewModel.alarmData[index], index: index)

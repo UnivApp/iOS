@@ -15,6 +15,9 @@ struct LogoutView: View {
         contentView
             .navigationBarBackButtonHidden(true)
             .toolbar(.hidden, for: .tabBar)
+            .onAppear {
+                authViewModel.phase = .notRequested
+            }
     }
     
     @ViewBuilder

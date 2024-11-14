@@ -38,7 +38,8 @@ class CalendarViewModel: ObservableObject {
             container.services.calendarService.getTotalCalendar()
                 .sink { [weak self] completion in
                     if case .failure = completion {
-                        self?.phase = .fail
+                        self?.phase = .success
+                        //TODO: - 캘린더 전체조회 실패
                     }
                 } receiveValue: { [weak self] calendarData in
                     self?.calendarData = calendarData

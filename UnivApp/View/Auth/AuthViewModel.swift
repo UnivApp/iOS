@@ -95,6 +95,7 @@ class AuthViewModel: ObservableObject {
                             KeychainWrapper.standard.removeAllKeys()
                             KeychainWrapper.standard.set("Bearer \(accessToken)", forKey: "JWTaccessToken")
                             KeychainWrapper.standard.set(refreshToken, forKey: "JWTrefreshToken")
+                            self?.send(action: .checkAuthState)
                         }
                     }.store(in: &subscriptions)
             } else if case let .failure(error) = result {
@@ -106,11 +107,9 @@ class AuthViewModel: ObservableObject {
             container.services.authService.logout()
                 .sink { [weak self] completion in
                     if case .failure = completion {
-                        //TODO: - 로그아웃 실패
                         self?.phase = .fail
                     }
                 } receiveValue: { [weak self] _ in
-                    //TODO: - 로그아웃 성공
                     KeychainWrapper.standard.removeAllKeys()
                     self?.phase = .success
                 }.store(in: &subscriptions)
@@ -121,11 +120,9 @@ class AuthViewModel: ObservableObject {
             container.services.authService.withdrawMember()
                 .sink { [weak self] completion in
                     if case .failure = completion {
-                        //TODO: - 회원 탈퇴 실패
                         self?.phase = .fail
                     }
                 } receiveValue: { [weak self] _ in
-                    //TODO: - 회원 탈퇴 성공
                     KeychainWrapper.standard.removeAllKeys()
                     self?.phase = .success
                 }.store(in: &subscriptions)

@@ -62,41 +62,46 @@ struct RateDetailView: View {
                 .environmentObject(self.listViewModel)
                 .padding(.top, 20)
             
-            VStack {
-                HStack(spacing: 10) {
-                    ForEach(SplitType.allCases, id: \.self) { item in
-                        Button(action: {
-                            selectedSegment = item
-                        }) {
-                            Text(item.title)
-                                .font(.system(size: 15, weight: .bold))
-                                .foregroundColor(selectedSegment == item ? .black : .gray)
-                                .padding()
-                                .background(
-                                    RoundedRectangle(cornerRadius: 15)
-                                        .fill(selectedSegment == item ? Color.yellow : Color.backGray)
-                                        .frame(height: 40))
-                                .cornerRadius(15)
+            ScrollViewReader { proxy in
+                VStack {
+                    HStack(spacing: 10) {
+                        ForEach(SplitType.allCases, id: \.self) { item in
+                            Button(action: {
+                                selectedSegment = item
+                                withAnimation {
+                                    proxy.scrollTo(0)
+                                }
+                            }) {
+                                Text(item.title)
+                                    .font(.system(size: 15, weight: .bold))
+                                    .foregroundColor(selectedSegment == item ? .black : .gray)
+                                    .padding()
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 15)
+                                            .fill(selectedSegment == item ? Color.yellow : Color.backGray)
+                                            .frame(height: 40))
+                                    .cornerRadius(15)
+                            }
                         }
                     }
-                }
-                .padding(.top, -10)
-                
-                ScrollView(.vertical) {
-                    Group {
-                        switch selectedSegment {
-                        case .employment:
-                            RateDetailViewList(selectedType: $selectedSegment)
-                                .environmentObject(viewModel)
-                                .environmentObject(listViewModel)
-                        case .Occasion:
-                            RateDetailViewList(selectedType: $selectedSegment)
-                                .environmentObject(viewModel)
-                                .environmentObject(listViewModel)
-                        case .ontime:
-                            RateDetailViewList(selectedType: $selectedSegment)
-                                .environmentObject(viewModel)
-                                .environmentObject(listViewModel)
+                    .padding(.top, -10)
+                    
+                    ScrollView(.vertical) {
+                        Group {
+                            switch selectedSegment {
+                            case .employment:
+                                RateDetailViewList(selectedType: $selectedSegment)
+                                    .environmentObject(viewModel)
+                                    .environmentObject(listViewModel)
+                            case .Occasion:
+                                RateDetailViewList(selectedType: $selectedSegment)
+                                    .environmentObject(viewModel)
+                                    .environmentObject(listViewModel)
+                            case .ontime:
+                                RateDetailViewList(selectedType: $selectedSegment)
+                                    .environmentObject(viewModel)
+                                    .environmentObject(listViewModel)
+                            }
                         }
                     }
                 }
@@ -114,6 +119,7 @@ fileprivate struct RateDetailViewList: View {
         ForEach(listViewModel.summaryArray.indices, id: \.self) { index in
             VStack(spacing: 30) {
                 RateDetailViewCell(summaryModel: listViewModel.summaryArray[index], selectedType: $selectedType, index: index)
+                    .id(index)
                     .environmentObject(viewModel)
                     .environmentObject(listViewModel)
             }
@@ -157,16 +163,15 @@ fileprivate struct RateDetailViewCell: View {
                             case .employment:
                                 Text("취업률 확인")
                                     .font(.system(size: 12, weight: .bold))
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.black.opacity(0.7))
                             case .ontime:
-                                
                                 Text("정시 경쟁률 확인")
                                     .font(.system(size: 12, weight: .bold))
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.black.opacity(0.7))
                             case .Occasion:
                                 Text("수시 경쟁률 확인")
                                     .font(.system(size: 12, weight: .bold))
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.black.opacity(0.7))
                             }
                             Image(listViewModel.showRateArray[index] ? "arrow_down" : "arrow_fill")
                                 .resizable()

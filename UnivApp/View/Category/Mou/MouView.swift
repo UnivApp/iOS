@@ -77,11 +77,10 @@ struct MouView: View {
                 }
                 .padding(.leading, 20)
                 
-                SeperateView()
-                    .frame(width: UIScreen.main.bounds.width, height: 20)
-                
                 ScrollView(.vertical) {
                     VStack(alignment: .leading, spacing: 30) {
+                        SeperateView()
+                            .frame(width: UIScreen.main.bounds.width, height: 20)
                         Group {
                             Text("\(viewModel.MouData.count)")
                                 .font(.system(size: 12, weight: .heavy))

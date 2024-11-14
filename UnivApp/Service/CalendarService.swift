@@ -47,6 +47,7 @@ class CalendarService: CalendarServiceType {
                         print("캘린더 전체 조회 성공")
                     case let .failure(error):
                         print("캘린더 전체 조회 실패 \(error)")
+                        promise(.failure(error))
                     }
                 } receiveValue: { [weak self] (calendarData: [CalendarModel]) in
                     guard self != nil else { return }

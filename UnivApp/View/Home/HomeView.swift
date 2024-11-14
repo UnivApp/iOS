@@ -33,7 +33,7 @@ struct HomeView: View {
     private let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        loadedView
+        contentView
     }
     
     @ViewBuilder
