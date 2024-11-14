@@ -15,6 +15,7 @@ struct CalendarDetailModel: Hashable {
 
 struct CalendarDataCell: View {
     var model: CalendarDetailModel
+    @EnvironmentObject var authViewModel: AuthViewModel
     
     @Binding var selectedIndex: Int
     @Binding var isAlert: Bool
@@ -44,17 +45,27 @@ struct CalendarDataCell: View {
                 
                 Spacer()
                 
-                Button  {
-                    withAnimation {
-                        isAlert = true
-                        selectedIndex = model.index
+                if let memberState = (UserDefaults.standard.value(forKey: "nonMember")) {
+                    if memberState as! String == "false" {
+                        Button  {
+                            withAnimation {
+                                isAlert = true
+                                selectedIndex = model.index
+                            }
+                        } label: {
+                            Image(systemName: "bell.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(model.bellSelected ? .yellow : .gray)
+                        }
                     }
-                } label: {
-                    Image(systemName: "bell.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 20, height: 20)
-                        .foregroundColor(model.bellSelected ? .yellow : .gray)
+                } else {
+                    ErrorView()
+                        .onAppear {
+                            authViewModel.authState = .unAuth
+                            authViewModel.refreshTokenState = .Expired
+                        }
                 }
             }
             Divider()

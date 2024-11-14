@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ListView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
     @StateObject var viewModel: ListViewModel
     
     @State private var showAlert: Bool = false
@@ -118,6 +119,7 @@ struct ListView: View {
                         if let id = cell.universityId, let image = cell.logo, let title = cell.fullName, let heartNum = cell.starNum, let starred = cell.starred {
                             HStack(spacing: 20) {
                                 ListViewCell(model: SummaryModel(universityId: id, fullName: title, logo: image, starNum: heartNum, starred: starred), listViewModel: self.viewModel)
+                                    .environmentObject(authViewModel)
                             }
                             .tag(cell.universityId)
                         }
@@ -150,5 +152,6 @@ struct ListView_Previews: PreviewProvider {
     static let authViewModel = AuthViewModel(container: .init(services: StubServices()), authState: .auth)
     static var previews: some View {
         ListView(viewModel: ListViewModel(container: self.container, searchText: ""))
+            .environmentObject(authViewModel)
     }
 }

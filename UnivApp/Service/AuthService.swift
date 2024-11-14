@@ -22,6 +22,8 @@ protocol AuthServiceType {
     func signInAppleCompletion(_ auth: ASAuthorization, none: String) -> AnyPublisher<UserModel, ServicesError>
     func logout() -> AnyPublisher<Void, ServicesError>
     func withdrawMember() -> AnyPublisher<Void, ServicesError>
+    
+    func nonMemberLogin() -> AnyPublisher<UserModel, ServicesError>
 }
 
 class AuthService: AuthServiceType {
@@ -104,6 +106,31 @@ class AuthService: AuthServiceType {
             
         }.eraseToAnyPublisher()
     }
+    
+    func nonMemberLogin() -> AnyPublisher<UserModel, ServicesError> {
+        Future<UserModel, ServicesError> { promise in
+            let params: [String:Any] = [
+                "socialId": "nonMember",
+                "name": "nonMember",
+                "email": "nonMember"
+            ]
+            Alamofire().postAlamofire(url: APIEndpoint.login.urlString, params: params)
+                .sink { completion in
+                    switch completion {
+                    case .finished:
+                        print("비회원 로그인 성공")
+                    case let .failure(error):
+                        print("비회원 로그인 실패")
+                        promise(.failure(ServicesError.error(error)))
+                    }
+                } receiveValue: { [weak self] (user: UserModel) in
+                    guard self != nil else { return }
+                    promise(.success(user))
+                }.store(in: &self.subscriptions)
+
+        }
+        .eraseToAnyPublisher()
+    }
 }
 
 extension AuthService {
@@ -138,6 +165,10 @@ extension AuthService {
 }
 
 class StubAuthService: AuthServiceType {
+    
+    func nonMemberLogin() -> AnyPublisher<UserModel, ServicesError> {
+        Empty().eraseToAnyPublisher()
+    }
     
     func checkAuthState() -> AnyPublisher<AuthStateModel, ServicesError> {
         Empty().eraseToAnyPublisher()

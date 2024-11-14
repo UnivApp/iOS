@@ -45,7 +45,7 @@ struct LogoutView: View {
         .alert(isPresented: $isShow) {
             Alert (
                 title: Text("로그아웃 성공 🔓"),
-                message: Text("어플을 사용하기 위해서는 사용자 로그인이 필요합니다."),
+                message: Text("로그인을 하면 더 많은 기능을 이용할 수 있습니다!"),
                 dismissButton: .default(Text("확인"), action: {
                     self.authViewModel.authState = .unAuth
                     self.authViewModel.refreshTokenState = .unExpired

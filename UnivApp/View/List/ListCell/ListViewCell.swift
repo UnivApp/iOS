@@ -13,6 +13,7 @@ struct ListViewCell: View {
     
     @State private var heartTapped: Bool = false
     @StateObject var listViewModel: ListViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
     
     init(model: SummaryModel, listViewModel: ListViewModel){
         self.model = model
@@ -29,31 +30,41 @@ struct ListViewCell: View {
             Spacer()
             
             HStack {
-                Button {
-                    self.heartTapped.toggle()
-                    if heartTapped == true {
-                        listViewModel.send(action: .addHeart(self.model.universityId ?? 0))
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                            listViewModel.send(action: .load)
+                if let memberState = (UserDefaults.standard.value(forKey: "nonMember")) {
+                    if memberState as! String == "false" {
+                        Button {
+                            self.heartTapped.toggle()
+                            if heartTapped == true {
+                                listViewModel.send(action: .addHeart(self.model.universityId ?? 0))
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                    listViewModel.send(action: .load)
+                                }
+                            } else {
+                                listViewModel.send(action: .removeHeart(self.model.universityId ?? 0))
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                    listViewModel.send(action: .load)
+                                }
+                            }
+                        } label: {
+                            if heartTapped == true {
+                                Image("love_fill")
+                                    .resizable()
+                                    .frame(width: 12, height: 12)
+                            } else {
+                                Image("love_empty")
+                                    .resizable()
+                                    .frame(width: 12, height: 12)
+                            }
                         }
-                    } else {
-                        listViewModel.send(action: .removeHeart(self.model.universityId ?? 0))
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                            listViewModel.send(action: .load)
+                        .padding(.leading, 20)
+                    }
+                } else {
+                    ErrorView()
+                        .onAppear {
+                            authViewModel.authState = .unAuth
+                            authViewModel.refreshTokenState = .Expired
                         }
-                    }
-                } label: {
-                    if heartTapped == true {
-                        Image("love_fill")
-                            .resizable()
-                            .frame(width: 12, height: 12)
-                    } else {
-                        Image("love_empty")
-                            .resizable()
-                            .frame(width: 12, height: 12)
-                    }
                 }
-                .padding(.leading, 20)
                 Spacer()
             }
             
@@ -122,4 +133,5 @@ struct ListViewCell: View {
 
 #Preview {
     ListViewCell(model: .init(universityId: nil, fullName: nil, logo: nil, starNum: nil, starred: nil), listViewModel: ListViewModel(container: .init(services: StubServices()), searchText: ""))
+        .environmentObject(AuthViewModel(container: .init(services: StubServices()), authState: .auth))
 }

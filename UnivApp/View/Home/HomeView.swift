@@ -20,6 +20,7 @@ struct HomePopupModel {
 }
 
 struct HomeView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
     @StateObject var viewModel: HomeViewModel
     @StateObject var listViewModel: ListViewModel
     
@@ -78,6 +79,7 @@ struct HomeView: View {
                 if isShowingPopup.type == .alert {
                     BellView(viewModel: CalendarViewModel(container: .init(services: Services())), isPopup: $isShowingPopup.isPresented)
                         .fadeInOut($popupOpacity[0])
+                        .environmentObject(authViewModel)
                 } else if isShowingPopup.type == .search {
                     PopUpContentView(summary: listViewModel.summaryArray, isShowingPopup: $isShowingPopup.isPresented)
                         .cornerRadius(15)
@@ -223,5 +225,6 @@ struct HomeView_Previews: PreviewProvider {
     static let authViewModel = AuthViewModel(container: .init(services: StubServices()), authState: .auth)
     static var previews: some View {
         HomeView(viewModel: HomeViewModel(container: Self.container), listViewModel: ListViewModel(container: Self.container, searchText: ""))
+            .environmentObject(AuthViewModel(container: .init(services: StubServices()), authState: .auth))
     }
 }

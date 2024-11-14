@@ -14,6 +14,7 @@ struct AlarmPhase {
 }
 
 struct CalendarContainer: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
     @StateObject var viewModel: CalendarViewModel
     
     @State var isSelected: Bool = false
@@ -102,6 +103,7 @@ struct CalendarContainer: View {
                     
                     ForEach(viewModel.selectedCalendar.indices, id: \.self) { index in
                         CalendarDataCell(model: CalendarDetailModel(model: viewModel.selectedCalendar[index], bellSelected: viewModel.selectedCalendar[index].notificationActive, index: index), selectedIndex: self.$selectedIndex, isAlert: $isAlert)
+                            .environmentObject(authViewModel)
                     }
                     .fadeInOut($opacity)
                 }
@@ -136,7 +138,6 @@ fileprivate struct CustomAlertView: View {
     @Binding var isSheet: Bool
     
     var type: String
-    var buttonTypes: [String] = ["1일 전", "당일"]
     
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
@@ -197,5 +198,6 @@ fileprivate struct CustomAlertView: View {
 struct CalendarContainer_Previews: PreviewProvider {
     static var previews: some View {
         CalendarContainer(viewModel: CalendarViewModel(container: .init(services: StubServices())))
+            .environmentObject(AuthViewModel(container: .init(services: StubServices()), authState: .auth))
     }
 }

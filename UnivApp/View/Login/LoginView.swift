@@ -26,17 +26,25 @@ struct LoginView: View {
                 .scaledToFill()
                 .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 20) {
                 Spacer()
+                Button {
+                    authViewModel.send(action: .nonMemberLogin)
+                } label: {
+                    Text("비회원으로 시작하기")
+                        .font(.system(size: 15, weight: .bold))
+                        .foregroundColor(.white)
+                }
+
                 SignInWithAppleButton { request in
                     authViewModel.send(action: .appleLogin(request))
                 } onCompletion: { result in
                     authViewModel.send(action: .appleLoginCompletion(result))
                 }
                 .frame(height: 50)
-                .padding(.horizontal, 30)
-                .padding(.bottom, 40)
             }
+            .padding(.bottom, 40)
+            .padding(.horizontal, 30)
         }
         .ignoresSafeArea()
     }

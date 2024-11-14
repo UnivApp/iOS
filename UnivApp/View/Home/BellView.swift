@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BellView: View {
     @StateObject var viewModel: CalendarViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
     @Environment(\.dismiss) var dismiss
     @Binding var isPopup: Bool
     
@@ -83,9 +84,17 @@ struct BellView: View {
             ScrollViewReader { proxy in
                 ScrollView(.vertical) {
                     if viewModel.alarmData.isEmpty {
-                        Text("설정된 알림이 없어요! 🔕")
-                            .font(.system(size: 15, weight: .semibold))
-                            .foregroundColor(.gray)
+                        if let memberState = (UserDefaults.standard.value(forKey: "nonMember")) {
+                            Text((memberState as! String == "false") ? "설정된 알림이 없어요! 🔕" : "로그인 후 알림 설정이 가능합니다!")
+                                .font(.system(size: 15, weight: .semibold))
+                                .foregroundColor(.gray)
+                        } else {
+                            ErrorView()
+                                .onAppear {
+                                    authViewModel.authState = .unAuth
+                                    authViewModel.refreshTokenState = .Expired
+                                }
+                        }
                     } else {
                         ForEach(viewModel.alarmData.indices, id: \.self) { index in
                             AlarmDataCell(selectedIndex: $ScrollIndex, model: viewModel.alarmData[index], index: index)
@@ -157,5 +166,6 @@ struct BellView_Previews: PreviewProvider {
     static var previews: some View {
         @State var isAlert: Bool = false
         BellView(viewModel: CalendarViewModel(container: .init(services: StubServices())), isPopup: $isAlert)
+            .environmentObject(AuthViewModel(container: .init(services: StubServices()), authState: .auth))
     }
 }

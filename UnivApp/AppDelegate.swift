@@ -10,6 +10,8 @@ import FirebaseMessaging
 import FirebaseCore
 import UIKit
 import SwiftKeychainWrapper
+import AdSupport
+import AppTrackingTransparency
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     

@@ -25,6 +25,7 @@ class AuthViewModel: ObservableObject {
         case checkAuthState
         case appleLogin(ASAuthorizationAppleIDRequest)
         case appleLoginCompletion(Result<ASAuthorization, Error>)
+        case nonMemberLogin
         case logout
         case withdraw
     }
@@ -61,8 +62,10 @@ class AuthViewModel: ObservableObject {
                 } receiveValue: { [weak self] checkStatus in
                     if checkStatus.loggedIn {
                         self?.authState = .auth
-                        if checkStatus.nicknameSet == false {
-                            self?.isNicknamePopup = true
+                        if let memberState = (UserDefaults.standard.value(forKey: "nonMember")) {
+                            if (checkStatus.nicknameSet == false) && (memberState as! String == "false") {
+                                self?.isNicknamePopup = true
+                            }
                         }
                     } else {
                         self?.authState = .unAuth
@@ -90,6 +93,8 @@ class AuthViewModel: ObservableObject {
                     } receiveValue: { [weak self] user in
                         self?.userId = user.accessToken
                         self?.authState = .auth
+                        UserDefaults.standard.removeObject(forKey: "nonMember")
+                        UserDefaults.standard.setValue("false", forKey: "nonMember")
                         if let accessToken = user.accessToken,
                            let refreshToken = user.refreshToken {
                             KeychainWrapper.standard.removeAllKeys()
@@ -101,6 +106,28 @@ class AuthViewModel: ObservableObject {
             } else if case let .failure(error) = result {
                 print(error.localizedDescription)
             }
+            
+        case .nonMemberLogin:
+            self.phase = .loading
+            container.services.authService.nonMemberLogin()
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.phase = .fail
+                        self?.authState = .unAuth
+                    }
+                } receiveValue: { [weak self] user in
+                    self?.userId = user.accessToken
+                    self?.authState = .auth
+                    UserDefaults.standard.removeObject(forKey: "nonMember")
+                    UserDefaults.standard.setValue("true", forKey: "nonMember")
+                    if let accessToken = user.accessToken,
+                       let refreshToken = user.refreshToken {
+                        KeychainWrapper.standard.removeAllKeys()
+                        KeychainWrapper.standard.set("Bearer \(accessToken)", forKey: "JWTaccessToken")
+                        KeychainWrapper.standard.set(refreshToken, forKey: "JWTrefreshToken")
+                        self?.send(action: .checkAuthState)
+                    }
+                }.store(in: &subscriptions)
             
         case .logout:
             self.phase = .loading

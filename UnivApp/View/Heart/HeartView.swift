@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HeartView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
     @StateObject var viewModel: HeartViewModel
     
     @State private var showAlert: Bool = false
@@ -44,7 +45,21 @@ struct HeartView: View {
     var loadedView: some View {
         NavigationStack {
             VStack {
-                list
+                if let memberState = (UserDefaults.standard.value(forKey: "nonMember")) {
+                    if memberState as! String == "false" {
+                        list
+                    } else {
+                        Text("로그인 후 관심대학 설정이 가능합니다!")
+                            .font(.system(size: 15, weight: .semibold))
+                            .foregroundColor(.gray)
+                    }
+                } else {
+                    ErrorView()
+                        .onAppear {
+                            authViewModel.authState = .unAuth
+                            authViewModel.refreshTokenState = .Expired
+                        }
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -108,5 +123,6 @@ struct HeartView_Previews: PreviewProvider {
     static let authViewModel = AuthViewModel(container: .init(services: StubServices()), authState: .auth)
     static var previews: some View {
         HeartView(viewModel: HeartViewModel(container: self.container))
+            .environmentObject(authViewModel)
     }
 }

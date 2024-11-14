@@ -19,18 +19,23 @@ struct MainTabView: View {
                     switch tab {
                     case .home:
                         HomeView(viewModel: HomeViewModel(container: self.container), listViewModel: ListViewModel(container: self.container, searchText: ""))
+                            .environmentObject(authViewModel)
                         
                     case .list:
                         ListView(viewModel: ListViewModel(container: self.container, searchText: .init()))
+                            .environmentObject(authViewModel)
                         
                     case .calendar:
                         CalendarContainer(viewModel: CalendarViewModel(container: self.container))
+                            .environmentObject(authViewModel)
                         
                     case .heart:
                         HeartView(viewModel: HeartViewModel(container: self.container))
+                            .environmentObject(authViewModel)
                         
                     case .setting:
                         SettingView(viewModel: SettingViewModel(container: self.container))
+                            .environmentObject(authViewModel)
                     }
                 }
                 .tabItem {

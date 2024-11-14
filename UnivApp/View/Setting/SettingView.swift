@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SettingView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
     @StateObject var viewModel: SettingViewModel
     @State var isPresented: Bool = false
     
@@ -75,29 +76,54 @@ struct SettingView: View {
                 .padding(10)
                 .background(Circle().fill(.white).shadow(radius: 1))
             
-            Group {
-                Text("  \(viewModel.userNickname)")
-                    .foregroundColor(.orange)
-                    .font(.system(size: 20, weight: .heavy))
-                +
-                Text("님\n 환영합니다!")
-                    .foregroundColor(.black)
-                    .font(.system(size: 20, weight: .semibold))
-            }
-            .multilineTextAlignment(.leading)
-            .padding(.top, 10)
-            .overlay(alignment: .topLeading) {
-                Button {
-                    isPresented = true
-                } label: {
-                    Image(systemName: "pencil.circle.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 15, height: 15)
-                        .foregroundColor(.blue.opacity(0.7))
-                        .padding(.top, -5)
-                        .padding(.leading, -10)
+            if let memberState = (UserDefaults.standard.value(forKey: "nonMember")) {
+                if memberState as! String == "false" {
+                    Group {
+                        Text("  \(viewModel.userNickname)")
+                            .foregroundColor(.orange)
+                            .font(.system(size: 20, weight: .heavy))
+                        +
+                        Text("님\n 환영합니다!")
+                            .foregroundColor(.black)
+                            .font(.system(size: 20, weight: .semibold))
+                    }
+                    .multilineTextAlignment(.leading)
+                    .padding(.top, 10)
+                    .overlay(alignment: .topLeading) {
+                        Button {
+                            isPresented = true
+                        } label: {
+                            Image(systemName: "pencil.circle.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 15, height: 15)
+                                .foregroundColor(.blue.opacity(0.7))
+                                .padding(.top, -5)
+                                .padding(.leading, -10)
+                        }
+                    }
+                } else {
+                    Button {
+                        authViewModel.authState = .unAuth
+                    } label: {
+                        VStack(alignment: .leading) {
+                            Text("로그인 및 회원가입하기 >")
+                                .foregroundColor(.orange)
+                                .font(.system(size: 14, weight: .semibold))
+                            
+                            Text("가입하고 더 많은 기능을 사용해 보세요!")
+                                .foregroundColor(.gray)
+                                .font(.system(size: 11, weight: .regular))
+                        }
+                        .multilineTextAlignment(.leading)
+                    }
                 }
+            } else {
+                ErrorView()
+                    .onAppear {
+                        authViewModel.authState = .unAuth
+                        authViewModel.refreshTokenState = .Expired
+                    }
             }
             Spacer()
         }
@@ -118,36 +144,80 @@ struct SettingView: View {
             VStack(spacing: 10) {
                 ForEach(SettingType.allCases, id: \.self) { cases in
                     if cases != .bell {
-                        NavigationLink(destination: cases.view) {
-                            VStack(spacing: 20) {
-                                HStack {
-                                    HStack(alignment: .center, spacing: 20) {
-                                        Image(systemName: cases.image)
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 20, height: 20)
-                                            .foregroundColor(.black.opacity(0.7))
-                                        
-                                        VStack(alignment: .leading) {
-                                            Text(cases.title)
-                                                .foregroundColor(.black.opacity(0.7))
-                                                .font(.system(size: 13, weight: .bold))
-                                            
-                                            Text(cases.description)
-                                                .foregroundColor(.gray)
-                                                .font(.system(size: 12, weight: .regular))
+                        if (cases == .logout) || (cases == .withdraw) {
+                            if let memberState = (UserDefaults.standard.value(forKey: "nonMember")) {
+                                if memberState as! String == "false" {
+                                    NavigationLink(destination: cases.view) {
+                                        VStack(spacing: 20) {
+                                            HStack {
+                                                HStack(alignment: .center, spacing: 20) {
+                                                    Image(systemName: cases.image)
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .frame(width: 20, height: 20)
+                                                        .foregroundColor(.black.opacity(0.7))
+                                                    
+                                                    VStack(alignment: .leading) {
+                                                        Text(cases.title)
+                                                            .foregroundColor(.black.opacity(0.7))
+                                                            .font(.system(size: 13, weight: .bold))
+                                                        
+                                                        Text(cases.description)
+                                                            .foregroundColor(.gray)
+                                                            .font(.system(size: 12, weight: .regular))
+                                                    }
+                                                    Spacer()
+                                                    Image("arrow_fill")
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .frame(width: 15, height: 15)
+                                                }
+                                                .multilineTextAlignment(.leading)
+                                            }
+                                            Divider()
                                         }
-                                        Spacer()
-                                        Image("arrow_fill")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 15, height: 15)
+                                        .padding(.vertical, 5)
                                     }
-                                    .multilineTextAlignment(.leading)
                                 }
-                                Divider()
+                            } else {
+                                ErrorView()
+                                    .onAppear {
+                                        authViewModel.authState = .unAuth
+                                        authViewModel.refreshTokenState = .Expired
+                                    }
                             }
-                            .padding(.vertical, 5)
+                        } else {
+                            NavigationLink(destination: cases.view) {
+                                VStack(spacing: 20) {
+                                    HStack {
+                                        HStack(alignment: .center, spacing: 20) {
+                                            Image(systemName: cases.image)
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 20, height: 20)
+                                                .foregroundColor(.black.opacity(0.7))
+                                            
+                                            VStack(alignment: .leading) {
+                                                Text(cases.title)
+                                                    .foregroundColor(.black.opacity(0.7))
+                                                    .font(.system(size: 13, weight: .bold))
+                                                
+                                                Text(cases.description)
+                                                    .foregroundColor(.gray)
+                                                    .font(.system(size: 12, weight: .regular))
+                                            }
+                                            Spacer()
+                                            Image("arrow_fill")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 15, height: 15)
+                                        }
+                                        .multilineTextAlignment(.leading)
+                                    }
+                                    Divider()
+                                }
+                                .padding(.vertical, 5)
+                            }
                         }
                     } else {
                         NavigationLink(destination: BellView(viewModel: .init(container: .init(services: Services())), isPopup: $isPresented)) {
@@ -191,4 +261,5 @@ struct SettingView: View {
 
 #Preview {
     SettingView(viewModel: SettingViewModel(container: .init(services: StubServices())))
+        .environmentObject(AuthViewModel(container: .init(services: StubServices()), authState: .auth))
 }
