@@ -198,10 +198,12 @@ struct HomeView: View {
             
             TabView(selection: $currentIndex) {
                 ForEach(viewModel.posterData.indices, id: \.self) { index in
-                    Image(viewModel.posterData[index])
-                        .resizable()
-                        .scaledToFill()
-                        .tag(index)
+                    NavigationLink(destination: viewModel.posterData[index].view) {
+                        Image(viewModel.posterData[index].imageName)
+                            .resizable()
+                            .scaledToFill()
+                            .tag(index)
+                    }
                 }
             }
             .frame(width: UIScreen.main.bounds.width - 40, height: (UIScreen.main.bounds.width - 40) / 3)

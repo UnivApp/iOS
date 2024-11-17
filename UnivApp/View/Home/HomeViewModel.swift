@@ -10,6 +10,47 @@ import Combine
 import UIKit
 import SwiftUI
 
+struct PosterData {
+    let imageName: String
+    let view: AnyView
+}
+
+enum PosterType: CaseIterable {
+    case food, event, rank, festival, mou, play, news
+    
+    var imageName: String {
+        switch self {
+        case .food: return "food_poster"
+        case .event: return "event_poster"
+        case .rank: return "rank_poster"
+        case .festival: return "festival_poster"
+        case .mou: return "mou_poster"
+        case .play: return "play_poster"
+        case .news: return "news_poster"
+        }
+    }
+    
+    func view(container: DIContainer) -> AnyView {
+        switch self {
+        case .food:
+            return AnyView(FoodView(viewModel: .init(container: container), listViewModel: .init(container: container, searchText: .init())))
+        case .event:
+            return AnyView(CalendarContainer(viewModel: .init(container: container)))
+        case .rank:
+            return AnyView(InitiativeView(viewModel: .init(container: container)))
+        case .festival:
+            return AnyView(FestivalView(viewModel: .init(container: container), listViewModel: .init(container: container, searchText: .init())))
+        case .mou:
+            return AnyView(MouView(viewModel: .init(container: container)))
+        case .play:
+            return AnyView(PlayView(viewModel: .init(container: container)))
+        case .news:
+            return AnyView(InfoView(viewModel: .init(container: container)))
+        }
+    }
+}
+
+
 class HomeViewModel: ObservableObject {
     
     enum Action {
@@ -25,10 +66,13 @@ class HomeViewModel: ObservableObject {
     
     private var container: DIContainer
     private var subscriptions = Set<AnyCancellable>()
-    let posterData: [String] = ["food_poster", "event_poster", "rank_poster", "festival_poster", "mou_poster", "play_poster", "news_poster"]
+    let posterData: [PosterData]
     
     init(container: DIContainer) {
         self.container = container
+        self.posterData = PosterType.allCases.map { type in
+            PosterData(imageName: type.imageName, view: type.view(container: container))
+        }
     }
     
     func send(action: Action) {

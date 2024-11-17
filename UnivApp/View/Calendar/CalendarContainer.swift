@@ -16,6 +16,7 @@ struct AlarmPhase {
 struct CalendarContainer: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @StateObject var viewModel: CalendarViewModel
+    @Environment(\.dismiss) var dismiss
     
     @State var isSelected: Bool = false
     @State var isAlert: Bool = false
@@ -68,6 +69,19 @@ struct CalendarContainer: View {
                     title: Text("알림 \(alarmPhase.type) \(alarmPhase.isSuccess ? "성공" : "실패") 🔔"),
                     buttons: [.default(Text("확인"))]
                 )
+            }
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image("blackback")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                    }
+                }
             }
     }
     
