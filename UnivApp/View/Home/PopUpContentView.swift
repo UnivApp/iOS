@@ -70,7 +70,7 @@ fileprivate struct PopUpCell: View {
                 Button {
                     self.isPresented = true
                 } label: {
-                    Text("정보 보기 >")
+                    Text("정보 보기 ▷")
                         .foregroundColor(.black.opacity(0.5))
                         .font(.system(size: 12, weight: .semibold))
                         .lineLimit(1)

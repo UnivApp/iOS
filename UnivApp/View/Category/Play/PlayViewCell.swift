@@ -32,7 +32,7 @@ struct PlayViewCell: View {
                     .foregroundColor(.black)
                 Spacer()
                 NavigationLink(destination: PlaySchoolView(viewModel: self.playViewModel, summaryModel: self.summaryModel)) {
-                    Text("주변 핫플 알아보기 >")
+                    Text("주변 핫플 알아보기 ▷")
                         .foregroundColor(.black.opacity(0.5))
                         .font(.system(size: 12, weight: .semibold))
                         .lineLimit(1)

@@ -86,7 +86,7 @@ fileprivate struct FestivalViewCell: View {
                     .foregroundColor(.black)
                 Spacer()
                 NavigationLink(destination: EmptyView()) {
-                    Text("학교 축제 알아보기 >")
+                    Text("학교 축제 알아보기 ▷")
                         .foregroundColor(.black.opacity(0.5))
                         .font(.system(size: 12, weight: .semibold))
                         .lineLimit(1)

@@ -163,7 +163,7 @@ fileprivate struct MoneySchoolCell: View {
                     .foregroundColor(.black)
                 Spacer()
                 NavigationLink(destination: MoneyDetailView(viewModel: MoneyDetailViewModel(container: .init(services: Services())), model: summaryModel)) {
-                    Text("주변 월세 알아보기 >")
+                    Text("주변 월세 알아보기 ▷")
                         .foregroundColor(.black.opacity(0.5))
                         .font(.system(size: 12, weight: .semibold))
                         .lineLimit(1)

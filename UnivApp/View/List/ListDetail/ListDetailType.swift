@@ -16,7 +16,7 @@ enum ListDetailType: String, CaseIterable {
     case info
     case Diagnosis
     case food
-    case chat
+    case festival
     
     var title: String {
         switch self {
@@ -34,8 +34,8 @@ enum ListDetailType: String, CaseIterable {
             return "학과매칭"
         case .food:
             return "맛집"
-        case .chat:
-            return "위봇"
+        case .festival:
+            return "축제"
         }
     }
     
@@ -55,8 +55,8 @@ enum ListDetailType: String, CaseIterable {
             return Image("Diagnosis")
         case .food:
             return Image("food")
-        case .chat:
-            return Image("chat")
+        case .festival:
+            return Image("festival")
         }
     }
     
@@ -76,15 +76,15 @@ enum ListDetailType: String, CaseIterable {
             return "나에게 맞는 학과를 확인해 보세요!"
         case .food:
             return "대학 주변의 맛집을 확인해 보세요!"
-        case .chat:
-            return "위봇에게 궁금한 점을 물어보세요!"
+        case .festival:
+            return "대학 축제를 확인하고 미리 즐겨보세요!"
         }
     }
     
     var view: AnyView {
         switch self {
-        case .chat:
-            return AnyView(ChatView(viewModel: .init(container: .init(services: Services()))))
+        case .festival:
+            return AnyView(FestivalView(viewModel: .init(container: .init(services: Services())), listViewModel: .init(container: .init(services: Services()), searchText: .init())))
         case .food:
             return AnyView(FoodView(viewModel: FoodViewModel(container: .init(services: Services())), listViewModel: ListViewModel(container: .init(services: Services()), searchText: .init())))
         case .Diagnosis:

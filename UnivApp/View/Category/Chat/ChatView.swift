@@ -13,6 +13,7 @@ struct ChatView: View {
     @State private var isAlert: Bool = false
     @State private var isPresented: Bool = true
     @FocusState private var isTextFieldFocused: Bool
+    @Binding var isPopPresented: Bool
     
     var body: some View {
         contentView
@@ -39,7 +40,7 @@ struct ChatView: View {
     
     var loadedView: some View {
         VStack(alignment: .center, spacing: 10) {
-            ChatNavigationView()
+            ChatNavigationView(isPresented: $isPopPresented)
             
             ZStack {
                 ScrollViewReader { proxy in
@@ -206,11 +207,11 @@ fileprivate struct QuestionButton: View {
 }
 
 fileprivate struct ChatNavigationView: View {
-    @Environment(\.dismiss) var dismiss
+    @Binding var isPresented: Bool
     var body: some View {
         HStack {
             Button {
-                dismiss()
+                isPresented = false
             } label: {
                 HStack(spacing: 10) {
                     Image("blackback")
@@ -238,10 +239,10 @@ fileprivate struct ChatNavigationView: View {
     }
 }
 
-struct ChatView_Previews: PreviewProvider {
-    static var previews: some View {
-        
-        ChatView(viewModel: ChatViewModel(container: .init(services: StubServices())))
-    }
-}
+//struct ChatView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        
+//        ChatView(viewModel: ChatViewModel(container: .init(services: StubServices())), isPopPresented: Binding)
+//    }
+//}
 
