@@ -19,7 +19,6 @@ struct FestivalSegmentView: View {
                     .resizable()
                     .scaledToFit()
                     .padding(.horizontal, 40)
-                
                 FestivalChartView(dataPoints: [ChartData(label: model[1].name, value: Double(model[1].count), xLabel: "", yLabel: "", year: ""), ChartData(label: model[0].name, value: Double(model[0].count), xLabel: "", yLabel: "", year: ""), ChartData(label: model[2].name, value: Double(model[2].count), xLabel: "", yLabel: "", year: "")], index: [2, 1, 3])
                     .padding(.top, -30)
                 
