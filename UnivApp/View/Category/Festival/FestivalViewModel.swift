@@ -13,9 +13,10 @@ class FestivalViewModel: ObservableObject {
     enum Action {
         case topLoad
         case detailLoad
+        case getArtist(String, Int)
     }
     
-    @Published var talentData: [TalentModel] = [TalentModel(name: "싸이", image: "", count: 12),TalentModel(name: "다비치", image: "", count: 9),TalentModel(name: "다니아믹듀오", image: "", count: 6),TalentModel(name: "싸이", image: "", count: 78)]
+    @Published var talentData: [TalentModel] = [TalentModel(name: "싸이", image: "", count: 12),TalentModel(name: "다비치", image: "", count: 9),TalentModel(name: "다이나믹듀오", image: "", count: 6)]
     @Published var festivalData: [FestivalModel] = []
     @Published var phase: Phase = .notRequested
     private var container: DIContainer
@@ -29,12 +30,25 @@ class FestivalViewModel: ObservableObject {
         switch action {
         case .topLoad:
             self.phase = .loading
-            self.phase = .success
-            return
+            for index in talentData.indices {
+                self.send(action: .getArtist(talentData[index].name, index))
+            }
+            
         case .detailLoad:
             self.phase = .loading
             self.phase = .success
-            return
+            
+        case let .getArtist(name, index):
+            container.services.festivalService.getArtist(name: name)
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.talentData[index].image = ""
+                    }
+                } receiveValue: { [weak self] artist in
+                    self?.talentData[index].image = artist
+                    self?.phase = .success
+                }
+                .store(in: &subscriptions)
         }
     }
 }

@@ -12,6 +12,7 @@ import Charts
 struct FestivalSegmentView: View {
     var model: [TalentModel]
     var summaryArray: [SummaryModel]
+    
     var body: some View {
         ScrollView(.vertical) {
             VStack(alignment: .center, spacing: 30) {
@@ -19,7 +20,7 @@ struct FestivalSegmentView: View {
                     .resizable()
                     .scaledToFit()
                     .padding(.horizontal, 40)
-                FestivalChartView(dataPoints: [ChartData(label: model[1].name, value: Double(model[1].count), xLabel: "", yLabel: "", year: ""), ChartData(label: model[0].name, value: Double(model[0].count), xLabel: "", yLabel: "", year: ""), ChartData(label: model[2].name, value: Double(model[2].count), xLabel: "", yLabel: "", year: "")], index: [2, 1, 3])
+                FestivalChartView(dataPoints: [ChartData(label: model[1].name, value: Double(model[1].count), xLabel: "", yLabel: "", year: ""), ChartData(label: model[0].name, value: Double(model[0].count), xLabel: "", yLabel: "", year: ""), ChartData(label: model[2].name, value: Double(model[2].count), xLabel: "", yLabel: "", year: "")], index: [2, 1, 3], images: model)
                     .padding(.top, -30)
                 
                 Image("festival_poster")
@@ -91,9 +92,10 @@ struct FestivalSegmentView: View {
     }
 }
 
-struct FestivalChartView: View {
+fileprivate struct FestivalChartView: View {
     var dataPoints: [ChartData]
     var index: [Int]
+    var images: [TalentModel]
     var date: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy년 MM월 dd일"
@@ -156,12 +158,21 @@ struct FestivalChartView: View {
                         .foregroundColor(.white)
                     }
                     .annotation(position: .top) {
-                            Image("psy")
+                        if let imageURL = URL(string: images[self.index[index]-1].image) {
+                            KFImage(imageURL)
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 30, height: 30)
                                 .cornerRadius(15)
                                 .padding(.bottom, -10)
+                        } else {
+                            Image("smile")
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 30, height: 30)
+                                .cornerRadius(15)
+                                .padding(.bottom, -10)
+                        }
                     }
                 }
             }
@@ -182,17 +193,27 @@ fileprivate struct TalentListCellView: View {
     var index: Int
     var size: [CGFloat]
     var body: some View {
-        VStack(alignment: .center, spacing: 10) {
+        VStack(alignment: .center, spacing: 30) {
             HStack(alignment: .center, spacing: 30) {
                 Text("\(index)")
                     .font(.system(size: 13, weight: .heavy))
                     .foregroundColor(.black.opacity(0.5))
                 
-                Image("psy")
-                    .resizable()
-                    .scaledToFill()
-                    .clipShape(Circle())
-                    .frame(width: size[0], height: size[1])
+                if let imageURL = URL(string: model.image) {
+                    KFImage(imageURL)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: size[0], height: size[1])
+                        .cornerRadius(15)
+                        .padding(.bottom, -10)
+                } else {
+                    Image("smile")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: size[0], height: size[1])
+                        .cornerRadius(15)
+                        .padding(.bottom, -10)
+                }
                 Text(model.name)
                     .font(.system(size: 15, weight: .bold))
                     .foregroundColor(.black.opacity(0.7))
@@ -214,5 +235,5 @@ fileprivate struct TalentListCellView: View {
 
 
 #Preview {
-    FestivalSegmentView(model: [TalentModel(name: "싸이", image: "", count: 300),TalentModel(name: "다비치", image: "", count: 200),TalentModel(name: "다니아믹듀오", image: "", count: 100),TalentModel(name: "싸이", image: "", count: 78)], summaryArray: [SummaryModel(universityId: nil, fullName: nil, logo: nil, starNum: nil, starred: nil)])
+    FestivalSegmentView(model: [TalentModel(name: "싸이", image: "", count: 300),TalentModel(name: "다비치", image: "", count: 200),TalentModel(name: "다이나믹듀오", image: "", count: 100),TalentModel(name: "싸이", image: "", count: 78)], summaryArray: [SummaryModel(universityId: nil, fullName: nil, logo: nil, starNum: nil, starred: nil)])
 }

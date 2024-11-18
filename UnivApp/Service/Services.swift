@@ -29,6 +29,7 @@ protocol ServicesType {
     var mouService: MouServiceType { get set }
     var moneyService: MoneyServiceType { get set }
     var diagnosisService: DiagnosisServiceType { get set }
+    var festivalService: FestivalServiceType { get set }
 }
 
 class Services: ServicesType {
@@ -47,6 +48,7 @@ class Services: ServicesType {
     var moneyService: MoneyServiceType
     var diagnosisService: DiagnosisServiceType
     var settingService: SettingServiceType
+    var festivalService: FestivalServiceType
     
     init() {
         self.authService = AuthService()
@@ -64,6 +66,7 @@ class Services: ServicesType {
         self.moneyService = MoneyService()
         self.diagnosisService = DiagnosisService()
         self.settingService = SettingService()
+        self.festivalService = FestivalService()
     }
     
 }
@@ -84,4 +87,5 @@ class StubServices: ServicesType {
     var moneyService: MoneyServiceType = StubMoneyService()
     var diagnosisService: DiagnosisServiceType = StubDiagnosisService()
     var settingService: SettingServiceType = StubSettingService()
+    var festivalService: FestivalServiceType = StubFestivalService()
 }

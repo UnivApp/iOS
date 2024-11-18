@@ -32,6 +32,10 @@
 		E41589422CBFCA9F00EDB211 /* DiagnosisResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41589412CBFCA9F00EDB211 /* DiagnosisResultView.swift */; };
 		E47B2ECF2C79AF4C0039E2E0 /* SettingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47B2ECE2C79AF4C0039E2E0 /* SettingType.swift */; };
 		E48904C42CDCE060003F566A /* firework-unscreen.gif in Resources */ = {isa = PBXBuildFile; fileRef = E48904C32CDCE060003F566A /* firework-unscreen.gif */; };
+		E48905322CEB0CAA003F566A /* FestivalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48905312CEB0CAA003F566A /* FestivalService.swift */; };
+		E48905382CEB1CE5003F566A /* FestivalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48905372CEB1CE5003F566A /* FestivalDetailView.swift */; };
+		E489053B2CEB1CF9003F566A /* FestivalDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E489053A2CEB1CF9003F566A /* FestivalDetailViewModel.swift */; };
+		E489053D2CEB1E41003F566A /* FestivalDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E489053C2CEB1E41003F566A /* FestivalDetailModel.swift */; };
 		E49222702C9C87DA0077EA45 /* RequestInterceptor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E492226F2C9C87DA0077EA45 /* RequestInterceptor + Extension.swift */; };
 		E49222752C9EE7650077EA45 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49222742C9EE7650077EA45 /* ChartView.swift */; };
 		E49222792C9F10240077EA45 /* SeperateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49222782C9F10240077EA45 /* SeperateView.swift */; };
@@ -206,6 +210,10 @@
 		E41589412CBFCA9F00EDB211 /* DiagnosisResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisResultView.swift; sourceTree = "<group>"; };
 		E47B2ECE2C79AF4C0039E2E0 /* SettingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingType.swift; sourceTree = "<group>"; };
 		E48904C32CDCE060003F566A /* firework-unscreen.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "firework-unscreen.gif"; sourceTree = "<group>"; };
+		E48905312CEB0CAA003F566A /* FestivalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FestivalService.swift; sourceTree = "<group>"; };
+		E48905372CEB1CE5003F566A /* FestivalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FestivalDetailView.swift; sourceTree = "<group>"; };
+		E489053A2CEB1CF9003F566A /* FestivalDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FestivalDetailViewModel.swift; sourceTree = "<group>"; };
+		E489053C2CEB1E41003F566A /* FestivalDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FestivalDetailModel.swift; sourceTree = "<group>"; };
 		E492226F2C9C87DA0077EA45 /* RequestInterceptor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RequestInterceptor + Extension.swift"; sourceTree = "<group>"; };
 		E49222742C9EE7650077EA45 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		E49222782C9F10240077EA45 /* SeperateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeperateView.swift; sourceTree = "<group>"; };
@@ -423,6 +431,30 @@
 			path = Diagnosis;
 			sourceTree = "<group>";
 		};
+		E48905352CEB115B003F566A /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				E4953D722C8EDB35008CBDE5 /* ListService.swift */,
+				E4B3FD252C77A26D00CB98F3 /* AuthService.swift */,
+				E4953D7F2C8EECC8008CBDE5 /* HomeService.swift */,
+				E4953D912C8F3AA3008CBDE5 /* SearchService.swift */,
+				E4953D932C901971008CBDE5 /* HeartService.swift */,
+				E4CEEFBD2CBA4A9D001F4DAE /* RateService.swift */,
+				E4CCE6C92CC0F2BA00483A87 /* CalendarService.swift */,
+				E4982D152CD4C7E700D0F1A7 /* SettingService.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		E48905392CEB1CEA003F566A /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				E48905372CEB1CE5003F566A /* FestivalDetailView.swift */,
+				E489053A2CEB1CF9003F566A /* FestivalDetailViewModel.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
 		E49222712C9EE7480077EA45 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
@@ -544,6 +576,7 @@
 			isa = PBXGroup;
 			children = (
 				E4982D222CDC9DB800D0F1A7 /* FestivalModel.swift */,
+				E489053C2CEB1E41003F566A /* FestivalDetailModel.swift */,
 			);
 			path = Festival;
 			sourceTree = "<group>";
@@ -551,6 +584,7 @@
 		E4982D242CDC9FB300D0F1A7 /* SegmentType */ = {
 			isa = PBXGroup;
 			children = (
+				E48905392CEB1CEA003F566A /* Detail */,
 				E4982D252CDC9FC600D0F1A7 /* FestivalSegmentView.swift */,
 				E4982D272CDC9FD700D0F1A7 /* FestivalSchoolView.swift */,
 			);
@@ -822,17 +856,10 @@
 		E4B3FCFC2C7755B500CB98F3 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				E4B3FD032C77577100CB98F3 /* Services.swift */,
 				E4953D692C8ECE3C008CBDE5 /* Alamofire */,
 				E4C2643E2CB3FE7B00E01480 /* Category */,
-				E4B3FD032C77577100CB98F3 /* Services.swift */,
-				E4953D722C8EDB35008CBDE5 /* ListService.swift */,
-				E4B3FD252C77A26D00CB98F3 /* AuthService.swift */,
-				E4953D7F2C8EECC8008CBDE5 /* HomeService.swift */,
-				E4953D912C8F3AA3008CBDE5 /* SearchService.swift */,
-				E4953D932C901971008CBDE5 /* HeartService.swift */,
-				E4CEEFBD2CBA4A9D001F4DAE /* RateService.swift */,
-				E4CCE6C92CC0F2BA00483A87 /* CalendarService.swift */,
-				E4982D152CD4C7E700D0F1A7 /* SettingService.swift */,
+				E48905352CEB115B003F566A /* Main */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -935,6 +962,7 @@
 				E41589192CBE409D00EDB211 /* MouService.swift */,
 				E4CCE6CB2CC2797900483A87 /* MoneyService.swift */,
 				E4CCE6E12CC62BBD00483A87 /* DiagnosisService.swift */,
+				E48905312CEB0CAA003F566A /* FestivalService.swift */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1241,7 +1269,9 @@
 				E4953D732C8EDB35008CBDE5 /* ListService.swift in Sources */,
 				E4953D442C89D60D008CBDE5 /* PlayDetailView.swift in Sources */,
 				E4F04BEF2C94475100F653DF /* CalendarView.swift in Sources */,
+				E48905322CEB0CAA003F566A /* FestivalService.swift in Sources */,
 				E49C9FBC2C86ED7C001F43A3 /* MouView.swift in Sources */,
+				E489053D2CEB1E41003F566A /* FestivalDetailModel.swift in Sources */,
 				E4F04C0C2C9878A600F653DF /* CalendarViewModel.swift in Sources */,
 				E41589152CBD216B00EDB211 /* RateDetailView.swift in Sources */,
 				E4953D242C897CCE008CBDE5 /* ListDetailView.swift in Sources */,
@@ -1316,6 +1346,7 @@
 				E4B3FD022C77563600CB98F3 /* DIContainer.swift in Sources */,
 				E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */,
 				E4CCE6CE2CC27A1C00483A87 /* MoneyModel.swift in Sources */,
+				E48905382CEB1CE5003F566A /* FestivalDetailView.swift in Sources */,
 				E409A1412CAD563600E9CB1C /* PlaySchoolView.swift in Sources */,
 				E4CEEFBA2CB7F193001F4DAE /* EmploymentModel.swift in Sources */,
 				E4CCE6CA2CC0F2BA00483A87 /* CalendarService.swift in Sources */,
@@ -1334,6 +1365,7 @@
 				E4B3FD262C77A26D00CB98F3 /* AuthService.swift in Sources */,
 				E4953D282C899013008CBDE5 /* ListDetailType.swift in Sources */,
 				E4953D5E2C8B0DC3008CBDE5 /* Object.swift in Sources */,
+				E489053B2CEB1CF9003F566A /* FestivalDetailViewModel.swift in Sources */,
 				E4CCE6CC2CC2797900483A87 /* MoneyService.swift in Sources */,
 				E4953DA22C906399008CBDE5 /* WebKitView.swift in Sources */,
 				E40135EC2CA1CDEF0021D351 /* PlaySegmentType.swift in Sources */,
