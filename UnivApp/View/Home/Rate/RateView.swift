@@ -77,7 +77,7 @@ struct RateView: View {
                             .environmentObject(self.rateViewModel)
                     }
                 }
-                .padding(.horizontal)
+                .padding(.horizontal, 10)
             }
         }
         .padding(.horizontal, 20)
@@ -152,7 +152,7 @@ fileprivate struct RateCell: View {
                         .foregroundColor(.black.opacity(0.7))
                         .multilineTextAlignment(.center)
                 }
-                .frame(width: 60)
+                .frame(width: 80)
                 Spacer()
                 HStack(spacing: 30) {
                     ForEach(rates.indices, id: \.self) { index in
@@ -181,10 +181,10 @@ fileprivate struct RateCell: View {
                     
                     Text(competitionModel.name ?? "")
                         .font(.system(size: 10, weight: .semibold))
-                        .foregroundColor(Color.black)
+                        .foregroundColor(Color.black.opacity(0.7))
                         .multilineTextAlignment(.center)
                 }
-                .frame(width: 60)
+                .frame(width: 80)
                 Spacer()
                 if self.selectedType == .Occasion {
                     HStack(spacing: 30) {
