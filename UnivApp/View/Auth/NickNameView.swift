@@ -62,7 +62,7 @@ struct NickNameView: View {
                     if textState == viewModel.nickNameText {
                         Text("\((duplicatePhase) && (textState != "") ? "사용 가능한 닉네임 입니다!" : "사용 불가한 닉네임 입니다!")")
                             .font(.system(size: 12, weight: .semibold))
-                            .foregroundColor(duplicatePhase ? .blue.opacity(0.7) : .red.opacity(0.7))
+                            .foregroundColor((duplicatePhase) && (textState != "") ? .blue.opacity(0.7) : .red.opacity(0.7))
                     } else {
                         Text(viewModel.nickNameText == "" ? "빈 닉네임은 사용할 수 없어요😭" : "닉네임 중복 체크를 해주세요 ✅")
                             .font(.system(size: 12, weight: checkStateStress ? .heavy : .semibold))
@@ -95,6 +95,7 @@ struct NickNameView: View {
                     HStack(alignment: .center, spacing: 40) {
                         Button {
                             isPresented = false
+                            viewModel.nickNameText = ""
                         } label: {
                             Text("취소하기")
                                 .font(.system(size: 15, weight: .semibold))

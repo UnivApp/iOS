@@ -13,6 +13,7 @@ struct FestivalDetailView: View {
     @Environment(\.dismiss) var dismiss
     @State private var selectedSegment: String = "2024"
     @State private var currentIndex: Int = 0
+    @State private var maxRowCount: [Int] = []
     
     var body: some View {
         contentView
@@ -43,6 +44,14 @@ struct FestivalDetailView: View {
             LoadingView(url: "congratulations", size: [150, 150])
         case .success:
             loadedView
+                .onAppear {
+                    let currentYearData = viewModel.SchoolFestivalData[self.currentIndex].yearData
+                    maxRowCount = Array(repeating: 0, count: currentYearData.count)
+                    
+                    for (index, year) in currentYearData.enumerated() {
+                        maxRowCount[index] = year.lineup.map { $0.detailLineup.count }.max() ?? 0
+                    }
+                }
         case .fail:
             ErrorView()
         }
@@ -52,7 +61,7 @@ struct FestivalDetailView: View {
             ScrollViewReader { proxy in
                 ScrollView(.vertical) {
                     VStack(alignment: .center, spacing: 20) {
-                        FestivalDescriptionView(model: viewModel.SchoolFestivalData[self.currentIndex])
+                        FestivalDescriptionView(model: viewModel.SchoolFestivalData[self.currentIndex].yearData)
                             .environmentObject(viewModel)
                         
                         ScrollView(.horizontal, showsIndicators: false) {
@@ -62,7 +71,14 @@ struct FestivalDetailView: View {
                                         if self.selectedSegment != viewModel.SchoolFestivalData[index].year {
                                             self.selectedSegment = viewModel.SchoolFestivalData[index].year
                                             self.currentIndex = index
+                                            
                                             viewModel.send(.load(selectedSegment))
+                                            
+                                            let currentYearData = viewModel.SchoolFestivalData[self.currentIndex].yearData
+                                            maxRowCount = Array(repeating: 0, count: currentYearData.count)
+                                            for (index, year) in currentYearData.enumerated() {
+                                                maxRowCount[index] = year.lineup.map { $0.detailLineup.count }.max() ?? 0
+                                            }
                                         }
                                     } label: {
                                         Text("\(viewModel.SchoolFestivalData[index].year)년도")
@@ -80,7 +96,11 @@ struct FestivalDetailView: View {
                             .padding(.horizontal, 30)
                         }
                         
-                        DetailLineupView(model: viewModel.SchoolFestivalData[self.currentIndex])
+                        ForEach(viewModel.SchoolFestivalData[self.currentIndex].yearData.indices, id: \.self) { index in
+                            if index < maxRowCount.count {
+                                DetailLineupView(model: viewModel.SchoolFestivalData[self.currentIndex].yearData[index], maxRowCount: $maxRowCount[index])
+                            }
+                        }
                     }
                 }
                 .ignoresSafeArea()
@@ -92,13 +112,15 @@ struct FestivalDetailView: View {
 fileprivate struct FestivalDescriptionView: View {
     @EnvironmentObject var viewModel: FestivalDetailViewModel
     @State private var currentIndex: Int = 0
-    var model: FestivalDetailModel
+    var model: [FestivalYearData]
     
     var body: some View {
         Group {
-            let flattenedLineup = model.lineup.flatMap { lineup in
-                lineup.detailLineup.map { detail in
-                    (day: lineup.day, detailLineup: detail)
+            let flattenedLineup = model.flatMap { yearData in
+                yearData.lineup.flatMap { lineup in
+                    lineup.detailLineup.map { detail in
+                        (name: yearData.name, day: lineup.day, detailLineup: detail)
+                    }
                 }
             }
             
@@ -112,19 +134,21 @@ fileprivate struct FestivalDescriptionView: View {
                         } else {
                             Color.gray.opacity(0.2)
                                 .overlay(alignment: .center) {
-                                    ProgressView()
-                                        .progressViewStyle(.circular)
-                                        .tint(.gray)
+                                    if flattenedLineup[index].detailLineup.image == "" {
+                                        ProgressView()
+                                            .progressViewStyle(.circular)
+                                            .tint(.gray)
+                                    }
                                 }
                         }
                     }
                     .tag(index)
                 }
             }
-            .tabViewStyle(.page)
+            .tabViewStyle(PageTabViewStyle())
             .overlay(alignment: .bottomLeading) {
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("\(flattenedLineup[currentIndex].day)")
+                    Text("\(flattenedLineup[currentIndex].name) \(flattenedLineup[currentIndex].day)")
                         .font(.system(size: 15, weight: .heavy))
                         .padding(5)
                         .background(RoundedRectangle(cornerRadius: 15).fill(.orange))
@@ -148,7 +172,8 @@ fileprivate struct FestivalDescriptionView: View {
 }
 
 fileprivate struct DetailLineupView: View {
-    var model: FestivalDetailModel
+    var model: FestivalYearData
+    @Binding var maxRowCount: Int
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             VStack(alignment: .leading, spacing: 5) {
@@ -172,7 +197,7 @@ fileprivate struct DetailLineupView: View {
             .font(.system(size: 15, weight: .bold))
             .padding(.horizontal, 30)
             
-            CustomCalendar(model: self.model)
+            CustomCalendar(maxRowCount: $maxRowCount, model: self.model)
             
             SeperateView()
                 .frame(width: UIScreen.main.bounds.width, height: 20)
@@ -181,19 +206,11 @@ fileprivate struct DetailLineupView: View {
 }
 
 fileprivate struct CustomCalendar: View {
-    var model: FestivalDetailModel
+    @Binding var maxRowCount: Int
+    
+    var model: FestivalYearData
     private let week: [String] = ["day1", "day2", "day3", "day4", "day5"]
     private let columns = Array(repeating: GridItem(.flexible()), count: 5)
-    private let rowCount: [Int]
-    private let maxRowCount: Int
-    
-    init(model: FestivalDetailModel) {
-        self.model = model
-        self.rowCount = model.lineup.map { lineup in
-            lineup.detailLineup.count
-        }
-        self.maxRowCount = rowCount.max() ?? 0
-    }
     
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
@@ -234,20 +251,27 @@ fileprivate struct CustomCalendar: View {
                                                 .foregroundColor(.primary)
                                         }
                                     } else {
-                                        Circle()
-                                            .fill(.gray.opacity(0.2))
-                                            .frame(width: 40, height: 40)
-                                            .overlay(alignment: .center) {
-                                                ProgressView()
-                                                    .progressViewStyle(.circular)
-                                                    .tint(.gray)
-                                            }
+                                        VStack(alignment: .center, spacing: 3) {
+                                            Circle()
+                                                .fill(.gray.opacity(0.2))
+                                                .frame(width: 30, height: 30)
+                                                .overlay(alignment: .center) {
+                                                    if flattenedLineup[index].detailLineup.image == "" {
+                                                        ProgressView()
+                                                            .progressViewStyle(.circular)
+                                                            .tint(.gray)
+                                                    }
+                                                }
+                                            Text(flattenedLineup[index].detailLineup.name)
+                                                .font(.system(size: 10, weight: .semibold))
+                                                .foregroundColor(.primary)
+                                        }
                                     }
                                 }
                             }
                             Spacer()
                         }
-                        .frame(height: CGFloat(maxRowCount * 80))
+                        .frame(height: CGFloat(maxRowCount * 90))
                     }
                 }
                 .padding(.horizontal, 10)

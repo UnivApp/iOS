@@ -43,7 +43,7 @@ class FestivalViewModel: ObservableObject {
             container.services.festivalService.getArtist(name: name)
                 .sink { [weak self] completion in
                     if case .failure = completion {
-                        self?.talentData[index].image = ""
+                        self?.talentData[index].image = "no"
                     }
                 } receiveValue: { [weak self] artist in
                     self?.talentData[index].image = artist

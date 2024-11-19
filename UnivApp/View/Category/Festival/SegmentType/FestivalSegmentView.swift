@@ -166,9 +166,11 @@ fileprivate struct FestivalChartView: View {
                         } else {
                             Color.gray.opacity(0.2)
                                 .overlay(alignment: .center) {
-                                    ProgressView()
-                                        .progressViewStyle(.circular)
-                                        .tint(.gray)
+                                    if images[self.index[index]-1].image == "" {
+                                        ProgressView()
+                                            .progressViewStyle(.circular)
+                                            .tint(.gray)
+                                    }
                                 }
                                 .frame(width: 30, height: 30)
                                 .cornerRadius(15)
@@ -210,9 +212,11 @@ fileprivate struct TalentListCellView: View {
                 } else {
                     Color.gray.opacity(0.2)
                         .overlay(alignment: .center) {
-                            ProgressView()
-                                .progressViewStyle(.circular)
-                                .tint(.gray)
+                            if model.image == "" {
+                                ProgressView()
+                                    .progressViewStyle(.circular)
+                                    .tint(.gray)
+                            }
                         }
                         .frame(width: size[0], height: size[1])
                         .cornerRadius(15)

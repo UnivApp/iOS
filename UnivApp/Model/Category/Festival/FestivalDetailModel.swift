@@ -9,6 +9,11 @@ import Foundation
 
 struct FestivalDetailModel: Codable, Hashable {
     var year: String
+    var yearData: [FestivalYearData]
+}
+
+struct FestivalYearData: Codable, Hashable {
+    var year: String
     var name: String
     var date: String
     var play: String
