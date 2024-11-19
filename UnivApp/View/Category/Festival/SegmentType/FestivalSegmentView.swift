@@ -44,9 +44,7 @@ struct FestivalSegmentView: View {
                         HStack(spacing: 10) {
                             ForEach(summaryArray.indices, id: \.self) { index in
                                 if (index < 10) && (!summaryArray.isEmpty) {
-                                    Button  {
-                                        
-                                    } label: {
+                                    NavigationLink(destination: FestivalDetailView(viewModel: .init(container: .init(services: Services())))) {
                                         VStack(spacing: 5) {
                                             if let url = summaryArray[index].logo,
                                                let imageURL = URL(string: url),
@@ -166,9 +164,12 @@ fileprivate struct FestivalChartView: View {
                                 .cornerRadius(15)
                                 .padding(.bottom, -10)
                         } else {
-                            Image("smile")
-                                .resizable()
-                                .scaledToFill()
+                            Color.gray.opacity(0.2)
+                                .overlay(alignment: .center) {
+                                    ProgressView()
+                                        .progressViewStyle(.circular)
+                                        .tint(.gray)
+                                }
                                 .frame(width: 30, height: 30)
                                 .cornerRadius(15)
                                 .padding(.bottom, -10)
@@ -207,9 +208,12 @@ fileprivate struct TalentListCellView: View {
                         .cornerRadius(15)
                         .padding(.bottom, -10)
                 } else {
-                    Image("smile")
-                        .resizable()
-                        .scaledToFill()
+                    Color.gray.opacity(0.2)
+                        .overlay(alignment: .center) {
+                            ProgressView()
+                                .progressViewStyle(.circular)
+                                .tint(.gray)
+                        }
                         .frame(width: size[0], height: size[1])
                         .cornerRadius(15)
                         .padding(.bottom, -10)

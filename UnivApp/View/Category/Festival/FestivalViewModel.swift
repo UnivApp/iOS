@@ -32,6 +32,7 @@ class FestivalViewModel: ObservableObject {
             self.phase = .loading
             for index in talentData.indices {
                 self.send(action: .getArtist(talentData[index].name, index))
+                self.phase = .success
             }
             
         case .detailLoad:
@@ -46,7 +47,6 @@ class FestivalViewModel: ObservableObject {
                     }
                 } receiveValue: { [weak self] artist in
                     self?.talentData[index].image = artist
-                    self?.phase = .success
                 }
                 .store(in: &subscriptions)
         }

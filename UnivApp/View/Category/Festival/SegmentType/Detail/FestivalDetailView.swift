@@ -23,7 +23,7 @@ struct FestivalDetailView: View {
                     Button {
                         dismiss()
                     } label: {
-                        Image("blackback")
+                        Image("whiteback")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 20, height: 20)
@@ -109,12 +109,13 @@ fileprivate struct FestivalDescriptionView: View {
                             KFImage(url)
                                 .resizable()
                                 .scaledToFill()
-                                .opacity(0.7)
                         } else {
-                            Image(systemName: "photo.fill")
-                                .resizable()
-                                .scaledToFill()
-                                .opacity(0.7)
+                            Color.gray.opacity(0.2)
+                                .overlay(alignment: .center) {
+                                    ProgressView()
+                                        .progressViewStyle(.circular)
+                                        .tint(.gray)
+                                }
                         }
                     }
                     .tag(index)
@@ -124,9 +125,11 @@ fileprivate struct FestivalDescriptionView: View {
             .overlay(alignment: .bottomLeading) {
                 VStack(alignment: .leading, spacing: 5) {
                     Text("\(flattenedLineup[currentIndex].day)")
-                        .font(.system(size: 30, weight: .heavy))
+                        .font(.system(size: 15, weight: .heavy))
+                        .padding(5)
+                        .background(RoundedRectangle(cornerRadius: 15).fill(.orange))
                     Text(flattenedLineup[currentIndex].detailLineup.name)
-                        .font(.system(size: 25, weight: .heavy))
+                        .font(.system(size: 30, weight: .heavy))
                 }
                 .foregroundColor(.white)
                 .padding(.horizontal, 30)
@@ -146,7 +149,6 @@ fileprivate struct FestivalDescriptionView: View {
 
 fileprivate struct DetailLineupView: View {
     var model: FestivalDetailModel
-    private let columns = Array(repeating: GridItem(.flexible()), count: 2)
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             VStack(alignment: .leading, spacing: 5) {
@@ -164,54 +166,99 @@ fileprivate struct DetailLineupView: View {
             }
             .padding(.horizontal, 30)
             
-            SeperateView()
-                .frame(width: UIScreen.main.bounds.width, height: 20)
-            
             Group {
-                Text("\(model.year)년도 ").foregroundColor(.primary) + Text("축제 ").foregroundColor(.orange) + Text("라인업").foregroundColor(.primary)
+                Text("\(model.year)년도 ").foregroundColor(.primary) + Text("\(model.name) 축제 ").foregroundColor(.orange) + Text("라인업").foregroundColor(.primary)
             }
             .font(.system(size: 15, weight: .bold))
             .padding(.horizontal, 30)
             
-            let flattenedLineup = model.lineup.flatMap { lineup in
-                lineup.detailLineup.map { detail in
-                    (day: lineup.day, detailLineup: detail)
-                }
-            }
+            CustomCalendar(model: self.model)
             
-            LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(flattenedLineup.indices, id: \.self) { index in
-                    VStack(alignment: .leading) {
-                        HStack(spacing: 5) {
-                            Text("• \(flattenedLineup[index].day)")
-                                .font(.system(size: 15, weight: .semibold))
-                            Text(flattenedLineup[index].detailLineup.name)
-                                .font(.system(size: 12, weight: .bold))
-                        }
-                        .foregroundColor(.black.opacity(0.7))
-                        
-                        if let url = URL(string: flattenedLineup[index].detailLineup.image), !flattenedLineup[index].detailLineup.image.isEmpty {
-                            KFImage(url)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 150, height: 150)
-                                .cornerRadius(15)
-                                .clipped()
-                        } else {
-                            Image(systemName: "photo.fill")
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 150, height: 150)
-                                .cornerRadius(15)
-                                .clipped()
-                        }
-                    }
-                    .padding(.vertical, 5)
-                }
-            }
-            .padding(.horizontal, 30)
-            .padding(.bottom, 20)
+            SeperateView()
+                .frame(width: UIScreen.main.bounds.width, height: 20)
         }
+    }
+}
+
+fileprivate struct CustomCalendar: View {
+    var model: FestivalDetailModel
+    private let week: [String] = ["day1", "day2", "day3", "day4", "day5"]
+    private let columns = Array(repeating: GridItem(.flexible()), count: 5)
+    private let rowCount: [Int]
+    private let maxRowCount: Int
+    
+    init(model: FestivalDetailModel) {
+        self.model = model
+        self.rowCount = model.lineup.map { lineup in
+            lineup.detailLineup.count
+        }
+        self.maxRowCount = rowCount.max() ?? 0
+    }
+    
+    var body: some View {
+        VStack(alignment: .center, spacing: 10) {
+            VStack {
+                VStack(alignment: .center, spacing: 5) {
+                    Text("\(model.year)년")
+                        .font(.system(size: 15, weight: .bold))
+                    Text(model.date)
+                        .font(.system(size: 12, weight: .regular))
+                        .foregroundColor(.gray)
+                }
+                
+                let flattenedLineup = model.lineup.flatMap { lineup in
+                    lineup.detailLineup.map { detail in
+                        (day: lineup.day, detailLineup: detail)
+                    }
+                }
+                
+                LazyVGrid(columns: columns) {
+                    ForEach(week.indices, id: \.self) { weekIndex in
+                        VStack(alignment: .center, spacing: 10) {
+                            Text(week[weekIndex])
+                                .font(.system(size: 12, weight: .semibold))
+                                .foregroundColor(.orange)
+                            
+                            Divider()
+                            ForEach(flattenedLineup.indices, id: \.self) { index in
+                                if (flattenedLineup[index].day == week[weekIndex]) {
+                                    if let url = URL(string: flattenedLineup[index].detailLineup.image), !flattenedLineup[index].detailLineup.image.isEmpty {
+                                        VStack(alignment: .center, spacing: 3) {
+                                            KFImage(url)
+                                                .resizable()
+                                                .scaledToFill()
+                                                .frame(width: 30, height: 30)
+                                                .cornerRadius(15)
+                                            Text(flattenedLineup[index].detailLineup.name)
+                                                .font(.system(size: 10, weight: .semibold))
+                                                .foregroundColor(.primary)
+                                        }
+                                    } else {
+                                        Circle()
+                                            .fill(.gray.opacity(0.2))
+                                            .frame(width: 40, height: 40)
+                                            .overlay(alignment: .center) {
+                                                ProgressView()
+                                                    .progressViewStyle(.circular)
+                                                    .tint(.gray)
+                                            }
+                                    }
+                                }
+                            }
+                            Spacer()
+                        }
+                        .frame(height: CGFloat(maxRowCount * 80))
+                    }
+                }
+                .padding(.horizontal, 10)
+            }
+            .padding(.vertical, 10)
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .background(.white)
+        .cornerRadius(15)
+        .shadow(color: .gray.opacity(0.5), radius: 3, x: 1, y: 1)
+        .padding(.horizontal, 30)
     }
 }
 

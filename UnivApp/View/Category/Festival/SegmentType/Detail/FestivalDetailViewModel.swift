@@ -16,7 +16,7 @@ class FestivalDetailViewModel: ObservableObject {
     }
     
     @Published var phase: Phase = .notRequested
-    @Published var SchoolFestivalData: [FestivalDetailModel] = [FestivalDetailModel(year: "2024", name: "등촌제", date: "24년 05월 09일 ~ 24년 05월 10일", play: "동아리 공연, 부스, 이벤트", lineup: [Lineup(day: "day1", detailLineup: [DetailLineup(name: "경서", image: "")]), Lineup(day: "day2", detailLineup: [DetailLineup(name: "지코", image: ""), DetailLineup(name: "수퍼비", image: ""), DetailLineup(name: "언에듀케이티드 키드", image: "")])]), FestivalDetailModel(year: "2023", name: "등촌제", date: "24년 05월 09일 ~ 24년 05월 10일", play: "동아리 공연, 부스, 이벤트", lineup: [Lineup(day: "day1", detailLineup: [DetailLineup(name: "경서", image: "")]), Lineup(day: "day2", detailLineup: [DetailLineup(name: "비오", image: ""), DetailLineup(name: "수퍼비", image: ""), DetailLineup(name: "언에듀케이티드 키드", image: "")])])]
+    @Published var SchoolFestivalData: [FestivalDetailModel] = [FestivalDetailModel(year: "2024", name: "등촌제", date: "24년 05월 09일 ~ 24년 05월 10일", play: "동아리 공연, 부스, 이벤트", lineup: [Lineup(day: "day1", detailLineup: [DetailLineup(name: "아이브", image: "")]), Lineup(day: "day2", detailLineup: [DetailLineup(name: "싸이", image: "")]), Lineup(day: "day3", detailLineup: [DetailLineup(name: "수퍼비", image: ""), DetailLineup(name: "언에듀케이티드 키드", image: "")]), Lineup(day: "day4", detailLineup: [DetailLineup(name: "윤종신", image: "")]), Lineup(day: "day5", detailLineup: [DetailLineup(name: "비투비", image: "")])]), FestivalDetailModel(year: "2023", name: "등촌제", date: "24년 05월 09일 ~ 24년 05월 10일", play: "동아리 공연, 부스, 이벤트", lineup: [Lineup(day: "day1", detailLineup: [DetailLineup(name: "경서", image: "")]), Lineup(day: "day2", detailLineup: [DetailLineup(name: "비오", image: ""), DetailLineup(name: "수퍼비", image: ""), DetailLineup(name: "언에듀케이티드 키드", image: "")])])]
     
     private let container: DIContainer
     private var subscriptions = Set<AnyCancellable>()
@@ -38,6 +38,7 @@ class FestivalDetailViewModel: ObservableObject {
                         }
                     }
                 }
+                self.phase = .success
             } else {
                 self.phase = .fail
             }
@@ -50,7 +51,6 @@ class FestivalDetailViewModel: ObservableObject {
                     }
                 } receiveValue: { [weak self] artist in
                     self?.SchoolFestivalData[index].lineup[lineupIndex].detailLineup[detailLineupIndex].image = artist
-                    self?.phase = .success
                 }
                 .store(in: &subscriptions)
         }
