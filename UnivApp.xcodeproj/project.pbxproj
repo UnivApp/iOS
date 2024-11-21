@@ -36,6 +36,7 @@
 		E48905382CEB1CE5003F566A /* FestivalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48905372CEB1CE5003F566A /* FestivalDetailView.swift */; };
 		E489053B2CEB1CF9003F566A /* FestivalDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E489053A2CEB1CF9003F566A /* FestivalDetailViewModel.swift */; };
 		E489053D2CEB1E41003F566A /* FestivalDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E489053C2CEB1E41003F566A /* FestivalDetailModel.swift */; };
+		E489054E2CEF1C29003F566A /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E489054D2CEF1C29003F566A /* ImageCacheManager.swift */; };
 		E49222702C9C87DA0077EA45 /* RequestInterceptor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E492226F2C9C87DA0077EA45 /* RequestInterceptor + Extension.swift */; };
 		E49222752C9EE7650077EA45 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49222742C9EE7650077EA45 /* ChartView.swift */; };
 		E49222792C9F10240077EA45 /* SeperateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49222782C9F10240077EA45 /* SeperateView.swift */; };
@@ -214,6 +215,7 @@
 		E48905372CEB1CE5003F566A /* FestivalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FestivalDetailView.swift; sourceTree = "<group>"; };
 		E489053A2CEB1CF9003F566A /* FestivalDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FestivalDetailViewModel.swift; sourceTree = "<group>"; };
 		E489053C2CEB1E41003F566A /* FestivalDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FestivalDetailModel.swift; sourceTree = "<group>"; };
+		E489054D2CEF1C29003F566A /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		E492226F2C9C87DA0077EA45 /* RequestInterceptor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RequestInterceptor + Extension.swift"; sourceTree = "<group>"; };
 		E49222742C9EE7650077EA45 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		E49222782C9F10240077EA45 /* SeperateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeperateView.swift; sourceTree = "<group>"; };
@@ -826,6 +828,7 @@
 			isa = PBXGroup;
 			children = (
 				E4B3FD012C77563600CB98F3 /* DIContainer.swift */,
+				E489054D2CEF1C29003F566A /* ImageCacheManager.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -1263,6 +1266,7 @@
 				E41589182CBD21A700EDB211 /* RateDetailViewModel.swift in Sources */,
 				E4CEEFBC2CB7F1A1001F4DAE /* CompetitionModel.swift in Sources */,
 				E4F04BFE2C96C53900F653DF /* InitiativeViewCell.swift in Sources */,
+				E489054E2CEF1C29003F566A /* ImageCacheManager.swift in Sources */,
 				E4B3FD182C77903700CB98F3 /* ListView.swift in Sources */,
 				E49C9FC82C86EFEA001F43A3 /* PlayViewModel.swift in Sources */,
 				E4982D1B2CD60F1F00D0F1A7 /* FestivalView.swift in Sources */,

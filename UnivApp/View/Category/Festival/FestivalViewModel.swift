@@ -40,15 +40,20 @@ class FestivalViewModel: ObservableObject {
             self.phase = .success
             
         case let .getArtist(name, index):
-            container.services.festivalService.getArtist(name: name)
-                .sink { [weak self] completion in
-                    if case .failure = completion {
-                        self?.talentData[index].image = "no"
+            if let cachedImage = ImageCacheManager.shared.getImage(for: name) {
+                self.talentData[index].image = cachedImage
+            } else {
+                container.services.festivalService.getArtist(name: name)
+                    .sink { [weak self] completion in
+                        if case .failure = completion {
+                            self?.talentData[index].image = "no"
+                        }
+                    } receiveValue: { [weak self] artist in
+                        ImageCacheManager.shared.setImage(artist, for: name)
+                        self?.talentData[index].image = artist
                     }
-                } receiveValue: { [weak self] artist in
-                    self?.talentData[index].image = artist
-                }
-                .store(in: &subscriptions)
+                    .store(in: &subscriptions)
+            }
         }
     }
 }

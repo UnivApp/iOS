@@ -77,7 +77,7 @@ enum ListDetailType: String, CaseIterable {
         case .food:
             return "대학 주변의 맛집을 확인해 보세요!"
         case .festival:
-            return "대학 축제를 확인하고 미리 즐겨보세요!"
+            return "대학 축제를 미리 즐겨보세요!"
         }
     }
     
