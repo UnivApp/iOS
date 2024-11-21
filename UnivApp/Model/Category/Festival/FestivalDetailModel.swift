@@ -8,24 +8,25 @@
 import Foundation
 
 struct FestivalDetailModel: Codable, Hashable {
-    var year: String
-    var yearData: [FestivalYearData]
+    var universityId: Int
+    var universityName: String
+    var events: [FestivalYearData]
 }
 
 struct FestivalYearData: Codable, Hashable {
+    var eventName: String
     var year: String
-    var name: String
     var date: String
-    var play: String
+    var dayLineup: [DayLineup]
+}
+
+struct DayLineup: Codable, Hashable {
+    var day: String
     var lineup: [Lineup]
 }
 
 struct Lineup: Codable, Hashable {
-    var day: String
-    var detailLineup: [DetailLineup]
-}
-
-struct DetailLineup: Codable, Hashable {
     var name: String
+    var subname: String
     var image: String
 }

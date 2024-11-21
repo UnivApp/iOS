@@ -11,9 +11,8 @@ import Kingfisher
 struct FestivalDetailView: View {
     @StateObject var viewModel: FestivalDetailViewModel
     @Environment(\.dismiss) var dismiss
-    @State private var selectedSegment: String = "2024"
+    @State private var selectedSegment: String = ""
     @State private var currentIndex: Int = 0
-    @State private var maxRowCount: [Int] = []
     
     var body: some View {
         contentView
@@ -38,19 +37,15 @@ struct FestivalDetailView: View {
         case .notRequested:
             PlaceholderView()
                 .onAppear {
-                    viewModel.send(.load(selectedSegment))
+                    viewModel.send(.eventLoad)
                 }
         case .loading:
             LoadingView(url: "congratulations", size: [150, 150])
         case .success:
             loadedView
                 .onAppear {
-                    let currentYearData = viewModel.SchoolFestivalData[self.currentIndex].yearData
-                    maxRowCount = Array(repeating: 0, count: currentYearData.count)
-                    
-                    for (index, year) in currentYearData.enumerated() {
-                        maxRowCount[index] = year.lineup.map { $0.detailLineup.count }.max() ?? 0
-                    }
+                    selectedSegment = "\(viewModel.SchoolFestivalData[0].year)년 \(viewModel.SchoolFestivalData[0].eventName)"
+                    viewModel.send(.load(selectedSegment))
                 }
         case .fail:
             ErrorView()
@@ -61,33 +56,27 @@ struct FestivalDetailView: View {
             ScrollViewReader { proxy in
                 ScrollView(.vertical) {
                     VStack(alignment: .center, spacing: 20) {
-                        FestivalDescriptionView(model: viewModel.SchoolFestivalData[self.currentIndex].yearData)
+                        FestivalDescriptionView(model: viewModel.SchoolFestivalData[self.currentIndex])
                             .environmentObject(viewModel)
                         
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 10) {
                                 ForEach(viewModel.SchoolFestivalData.indices, id: \.self) { index in
                                     Button {
-                                        if self.selectedSegment != viewModel.SchoolFestivalData[index].year {
-                                            self.selectedSegment = viewModel.SchoolFestivalData[index].year
+                                        if self.selectedSegment != "\(viewModel.SchoolFestivalData[index].year)년 \(viewModel.SchoolFestivalData[index].eventName)" {
+                                            self.selectedSegment = "\(viewModel.SchoolFestivalData[index].year)년 \(viewModel.SchoolFestivalData[index].eventName)"
                                             self.currentIndex = index
                                             
                                             viewModel.send(.load(selectedSegment))
-                                            
-                                            let currentYearData = viewModel.SchoolFestivalData[self.currentIndex].yearData
-                                            maxRowCount = Array(repeating: 0, count: currentYearData.count)
-                                            for (index, year) in currentYearData.enumerated() {
-                                                maxRowCount[index] = year.lineup.map { $0.detailLineup.count }.max() ?? 0
-                                            }
                                         }
                                     } label: {
-                                        Text("\(viewModel.SchoolFestivalData[index].year)년도")
+                                        Text("\(viewModel.SchoolFestivalData[index].year)년 \(viewModel.SchoolFestivalData[index].eventName)")
                                             .font(.system(size: 15, weight: .bold))
-                                            .foregroundColor(selectedSegment == viewModel.SchoolFestivalData[index].year ? .black : .gray)
+                                            .foregroundColor(selectedSegment == "\(viewModel.SchoolFestivalData[index].year)년 \(viewModel.SchoolFestivalData[index].eventName)" ? .black : .gray)
                                             .padding()
                                             .background(
                                                 RoundedRectangle(cornerRadius: 15)
-                                                    .fill(selectedSegment == viewModel.SchoolFestivalData[index].year ? Color.yellow : Color.backGray)
+                                                    .fill(selectedSegment == "\(viewModel.SchoolFestivalData[index].year)년 \(viewModel.SchoolFestivalData[index].eventName)" ? Color.yellow : Color.backGray)
                                                     .frame(height: 40))
                                             .cornerRadius(15)
                                     }
@@ -96,11 +85,7 @@ struct FestivalDetailView: View {
                             .padding(.horizontal, 30)
                         }
                         
-                        ForEach(viewModel.SchoolFestivalData[self.currentIndex].yearData.indices, id: \.self) { index in
-                            if index < maxRowCount.count {
-                                DetailLineupView(model: viewModel.SchoolFestivalData[self.currentIndex].yearData[index], maxRowCount: $maxRowCount[index])
-                            }
-                        }
+                        DetailLineupView(model: viewModel.SchoolFestivalData[self.currentIndex])
                     }
                 }
                 .ignoresSafeArea()
@@ -112,29 +97,27 @@ struct FestivalDetailView: View {
 fileprivate struct FestivalDescriptionView: View {
     @EnvironmentObject var viewModel: FestivalDetailViewModel
     @State private var currentIndex: Int = 0
-    var model: [FestivalYearData]
+    var model: FestivalYearData
     
     var body: some View {
         Group {
-            let flattenedLineup = model.flatMap { yearData in
-                yearData.lineup.flatMap { lineup in
-                    lineup.detailLineup.map { detail in
-                        (name: yearData.name, day: lineup.day, detailLineup: detail)
-                    }
+            let flattenedLineup = model.dayLineup.flatMap { daylineup in
+                daylineup.lineup.map { lineup in
+                    (name: lineup.name, day: daylineup.day, image: lineup.image)
                 }
             }
             
             TabView(selection: $currentIndex) {
                 ForEach(flattenedLineup.indices, id: \.self) { index in
                     VStack {
-                        if let url = URL(string: flattenedLineup[index].detailLineup.image), !flattenedLineup[index].detailLineup.image.isEmpty {
+                        if let url = URL(string: flattenedLineup[index].image), !flattenedLineup[index].image.isEmpty {
                             KFImage(url)
                                 .resizable()
                                 .scaledToFill()
                         } else {
                             Color.gray.opacity(0.2)
                                 .overlay(alignment: .center) {
-                                    if flattenedLineup[index].detailLineup.image == "" {
+                                    if flattenedLineup[index].image == "" {
                                         ProgressView()
                                             .progressViewStyle(.circular)
                                             .tint(.gray)
@@ -148,11 +131,11 @@ fileprivate struct FestivalDescriptionView: View {
             .tabViewStyle(PageTabViewStyle())
             .overlay(alignment: .bottomLeading) {
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("\(flattenedLineup[currentIndex].name) \(flattenedLineup[currentIndex].day)")
+                    Text("\(model.eventName) \(flattenedLineup[currentIndex].day)")
                         .font(.system(size: 15, weight: .heavy))
                         .padding(5)
                         .background(RoundedRectangle(cornerRadius: 15).fill(.orange))
-                    Text(flattenedLineup[currentIndex].detailLineup.name)
+                    Text(flattenedLineup[currentIndex].name)
                         .font(.system(size: 30, weight: .heavy))
                 }
                 .foregroundColor(.white)
@@ -173,43 +156,33 @@ fileprivate struct FestivalDescriptionView: View {
 
 fileprivate struct DetailLineupView: View {
     var model: FestivalYearData
-    @Binding var maxRowCount: Int
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             VStack(alignment: .leading, spacing: 5) {
-                Text(model.name)
+                Text(model.eventName)
                     .font(.system(size: 20, weight: .bold))
                     .foregroundColor(.primary)
                 
                 Text(model.date)
                     .font(.system(size: 12, weight: .regular))
                     .foregroundColor(.gray)
-                
-                Text(model.play)
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundColor(.black.opacity(0.7))
             }
             .padding(.horizontal, 30)
             
             Group {
-                Text("\(model.year)년도 ").foregroundColor(.primary) + Text("\(model.name) 축제 ").foregroundColor(.orange) + Text("라인업").foregroundColor(.primary)
+                Text("\(model.year)년도 ").foregroundColor(.primary) + Text("\(model.eventName) 축제 ").foregroundColor(.orange) + Text("라인업").foregroundColor(.primary)
             }
             .font(.system(size: 15, weight: .bold))
             .padding(.horizontal, 30)
             
-            CustomCalendar(maxRowCount: $maxRowCount, model: self.model)
-            
-            SeperateView()
-                .frame(width: UIScreen.main.bounds.width, height: 20)
+            CustomCalendar(model: self.model)
         }
     }
 }
 
 fileprivate struct CustomCalendar: View {
-    @Binding var maxRowCount: Int
-    
     var model: FestivalYearData
-    private let week: [String] = ["day1", "day2", "day3", "day4", "day5"]
+    private let week: [String] = ["Day1", "Day2", "Day3", "Day4", "Day5"]
     private let columns = Array(repeating: GridItem(.flexible()), count: 5)
     
     var body: some View {
@@ -223,9 +196,9 @@ fileprivate struct CustomCalendar: View {
                         .foregroundColor(.gray)
                 }
                 
-                let flattenedLineup = model.lineup.flatMap { lineup in
-                    lineup.detailLineup.map { detail in
-                        (day: lineup.day, detailLineup: detail)
+                let flattenedLineup = model.dayLineup.flatMap { daylineup in
+                    daylineup.lineup.map { lineup in
+                        (name: lineup.name, day: daylineup.day, image: lineup.image)
                     }
                 }
                 
@@ -239,16 +212,17 @@ fileprivate struct CustomCalendar: View {
                             Divider()
                             ForEach(flattenedLineup.indices, id: \.self) { index in
                                 if (flattenedLineup[index].day == week[weekIndex]) {
-                                    if let url = URL(string: flattenedLineup[index].detailLineup.image), !flattenedLineup[index].detailLineup.image.isEmpty {
+                                    if let url = URL(string: flattenedLineup[index].image), !flattenedLineup[index].image.isEmpty {
                                         VStack(alignment: .center, spacing: 3) {
                                             KFImage(url)
                                                 .resizable()
                                                 .scaledToFill()
                                                 .frame(width: 30, height: 30)
                                                 .cornerRadius(15)
-                                            Text(flattenedLineup[index].detailLineup.name)
+                                            Text(flattenedLineup[index].name)
                                                 .font(.system(size: 10, weight: .semibold))
                                                 .foregroundColor(.primary)
+                                                .multilineTextAlignment(.center)
                                         }
                                     } else {
                                         VStack(alignment: .center, spacing: 3) {
@@ -256,22 +230,22 @@ fileprivate struct CustomCalendar: View {
                                                 .fill(.gray.opacity(0.2))
                                                 .frame(width: 30, height: 30)
                                                 .overlay(alignment: .center) {
-                                                    if flattenedLineup[index].detailLineup.image == "" {
+                                                    if flattenedLineup[index].image == "" {
                                                         ProgressView()
                                                             .progressViewStyle(.circular)
                                                             .tint(.gray)
                                                     }
                                                 }
-                                            Text(flattenedLineup[index].detailLineup.name)
+                                            Text(flattenedLineup[index].name)
                                                 .font(.system(size: 10, weight: .semibold))
                                                 .foregroundColor(.primary)
+                                                .multilineTextAlignment(.center)
                                         }
                                     }
                                 }
                             }
                             Spacer()
                         }
-                        .frame(height: CGFloat(maxRowCount * 90))
                     }
                 }
                 .padding(.horizontal, 10)
@@ -283,6 +257,7 @@ fileprivate struct CustomCalendar: View {
         .cornerRadius(15)
         .shadow(color: .gray.opacity(0.5), radius: 3, x: 1, y: 1)
         .padding(.horizontal, 30)
+        .padding(.bottom, 20)
     }
 }
 
