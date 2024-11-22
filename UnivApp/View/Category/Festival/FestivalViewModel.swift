@@ -48,8 +48,13 @@ class FestivalViewModel: ObservableObject {
                             self?.talentData[index].image = "no"
                         }
                     } receiveValue: { [weak self] artist in
-                        ImageCacheManager.shared.setImage(artist, for: name)
-                        self?.talentData[index].image = artist
+                        if (artist != "http://i.maniadb.com") && (artist != "http://i.maniadb.com0") {
+                            self?.talentData[index].image = artist
+                            ImageCacheManager.shared.setImage(artist, for: name)
+                        } else {
+                            self?.talentData[index].image = "no"
+                            ImageCacheManager.shared.setImage("no", for: name)
+                        }
                     }
                     .store(in: &subscriptions)
             }

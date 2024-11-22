@@ -80,43 +80,41 @@ struct FestivalDetailView: View {
     
     var loadedView: some View {
         VStack(alignment: .center, spacing: 20) {
-            ScrollViewReader { proxy in
-                ScrollView(.vertical) {
-                    VStack(alignment: .center, spacing: 20) {
-                        FestivalDescriptionView(currentIndex: $tabIndex, model: viewModel.SchoolFestivalData[self.currentIndex])
-                            .environmentObject(viewModel)
-                        
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 10) {
-                                ForEach(viewModel.SchoolFestivalData.indices, id: \.self) { index in
-                                    Button {
-                                        if self.selectedSegment != "\(viewModel.SchoolFestivalData[index].year)년 \(viewModel.SchoolFestivalData[index].eventName)" {
-                                            self.selectedSegment = "\(viewModel.SchoolFestivalData[index].year)년 \(viewModel.SchoolFestivalData[index].eventName)"
-                                            self.currentIndex = index
-                                            self.tabIndex = 0
-                                            viewModel.send(.load(selectedSegment))
-                                        }
-                                    } label: {
-                                        Text("\(viewModel.SchoolFestivalData[index].year)년 \(viewModel.SchoolFestivalData[index].eventName)")
-                                            .font(.system(size: 15, weight: .bold))
-                                            .foregroundColor(selectedSegment == "\(viewModel.SchoolFestivalData[index].year)년 \(viewModel.SchoolFestivalData[index].eventName)" ? .black : .gray)
-                                            .padding()
-                                            .background(
-                                                RoundedRectangle(cornerRadius: 15)
-                                                    .fill(selectedSegment == "\(viewModel.SchoolFestivalData[index].year)년 \(viewModel.SchoolFestivalData[index].eventName)" ? Color.yellow : Color.backGray)
-                                                    .frame(height: 40))
-                                            .cornerRadius(15)
+            ScrollView(.vertical) {
+                VStack(alignment: .center, spacing: 20) {
+                    FestivalDescriptionView(currentIndex: $tabIndex, model: viewModel.SchoolFestivalData[self.currentIndex])
+                        .environmentObject(viewModel)
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 10) {
+                            ForEach(viewModel.SchoolFestivalData.indices, id: \.self) { index in
+                                Button {
+                                    if self.selectedSegment != "\(viewModel.SchoolFestivalData[index].year)년 \(viewModel.SchoolFestivalData[index].eventName)" {
+                                        self.selectedSegment = "\(viewModel.SchoolFestivalData[index].year)년 \(viewModel.SchoolFestivalData[index].eventName)"
+                                        self.currentIndex = index
+                                        self.tabIndex = 0
+                                        viewModel.send(.load(selectedSegment))
                                     }
+                                } label: {
+                                    Text("\(viewModel.SchoolFestivalData[index].year)년 \(viewModel.SchoolFestivalData[index].eventName)")
+                                        .font(.system(size: 15, weight: .bold))
+                                        .foregroundColor(selectedSegment == "\(viewModel.SchoolFestivalData[index].year)년 \(viewModel.SchoolFestivalData[index].eventName)" ? .black : .gray)
+                                        .padding()
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 15)
+                                                .fill(selectedSegment == "\(viewModel.SchoolFestivalData[index].year)년 \(viewModel.SchoolFestivalData[index].eventName)" ? Color.yellow : Color.backGray)
+                                                .frame(height: 40))
+                                        .cornerRadius(15)
                                 }
                             }
-                            .padding(.horizontal, 30)
                         }
-                        
-                        DetailLineupView(model: viewModel.SchoolFestivalData[self.currentIndex])
+                        .padding(.horizontal, 30)
                     }
+                    
+                    DetailLineupView(model: viewModel.SchoolFestivalData[self.currentIndex])
                 }
-                .ignoresSafeArea()
             }
+            .ignoresSafeArea()
         }
     }
 }
@@ -138,9 +136,17 @@ fileprivate struct FestivalDescriptionView: View {
                 ForEach(flattenedLineup.indices, id: \.self) { index in
                     VStack {
                         if let url = URL(string: flattenedLineup[index].image), !flattenedLineup[index].image.isEmpty {
-                            KFImage(url)
-                                .resizable()
-                                .scaledToFill()
+                            if flattenedLineup[index].image != "no" {
+                                KFImage(url)
+                                    .resizable()
+                                    .scaledToFill()
+                            } else {
+                                Image(systemName: "photo.on.rectangle")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .opacity(0.3)
+                                    .foregroundColor(.gray)
+                            }
                         } else {
                             Color.gray.opacity(0.2)
                                 .overlay(alignment: .center) {
@@ -242,12 +248,19 @@ fileprivate struct CustomCalendar: View {
                                 if (flattenedLineup[index].day == week[weekIndex]) {
                                     if let url = URL(string: flattenedLineup[index].image), !flattenedLineup[index].image.isEmpty {
                                         VStack(alignment: .center, spacing: 3) {
-                                            KFImage(url)
-                                                .resizable()
-                                                .scaledToFill()
-                                                .frame(width: 30, height: 30)
-                                                .cornerRadius(15)
-                                                .shadow(radius: 1)
+                                            Group {
+                                                if flattenedLineup[index].image != "no" {
+                                                    KFImage(url)
+                                                        .resizable()
+                                                } else {
+                                                    Image("smile")
+                                                        .resizable()
+                                                }
+                                            }
+                                            .scaledToFill()
+                                            .frame(width: 30, height: 30)
+                                            .cornerRadius(15)
+                                            
                                             Text(flattenedLineup[index].name)
                                                 .font(.system(size: 10, weight: .semibold))
                                                 .foregroundColor(.primary)
@@ -275,6 +288,9 @@ fileprivate struct CustomCalendar: View {
                             }
                             Spacer()
                         }
+                        .frame(height: (week.map { day in
+                            CGFloat(flattenedLineup.filter { $0.day == day }.count)
+                        }.max() ?? 0) * 70)
                     }
                 }
                 .padding(.horizontal, 10)

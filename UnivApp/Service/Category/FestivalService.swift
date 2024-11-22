@@ -84,6 +84,8 @@ class FestivalService: FestivalServiceType {
         
         if let firstImage = delegate.imageURLs.first {
             imageUrl = firstImage
+        } else {
+            return "http://i.maniadb.com"
         }
         return imageUrl
     }

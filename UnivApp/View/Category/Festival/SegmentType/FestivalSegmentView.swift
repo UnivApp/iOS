@@ -203,12 +203,19 @@ fileprivate struct TalentListCellView: View {
                     .foregroundColor(.black.opacity(0.5))
                 
                 if let imageURL = URL(string: model.image) {
-                    KFImage(imageURL)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: size[0], height: size[1])
-                        .cornerRadius(15)
-                        .padding(.bottom, -10)
+                    Group {
+                        if model.image != "no" {
+                            KFImage(imageURL)
+                                .resizable()
+                        } else {
+                            Image("smile")
+                                .resizable()
+                        }
+                    }
+                    .scaledToFill()
+                    .frame(width: size[0], height: size[1])
+                    .cornerRadius(15)
+                    .padding(.bottom, -10)
                 } else {
                     Color.gray.opacity(0.2)
                         .overlay(alignment: .center) {
