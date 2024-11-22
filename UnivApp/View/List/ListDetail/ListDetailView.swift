@@ -12,6 +12,7 @@ struct ListDetailView: View {
     @StateObject var viewModel: ListDetailViewModel
     @State private var selectedSegment: ListDetailSection = .general
     @State private var expandedDepartIds: Set<Int> = []
+    @State private var scrolledID: String? = "기본정보"
     @Environment(\.dismiss) var dismiss
     
     var universityId: Int
@@ -48,7 +49,6 @@ struct ListDetailView: View {
                         info
                             .padding(.horizontal, 30)
                             .padding(.top, 30)
-                            .id("기본정보")
                         
                         SeperateView()
                             .frame(height: 10)
@@ -62,6 +62,7 @@ struct ListDetailView: View {
                         
                         BarChartView(title: "계열별등록금", description: "출처: 대학어디가 - 2024년도" , dataPoints: viewModel.tuitionFeeData)
                         .padding(.horizontal, 30)
+                        .id("기본정보")
                         
                         CircleChartView(title: "학과 정보", description: "대학어디가 - 정보제공", dataPoints: viewModel.departmentData)
                             .padding(.horizontal, 30)
@@ -99,9 +100,25 @@ struct ListDetailView: View {
                             .padding(.horizontal, 0)
                             .id("카테고리")
                     }
+                    .scrollTargetLayout()
                 }
-                .task(id: selectedSegment) {
-                    withAnimation(.spring()) {
+                .scrollPosition(id: $scrolledID, anchor: .center)
+                .onChange(of: scrolledID) {
+                    withAnimation {
+                        switch scrolledID {
+                        case "기본정보":
+                            selectedSegment = .general
+                        case "학과목록":
+                            selectedSegment = .depart
+                        case "카테고리":
+                            selectedSegment = .category
+                        default:
+                            break
+                        }
+                    }
+                }
+                .onChange(of: selectedSegment) {
+                    withAnimation {
                         switch selectedSegment {
                         case .general:
                             proxy.scrollTo("기본정보", anchor: .center)
@@ -137,8 +154,8 @@ struct ListDetailView: View {
             HStack(spacing: 10) {
                 ForEach(ListDetailSection.allCases, id: \.self) { item in
                     Button(action: {
-                        DispatchQueue.main.async {
-                            self.selectedSegment = item
+                        withAnimation {
+                            selectedSegment = item
                         }
                     }) {
                         Text(item.title)
@@ -148,11 +165,13 @@ struct ListDetailView: View {
                             .background(
                                 RoundedRectangle(cornerRadius: 15)
                                     .fill(selectedSegment == item ? Color.yellow : Color.clear)
-                                    .frame(height: 30))
+                                    .frame(height: 30)
+                            )
                             .cornerRadius(15)
                     }
                 }
-            }.padding(.horizontal, 20)
+            }
+            .padding(.horizontal, 20)
         }
     }
     

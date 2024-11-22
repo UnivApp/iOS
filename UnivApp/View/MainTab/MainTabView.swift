@@ -46,6 +46,11 @@ struct MainTabView: View {
                 .onAppear {
                     UINavigationBar.appearance().backgroundColor = .clear
                     UIPageControl.appearance().isHidden = true
+                    
+                    UIPageControl.appearance().currentPageIndicatorTintColor = .clear
+                    UIPageControl.appearance().pageIndicatorTintColor = .clear
+                    UIPageControl.appearance().tintColor = .clear
+                    UIPageControl.appearance().backgroundColor = .clear
                 }
             }
         }

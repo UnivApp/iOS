@@ -214,6 +214,7 @@ struct PlayDetailView: View {
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 20, height: 20)
+                                .shadow(radius: 1)
                         }
                     }
                 }
