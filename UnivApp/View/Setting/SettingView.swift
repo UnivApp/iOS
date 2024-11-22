@@ -107,7 +107,7 @@ struct SettingView: View {
                         authViewModel.authState = .unAuth
                     } label: {
                         VStack(alignment: .leading) {
-                            Text("로그인 및 회원가입하기 >")
+                            Text("로그인 및 회원가입하기 ▷")
                                 .foregroundColor(.orange)
                                 .font(.system(size: 14, weight: .semibold))
                             

@@ -77,7 +77,7 @@ struct RateView: View {
                             .environmentObject(self.rateViewModel)
                     }
                 }
-                .padding(.horizontal)
+                .padding(.horizontal, 10)
             }
         }
         .padding(.horizontal, 20)
@@ -91,22 +91,41 @@ fileprivate struct RateList: View {
     var body: some View {
         switch selectedType {
         case .employment:
-            ForEach(viewModel.employmentData.indices, id: \.self) { index in
-                if index < 5 {
-                    RateCell(employModel: viewModel.employmentData[index], selectedType: $selectedType)
+            let filteredData = viewModel.employmentData.indices.filter { index in
+                if let employmentRates = viewModel.employmentData[index].employmentRateResponses?.compactMap({ $0.employmentRate }),
+                   !employmentRates.isEmpty,
+                   employmentRates.allSatisfy({ $0 != 0.0 }) {
+                    return true
                 }
+                return false
+            }
+            
+            ForEach(filteredData.prefix(5), id: \.self) { index in
+                RateCell(employModel: viewModel.employmentData[index], selectedType: $selectedType)
             }
         case .ontime:
-            ForEach(viewModel.competitionData.indices, id: \.self) { index in
-                if index < 5 {
-                    RateCell(competitionModel: viewModel.competitionData[index], selectedType: $selectedType)
+            let filteredData = viewModel.competitionData.indices.filter { index in
+                if let regularAdmissionRate = viewModel.competitionData[index].competitionRateResponses?.compactMap({ $0.regularAdmissionRate }),
+                   !regularAdmissionRate.isEmpty,
+                   regularAdmissionRate.allSatisfy({ $0 != 0.0 }) {
+                    return true
                 }
+                return false
+            }
+            ForEach(filteredData.prefix(5), id: \.self) { index in
+                RateCell(competitionModel: viewModel.competitionData[index], selectedType: $selectedType)
             }
         case .Occasion:
-            ForEach(viewModel.competitionData.indices, id: \.self) { index in
-                if index < 5 {
-                    RateCell(competitionModel: viewModel.competitionData[index], selectedType: $selectedType)
+            let filteredData = viewModel.competitionData.indices.filter { index in
+                if let earlyAdmissionRate = viewModel.competitionData[index].competitionRateResponses?.compactMap({ $0.earlyAdmissionRate }),
+                   !earlyAdmissionRate.isEmpty,
+                   earlyAdmissionRate.allSatisfy({ $0 != 0.0 }) {
+                    return true
                 }
+                return false
+            }
+            ForEach(filteredData.prefix(5), id: \.self) { index in
+                RateCell(competitionModel: viewModel.competitionData[index], selectedType: $selectedType)
             }
         }
     }
@@ -133,7 +152,7 @@ fileprivate struct RateCell: View {
                         .foregroundColor(.black.opacity(0.7))
                         .multilineTextAlignment(.center)
                 }
-                .frame(width: 60)
+                .frame(width: 80)
                 Spacer()
                 HStack(spacing: 30) {
                     ForEach(rates.indices, id: \.self) { index in
@@ -162,10 +181,10 @@ fileprivate struct RateCell: View {
                     
                     Text(competitionModel.name ?? "")
                         .font(.system(size: 10, weight: .semibold))
-                        .foregroundColor(Color.black)
+                        .foregroundColor(Color.black.opacity(0.7))
                         .multilineTextAlignment(.center)
                 }
-                .frame(width: 60)
+                .frame(width: 80)
                 Spacer()
                 if self.selectedType == .Occasion {
                     HStack(spacing: 30) {

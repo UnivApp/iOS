@@ -85,8 +85,8 @@ fileprivate struct FestivalViewCell: View {
                     .font(.system(size: 13, weight: .semibold))
                     .foregroundColor(.black)
                 Spacer()
-                NavigationLink(destination: EmptyView()) {
-                    Text("학교 축제 알아보기 >")
+                NavigationLink(destination: FestivalDetailView(viewModel: FestivalDetailViewModel(container: .init(services: Services())), universityId: "\(summaryModel.universityId ?? 0)")) {
+                    Text("학교 축제 알아보기 ▷")
                         .foregroundColor(.black.opacity(0.5))
                         .font(.system(size: 12, weight: .semibold))
                         .lineLimit(1)
