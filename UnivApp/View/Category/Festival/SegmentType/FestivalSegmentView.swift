@@ -44,7 +44,7 @@ struct FestivalSegmentView: View {
                         HStack(spacing: 10) {
                             ForEach(summaryArray.indices, id: \.self) { index in
                                 if (index < 10) && (!summaryArray.isEmpty) {
-                                    NavigationLink(destination: FestivalDetailView(viewModel: .init(container: .init(services: Services())))) {
+                                    NavigationLink(destination: FestivalDetailView(viewModel: .init(container: .init(services: Services())), universityId: "\( summaryArray[index].universityId ?? 0)")) {
                                         VStack(spacing: 5) {
                                             if let url = summaryArray[index].logo,
                                                let imageURL = URL(string: url),
@@ -243,5 +243,5 @@ fileprivate struct TalentListCellView: View {
 
 
 #Preview {
-    FestivalSegmentView(model: [TalentModel(name: "싸이", image: "", count: 300),TalentModel(name: "다비치", image: "", count: 200),TalentModel(name: "다이나믹듀오", image: "", count: 100),TalentModel(name: "싸이", image: "", count: 78)], summaryArray: [SummaryModel(universityId: nil, fullName: nil, logo: nil, starNum: nil, starred: nil)])
+    FestivalSegmentView(model: [], summaryArray: [SummaryModel(universityId: nil, fullName: nil, logo: nil, starNum: nil, starred: nil)])
 }

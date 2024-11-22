@@ -12,12 +12,10 @@ class FestivalViewModel: ObservableObject {
     
     enum Action {
         case topLoad
-        case detailLoad
         case getArtist(String, Int)
     }
     
-    @Published var talentData: [TalentModel] = [TalentModel(name: "싸이", image: "", count: 12),TalentModel(name: "다비치", image: "", count: 9),TalentModel(name: "다이나믹듀오", image: "", count: 6)]
-    @Published var festivalData: [FestivalModel] = []
+    @Published var talentData: [TalentModel] = []
     @Published var phase: Phase = .notRequested
     private var container: DIContainer
     private var subscriptions = Set<AnyCancellable>()
@@ -30,14 +28,15 @@ class FestivalViewModel: ObservableObject {
         switch action {
         case .topLoad:
             self.phase = .loading
-            for index in talentData.indices {
-                self.send(action: .getArtist(talentData[index].name, index))
-                self.phase = .success
-            }
-            
-        case .detailLoad:
-            self.phase = .loading
-            self.phase = .success
+            container.services.festivalService.topArtists()
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.phase = .fail
+                    }
+                } receiveValue: { [weak self] artists in
+                    self?.talentData = artists
+                    self?.changeArtistsImage()
+                }.store(in: &subscriptions)
             
         case let .getArtist(name, index):
             if let cachedImage = ImageCacheManager.shared.getImage(for: name) {
@@ -54,6 +53,13 @@ class FestivalViewModel: ObservableObject {
                     }
                     .store(in: &subscriptions)
             }
+        }
+    }
+    
+    private func changeArtistsImage() {
+        for index in self.talentData.indices {
+            self.send(action: .getArtist(self.talentData[index].subname, index))
+            self.phase = .success
         }
     }
 }

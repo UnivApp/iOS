@@ -11,6 +11,8 @@ import Alamofire
 
 protocol FestivalServiceType {
     func getArtist(name: String) -> AnyPublisher<String, Error>
+    func topArtists() -> AnyPublisher<[TalentModel],Error>
+    func getFestival(universityId: String) -> AnyPublisher<FestivalDetailModel,Error>
 }
 
 class FestivalService: FestivalServiceType {
@@ -32,6 +34,44 @@ class FestivalService: FestivalServiceType {
                         promise(.failure(error))
                     }
                 }
+        }.eraseToAnyPublisher()
+    }
+    
+    func topArtists() -> AnyPublisher<[TalentModel], any Error> {
+        Future<[TalentModel], Error> { promise in
+            Alamofire().getAlamofire(url: APIEndpoint.topArtist.urlString)
+                .sink { completion in
+                    switch completion {
+                    case .finished:
+                        print("탑 연예인 조회 성공")
+                    case let .failure(error):
+                        print("탑 연예인 조회 실패")
+                        promise(.failure(error))
+                    }
+                } receiveValue: { [weak self] (artists: [TalentModel]) in
+                    guard self != nil else { return }
+                    promise(.success(artists))
+                }.store(in: &self.subscriptions)
+
+        }.eraseToAnyPublisher()
+    }
+    
+    func getFestival(universityId: String) -> AnyPublisher<FestivalDetailModel, any Error> {
+        Future<FestivalDetailModel, Error> { promise in
+            Alamofire().getAlamofire(url: "\(APIEndpoint.getFestival.urlString)\(universityId)")
+                .sink { completion in
+                    switch completion {
+                    case .finished:
+                        print("축제 정보 조회 성공")
+                    case let .failure(error):
+                        print("축제 정보 조회 실패")
+                        promise(.failure(error))
+                    }
+                } receiveValue: { [weak self] (festival: FestivalDetailModel) in
+                    guard self != nil else { return }
+                    promise(.success(festival))
+                }.store(in: &self.subscriptions)
+
         }.eraseToAnyPublisher()
     }
     
@@ -77,4 +117,11 @@ class StubFestivalService: FestivalServiceType {
         Empty().eraseToAnyPublisher()
     }
     
+    func topArtists() -> AnyPublisher<[TalentModel], any Error> {
+        Empty().eraseToAnyPublisher()
+    }
+    
+    func getFestival(universityId: String) -> AnyPublisher<FestivalDetailModel, any Error> {
+        Empty().eraseToAnyPublisher()
+    }
 }

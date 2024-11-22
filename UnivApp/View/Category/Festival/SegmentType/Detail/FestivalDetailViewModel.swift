@@ -11,16 +11,14 @@ import Combine
 class FestivalDetailViewModel: ObservableObject {
     
     enum Action {
-        case eventLoad
+        case eventLoad(String)
         case load(String)
         case getArtist(String, Int, Int, Int)
     }
     
     @Published var phase: Phase = .notRequested
-    @Published var SchoolFestivalData: [FestivalYearData] = [
-        FestivalYearData(eventName: "대동제", year: "2024", date: "2024.05.29 ~ 2024.05.30", dayLineup: [DayLineup(day: "Day1", lineup: [Lineup(name: "NewJeans", subname: "NewJeans", image: ""), Lineup(name: "백예슬", subname: "백예슬", image: ""), Lineup(name: "YB 윤도현밴드", subname: "YB 윤도현밴드", image: "")]), DayLineup(day: "Day2", lineup: [Lineup(name: "트리플에스", subname: "트리플에스", image: ""), Lineup(name: "로이킴", subname: "로이킴", image: "")])]),
-        FestivalYearData(eventName: "청춘대로", year: "2023", date: "2024.05.29 ~ 2024.05.30", dayLineup: [DayLineup(day: "Day1", lineup: [Lineup(name: "아이브", subname: "아이브", image: ""), Lineup(name: "NewJeans", subname: "NewJeans", image: ""), Lineup(name: "YB 윤도현밴드", subname: "YB 윤도현밴드", image: "")]), DayLineup(day: "Day2", lineup: [Lineup(name: "트와이스", subname: "트와이스", image: ""), Lineup(name: "로이킴", subname: "로이킴", image: "")])])
-    ]
+    @Published var SchoolFestivalData: [FestivalYearData] = []
+    @Published var isReady: Bool = false
     
     private let container: DIContainer
     private var subscriptions = Set<AnyCancellable>()
@@ -32,11 +30,22 @@ class FestivalDetailViewModel: ObservableObject {
     
     func send(_ action: Action) {
         switch action {
-        case .eventLoad:
-            //TODO: - 서버와의 연동
+        case let .eventLoad(universityId):
             self.phase = .loading
-            
-            self.phase = .success
+            container.services.festivalService.getFestival(universityId: universityId)
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.phase = .fail
+                    }
+                } receiveValue: { [weak self] festivalData in
+                    if festivalData.events.isEmpty {
+                        self?.isReady = true
+                    } else {
+                        self?.isReady = false
+                        self?.SchoolFestivalData = festivalData.events
+                    }
+                    self?.phase = .success
+                }.store(in: &subscriptions)
             
         case let .load(eventName):
             self.phase = .loading

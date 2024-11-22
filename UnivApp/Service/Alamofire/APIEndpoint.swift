@@ -34,6 +34,8 @@ enum APIEndpoint {
     case diagnosisQuestion
     case diagnosisResult
     case getArtist
+    case topArtist
+    case getFestival
     //MARK: - Home
     case topEmployment
     case topCompetition
@@ -100,6 +102,10 @@ enum APIEndpoint {
             return "http://43.200.143.28:8080/api/questionnaires/results?score="
         case .getArtist:
             return "https://www.maniadb.com/api/search/"
+        case .topArtist:
+            return "http://43.200.143.28:8080/api/artists/top"
+        case .getFestival:
+            return "http://43.200.143.28:8080/api/festivals?universityId="
         
         case .topEmployment:
             return "http://43.200.143.28:8080/api/employment-rate/top-5"

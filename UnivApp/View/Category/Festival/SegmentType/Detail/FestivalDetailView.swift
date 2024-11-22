@@ -13,6 +13,8 @@ struct FestivalDetailView: View {
     @Environment(\.dismiss) var dismiss
     @State private var selectedSegment: String = ""
     @State private var currentIndex: Int = 0
+    @State private var tabIndex: Int = 0
+    var universityId: String
     
     var body: some View {
         contentView
@@ -23,10 +25,11 @@ struct FestivalDetailView: View {
                     Button {
                         dismiss()
                     } label: {
-                        Image("whiteback")
+                        Image(viewModel.isReady ? "blackback" : "whiteback")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 20, height: 20)
+                            .shadow(radius: 1)
                     }
                 }
             }
@@ -37,26 +40,50 @@ struct FestivalDetailView: View {
         case .notRequested:
             PlaceholderView()
                 .onAppear {
-                    viewModel.send(.eventLoad)
+                    viewModel.send(.eventLoad(universityId))
                 }
         case .loading:
             LoadingView(url: "congratulations", size: [150, 150])
         case .success:
-            loadedView
-                .onAppear {
-                    selectedSegment = "\(viewModel.SchoolFestivalData[0].year)년 \(viewModel.SchoolFestivalData[0].eventName)"
-                    viewModel.send(.load(selectedSegment))
-                }
+            if viewModel.isReady {
+                isReadyView
+            } else {
+                loadedView
+                    .onAppear {
+                        selectedSegment = "\(viewModel.SchoolFestivalData[0].year)년 \(viewModel.SchoolFestivalData[0].eventName)"
+                        viewModel.send(.load(selectedSegment))
+                    }
+            }
         case .fail:
             ErrorView()
         }
     }
+    
+    var isReadyView: some View {
+        VStack(alignment: .center, spacing: 20) {
+            Spacer()
+            LoadingView(url: "serviceReady", size: [150, 150])
+            VStack(alignment: .center, spacing: 10) {
+                Group {
+                    Text("컨텐츠 준비중 ").foregroundColor(.orange) + Text("입니다").foregroundColor(.primary)
+                }
+                .font(.system(size: 25, weight: .semibold))
+                
+                Text("컨텐츠 내용이 준비가 되지 않았습니다.\n가능한 빠른 시일내에 업데이트 하도록 하겠습니다.")
+                    .foregroundColor(.gray.opacity(0.8))
+                    .font(.system(size: 15, weight: .semibold))
+                    .multilineTextAlignment(.leading)
+            }
+            Spacer()
+        }
+    }
+    
     var loadedView: some View {
         VStack(alignment: .center, spacing: 20) {
             ScrollViewReader { proxy in
                 ScrollView(.vertical) {
                     VStack(alignment: .center, spacing: 20) {
-                        FestivalDescriptionView(model: viewModel.SchoolFestivalData[self.currentIndex])
+                        FestivalDescriptionView(currentIndex: $tabIndex, model: viewModel.SchoolFestivalData[self.currentIndex])
                             .environmentObject(viewModel)
                         
                         ScrollView(.horizontal, showsIndicators: false) {
@@ -66,7 +93,7 @@ struct FestivalDetailView: View {
                                         if self.selectedSegment != "\(viewModel.SchoolFestivalData[index].year)년 \(viewModel.SchoolFestivalData[index].eventName)" {
                                             self.selectedSegment = "\(viewModel.SchoolFestivalData[index].year)년 \(viewModel.SchoolFestivalData[index].eventName)"
                                             self.currentIndex = index
-                                            
+                                            self.tabIndex = 0
                                             viewModel.send(.load(selectedSegment))
                                         }
                                     } label: {
@@ -96,7 +123,7 @@ struct FestivalDetailView: View {
 
 fileprivate struct FestivalDescriptionView: View {
     @EnvironmentObject var viewModel: FestivalDetailViewModel
-    @State private var currentIndex: Int = 0
+    @Binding var currentIndex: Int
     var model: FestivalYearData
     
     var body: some View {
@@ -137,6 +164,7 @@ fileprivate struct FestivalDescriptionView: View {
                         .background(RoundedRectangle(cornerRadius: 15).fill(.orange))
                     Text(flattenedLineup[currentIndex].name)
                         .font(.system(size: 30, weight: .heavy))
+                        .shadow(radius: 1)
                 }
                 .foregroundColor(.white)
                 .padding(.horizontal, 30)
@@ -219,6 +247,7 @@ fileprivate struct CustomCalendar: View {
                                                 .scaledToFill()
                                                 .frame(width: 30, height: 30)
                                                 .cornerRadius(15)
+                                                .shadow(radius: 1)
                                             Text(flattenedLineup[index].name)
                                                 .font(.system(size: 10, weight: .semibold))
                                                 .foregroundColor(.primary)
@@ -262,5 +291,5 @@ fileprivate struct CustomCalendar: View {
 }
 
 #Preview {
-    FestivalDetailView(viewModel: FestivalDetailViewModel(container: .init(services: StubServices())))
+    FestivalDetailView(viewModel: FestivalDetailViewModel(container: .init(services: StubServices())), universityId: "")
 }
