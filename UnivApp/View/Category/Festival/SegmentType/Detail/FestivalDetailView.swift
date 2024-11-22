@@ -290,7 +290,7 @@ fileprivate struct CustomCalendar: View {
                         }
                         .frame(height: (week.map { day in
                             CGFloat(flattenedLineup.filter { $0.day == day }.count)
-                        }.max() ?? 0) * 70)
+                        }.max() ?? 0) * 80)
                     }
                 }
                 .padding(.horizontal, 10)
