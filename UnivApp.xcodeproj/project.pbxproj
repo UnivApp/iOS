@@ -757,8 +757,8 @@
 			children = (
 				E4EA25602C85CEF000DC5D55 /* Info.plist */,
 				E4B3FD2D2C786F0000CB98F3 /* UnivApp.entitlements */,
-				E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */,
 				E4982D012CCF60DC00D0F1A7 /* AppDelegate.swift */,
+				E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */,
 				E4982D072CCF65E400D0F1A7 /* GoogleService-Info.plist */,
 				E4982D0D2CCF706000D0F1A7 /* ServicesKEY.swift */,
 				E4EA25652C85D6DC00DC5D55 /* General */,
@@ -771,6 +771,7 @@
 				E4B3FCF22C7754CF00CB98F3 /* Reference */,
 				E4B3FCF52C7754E800CB98F3 /* Extension */,
 				E4B3FCCD2C7751DD00CB98F3 /* Preview Content */,
+				E4F321DA2CF727B300D35702 /* Test */,
 			);
 			path = UnivApp;
 			sourceTree = "<group>";
@@ -1124,6 +1125,29 @@
 				E4982D0F2CCF81A900D0F1A7 /* AlarmModel.swift */,
 			);
 			path = Calendar;
+			sourceTree = "<group>";
+		};
+		E4F321DA2CF727B300D35702 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				E4F321DB2CF727BE00D35702 /* Service */,
+				E4F321DC2CF727C700D35702 /* ViewModel */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		E4F321DB2CF727BE00D35702 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		E4F321DC2CF727C700D35702 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1514,7 +1538,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = UnivApp/UnivApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"UnivApp/Preview Content\"";
 				DEVELOPMENT_TEAM = Q653PU93R6;
 				ENABLE_PREVIEWS = YES;
@@ -1533,7 +1557,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = WEDLE.UnivApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1553,7 +1577,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = UnivApp/UnivApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"UnivApp/Preview Content\"";
 				DEVELOPMENT_TEAM = Q653PU93R6;
 				ENABLE_PREVIEWS = YES;
@@ -1572,7 +1596,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = WEDLE.UnivApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
