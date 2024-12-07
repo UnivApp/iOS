@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class DIContainer: ObservableObject {
+final class DIContainer: ObservableObject {
     
     var services: ServicesType
     

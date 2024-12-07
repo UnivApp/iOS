@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class FoodViewModel: ObservableObject {
+final class FoodViewModel: ObservableObject {
     
     enum Action {
         case load(String)

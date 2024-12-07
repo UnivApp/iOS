@@ -13,7 +13,7 @@ protocol RateServiceType {
     func getCompetitionRate(universityId: Int) -> AnyPublisher<CompetitionModel, Error>
 }
 
-class RateService: RateServiceType {
+final class RateService: RateServiceType {
     private var subscriptions = Set<AnyCancellable>()
     
     func getEmployRate(universityId: Int) -> AnyPublisher<EmploymentModel, any Error> {
@@ -53,7 +53,7 @@ class RateService: RateServiceType {
     }
 }
 
-class StubRateService: RateServiceType {
+final class StubRateService: RateServiceType {
     
     func getEmployRate(universityId: Int) -> AnyPublisher<EmploymentModel, any Error> {
         Empty().eraseToAnyPublisher()

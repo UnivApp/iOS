@@ -12,7 +12,7 @@ protocol MoneyServiceType {
     func getRent(CGG_NM: String, BLDG_USG: String) -> AnyPublisher<RentModel, Error>
 }
 
-class MoneyService: MoneyServiceType {
+final class MoneyService: MoneyServiceType {
     
     private var subscriptioins = Set<AnyCancellable>()
     
@@ -39,7 +39,7 @@ class MoneyService: MoneyServiceType {
     }
 }
 
-class StubMoneyService: MoneyServiceType {
+final class StubMoneyService: MoneyServiceType {
     
     func getRent(CGG_NM: String, BLDG_USG: String) -> AnyPublisher<RentModel, any Error> {
         Empty().eraseToAnyPublisher()

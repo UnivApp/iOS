@@ -13,7 +13,7 @@ protocol HomeServiceType {
     func getTopCompetition() -> AnyPublisher<[CompetitionModel], Error>
 }
 
-class HomeService: HomeServiceType {
+final class HomeService: HomeServiceType {
     private var subscriptions = Set<AnyCancellable>()
     
     func getTopEmployment() -> AnyPublisher<[EmploymentModel], any Error> {
@@ -53,7 +53,7 @@ class HomeService: HomeServiceType {
     }
 }
 
-class StubHomeService: HomeServiceType {
+final class StubHomeService: HomeServiceType {
     
     func getTopEmployment() -> AnyPublisher<[EmploymentModel], any Error> {
         Empty().eraseToAnyPublisher()

@@ -20,7 +20,7 @@ protocol CalendarServiceType {
     func getAlarm() -> AnyPublisher<[AlarmListModel], Error>
 }
 
-class CalendarService: CalendarServiceType {
+final class CalendarService: CalendarServiceType {
     
     init() {
         NotificationCenter.default.publisher(for: .deviceTokenDidSave)
@@ -122,7 +122,7 @@ class CalendarService: CalendarServiceType {
     }
 }
 
-class StubCalendarService: CalendarServiceType {
+final class StubCalendarService: CalendarServiceType {
     
     func getTotalCalendar() -> AnyPublisher<[CalendarModel], any Error> {
         Empty().eraseToAnyPublisher()

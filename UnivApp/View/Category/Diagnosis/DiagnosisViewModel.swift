@@ -46,7 +46,7 @@ enum DiagnosisButton: String, CaseIterable {
     }
 }
 
-class DiagnosisViewModel: ObservableObject {
+final class DiagnosisViewModel: ObservableObject {
     
     enum Action {
         case questionLoad

@@ -13,6 +13,8 @@
 		E40135EC2CA1CDEF0021D351 /* PlaySegmentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40135EB2CA1CDEF0021D351 /* PlaySegmentType.swift */; };
 		E40135EE2CA3E7850021D351 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40135ED2CA3E7850021D351 /* SearchView.swift */; };
 		E40135F82CA3F5B90021D351 /* logo_Splash.gif in Resources */ = {isa = PBXBuildFile; fileRef = E40135F72CA3F5B90021D351 /* logo_Splash.gif */; };
+		E40395442D042400001ED2E0 /* NavigationDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40395432D042400001ED2E0 /* NavigationDestination.swift */; };
+		E40395462D042512001ED2E0 /* NavigationRoutingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40395452D042512001ED2E0 /* NavigationRoutingView.swift */; };
 		E409A13A2CAA944C00E9CB1C /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E409A1392CAA944C00E9CB1C /* NewsModel.swift */; };
 		E409A13D2CAC014900E9CB1C /* MouModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E409A13C2CAC014900E9CB1C /* MouModel.swift */; };
 		E409A13F2CAD1ADF00E9CB1C /* PlayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E409A13E2CAD1ADF00E9CB1C /* PlayService.swift */; };
@@ -184,6 +186,7 @@
 		E4F04C0C2C9878A600F653DF /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F04C0B2C9878A600F653DF /* CalendarViewModel.swift */; };
 		E4F04C0F2C987CA500F653DF /* CalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F04C0E2C987CA500F653DF /* CalendarModel.swift */; };
 		E4F04C112C987D2A00F653DF /* CalendarDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F04C102C987D2A00F653DF /* CalendarDataCell.swift */; };
+		E4F3230E2D04228600D35702 /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F3230D2D04228500D35702 /* NavigationRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -193,6 +196,8 @@
 		E40135EB2CA1CDEF0021D351 /* PlaySegmentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySegmentType.swift; sourceTree = "<group>"; };
 		E40135ED2CA3E7850021D351 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		E40135F72CA3F5B90021D351 /* logo_Splash.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = logo_Splash.gif; sourceTree = "<group>"; };
+		E40395432D042400001ED2E0 /* NavigationDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationDestination.swift; sourceTree = "<group>"; };
+		E40395452D042512001ED2E0 /* NavigationRoutingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRoutingView.swift; sourceTree = "<group>"; };
 		E409A1392CAA944C00E9CB1C /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
 		E409A13C2CAC014900E9CB1C /* MouModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MouModel.swift; sourceTree = "<group>"; };
 		E409A13E2CAD1ADF00E9CB1C /* PlayService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayService.swift; sourceTree = "<group>"; };
@@ -359,6 +364,7 @@
 		E4F04C0B2C9878A600F653DF /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		E4F04C0E2C987CA500F653DF /* CalendarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarModel.swift; sourceTree = "<group>"; };
 		E4F04C102C987D2A00F653DF /* CalendarDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDataCell.swift; sourceTree = "<group>"; };
+		E4F3230D2D04228500D35702 /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -388,6 +394,16 @@
 				E40135EB2CA1CDEF0021D351 /* PlaySegmentType.swift */,
 			);
 			path = PlaySegment;
+			sourceTree = "<group>";
+		};
+		E40395422D04239D001ED2E0 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				E4F3230D2D04228500D35702 /* NavigationRouter.swift */,
+				E40395432D042400001ED2E0 /* NavigationDestination.swift */,
+				E40395452D042512001ED2E0 /* NavigationRoutingView.swift */,
+			);
+			path = Navigation;
 			sourceTree = "<group>";
 		};
 		E409A1382CAA944100E9CB1C /* Info */ = {
@@ -1042,6 +1058,7 @@
 		E4EA25652C85D6DC00DC5D55 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				E40395422D04239D001ED2E0 /* Navigation */,
 				E4EA25662C85D6E500DC5D55 /* View */,
 				E4953D762C8EE00D008CBDE5 /* Phase.swift */,
 			);
@@ -1318,6 +1335,7 @@
 				E4B3FD0C2C775D7000CB98F3 /* MainTabView.swift in Sources */,
 				E4982D262CDC9FC600D0F1A7 /* FestivalSegmentView.swift in Sources */,
 				E4982D022CCF60DC00D0F1A7 /* AppDelegate.swift in Sources */,
+				E40395462D042512001ED2E0 /* NavigationRoutingView.swift in Sources */,
 				E415893F2CBE971500EDB211 /* DiagnosisModel.swift in Sources */,
 				E49222702C9C87DA0077EA45 /* RequestInterceptor + Extension.swift in Sources */,
 				E4CEEFC02CBA4E19001F4DAE /* MapView.swift in Sources */,
@@ -1352,6 +1370,7 @@
 				E4953D7D2C8EE4F2008CBDE5 /* ErrorView.swift in Sources */,
 				E4B0FFDF2CBCE60A008B742E /* RateViewModel.swift in Sources */,
 				E49C9FA72C86D3BC001F43A3 /* ListViewModel.swift in Sources */,
+				E40395442D042400001ED2E0 /* NavigationDestination.swift in Sources */,
 				E49C9FB22C86ED38001F43A3 /* FoodView.swift in Sources */,
 				E49C9FDE2C87055D001F43A3 /* MoneyViewModel.swift in Sources */,
 				E4F04C112C987D2A00F653DF /* CalendarDataCell.swift in Sources */,
@@ -1361,6 +1380,7 @@
 				E4B3FD102C778D6C00CB98F3 /* MainTabType.swift in Sources */,
 				E49C9FE62C870572001F43A3 /* InfoViewModel.swift in Sources */,
 				E4982D282CDC9FD700D0F1A7 /* FestivalSchoolView.swift in Sources */,
+				E4F3230E2D04228600D35702 /* NavigationRouter.swift in Sources */,
 				E4982D162CD4C7E700D0F1A7 /* SettingService.swift in Sources */,
 				E49C9FF22C870589001F43A3 /* ChatViewModel.swift in Sources */,
 				E4982D0E2CCF706000D0F1A7 /* ServicesKEY.swift in Sources */,
@@ -1538,7 +1558,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = UnivApp/UnivApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"UnivApp/Preview Content\"";
 				DEVELOPMENT_TEAM = Q653PU93R6;
 				ENABLE_PREVIEWS = YES;
@@ -1577,7 +1597,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = UnivApp/UnivApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"UnivApp/Preview Content\"";
 				DEVELOPMENT_TEAM = Q653PU93R6;
 				ENABLE_PREVIEWS = YES;

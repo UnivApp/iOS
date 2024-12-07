@@ -27,7 +27,7 @@ enum chatScrollType {
     case Occasion
 }
 
-class ChatViewModel: ObservableObject {
+final class ChatViewModel: ObservableObject {
     
     @Published var phase: Phase = .notRequested
     @Published var chatList: [String] = ["안녕하세요! 제 이름은 위봇입니다", "무엇을 도와드릴까요 💭"]

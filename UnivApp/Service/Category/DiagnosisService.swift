@@ -13,7 +13,7 @@ protocol DiagnosisServiceType {
     func getResult(score: Int) -> AnyPublisher<DiagnosisResultModel, Error>
 }
 
-class DiagnosisService: DiagnosisServiceType {
+final class DiagnosisService: DiagnosisServiceType {
     private var subscriptions = Set<AnyCancellable>()
     
     func getQuestion() -> AnyPublisher<[DiagnosisModel], any Error> {
@@ -55,7 +55,7 @@ class DiagnosisService: DiagnosisServiceType {
     
 }
 
-class StubDiagnosisService: DiagnosisServiceType {
+final class StubDiagnosisService: DiagnosisServiceType {
     
     func getQuestion() -> AnyPublisher<[DiagnosisModel], any Error> {
         Empty().eraseToAnyPublisher()

@@ -13,7 +13,7 @@ protocol ListServiceType {
     func getDetail(universityId: Int) -> AnyPublisher<ListDetailModel, Error>
 }
 
-class ListService: ListServiceType {
+final class ListService: ListServiceType {
     private var subscriptions = Set<AnyCancellable>()
     
     func getSummary() -> AnyPublisher<[SummaryModel], any Error> {
@@ -55,7 +55,7 @@ class ListService: ListServiceType {
     }
 }
 
-class StubListService: ListServiceType {
+final class StubListService: ListServiceType {
     func getSummary() -> AnyPublisher<[SummaryModel], any Error> {
         Empty().eraseToAnyPublisher()
     }

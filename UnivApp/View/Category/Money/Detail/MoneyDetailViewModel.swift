@@ -8,7 +8,7 @@ import Foundation
 import Combine
 import Charts
 
-class MoneyDetailViewModel: ObservableObject {
+final class MoneyDetailViewModel: ObservableObject {
     
     enum Action {
         case load(String, String)

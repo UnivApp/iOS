@@ -14,7 +14,7 @@ protocol MouServiceType {
     func statusExpo(status: String) -> AnyPublisher<[MouModel], Error>
 }
 
-class MouService: MouServiceType {
+final class MouService: MouServiceType {
     private var subscriptions = Set<AnyCancellable>()
     
     func getExpo() -> AnyPublisher<[MouModel], any Error> {
@@ -75,7 +75,7 @@ class MouService: MouServiceType {
     }
 }
 
-class StubMouService: MouServiceType {
+final class StubMouService: MouServiceType {
     
     func getExpo() -> AnyPublisher<[MouModel], any Error> {
         Empty().eraseToAnyPublisher()

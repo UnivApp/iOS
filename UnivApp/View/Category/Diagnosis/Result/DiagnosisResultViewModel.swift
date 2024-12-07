@@ -48,7 +48,7 @@ enum DiagnosisImageType: String {
     }
 }
 
-class DiagnosisResultViewModel: ObservableObject {
+final class DiagnosisResultViewModel: ObservableObject {
     
     enum Action {
         case resultLoad(Int)

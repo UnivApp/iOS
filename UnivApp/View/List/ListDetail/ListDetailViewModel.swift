@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import SwiftUI
 
-class ListDetailViewModel: ObservableObject {
+final class ListDetailViewModel: ObservableObject {
     
     enum Action {
         case load(Int)

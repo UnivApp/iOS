@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class RateDetailViewModel: ObservableObject {
+final class RateDetailViewModel: ObservableObject {
     
     enum Action {
         case employLoad(Int)

@@ -71,7 +71,7 @@ class Services: ServicesType {
     
 }
 
-class StubServices: ServicesType {
+final class StubServices: ServicesType {
     var authService: AuthServiceType = StubAuthService()
     var listService: ListServiceType = StubListService()
     var homeService: HomeServiceType = StubHomeService()
