@@ -15,7 +15,6 @@ struct HomePopupModel {
     enum HomePopupType {
         case search
         case alert
-        case chat
     }
 }
 
@@ -65,36 +64,15 @@ struct HomeView: View {
     
     var loadedView: some View {
         NavigationStack {
-            ZStack {
-                ScrollView(.vertical) {
-                    VStack(alignment: .center, spacing: 10) {
-                        searchView
-                            .padding(.top, 10)
-                        
-                        categoryView
-                        
-                        footerView
-                    }
+            ScrollView(.vertical) {
+                VStack(alignment: .center, spacing: 10) {
+                    searchView
+                        .padding(.top, 10)
+                    
+                    categoryView
+                    
+                    footerView
                 }
-                VStack(alignment: .trailing) {
-                    Spacer()
-                    HStack {
-                        Spacer()
-                        Button {
-                            self.isShowingPopup.isPresented = true
-                            self.isShowingPopup.type = .chat
-                        } label: {
-                            Image("chat")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 25, height: 25)
-                                .padding(10)
-                                .background(Circle().fill(.yellow))
-                        }
-                    }
-                }
-                .padding(.horizontal, 30)
-                .padding(.vertical, 30)
             }
             .fullScreenCover(isPresented: $isShowingPopup.isPresented) {
                 if isShowingPopup.type == .alert {
@@ -107,9 +85,6 @@ struct HomeView: View {
                         .padding(.horizontal, 20)
                         .presentationBackground(.black.opacity(0.3))
                         .fadeInOut($popupOpacity[1])
-                } else {
-                    ChatView(viewModel: ChatViewModel(container: .init(services: Services())),isPopPresented: $isShowingPopup.isPresented)
-                        .fadeInOut($popupOpacity[2])
                 }
             }
             .transaction { $0.disablesAnimations = true }
