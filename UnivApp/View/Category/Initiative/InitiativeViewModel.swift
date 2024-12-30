@@ -7,7 +7,7 @@
 import Foundation
 import Combine
 
-class InitiativeViewModel: ObservableObject {
+final class InitiativeViewModel: ObservableObject {
     
     enum Action {
         case load

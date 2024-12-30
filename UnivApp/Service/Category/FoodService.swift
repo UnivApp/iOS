@@ -12,7 +12,7 @@ protocol FoodServiceType {
     func getSearchFood(universityName: String) -> AnyPublisher<[FoodModel], Error>
 }
 
-class FoodService: FoodServiceType {
+final class FoodService: FoodServiceType {
     private var subscriptions = Set<AnyCancellable>()
     
     func getSearchFood(universityName: String) -> AnyPublisher<[FoodModel], any Error> {
@@ -35,7 +35,7 @@ class FoodService: FoodServiceType {
     }
 }
 
-class StubFoodService: FoodServiceType {
+final class StubFoodService: FoodServiceType {
     
     func getSearchFood(universityName: String) -> AnyPublisher<[FoodModel], any Error> {
         Empty().eraseToAnyPublisher()

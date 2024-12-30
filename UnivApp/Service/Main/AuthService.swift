@@ -26,7 +26,7 @@ protocol AuthServiceType {
     func nonMemberLogin() -> AnyPublisher<UserModel, ServicesError>
 }
 
-class AuthService: AuthServiceType {
+final class AuthService: AuthServiceType {
     
     private var subscriptions = Set<AnyCancellable>()
     

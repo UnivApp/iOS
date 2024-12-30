@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class FestivalViewModel: ObservableObject {
+final class FestivalViewModel: ObservableObject {
     
     enum Action {
         case topLoad

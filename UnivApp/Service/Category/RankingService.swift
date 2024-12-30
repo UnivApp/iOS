@@ -12,7 +12,7 @@ protocol RankingServiceType {
     func getRanking() -> AnyPublisher<[InitiativeModel], Error>
 }
 
-class RankingService: RankingServiceType {
+final class RankingService: RankingServiceType {
     private var subscriptions = Set<AnyCancellable>()
     
     func getRanking() -> AnyPublisher<[InitiativeModel], any Error> {
@@ -35,7 +35,7 @@ class RankingService: RankingServiceType {
     }
 }
 
-class StubRankingService: RankingServiceType {
+final class StubRankingService: RankingServiceType {
     func getRanking() -> AnyPublisher<[InitiativeModel], any Error> {
         Empty().eraseToAnyPublisher()
     }

@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class FestivalDetailViewModel: ObservableObject {
+final class FestivalDetailViewModel: ObservableObject {
     
     enum Action {
         case eventLoad(String)

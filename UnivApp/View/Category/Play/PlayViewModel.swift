@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class PlayViewModel: ObservableObject {
+final class PlayViewModel: ObservableObject {
     
     enum Action {
         case topPlaceLoad

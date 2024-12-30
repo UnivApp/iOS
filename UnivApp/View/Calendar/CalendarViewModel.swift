@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class CalendarViewModel: ObservableObject {
+final class CalendarViewModel: ObservableObject {
     
     enum Action {
         case totalLoad

@@ -32,7 +32,7 @@ protocol ServicesType {
     var festivalService: FestivalServiceType { get set }
 }
 
-class Services: ServicesType {
+final class Services: ServicesType {
     var authService: AuthServiceType
     var listService: ListServiceType
     var homeService: HomeServiceType
@@ -71,7 +71,7 @@ class Services: ServicesType {
     
 }
 
-class StubServices: ServicesType {
+final class StubServices: ServicesType {
     var authService: AuthServiceType = StubAuthService()
     var listService: ListServiceType = StubListService()
     var homeService: HomeServiceType = StubHomeService()

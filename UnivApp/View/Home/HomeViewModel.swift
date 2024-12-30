@@ -51,7 +51,7 @@ enum PosterType: CaseIterable {
 }
 
 
-class HomeViewModel: ObservableObject {
+final class HomeViewModel: ObservableObject {
     
     enum Action {
         case load

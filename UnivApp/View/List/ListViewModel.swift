@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class ListViewModel: ObservableObject {
+final class ListViewModel: ObservableObject {
     
     enum Action {
         case load

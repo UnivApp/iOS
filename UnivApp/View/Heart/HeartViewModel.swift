@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class HeartViewModel: ObservableObject {
+final class HeartViewModel: ObservableObject {
     
     enum Action {
         case load

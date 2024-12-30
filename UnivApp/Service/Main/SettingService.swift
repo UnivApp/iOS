@@ -15,7 +15,7 @@ protocol SettingServiceType {
     func getNickname() -> AnyPublisher<NicknameModel, Error>
 }
 
-class SettingService: SettingServiceType {
+final class SettingService: SettingServiceType {
     
     private var subscriptions = Set<AnyCancellable>()
     
@@ -96,7 +96,7 @@ class SettingService: SettingServiceType {
     
 }
 
-class StubSettingService: SettingServiceType {
+final class StubSettingService: SettingServiceType {
     
     func checkNickname(nickName: String) -> AnyPublisher<CheckNicknameModel, any Error> {
         Empty().eraseToAnyPublisher()

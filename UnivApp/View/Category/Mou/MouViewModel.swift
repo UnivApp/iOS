@@ -22,7 +22,7 @@ enum MouType: String, CaseIterable, Hashable {
     }
 }
 
-class MouViewModel: ObservableObject {
+final class MouViewModel: ObservableObject {
     
     enum Action {
         case load

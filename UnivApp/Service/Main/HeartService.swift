@@ -14,7 +14,7 @@ protocol HeartServiceType {
     func heartList() -> AnyPublisher<[SummaryModel], Error>
 }
 
-class HeartService: HeartServiceType {
+final class HeartService: HeartServiceType {
     private var subscriptions = Set<AnyCancellable>()
     
     func addHeart(universityId: Int) -> AnyPublisher<Void, any Error> {
@@ -75,7 +75,7 @@ class HeartService: HeartServiceType {
     }
 }
 
-class StubHeartService: HeartServiceType {
+final class StubHeartService: HeartServiceType {
     func addHeart(universityId: Int) -> AnyPublisher<Void, any Error> {
         Empty().eraseToAnyPublisher()
     }
