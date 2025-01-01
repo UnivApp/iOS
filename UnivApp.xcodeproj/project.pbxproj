@@ -877,12 +877,10 @@
 			isa = PBXGroup;
 			children = (
 				E4B0FFDB2CBCE548008B742E /* Rate */,
-				E4F04C022C96CF2A00F653DF /* SplitType */,
+				E4BF17B12D22899F00459D4A /* Type */,
+				E4BF17B02D22899500459D4A /* Detail */,
 				E4B3FD152C77902800CB98F3 /* HomeView.swift */,
-				E4B3FD362C7882C200CB98F3 /* CategoryType.swift */,
-				E409A1442CAE8B7F00E9CB1C /* PopUpContentView.swift */,
 				E49C9FA82C86D539001F43A3 /* HomeViewModel.swift */,
-				E4982D112CD4ABCB00D0F1A7 /* BellView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -917,6 +915,24 @@
 				E409A1422CAE83EA00E9CB1C /* SettingViewModel.swift */,
 			);
 			path = Setting;
+			sourceTree = "<group>";
+		};
+		E4BF17B02D22899500459D4A /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				E4982D112CD4ABCB00D0F1A7 /* BellView.swift */,
+				E409A1442CAE8B7F00E9CB1C /* PopUpContentView.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		E4BF17B12D22899F00459D4A /* Type */ = {
+			isa = PBXGroup;
+			children = (
+				E4F04C022C96CF2A00F653DF /* SplitType */,
+				E4B3FD362C7882C200CB98F3 /* CategoryType.swift */,
+			);
+			path = Type;
 			sourceTree = "<group>";
 		};
 		E4C2643D2CB3FCF500E01480 /* Category */ = {
