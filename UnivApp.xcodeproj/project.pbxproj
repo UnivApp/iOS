@@ -106,6 +106,9 @@
 		E4982D232CDC9DB800D0F1A7 /* TalentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982D222CDC9DB800D0F1A7 /* TalentModel.swift */; };
 		E4982D262CDC9FC600D0F1A7 /* FestivalSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982D252CDC9FC600D0F1A7 /* FestivalSegmentView.swift */; };
 		E4982D282CDC9FD700D0F1A7 /* FestivalSchoolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4982D272CDC9FD700D0F1A7 /* FestivalSchoolView.swift */; };
+		E49A9FB92D263A9E001ED634 /* HomeCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49A9FB82D263A9E001ED634 /* HomeCategoryView.swift */; };
+		E49A9FBB2D263B96001ED634 /* HomeFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49A9FBA2D263B96001ED634 /* HomeFooterView.swift */; };
+		E49A9FBD2D263F1D001ED634 /* SearchDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49A9FBC2D263F1D001ED634 /* SearchDetailView.swift */; };
 		E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */; };
 		E49C9F9F2C86CF70001F43A3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */; };
 		E49C9FA72C86D3BC001F43A3 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */; };
@@ -165,7 +168,6 @@
 		E4CEEFBC2CB7F1A1001F4DAE /* CompetitionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CEEFBB2CB7F1A1001F4DAE /* CompetitionModel.swift */; };
 		E4CEEFBE2CBA4A9D001F4DAE /* RateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CEEFBD2CBA4A9D001F4DAE /* RateService.swift */; };
 		E4CEEFC02CBA4E19001F4DAE /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CEEFBF2CBA4E19001F4DAE /* MapView.swift */; };
-		E4D626012CA5347E008596D0 /* SearchViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D626002CA5347E008596D0 /* SearchViewModelType.swift */; };
 		E4D626062CA7F611008596D0 /* CustomPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D626052CA7F611008596D0 /* CustomPageControl.swift */; };
 		E4DCD9B32C9FE4D000E06542 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DCD9B22C9FE4D000E06542 /* SplashView.swift */; };
 		E4DCD9BB2C9FFF5500E06542 /* PlayDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DCD9BA2C9FFF5500E06542 /* PlayDetailModel.swift */; };
@@ -276,6 +278,9 @@
 		E4982D222CDC9DB800D0F1A7 /* TalentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalentModel.swift; sourceTree = "<group>"; };
 		E4982D252CDC9FC600D0F1A7 /* FestivalSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FestivalSegmentView.swift; sourceTree = "<group>"; };
 		E4982D272CDC9FD700D0F1A7 /* FestivalSchoolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FestivalSchoolView.swift; sourceTree = "<group>"; };
+		E49A9FB82D263A9E001ED634 /* HomeCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCategoryView.swift; sourceTree = "<group>"; };
+		E49A9FBA2D263B96001ED634 /* HomeFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFooterView.swift; sourceTree = "<group>"; };
+		E49A9FBC2D263F1D001ED634 /* SearchDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailView.swift; sourceTree = "<group>"; };
 		E49C9F9A2C85DE06001F43A3 /* UnivAppApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnivAppApp.swift; sourceTree = "<group>"; };
 		E49C9F9E2C86CF70001F43A3 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		E49C9FA62C86D3BC001F43A3 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
@@ -337,7 +342,6 @@
 		E4CEEFBB2CB7F1A1001F4DAE /* CompetitionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionModel.swift; sourceTree = "<group>"; };
 		E4CEEFBD2CBA4A9D001F4DAE /* RateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateService.swift; sourceTree = "<group>"; };
 		E4CEEFBF2CBA4E19001F4DAE /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
-		E4D626002CA5347E008596D0 /* SearchViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModelType.swift; sourceTree = "<group>"; };
 		E4D626052CA7F611008596D0 /* CustomPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPageControl.swift; sourceTree = "<group>"; };
 		E4DCD9B22C9FE4D000E06542 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		E4DCD9BA2C9FFF5500E06542 /* PlayDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayDetailModel.swift; sourceTree = "<group>"; };
@@ -922,6 +926,8 @@
 			children = (
 				E4982D112CD4ABCB00D0F1A7 /* BellView.swift */,
 				E409A1442CAE8B7F00E9CB1C /* PopUpContentView.swift */,
+				E49A9FB82D263A9E001ED634 /* HomeCategoryView.swift */,
+				E49A9FBA2D263B96001ED634 /* HomeFooterView.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -1002,7 +1008,7 @@
 			isa = PBXGroup;
 			children = (
 				E40135ED2CA3E7850021D351 /* SearchView.swift */,
-				E4D626002CA5347E008596D0 /* SearchViewModelType.swift */,
+				E49A9FBC2D263F1D001ED634 /* SearchDetailView.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -1255,11 +1261,13 @@
 				E4953D942C901972008CBDE5 /* HeartService.swift in Sources */,
 				E4953D752C8EDC08008CBDE5 /* SummaryModel.swift in Sources */,
 				E4953D5C2C8B0544008CBDE5 /* FoodModel.swift in Sources */,
+				E49A9FB92D263A9E001ED634 /* HomeCategoryView.swift in Sources */,
 				E49C9FA92C86D539001F43A3 /* HomeViewModel.swift in Sources */,
 				E415891A2CBE409D00EDB211 /* MouService.swift in Sources */,
 				E49C9FE22C87056B001F43A3 /* InitiativeViewModel.swift in Sources */,
 				E4953D922C8F3AA3008CBDE5 /* SearchService.swift in Sources */,
 				E4CEEFBE2CBA4A9D001F4DAE /* RateService.swift in Sources */,
+				E49A9FBD2D263F1D001ED634 /* SearchDetailView.swift in Sources */,
 				E41589182CBD21A700EDB211 /* RateDetailViewModel.swift in Sources */,
 				E4CEEFBC2CB7F1A1001F4DAE /* CompetitionModel.swift in Sources */,
 				E4F04BFE2C96C53900F653DF /* InitiativeViewCell.swift in Sources */,
@@ -1293,6 +1301,7 @@
 				E4B3FD042C77577100CB98F3 /* Services.swift in Sources */,
 				E409A13F2CAD1ADF00E9CB1C /* PlayService.swift in Sources */,
 				E47B2ECF2C79AF4C0039E2E0 /* SettingType.swift in Sources */,
+				E49A9FBB2D263B96001ED634 /* HomeFooterView.swift in Sources */,
 				E4CEEFB12CB517E8001F4DAE /* FoodService.swift in Sources */,
 				E4B3FD1E2C77905500CB98F3 /* SettingView.swift in Sources */,
 				E409A1432CAE83EA00E9CB1C /* SettingViewModel.swift in Sources */,
@@ -1339,7 +1348,6 @@
 				E4CEEFB82CB675A1001F4DAE /* ListCategoryView.swift in Sources */,
 				E49C9FF92C870C36001F43A3 /* PlayModel.swift in Sources */,
 				E4CCE6DA2CC3892E00483A87 /* MoneySelectedType.swift in Sources */,
-				E4D626012CA5347E008596D0 /* SearchViewModelType.swift in Sources */,
 				E4B3FD022C77563600CB98F3 /* DIContainer.swift in Sources */,
 				E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */,
 				E4CCE6CE2CC27A1C00483A87 /* MoneyModel.swift in Sources */,
