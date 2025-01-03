@@ -15,6 +15,8 @@ final class ListViewModel: ObservableObject {
         case search
         case addHeart(Int)
         case removeHeart(Int)
+        case saveText
+        case loadText
     }
     
     @Published var searchText: String
@@ -23,6 +25,7 @@ final class ListViewModel: ObservableObject {
     @Published var heartPhase: heartPhase = .notRequested
     @Published var notFound: Bool = false
     @Published var showRateArray: [Bool] = []
+    @Published var recentTexts: [String] = []
     
     private var container: DIContainer
     private var subscriptions = Set<AnyCancellable>()
@@ -91,7 +94,20 @@ final class ListViewModel: ObservableObject {
                 } receiveValue: { [weak self] removeHeart in
                     self?.heartPhase = .removeHeart(universityId)
                 }.store(in: &subscriptions)
-
+            
+        case .saveText:
+            if recentTexts.count >= 10 {
+                for removeIndex in 10..<recentTexts.count {
+                    recentTexts.remove(at: removeIndex)
+                }
+                UserDefaults.standard.set(recentTexts, forKey: "recentTexts")
+            } else {
+                UserDefaults.standard.set(recentTexts, forKey: "recentTexts")
+            }
+        case .loadText:
+            if let recentTexts = UserDefaults.standard.array(forKey: "recentTexts") as? [String] {
+                self.recentTexts = recentTexts
+            }
         }
     }
 }

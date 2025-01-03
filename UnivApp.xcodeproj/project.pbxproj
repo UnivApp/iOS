@@ -20,6 +20,8 @@
 		E409A1432CAE83EA00E9CB1C /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E409A1422CAE83EA00E9CB1C /* SettingViewModel.swift */; };
 		E409A1452CAE8B7F00E9CB1C /* PopUpContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E409A1442CAE8B7F00E9CB1C /* PopUpContentView.swift */; };
 		E40B3EA12D278CA90077932E /* SearchDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40B3EA02D278CA90077932E /* SearchDetailViewCell.swift */; };
+		E40B3EA32D2790AF0077932E /* UINavigationController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40B3EA22D2790AF0077932E /* UINavigationController + Extension.swift */; };
+		E40B3EA52D2793A50077932E /* SearchRecentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40B3EA42D2793A50077932E /* SearchRecentView.swift */; };
 		E41589152CBD216B00EDB211 /* RateDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41589142CBD216B00EDB211 /* RateDetailView.swift */; };
 		E41589182CBD21A700EDB211 /* RateDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41589172CBD21A700EDB211 /* RateDetailViewModel.swift */; };
 		E415891A2CBE409D00EDB211 /* MouService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41589192CBE409D00EDB211 /* MouService.swift */; };
@@ -198,6 +200,8 @@
 		E409A1422CAE83EA00E9CB1C /* SettingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		E409A1442CAE8B7F00E9CB1C /* PopUpContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpContentView.swift; sourceTree = "<group>"; };
 		E40B3EA02D278CA90077932E /* SearchDetailViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailViewCell.swift; sourceTree = "<group>"; };
+		E40B3EA22D2790AF0077932E /* UINavigationController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController + Extension.swift"; sourceTree = "<group>"; };
+		E40B3EA42D2793A50077932E /* SearchRecentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecentView.swift; sourceTree = "<group>"; };
 		E41589142CBD216B00EDB211 /* RateDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateDetailView.swift; sourceTree = "<group>"; };
 		E41589172CBD21A700EDB211 /* RateDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateDetailViewModel.swift; sourceTree = "<group>"; };
 		E41589192CBE409D00EDB211 /* MouService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MouService.swift; sourceTree = "<group>"; };
@@ -407,6 +411,7 @@
 			children = (
 				E49A9FBC2D263F1D001ED634 /* SearchDetailView.swift */,
 				E40B3EA02D278CA90077932E /* SearchDetailViewCell.swift */,
+				E40B3EA42D2793A50077932E /* SearchRecentView.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -807,6 +812,7 @@
 				E4B3FCF62C7754F500CB98F3 /* Color+Extension.swift */,
 				E4953D3B2C89CDD5008CBDE5 /* View + Extension.swift */,
 				E492226F2C9C87DA0077EA45 /* RequestInterceptor + Extension.swift */,
+				E40B3EA22D2790AF0077932E /* UINavigationController + Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1252,6 +1258,7 @@
 				E41589422CBFCA9F00EDB211 /* DiagnosisResultView.swift in Sources */,
 				E4953D6F2C8ECE90008CBDE5 /* Alamofire.swift in Sources */,
 				E4B0FFDD2CBCE55A008B742E /* RateView.swift in Sources */,
+				E40B3EA32D2790AF0077932E /* UINavigationController + Extension.swift in Sources */,
 				E49C9FB42C86ED41001F43A3 /* DiagnosisView.swift in Sources */,
 				E415893B2CBE938D00EDB211 /* DiagnosisDetailView.swift in Sources */,
 				E4CCE6E82CC63DDE00483A87 /* DiagnosisResultViewModel.swift in Sources */,
@@ -1341,6 +1348,7 @@
 				E4B0FFDF2CBCE60A008B742E /* RateViewModel.swift in Sources */,
 				E49C9FA72C86D3BC001F43A3 /* ListViewModel.swift in Sources */,
 				E49C9FB22C86ED38001F43A3 /* FoodView.swift in Sources */,
+				E40B3EA52D2793A50077932E /* SearchRecentView.swift in Sources */,
 				E49C9FDE2C87055D001F43A3 /* MoneyViewModel.swift in Sources */,
 				E4F04C112C987D2A00F653DF /* CalendarDataCell.swift in Sources */,
 				E4CCE6C82CC0EEE300483A87 /* CalendarContainer.swift in Sources */,

@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct SearchDetailView: View {
+    @Environment(\.dismiss) var dismiss
     @StateObject var listViewModel : ListViewModel
+    
     @FocusState var isFocused: Bool
     @State var isLoading: Bool = false
     
@@ -21,6 +23,9 @@ struct SearchDetailView: View {
         switch listViewModel.phase {
         case .notRequested:
             loadedView
+                .onAppear {
+                    listViewModel.send(action: .loadText)
+                }
         case .loading:
             loadedView
                 .onAppear { isLoading = true }
@@ -28,15 +33,36 @@ struct SearchDetailView: View {
             loadedView
                 .onAppear { isLoading = false }
         case .fail:
-            ErrorView()
+            loadedView
         }
     }
     
     var loadedView: some View {
-        VStack {
+        VStack(spacing: 10) {
             searchView
             
+            SearchRecentView(recentTexts: $listViewModel.recentTexts)
+                .environmentObject(listViewModel)
+            
             resultView
+                .onTapGesture {
+                    isFocused = false
+                }
+        }
+        .navigationBarBackButtonHidden()
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                HStack(spacing: 0) {
+                    Button(action: {
+                        dismiss()
+                    }, label: {
+                        Image("blackback")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                    })
+                }
+            }
         }
     }
     
@@ -64,9 +90,6 @@ struct SearchDetailView: View {
                         listViewModel.send(action: .search)
                         listViewModel.searchText = ""
                         isFocused = false
-                    }
-                    .onChange(of: listViewModel.searchText) {
-                        listViewModel.send(action: .search)
                     }
             }
             .padding(.horizontal, 10)
@@ -98,6 +121,7 @@ struct SearchDetailView: View {
                 Spacer()
             }
         }
+        .padding(.vertical, 10)
     }
 }
 

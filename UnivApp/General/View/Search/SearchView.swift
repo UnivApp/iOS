@@ -12,7 +12,6 @@ struct SearchView: View {
     var body: some View {
         NavigationLink(destination : SearchDetailView(listViewModel: ListViewModel(container: .init(services: Services()), searchText: .init()))) {
             HStack(spacing: 20) {
-                Spacer()
                 Image("search")
                     .resizable()
                     .scaledToFit()
@@ -23,7 +22,7 @@ struct SearchView: View {
                     .padding()
                 Spacer()
             }
-            .padding(.horizontal, 20)
+            .padding(.horizontal, 25)
             .background(.white)
             .overlay (
                 RoundedRectangle(cornerRadius: 15)
