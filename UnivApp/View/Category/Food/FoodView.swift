@@ -151,11 +151,11 @@ struct FoodView: View {
                     }
                     .padding(.horizontal, 20)
                     
-                    SearchView(searchText: $listViewModel.searchText, color: .clear)
-                        .environmentObject(listViewModel)
-                        .onTapGesture {
-                            isModal = .half
-                        }
+//                    SearchView(searchText: $listViewModel.searchText, color: .clear)
+//                        .environmentObject(listViewModel)
+//                        .onTapGesture {
+//                            isModal = .half
+//                        }
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
                             ForEach(listViewModel.summaryArray.indices, id: \.self) { index in

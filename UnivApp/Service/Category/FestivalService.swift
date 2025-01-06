@@ -15,7 +15,7 @@ protocol FestivalServiceType {
     func getFestival(universityId: String) -> AnyPublisher<FestivalDetailModel,Error>
 }
 
-class FestivalService: FestivalServiceType {
+final class FestivalService: FestivalServiceType {
     
     private var subscriptions = Set<AnyCancellable>()
     
@@ -91,7 +91,7 @@ class FestivalService: FestivalServiceType {
     }
 }
 
-class ManiadbParserDelegate: NSObject, XMLParserDelegate {
+final class ManiadbParserDelegate: NSObject, XMLParserDelegate {
     var currentElement = ""
     var imageURLs: [String] = []
     
@@ -113,7 +113,7 @@ class ManiadbParserDelegate: NSObject, XMLParserDelegate {
     }
 }
 
-class StubFestivalService: FestivalServiceType {
+final class StubFestivalService: FestivalServiceType {
     
     func getArtist(name: String) -> AnyPublisher<String, any Error> {
         Empty().eraseToAnyPublisher()

@@ -7,7 +7,7 @@
 import Foundation
 import Combine
 
-class InfoViewModel: ObservableObject {
+final class InfoViewModel: ObservableObject {
     
     enum Action {
         case load

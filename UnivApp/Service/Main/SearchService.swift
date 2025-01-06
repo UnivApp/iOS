@@ -12,7 +12,7 @@ protocol SearchServiceType {
     func getSearch(searchText: String) -> AnyPublisher<[SummaryModel], Error>
 }
 
-class SearchService: SearchServiceType {
+final class SearchService: SearchServiceType {
     private var subscriptions = Set<AnyCancellable>()
     
     func getSearch(searchText: String) -> AnyPublisher<[SummaryModel], any Error> {
@@ -35,7 +35,7 @@ class SearchService: SearchServiceType {
     }
 }
 
-class StubSearchService: SearchServiceType {
+final class StubSearchService: SearchServiceType {
     func getSearch(searchText: String) -> AnyPublisher<[SummaryModel], any Error> {
         Empty().eraseToAnyPublisher()
     }

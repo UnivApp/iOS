@@ -92,7 +92,7 @@ struct CalendarView: UIViewRepresentable {
     }
 }
 
-class CalendarViewCell: FSCalendarCell {
+final class CalendarViewCell: FSCalendarCell {
     private var eventImageView: UIImageView!
     
     override init(frame: CGRect) {

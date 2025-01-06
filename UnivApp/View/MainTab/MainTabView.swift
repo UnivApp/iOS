@@ -18,7 +18,7 @@ struct MainTabView: View {
                 Group {
                     switch tab {
                     case .home:
-                        HomeView(viewModel: HomeViewModel(container: self.container), listViewModel: ListViewModel(container: self.container, searchText: ""))
+                        HomeView(viewModel: HomeViewModel(container: self.container))
                             .environmentObject(authViewModel)
                         
                     case .list:

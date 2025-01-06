@@ -7,12 +7,11 @@
 
 import SwiftUI
 import Kingfisher
-
 struct HScrollView: View {
     var title: [Text]
     var pointColor: Color
     var size: CGFloat
-    var playDeatilModel: PlayDetailModel
+    var playDetailModel: PlayDetailModel
     
     var body: some View {
         NavigationStack {
@@ -30,9 +29,9 @@ struct HScrollView: View {
                 .padding(.leading, 20)
                 
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 0) {
-                        ForEach(playDeatilModel.object.self, id: \.self) { item in
-                            HScrollViewCell(item: item, size: self.size, playDetailModel: PlayDetailModel(object: playDeatilModel.object, placeDataArray: playDeatilModel.placeDataArray, placeData: playDeatilModel.placeData))
+                    LazyHStack(spacing: 0) {
+                        ForEach(playDetailModel.object.self, id: \.self) { item in
+                            HScrollViewCell(item: item, size: self.size, playDetailModel: PlayDetailModel(object: playDetailModel.object, placeDataArray: playDetailModel.placeDataArray, placeData: playDetailModel.placeData))
                                 .padding(.horizontal, 10)
                                 .padding(.vertical, 20)
                         }

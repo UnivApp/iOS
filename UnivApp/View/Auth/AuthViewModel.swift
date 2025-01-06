@@ -19,7 +19,7 @@ enum RefreshTokenState {
     case Expired
 }
 
-class AuthViewModel: ObservableObject {
+final class AuthViewModel: ObservableObject {
     
     enum Action {
         case checkAuthState

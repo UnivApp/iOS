@@ -46,9 +46,9 @@ struct RateDetailView: View {
     
     var loadedView: some View {
         VStack(spacing: 30) {
-            SearchView(isFocused: self._isFocused, searchText: $listViewModel.searchText, color: .white)
-                .environmentObject(self.listViewModel)
-                .padding(.top, 20)
+//            SearchView(isFocused: self._isFocused, searchText: $listViewModel.searchText, color: .white)
+//                .environmentObject(self.listViewModel)
+//                .padding(.top, 20)
             
             ScrollViewReader { proxy in
                 VStack {

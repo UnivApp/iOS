@@ -8,55 +8,35 @@
 import SwiftUI
 
 struct SearchView: View {
-    @EnvironmentObject var listViewModel : ListViewModel
-    @FocusState var isFocused: Bool
-    @Binding var searchText: String
-    var color: Color
     
     var body: some View {
-        VStack(alignment: .center, spacing: 20) {
-            HStack {
-                Button {
-                    listViewModel.send(action: .search)
-                    listViewModel.searchText = ""
-                    isFocused = false
-                } label: {
-                    Image("search")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 15, height: 15)
-                }
-                .padding()
-                
-                TextField("대학명/소재지를 입력하세요", text: $searchText)
-                    .focused($isFocused)
+        NavigationLink(destination : SearchDetailView(listViewModel: ListViewModel(container: .init(services: Services()), searchText: .init()))) {
+            HStack(spacing: 20) {
+                Image("search")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 15, height: 15)
+                Text("대학명/소재지를 입력하세요")
                     .font(.system(size: 15, weight: .regular))
+                    .foregroundColor(.gray)
                     .padding()
-                    .submitLabel(.search)
-                    .onSubmit {
-                        listViewModel.send(action: .search)
-                        listViewModel.searchText = ""
-                        isFocused = false
-                    }
+                Spacer()
             }
-            .padding(.horizontal, 10)
+            .padding(.horizontal, 25)
             .background(.white)
-            .border(LinearGradient(gradient: Gradient(colors: [Color.yellow, Color.orange]), startPoint: .leading, endPoint: .trailing), width: 1)
-            .cornerRadius(15)
             .overlay (
                 RoundedRectangle(cornerRadius: 15)
-                    .stroke(LinearGradient(gradient: Gradient(colors: [Color.yellow, Color.orange]), startPoint: .leading, endPoint: .trailing), lineWidth: 1.5)
+                    .stroke(.orange, lineWidth: 1.5)
             )
         }
-        .background(self.color)
+        .background(.white)
+        .padding(.vertical, 10)
         .padding(.horizontal, 20)
     }
 }
 
 struct SearchViewProvider: PreviewProvider {
     static var previews: some View {
-        @State var searchText = ""
-        SearchView(searchText: $searchText, color: .white)
-            .environmentObject(ListViewModel(container: DIContainer(services: StubServices()), searchText: ""))
+        SearchView()
     }
 }

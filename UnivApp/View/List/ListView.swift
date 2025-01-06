@@ -58,8 +58,8 @@ struct ListView: View {
             VStack {
                 Spacer()
                 
-                SearchView(isFocused: self._isFocused, searchText: $viewModel.searchText, color: .white)
-                    .environmentObject(self.viewModel)
+//                SearchView(isFocused: self._isFocused, searchText: $viewModel.searchText, color: .white)
+//                    .environmentObject(self.viewModel)
                     
                 
                 Spacer()

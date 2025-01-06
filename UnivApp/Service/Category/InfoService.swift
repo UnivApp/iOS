@@ -12,7 +12,7 @@ protocol InfoServiceType {
     func getNewsList() -> AnyPublisher<[NewsModel], Error>
 }
 
-class InfoService: InfoServiceType {
+final class InfoService: InfoServiceType {
     private var subscriptions = Set<AnyCancellable>()
     
     func getNewsList() -> AnyPublisher<[NewsModel], any Error> {
@@ -35,7 +35,7 @@ class InfoService: InfoServiceType {
     }
 }
 
-class StubInfoService: InfoServiceType {
+final class StubInfoService: InfoServiceType {
     func getNewsList() -> AnyPublisher<[NewsModel], any Error> {
         Empty().eraseToAnyPublisher()
     }

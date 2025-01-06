@@ -50,8 +50,8 @@ struct FestivalSchoolView: View {
                     .font(.system(size: 18, weight: .bold))
                     .padding(.leading, 20)
                 
-                SearchView(isFocused: self._isFocused, searchText: $listViewModel.searchText, color: .white)
-                    .environmentObject(self.listViewModel)
+//                SearchView(isFocused: self._isFocused, searchText: $listViewModel.searchText, color: .white)
+//                    .environmentObject(self.listViewModel)
                 
                 ForEach(listViewModel.summaryArray, id: \.self) { item in
                     FestivalViewCell(summaryModel: item)

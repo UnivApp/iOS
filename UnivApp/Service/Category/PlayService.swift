@@ -13,7 +13,7 @@ protocol PlayServiceType {
     func getSchoolPlace(universityId: Int) -> AnyPublisher<[PlayModel], Error>
 }
 
-class PlayService: PlayServiceType {
+final class PlayService: PlayServiceType {
     private var subscriptions = Set<AnyCancellable>()
     
     func getTopPlace() -> AnyPublisher<[PlayModel], any Error> {
@@ -53,7 +53,7 @@ class PlayService: PlayServiceType {
     }
 }
 
-class StubPlayService: PlayServiceType {
+final class StubPlayService: PlayServiceType {
     func getTopPlace() -> AnyPublisher<[PlayModel], any Error> {
         Empty().eraseToAnyPublisher()
     }

@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class SettingViewModel: ObservableObject {
+final class SettingViewModel: ObservableObject {
     
     enum Action {
         case getLoad
