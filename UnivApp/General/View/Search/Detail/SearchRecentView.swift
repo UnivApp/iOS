@@ -14,7 +14,7 @@ struct SearchRecentView: View {
     var body: some View {
         ScrollView(.horizontal) {
             HStack(spacing: 10) {
-                ForEach(recentTexts, id: \.self) { text in
+                ForEach(recentTexts.reversed(), id: \.self) { text in
                     RecentTextCell(text: text)
                         .environmentObject(viewModel)
                 }

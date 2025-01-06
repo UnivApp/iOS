@@ -12,7 +12,6 @@ struct SearchDetailView: View {
     @StateObject var listViewModel : ListViewModel
     
     @FocusState var isFocused: Bool
-    @State var isLoading: Bool = false
     
     var body: some View {
         contentView
@@ -28,10 +27,8 @@ struct SearchDetailView: View {
                 }
         case .loading:
             loadedView
-                .task { isLoading = true }
         case .success:
             loadedView
-                .task { isLoading = false }
                 .onChange(of: listViewModel.recentTexts) {
                     listViewModel.send(action: .loadText)
                 }
@@ -105,22 +102,13 @@ struct SearchDetailView: View {
     }
     
     var resultView: some View {
-        VStack {
-            ZStack {
-                ScrollView(.vertical) {
-                    LazyVStack {
-                        ForEach(listViewModel.summaryArray, id: \.self) { model in
-                            SearchDetailViewCell(summaryModel: model)
-                        }
-                    }
-                    .padding(.horizontal, 20)
+        ScrollView(.vertical) {
+            LazyVStack {
+                ForEach(listViewModel.summaryArray, id: \.self) { model in
+                    SearchDetailViewCell(summaryModel: model)
                 }
-                Spacer()
-                if isLoading {
-                    ProgressView()
-                }
-                Spacer()
             }
+            .padding(.horizontal, 20)
         }
         .padding(.vertical, 10)
     }

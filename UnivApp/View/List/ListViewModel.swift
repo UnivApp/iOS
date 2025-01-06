@@ -62,7 +62,7 @@ final class ListViewModel: ObservableObject {
                 .sink { [weak self] completion in
                     if case .failure = completion {
                         if let searchText = self?.searchText, searchText != "" {
-                            //TODO: - 최근 검색어에 겹치는게 있는지?
+                            self?.duplicateRecentTexts(searchText)
                             self?.recentTexts.append(searchText)
                             self?.send(action: .saveText)
                         }
@@ -74,7 +74,7 @@ final class ListViewModel: ObservableObject {
                     }
                 } receiveValue: { [weak self] searchResult in
                     if let searchText = self?.searchText, searchText != "" {
-                        //TODO: - 최근 검색어에 겹치는게 있는지?
+                        self?.duplicateRecentTexts(searchText)
                         self?.recentTexts.append(searchText)
                         self?.send(action: .saveText)
                     }
@@ -124,5 +124,12 @@ final class ListViewModel: ObservableObject {
                 print("recentTexts - load Error")
             }
         }
+    }
+    
+    private func duplicateRecentTexts(_ text: String) {
+        if self.recentTexts.contains(text) {
+            self.recentTexts.removeAll(where: { $0 == text } )
+        }
+        return
     }
 }
