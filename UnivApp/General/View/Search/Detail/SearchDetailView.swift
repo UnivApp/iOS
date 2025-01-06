@@ -28,10 +28,13 @@ struct SearchDetailView: View {
                 }
         case .loading:
             loadedView
-                .onAppear { isLoading = true }
+                .task { isLoading = true }
         case .success:
             loadedView
-                .onAppear { isLoading = false }
+                .task { isLoading = false }
+                .onChange(of: listViewModel.recentTexts) {
+                    listViewModel.send(action: .loadText)
+                }
         case .fail:
             loadedView
         }
@@ -71,7 +74,6 @@ struct SearchDetailView: View {
             HStack {
                 Button {
                     listViewModel.send(action: .search)
-                    listViewModel.searchText = ""
                     isFocused = false
                 } label: {
                     Image("search")
@@ -88,7 +90,6 @@ struct SearchDetailView: View {
                     .submitLabel(.search)
                     .onSubmit {
                         listViewModel.send(action: .search)
-                        listViewModel.searchText = ""
                         isFocused = false
                     }
             }

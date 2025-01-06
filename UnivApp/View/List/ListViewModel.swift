@@ -61,12 +61,24 @@ final class ListViewModel: ObservableObject {
             container.services.searchService.getSearch(searchText: self.searchText)
                 .sink { [weak self] completion in
                     if case .failure = completion {
+                        if let searchText = self?.searchText, searchText != "" {
+                            //TODO: - 최근 검색어에 겹치는게 있는지?
+                            self?.recentTexts.append(searchText)
+                            self?.send(action: .saveText)
+                        }
+                        self?.searchText = .init()
                         self?.phase = .success
                         self?.summaryArray = []
                         self?.notFound = true
                         self?.heartPhase = .notRequested
                     }
                 } receiveValue: { [weak self] searchResult in
+                    if let searchText = self?.searchText, searchText != "" {
+                        //TODO: - 최근 검색어에 겹치는게 있는지?
+                        self?.recentTexts.append(searchText)
+                        self?.send(action: .saveText)
+                    }
+                    self?.searchText = .init()
                     self?.summaryArray = searchResult
                     self?.showRateArray = Array(repeating: false, count: searchResult.count)
                     self?.phase = .success
@@ -106,7 +118,10 @@ final class ListViewModel: ObservableObject {
             }
         case .loadText:
             if let recentTexts = UserDefaults.standard.array(forKey: "recentTexts") as? [String] {
+                print(recentTexts)
                 self.recentTexts = recentTexts
+            } else {
+                print("recentTexts - load Error")
             }
         }
     }

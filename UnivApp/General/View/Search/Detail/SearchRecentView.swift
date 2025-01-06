@@ -33,12 +33,12 @@ fileprivate struct RecentTextCell: View {
             viewModel.send(action: .search)
         } label: {
             Text(text)
-                .foregroundColor(.black)
                 .font(.system(size: 12, weight: .bold))
-                .overlay (
-                    RoundedRectangle(cornerRadius: 15)
-                        .fill(.backGray)
-                )
+                .foregroundColor(.black)
+                .padding(10)
+                .background(.backGray)
+                .clipped()
+                .cornerRadius(15)
         }
     }
 }
@@ -47,5 +47,6 @@ struct SearchRecentView_Preview: PreviewProvider {
     static var previews: some View {
         @State var texts: [String] = ["세종", "건국", "숭실", "서울대"]
         SearchRecentView(recentTexts: $texts)
+            .environmentObject(ListViewModel(container: .init(services: StubServices()), searchText: ""))
     }
 }
