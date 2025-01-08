@@ -49,7 +49,9 @@ struct SettingView: View {
         NavigationStack {
             ScrollView(.vertical) {
                 VStack(spacing: 30) {
-                    profile
+                    SettingProfileView(isPresented: $isPresented)
+                        .environmentObject(viewModel)
+                        .environmentObject(authViewModel)
                     
                     setting
                     
@@ -65,70 +67,6 @@ struct SettingView: View {
                 }
             }
         }
-    }
-    
-    var profile: some View {
-        HStack(alignment: .center, spacing: 40) {
-            Image("smile")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 50, height: 50)
-                .padding(10)
-                .background(Circle().fill(.white).shadow(radius: 1))
-            
-            if let memberState = (UserDefaults.standard.value(forKey: "nonMember")) {
-                if memberState as! String == "false" {
-                    Group {
-                        Text("  \(viewModel.userNickname)")
-                            .foregroundColor(.orange)
-                            .font(.system(size: 20, weight: .heavy))
-                        +
-                        Text("님\n 환영합니다!")
-                            .foregroundColor(.black)
-                            .font(.system(size: 20, weight: .semibold))
-                    }
-                    .multilineTextAlignment(.leading)
-                    .padding(.top, 10)
-                    .overlay(alignment: .topLeading) {
-                        Button {
-                            isPresented = true
-                        } label: {
-                            Image(systemName: "pencil.circle.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 15, height: 15)
-                                .foregroundColor(.blue.opacity(0.7))
-                                .padding(.top, -5)
-                                .padding(.leading, -10)
-                        }
-                    }
-                } else {
-                    Button {
-                        authViewModel.authState = .unAuth
-                    } label: {
-                        VStack(alignment: .leading) {
-                            Text("로그인 및 회원가입하기 ▷")
-                                .foregroundColor(.orange)
-                                .font(.system(size: 14, weight: .semibold))
-                            
-                            Text("가입하고 더 많은 기능을 사용해 보세요!")
-                                .foregroundColor(.gray)
-                                .font(.system(size: 11, weight: .regular))
-                        }
-                        .multilineTextAlignment(.leading)
-                    }
-                }
-            } else {
-                ErrorView()
-                    .onAppear {
-                        authViewModel.authState = .unAuth
-                        authViewModel.refreshTokenState = .Expired
-                    }
-            }
-            Spacer()
-        }
-        .padding(.horizontal, 30)
-        .padding(.top, 30)
     }
     
     var setting: some View {

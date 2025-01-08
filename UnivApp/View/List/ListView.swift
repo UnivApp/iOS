@@ -65,13 +65,11 @@ struct ListView: View {
                 Spacer()
                 
                 ZStack {
-                    
                     if viewModel.notFound == true {
                         Text("학교를 찾을 수 없습니다. 🧐")
                             .font(.system(size: 15, weight: .bold))
                             .foregroundColor(.gray)
                     }
-                    
                     list
                 }
             }
