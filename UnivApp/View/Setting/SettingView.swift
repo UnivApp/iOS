@@ -85,37 +85,7 @@ struct SettingView: View {
                         if (cases == .logout) || (cases == .withdraw) {
                             if let memberState = (UserDefaults.standard.value(forKey: "nonMember")) {
                                 if memberState as! String == "false" {
-                                    NavigationLink(destination: cases.view) {
-                                        VStack(spacing: 20) {
-                                            HStack {
-                                                HStack(alignment: .center, spacing: 20) {
-                                                    Image(systemName: cases.image)
-                                                        .resizable()
-                                                        .scaledToFit()
-                                                        .frame(width: 20, height: 20)
-                                                        .foregroundColor(.black.opacity(0.7))
-                                                    
-                                                    VStack(alignment: .leading) {
-                                                        Text(cases.title)
-                                                            .foregroundColor(.black.opacity(0.7))
-                                                            .font(.system(size: 13, weight: .bold))
-                                                        
-                                                        Text(cases.description)
-                                                            .foregroundColor(.gray)
-                                                            .font(.system(size: 12, weight: .regular))
-                                                    }
-                                                    Spacer()
-                                                    Image("arrow_fill")
-                                                        .resizable()
-                                                        .scaledToFit()
-                                                        .frame(width: 15, height: 15)
-                                                }
-                                                .multilineTextAlignment(.leading)
-                                            }
-                                            Divider()
-                                        }
-                                        .padding(.vertical, 5)
-                                    }
+                                    SettingDetailView(cases: cases)
                                 }
                             } else {
                                 ErrorView()
@@ -125,70 +95,10 @@ struct SettingView: View {
                                     }
                             }
                         } else {
-                            NavigationLink(destination: cases.view) {
-                                VStack(spacing: 20) {
-                                    HStack {
-                                        HStack(alignment: .center, spacing: 20) {
-                                            Image(systemName: cases.image)
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 20, height: 20)
-                                                .foregroundColor(.black.opacity(0.7))
-                                            
-                                            VStack(alignment: .leading) {
-                                                Text(cases.title)
-                                                    .foregroundColor(.black.opacity(0.7))
-                                                    .font(.system(size: 13, weight: .bold))
-                                                
-                                                Text(cases.description)
-                                                    .foregroundColor(.gray)
-                                                    .font(.system(size: 12, weight: .regular))
-                                            }
-                                            Spacer()
-                                            Image("arrow_fill")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 15, height: 15)
-                                        }
-                                        .multilineTextAlignment(.leading)
-                                    }
-                                    Divider()
-                                }
-                                .padding(.vertical, 5)
-                            }
+                            SettingDetailView(cases: cases)
                         }
                     } else {
-                        NavigationLink(destination: BellView(viewModel: .init(container: .init(services: Services())), isPopup: $isPresented)) {
-                            VStack(spacing: 20) {
-                                HStack {
-                                    HStack(alignment: .center, spacing: 20) {
-                                        Image(systemName: cases.image)
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 20, height: 20)
-                                            .foregroundColor(.black.opacity(0.7))
-                                        
-                                        VStack(alignment: .leading) {
-                                            Text(cases.title)
-                                                .foregroundColor(.black.opacity(0.7))
-                                                .font(.system(size: 13, weight: .bold))
-                                            
-                                            Text(cases.description)
-                                                .foregroundColor(.gray)
-                                                .font(.system(size: 12, weight: .regular))
-                                        }
-                                        Spacer()
-                                        Image("arrow_fill")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 15, height: 15)
-                                    }
-                                    .multilineTextAlignment(.leading)
-                                }
-                                Divider()
-                            }
-                            .padding(.vertical, 5)
-                        }
+                        SettingBellView(isPresented: $isPresented, cases: cases)
                     }
                 }
             }

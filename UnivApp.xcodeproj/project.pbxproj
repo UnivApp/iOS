@@ -134,6 +134,9 @@
 		E49C9FF92C870C36001F43A3 /* PlayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49C9FF82C870C36001F43A3 /* PlayModel.swift */; };
 		E49CA0132C886DC9001F43A3 /* HeartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49CA0122C886DC9001F43A3 /* HeartView.swift */; };
 		E4A660A32D2DFD740048D96B /* SettingProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A660A22D2DFD740048D96B /* SettingProfileView.swift */; };
+		E4A6620D2D2F46BC0048D96B /* SettingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A6620C2D2F46BB0048D96B /* SettingDetailView.swift */; };
+		E4A6620F2D2F472A0048D96B /* SettingBellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A6620E2D2F472A0048D96B /* SettingBellView.swift */; };
+		E4A662112D2F4C570048D96B /* ListSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A662102D2F4C570048D96B /* ListSearchView.swift */; };
 		E4B0FFDD2CBCE55A008B742E /* RateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B0FFDC2CBCE55A008B742E /* RateView.swift */; };
 		E4B0FFDF2CBCE60A008B742E /* RateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B0FFDE2CBCE60A008B742E /* RateViewModel.swift */; };
 		E4B3FCCA2C7751DB00CB98F3 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B3FCC92C7751DB00CB98F3 /* AuthView.swift */; };
@@ -310,6 +313,9 @@
 		E49C9FF82C870C36001F43A3 /* PlayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayModel.swift; sourceTree = "<group>"; };
 		E49CA0122C886DC9001F43A3 /* HeartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartView.swift; sourceTree = "<group>"; };
 		E4A660A22D2DFD740048D96B /* SettingProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileView.swift; sourceTree = "<group>"; };
+		E4A6620C2D2F46BB0048D96B /* SettingDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailView.swift; sourceTree = "<group>"; };
+		E4A6620E2D2F472A0048D96B /* SettingBellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingBellView.swift; sourceTree = "<group>"; };
+		E4A662102D2F4C570048D96B /* ListSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSearchView.swift; sourceTree = "<group>"; };
 		E4B0FFDC2CBCE55A008B742E /* RateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateView.swift; sourceTree = "<group>"; };
 		E4B0FFDE2CBCE60A008B742E /* RateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateViewModel.swift; sourceTree = "<group>"; };
 		E4B3FCC42C7751DB00CB98F3 /* UnivApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnivApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -550,6 +556,7 @@
 				E4953D272C899013008CBDE5 /* ListDetailType.swift */,
 				E492227B2C9F2D900077EA45 /* ListDetailSection.swift */,
 				E4CEEFB72CB675A1001F4DAE /* ListCategoryView.swift */,
+				E4A662102D2F4C570048D96B /* ListSearchView.swift */,
 			);
 			path = ListDetail;
 			sourceTree = "<group>";
@@ -561,6 +568,8 @@
 				E4953DA82C906486008CBDE5 /* WithdrawView.swift */,
 				E4953DAA2C90654E008CBDE5 /* LogoutView.swift */,
 				E4A660A22D2DFD740048D96B /* SettingProfileView.swift */,
+				E4A6620C2D2F46BB0048D96B /* SettingDetailView.swift */,
+				E4A6620E2D2F472A0048D96B /* SettingBellView.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -1270,6 +1279,7 @@
 				E4953D4C2C89D6CC008CBDE5 /* InfoDetailView.swift in Sources */,
 				E4B3FD002C77560200CB98F3 /* AuthViewModel.swift in Sources */,
 				E4B3FD2C2C786B0C00CB98F3 /* sha256.swift in Sources */,
+				E4A6620F2D2F472A0048D96B /* SettingBellView.swift in Sources */,
 				E4982D102CCF81A900D0F1A7 /* AlarmModel.swift in Sources */,
 				E4F04C042C96CF3900F653DF /* SplitType.swift in Sources */,
 				E4CEEFB62CB54513001F4DAE /* InfoService.swift in Sources */,
@@ -1313,6 +1323,7 @@
 				E4982D142CD4B7CA00D0F1A7 /* NickNameView.swift in Sources */,
 				E49222792C9F10240077EA45 /* SeperateView.swift in Sources */,
 				E4953D222C888A64008CBDE5 /* HeartViewModel.swift in Sources */,
+				E4A662112D2F4C570048D96B /* ListSearchView.swift in Sources */,
 				E4B3FD0C2C775D7000CB98F3 /* MainTabView.swift in Sources */,
 				E4982D262CDC9FC600D0F1A7 /* FestivalSegmentView.swift in Sources */,
 				E4982D022CCF60DC00D0F1A7 /* AppDelegate.swift in Sources */,
@@ -1396,6 +1407,7 @@
 				E489053B2CEB1CF9003F566A /* FestivalDetailViewModel.swift in Sources */,
 				E4CCE6CC2CC2797900483A87 /* MoneyService.swift in Sources */,
 				E4953DA22C906399008CBDE5 /* WebKitView.swift in Sources */,
+				E4A6620D2D2F46BC0048D96B /* SettingDetailView.swift in Sources */,
 				E40135EC2CA1CDEF0021D351 /* PlaySegmentType.swift in Sources */,
 				E4953D632C8D8497008CBDE5 /* ChartData.swift in Sources */,
 				E4953D802C8EECC8008CBDE5 /* HomeService.swift in Sources */,

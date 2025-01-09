@@ -30,7 +30,6 @@ struct HeartViewCell: View {
             
             HStack {
                 ZStack {
-                    //TODO: - 즐겨찾기 수정
                     Button {
                         self.heartTapped.toggle()
                         if heartTapped == true {
