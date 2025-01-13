@@ -10,11 +10,11 @@ import SwiftUI
 struct ListView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @StateObject var viewModel: ListViewModel
+    @FocusState private var isFocused: Bool
     
     @State private var showAlert: Bool = false
     @State private var alertMessage: String = ""
-    @FocusState private var isFocused: Bool
-    @State private var universityIdToScroll: Int? = nil
+    @State var universityIdToScroll: Int? = nil
     
     var body: some View {
         contentView
@@ -58,6 +58,7 @@ struct ListView: View {
             VStack {
                 Spacer()
                 
+                //TODO: - 서치 기능 수정
                 ListSearchView(isFocused: self._isFocused)
                     .environmentObject(self.viewModel)
                 
@@ -69,7 +70,9 @@ struct ListView: View {
                             .font(.system(size: 15, weight: .bold))
                             .foregroundColor(.gray)
                     }
-                    list
+                    ListItemsVIew(universityIdToScroll: $universityIdToScroll)
+                        .environmentObject(viewModel)
+                        .environmentObject(authViewModel)
                 }
             }
             .toolbar {
@@ -107,48 +110,13 @@ struct ListView: View {
             }
         }
     }
-    
-    var list: some View {
-        ScrollView(.vertical) {
-            ScrollViewReader { proxy in
-                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
-                    ForEach(viewModel.summaryArray, id: \.universityId) { cell in
-                        if let id = cell.universityId, let image = cell.logo, let title = cell.fullName, let heartNum = cell.starNum, let starred = cell.starred {
-                            HStack(spacing: 20) {
-                                ListViewCell(model: SummaryModel(universityId: id, fullName: title, logo: image, starNum: heartNum, starred: starred), listViewModel: self.viewModel)
-                                    .environmentObject(authViewModel)
-                            }
-                            .tag(cell.universityId)
-                        }
-                    }
-                }
-                .task {
-                    if universityIdToScroll != nil {
-                        withAnimation {
-                            proxy.scrollTo(universityIdToScroll, anchor: .center)
-                        }
-                        universityIdToScroll = nil
-                    }
-                }
-                .padding(.horizontal, 10)
-                .padding(.vertical, 10)
-            }
-        }
-        .padding(.horizontal, 0)
-        .padding(.bottom, 0)
-        .refreshable {
-            viewModel.send(action: .load)
-            self.viewModel.searchText = ""
-        }
-        
-    }
 }
 
 struct ListView_Previews: PreviewProvider {
     static let container = DIContainer(services: StubServices())
     static let authViewModel = AuthViewModel(container: .init(services: StubServices()), authState: .auth)
     static var previews: some View {
-        ListView(viewModel: ListViewModel(container: self.container, searchText: ""))
+        ListView(viewModel: ListViewModel(container: self.container, searchText: ""), universityIdToScroll: 0)
             .environmentObject(authViewModel)
     }
 }
