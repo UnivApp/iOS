@@ -14,7 +14,7 @@ import SwiftUI
 final class TokenRequestInterceptor: RequestInterceptor {
     private var subscriptions = Set<AnyCancellable>()
 
-    public func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, any Error>) -> Void) {
+    func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, any Error>) -> Void) {
         var urlRequest = urlRequest
         if let accessToken = KeychainWrapper.standard.string(forKey: "JWTaccessToken") {
             if urlRequest.headers["Authorization"] == nil {
@@ -27,7 +27,7 @@ final class TokenRequestInterceptor: RequestInterceptor {
         completion(.success(urlRequest))
     }
 
-    public func retry(_ request: Request,
+    func retry(_ request: Request,
                       for session: Session,
                       dueTo error: Error,
                       completion: @escaping (RetryResult) -> Void) {

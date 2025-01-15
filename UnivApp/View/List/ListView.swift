@@ -70,7 +70,7 @@ struct ListView: View {
                             .font(.system(size: 15, weight: .bold))
                             .foregroundColor(.gray)
                     }
-                    ListItemsVIew(universityIdToScroll: $universityIdToScroll)
+                    ListItemsView(universityIdToScroll: $universityIdToScroll)
                         .environmentObject(viewModel)
                         .environmentObject(authViewModel)
                 }

@@ -36,7 +36,7 @@ struct ListSearchView: View {
                     Image("search")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 15, height: 15)
+                        .frame(width: 20, height: 15)
                 }
                 .padding()
                 

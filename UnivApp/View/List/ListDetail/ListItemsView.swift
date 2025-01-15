@@ -1,5 +1,5 @@
 //
-//  ListItemsVIew.swift
+//  ListItemsView.swift
 //  UnivApp
 //
 //  Created by 정성윤 on 1/13/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ListItemsVIew: View {
+struct ListItemsView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var viewModel: ListViewModel
     @Binding var universityIdToScroll: Int?

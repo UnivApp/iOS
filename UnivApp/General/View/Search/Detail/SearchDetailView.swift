@@ -56,7 +56,7 @@ struct SearchDetailView: View {
                     Button(action: {
                         dismiss()
                     }, label: {
-                        Image("blackback")
+                        Image(.blackback)
                             .resizable()
                             .scaledToFit()
                             .frame(width: 20, height: 20)
