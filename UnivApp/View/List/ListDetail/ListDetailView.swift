@@ -135,7 +135,7 @@ struct ListDetailView: View {
                     Button {
                         dismiss()
                     } label: {
-                        Image("blackback")
+                        Image(.blackback)
                             .resizable()
                             .scaledToFit()
                             .frame(width: 20, height: 20)
