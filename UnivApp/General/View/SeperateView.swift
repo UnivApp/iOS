@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SeperateView: View {
     var body: some View {
-        Color.homeColor
+        Color.backGray.opacity(0.5)
     }
 }
 

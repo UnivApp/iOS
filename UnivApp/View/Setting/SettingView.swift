@@ -78,32 +78,7 @@ struct SettingView: View {
                 Spacer()
             }
             .padding(.leading, -10)
-            
-            VStack(spacing: 10) {
-                ForEach(SettingType.allCases, id: \.self) { cases in
-                    if cases != .bell {
-                        if (cases == .logout) || (cases == .withdraw) {
-                            if let memberState = (UserDefaults.standard.value(forKey: "nonMember")) {
-                                if memberState as! String == "false" {
-                                    SettingDetailView(cases: cases)
-                                }
-                            } else {
-                                ErrorView()
-                                    .onAppear {
-                                        authViewModel.authState = .unAuth
-                                        authViewModel.refreshTokenState = .Expired
-                                    }
-                            }
-                        } else {
-                            SettingDetailView(cases: cases)
-                        }
-                    } else {
-                        SettingBellView(isPresented: $isPresented, cases: cases)
-                    }
-                }
-            }
         }
-        .padding(.horizontal, 30)
     }
 }
 

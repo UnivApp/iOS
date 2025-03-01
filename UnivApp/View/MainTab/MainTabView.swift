@@ -38,11 +38,17 @@ struct MainTabView: View {
                             .environmentObject(authViewModel)
                     }
                 }
+                .tabItem {
+                    Image(tab.imageName(selectedTab.isEqual(tab)))
+                }
             }
         }
-        .navigationBarBackButtonHidden(true)
         .onAppear {
-            UINavigationBar.appearance().backgroundColor = .clear
+            let apperance = UINavigationBarAppearance()
+            apperance.backgroundColor = UIColor(Color.backPointColor)
+            apperance.shadowColor = nil
+            UINavigationBar.appearance().standardAppearance = apperance
+            UINavigationBar.appearance().scrollEdgeAppearance = apperance
             
             UIPageControl.appearance().isHidden = true
             UIPageControl.appearance().currentPageIndicatorTintColor = .clear
@@ -51,6 +57,9 @@ struct MainTabView: View {
             UIPageControl.appearance().backgroundColor = .clear
         }
         .tint(.black)
+        .background(.white)
+//        .clipShape(RoundedCornersShape(corners: [.topLeft, .topRight], radius: 15))
+        
 //        .fullScreenCover(isPresented: $authViewModel.isNicknamePopup) {
 //            NickNameView(viewModel: SettingViewModel(container: container), isPresented: $authViewModel.isNicknamePopup, type: .create)
 //                .presentationBackground(.black.opacity(0.7))

@@ -63,7 +63,7 @@ struct BarChartView: View {
             .padding(.horizontal, 20)
             .padding(.vertical, 20)
         }
-        .background(Color.homeColor)
+        .background(Color.backGray.opacity(0.5))
         .cornerRadius(15)
     }
 }
@@ -128,7 +128,7 @@ struct CircleChartView: View {
             .padding(.horizontal, 50)
             .padding(.vertical, 30)
         }
-        .background(Color.homeColor)
+        .background(Color.backGray.opacity(0.5))
         .cornerRadius(15)
     }
 }
