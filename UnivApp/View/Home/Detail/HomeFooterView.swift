@@ -20,9 +20,6 @@ struct HomeFooterView: View {
                 .frame(width: UIScreen.main.bounds.width - 40, height: (UIScreen.main.bounds.width - 40) / 3.2)
             
             
-            RateView(rateViewModel: RateViewModel(container: .init(services: Services())), selectedSegment: $selectedSegment)
-                .environmentObject(viewModel)
-                .padding(.bottom, 30)
         }
     }
 }

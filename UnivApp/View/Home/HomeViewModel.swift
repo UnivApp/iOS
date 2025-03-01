@@ -12,7 +12,6 @@ import SwiftUI
 
 struct PosterData {
     let imageName: String
-    let view: AnyView
 }
 
 enum PosterType: CaseIterable {
@@ -27,25 +26,6 @@ enum PosterType: CaseIterable {
         case .mou: return "mou_poster"
         case .play: return "play_poster"
         case .news: return "news_poster"
-        }
-    }
-    
-    func view(container: DIContainer) -> AnyView {
-        switch self {
-        case .food:
-            return AnyView(FoodView(viewModel: .init(container: container), listViewModel: .init(container: container, searchText: .init())))
-        case .event:
-            return AnyView(CalendarContainer(viewModel: .init(container: container)))
-        case .rank:
-            return AnyView(InitiativeView(viewModel: .init(container: container)))
-        case .festival:
-            return AnyView(FestivalView(viewModel: .init(container: container), listViewModel: .init(container: container, searchText: .init())))
-        case .mou:
-            return AnyView(MouView(viewModel: .init(container: container)))
-        case .play:
-            return AnyView(PlayView(viewModel: .init(container: container)))
-        case .news:
-            return AnyView(InfoView(viewModel: .init(container: container)))
         }
     }
 }
@@ -71,7 +51,7 @@ final class HomeViewModel: ObservableObject {
     init(container: DIContainer) {
         self.container = container
         self.posterData = PosterType.allCases.map { type in
-            PosterData(imageName: type.imageName, view: type.view(container: container))
+            PosterData(imageName: type.imageName)
         }
     }
     

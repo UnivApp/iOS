@@ -14,9 +14,12 @@ struct HomeCategoryView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
+            Text("학교이름")
+                .foregroundColor(.black)
+                .multilineTextAlignment(.leading)
+                .font(.system(size: 20, weight: .bold))
             
             let columns = Array(repeating: GridItem(.flexible()), count: 4)
-            
             LazyVGrid(columns: columns, spacing: 10) {
                 ForEach(CategoryType.allCases, id: \.self) { category in
                     NavigationLink(destination: category.view) {
@@ -37,12 +40,12 @@ struct HomeCategoryView: View {
             
             TabView(selection: $currentIndex) {
                 ForEach(viewModel.posterData.indices, id: \.self) { index in
-                    NavigationLink(destination: viewModel.posterData[index].view) {
-                        Image(viewModel.posterData[index].imageName)
-                            .resizable()
-                            .scaledToFill()
-                            .tag(index)
-                    }
+//                    NavigationLink(destination: viewModel.posterData[index].view) {
+//                        Image(viewModel.posterData[index].imageName)
+//                            .resizable()
+//                            .scaledToFill()
+//                            .tag(index)
+//                    }
                 }
             }
             .frame(width: UIScreen.main.bounds.width - 40, height: (UIScreen.main.bounds.width - 40) / 3)
@@ -60,8 +63,6 @@ struct HomeCategoryView: View {
             }
             .cornerRadius(15)
             .padding(.horizontal, 20)
-            
-            HScrollView(title: [Text("이런 "), Text("핫플 "), Text("어때요?")], pointColor: .orange, size: 100, playDetailModel: PlayDetailModel(object: viewModel.convertToObjects(from: viewModel.topPlaceData), placeDataArray: viewModel.topPlaceData, placeData: nil))
         }
     }
 }

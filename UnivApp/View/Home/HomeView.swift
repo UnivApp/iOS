@@ -40,33 +40,33 @@ struct HomeView: View {
         NavigationStack {
             ScrollView(.vertical) {
                 VStack(alignment: .center, spacing: 10) {
-                    SearchView()
+//                    SearchView()
                     
                     HomeCategoryView()
                         .environmentObject(viewModel)
                     
-                    HomeFooterView(selectedSegment: $selectedSegment)
-                        .environmentObject(viewModel)
+//                    HomeFooterView(selectedSegment: $selectedSegment)
+//                        .environmentObject(viewModel)
                 }
             }
-            .fullScreenCover(isPresented: $isShowingPopup) {
-                BellView(viewModel: CalendarViewModel(container: .init(services: Services())), isPopup: $isShowingPopup)
-                    .fadeInOut($isShowingPopup)
-                    .environmentObject(authViewModel)
-            }
-            .transaction { $0.disablesAnimations = true }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        isShowingPopup = true
-                    }, label: {
-                        Image("bell")
-                    })
-                }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Image("logo")
-                }
-            }
+//            .fullScreenCover(isPresented: $isShowingPopup) {
+//                BellView(viewModel: CalendarViewModel(container: .init(services: Services())), isPopup: $isShowingPopup)
+//                    .fadeInOut($isShowingPopup)
+//                    .environmentObject(authViewModel)
+//            }
+//            .transaction { $0.disablesAnimations = true }
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    Button(action: {
+//                        isShowingPopup = true
+//                    }, label: {
+//                        Image("bell")
+//                    })
+//                }
+//                ToolbarItem(placement: .navigationBarLeading) {
+//                    Image("logo")
+//                }
+//            }
         }
     }
 }

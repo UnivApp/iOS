@@ -9,55 +9,26 @@ import Foundation
 import SwiftUI
 
 enum CategoryType: String, CaseIterable {
-    case festival
+    case site
     case food
-    case Diagnosis
+    case calendar
     case info
-    case initiative
-    case money
-    case mou
-    case play
     
     var title: String {
         switch self {
-        case .festival:
-            return "축제"
+        case .site:
+            "학교 홈페이지"
         case .food:
-            return "맛집"
-        case .Diagnosis:
-            return "학과매칭"
+            "급식"
+        case .calendar:
+            "학사 일정"
         case .info:
-            return "대입기사"
-        case .initiative:
-            return "랭킹"
-        case .money:
-            return "월세"
-        case .mou:
-            return "대학연계"
-        case .play:
-            return "핫플"
+            "대학정보"
         }
     }
     
     var view: AnyView {
-        switch self {
-        case .festival:
-            return AnyView(FestivalView(viewModel: .init(container: .init(services: Services())), listViewModel: .init(container: .init(services: Services()), searchText: .init())))
-        case .food:
-            return AnyView(FoodView(viewModel: FoodViewModel(container: .init(services: Services())), listViewModel: ListViewModel(container: .init(services: Services()), searchText: .init())))
-        case .Diagnosis:
-            return AnyView(DiagnosisView(viewModel: DiagnosisViewModel(container: .init(services: Services()))))
-        case .info:
-            return AnyView(InfoView(viewModel: InfoViewModel(container: .init(services: Services()))))
-        case .initiative:
-            return AnyView(InitiativeView(viewModel: InitiativeViewModel(container: .init(services: Services()))))
-        case .money:
-            return AnyView(MoneyView(listViewModel: ListViewModel(container: .init(services: Services()), searchText: .init()), viewModel: MoneyViewModel(container: .init(services: Services()))))
-        case .mou:
-            return AnyView(MouView(viewModel: MouViewModel(container: .init(services: Services()))))
-        case .play:
-            return AnyView(PlayView(viewModel: PlayViewModel(container: .init(services: Services()))))
-        }
+        return AnyView(EmptyView())
     }
     
     func imageName() -> String {

@@ -50,21 +50,7 @@ struct HScrollViewCell: View {
     
     var body: some View {
         NavigationStack {
-            if let selectedPlace = playDetailModel.placeDataArray.first(where: { $0.name == item.title }) {
-                NavigationLink(destination: PlayDetailView(playDetailModel: PlayDetailModel(object: playDetailModel.object, placeDataArray: playDetailModel.placeDataArray, placeData: selectedPlace))) {
-                    VStack(spacing: 10) {
-                        KFImage(URL(string: item.image))
-                            .resizable()
-                            .scaledToFit()
-                            .cornerRadius(10)
-                            .frame(width: self.size, height: self.size)
-                        
-                        Text(item.title)
-                            .font(.system(size: 12, weight: .semibold))
-                            .foregroundColor(.black)
-                    }
-                }
-            }
+            EmptyView()
         }
     }
 }
