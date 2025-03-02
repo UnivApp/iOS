@@ -17,7 +17,7 @@ struct HomeHeaderView: View {
         VStack(alignment: .leading, spacing: 24) {
             Text("강일여고")
                 .foregroundColor(.black)
-                .font(.system(size: 25, weight: .bold))
+                .font(.system(size: 20, weight: .bold))
             
             let columns = Array(repeating: GridItem(.flexible()), count: 4)
             LazyVGrid(columns: columns, spacing: 10) {

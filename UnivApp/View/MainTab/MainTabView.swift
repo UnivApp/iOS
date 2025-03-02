@@ -22,12 +22,13 @@ struct MainTabView: View {
                             .environmentObject(authViewModel)
                         
                     case .calendar:
-                        CalendarContainer(viewModel: CalendarViewModel(container: self.container))
-                            .environmentObject(authViewModel)
+                        TimeTableView()
+//                            .environmentObject(authViewModel)
                         
                     case .list:
-                        PlaceholderView()
-                            .environmentObject(authViewModel)
+                        ListView(viewModel: ListViewModel())
+//                        PlaceholderView()
+//                            .environmentObject(authViewModel)
                         
                     case .todo:
                         PlaceholderView()
@@ -46,7 +47,7 @@ struct MainTabView: View {
         }
         .onAppear {
             let apperance = UINavigationBarAppearance()
-            apperance.backgroundColor = UIColor(Color.backPointColor)
+            apperance.backgroundColor = UIColor(.white)
             apperance.shadowColor = nil
             UINavigationBar.appearance().standardAppearance = apperance
             UINavigationBar.appearance().scrollEdgeAppearance = apperance

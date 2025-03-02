@@ -35,7 +35,7 @@ struct BoardSectionView: View {
                     .foregroundColor(.black)
                     .font(.system(size: 15, weight: .bold))
                 
-                Text("진짜 자기 싫다...그치만 졸리다...낼 등교...ddddasdfvvcxzvzcvzxcvzxcvzxcvzxcvzxcvzcxvzxcvzxcvzcxvzxcvvc")
+                Text("진짜 자기 싫다...그치만 졸리다...낼 등교...")
                     .foregroundColor(.black)
                     .font(.system(size: 13, weight: .regular))
                     .lineLimit(1)
@@ -78,6 +78,7 @@ struct BoardSectionView: View {
         .background(.white)
         .clipped()
         .cornerRadius(15)
+        .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 0)
     }
 }
 

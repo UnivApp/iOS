@@ -18,9 +18,21 @@ struct HomeFooterView: View {
                 .frame(width: UIScreen.main.bounds.width - 40, height: (UIScreen.main.bounds.width - 40) / 3.2)
                 .padding(.top, 24)
             
-            Text("급식표🍚")
-                .foregroundColor(.black)
-                .font(.system(size: 20, weight: .bold))
+            HStack {
+                Text("급식표🍚")
+                    .foregroundColor(.black)
+                    .font(.system(size: 20, weight: .bold))
+                
+                Spacer()
+                
+                Button {
+                    //TODO: 더보기
+                } label: {
+                    Text("더보기 ▶︎")
+                        .foregroundColor(.gray)
+                        .font(.system(size: 15, weight: .semibold))
+                }
+            }
             
             FoodSectionView()
         }

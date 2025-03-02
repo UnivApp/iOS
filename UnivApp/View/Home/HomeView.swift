@@ -18,11 +18,11 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             contentView
-                .background(Color.backPointColor)
+                .background(.white)
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         Text("SCHOOLIT")
-                            .font(.system(size: 30, weight: .heavy))
+                            .font(.system(size: 15, weight: .heavy))
                             .foregroundColor(.blue)
                     }
                     ToolbarItem(placement: .topBarTrailing) {

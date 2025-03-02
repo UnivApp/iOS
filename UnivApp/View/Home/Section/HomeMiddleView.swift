@@ -12,7 +12,7 @@ struct HomeMiddleView: View {
         VStack(alignment: .leading, spacing: 24) {
             Group {
                 HStack {
-                    Text("게시판")
+                    Text("게시판👀")
                         .foregroundColor(.black)
                         .multilineTextAlignment(.leading)
                         .font(.system(size: 20, weight: .bold))
@@ -48,6 +48,7 @@ struct HomeMiddleView: View {
                 .background(.white)
                 .clipped()
                 .cornerRadius(15)
+                .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 0)
             }
             
             Group {

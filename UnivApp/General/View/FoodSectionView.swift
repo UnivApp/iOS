@@ -65,6 +65,7 @@ struct FoodSectionView: View {
             .background(.white)
             .clipped()
             .cornerRadius(15)
+            .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 0)
         }
         .background(Color.clear)
     }
