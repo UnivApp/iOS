@@ -13,8 +13,20 @@ enum MainTabType: String, CaseIterable {
     case list
     case todo
     case profile
-    
-    func imageName(selected: Bool) -> String {
-        selected ? "\(rawValue)_fill" : rawValue
+
+    var sfSymbol: String {
+        switch self {
+        case .home:
+            return "house.fill"
+        case .calendar:
+            return "calendar"
+        case .list:
+            return "list.bullet"
+        case .todo:
+            return "checklist"
+        case .profile:
+            return "person.fill"
+        }
     }
 }
+

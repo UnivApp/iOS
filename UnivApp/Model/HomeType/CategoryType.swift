@@ -31,8 +31,17 @@ enum CategoryType: String, CaseIterable {
         return AnyView(EmptyView())
     }
     
-    func imageName() -> String {
-        return rawValue
+    var imageName: String {
+        switch self {
+        case .site:
+            "building.columns"
+        case .food:
+            "takeoutbag.and.cup.and.straw"
+        case .calendar:
+            "calendar.badge.exclamationmark"
+        case .info:
+            "graduationcap"
+        }
     }
 
 }

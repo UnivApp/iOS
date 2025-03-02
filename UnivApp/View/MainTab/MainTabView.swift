@@ -39,8 +39,9 @@ struct MainTabView: View {
                     }
                 }
                 .tabItem {
-                    Image(tab.imageName(selectedTab.isEqual(tab)))
+                    Image(systemName: tab.sfSymbol)
                 }
+                .tag(tab)
             }
         }
         .onAppear {
@@ -49,6 +50,12 @@ struct MainTabView: View {
             apperance.shadowColor = nil
             UINavigationBar.appearance().standardAppearance = apperance
             UINavigationBar.appearance().scrollEdgeAppearance = apperance
+            
+            let tabApperance = UITabBarAppearance()
+            tabApperance.backgroundColor = .white
+            tabApperance.shadowColor = nil
+            UITabBar.appearance().standardAppearance = tabApperance
+            UITabBar.appearance().scrollEdgeAppearance = tabApperance
             
             UIPageControl.appearance().isHidden = true
             UIPageControl.appearance().currentPageIndicatorTintColor = .clear

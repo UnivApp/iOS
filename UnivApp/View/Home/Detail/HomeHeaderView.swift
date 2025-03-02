@@ -24,10 +24,12 @@ struct HomeHeaderView: View {
                 ForEach(CategoryType.allCases, id: \.self) { category in
                     NavigationLink(destination: category.view) {
                         VStack {
-                            Image(category.imageName())
+                            Image(systemName: category.imageName)
                                 .resizable()
                                 .scaledToFit()
+                                .tint(.blue.opacity(0.5))
                                 .frame(width: 35, height: 35)
+                            
                             Text(category.title)
                                 .foregroundColor(.gray)
                                 .font(.system(size: 10, weight: .semibold))
