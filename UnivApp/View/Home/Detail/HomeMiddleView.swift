@@ -33,7 +33,7 @@ struct HomeMiddleView: View {
                     ForEach(0...4, id: \.self) { tab in
                         HStack {
                             Text("@@게시판")
-                                .foregroundColor(.black.opacity(0.5))
+                                .foregroundColor(.black.opacity(0.7))
                                 .font(.system(size: 15, weight: .semibold))
                             
                             Text("내일 학교 안하겠지?")

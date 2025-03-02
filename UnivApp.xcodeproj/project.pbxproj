@@ -23,6 +23,7 @@
 		E42DB9502D735E4600F0A55C /* HomeMiddleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42DB94F2D735E4600F0A55C /* HomeMiddleView.swift */; };
 		E42DB9522D736EB400F0A55C /* BoardSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42DB9512D736EB400F0A55C /* BoardSectionView.swift */; };
 		E42DB9542D73759900F0A55C /* Shape + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42DB9532D73759900F0A55C /* Shape + Extension.swift */; };
+		E42DB9582D7481C400F0A55C /* FoodSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42DB9572D7481C400F0A55C /* FoodSectionView.swift */; };
 		E47B2ECF2C79AF4C0039E2E0 /* SettingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47B2ECE2C79AF4C0039E2E0 /* SettingType.swift */; };
 		E48904C42CDCE060003F566A /* firework-unscreen.gif in Resources */ = {isa = PBXBuildFile; fileRef = E48904C32CDCE060003F566A /* firework-unscreen.gif */; };
 		E48905322CEB0CAA003F566A /* FestivalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48905312CEB0CAA003F566A /* FestivalService.swift */; };
@@ -152,6 +153,7 @@
 		E42DB94F2D735E4600F0A55C /* HomeMiddleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMiddleView.swift; sourceTree = "<group>"; };
 		E42DB9512D736EB400F0A55C /* BoardSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardSectionView.swift; sourceTree = "<group>"; };
 		E42DB9532D73759900F0A55C /* Shape + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shape + Extension.swift"; sourceTree = "<group>"; };
+		E42DB9572D7481C400F0A55C /* FoodSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSectionView.swift; sourceTree = "<group>"; };
 		E47B2ECE2C79AF4C0039E2E0 /* SettingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingType.swift; sourceTree = "<group>"; };
 		E48904C32CDCE060003F566A /* firework-unscreen.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "firework-unscreen.gif"; sourceTree = "<group>"; };
 		E48905312CEB0CAA003F566A /* FestivalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FestivalService.swift; sourceTree = "<group>"; };
@@ -741,6 +743,7 @@
 				E49222782C9F10240077EA45 /* SeperateView.swift */,
 				E4DCD9B22C9FE4D000E06542 /* SplashView.swift */,
 				E42DB9512D736EB400F0A55C /* BoardSectionView.swift */,
+				E42DB9572D7481C400F0A55C /* FoodSectionView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -926,6 +929,7 @@
 				E415891A2CBE409D00EDB211 /* MouService.swift in Sources */,
 				E4953D922C8F3AA3008CBDE5 /* SearchService.swift in Sources */,
 				E4CEEFBE2CBA4A9D001F4DAE /* RateService.swift in Sources */,
+				E42DB9582D7481C400F0A55C /* FoodSectionView.swift in Sources */,
 				E4CEEFBC2CB7F1A1001F4DAE /* CompetitionModel.swift in Sources */,
 				E489054E2CEF1C29003F566A /* ImageCacheManager.swift in Sources */,
 				E4953D732C8EDB35008CBDE5 /* ListService.swift in Sources */,

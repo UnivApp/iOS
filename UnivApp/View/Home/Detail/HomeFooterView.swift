@@ -18,15 +18,14 @@ struct HomeFooterView: View {
                 .frame(width: UIScreen.main.bounds.width - 40, height: (UIScreen.main.bounds.width - 40) / 3.2)
                 .padding(.top, 24)
             
-            Text("급식표")
+            Text("급식표🍚")
                 .foregroundColor(.black)
                 .font(.system(size: 20, weight: .bold))
             
-            
-            VStack(alignment: .leading, spacing: 8) {
-                
-            }
+            FoodSectionView()
         }
+        .padding(.horizontal, 24)
+        .padding(.bottom, 12)
     }
 }
 
