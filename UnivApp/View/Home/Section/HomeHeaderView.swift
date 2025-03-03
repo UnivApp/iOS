@@ -15,7 +15,7 @@ struct HomeHeaderView: View {
     private let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
-            Text("강일여고")
+            Text("강일여자고등학교")
                 .foregroundColor(.black)
                 .font(.system(size: 20, weight: .bold))
             

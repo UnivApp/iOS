@@ -28,6 +28,9 @@
 		E42DB9632D74862200F0A55C /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42DB9622D74862200F0A55C /* ListView.swift */; };
 		E42DB9652D74862900F0A55C /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42DB9642D74862900F0A55C /* ListViewModel.swift */; };
 		E42DB96A2D748BAB00F0A55C /* TimeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42DB9692D748BAB00F0A55C /* TimeTableView.swift */; };
+		E4614A172D7571D100B48BEE /* TimeTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4614A162D7571D100B48BEE /* TimeTableViewModel.swift */; };
+		E4614A192D757B4900B48BEE /* ToDoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4614A182D757B4900B48BEE /* ToDoListView.swift */; };
+		E4614A1B2D757B5200B48BEE /* ToDoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4614A1A2D757B5200B48BEE /* ToDoListViewModel.swift */; };
 		E47B2ECF2C79AF4C0039E2E0 /* SettingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47B2ECE2C79AF4C0039E2E0 /* SettingType.swift */; };
 		E48904C42CDCE060003F566A /* firework-unscreen.gif in Resources */ = {isa = PBXBuildFile; fileRef = E48904C32CDCE060003F566A /* firework-unscreen.gif */; };
 		E48905322CEB0CAA003F566A /* FestivalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48905312CEB0CAA003F566A /* FestivalService.swift */; };
@@ -158,6 +161,9 @@
 		E42DB9622D74862200F0A55C /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		E42DB9642D74862900F0A55C /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		E42DB9692D748BAB00F0A55C /* TimeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableView.swift; sourceTree = "<group>"; };
+		E4614A162D7571D100B48BEE /* TimeTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableViewModel.swift; sourceTree = "<group>"; };
+		E4614A182D757B4900B48BEE /* ToDoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListView.swift; sourceTree = "<group>"; };
+		E4614A1A2D757B5200B48BEE /* ToDoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewModel.swift; sourceTree = "<group>"; };
 		E47B2ECE2C79AF4C0039E2E0 /* SettingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingType.swift; sourceTree = "<group>"; };
 		E48904C32CDCE060003F566A /* firework-unscreen.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "firework-unscreen.gif"; sourceTree = "<group>"; };
 		E48905312CEB0CAA003F566A /* FestivalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FestivalService.swift; sourceTree = "<group>"; };
@@ -345,6 +351,8 @@
 		E42DB95D2D74857D00F0A55C /* ToDo */ = {
 			isa = PBXGroup;
 			children = (
+				E4614A182D757B4900B48BEE /* ToDoListView.swift */,
+				E4614A1A2D757B5200B48BEE /* ToDoListViewModel.swift */,
 			);
 			path = ToDo;
 			sourceTree = "<group>";
@@ -387,6 +395,7 @@
 			isa = PBXGroup;
 			children = (
 				E42DB9692D748BAB00F0A55C /* TimeTableView.swift */,
+				E4614A162D7571D100B48BEE /* TimeTableViewModel.swift */,
 			);
 			path = TimeTable;
 			sourceTree = "<group>";
@@ -991,6 +1000,7 @@
 				E4953D5C2C8B0544008CBDE5 /* FoodModel.swift in Sources */,
 				E49A9FB92D263A9E001ED634 /* HomeHeaderView.swift in Sources */,
 				E49C9FA92C86D539001F43A3 /* HomeViewModel.swift in Sources */,
+				E4614A172D7571D100B48BEE /* TimeTableViewModel.swift in Sources */,
 				E415891A2CBE409D00EDB211 /* MouService.swift in Sources */,
 				E4953D922C8F3AA3008CBDE5 /* SearchService.swift in Sources */,
 				E4CEEFBE2CBA4A9D001F4DAE /* RateService.swift in Sources */,
@@ -1016,6 +1026,7 @@
 				E42DB9542D73759900F0A55C /* Shape + Extension.swift in Sources */,
 				E4CEEFB12CB517E8001F4DAE /* FoodService.swift in Sources */,
 				E4B3FD1E2C77905500CB98F3 /* SettingView.swift in Sources */,
+				E4614A1B2D757B5200B48BEE /* ToDoListViewModel.swift in Sources */,
 				E409A1432CAE83EA00E9CB1C /* SettingViewModel.swift in Sources */,
 				E4B3FD2A2C786B0400CB98F3 /* randomNonceString.swift in Sources */,
 				E4982D0A2CCF6DC800D0F1A7 /* GADBannerViewController.swift in Sources */,
@@ -1027,6 +1038,7 @@
 				E4DCD9BB2C9FFF5500E06542 /* PlayDetailModel.swift in Sources */,
 				E4953DAB2C90654E008CBDE5 /* LogoutView.swift in Sources */,
 				E4982D232CDC9DB800D0F1A7 /* TalentModel.swift in Sources */,
+				E4614A192D757B4900B48BEE /* ToDoListView.swift in Sources */,
 				E4B3FD282C77A42900CB98F3 /* UserModel.swift in Sources */,
 				E4953D3F2C89CDF6008CBDE5 /* LoadingModifier.swift in Sources */,
 				E4953D772C8EE00D008CBDE5 /* Phase.swift in Sources */,
@@ -1200,7 +1212,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = UnivApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "위들";
+				INFOPLIST_KEY_CFBundleDisplayName = "하이틴즈";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "맞춤형 광고 제공을 위해 사용자의 데이터가 사용됩니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1213,7 +1225,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = WEDLE.UnivApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1239,7 +1251,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = UnivApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "위들";
+				INFOPLIST_KEY_CFBundleDisplayName = "하이틴즈";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "맞춤형 광고 제공을 위해 사용자의 데이터가 사용됩니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1252,7 +1264,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = WEDLE.UnivApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
