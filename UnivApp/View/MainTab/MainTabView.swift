@@ -23,16 +23,12 @@ struct MainTabView: View {
                         
                     case .calendar:
                         TimeTableView()
-//                            .environmentObject(authViewModel)
                         
-                    case .list:
-                        ListView(viewModel: ListViewModel())
-//                        PlaceholderView()
-//                            .environmentObject(authViewModel)
+                    case .chat:
+                        PlaceholderView()
                         
                     case .todo:
-                        PlaceholderView()
-                            .environmentObject(authViewModel)
+                        ToDoListView()
                         
                     case .profile:
                         SettingView(viewModel: SettingViewModel(container: self.container))
