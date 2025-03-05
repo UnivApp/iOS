@@ -32,6 +32,7 @@
 		E4614A192D757B4900B48BEE /* ToDoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4614A182D757B4900B48BEE /* ToDoListView.swift */; };
 		E4614A1B2D757B5200B48BEE /* ToDoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4614A1A2D757B5200B48BEE /* ToDoListViewModel.swift */; };
 		E47B2ECF2C79AF4C0039E2E0 /* SettingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47B2ECE2C79AF4C0039E2E0 /* SettingType.swift */; };
+		E48359922D786E2E0050070F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48359912D786E2E0050070F /* ProfileView.swift */; };
 		E48904C42CDCE060003F566A /* firework-unscreen.gif in Resources */ = {isa = PBXBuildFile; fileRef = E48904C32CDCE060003F566A /* firework-unscreen.gif */; };
 		E48905322CEB0CAA003F566A /* FestivalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48905312CEB0CAA003F566A /* FestivalService.swift */; };
 		E489053D2CEB1E41003F566A /* FestivalDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E489053C2CEB1E41003F566A /* FestivalDetailModel.swift */; };
@@ -165,6 +166,7 @@
 		E4614A182D757B4900B48BEE /* ToDoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListView.swift; sourceTree = "<group>"; };
 		E4614A1A2D757B5200B48BEE /* ToDoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewModel.swift; sourceTree = "<group>"; };
 		E47B2ECE2C79AF4C0039E2E0 /* SettingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingType.swift; sourceTree = "<group>"; };
+		E48359912D786E2E0050070F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		E48904C32CDCE060003F566A /* firework-unscreen.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "firework-unscreen.gif"; sourceTree = "<group>"; };
 		E48905312CEB0CAA003F566A /* FestivalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FestivalService.swift; sourceTree = "<group>"; };
 		E489053C2CEB1E41003F566A /* FestivalDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FestivalDetailModel.swift; sourceTree = "<group>"; };
@@ -734,6 +736,7 @@
 			children = (
 				E4982D112CD4ABCB00D0F1A7 /* HomeBellView.swift */,
 				E42DB95E2D7485AA00F0A55C /* HomeFoodView.swift */,
+				E48359912D786E2E0050070F /* ProfileView.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -1026,6 +1029,7 @@
 				E42DB9542D73759900F0A55C /* Shape + Extension.swift in Sources */,
 				E4CEEFB12CB517E8001F4DAE /* FoodService.swift in Sources */,
 				E4B3FD1E2C77905500CB98F3 /* SettingView.swift in Sources */,
+				E48359922D786E2E0050070F /* ProfileView.swift in Sources */,
 				E4614A1B2D757B5200B48BEE /* ToDoListViewModel.swift in Sources */,
 				E409A1432CAE83EA00E9CB1C /* SettingViewModel.swift in Sources */,
 				E4B3FD2A2C786B0400CB98F3 /* randomNonceString.swift in Sources */,
@@ -1212,7 +1216,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = UnivApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "하이틴즈";
+				INFOPLIST_KEY_CFBundleDisplayName = "틴스팟";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "맞춤형 광고 제공을 위해 사용자의 데이터가 사용됩니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1251,7 +1255,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = UnivApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "하이틴즈";
+				INFOPLIST_KEY_CFBundleDisplayName = "틴스팟";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "맞춤형 광고 제공을 위해 사용자의 데이터가 사용됩니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

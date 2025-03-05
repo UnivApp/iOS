@@ -30,18 +30,5 @@ enum CategoryType: String, CaseIterable {
     var view: AnyView {
         return AnyView(EmptyView())
     }
-    
-    var imageName: String {
-        switch self {
-        case .site:
-            "building.columns"
-        case .food:
-            "takeoutbag.and.cup.and.straw"
-        case .calendar:
-            "calendar.badge.exclamationmark"
-        case .info:
-            "graduationcap"
-        }
-    }
 
 }

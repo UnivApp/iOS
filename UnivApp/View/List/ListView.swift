@@ -61,7 +61,7 @@ fileprivate struct CustomCellView: View {
                     .frame(width: 20, height: 20)
                 
                 VStack(alignment: .leading) {
-                    Text("HOT🔥 게시판")
+                    Text("인기🔥 게시판")
                         .font(.headline)
                 }
                 Spacer()

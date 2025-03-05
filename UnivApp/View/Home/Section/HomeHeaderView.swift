@@ -15,28 +15,8 @@ struct HomeHeaderView: View {
     private let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
-            Text("강일여자고등학교")
-                .foregroundColor(.black)
-                .font(.system(size: 20, weight: .bold))
+            ProfileView()
             
-            let columns = Array(repeating: GridItem(.flexible()), count: 4)
-            LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(CategoryType.allCases, id: \.self) { category in
-                    NavigationLink(destination: category.view) {
-                        VStack {
-                            Image(systemName: category.imageName)
-                                .resizable()
-                                .scaledToFit()
-                                .tint(.blue.opacity(0.5))
-                                .frame(width: 35, height: 35)
-                            
-                            Text(category.title)
-                                .foregroundColor(.gray)
-                                .font(.system(size: 10, weight: .semibold))
-                        }
-                    }
-                }
-            }
             TabView(selection: $currentIndex) {
                 ForEach(viewModel.posterData.indices, id: \.self) { index in
                     //                    NavigationLink(destination: viewModel.posterData[index].view) {
@@ -61,6 +41,25 @@ struct HomeHeaderView: View {
                     .padding(.bottom, 10)
             }
             .cornerRadius(15)
+            
+            
+            let columns = Array(repeating: GridItem(.flexible()), count: 4)
+            LazyVGrid(columns: columns, spacing: 10) {
+                ForEach(CategoryType.allCases, id: \.self) { category in
+                    NavigationLink(destination: category.view) {
+                        VStack {
+                            Image(category.rawValue)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 40, height: 40)
+                            
+                            Text(category.title)
+                                .foregroundColor(.gray)
+                                .font(.system(size: 10, weight: .semibold))
+                        }
+                    }
+                }
+            }
         }
         .padding(.horizontal, 24)
         .padding(.vertical, 24)

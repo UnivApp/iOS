@@ -18,23 +18,30 @@ struct HomeFooterView: View {
                 .frame(width: UIScreen.main.bounds.width - 40, height: (UIScreen.main.bounds.width - 40) / 3.2)
                 .padding(.top, 24)
             
-            HStack {
-                Text("급식표🍚")
-                    .foregroundColor(.black)
-                    .font(.system(size: 20, weight: .bold))
+            Group {
+                HStack {
+                    Text("인기🔥 게시판")
+                        .foregroundColor(.black)
+                        .multilineTextAlignment(.leading)
+                        .font(.system(size: 20, weight: .bold))
+                    
+                    Spacer()
+                    
+                    Button {
+                        //TODO: 더보기
+                    } label: {
+                        Text("더보기 ▶︎")
+                            .foregroundColor(.gray)
+                            .font(.system(size: 15, weight: .semibold))
+                    }
+                }
                 
-                Spacer()
-                
-                Button {
-                    //TODO: 더보기
-                } label: {
-                    Text("더보기 ▶︎")
-                        .foregroundColor(.gray)
-                        .font(.system(size: 15, weight: .semibold))
+                ForEach(0...2, id: \.self) { _ in
+                    VStack(spacing: 12) {
+                        BoardSectionView()
+                    }
                 }
             }
-            
-            FoodSectionView()
         }
         .padding(.horizontal, 24)
         .padding(.bottom, 12)

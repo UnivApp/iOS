@@ -17,13 +17,13 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack {
-            contentView
+            loadedView
                 .background(.white)
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
-                        Text("SCHOOLIT")
-                            .font(.system(size: 15, weight: .heavy))
-                            .foregroundColor(.blue)
+                        Text("TeenSpot")
+                            .foregroundColor(.black)
+                            .font(.system(size: 25, weight: .heavy))
                     }
                     ToolbarItem(placement: .topBarTrailing) {
                         HStack(spacing: 16) {

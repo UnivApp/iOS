@@ -62,7 +62,7 @@ struct ToDoListView: View {
                 Text("할 일 추가")
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color.blue)
+                    .background(.black)
                     .foregroundColor(.white)
                     .cornerRadius(8)
             }
@@ -113,9 +113,11 @@ struct CalendarView: UIViewRepresentable {
         calendar.scope = .month
         calendar.locale = Locale(identifier: "ko_KR")
         calendar.appearance.headerDateFormat = "YYYY년 MM월"
+        calendar.appearance.headerTitleColor = .black
+        calendar.appearance.titleDefaultColor = .black
         calendar.appearance.titleWeekendColor = .red
-        calendar.appearance.todayColor = .systemBlue.withAlphaComponent(0.3)
-        calendar.appearance.selectionColor = .systemBlue
+        calendar.appearance.todayColor = .systemGray5
+        calendar.appearance.selectionColor = .systemBlue.withAlphaComponent(0.7)
         
         return calendar
     }
