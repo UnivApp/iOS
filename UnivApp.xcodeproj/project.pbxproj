@@ -25,6 +25,10 @@
 		E4365C382D87F45F00247FF6 /* FoodSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365C372D87F45F00247FF6 /* FoodSectionView.swift */; };
 		E4365C3A2D87F46B00247FF6 /* BoardSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365C392D87F46B00247FF6 /* BoardSectionView.swift */; };
 		E4365C3C2D88041200247FF6 /* HomeProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365C3B2D88041200247FF6 /* HomeProfileView.swift */; };
+		E4365C3F2D88078100247FF6 /* TimeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365C3E2D88078100247FF6 /* TimeTableView.swift */; };
+		E4365C412D88078700247FF6 /* TimeTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365C402D88078700247FF6 /* TimeTableViewModel.swift */; };
+		E4365C442D880B0A00247FF6 /* TimeTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365C432D880B0A00247FF6 /* TimeTableRowView.swift */; };
+		E4365C482D882F0D00247FF6 /* AddSchedulePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365C472D882F0D00247FF6 /* AddSchedulePopupView.swift */; };
 		E49222702C9C87DA0077EA45 /* RequestInterceptor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E492226F2C9C87DA0077EA45 /* RequestInterceptor + Extension.swift */; };
 		E4953D382C89C924008CBDE5 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E4953D372C89C924008CBDE5 /* Kingfisher */; };
 		E4953D3C2C89CDD5008CBDE5 /* View + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D3B2C89CDD5008CBDE5 /* View + Extension.swift */; };
@@ -62,6 +66,10 @@
 		E4365C372D87F45F00247FF6 /* FoodSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSectionView.swift; sourceTree = "<group>"; };
 		E4365C392D87F46B00247FF6 /* BoardSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardSectionView.swift; sourceTree = "<group>"; };
 		E4365C3B2D88041200247FF6 /* HomeProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeProfileView.swift; sourceTree = "<group>"; };
+		E4365C3E2D88078100247FF6 /* TimeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableView.swift; sourceTree = "<group>"; };
+		E4365C402D88078700247FF6 /* TimeTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableViewModel.swift; sourceTree = "<group>"; };
+		E4365C432D880B0A00247FF6 /* TimeTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableRowView.swift; sourceTree = "<group>"; };
+		E4365C472D882F0D00247FF6 /* AddSchedulePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSchedulePopupView.swift; sourceTree = "<group>"; };
 		E492226F2C9C87DA0077EA45 /* RequestInterceptor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RequestInterceptor + Extension.swift"; sourceTree = "<group>"; };
 		E4953D3B2C89CDD5008CBDE5 /* View + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Extension.swift"; sourceTree = "<group>"; };
 		E4953D762C8EE00D008CBDE5 /* Phase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phase.swift; sourceTree = "<group>"; };
@@ -160,6 +168,25 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		E4365C3D2D88071200247FF6 /* TimeTable */ = {
+			isa = PBXGroup;
+			children = (
+				E4365C422D880AF800247FF6 /* Custom */,
+				E4365C3E2D88078100247FF6 /* TimeTableView.swift */,
+				E4365C402D88078700247FF6 /* TimeTableViewModel.swift */,
+			);
+			path = TimeTable;
+			sourceTree = "<group>";
+		};
+		E4365C422D880AF800247FF6 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				E4365C432D880B0A00247FF6 /* TimeTableRowView.swift */,
+				E4365C472D882F0D00247FF6 /* AddSchedulePopupView.swift */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
 		E4B3FCBB2C7751DB00CB98F3 = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +232,7 @@
 		E4B3FCF12C7754C800CB98F3 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				E4365C3D2D88071200247FF6 /* TimeTable */,
 				E4365C1D2D87ED0A00247FF6 /* Home */,
 				E4365C142D87EB8100247FF6 /* TabBar */,
 			);
@@ -374,17 +402,21 @@
 			files = (
 				E40B3EA32D2790AF0077932E /* UINavigationController + Extension.swift in Sources */,
 				E4365C162D87EB8800247FF6 /* TabBarType.swift in Sources */,
+				E4365C482D882F0D00247FF6 /* AddSchedulePopupView.swift in Sources */,
 				E4365C362D87F42200247FF6 /* HomeFooterView.swift in Sources */,
 				E4365C3C2D88041200247FF6 /* HomeProfileView.swift in Sources */,
 				E49222702C9C87DA0077EA45 /* RequestInterceptor + Extension.swift in Sources */,
 				E4365C2E2D87EECD00247FF6 /* NetworkMonitorManager.swift in Sources */,
+				E4365C442D880B0A00247FF6 /* TimeTableRowView.swift in Sources */,
 				E4365C342D87F3FD00247FF6 /* HomeMiddleView.swift in Sources */,
+				E4365C3F2D88078100247FF6 /* TimeTableView.swift in Sources */,
 				E4365C1F2D87ED2000247FF6 /* HomeViewModel.swift in Sources */,
 				E42DB9542D73759900F0A55C /* Shape + Extension.swift in Sources */,
 				E4365C382D87F45F00247FF6 /* FoodSectionView.swift in Sources */,
 				E4365C242D87EDBD00247FF6 /* LoadingView.swift in Sources */,
 				E4365C212D87ED6A00247FF6 /* HomeView.swift in Sources */,
 				E4365C322D87F12100247FF6 /* HomeHeaderView.swift in Sources */,
+				E4365C412D88078700247FF6 /* TimeTableViewModel.swift in Sources */,
 				E4953D772C8EE00D008CBDE5 /* Phase.swift in Sources */,
 				E4953D3C2C89CDD5008CBDE5 /* View + Extension.swift in Sources */,
 				E4365C0F2D87EA2D00247FF6 /* TabBarView.swift in Sources */,

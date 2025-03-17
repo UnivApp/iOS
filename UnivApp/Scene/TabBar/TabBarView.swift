@@ -18,8 +18,8 @@ struct TabBarView: View {
                     case .home:
                         HomeView(viewModel: HomeViewModel())
                         
-                    case .calendar:
-                        Color.white
+                    case .timeTable:
+                        TimeTableView(viewModel: TimeTableViewModel())
                         
                     case .chat:
                         Color.white

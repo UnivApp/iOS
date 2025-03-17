@@ -10,7 +10,7 @@ import Combine
 
 enum TabBarType: CaseIterable {
     case home
-    case calendar
+    case timeTable
     case chat
     case todo
     case profile
@@ -19,7 +19,7 @@ enum TabBarType: CaseIterable {
         switch self {
         case .home:
             return "house.fill"
-        case .calendar:
+        case .timeTable:
             return "calendar"
         case .chat:
             return "bubble"
