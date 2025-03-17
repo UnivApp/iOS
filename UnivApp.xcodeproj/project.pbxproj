@@ -32,6 +32,7 @@
 		E4365D442D88410800247FF6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365D422D88410800247FF6 /* NetworkManager.swift */; };
 		E4365D452D88410800247FF6 /* NetworkMonitorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365D432D88410800247FF6 /* NetworkMonitorManager.swift */; };
 		E4365E3B2D88413900247FF6 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365E3A2D88413900247FF6 /* Router.swift */; };
+		E4365E3D2D88447100247FF6 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E4365E3C2D88447100247FF6 /* .gitignore */; };
 		E49222702C9C87DA0077EA45 /* RequestInterceptor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E492226F2C9C87DA0077EA45 /* RequestInterceptor + Extension.swift */; };
 		E4953D382C89C924008CBDE5 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E4953D372C89C924008CBDE5 /* Kingfisher */; };
 		E4953D3C2C89CDD5008CBDE5 /* View + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D3B2C89CDD5008CBDE5 /* View + Extension.swift */; };
@@ -76,6 +77,7 @@
 		E4365D422D88410800247FF6 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E4365D432D88410800247FF6 /* NetworkMonitorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitorManager.swift; sourceTree = "<group>"; };
 		E4365E3A2D88413900247FF6 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		E4365E3C2D88447100247FF6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		E492226F2C9C87DA0077EA45 /* RequestInterceptor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RequestInterceptor + Extension.swift"; sourceTree = "<group>"; };
 		E4953D3B2C89CDD5008CBDE5 /* View + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Extension.swift"; sourceTree = "<group>"; };
 		E4953D762C8EE00D008CBDE5 /* Phase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phase.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 		E4B3FCBB2C7751DB00CB98F3 = {
 			isa = PBXGroup;
 			children = (
+				E4365E3C2D88447100247FF6 /* .gitignore */,
 				E4B3FCC62C7751DB00CB98F3 /* UnivApp */,
 				E4B3FCC52C7751DB00CB98F3 /* Products */,
 				E4EA25622C85D54800DC5D55 /* Frameworks */,
@@ -403,6 +406,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4365E3D2D88447100247FF6 /* .gitignore in Resources */,
 				E4B3FCCF2C7751DD00CB98F3 /* Preview Assets.xcassets in Resources */,
 				E4365C112D87EA8D00247FF6 /* LaunchScreen.storyboard in Resources */,
 				E4B3FCCC2C7751DD00CB98F3 /* Assets.xcassets in Resources */,
