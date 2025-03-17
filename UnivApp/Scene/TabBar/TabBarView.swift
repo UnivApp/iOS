@@ -25,7 +25,7 @@ struct TabBarView: View {
                         Color.white
                         
                     case .todo:
-                        Color.white
+                        ToDoListView(viewModel: ToDoListViewModel())
                         
                     case .profile:
                         Color.white

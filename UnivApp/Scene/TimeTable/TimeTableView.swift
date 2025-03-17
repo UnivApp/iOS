@@ -18,7 +18,6 @@ struct TimeTableView: View {
         ZStack {
             VStack {
                 headerView
-                    .padding(.horizontal, 12)
                 
                 timeTableGridView
             }
@@ -54,7 +53,8 @@ struct TimeTableView: View {
             Spacer()
             addScheduleButton
         }
-        .padding()
+        .padding(.top, 12)
+        .padding(.horizontal, 24)
     }
     
     private var addScheduleButton: some View {
@@ -91,7 +91,7 @@ struct TimeTableView: View {
                 
                 ForEach(hours, id: \.self) { hour in
                     Text("\(hour)")
-                        .frame(width: 30)
+                        .frame(width: 15)
                         .font(.system(size: 10, weight: .semibold))
                         .foregroundColor(.gray)
                     

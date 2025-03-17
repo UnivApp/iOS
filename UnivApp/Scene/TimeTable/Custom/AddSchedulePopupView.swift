@@ -22,8 +22,8 @@ struct AddSchedulePopupView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
             Text("새 일정 추가")
-                .font(.title2)
-                .fontWeight(.bold)
+                .font(.system(size: 15, weight: .bold))
+                .foregroundColor(.black)
 
             scheduleNameField
 
