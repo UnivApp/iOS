@@ -12,9 +12,3 @@ enum Phase {
     case success
     case fail
 }
-
-enum heartPhase: Equatable {
-    case notRequested
-    case addHeart(Int)
-    case removeHeart(Int)
-}

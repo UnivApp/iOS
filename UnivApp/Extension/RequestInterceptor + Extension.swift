@@ -42,26 +42,26 @@ final class TokenRequestInterceptor: RequestInterceptor {
             guard let refreshToken = KeychainWrapper.standard.string(forKey: "JWTrefreshToken") else {
                 return completion(.doNotRetryWithError(error))
             }
-            Alamofire().reissueRefresh(url: APIEndpoint.refresh.urlString, refresh: refreshToken)
-                .sink { completionStatus in
-                    switch completionStatus {
-                    case .finished:
-                        print("토큰 재발행 성공")
-                    case let .failure(error):
-                        print("토큰 재발행 실패 \(error)")
-                        KeychainWrapper.standard.removeAllKeys()
-                        return completion(.doNotRetryWithError(error))
-                    }
-                } receiveValue: { (response: UserModel) in
-                    KeychainWrapper.standard.removeAllKeys()
-                    if let accessToken = response.accessToken,
-                       let refreshToken = response.refreshToken {
-                        print("토큰 재발행 성공")
-                        KeychainWrapper.standard.set("Bearer \(accessToken)", forKey: "JWTaccessToken")
-                        KeychainWrapper.standard.set(refreshToken, forKey: "JWTrefreshToken")
-                    }
-                    return completion(.retry)
-                }.store(in: &subscriptions)
+//            Alamofire().reissueRefresh(url: APIEndpoint.refresh.urlString, refresh: refreshToken)
+//                .sink { completionStatus in
+//                    switch completionStatus {
+//                    case .finished:
+//                        print("토큰 재발행 성공")
+//                    case let .failure(error):
+//                        print("토큰 재발행 실패 \(error)")
+//                        KeychainWrapper.standard.removeAllKeys()
+//                        return completion(.doNotRetryWithError(error))
+//                    }
+//                } receiveValue: { (response: UserModel) in
+//                    KeychainWrapper.standard.removeAllKeys()
+//                    if let accessToken = response.accessToken,
+//                       let refreshToken = response.refreshToken {
+//                        print("토큰 재발행 성공")
+//                        KeychainWrapper.standard.set("Bearer \(accessToken)", forKey: "JWTaccessToken")
+//                        KeychainWrapper.standard.set(refreshToken, forKey: "JWTrefreshToken")
+//                    }
+//                    return completion(.retry)
+//                }.store(in: &subscriptions)
         }
     }
 }
