@@ -17,8 +17,6 @@
 		E4365C242D87EDBD00247FF6 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365C232D87EDBD00247FF6 /* LoadingView.swift */; };
 		E4365C262D87EE3B00247FF6 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365C252D87EE3B00247FF6 /* ErrorView.swift */; };
 		E4365C282D87EE8200247FF6 /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365C272D87EE8200247FF6 /* PlaceholderView.swift */; };
-		E4365C2C2D87EEC500247FF6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365C2B2D87EEC500247FF6 /* NetworkManager.swift */; };
-		E4365C2E2D87EECD00247FF6 /* NetworkMonitorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365C2D2D87EECD00247FF6 /* NetworkMonitorManager.swift */; };
 		E4365C322D87F12100247FF6 /* HomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365C312D87F12100247FF6 /* HomeHeaderView.swift */; };
 		E4365C342D87F3FD00247FF6 /* HomeMiddleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365C332D87F3FD00247FF6 /* HomeMiddleView.swift */; };
 		E4365C362D87F42200247FF6 /* HomeFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365C352D87F42200247FF6 /* HomeFooterView.swift */; };
@@ -31,6 +29,9 @@
 		E4365C482D882F0D00247FF6 /* AddSchedulePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365C472D882F0D00247FF6 /* AddSchedulePopupView.swift */; };
 		E4365C4B2D88300300247FF6 /* ToDoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365C4A2D88300300247FF6 /* ToDoListView.swift */; };
 		E4365C4D2D88302B00247FF6 /* ToDoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365C4C2D88302B00247FF6 /* ToDoListViewModel.swift */; };
+		E4365D442D88410800247FF6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365D422D88410800247FF6 /* NetworkManager.swift */; };
+		E4365D452D88410800247FF6 /* NetworkMonitorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365D432D88410800247FF6 /* NetworkMonitorManager.swift */; };
+		E4365E3B2D88413900247FF6 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365E3A2D88413900247FF6 /* Router.swift */; };
 		E49222702C9C87DA0077EA45 /* RequestInterceptor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E492226F2C9C87DA0077EA45 /* RequestInterceptor + Extension.swift */; };
 		E4953D382C89C924008CBDE5 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E4953D372C89C924008CBDE5 /* Kingfisher */; };
 		E4953D3C2C89CDD5008CBDE5 /* View + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D3B2C89CDD5008CBDE5 /* View + Extension.swift */; };
@@ -60,8 +61,6 @@
 		E4365C232D87EDBD00247FF6 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		E4365C252D87EE3B00247FF6 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		E4365C272D87EE8200247FF6 /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
-		E4365C2B2D87EEC500247FF6 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		E4365C2D2D87EECD00247FF6 /* NetworkMonitorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitorManager.swift; sourceTree = "<group>"; };
 		E4365C312D87F12100247FF6 /* HomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderView.swift; sourceTree = "<group>"; };
 		E4365C332D87F3FD00247FF6 /* HomeMiddleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMiddleView.swift; sourceTree = "<group>"; };
 		E4365C352D87F42200247FF6 /* HomeFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFooterView.swift; sourceTree = "<group>"; };
@@ -74,6 +73,9 @@
 		E4365C472D882F0D00247FF6 /* AddSchedulePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSchedulePopupView.swift; sourceTree = "<group>"; };
 		E4365C4A2D88300300247FF6 /* ToDoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListView.swift; sourceTree = "<group>"; };
 		E4365C4C2D88302B00247FF6 /* ToDoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewModel.swift; sourceTree = "<group>"; };
+		E4365D422D88410800247FF6 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		E4365D432D88410800247FF6 /* NetworkMonitorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitorManager.swift; sourceTree = "<group>"; };
+		E4365E3A2D88413900247FF6 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		E492226F2C9C87DA0077EA45 /* RequestInterceptor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RequestInterceptor + Extension.swift"; sourceTree = "<group>"; };
 		E4953D3B2C89CDD5008CBDE5 /* View + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Extension.swift"; sourceTree = "<group>"; };
 		E4953D762C8EE00D008CBDE5 /* Phase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phase.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 		E4365C292D87EEB000247FF6 /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				E4365E3A2D88413900247FF6 /* Router.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -298,8 +301,8 @@
 				E4365C2A2D87EEB900247FF6 /* Services */,
 				E4365C292D87EEB000247FF6 /* Router */,
 				E4B3FCF82C77559C00CB98F3 /* Repository */,
-				E4365C2B2D87EEC500247FF6 /* NetworkManager.swift */,
-				E4365C2D2D87EECD00247FF6 /* NetworkMonitorManager.swift */,
+				E4365D422D88410800247FF6 /* NetworkManager.swift */,
+				E4365D432D88410800247FF6 /* NetworkMonitorManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -421,7 +424,6 @@
 				E4365C362D87F42200247FF6 /* HomeFooterView.swift in Sources */,
 				E4365C3C2D88041200247FF6 /* HomeProfileView.swift in Sources */,
 				E49222702C9C87DA0077EA45 /* RequestInterceptor + Extension.swift in Sources */,
-				E4365C2E2D87EECD00247FF6 /* NetworkMonitorManager.swift in Sources */,
 				E4365C442D880B0A00247FF6 /* TimeTableRowView.swift in Sources */,
 				E4365C342D87F3FD00247FF6 /* HomeMiddleView.swift in Sources */,
 				E4365C3F2D88078100247FF6 /* TimeTableView.swift in Sources */,
@@ -436,9 +438,11 @@
 				E4953D772C8EE00D008CBDE5 /* Phase.swift in Sources */,
 				E4953D3C2C89CDD5008CBDE5 /* View + Extension.swift in Sources */,
 				E4365C0F2D87EA2D00247FF6 /* TabBarView.swift in Sources */,
+				E4365E3B2D88413900247FF6 /* Router.swift in Sources */,
 				E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */,
+				E4365D442D88410800247FF6 /* NetworkManager.swift in Sources */,
+				E4365D452D88410800247FF6 /* NetworkMonitorManager.swift in Sources */,
 				E4365C262D87EE3B00247FF6 /* ErrorView.swift in Sources */,
-				E4365C2C2D87EEC500247FF6 /* NetworkManager.swift in Sources */,
 				E4365C282D87EE8200247FF6 /* PlaceholderView.swift in Sources */,
 				E4B3FCF72C7754F500CB98F3 /* Color+Extension.swift in Sources */,
 				E4365C3A2D87F46B00247FF6 /* BoardSectionView.swift in Sources */,
