@@ -15,7 +15,9 @@ struct UnivAppApp: App {
     var body: some Scene {
         WindowGroup {
             //TODO: 로그인 판별
-            TabBarView()
+            NavigationStack {
+                TabBarView()
+            }
         }
     }
 }

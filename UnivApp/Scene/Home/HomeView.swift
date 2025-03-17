@@ -8,9 +8,43 @@
 import SwiftUI
 
 struct HomeView: View {
-    private let viewModel = HomeViewModel()
+    @StateObject var viewModel: HomeViewModel
+    
     var body: some View {
-        loadedView
+        NavigationStack {
+            loadedView
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Text("TeenSpot")
+                    .foregroundColor(.label)
+                    .font(.system(size: 20, weight: .heavy))
+            }
+            
+            ToolbarItem(placement: .topBarTrailing) {
+                HStack(spacing: 12) {
+                    Button {
+                        //TODO: Search
+                    } label: {
+                        Image(systemName: "magnifyingglass")
+                            .resizable()
+                            .scaledToFit()
+                            .foregroundColor(.label)
+                            .frame(width: 20, height: 20)
+                    }
+                    
+                    Button {
+                        //TODO: Bell
+                    } label: {
+                        Image(systemName: "bell.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .foregroundColor(.label)
+                            .frame(width: 20, height: 20)
+                    }
+                }
+            }
+        }
     }
     
     @ViewBuilder
@@ -31,13 +65,23 @@ struct HomeView: View {
     }
     
     var loadedView: some View {
-        VStack {
-            
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack(alignment: .center, spacing: 24) {
+                HomeHeaderView()
+                    .environmentObject(viewModel)
+                
+                HomeMiddleView()
+                    .environmentObject(viewModel)
+                
+                HomeFooterView()
+                    .environmentObject(viewModel)
+            }
         }
+        .background(.lightPoint)
     }
     
 }
 
 #Preview {
-    HomeView()
+    HomeView(viewModel: HomeViewModel())
 }

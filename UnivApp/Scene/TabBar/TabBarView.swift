@@ -16,7 +16,7 @@ struct TabBarView: View {
                 Group {
                     switch tab {
                     case .home:
-                        Color.white
+                        HomeView(viewModel: HomeViewModel())
                         
                     case .calendar:
                         Color.white
@@ -39,7 +39,7 @@ struct TabBarView: View {
         }
         .onAppear {
             let apperance = UINavigationBarAppearance()
-            apperance.backgroundColor = UIColor(.white)
+            apperance.backgroundColor = UIColor(.lightPoint)
             apperance.shadowColor = nil
             UINavigationBar.appearance().standardAppearance = apperance
             UINavigationBar.appearance().scrollEdgeAppearance = apperance
