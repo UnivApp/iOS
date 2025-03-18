@@ -54,7 +54,7 @@ fileprivate struct AnnouncementView: View {
                             .font(.system(size: 13, weight: .regular))
                             .padding(.horizontal, 8)
                     } icon: {
-                        Image(systemName: "speaker")
+                        Image(systemName: "speaker.wave.2")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 20, height: 20)

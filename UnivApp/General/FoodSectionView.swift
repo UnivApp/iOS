@@ -19,7 +19,7 @@ struct FoodSectionView: View {
     }
 }
 
-fileprivate struct FoodItemView: View {
+struct FoodItemView: View {
     var title: String
     //TODO: Model
     var body: some View {
