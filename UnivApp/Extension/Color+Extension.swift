@@ -10,6 +10,8 @@ import SwiftUI
 
 extension Color {
     static let backgroundColor = Color(UIColor.systemGray6.withAlphaComponent(0.3))
+    static let customBlue = Color(UIColor.systemBlue.withAlphaComponent(0.1))
+    static let customRed = Color(UIColor.systemRed.withAlphaComponent(0.1))
     
     //TODO: 지정색으로!
     static func random() -> Color {

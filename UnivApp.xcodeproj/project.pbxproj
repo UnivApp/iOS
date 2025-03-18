@@ -44,6 +44,8 @@
 		E4365E772D89567F00247FF6 /* PostRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365E762D89567F00247FF6 /* PostRouter.swift */; };
 		E4365E7A2D896D2C00247FF6 /* MealListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365E792D896D2C00247FF6 /* MealListView.swift */; };
 		E4365E7C2D896D3600247FF6 /* MealListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365E7B2D896D3600247FF6 /* MealListViewModel.swift */; };
+		E4365E7F2D89707100247FF6 /* BoardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365E7E2D89707100247FF6 /* BoardListView.swift */; };
+		E4365E812D89707C00247FF6 /* BoardListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365E802D89707C00247FF6 /* BoardListViewModel.swift */; };
 		E49222702C9C87DA0077EA45 /* RequestInterceptor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E492226F2C9C87DA0077EA45 /* RequestInterceptor + Extension.swift */; };
 		E4953D382C89C924008CBDE5 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E4953D372C89C924008CBDE5 /* Kingfisher */; };
 		E4953D3C2C89CDD5008CBDE5 /* View + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D3B2C89CDD5008CBDE5 /* View + Extension.swift */; };
@@ -100,6 +102,8 @@
 		E4365E762D89567F00247FF6 /* PostRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRouter.swift; sourceTree = "<group>"; };
 		E4365E792D896D2C00247FF6 /* MealListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealListView.swift; sourceTree = "<group>"; };
 		E4365E7B2D896D3600247FF6 /* MealListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealListViewModel.swift; sourceTree = "<group>"; };
+		E4365E7E2D89707100247FF6 /* BoardListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardListView.swift; sourceTree = "<group>"; };
+		E4365E802D89707C00247FF6 /* BoardListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardListViewModel.swift; sourceTree = "<group>"; };
 		E492226F2C9C87DA0077EA45 /* RequestInterceptor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RequestInterceptor + Extension.swift"; sourceTree = "<group>"; };
 		E4953D3B2C89CDD5008CBDE5 /* View + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Extension.swift"; sourceTree = "<group>"; };
 		E4953D762C8EE00D008CBDE5 /* Phase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phase.swift; sourceTree = "<group>"; };
@@ -261,6 +265,15 @@
 			path = Meal;
 			sourceTree = "<group>";
 		};
+		E4365E7D2D89705800247FF6 /* Board */ = {
+			isa = PBXGroup;
+			children = (
+				E4365E7E2D89707100247FF6 /* BoardListView.swift */,
+				E4365E802D89707C00247FF6 /* BoardListViewModel.swift */,
+			);
+			path = Board;
+			sourceTree = "<group>";
+		};
 		E4B3FCBB2C7751DB00CB98F3 = {
 			isa = PBXGroup;
 			children = (
@@ -307,6 +320,7 @@
 		E4B3FCF12C7754C800CB98F3 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				E4365E7D2D89705800247FF6 /* Board */,
 				E4365E782D896D1A00247FF6 /* Meal */,
 				E4365C492D882FF400247FF6 /* ToDo */,
 				E4365C3D2D88071200247FF6 /* TimeTable */,
@@ -487,6 +501,7 @@
 				E49222702C9C87DA0077EA45 /* RequestInterceptor + Extension.swift in Sources */,
 				E4365E412D88EA5B00247FF6 /* CommentRouter.swift in Sources */,
 				E4365E7A2D896D2C00247FF6 /* MealListView.swift in Sources */,
+				E4365E7F2D89707100247FF6 /* BoardListView.swift in Sources */,
 				E4365E7C2D896D3600247FF6 /* MealListViewModel.swift in Sources */,
 				E4365C442D880B0A00247FF6 /* TimeTableRowView.swift in Sources */,
 				E4365C342D87F3FD00247FF6 /* HomeMiddleView.swift in Sources */,
@@ -508,6 +523,7 @@
 				E4365E432D88EA7300247FF6 /* CommunityRouter.swift in Sources */,
 				E4365C0F2D87EA2D00247FF6 /* TabBarView.swift in Sources */,
 				E4365E3B2D88413900247FF6 /* Router.swift in Sources */,
+				E4365E812D89707C00247FF6 /* BoardListViewModel.swift in Sources */,
 				E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */,
 				E4365E492D88EAAF00247FF6 /* MemberRouter.swift in Sources */,
 				E4365E452D88EA7900247FF6 /* MealRouter.swift in Sources */,
