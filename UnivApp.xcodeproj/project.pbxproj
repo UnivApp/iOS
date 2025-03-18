@@ -33,6 +33,14 @@
 		E4365D452D88410800247FF6 /* NetworkMonitorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365D432D88410800247FF6 /* NetworkMonitorManager.swift */; };
 		E4365E3B2D88413900247FF6 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365E3A2D88413900247FF6 /* Router.swift */; };
 		E4365E3D2D88447100247FF6 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E4365E3C2D88447100247FF6 /* .gitignore */; };
+		E4365E3F2D88EA4B00247FF6 /* BoardRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365E3E2D88EA4B00247FF6 /* BoardRouter.swift */; };
+		E4365E412D88EA5B00247FF6 /* CommentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365E402D88EA5B00247FF6 /* CommentRouter.swift */; };
+		E4365E432D88EA7300247FF6 /* CommunityRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365E422D88EA7300247FF6 /* CommunityRouter.swift */; };
+		E4365E452D88EA7900247FF6 /* MealRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365E442D88EA7900247FF6 /* MealRouter.swift */; };
+		E4365E472D88EA8B00247FF6 /* TimeTableRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365E462D88EA8B00247FF6 /* TimeTableRouter.swift */; };
+		E4365E492D88EAAF00247FF6 /* MemberRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365E482D88EAAF00247FF6 /* MemberRouter.swift */; };
+		E4365E4C2D88EC4A00247FF6 /* BoardResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365E4B2D88EC4A00247FF6 /* BoardResponseDTO.swift */; };
+		E4365E4F2D88ECB800247FF6 /* BoardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365E4E2D88ECB800247FF6 /* BoardEntity.swift */; };
 		E49222702C9C87DA0077EA45 /* RequestInterceptor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E492226F2C9C87DA0077EA45 /* RequestInterceptor + Extension.swift */; };
 		E4953D382C89C924008CBDE5 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E4953D372C89C924008CBDE5 /* Kingfisher */; };
 		E4953D3C2C89CDD5008CBDE5 /* View + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D3B2C89CDD5008CBDE5 /* View + Extension.swift */; };
@@ -78,6 +86,14 @@
 		E4365D432D88410800247FF6 /* NetworkMonitorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitorManager.swift; sourceTree = "<group>"; };
 		E4365E3A2D88413900247FF6 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		E4365E3C2D88447100247FF6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		E4365E3E2D88EA4B00247FF6 /* BoardRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardRouter.swift; sourceTree = "<group>"; };
+		E4365E402D88EA5B00247FF6 /* CommentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRouter.swift; sourceTree = "<group>"; };
+		E4365E422D88EA7300247FF6 /* CommunityRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityRouter.swift; sourceTree = "<group>"; };
+		E4365E442D88EA7900247FF6 /* MealRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealRouter.swift; sourceTree = "<group>"; };
+		E4365E462D88EA8B00247FF6 /* TimeTableRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableRouter.swift; sourceTree = "<group>"; };
+		E4365E482D88EAAF00247FF6 /* MemberRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRouter.swift; sourceTree = "<group>"; };
+		E4365E4B2D88EC4A00247FF6 /* BoardResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardResponseDTO.swift; sourceTree = "<group>"; };
+		E4365E4E2D88ECB800247FF6 /* BoardEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardEntity.swift; sourceTree = "<group>"; };
 		E492226F2C9C87DA0077EA45 /* RequestInterceptor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RequestInterceptor + Extension.swift"; sourceTree = "<group>"; };
 		E4953D3B2C89CDD5008CBDE5 /* View + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Extension.swift"; sourceTree = "<group>"; };
 		E4953D762C8EE00D008CBDE5 /* Phase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phase.swift; sourceTree = "<group>"; };
@@ -121,6 +137,7 @@
 		E4365C122D87EB3A00247FF6 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				E4365E4A2D88EC2C00247FF6 /* Board */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -128,6 +145,7 @@
 		E4365C132D87EB4000247FF6 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				E4365E4D2D88ECA200247FF6 /* Board */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -166,6 +184,12 @@
 			isa = PBXGroup;
 			children = (
 				E4365E3A2D88413900247FF6 /* Router.swift */,
+				E4365E3E2D88EA4B00247FF6 /* BoardRouter.swift */,
+				E4365E402D88EA5B00247FF6 /* CommentRouter.swift */,
+				E4365E422D88EA7300247FF6 /* CommunityRouter.swift */,
+				E4365E442D88EA7900247FF6 /* MealRouter.swift */,
+				E4365E462D88EA8B00247FF6 /* TimeTableRouter.swift */,
+				E4365E482D88EAAF00247FF6 /* MemberRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -203,6 +227,22 @@
 				E4365C4C2D88302B00247FF6 /* ToDoListViewModel.swift */,
 			);
 			path = ToDo;
+			sourceTree = "<group>";
+		};
+		E4365E4A2D88EC2C00247FF6 /* Board */ = {
+			isa = PBXGroup;
+			children = (
+				E4365E4B2D88EC4A00247FF6 /* BoardResponseDTO.swift */,
+			);
+			path = Board;
+			sourceTree = "<group>";
+		};
+		E4365E4D2D88ECA200247FF6 /* Board */ = {
+			isa = PBXGroup;
+			children = (
+				E4365E4E2D88ECB800247FF6 /* BoardEntity.swift */,
+			);
+			path = Board;
 			sourceTree = "<group>";
 		};
 		E4B3FCBB2C7751DB00CB98F3 = {
@@ -428,8 +468,10 @@
 				E4365C362D87F42200247FF6 /* HomeFooterView.swift in Sources */,
 				E4365C3C2D88041200247FF6 /* HomeProfileView.swift in Sources */,
 				E49222702C9C87DA0077EA45 /* RequestInterceptor + Extension.swift in Sources */,
+				E4365E412D88EA5B00247FF6 /* CommentRouter.swift in Sources */,
 				E4365C442D880B0A00247FF6 /* TimeTableRowView.swift in Sources */,
 				E4365C342D87F3FD00247FF6 /* HomeMiddleView.swift in Sources */,
+				E4365E3F2D88EA4B00247FF6 /* BoardRouter.swift in Sources */,
 				E4365C3F2D88078100247FF6 /* TimeTableView.swift in Sources */,
 				E4365C1F2D87ED2000247FF6 /* HomeViewModel.swift in Sources */,
 				E42DB9542D73759900F0A55C /* Shape + Extension.swift in Sources */,
@@ -437,13 +479,19 @@
 				E4365C382D87F45F00247FF6 /* FoodSectionView.swift in Sources */,
 				E4365C242D87EDBD00247FF6 /* LoadingView.swift in Sources */,
 				E4365C212D87ED6A00247FF6 /* HomeView.swift in Sources */,
+				E4365E472D88EA8B00247FF6 /* TimeTableRouter.swift in Sources */,
 				E4365C322D87F12100247FF6 /* HomeHeaderView.swift in Sources */,
+				E4365E4F2D88ECB800247FF6 /* BoardEntity.swift in Sources */,
 				E4365C412D88078700247FF6 /* TimeTableViewModel.swift in Sources */,
 				E4953D772C8EE00D008CBDE5 /* Phase.swift in Sources */,
 				E4953D3C2C89CDD5008CBDE5 /* View + Extension.swift in Sources */,
+				E4365E4C2D88EC4A00247FF6 /* BoardResponseDTO.swift in Sources */,
+				E4365E432D88EA7300247FF6 /* CommunityRouter.swift in Sources */,
 				E4365C0F2D87EA2D00247FF6 /* TabBarView.swift in Sources */,
 				E4365E3B2D88413900247FF6 /* Router.swift in Sources */,
 				E49C9F9B2C85DE06001F43A3 /* UnivAppApp.swift in Sources */,
+				E4365E492D88EAAF00247FF6 /* MemberRouter.swift in Sources */,
+				E4365E452D88EA7900247FF6 /* MealRouter.swift in Sources */,
 				E4365D442D88410800247FF6 /* NetworkManager.swift in Sources */,
 				E4365D452D88410800247FF6 /* NetworkMonitorManager.swift in Sources */,
 				E4365C262D87EE3B00247FF6 /* ErrorView.swift in Sources */,
