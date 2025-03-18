@@ -42,6 +42,8 @@
 		E4365E4C2D88EC4A00247FF6 /* BoardResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365E4B2D88EC4A00247FF6 /* BoardResponseDTO.swift */; };
 		E4365E4F2D88ECB800247FF6 /* BoardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365E4E2D88ECB800247FF6 /* BoardEntity.swift */; };
 		E4365E772D89567F00247FF6 /* PostRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365E762D89567F00247FF6 /* PostRouter.swift */; };
+		E4365E7A2D896D2C00247FF6 /* MealListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365E792D896D2C00247FF6 /* MealListView.swift */; };
+		E4365E7C2D896D3600247FF6 /* MealListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365E7B2D896D3600247FF6 /* MealListViewModel.swift */; };
 		E49222702C9C87DA0077EA45 /* RequestInterceptor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E492226F2C9C87DA0077EA45 /* RequestInterceptor + Extension.swift */; };
 		E4953D382C89C924008CBDE5 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E4953D372C89C924008CBDE5 /* Kingfisher */; };
 		E4953D3C2C89CDD5008CBDE5 /* View + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D3B2C89CDD5008CBDE5 /* View + Extension.swift */; };
@@ -96,6 +98,8 @@
 		E4365E4B2D88EC4A00247FF6 /* BoardResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardResponseDTO.swift; sourceTree = "<group>"; };
 		E4365E4E2D88ECB800247FF6 /* BoardEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardEntity.swift; sourceTree = "<group>"; };
 		E4365E762D89567F00247FF6 /* PostRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRouter.swift; sourceTree = "<group>"; };
+		E4365E792D896D2C00247FF6 /* MealListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealListView.swift; sourceTree = "<group>"; };
+		E4365E7B2D896D3600247FF6 /* MealListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealListViewModel.swift; sourceTree = "<group>"; };
 		E492226F2C9C87DA0077EA45 /* RequestInterceptor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RequestInterceptor + Extension.swift"; sourceTree = "<group>"; };
 		E4953D3B2C89CDD5008CBDE5 /* View + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Extension.swift"; sourceTree = "<group>"; };
 		E4953D762C8EE00D008CBDE5 /* Phase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phase.swift; sourceTree = "<group>"; };
@@ -248,6 +252,15 @@
 			path = Board;
 			sourceTree = "<group>";
 		};
+		E4365E782D896D1A00247FF6 /* Meal */ = {
+			isa = PBXGroup;
+			children = (
+				E4365E792D896D2C00247FF6 /* MealListView.swift */,
+				E4365E7B2D896D3600247FF6 /* MealListViewModel.swift */,
+			);
+			path = Meal;
+			sourceTree = "<group>";
+		};
 		E4B3FCBB2C7751DB00CB98F3 = {
 			isa = PBXGroup;
 			children = (
@@ -294,6 +307,7 @@
 		E4B3FCF12C7754C800CB98F3 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				E4365E782D896D1A00247FF6 /* Meal */,
 				E4365C492D882FF400247FF6 /* ToDo */,
 				E4365C3D2D88071200247FF6 /* TimeTable */,
 				E4365C1D2D87ED0A00247FF6 /* Home */,
@@ -472,6 +486,8 @@
 				E4365C3C2D88041200247FF6 /* HomeProfileView.swift in Sources */,
 				E49222702C9C87DA0077EA45 /* RequestInterceptor + Extension.swift in Sources */,
 				E4365E412D88EA5B00247FF6 /* CommentRouter.swift in Sources */,
+				E4365E7A2D896D2C00247FF6 /* MealListView.swift in Sources */,
+				E4365E7C2D896D3600247FF6 /* MealListViewModel.swift in Sources */,
 				E4365C442D880B0A00247FF6 /* TimeTableRowView.swift in Sources */,
 				E4365C342D87F3FD00247FF6 /* HomeMiddleView.swift in Sources */,
 				E4365E3F2D88EA4B00247FF6 /* BoardRouter.swift in Sources */,

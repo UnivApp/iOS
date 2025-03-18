@@ -46,7 +46,7 @@ struct TabBarView: View {
             
             let tabApperance = UITabBarAppearance()
             tabApperance.backgroundColor = .white
-            tabApperance.shadowColor = nil
+//            tabApperance.shadowColor = nil
             UITabBar.appearance().standardAppearance = tabApperance
             UITabBar.appearance().scrollEdgeAppearance = tabApperance
             

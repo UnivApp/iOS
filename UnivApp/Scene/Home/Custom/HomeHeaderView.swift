@@ -14,11 +14,10 @@ struct HomeHeaderView: View {
         VStack(alignment: .leading, spacing: 36) {
             HomeProfileView()
             
-            let columns = Array(repeating: GridItem(.flexible()), count: 4)
+            let columns = Array(repeating: GridItem(.flexible()), count: 5)
             LazyVGrid(columns: columns, spacing: 10) {
                 ForEach(HomeCategoryType.allCases, id: \.self) { category in
-                    //TODO: 이동
-                    NavigationLink(destination: EmptyView()) {
+                    NavigationLink(destination: category.view) {
                         VStack {
                             Image(systemName: category.image)
                                 .resizable()

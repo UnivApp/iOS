@@ -63,7 +63,7 @@ struct BoardSectionView: View {
             }
             .padding(.all, 12)
         }
-        .frame(height: 120)
+        .frame(height: 100)
         .background(.white)
         .cornerRadius(15)
         .clipped()
