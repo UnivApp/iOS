@@ -23,7 +23,7 @@ struct HomeHeaderView: View {
                             Image(systemName: category.image)
                                 .resizable()
                                 .scaledToFit()
-                                .foregroundColor(.point)
+                                .foregroundColor(.black)
                                 .frame(width: 30, height: 30)
                             
                             Text(category.rawValue)

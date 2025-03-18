@@ -41,6 +41,7 @@
 		E4365E492D88EAAF00247FF6 /* MemberRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365E482D88EAAF00247FF6 /* MemberRouter.swift */; };
 		E4365E4C2D88EC4A00247FF6 /* BoardResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365E4B2D88EC4A00247FF6 /* BoardResponseDTO.swift */; };
 		E4365E4F2D88ECB800247FF6 /* BoardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365E4E2D88ECB800247FF6 /* BoardEntity.swift */; };
+		E4365E772D89567F00247FF6 /* PostRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4365E762D89567F00247FF6 /* PostRouter.swift */; };
 		E49222702C9C87DA0077EA45 /* RequestInterceptor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E492226F2C9C87DA0077EA45 /* RequestInterceptor + Extension.swift */; };
 		E4953D382C89C924008CBDE5 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E4953D372C89C924008CBDE5 /* Kingfisher */; };
 		E4953D3C2C89CDD5008CBDE5 /* View + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4953D3B2C89CDD5008CBDE5 /* View + Extension.swift */; };
@@ -94,6 +95,7 @@
 		E4365E482D88EAAF00247FF6 /* MemberRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRouter.swift; sourceTree = "<group>"; };
 		E4365E4B2D88EC4A00247FF6 /* BoardResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardResponseDTO.swift; sourceTree = "<group>"; };
 		E4365E4E2D88ECB800247FF6 /* BoardEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardEntity.swift; sourceTree = "<group>"; };
+		E4365E762D89567F00247FF6 /* PostRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRouter.swift; sourceTree = "<group>"; };
 		E492226F2C9C87DA0077EA45 /* RequestInterceptor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RequestInterceptor + Extension.swift"; sourceTree = "<group>"; };
 		E4953D3B2C89CDD5008CBDE5 /* View + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Extension.swift"; sourceTree = "<group>"; };
 		E4953D762C8EE00D008CBDE5 /* Phase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phase.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				E4365E442D88EA7900247FF6 /* MealRouter.swift */,
 				E4365E462D88EA8B00247FF6 /* TimeTableRouter.swift */,
 				E4365E482D88EAAF00247FF6 /* MemberRouter.swift */,
+				E4365E762D89567F00247FF6 /* PostRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -493,6 +496,7 @@
 				E4365E492D88EAAF00247FF6 /* MemberRouter.swift in Sources */,
 				E4365E452D88EA7900247FF6 /* MealRouter.swift in Sources */,
 				E4365D442D88410800247FF6 /* NetworkManager.swift in Sources */,
+				E4365E772D89567F00247FF6 /* PostRouter.swift in Sources */,
 				E4365D452D88410800247FF6 /* NetworkMonitorManager.swift in Sources */,
 				E4365C262D87EE3B00247FF6 /* ErrorView.swift in Sources */,
 				E4365C282D87EE8200247FF6 /* PlaceholderView.swift in Sources */,

@@ -84,14 +84,14 @@ struct ToDoListView: View {
                 Text("할 일 추가")
                     .frame(maxWidth: .infinity)
                     .frame(height: 40)
-                    .background(.point)
+                    .background(.primary)
                     .foregroundColor(.white)
                     .cornerRadius(8)
                     .padding()
             }
         }
         .padding(.horizontal, 24)
-        .background(.lightPoint)
+        .background(.white)
     }
 
     private func formattedDate(_ date: Date) -> String {

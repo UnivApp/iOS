@@ -21,7 +21,7 @@ struct TimeTableView: View {
                 
                 timeTableGridView
             }
-            .background(.lightPoint)
+            .background(.white)
             
             if showPopup {
                 AddSchedulePopupView(showPopup: $showPopup) { newSchedule in
@@ -65,7 +65,7 @@ struct TimeTableView: View {
                 .resizable()
                 .scaledToFit()
                 .foregroundColor(.white)
-                .background(.point)
+                .background(.primary)
                 .frame(width: 20, height: 20)
                 .clipped()
                 .cornerRadius(10)
@@ -112,6 +112,7 @@ struct TimeTableView: View {
             .clipped()
             .cornerRadius(15)
             .padding(.all, 24)
+            .shadow(radius: 0.7)
         }
     }
 }

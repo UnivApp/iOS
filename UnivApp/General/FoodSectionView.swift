@@ -31,7 +31,7 @@ fileprivate struct FoodItemView: View {
                         .font(.system(size: 15, weight: .bold))
                     Spacer()
                     Text("720Kcal")
-                        .foregroundColor(.label)
+                        .foregroundColor(.primary)
                         .font(.system(size: 14, weight: .regular))
                 }
                 .padding(.horizontal, 24)
@@ -53,6 +53,8 @@ fileprivate struct FoodItemView: View {
         .background(.white)
         .clipped()
         .cornerRadius(15)
+        .shadow(radius: 0.7)
+        .padding(.vertical, 8)
     }
 }
 

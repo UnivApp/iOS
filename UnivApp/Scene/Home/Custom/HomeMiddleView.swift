@@ -15,7 +15,7 @@ struct HomeMiddleView: View {
             Group {
                 HStack {
                     Text("급식표🍚")
-                        .foregroundColor(.label)
+                        .foregroundColor(.primary)
                         .font(.system(size: 18, weight: .heavy))
                     
                     Spacer()
@@ -35,7 +35,7 @@ struct HomeMiddleView: View {
                 Group {
                     HStack {
                         Text("최신 게시글 👀")
-                            .foregroundColor(.label)
+                            .foregroundColor(.primary)
                             .font(.system(size: 18, weight: .heavy))
                         Spacer()
                     }
@@ -74,6 +74,7 @@ fileprivate struct RecentView: View {
         .background(.white)
         .clipped()
         .cornerRadius(15)
+        .shadow(radius: 0.7)
     }
 }
 

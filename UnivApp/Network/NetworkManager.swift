@@ -10,15 +10,16 @@ import Alamofire
 import Combine
 
 protocol NetworkManagerType: AnyObject {
-    func getData<T: Decodable, U: Router>(_ api: U) -> AnyPublisher<T,Error>
+    func fetchData<T: Decodable, U: Router>(_ api: U) -> AnyPublisher<T,Error>
 }
 
 final class NetworkManager: NetworkManagerType {
+    
     static let shared = NetworkManager()
     
     private init() { }
     
-    func getData<T: Decodable, U: Router>(_ api: U) -> AnyPublisher<T,Error> {
+    func fetchData<T: Decodable, U: Router>(_ api: U) -> AnyPublisher<T,Error> {
 //        print(api.endpoint)
         return Future<T,Error> { promise in
             AF.request(api)

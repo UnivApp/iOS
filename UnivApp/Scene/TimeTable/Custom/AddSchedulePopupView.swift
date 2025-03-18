@@ -37,9 +37,9 @@ struct AddSchedulePopupView: View {
         }
         .padding()
         .frame(width: 300)
-        .background(.lightPoint)
+        .background(.white)
         .cornerRadius(10)
-        .shadow(radius: 2)
+        .shadow(radius: 0.7)
     }
 
     private var scheduleNameField: some View {
@@ -98,7 +98,7 @@ struct AddSchedulePopupView: View {
                 Text("저장")
                     .padding()
                     .frame(maxWidth: .infinity, maxHeight: 40)
-                    .background(.point)
+                    .background(.primary)
                     .foregroundColor(.white)
                     .cornerRadius(5)
             }

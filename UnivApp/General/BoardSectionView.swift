@@ -15,7 +15,7 @@ struct BoardSectionView: View {
                 HStack {
                     Text("🚨 비상이야 얘들아 🚨")
                         .lineLimit(1)
-                        .foregroundColor(.label)
+                        .foregroundColor(.primary)
                         .font(.system(size: 15, weight: .bold))
                     
                     Spacer()
@@ -63,10 +63,11 @@ struct BoardSectionView: View {
             }
             .padding(.all, 12)
         }
-        .background(.white)
         .frame(height: 120)
-        .clipped()
+        .background(.white)
         .cornerRadius(15)
+        .clipped()
+        .shadow(radius: 0.7)
     }
 }
 

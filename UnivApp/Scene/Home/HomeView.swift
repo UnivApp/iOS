@@ -17,7 +17,7 @@ struct HomeView: View {
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Text("TeenSpot")
-                    .foregroundColor(.label)
+                    .foregroundColor(.primary)
                     .font(.system(size: 20, weight: .heavy))
             }
             
@@ -29,7 +29,7 @@ struct HomeView: View {
                         Image(systemName: "magnifyingglass")
                             .resizable()
                             .scaledToFit()
-                            .foregroundColor(.label)
+                            .foregroundColor(.primary)
                             .frame(width: 20, height: 20)
                     }
                     
@@ -39,7 +39,7 @@ struct HomeView: View {
                         Image(systemName: "bell.fill")
                             .resizable()
                             .scaledToFit()
-                            .foregroundColor(.label)
+                            .foregroundColor(.primary)
                             .frame(width: 20, height: 20)
                     }
                 }
@@ -77,7 +77,7 @@ struct HomeView: View {
                     .environmentObject(viewModel)
             }
         }
-        .background(.lightPoint)
+        .background(.white)
     }
     
 }

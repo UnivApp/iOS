@@ -39,7 +39,7 @@ struct TabBarView: View {
         }
         .onAppear {
             let apperance = UINavigationBarAppearance()
-            apperance.backgroundColor = UIColor(.lightPoint)
+            apperance.backgroundColor = UIColor(.white)
             apperance.shadowColor = nil
             UINavigationBar.appearance().standardAppearance = apperance
             UINavigationBar.appearance().scrollEdgeAppearance = apperance

@@ -14,7 +14,7 @@ struct HomeFooterView: View {
         VStack(alignment: .center, spacing: 24) {
             HStack {
                 Text("인기🔥 게시판")
-                    .foregroundColor(.label)
+                    .foregroundColor(.primary)
                     .font(.system(size: 18, weight: .heavy))
                 
                 Spacer()
@@ -35,7 +35,7 @@ struct HomeFooterView: View {
     }
     
     var boardView: some View {
-        VStack(alignment: .center, spacing: 4) {
+        VStack(alignment: .center, spacing: 12) {
             ForEach(0...2, id: \.self) { _ in
                 BoardSectionView()
             }
